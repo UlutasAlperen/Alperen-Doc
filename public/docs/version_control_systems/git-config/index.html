@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="We need to configure Git to contain your information. Whenever code changes, Git tracks who made the change. To ensure you get proper credit (or more likely, blame) for all the code you write, you need to set your name and email.
+Git comes with a configuration both at the global and the repo (project) level. Most of the time, you’ll just use the global config.
+Assignment# Let’s set your identity. Check if your user.name and user.email are already set:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/version_control_systems/git-config/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="git config">
+	<meta property="og:description" content="We need to configure Git to contain your information. Whenever code changes, Git tracks who made the change. To ensure you get proper credit (or more likely, blame) for all the code you write, you need to set your name and email.
+Git comes with a configuration both at the global and the repo (project) level. Most of the time, you’ll just use the global config.
+Assignment# Let’s set your identity. Check if your user.name and user.email are already set:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="git config">
+	<meta itemprop="description" content="We need to configure Git to contain your information. Whenever code changes, Git tracks who made the change. To ensure you get proper credit (or more likely, blame) for all the code you write, you need to set your name and email.
+Git comes with a configuration both at the global and the repo (project) level. Most of the time, you’ll just use the global config.
+Assignment# Let’s set your identity. Check if your user.name and user.email are already set:">
+	<meta itemprop="wordCount" content="299">
+
+<title>git config • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/version_control_systems/git-config/">
+<link rel="stylesheet" href="/book.min.b71fe3c1d3675e52d80430d63a71819e12d05dee934e099a700bacfd4c49a7be.css" integrity="sha256-tx/jwdNnXlLYBDDWOnGBnhLQXe6TTgmacAus/UxJp74=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.3cecc15c0fabf6dcac676b55360d5462df29ed39f525edaddf08a76db4f16385.js" integrity="sha256-POzBXA&#43;r9tysZ2tVNg1UYt8p7Tn1Je2t3winbbTxY4U=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="toggle" checked />
+    <label for="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="active">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>git config</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#assignment">Assignment</a></li>
+    <li><a href="#make-sure-it-worked">Make Sure It Worked</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p>We need to configure Git to contain <em>your</em> information. Whenever code changes, Git tracks <em>who</em> made the change. To ensure you get proper credit (or more likely, blame) for all the code you write, you need to set your name and email.</p>
+<p>Git comes with a <a href="https://git-scm.com/docs/git-config">configuration</a> both at the global and the repo (project) level. Most of the time, you&rsquo;ll just use the global config.</p>
+<h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
+<p>Let&rsquo;s set your identity. Check if your <code>user.name</code> and <code>user.email</code> are already set:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config --get user.name</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config --get user.email</span></span></code></pre></div><p>If they aren&rsquo;t, set them. I recommend using your GitHub username and email.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config --add --global user.name <span style="color:#e6db74">&#34;github_username_here&#34;</span>
+</span></span><span style="display:flex;"><span>git config --add --global user.email <span style="color:#e6db74">&#34;email@example.com&#34;</span></span></span></code></pre></div><p>Finally, let&rsquo;s set a default branch (we&rsquo;ll talk more about configs and branches later) so that we&rsquo;re all on the same page. Run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config --global init.defaultBranch master</span></span></code></pre></div><blockquote class='book-hint '>
+<p>We&rsquo;re using <code>master</code> for now because it is Git&rsquo;s default, but later we&rsquo;ll change it to <code>main</code>, which is GitHub&rsquo;s default. Just bear with us for a second.</p>
+</blockquote><h2 id="make-sure-it-worked">Make Sure It Worked<a class="anchor" href="#make-sure-it-worked">#</a></h2>
+<p>Your <code>~/.gitconfig</code> file is the file that stores your global Git configuration. View it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat ~/.gitconfig</span></span></code></pre></div><h1 id="git-config">Git Config<a class="anchor" href="#git-config">#</a></h1>
+<p>Git stores author information so that when you&rsquo;re making a commit it can track <em>who</em> made the change. Here&rsquo;s how you might update your global <a href="https://git-scm.com/docs/git-config">Git configuration</a> (don&rsquo;t do this yet):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config --add --global user.name <span style="color:#e6db74">&#34;ThePrimeagen&#34;</span>
+</span></span><span style="display:flex;"><span>git config --add --global user.email <span style="color:#e6db74">&#34;the.primeagen@aol.com&#34;</span></span></span></code></pre></div><p>Let&rsquo;s take the command apart:</p>
+<ul>
+<li><code>git config</code>: The command to interact with your Git configuration.</li>
+<li><code>--add</code>: Flag stating you want to <em>add</em> a configuration.</li>
+<li><code>--global</code>: Flag stating you want this configuration to be stored globally in your <code>~/.gitconfig</code>. The opposite is &ldquo;local&rdquo;, which stores the configuration in the current repository only.</li>
+<li><code>user</code>: The section.</li>
+<li><code>name</code>: The key within the section.</li>
+<li><code>&quot;ThePrimeagen&quot;</code>: The value you want to set for the key.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/version_control_systems/git-switch/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>git switch</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/version_control_systems/gitignore/" class="flex align-center">
+        <span>gitignore</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#assignment">Assignment</a></li>
+    <li><a href="#make-sure-it-worked">Make Sure It Worked</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

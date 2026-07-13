@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Rebase# “Rebase vs Merge” is one of the most hotly debated topics in the Git world. A lot of the discussions you’ll see online come down to the fact that many developers (yes, even professionals) don’t understand the purpose of rebase and use it incorrectly, causing a bunch of Git havoc, and then blame the rebase command.
+It’s not Git’s fault, it’s a skill issue.
+Visualizing Rebase# Say we have this commit history:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/version_control_systems/git-rebase/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="git rebase">
+	<meta property="og:description" content="Rebase# “Rebase vs Merge” is one of the most hotly debated topics in the Git world. A lot of the discussions you’ll see online come down to the fact that many developers (yes, even professionals) don’t understand the purpose of rebase and use it incorrectly, causing a bunch of Git havoc, and then blame the rebase command.
+It’s not Git’s fault, it’s a skill issue.
+Visualizing Rebase# Say we have this commit history:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="git rebase">
+	<meta itemprop="description" content="Rebase# “Rebase vs Merge” is one of the most hotly debated topics in the Git world. A lot of the discussions you’ll see online come down to the fact that many developers (yes, even professionals) don’t understand the purpose of rebase and use it incorrectly, causing a bunch of Git havoc, and then blame the rebase command.
+It’s not Git’s fault, it’s a skill issue.
+Visualizing Rebase# Say we have this commit history:">
+	<meta itemprop="wordCount" content="251">
+
+<title>git rebase • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/version_control_systems/git-rebase/">
+<link rel="stylesheet" href="/book.min.b71fe3c1d3675e52d80430d63a71819e12d05dee934e099a700bacfd4c49a7be.css" integrity="sha256-tx/jwdNnXlLYBDDWOnGBnhLQXe6TTgmacAus/UxJp74=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.3cecc15c0fabf6dcac676b55360d5462df29ed39f525edaddf08a76db4f16385.js" integrity="sha256-POzBXA&#43;r9tysZ2tVNg1UYt8p7Tn1Je2t3winbbTxY4U=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="toggle" checked />
+    <label for="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="active">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>git rebase</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#visualizing-rebase">Visualizing Rebase</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="rebase">Rebase<a class="anchor" href="#rebase">#</a></h1>
+<p>&ldquo;<a href="https://git-scm.com/docs/git-rebase">Rebase</a> vs <a href="https://git-scm.com/docs/git-merge">Merge</a>&rdquo; is one of the most hotly debated topics in the Git world. A lot of the discussions you&rsquo;ll see online come down to the fact that many developers (yes, even professionals) don&rsquo;t understand the purpose of rebase and use it incorrectly, causing a bunch of Git havoc, and then blame the rebase command.</p>
+<p><em>It&rsquo;s not Git&rsquo;s fault, it&rsquo;s a skill issue.</em></p>
+<h2 id="visualizing-rebase">Visualizing Rebase<a class="anchor" href="#visualizing-rebase">#</a></h2>
+<p>Say we have this commit history:</p>
+<pre tabindex="0"><code>A - B - C    main
+   \
+    D - E    feature_branch</code></pre><p>We&rsquo;re working on <code>feature_branch</code>, and want to bring in the changes our team added to <code>main</code> so we&rsquo;re not working with a stale branch. We could merge <code>main</code> into <code>feature_branch</code>, but that would create an additional merge commit. Rebase avoids a merge commit by replaying the commits from <code>feature_branch</code> on top of <code>main</code>. After a rebase, the history will look like this:</p>
+<pre tabindex="0"><code>A - B - C         main
+         \
+          D - E   feature_branch</code></pre><h1 id="run-rebase">Run Rebase<a class="anchor" href="#run-rebase">#</a></h1>
+<p>To use <a href="https://git-scm.com/docs/git-rebase">rebase</a> to bring changes from <code>main</code> onto a current branch (let&rsquo;s pretend we&rsquo;re on one called <code>jdsl</code>), we would run this while on the <code>jdsl</code> branch:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git rebase main</span></span></code></pre></div><p>This will do the following:</p>
+<ol>
+<li>Checkout the latest commit from <code>main</code> into a temporary location</li>
+<li>Replay each commit from <code>jdsl</code> one at a time onto this temporary location</li>
+<li>Update the <code>jdsl</code> branch to point to the last replayed commit in the temporary location, making this the new permanent <code>jdsl</code>.</li>
+<li>The rebase does <em>not</em> affect the <code>main</code> branch; <code>jdsl</code> now includes all changes from <code>main</code>.</li>
+</ol>
+<p><img src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/tCgqhtr.png" alt="rebase update_dune branch onto the main branch" /></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/version_control_systems/git-merge/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>git merge</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/version_control_systems/git-reset/" class="flex align-center">
+        <span>git reset</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#visualizing-rebase">Visualizing Rebase</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

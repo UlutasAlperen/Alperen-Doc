@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Merge# “What’s the point of having multiple branches?” you might ask. They’re most often used to safely make changes without affecting your (or your team’s) primary branch. However, once you’re happy with your changes, you’ll want to merge them back into the main branch so that they make their way into the final product.
+Visual# Let’s say you’re in a state where you have two branches, each with their own unique commits:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/version_control_systems/git-merge/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="git merge">
+	<meta property="og:description" content="Merge# “What’s the point of having multiple branches?” you might ask. They’re most often used to safely make changes without affecting your (or your team’s) primary branch. However, once you’re happy with your changes, you’ll want to merge them back into the main branch so that they make their way into the final product.
+Visual# Let’s say you’re in a state where you have two branches, each with their own unique commits:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="git merge">
+	<meta itemprop="description" content="Merge# “What’s the point of having multiple branches?” you might ask. They’re most often used to safely make changes without affecting your (or your team’s) primary branch. However, once you’re happy with your changes, you’ll want to merge them back into the main branch so that they make their way into the final product.
+Visual# Let’s say you’re in a state where you have two branches, each with their own unique commits:">
+	<meta itemprop="wordCount" content="456">
+
+<title>git merge • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/version_control_systems/git-merge/">
+<link rel="stylesheet" href="/book.min.b71fe3c1d3675e52d80430d63a71819e12d05dee934e099a700bacfd4c49a7be.css" integrity="sha256-tx/jwdNnXlLYBDDWOnGBnhLQXe6TTgmacAus/UxJp74=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.3cecc15c0fabf6dcac676b55360d5462df29ed39f525edaddf08a76db4f16385.js" integrity="sha256-POzBXA&#43;r9tysZ2tVNg1UYt8p7Tn1Je2t3winbbTxY4U=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="toggle" checked />
+    <label for="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="active">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>git merge</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#visual">Visual</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#syntax">Syntax</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="merge">Merge<a class="anchor" href="#merge">#</a></h1>
+<p>&ldquo;What&rsquo;s the point of having multiple branches?&rdquo; you might ask. They&rsquo;re most often used to safely make changes without affecting your (or your <em>team&rsquo;s</em>) primary branch. However, once you&rsquo;re happy with your changes, you&rsquo;ll want to <a href="https://git-scm.com/docs/git-merge">merge</a> them back into the main branch so that they make their way into the final product.</p>
+<h2 id="visual">Visual<a class="anchor" href="#visual">#</a></h2>
+<p>Let&rsquo;s say you&rsquo;re in a state where you have two branches, each with their own unique commits:</p>
+<pre tabindex="0"><code>A - B - C    main
+   \
+    D - E    other_branch</code></pre><p>If you merge <code>other_branch</code> into <code>main</code>, Git combines both branches by creating a new commit that has <em>both</em> histories as parents. In the diagram below, <code>F</code> is a <a href="https://git-scm.com/docs/git-merge#_true_merge">merge commit</a> that has <code>C</code> and <code>E</code> as parents. <code>F</code> brings all the changes from <code>D</code> and <code>E</code> back into the <code>main</code> branch.</p>
+<pre tabindex="0"><code>A - B - C - F    main
+   \     /
+    D - E        other_branch</code></pre><h1 id="merge-commits">Merge Commits<a class="anchor" href="#merge-commits">#</a></h1>
+<p>A merge commit is the result of merging two branches together.</p>
+<p>Let&rsquo;s say we start with this:</p>
+<pre tabindex="0"><code>A - B - C    main
+   \
+    D - E    vimchadsonly</code></pre><p>And we merge <code>vimchadsonly</code> into <code>main</code> by running this while on <code>main</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge vimchadsonly</span></span></code></pre></div><p>The merge will:</p>
+<ol>
+<li>Find the &ldquo;merge base&rdquo; commit, or &ldquo;best common ancestor&rdquo; of the two branches. In this case, <code>A</code>.</li>
+<li>Replays the changes from <code>main</code>, starting from the best common ancestor, into a new commit.</li>
+<li>Replays the changes from <code>vimchadsonly</code> onto <code>main</code>, starting from the best common ancestor.</li>
+<li>Records the result as a new commit, in our case, <code>F</code>.</li>
+<li><code>F</code> is special because it has <em>two parents</em>, <code>C</code> and <code>E</code>.</li>
+</ol>
+<p><strong>After:</strong></p>
+<pre tabindex="0"><code>A - B - C - F    main
+   \     /
+    D - E        vimchadsonly</code></pre><h1 id="fast-forward-merge">Fast Forward Merge<a class="anchor" href="#fast-forward-merge">#</a></h1>
+<p>The simplest type of merge is a <a href="https://git-scm.com/docs/git-merge#_fast_forward_merge">fast-forward merge</a>. Let&rsquo;s say we start with this:</p>
+<pre tabindex="0"><code>      C     delete_vscode
+     /
+A - B       main</code></pre><p>And we run this while on <code>main</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge delete_vscode</span></span></code></pre></div><p>Because <code>delete_vscode</code> has <em>all the commits</em> that <code>main</code> has, Git automatically does a fast-forward merge. It just moves the pointer of the &ldquo;base&rdquo; branch to the tip of the &ldquo;feature&rdquo; branch:</p>
+<pre tabindex="0"><code>            delete_vscode
+A - B - C   main</code></pre><p>Notice that with a fast-forward merge, <strong>no <a href="https://git-scm.com/docs/git-merge#_true_merge">merge commit</a> is created</strong>.</p>
+<p>This is a common workflow when working with Git on a team of developers:</p>
+<ol>
+<li>Create a branch for a new change</li>
+<li>Make the change</li>
+<li>Merge the branch back into <code>main</code> (or whatever branch your team dubs the &ldquo;default&rdquo; branch)</li>
+<li>Remove the branch</li>
+<li>Repeat</li>
+</ol>
+<h1 id="merge-1">Merge<a class="anchor" href="#merge-1">#</a></h1>
+<p>Just as we merged branches within a single local repo, we can also merge branches between local and remote repos.</p>
+<h2 id="syntax">Syntax<a class="anchor" href="#syntax">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge remote/branch</span></span></code></pre></div><p>For example, if you wanted to merge the <code>primeagen</code> branch of the remote <code>origin</code> into your local <code>main</code> branch, you would run this inside the local repo while on the <code>main</code> branch:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge origin/primeagen</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/version_control_systems/git-log/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>git log</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/version_control_systems/git-rebase/" class="flex align-center">
+        <span>git rebase</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#visual">Visual</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#syntax">Syntax</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

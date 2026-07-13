@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Plumbing# So far we’ve been using Git in a “porcelain” manner. But to sate our insatiable curiosity, let’s take a look at some of the “plumbing”.
+It’s Just Files All the Way Down# All the data in a Git repository is stored directly in the (hidden) .git directory. That includes all the commits, branches, tags, and other objects we’ll learn about later.
+Git is made up of objects that are stored in the .git/objects directory. A commit is just a type of object.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/version_control_systems/plumping/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="plumping">
+	<meta property="og:description" content="The Plumbing# So far we’ve been using Git in a “porcelain” manner. But to sate our insatiable curiosity, let’s take a look at some of the “plumbing”.
+It’s Just Files All the Way Down# All the data in a Git repository is stored directly in the (hidden) .git directory. That includes all the commits, branches, tags, and other objects we’ll learn about later.
+Git is made up of objects that are stored in the .git/objects directory. A commit is just a type of object.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="plumping">
+	<meta itemprop="description" content="The Plumbing# So far we’ve been using Git in a “porcelain” manner. But to sate our insatiable curiosity, let’s take a look at some of the “plumbing”.
+It’s Just Files All the Way Down# All the data in a Git repository is stored directly in the (hidden) .git directory. That includes all the commits, branches, tags, and other objects we’ll learn about later.
+Git is made up of objects that are stored in the .git/objects directory. A commit is just a type of object.">
+	<meta itemprop="wordCount" content="396">
+
+<title>plumping • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/version_control_systems/plumping/">
+<link rel="stylesheet" href="/book.min.b71fe3c1d3675e52d80430d63a71819e12d05dee934e099a700bacfd4c49a7be.css" integrity="sha256-tx/jwdNnXlLYBDDWOnGBnhLQXe6TTgmacAus/UxJp74=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.3cecc15c0fabf6dcac676b55360d5462df29ed39f525edaddf08a76db4f16385.js" integrity="sha256-POzBXA&#43;r9tysZ2tVNg1UYt8p7Tn1Je2t3winbbTxY4U=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="toggle" checked />
+    <label for="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="active">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>plumping</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#its-just-files-all-the-way-down">It&rsquo;s Just Files All the Way Down</a></li>
+    <li><a href="#assignment">Assignment</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#assignment-1">Assignment</a>
+      <ul>
+        <li><a href="#trees-and-blobs">Trees and Blobs</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#optimization">Optimization</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="the-plumbing">The Plumbing<a class="anchor" href="#the-plumbing">#</a></h1>
+<p>So far we&rsquo;ve been using Git in a &ldquo;porcelain&rdquo; manner. But to sate our insatiable curiosity, let&rsquo;s take a look at some of the &ldquo;plumbing&rdquo;.</p>
+<h2 id="its-just-files-all-the-way-down">It&rsquo;s Just Files All the Way Down<a class="anchor" href="#its-just-files-all-the-way-down">#</a></h2>
+<p>All the data in a Git repository is stored directly in the (hidden) <code>.git</code> directory. That includes all the commits, branches, tags, and other objects we&rsquo;ll learn about later.</p>
+<p>Git is made up of <a href="https://git-scm.com/book/en/v2/Git-Internals-Git-Objects">objects</a> that are stored in the <code>.git/objects</code> directory. A commit is just a type of object.</p>
+<h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
+<ol>
+<li>Use <code>git log -n 10</code> to find your commit hash again.</li>
+<li>Use <code>ls -al</code> to list the contents of the <code>.git/objects</code> directory.</li>
+<li>Look for a directory that suspiciously matches the first two characters of your commit hash.</li>
+<li>Use <code>ls -al</code> to list the contents of that directory and answer the question.</li>
+</ol>
+<h1 id="cat-file">Cat File<a class="anchor" href="#cat-file">#</a></h1>
+<p>Luckily, Git has a built-in plumbing command, <a href="https://git-scm.com/docs/git-cat-file">cat-file</a>, that allows us to see the contents of a commit without needing to futz around with the object files directly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git cat-file -p &lt;hash&gt;</span></span></code></pre></div><h2 id="assignment-1">Assignment<a class="anchor" href="#assignment-1">#</a></h2>
+<ol>
+<li><input disabled="" type="checkbox"> Use the <code>cat-file</code> command to view the contents of your last commit.</li>
+<li><input disabled="" type="checkbox"> For the CLI to be able to check your output, do it again, but redirect the output to a temporary file:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>catfile command here<span style="color:#f92672">]</span> &gt; /tmp/catfileout.txt</span></span></code></pre></div><h3 id="trees-and-blobs">Trees and Blobs<a class="anchor" href="#trees-and-blobs">#</a></h3>
+<p>Now that we understand some of our plumbing equipment, let&rsquo;s get into the pipes. Here are some terms to know:</p>
+<ul>
+<li><code>tree</code>: git&rsquo;s way of storing a directory</li>
+<li><code>blob</code>: git&rsquo;s way of storing a file</li>
+</ul>
+<p>Here&rsquo;s what I got when I inspected my last commit:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; git cat-file -p 5ba786fcc93e8092831c01e71444b9baa2228a4f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tree 4e507fdc6d9044ccd8a4a3061324c9f711c4667d
+</span></span><span style="display:flex;"><span>author alperen &lt;the.alperen@aol.com&gt; <span style="color:#ae81ff">1705891256</span> -0700
+</span></span><span style="display:flex;"><span>committer alperen &lt;the.alperen@aol.com&gt; <span style="color:#ae81ff">1705891256</span> -0700
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>A: add contents.md</span></span></code></pre></div><p>Notice that we can see:</p>
+<ul>
+<li>The <code>tree</code> object</li>
+<li>The <code>author</code></li>
+<li>The <code>committer</code></li>
+<li>The commit message</li>
+</ul>
+<p>However, we <em>cannot</em> see the contents of the <code>contents.md</code> file itself! That&rsquo;s because the <code>blob</code> object stores it.</p>
+<h1 id="storing-data">Storing Data<a class="anchor" href="#storing-data">#</a></h1>
+<p>Git stores an entire <em>snapshot</em> of files on a <em>per-commit</em> level. This was a surprise to me! I always assumed each commit only stored the <em>changes</em> made in that commit.</p>
+<h2 id="optimization">Optimization<a class="anchor" href="#optimization">#</a></h2>
+<p>While it&rsquo;s true that Git stores entire snapshots, it <em>does</em> have some performance optimizations so that your <code>.git</code> directory doesn&rsquo;t get too unbearably large.</p>
+<ul>
+<li>Git <a href="https://git-scm.com/book/en/v2/Git-Internals-Packfiles">compresses and packs</a> files to store them more efficiently.</li>
+<li>Git deduplicates files that are the same across different commits. If a file doesn&rsquo;t change between commits, Git will only store it once.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/version_control_systems/gitignore/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>gitignore</span>
+      </a>
+    
+    </span>
+    <span>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#its-just-files-all-the-way-down">It&rsquo;s Just Files All the Way Down</a></li>
+    <li><a href="#assignment">Assignment</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#assignment-1">Assignment</a>
+      <ul>
+        <li><a href="#trees-and-blobs">Trees and Blobs</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#optimization">Optimization</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

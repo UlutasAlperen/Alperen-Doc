@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Simplified Git Commands Guide# Initialize a Git Repository# Navigate to the directory you want to track. Run the following command: git initAdding Files or Directories# To add files or directories to the staging area, use: git add &lt;file_or_directory_name&gt;git add
+Checking the Current State# To see the current state of your repository: git statusgit status
+Committing Changes# To save changes to the repository: git commit -m &#34;Your commit message&#34;git commit
+Branch Management# Creating and Switching to a New Branch# Use the following command to create and switch to a new branch: git switch -c my_new_branchThis is easier than using git branch followed by git switch. git branch
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/version_control_systems/basic_git_knowledge/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="basic_git_knowledge">
+	<meta property="og:description" content="Simplified Git Commands Guide# Initialize a Git Repository# Navigate to the directory you want to track. Run the following command: git initAdding Files or Directories# To add files or directories to the staging area, use: git add &lt;file_or_directory_name&gt;git add
+Checking the Current State# To see the current state of your repository: git statusgit status
+Committing Changes# To save changes to the repository: git commit -m &#34;Your commit message&#34;git commit
+Branch Management# Creating and Switching to a New Branch# Use the following command to create and switch to a new branch: git switch -c my_new_branchThis is easier than using git branch followed by git switch. git branch">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="basic_git_knowledge">
+	<meta itemprop="description" content="Simplified Git Commands Guide# Initialize a Git Repository# Navigate to the directory you want to track. Run the following command: git initAdding Files or Directories# To add files or directories to the staging area, use: git add &lt;file_or_directory_name&gt;git add
+Checking the Current State# To see the current state of your repository: git statusgit status
+Committing Changes# To save changes to the repository: git commit -m &#34;Your commit message&#34;git commit
+Branch Management# Creating and Switching to a New Branch# Use the following command to create and switch to a new branch: git switch -c my_new_branchThis is easier than using git branch followed by git switch. git branch">
+	<meta itemprop="wordCount" content="451">
+
+<title>basic_git_knowledge • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/version_control_systems/basic_git_knowledge/">
+<link rel="stylesheet" href="/book.min.b71fe3c1d3675e52d80430d63a71819e12d05dee934e099a700bacfd4c49a7be.css" integrity="sha256-tx/jwdNnXlLYBDDWOnGBnhLQXe6TTgmacAus/UxJp74=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.3cecc15c0fabf6dcac676b55360d5462df29ed39f525edaddf08a76db4f16385.js" integrity="sha256-POzBXA&#43;r9tysZ2tVNg1UYt8p7Tn1Je2t3winbbTxY4U=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="toggle" checked />
+    <label for="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="active">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>basic_git_knowledge</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#initialize-a-git-repository">Initialize a Git Repository</a></li>
+    <li><a href="#adding-files-or-directories">Adding Files or Directories</a></li>
+    <li><a href="#checking-the-current-state">Checking the Current State</a></li>
+    <li><a href="#committing-changes">Committing Changes</a></li>
+    <li><a href="#branch-management">Branch Management</a>
+      <ul>
+        <li><a href="#creating-and-switching-to-a-new-branch">Creating and Switching to a New Branch</a></li>
+        <li><a href="#switching-between-branches">Switching Between Branches</a></li>
+        <li><a href="#viewing-existing-branches">Viewing Existing Branches</a></li>
+      </ul>
+    </li>
+    <li><a href="#viewing-commit-logs">Viewing Commit Logs</a></li>
+    <li><a href="#fetching-updates-from-remote-repositories">Fetching Updates from Remote Repositories</a></li>
+    <li><a href="#working-with-remote-repositories">Working with Remote Repositories</a></li>
+    <li><a href="#merging-branches">Merging Branches</a></li>
+    <li><a href="#creating-a-new-branch-from-an-older-commit">Creating a New Branch from an Older Commit</a></li>
+    <li><a href="#rebasing-branches">Rebasing Branches</a></li>
+    <li><a href="#resetting-commits">Resetting Commits</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#what-happens-when-you-git-clone">What happens when you <code>git clone</code>?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="simplified-git-commands-guide">Simplified Git Commands Guide<a class="anchor" href="#simplified-git-commands-guide">#</a></h1>
+<h2 id="initialize-a-git-repository">Initialize a Git Repository<a class="anchor" href="#initialize-a-git-repository">#</a></h2>
+<ol>
+<li>Navigate to the directory you want to track.</li>
+<li>Run the following command:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git init</span></span></code></pre></div><h2 id="adding-files-or-directories">Adding Files or Directories<a class="anchor" href="#adding-files-or-directories">#</a></h2>
+<ul>
+<li>To add files or directories to the staging area, use:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git add &lt;file_or_directory_name&gt;</span></span></code></pre></div><p><a href="git-add/">git add</a></p>
+<h2 id="checking-the-current-state">Checking the Current State<a class="anchor" href="#checking-the-current-state">#</a></h2>
+<ul>
+<li>To see the current state of your repository:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git status</span></span></code></pre></div><p><a href="git-status/">git status</a></p>
+<h2 id="committing-changes">Committing Changes<a class="anchor" href="#committing-changes">#</a></h2>
+<ul>
+<li>To save changes to the repository:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Your commit message&#34;</span></span></span></code></pre></div><p><a href="git-commit/">git commit</a></p>
+<h2 id="branch-management">Branch Management<a class="anchor" href="#branch-management">#</a></h2>
+<h3 id="creating-and-switching-to-a-new-branch">Creating and Switching to a New Branch<a class="anchor" href="#creating-and-switching-to-a-new-branch">#</a></h3>
+<ul>
+<li>Use the following command to create and switch to a new branch:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git switch -c my_new_branch</span></span></code></pre></div><p><em>This is easier than using <code>git branch</code> followed by <code>git switch</code>.</em> <a href="git-branch/">git branch</a></p>
+<h3 id="switching-between-branches">Switching Between Branches<a class="anchor" href="#switching-between-branches">#</a></h3>
+<ul>
+<li>To switch to an existing branch:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git switch branch_name</span></span></code></pre></div><h3 id="viewing-existing-branches">Viewing Existing Branches<a class="anchor" href="#viewing-existing-branches">#</a></h3>
+<ul>
+<li>To list all branches:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch</span></span></code></pre></div><h2 id="viewing-commit-logs">Viewing Commit Logs<a class="anchor" href="#viewing-commit-logs">#</a></h2>
+<ul>
+<li>To see commit history:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log</span></span></code></pre></div><p><a href="git-log/">git log</a></p>
+<ul>
+<li>Optionally, you can specify a branch name:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log branch_name</span></span></code></pre></div><ul>
+<li>For a compact, graphical log, create an alias:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config --global alias.gitmap <span style="color:#e6db74">&#34;log --oneline --graph --all --decorate --parents&#34;</span></span></span></code></pre></div><p>Then use:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git gitmap</span></span></code></pre></div><h2 id="fetching-updates-from-remote-repositories">Fetching Updates from Remote Repositories<a class="anchor" href="#fetching-updates-from-remote-repositories">#</a></h2>
+<ul>
+<li>To download objects and refs from a remote repository without merging them into your working directory:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git fetch</span></span></code></pre></div><p><a href="git-fetch/">git fetch</a></p>
+<h2 id="working-with-remote-repositories">Working with Remote Repositories<a class="anchor" href="#working-with-remote-repositories">#</a></h2>
+<ul>
+<li>To add a remote repository:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git remote add origin &lt;repository_url&gt;</span></span></code></pre></div><ul>
+<li>To list all remote repositories:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git remote -v</span></span></code></pre></div><ul>
+<li>To remove a remote repository:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git remote remove &lt;name&gt;</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git remote add origin https://github.com/your-username/repo_name</span></span></code></pre></div><p><a href="git-remote/">git remote</a></p>
+<h2 id="merging-branches">Merging Branches<a class="anchor" href="#merging-branches">#</a></h2>
+<ul>
+<li>To merge a branch into the current branch:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge example_branch</span></span></code></pre></div><p>Example: To merge <code>example_branch</code> into <code>main</code>,<em><strong>ensure you are on <code>main</code> and run the above command.</strong></em></p>
+<h2 id="creating-a-new-branch-from-an-older-commit">Creating a New Branch from an Older Commit<a class="anchor" href="#creating-a-new-branch-from-an-older-commit">#</a></h2>
+<ul>
+<li>To create a new branch from a specific commit:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git switch -c new_branch_name old_commit_hash</span></span></code></pre></div><h2 id="rebasing-branches">Rebasing Branches<a class="anchor" href="#rebasing-branches">#</a></h2>
+<ul>
+<li>To reapply commits from <code>main</code> onto the current branch:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git rebase main</span></span></code></pre></div><p><em><strong>Example: If you&rsquo;re on branch <code>example_brach</code>, this command brings changes from <code>main</code> onto <code>example_brach</code>.</strong></em>
+<a href="git-rebase/">git rebase</a></p>
+<h2 id="resetting-commits">Resetting Commits<a class="anchor" href="#resetting-commits">#</a></h2>
+<ul>
+<li>To undo commits:</li>
+<li>Use <code>--soft</code> to keep changes in the staging area:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git reset --soft commit</span></span></code></pre></div><ul>
+<li>Use <code>--hard</code> to discard changes:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git reset --hard commit</span></span></code></pre></div><p><a href="git-reset/">git reset</a></p>
+<h1 id="git-push">Git Push<a class="anchor" href="#git-push">#</a></h1>
+<p>The <code>git push</code> command pushes (sends) local changes to any &ldquo;remote&rdquo; - in our case, GitHub. For example, to push our local <code>main</code> branch&rsquo;s commits to the remote <code>origin</code>&rsquo;s <code>main</code> branch we would run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git push origin &lt;branch_name&gt;</span></span></code></pre></div><p><a href="git-push/">git push</a></p>
+<h1 id="git-pull">Git pull<a class="anchor" href="#git-pull">#</a></h1>
+<ul>
+<li>To pull changes from a remote repository and update your local repository:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git pull origin &lt;branch_name&gt;</span></span></code></pre></div><p><a href="git-pull/">git pull</a></p>
+<h3 id="what-happens-when-you-git-clone">What happens when you <code>git clone</code>?<a class="anchor" href="#what-happens-when-you-git-clone">#</a></h3>
+<ol>
+<li>It creates a directory for the repository.</li>
+<li>It initializes the repository and fetches its content.</li>
+<li>It automatically sets up the <strong><code>origin</code></strong> remote to point to the repository URL you cloned.</li>
+</ol>
+<p>Use the <code>git clone</code> command followed by the repository URL:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone &lt;repository-url&gt; &lt;directory-name&gt;</span></span></code></pre></div><p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/user/repository.git</span></span></code></pre></div><p>Clone a Specific Branch:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone --branch &lt;branch-name&gt; &lt;repository-url&gt;</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/version_control_systems/basic_git_conf/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>basic_git_conf</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/version_control_systems/github_workflow/" class="flex align-center">
+        <span>github_workflow</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#initialize-a-git-repository">Initialize a Git Repository</a></li>
+    <li><a href="#adding-files-or-directories">Adding Files or Directories</a></li>
+    <li><a href="#checking-the-current-state">Checking the Current State</a></li>
+    <li><a href="#committing-changes">Committing Changes</a></li>
+    <li><a href="#branch-management">Branch Management</a>
+      <ul>
+        <li><a href="#creating-and-switching-to-a-new-branch">Creating and Switching to a New Branch</a></li>
+        <li><a href="#switching-between-branches">Switching Between Branches</a></li>
+        <li><a href="#viewing-existing-branches">Viewing Existing Branches</a></li>
+      </ul>
+    </li>
+    <li><a href="#viewing-commit-logs">Viewing Commit Logs</a></li>
+    <li><a href="#fetching-updates-from-remote-repositories">Fetching Updates from Remote Repositories</a></li>
+    <li><a href="#working-with-remote-repositories">Working with Remote Repositories</a></li>
+    <li><a href="#merging-branches">Merging Branches</a></li>
+    <li><a href="#creating-a-new-branch-from-an-older-commit">Creating a New Branch from an Older Commit</a></li>
+    <li><a href="#rebasing-branches">Rebasing Branches</a></li>
+    <li><a href="#resetting-commits">Resetting Commits</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#what-happens-when-you-git-clone">What happens when you <code>git clone</code>?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

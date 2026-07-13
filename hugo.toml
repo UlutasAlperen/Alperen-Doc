@@ -1,0 +1,7 @@
+baseURL = 'https://doc.ulutasalperen.com/'
+title = 'Alperen Doc'
+theme = 'hugo-book'
+
+# Required for mermaid and katex shortcodes
+[markup.goldmark.renderer]
+unsafe = true

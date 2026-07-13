@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Git is the distributed version control system (VCS). Nearly every developer in the world uses it to manage their code. It has quite a monopoly on VCS. Developers use Git to:
+Keep a history of their code changes Revert mistakes made in their code Collaborate with other developers Make backups of their code And much more Git konular# basic_git_knowledge github_workflow basic_git_conf Porcelain and Plumbing# In Git, commands are divided into high-level (“porcelain”) commands and low-level (“plumbing”) commands. The porcelain commands are the ones that you will use most often as a developer to interact with your code. Some porcelain commands are:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/version_control_systems/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="Alperen Doc">
+	<meta property="og:description" content="Git is the distributed version control system (VCS). Nearly every developer in the world uses it to manage their code. It has quite a monopoly on VCS. Developers use Git to:
+Keep a history of their code changes Revert mistakes made in their code Collaborate with other developers Make backups of their code And much more Git konular# basic_git_knowledge github_workflow basic_git_conf Porcelain and Plumbing# In Git, commands are divided into high-level (“porcelain”) commands and low-level (“plumbing”) commands. The porcelain commands are the ones that you will use most often as a developer to interact with your code. Some porcelain commands are:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="website">
+
+
+	<meta itemprop="name" content="Alperen Doc">
+	<meta itemprop="description" content="Git is the distributed version control system (VCS). Nearly every developer in the world uses it to manage their code. It has quite a monopoly on VCS. Developers use Git to:
+Keep a history of their code changes Revert mistakes made in their code Collaborate with other developers Make backups of their code And much more Git konular# basic_git_knowledge github_workflow basic_git_conf Porcelain and Plumbing# In Git, commands are divided into high-level (“porcelain”) commands and low-level (“plumbing”) commands. The porcelain commands are the ones that you will use most often as a developer to interact with your code. Some porcelain commands are:">
+	<meta itemprop="wordCount" content="1174">
+
+<title>Version Control Systems • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/version_control_systems/">
+<link rel="stylesheet" href="/book.min.b71fe3c1d3675e52d80430d63a71819e12d05dee934e099a700bacfd4c49a7be.css" integrity="sha256-tx/jwdNnXlLYBDDWOnGBnhLQXe6TTgmacAus/UxJp74=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.3cecc15c0fabf6dcac676b55360d5462df29ed39f525edaddf08a76db4f16385.js" integrity="sha256-POzBXA&#43;r9tysZ2tVNg1UYt8p7Tn1Je2t3winbbTxY4U=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/docs/version_control_systems/index.xml" title="" />
+
+  
+</head>
+<body dir="ltr" class="book-kind-section book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="toggle" checked />
+    <label for="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="flex">
+      <a href="/docs/version_control_systems/" class="active">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Version Control Systems</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#git-konular">Git konular</a>
+      <ul>
+        <li><a href="#porcelain-and-plumbing">Porcelain and Plumbing</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#under-the-hood">Under the Hood</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p><a href="https://git-scm.com/">Git</a> is <em>the</em> distributed <a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control">version control system</a> (VCS). Nearly every developer in the world uses it to manage their code. It has quite a monopoly on VCS. Developers use Git to:</p>
+<ul>
+<li>Keep a history of their code changes</li>
+<li>Revert mistakes made in their code</li>
+<li>Collaborate with other developers</li>
+<li>Make backups of their code</li>
+<li>And much more</li>
+</ul>
+<h2 id="git-konular">Git konular<a class="anchor" href="#git-konular">#</a></h2>
+<ol>
+<li><a href="basic_git_knowledge/">basic_git_knowledge</a></li>
+<li><a href="github_workflow/">github_workflow</a></li>
+<li><a href="basic_git_conf/">basic_git_conf</a></li>
+</ol>
+<h3 id="porcelain-and-plumbing">Porcelain and Plumbing<a class="anchor" href="#porcelain-and-plumbing">#</a></h3>
+<p>In Git, commands are divided into high-level (&ldquo;porcelain&rdquo;) commands and low-level (&ldquo;plumbing&rdquo;) commands. The porcelain commands are the ones that you will use most often as a developer to interact with your code. Some porcelain commands are:</p>
+<ul>
+<li><a href="git-status/">git status</a> = The <code>git status</code> command shows you the current state of your repo</li>
+<li><a href="git-add/">git add</a>  =  add file to git status</li>
+<li><a href="git-commit/">git commit</a> = A commit is a snapshot of the repository at a given point in time. It&rsquo;s a way to save the state of the repository</li>
+<li><a href="git-push/">git push</a> =The <code>git push</code> command pushes (sends) local changes to any &ldquo;remote&rdquo;</li>
+<li><a href="git-branch/">git branch</a>  =A <a href="https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell">Git branch</a> allows you to keep track of different changes separately.</li>
+<li><a href="git-pull/">git pull</a> = fetching the all data from remote repo</li>
+<li><a href="git-log/">git log</a> = showing logs</li>
+<li><code>git init</code> = create a new Git repository</li>
+<li><a href="git-merge/">git merge</a> = merge <code>example_branch</code> into <code>main_branch</code> by running this while on <code>main_branch</code></li>
+<li><a href="git-rebase/">git rebase</a> = turn branch to a main branch</li>
+<li><a href="git-reset/">git reset</a> = resetting to a committed hash</li>
+<li><a href="git-remote/">git remote</a> =git remote add  name (origin most of time)  uri (yanked repo)</li>
+<li><a href="git-fetch/">git fetch</a> =This downloads copies of all the contents of the .git/objects</li>
+<li><a href="git-switch/">git switch</a> = switching branch , using -c flag crate ,if use committed hash back to old repo</li>
+</ul>
+<p><a href="plumping/">plumping</a> commands are:</p>
+<ul>
+<li><code>git apply</code></li>
+<li><code>git commit-tree</code></li>
+<li><code>git hash-object</code></li>
+</ul>
+<p><strong><a href="git-config/">git config</a></strong></p>
+<h1 id="locations">Locations<a class="anchor" href="#locations">#</a></h1>
+<p>There are several locations where Git can be configured. From more general to more specific, they are:</p>
+<ul>
+<li><strong>system</strong>: <code>/etc/gitconfig</code>, a file that configures Git for all users on the system</li>
+<li><strong>global</strong>: <code>~/.gitconfig</code>, a file that configures Git for all projects of a user</li>
+<li><strong>local</strong>: <code>.git/config</code>, a file that configures Git for a specific project</li>
+<li><strong>worktree</strong>: <code>.git/config.worktree</code>, a file that configures Git for part of a project</li>
+</ul>
+<p>In my experience, 90% of the time you will be using <code>--global</code> to set things like your username and email. The other 9% of the time you will be using <code>--local</code> to set project-specific configurations. The last 1% of the time you <em>might</em> need to futz with system and worktree configurations, but it&rsquo;s extremely rare.</p>
+<h1 id="overriding">Overriding<a class="anchor" href="#overriding">#</a></h1>
+<p>If you set a configuration in a more specific location, it will override the same configuration in a more general location. For example, if you set <code>user.name</code> in the local configuration, it will override the <code>user.name</code> set in the global configuration.</p>
+<p><img src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/e4S7M9u.png" alt="overriding" /></p>
+<h1 id="what-is-a-branch">What Is a Branch?<a class="anchor" href="#what-is-a-branch">#</a></h1>
+<p>A <a href="https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell">Git branch</a> allows you to keep track of different changes separately.</p>
+<p>For example, let&rsquo;s say you have a big web project and you want to experiment with changing the color scheme. Instead of changing the entire project directly (as of right now, our <code>master</code> branch), you can create a new branch called <code>color_scheme</code> and work on that branch. When you&rsquo;re done, if you like the changes, you can <a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging">merge</a> the <code>color_scheme</code> branch back into the <code>master</code> branch to keep the changes. If you don&rsquo;t like the changes, you can simply delete the <code>color_scheme</code> branch and go back to the <code>master</code> branch.</p>
+<h2 id="under-the-hood">Under the Hood<a class="anchor" href="#under-the-hood">#</a></h2>
+<p>A branch is just a named <a href="https://en.wikipedia.org/wiki/Pointer_%28computer_programming%29#:~:text=A%20pointer%20is%20a%20programming,than%20storing%20the%20data%20itself.">pointer</a> to a specific commit. When you create a branch, you are creating a new pointer to a specific commit. The commit that the branch points to is called the tip of the branch.</p>
+<p><img src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/iH1kl8l.png" alt="commits and branches" /></p>
+<p>Because a branch is just a pointer to a commit, they&rsquo;re lightweight and &ldquo;cheap&rdquo; resource-wise to create. When you create 10 branches, you&rsquo;re not creating 10 copies of your project on your hard drive.</p>
+<h1 id="merge">Merge<a class="anchor" href="#merge">#</a></h1>
+<p>&ldquo;What&rsquo;s the point of having multiple branches?&rdquo; you might ask. They&rsquo;re most often used to safely make changes without affecting your (or your <em>team&rsquo;s</em>) primary branch. However, once you&rsquo;re happy with your changes, you&rsquo;ll want to <a href="git-merge/">git merge</a> them back into the main branch so that they make their way into the final product.</p>
+<h1 id="git-remote">Git Remote<a class="anchor" href="#git-remote">#</a></h1>
+<p>Often our frenemies (read: coworkers) make code changes that we need to begrudgingly accept into our pristine bug-free repos. <em>/s</em></p>
+<p>This is where the &ldquo;distributed&rdquo; in &ldquo;distributed version control system&rdquo; comes from. We can have &ldquo;remotes&rdquo;, which are just external repos with <em>mostly</em> the same Git history as our local repo.</p>
+<p>When it comes to Git (the CLI tool), there really isn&rsquo;t a &ldquo;central&rdquo; repo. GitHub is just someone else&rsquo;s repo. Only by convention and convenience have we, as developers, started to use GitHub as a &ldquo;source of truth&rdquo; for our code. <a href="git-remote/">git remote</a></p>
+<h1 id="pull-requests">Pull Requests<a class="anchor" href="#pull-requests">#</a></h1>
+<p>On GitHub, a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request</a> is a way to propose changes, typically to the rest of your team, or to the maintainer of a project you&rsquo;re contributing to.</p>
+<p>Pull requests allow team members to see what changes are being proposed and to discuss them before they are merged into the main codebase.</p>
+<h1 id="my-team-workflow">My Team Workflow<a class="anchor" href="#my-team-workflow">#</a></h1>
+<p>When you&rsquo;re working with a <em>team</em>, Git gets a bit more involved (and we&rsquo;ll cover more of this in part 2 of this course). Here&rsquo;s what I do:</p>
+<ul>
+<li>Update my local <code>main</code> branch with <code>git pull origin main</code></li>
+<li>Checkout a new branch for the changes I want to make with <code>git switch -c &lt;branchname&gt;</code></li>
+<li>Make changes to files</li>
+<li><code>git add .</code></li>
+<li><code>git commit -m &quot;a message describing the changes&quot;</code></li>
+<li><code>git push origin &lt;branchname&gt;</code> (I push to the <em>new</em> branch name, not <code>main</code>)</li>
+<li>Open a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request</a> on GitHub to merge my changes into <code>main</code></li>
+<li>Ask a team member to review my pull request</li>
+<li>Once approved, click the &ldquo;Merge&rdquo; button on GitHub to merge my changes into <code>main</code></li>
+<li>Delete my feature branch, and repeat with a new branch for the next set of changes</li>
+</ul>
+<h1 id="merge-pull-request">Merge Pull Request<a class="anchor" href="#merge-pull-request">#</a></h1>
+<p>In a typical team workflow, you would ask a team mate to review your pull request. If they approve of the changes, they would approve the pull request, and you&rsquo;d be clear to merge.</p>
+<p>We&rsquo;re the dictators of our own repo however, so no need to wait for approval!</p>
+<h1 id="gitignore">Gitignore<a class="anchor" href="#gitignore">#</a></h1>
+<p>As you&rsquo;ve seen, it&rsquo;s <em>pretty normal</em> to use the following workflow from the top level of your repo:</p>
+<ol>
+<li><code>git add .</code></li>
+<li><code>git commit -m &quot;some message here&quot;</code></li>
+<li><code>git push origin main</code></li>
+</ol>
+<p>A problem arises when we want to put files in our project&rsquo;s directory, but we <em>don&rsquo;t</em> want to track them with Git. <strong><a href="gitignore/">gitignore</a> file solves this.</strong> For example, if you work with Python, you probably want to ignore automatically generated files like <code>.pyc</code> and <code>__pycache__</code>. If you are building a server, you probably want to ignore <code>.env</code> files that might hold private keys. If you (I&rsquo;m sorry) work with JavaScript, you might want to ignore the <code>node_modules</code> directory.</p>
+<p><img src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/Mn7FERh.png" alt="node_modules" /></p>
+<p>Here&rsquo;s an example <code>.gitignore</code> file, which exists at the root of a repo:</p>
+<pre tabindex="0"><code>node_modules</code></pre><p>This will ignore every path containing <code>node_modules</code> as a &ldquo;section&rdquo; (directory name or file name). It ignores:</p>
+<ul>
+<li><code>node_modules/code.js</code></li>
+<li><code>src/node_modules/code.js</code></li>
+<li><code>src/node_modules</code></li>
+</ul>
+<p>It does <em>not</em> ignore:</p>
+<ul>
+<li><code>src/node_modules_2/code.js</code></li>
+<li><code>env/node_modules_3</code></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>Docs</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/version_control_systems/basic_git_conf/" class="flex align-center">
+        <span>basic_git_conf</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#git-konular">Git konular</a>
+      <ul>
+        <li><a href="#porcelain-and-plumbing">Porcelain and Plumbing</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#under-the-hood">Under the Hood</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Gitignore# As you’ve seen, it’s pretty normal to use the following workflow from the top level of your repo:
+git add . git commit -m &#34;some message here&#34; git push origin main A problem arises when we want to put files in our project’s directory, but we don’t want to track them with Git. gitignore file solves this. For example, if you work with Python, you probably want to ignore automatically generated files like .pyc and __pycache__. If you are building a server, you probably want to ignore .env files that might hold private keys. If you (I’m sorry) work with JavaScript, you might want to ignore the node_modules directory.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/version_control_systems/gitignore/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="gitignore">
+	<meta property="og:description" content="Gitignore# As you’ve seen, it’s pretty normal to use the following workflow from the top level of your repo:
+git add . git commit -m &#34;some message here&#34; git push origin main A problem arises when we want to put files in our project’s directory, but we don’t want to track them with Git. gitignore file solves this. For example, if you work with Python, you probably want to ignore automatically generated files like .pyc and __pycache__. If you are building a server, you probably want to ignore .env files that might hold private keys. If you (I’m sorry) work with JavaScript, you might want to ignore the node_modules directory.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="gitignore">
+	<meta itemprop="description" content="Gitignore# As you’ve seen, it’s pretty normal to use the following workflow from the top level of your repo:
+git add . git commit -m &#34;some message here&#34; git push origin main A problem arises when we want to put files in our project’s directory, but we don’t want to track them with Git. gitignore file solves this. For example, if you work with Python, you probably want to ignore automatically generated files like .pyc and __pycache__. If you are building a server, you probably want to ignore .env files that might hold private keys. If you (I’m sorry) work with JavaScript, you might want to ignore the node_modules directory.">
+	<meta itemprop="wordCount" content="516">
+
+<title>gitignore • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/version_control_systems/gitignore/">
+<link rel="stylesheet" href="/book.min.b71fe3c1d3675e52d80430d63a71819e12d05dee934e099a700bacfd4c49a7be.css" integrity="sha256-tx/jwdNnXlLYBDDWOnGBnhLQXe6TTgmacAus/UxJp74=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.3cecc15c0fabf6dcac676b55360d5462df29ed39f525edaddf08a76db4f16385.js" integrity="sha256-POzBXA&#43;r9tysZ2tVNg1UYt8p7Tn1Je2t3winbbTxY4U=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="toggle" checked />
+    <label for="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="active">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>gitignore</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#wildcards">Wildcards</a></li>
+    <li><a href="#rooted-patterns">Rooted Patterns</a></li>
+    <li><a href="#negation">Negation</a></li>
+    <li><a href="#comments">Comments</a></li>
+    <li><a href="#order-matters">Order Matters</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="gitignore">Gitignore<a class="anchor" href="#gitignore">#</a></h1>
+<p>As you&rsquo;ve seen, it&rsquo;s <em>pretty normal</em> to use the following workflow from the top level of your repo:</p>
+<ol>
+<li><code>git add .</code></li>
+<li><code>git commit -m &quot;some message here&quot;</code></li>
+<li><code>git push origin main</code></li>
+</ol>
+<p>A problem arises when we want to put files in our project&rsquo;s directory, but we <em>don&rsquo;t</em> want to track them with Git. <strong><a href="gitignore/">gitignore</a> file solves this.</strong> For example, if you work with Python, you probably want to ignore automatically generated files like <code>.pyc</code> and <code>__pycache__</code>. If you are building a server, you probably want to ignore <code>.env</code> files that might hold private keys. If you (I&rsquo;m sorry) work with JavaScript, you might want to ignore the <code>node_modules</code> directory.</p>
+<p><img src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/Mn7FERh.png" alt="node_modules" /></p>
+<p>Here&rsquo;s an example <code>.gitignore</code> file, which exists at the root of a repo:</p>
+<pre tabindex="0"><code>node_modules</code></pre><p>This will ignore every path containing <code>node_modules</code> as a &ldquo;section&rdquo; (directory name or file name). It ignores:</p>
+<ul>
+<li><code>node_modules/code.js</code></li>
+<li><code>src/node_modules/code.js</code></li>
+<li><code>src/node_modules</code></li>
+</ul>
+<p>It does <em>not</em> ignore:</p>
+<ul>
+<li><code>src/node_modules_2/code.js</code></li>
+<li><code>env/node_modules_3</code></li>
+</ul>
+<h1 id="nested-gitignore">Nested Gitignore<a class="anchor" href="#nested-gitignore">#</a></h1>
+<p>Your <code>.gitignore</code> file does <em>not</em> necessarily need to be at the root of your project.</p>
+<p>It&rsquo;s fairly common to have multiple <code>.gitignore</code> files in different directories throughout a project. A nested <code>.gitignore</code> file only applies to the directory it&rsquo;s in and its subdirectories.</p>
+<p>Let&rsquo;s say you have the following setup:</p>
+<pre tabindex="0"><code>src/
+├── assets/
+│   ├── .gitignore
+|   ├── cover_art.jpg
+│   └── onlydevs.png
+├── main.py
+├── tests.py
+├── venv/
+│   └── bin/
+|       ├── activate
+│       └── python
+.gitignore</code></pre><p>Here&rsquo;s the contents of <code>src/assets/.gitignore</code>:</p>
+<pre tabindex="0"><code>onlydevs.png
+main.py</code></pre><p>Here&rsquo;s the contents of the root <code>.gitignore</code>:</p>
+<pre tabindex="0"><code>venv/bin/activate</code></pre><h1 id="patterns">Patterns<a class="anchor" href="#patterns">#</a></h1>
+<p>It would be <em>rough</em> if <code>.gitignore</code> files only accepted exact filepath section names. Luckily, they don&rsquo;t!</p>
+<p>Let&rsquo;s go over some of the most common patterns.</p>
+<h2 id="wildcards">Wildcards<a class="anchor" href="#wildcards">#</a></h2>
+<p>The <code>*</code> character matches any number of characters except for a slash (<code>/</code>). For example, to ignore <em>all</em> <code>.txt</code> files, you could use the following pattern:</p>
+<pre tabindex="0"><code>*.txt</code></pre><h2 id="rooted-patterns">Rooted Patterns<a class="anchor" href="#rooted-patterns">#</a></h2>
+<p>Patterns starting with a <code>/</code> are anchored to the directory containing the <code>.gitignore</code> file. For example, this would ignore a <code>main.py</code> in the root directory, but not in any subdirectories:</p>
+<pre tabindex="0"><code>/main.py</code></pre><h2 id="negation">Negation<a class="anchor" href="#negation">#</a></h2>
+<p>You can negate a pattern by prefixing it with an exclamation mark (<code>!</code>). For example, to ignore all <code>.txt</code> files <em>except</em> for <code>important.txt</code>, you could use the following pattern:</p>
+<pre tabindex="0"><code>*.txt
+!important.txt</code></pre><h2 id="comments">Comments<a class="anchor" href="#comments">#</a></h2>
+<p>You can add comments to your <code>.gitignore</code> file by starting a line with a <code>#</code>. For example:</p>
+<pre tabindex="0"><code># Ignore all .txt files
+*.txt</code></pre><h2 id="order-matters">Order Matters<a class="anchor" href="#order-matters">#</a></h2>
+<p>The order of patterns in a <code>.gitignore</code> file determines their effect, and patterns can override each other. For example:</p>
+<pre tabindex="0"><code>temp/*
+!temp/instructions.md</code></pre><p>Everything in the <code>temp/</code> directory would be ignored <em>except</em> for <code>instructions.md</code>. If the order were reversed, <code>instructions.md</code> would be ignored.</p>
+<blockquote class='book-hint '>
+<p>You can read more about the patterns that are available in the <a href="https://git-scm.com/docs/gitignore#_pattern_format">official documentation</a> if you&rsquo;d like.</p>
+</blockquote><h1 id="what-to-ignore">What to Ignore<a class="anchor" href="#what-to-ignore">#</a></h1>
+<p>We&rsquo;ve talked about <em>how</em> to ignore files, but the deeper question is <em>what</em> should you ignore? Here are some rules of thumb for coding projects:</p>
+<ol>
+<li>Ignore things that can be <em>generated</em> (e.g. compiled code, minified files, etc.)</li>
+<li>Ignore dependencies (e.g. <code>node_modules</code>, <code>venv</code>, <code>packages</code>, etc.)</li>
+<li>Ignore things that are personal or specific to how you like to work (e.g. editor settings)</li>
+<li>Ignore things that are sensitive or dangerous (e.g. <code>.env</code> files, passwords, API keys, etc.)</li>
+</ol>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/version_control_systems/git-config/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>git config</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/version_control_systems/plumping/" class="flex align-center">
+        <span>plumping</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#wildcards">Wildcards</a></li>
+    <li><a href="#rooted-patterns">Rooted Patterns</a></li>
+    <li><a href="#negation">Negation</a></li>
+    <li><a href="#comments">Comments</a></li>
+    <li><a href="#order-matters">Order Matters</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

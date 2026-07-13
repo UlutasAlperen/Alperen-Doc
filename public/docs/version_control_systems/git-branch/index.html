@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="What Is a Branch?# A Git branch allows you to keep track of different changes separately.
+For example, let’s say you have a big web project and you want to experiment with changing the color scheme. Instead of changing the entire project directly (as of right now, our master branch), you can create a new branch called color_scheme and work on that branch. When you’re done, if you like the changes, you can merge the color_scheme branch back into the master branch to keep the changes. If you don’t like the changes, you can simply delete the color_scheme branch and go back to the master branch.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/version_control_systems/git-branch/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="git branch">
+	<meta property="og:description" content="What Is a Branch?# A Git branch allows you to keep track of different changes separately.
+For example, let’s say you have a big web project and you want to experiment with changing the color scheme. Instead of changing the entire project directly (as of right now, our master branch), you can create a new branch called color_scheme and work on that branch. When you’re done, if you like the changes, you can merge the color_scheme branch back into the master branch to keep the changes. If you don’t like the changes, you can simply delete the color_scheme branch and go back to the master branch.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="git branch">
+	<meta itemprop="description" content="What Is a Branch?# A Git branch allows you to keep track of different changes separately.
+For example, let’s say you have a big web project and you want to experiment with changing the color scheme. Instead of changing the entire project directly (as of right now, our master branch), you can create a new branch called color_scheme and work on that branch. When you’re done, if you like the changes, you can merge the color_scheme branch back into the master branch to keep the changes. If you don’t like the changes, you can simply delete the color_scheme branch and go back to the master branch.">
+	<meta itemprop="wordCount" content="541">
+
+<title>git branch • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/version_control_systems/git-branch/">
+<link rel="stylesheet" href="/book.min.b71fe3c1d3675e52d80430d63a71819e12d05dee934e099a700bacfd4c49a7be.css" integrity="sha256-tx/jwdNnXlLYBDDWOnGBnhLQXe6TTgmacAus/UxJp74=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.3cecc15c0fabf6dcac676b55360d5462df29ed39f525edaddf08a76db4f16385.js" integrity="sha256-POzBXA&#43;r9tysZ2tVNg1UYt8p7Tn1Je2t3winbbTxY4U=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="toggle" checked />
+    <label for="section-9808573fb5a2a0f77a7b522fbcf6a2f2" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="active">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>git branch</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#under-the-hood">Under the Hood</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#how-to-rename-a-branch">How to Rename a Branch</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#two-ways-to-create-a-branch">Two Ways to Create a Branch</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#visual">Visual</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="what-is-a-branch">What Is a Branch?<a class="anchor" href="#what-is-a-branch">#</a></h1>
+<p>A <a href="https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell">Git branch</a> allows you to keep track of different changes separately.</p>
+<p>For example, let&rsquo;s say you have a big web project and you want to experiment with changing the color scheme. Instead of changing the entire project directly (as of right now, our <code>master</code> branch), you can create a new branch called <code>color_scheme</code> and work on that branch. When you&rsquo;re done, if you like the changes, you can <a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging">merge</a> the <code>color_scheme</code> branch back into the <code>master</code> branch to keep the changes. If you don&rsquo;t like the changes, you can simply delete the <code>color_scheme</code> branch and go back to the <code>master</code> branch.</p>
+<h2 id="under-the-hood">Under the Hood<a class="anchor" href="#under-the-hood">#</a></h2>
+<p>A branch is just a named <a href="https://en.wikipedia.org/wiki/Pointer_%28computer_programming%29#:~:text=A%20pointer%20is%20a%20programming,than%20storing%20the%20data%20itself.">pointer</a> to a specific commit. When you create a branch, you are creating a new pointer to a specific commit. The commit that the branch points to is called the tip of the branch.</p>
+<p><img src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/iH1kl8l.png" alt="commits and branches" /></p>
+<p>Because a branch is just a pointer to a commit, they&rsquo;re lightweight and &ldquo;cheap&rdquo; resource-wise to create. When you create 10 branches, you&rsquo;re not creating 10 copies of your project on your hard drive.</p>
+<p>Check which branch you&rsquo;re currently on by running:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch</span></span></code></pre></div><h1 id="default-branch">Default Branch<a class="anchor" href="#default-branch">#</a></h1>
+<p>We&rsquo;ve been using <a href="https://git-scm.com">Git&rsquo;s</a> default <code>master</code> branch. Interestingly, <a href="https://github.com/">GitHub</a> (a website where you can remotely store Git projects) recently changed its default branch from <code>master</code> to <code>main</code>. As a general rule, I recommend using <code>main</code> as your default branch if you work primarily with <code>GitHub</code>, as we will.</p>
+<h2 id="how-to-rename-a-branch">How to Rename a Branch<a class="anchor" href="#how-to-rename-a-branch">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch -m oldname newname</span></span></code></pre></div><h1 id="new-branch">New Branch<a class="anchor" href="#new-branch">#</a></h1>
+<p>You should already be on the <code>main</code> branch: your &ldquo;default&rdquo; branch. You can always check with <code>git branch</code>.</p>
+<h2 id="two-ways-to-create-a-branch">Two Ways to Create a Branch<a class="anchor" href="#two-ways-to-create-a-branch">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch my_new_branch</span></span></code></pre></div><p>This creates a new branch called <code>my_new_branch</code>. The thing is, I rarely use this command because usually I want to create a branch and switch to it immediately. So I use this command instead:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git switch -c my_new_branch</span></span></code></pre></div><p>The <a href="https://git-scm.com/docs/git-switch">switch</a> command allows you to switch branches, and the <code>-c</code> flag tells Git to create a new branch if it doesn&rsquo;t already exist.</p>
+<p>When you create a new branch, it uses the <em>current commit</em> you are on as the branch base. For example, if you&rsquo;re on your <code>main</code> branch with 3 commits, <code>A</code>, <code>B</code>, and <code>C</code>, and then you run <code>git switch -c my_new_branch</code>, your new branch will look like this:</p>
+<p><img src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/oah2FRD.png" alt="branch diagram same commits" /></p>
+<h1 id="merge">Merge<a class="anchor" href="#merge">#</a></h1>
+<p>&ldquo;What&rsquo;s the point of having multiple branches?&rdquo; you might ask. They&rsquo;re most often used to safely make changes without affecting your (or your <em>team&rsquo;s</em>) primary branch. However, once you&rsquo;re happy with your changes, you&rsquo;ll want to <a href="git-merge/">git merge</a> them back into the main branch so that they make their way into the final product.</p>
+<h2 id="visual">Visual<a class="anchor" href="#visual">#</a></h2>
+<p>Let&rsquo;s say you&rsquo;re in a state where you have two branches, each with their own unique commits:</p>
+<pre tabindex="0"><code>A - B - C    main
+   \
+    D - E    other_branch</code></pre><p>If you merge <code>other_branch</code> into <code>main</code>, Git combines both branches by creating a new commit that has <em>both</em> histories as parents. In the diagram below, <code>F</code> is a <a href="https://git-scm.com/docs/git-merge#_true_merge">merge commit</a> that has <code>C</code> and <code>E</code> as parents. <code>F</code> brings all the changes from <code>D</code> and <code>E</code> back into the <code>main</code> branch.</p>
+<pre tabindex="0"><code>A - B - C - F    main
+   \     /
+    D - E        other_branch</code></pre><h4 id="delete-branch">delete branch<a class="anchor" href="#delete-branch">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch -d example_branch</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/version_control_systems/git-push/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>git push</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/version_control_systems/git-pull/" class="flex align-center">
+        <span>git pull</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#under-the-hood">Under the Hood</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#how-to-rename-a-branch">How to Rename a Branch</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#two-ways-to-create-a-branch">Two Ways to Create a Branch</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#visual">Visual</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
