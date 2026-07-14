@@ -1,0 +1,51 @@
+name: Deploy Hugo Site
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive # Hugo temaları (hugo-book) submodule icin gerekli
+          fetch-depth: 0
+
+      # 2. Hugo Kurulumu
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "latest"
+          extended: true # hugo-book veya temalar sass/scss kullanıyorum o yuzden true
+
+      # 3. Hugo Build
+      - name: Build Hugo Site
+        run: hugo --minify
+
+      # 4. SSH Key Yapılandırması
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: "unnecessary"
+          if_key_exists: replace
+
+      # 5. VPS IP'sini bilinen hostlar listesine ekliyorum hem sormasin hemde guvenlik icin
+      - name: Adding Known Hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      # 6. Rsync ile VPS'e gönderim
+      - name: Deploy Files with Rsync
+        run: |
+          rsync -avz --delete \
+            --no-perms --no-owner \
+            --chmod=D750,F640 \
+            -e "ssh -p ${{ secrets.SSH_PORT }}" \
+            public/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/kole/public/
