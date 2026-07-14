@@ -5,3 +5,7 @@ theme = 'hugo-book'
 # Required for mermaid and katex shortcodes
 [markup.goldmark.renderer]
 unsafe = true
+
+[params]
+# Temayı kalıcı olarak koyu yapmak için:
+BookTheme = "dark"

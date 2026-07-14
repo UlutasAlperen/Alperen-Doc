@@ -2,56 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/docs/version_control_systems/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/basic_git_conf/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/basic_git_conf/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/basic_git_knowledge/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/basic_git_knowledge/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/github_workflow/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/github_workflow/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/continuous_integration/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/continuous_integration/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/continuous_deployment/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/continuous_deployment/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/git-status/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/git-status/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/git-add/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/git-add/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/git-commit/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/git-commit/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/git-push/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/git-push/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/git-branch/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/git-branch/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/git-pull/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/git-pull/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/git-log/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/git-log/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/git-merge/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/git-merge/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/git-rebase/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/git-rebase/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/git-reset/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/git-reset/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/git-remote/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/git-remote/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/git-fetch/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/git-fetch/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/git-switch/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/git-switch/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/git-config/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/git-config/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/gitignore/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/gitignore/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/version_control_systems/plumping/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/version_control_systems/plumping/</loc>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://doc.ulutasalperen.com/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/</loc>
+    <loc>https://doc.ulutasalperen.com/docs/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://doc.ulutasalperen.com/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://doc.ulutasalperen.com/tags/</loc>
   </url>
 </urlset>
