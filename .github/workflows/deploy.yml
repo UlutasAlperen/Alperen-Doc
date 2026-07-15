@@ -45,7 +45,7 @@ jobs:
       - name: Deploy Files with Rsync
         run: |
           rsync -avz --delete \
-            --no-perms --no-owner \
+            --no-perms --no-owner --no-group \
             --chmod=D750,F640 \
             -e "ssh -p ${{ secrets.SSH_PORT }}" \
             public/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/kole/public/
