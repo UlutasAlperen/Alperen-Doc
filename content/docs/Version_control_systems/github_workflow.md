@@ -65,12 +65,13 @@ echo "pub-key" > /var/www/kole/.ssh/authorized_keys
 # Klasör ve dosya izinlerini sıkılaştırıyorum
 sudo chmod 700 /var/www/kole/.ssh
 sudo chmod 600 /var/www/kole/.ssh/authorized_keys
-sudo chown -R kole:caddy /var/www/kole/.ssh
+sudo chown -R kole:kole /var/www/kole/.ssh
+#zaten ssh baglantisi kole uzerinden ve  caddy agent'in ssh dizinine erisimine gerek yok
 ```
 
 ## 3. Caddy Yapılandırması
 
-Caddy ile statik dosyalarımı web'e sunacağım. `/etc/caddy/Caddyfile` dosyasını şu şekilde yapılandırıyorum:
+Caddy ile statik dosyalarımı web'e sunacağım. `/etc/caddy/Caddyfile` (temsili olarak paylayisorum prodda biraz daha farkli conf) dosyasını şu şekilde yapılandırıyorum:
 
 
 ```toml
