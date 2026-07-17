@@ -9,9 +9,9 @@ Continuous Integration (CI) is where developers regularly push code changes into
 Those tests can include unit tests, integration tests, styling checks, linting checks, security checks or any other type of automated test. If _any_ of the tests fail, the build is considered "broken" and the developer is notified so they can fix it.
 
 
-## Our Internal CI at Boot.dev
+## I was forked boot.dev cli for testing CI at Boot.dev Cli 
 
-Here at Boot.dev we have CI tests that run each time a new pull request is opened. The reviewer doesn't need to manually check for formatting issues or run tests locally before approving the changes. It automates _part_ of the code review process.
+Here at Boot.dev  CI tests that run each time a new pull request is opened. The reviewer doesn't need to manually check for formatting issues or run tests locally before approving the changes. It automates _part_ of the code review process.
 
 _CI is all about automating as much of the testing and review process as possible._
 

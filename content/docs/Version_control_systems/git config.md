@@ -57,4 +57,4 @@ Let's take the command apart:
 - `--global`: Flag stating you want this configuration to be stored globally in your `~/.gitconfig`. The opposite is "local", which stores the configuration in the current repository only.
 - `user`: The section.
 - `name`: The key within the section.
-- `"ThePrimeagen"`: The value you want to set for the key.
+- `"alperen"`: The value you want to set for the key.
