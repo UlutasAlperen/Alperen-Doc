@@ -16,7 +16,7 @@ scalable, and production-ready infrastructure using modern DevOps and cloud-nati
 {{<button href="mailto:ulutas.alperen@outlook.com">}}Mail me{{</button>}}
 {{<button href="https://ulutasalperen.com">}}My Personal Website{{</button>}}
 {{<button href="https://github.com/UlutasAlperen">}}Github{{</button>}}
-{{<button href="https://linkedin.com/in/alperen-ul">}}Linkedin{{</button>}}
+{{<button href="https://dev.ulutasalperen.com/docs/version_control_systems"/>}}Git main{{</button>}}
 </div>
 
 <style>
