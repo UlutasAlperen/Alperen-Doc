@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -9,30 +9,36 @@ https://github.com/alex-shpak/hugo-book
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="001 - continuous_integration 002 - continuous_deployment
+Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosyalarını statik bir siteye dönüştüren bir araç. Bu yazıda, suan bulundugunuz siteyi nasil hugo-book temasını kullanırken aynı zamanda GitHub Workflow kullanarak her değişikliği debian tabanli uzak sunucuma nasıl otomatik olarak deploy edeceğimi anlatmak istedim.
+1. VPS ve Kullanıcı Yapılandırması# İlk başta sistemi --system parametresiyle kurmayı düşünmüştüm. Sistem kullanıcısı oluşturmak mantıklı çünkü bu kullanıcının varsayılan olarak bir şifresi ve interaktif bir shell oturumu olmaz (tabi belirli komutlarla yapilabilir). Bu da sunucunun guvenligini arttirir.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://doc.ulutasalperen.com/docs/version_control_systems/github_workflow/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/version_control_systems/github_workflow/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="github_workflow">
-	<meta property="og:description" content="001 - continuous_integration 002 - continuous_deployment">
+	<meta property="og:description" content="001 - continuous_integration 002 - continuous_deployment
+Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosyalarını statik bir siteye dönüştüren bir araç. Bu yazıda, suan bulundugunuz siteyi nasil hugo-book temasını kullanırken aynı zamanda GitHub Workflow kullanarak her değişikliği debian tabanli uzak sunucuma nasıl otomatik olarak deploy edeceğimi anlatmak istedim.
+1. VPS ve Kullanıcı Yapılandırması# İlk başta sistemi --system parametresiyle kurmayı düşünmüştüm. Sistem kullanıcısı oluşturmak mantıklı çünkü bu kullanıcının varsayılan olarak bir şifresi ve interaktif bir shell oturumu olmaz (tabi belirli komutlarla yapilabilir). Bu da sunucunun guvenligini arttirir.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="github_workflow">
-	<meta itemprop="description" content="001 - continuous_integration 002 - continuous_deployment">
-	<meta itemprop="wordCount" content="6">
+	<meta itemprop="description" content="001 - continuous_integration 002 - continuous_deployment
+Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosyalarını statik bir siteye dönüştüren bir araç. Bu yazıda, suan bulundugunuz siteyi nasil hugo-book temasını kullanırken aynı zamanda GitHub Workflow kullanarak her değişikliği debian tabanli uzak sunucuma nasıl otomatik olarak deploy edeceğimi anlatmak istedim.
+1. VPS ve Kullanıcı Yapılandırması# İlk başta sistemi --system parametresiyle kurmayı düşünmüştüm. Sistem kullanıcısı oluşturmak mantıklı çünkü bu kullanıcının varsayılan olarak bir şifresi ve interaktif bir shell oturumu olmaz (tabi belirli komutlarla yapilabilir). Bu da sunucunun guvenligini arttirir.">
+	<meta itemprop="wordCount" content="893">
 
 <title>github_workflow • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://doc.ulutasalperen.com/docs/version_control_systems/github_workflow/">
+<link rel="canonical" href="http://localhost:1313/docs/version_control_systems/github_workflow/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.b44dd7ac5e155a60db5edf73e01d04e252d801e05f6ef39b6bc6938101265b3b.js" integrity="sha256-tE3XrF4VWmDbXt9z4B0E4lLYAeBfbvOba8aTgQEmWzs=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.de09b9189818537667f1fa9a0fb5c03c37ee3e9d9c723aa8adcd7417dbe79d1f.js" integrity="sha256-3gm5GJgYU3Zn8fqaD7XAPDfuPp2ccjqorc10F9vnnR8=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -439,7 +445,29 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-vps-ve-kullanıcı-yapılandırması">1. VPS ve Kullanıcı Yapılandırması</a>
+      <ul>
+        <li><a href="#kullanıcı-ve-dizin-hazırlığı-debian-vps">Kullanıcı ve Dizin Hazırlığı (Debian VPS):</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-ssh-ve-güvenlik-şifresiz-ssh--secrets">2. SSH ve Güvenlik (Şifresiz SSH &amp; Secrets)</a>
+      <ul>
+        <li><a href="#adım-a-ssh-key-üretimi">Adım A: SSH Key Üretimi</a></li>
+        <li><a href="#adım-b-public-keyi-vpse-ekleme">Adım B: Public Key&rsquo;i VPS&rsquo;e Ekleme</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-caddy-yapılandırması">3. Caddy Yapılandırması</a></li>
+    <li><a href="#4-github-repository-secrets-tanımlama">4. GitHub Repository Secrets Tanımlama</a></li>
+    <li><a href="#5-github-actions-workflow-dosyası-githubworkflowsdeployyml">5. GitHub Actions Workflow Dosyası (<code>.github/workflows/deploy.yml</code>)</a>
+      <ul>
+        <li><a href="#rsync-parametrelerinin-detayları">Rsync Parametrelerinin Detayları:</a></li>
+        <li><a href="#setgid-bitinin-sunucu-tarafında-tanımlanması">SetGID Bitinin Sunucu Tarafında Tanımlanması</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -452,6 +480,163 @@ https://github.com/alex-shpak/hugo-book
       
   <article class="markdown book-article"><p>001 - <a href="continuous_integration/">continuous_integration</a>
 002 - <a href="continuous_deployment/">continuous_deployment</a></p>
+<h1 id="hugo-book-teması-ve-github-actionsworkflow-ile-vpse-cd">Hugo-Book Teması ve GitHub Actions(workflow) ile VPS&rsquo;e CD<a class="anchor" href="#hugo-book-temas%c4%b1-ve-github-actionsworkflow-ile-vpse-cd">#</a></h1>
+<p>Hugo,Markdown dosyalarını statik bir siteye dönüştüren bir araç. Bu yazıda, suan bulundugunuz siteyi nasil <em>hugo-book</em> temasını kullanırken aynı zamanda GitHub Workflow kullanarak her değişikliği debian tabanli uzak sunucuma nasıl otomatik olarak deploy edeceğimi anlatmak istedim.</p>
+<h2 id="1-vps-ve-kullanıcı-yapılandırması">1. VPS ve Kullanıcı Yapılandırması<a class="anchor" href="#1-vps-ve-kullan%c4%b1c%c4%b1-yap%c4%b1land%c4%b1rmas%c4%b1">#</a></h2>
+<p>İlk başta sistemi <code>--system</code> parametresiyle kurmayı düşünmüştüm. Sistem kullanıcısı oluşturmak mantıklı çünkü bu kullanıcının varsayılan olarak bir şifresi ve interaktif bir shell oturumu olmaz (tabi belirli komutlarla yapilabilir). Bu da sunucunun guvenligini arttirir.</p>
+<p>Ancak dikkat edilmesi gereken önemli bir detay var:</p>
+<ul>
+<li>
+<p><strong>Shell Durumu:</strong> <code>rsync</code> işleminin SSH üzerinden çalışabilmesi için kullanıcının geçici de olsa geçerli bir shell&rsquo;e (<code>/bin/bash</code> veya <code>/bin/sh</code>) ihtiyacı var. Sunucuya dosya taşımak için rsync kullanacağımdan, shell&rsquo;i <code>/usr/sbin/nologin</code> veya <code>/bin/false</code> yaparsam SSH bağlantısı kurulamazdim.</p>
+</li>
+<li>
+<p><strong>Çözüm:</strong> Güvenliği shell&rsquo;i tamamen kapatarak değil, SSH anahtarı kullanarak (ve gerekirse sadece rsync komutuna izin vererek) kullanacagim.</p>
+</li>
+</ul>
+<h3 id="kullanıcı-ve-dizin-hazırlığı-debian-vps">Kullanıcı ve Dizin Hazırlığı (Debian VPS):<a class="anchor" href="#kullan%c4%b1c%c4%b1-ve-dizin-haz%c4%b1rl%c4%b1%c4%9f%c4%b1-debian-vps">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 1. Sistem kullanıcısını oluşturuyorum (home dizini /var/www/kole olacak şekilde)</span>
+</span></span><span style="display:flex;"><span>sudo useradd -r -m -d /var/www/kole -s /bin/bash kole
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. Web dizinini oluşturup Caddy&#39;nin de okuyabilmesi için izinleri ayarlıyorum</span>
+</span></span><span style="display:flex;"><span>sudo mkdir -p /var/www/kole/public
+</span></span><span style="display:flex;"><span>sudo chown -R kole:caddy /var/www/kole
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># İzinleri dizinler için 750 (rwxr-x---), dosyalar için ise 640 (rw-r-----) şeklinde yapılandıracağım.</span></span></span></code></pre></div><h2 id="2-ssh-ve-güvenlik-şifresiz-ssh--secrets">2. SSH ve Güvenlik (Şifresiz SSH &amp; Secrets)<a class="anchor" href="#2-ssh-ve-g%c3%bcvenlik-%c5%9fifresiz-ssh--secrets">#</a></h2>
+<p>Sürecin tamamen şifresiz ve güvenli çalışması için bir SSH Key çifti üretiyorum; çünkü otomasyonu bu anahtarla sağlayacağım.</p>
+<h3 id="adım-a-ssh-key-üretimi">Adım A: SSH Key Üretimi<a class="anchor" href="#ad%c4%b1m-a-ssh-key-%c3%bcretimi">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ssh-keygen -t ed25519 -f id_github_deploy -C <span style="color:#e6db74">&#34;github-actions-deploy&#34;</span></span></span></code></pre></div><p>Bu işlem bize iki adet dosya verir:</p>
+<ol>
+<li>
+<p><code>id_github_deploy</code> (Private Key): GitHub&rsquo;da Secrets kısmına ekleyeceğim. Eğer birileri bu key&rsquo;e erişirse işletim sistemime sızabilir. GitHub patlamadığı sürece sorun yok, patlarsa who cares.</p>
+</li>
+<li>
+<p><code>id_github_deploy.pub</code> (Public Key): VPS tarafına ekleyeceğim anahtar.</p>
+</li>
+</ol>
+<h3 id="adım-b-public-keyi-vpse-ekleme">Adım B: Public Key&rsquo;i VPS&rsquo;e Ekleme<a class="anchor" href="#ad%c4%b1m-b-public-keyi-vpse-ekleme">#</a></h3>
+<p>VPS üzerinde yeni oluşturduğum <code>kole</code> kullanıcısının SSH yetkilendirmesini yapıyorum:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># kole kullanıcısının SSH dizinini oluşturuyorum</span>
+</span></span><span style="display:flex;"><span>sudo mkdir -p /var/www/kole/.ssh
+</span></span><span style="display:flex;"><span>sudo touch /var/www/kole/.ssh/authorized_keys
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ürettiğim PUBLIC key içeriğini bu dosyaya yazdırıyorum</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;pub-key&#34;</span> &gt; /var/www/kole/.ssh/authorized_keys
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Klasör ve dosya izinlerini sıkılaştırıyorum</span>
+</span></span><span style="display:flex;"><span>sudo chmod <span style="color:#ae81ff">700</span> /var/www/kole/.ssh
+</span></span><span style="display:flex;"><span>sudo chmod <span style="color:#ae81ff">600</span> /var/www/kole/.ssh/authorized_keys
+</span></span><span style="display:flex;"><span>sudo chown -R kole:caddy /var/www/kole/.ssh</span></span></code></pre></div><h2 id="3-caddy-yapılandırması">3. Caddy Yapılandırması<a class="anchor" href="#3-caddy-yap%c4%b1land%c4%b1rmas%c4%b1">#</a></h2>
+<p>Caddy ile statik dosyalarımı web&rsquo;e sunacağım. <code>/etc/caddy/Caddyfile</code> dosyasını şu şekilde yapılandırıyorum:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#a6e22e">dev</span>.<span style="color:#a6e22e">ulutasalperen</span>.<span style="color:#a6e22e">com</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Statik dosyaların konumunu belirtiyorum</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">root</span> <span style="color:#960050;background-color:#1e0010">*</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">var</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">www</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">kole</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">public</span> 
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Dosyaları statik olarak serve etmesini söylüyorum</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">file_server</span> 
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Statik dosyaları sıkıştırıp göndermek performansı ciddi artırır</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">encode</span> <span style="color:#a6e22e">gzip</span> <span style="color:#a6e22e">zstd</span> 
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><blockquote class='book-hint '>
+<p><strong>Not:</strong> Caddy&rsquo;nin <code>/var/www/kole/public</code> altındaki dosyaları okuyup web&rsquo;e sunabilmesi için dizin geçiş izinlerinin en az <code>5</code> (r-x) ve dosyaların okuma izinlerinin en az <code>4</code> (r&ndash;) olması gerekir. <code>rsync</code> deploy aşamasında bu izinleri otomatik olarak ayarlayacak seklinde yml yazacagim.</p>
+</blockquote><h2 id="4-github-repository-secrets-tanımlama">4. GitHub Repository Secrets Tanımlama<a class="anchor" href="#4-github-repository-secrets-tan%c4%b1mlama">#</a></h2>
+<p>GitHub deponuzun <strong>Settings &gt; Secrets and variables &gt; Actions</strong> kısmına giderek aşağıdaki <strong>Repository secrets</strong> değerlerini ekleyin:</p>
+<ul>
+<li><code>SSH_PRIVATE_KEY</code>: Ürettiğiniz <code>id_github_deploy</code> dosyasının <em>tüm</em> içeriği.</li>
+<li><code>SSH_HOST</code>: VPS sunucunuzun IP adresi.</li>
+<li><code>SSH_USER</code>: <code>kole</code></li>
+<li><code>SSH_PORT</code>: Güvenlik amacıyla değiştirdiyseniz yeni SSH port numaranız (varsayılan 22).</li>
+</ul>
+<h2 id="5-github-actions-workflow-dosyası-githubworkflowsdeployyml">5. GitHub Actions Workflow Dosyası (<code>.github/workflows/deploy.yml</code>)<a class="anchor" href="#5-github-actions-workflow-dosyas%c4%b1-githubworkflowsdeployyml">#</a></h2>
+<p>Deponuzun kök dizininde <code>.github/workflows/deploy.yml</code> dosyasını oluşturun ve aşağıdaki içeriği ekleyin. Bu workflow sırasıyla şunları yapar:</p>
+<ol>
+<li>Hugo kurulumunu gerçekleştirir.</li>
+<li>Siteyi build eder.</li>
+<li>SSH Private Key&rsquo;i geçici olarak runner&rsquo;a yükler.</li>
+<li><code>rsync</code> ile sadece değişen dosyaları güvenli bir şekilde VPS&rsquo;e aktarır ve izinleri sunucu üzerinde yeniden yazar.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Deploy Hugo Site</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">on</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">push</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">branches</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">main  </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">deploy</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Checkout Source Code</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v4</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">submodules</span>: <span style="color:#ae81ff">recursive </span> <span style="color:#75715e"># hugo-book teması submodule olarak ekliyse indirmek için şart</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">fetch-depth</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># 2. Hugo Kurulumu</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Setup Hugo</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">peaceiris/actions-hugo@v3</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">hugo-version</span>: <span style="color:#e6db74">&#39;latest&#39;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">extended</span>: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># hugo-book veya kullandığınız temalar sass/scss derliyorsa true olmalı</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># 3. Hugo Build </span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build Hugo Site</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">hugo --minify</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># 4. SSH Key Yapılandırması</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install SSH Key</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">shimataro/ssh-key-action@v2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">key</span>: <span style="color:#ae81ff">${{ secrets.SSH_PRIVATE_KEY }}</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">known_hosts</span>: <span style="color:#e6db74">&#39;unnecessary&#39;</span> 
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">if_key_exists</span>: <span style="color:#ae81ff">replace</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># 5. VPS IP&#39;sini bilinen hostlar listesine ekliyoruz (bağlantıda onay sormaması ve güvenlik için)</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Adding Known Hosts</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          mkdir -p ~/.ssh
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_HOST }} &gt;&gt; ~/.ssh/known_hosts</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># 6. Rsync ile VPS&#39;e gönderim</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Deploy Files with Rsync</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          rsync -avz --delete \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            --no-perms --no-owner --no-group \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            --chmod=D750,F640 \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            -e &#34;ssh -p ${{ secrets.SSH_PORT }}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            public/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/kole/public/</span></span></span></code></pre></div><h3 id="rsync-parametrelerinin-detayları">Rsync Parametrelerinin Detayları:<a class="anchor" href="#rsync-parametrelerinin-detaylar%c4%b1">#</a></h3>
+<ul>
+<li>
+<p><code>-a</code> (archive): Dosya izinlerini, sahipliklerini ve tarihlerini korur.</p>
+</li>
+<li>
+<p><code>-v</code> (verbose): İşlem detaylarını loglara yazar.</p>
+</li>
+<li>
+<p><code>-z</code> (compress): Transfer sırasında veriyi sıkıştırarak hızı artırır.</p>
+</li>
+<li>
+<p><code>--delete</code>: Eğer lokalde (git üzerinde) bir dosyayı sildiyseniz, VPS tarafındaki <code>public</code> klasöründen de silinmesini sağlar. Statik sitelerde eski ve çöp dosyaların birikmesini önlemek için kritiktir.</p>
+</li>
+<li>
+<p><code>public/</code> (Sondaki eğik çizgi önemlidir): Sadece <code>public</code> klasörünün <strong>içeriğini</strong> karşıya yükler. Eğer eğik çizgi koymazsanız, karşı tarafta <code>/var/www/kole/public/public/</code> şeklinde iç içe gereksiz bir klasör yapısı oluşur.</p>
+</li>
+<li>
+<p><code>--no-perms</code>, <code>--no-owner</code>, <code>--no-group</code>: GitHub runner üzerindeki lokal kullanıcı izinlerinin ve sahiplik bilgilerinin hedef sunucuya olduğu gibi taşınmasını engeller.</p>
+</li>
+<li>
+<p><code>--chmod=D750,F640</code>: Klasörleri (<code>D</code>) 750 yetkisiyle, dosyaları (<code>F</code>) ise 640 yetkisiyle hedefe yazar. Böylece Caddy dosyaları sorunsuz okurken, dışarıdan yetkisiz yazma işlemlerinin önüne geçilir.</p>
+</li>
+</ul>
+<h3 id="setgid-bitinin-sunucu-tarafında-tanımlanması">SetGID Bitinin Sunucu Tarafında Tanımlanması<a class="anchor" href="#setgid-bitinin-sunucu-taraf%c4%b1nda-tan%c4%b1mlanmas%c4%b1">#</a></h3>
+<p>SetGID&rsquo;nin hedef klasörde (<code>/var/www/kole/public</code>) aktif olduğunu garanti altına almak için VPS üzerinde şu komutları bir kez çalıştırmamız gerekiyor:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Klasörün grubunu caddy olarak ayarlıyoruz</span>
+</span></span><span style="display:flex;"><span>sudo chown -R kole:caddy /var/www/kole/public
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Mevcut ve yeni açılacak tüm alt klasörlere SetGID yetkisi veriyoruz (g+s)</span>
+</span></span><span style="display:flex;"><span>sudo find /var/www/kole/public -type d -exec chmod g+s <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span></span></span></code></pre></div><blockquote class='book-hint '>
+<p><strong>SetGID Nasıl Çalışır?</strong> <code>g+s</code> izni alan bir klasörün altında oluşturulan her yeni dosya veya alt klasör, onu oluşturan kullanıcının (bu senaryoda <code>kole</code>) birincil grubuna bakmaksızın, otomatik olarak üst klasörün grubunu (<code>caddy</code>) miras alır. Bu sayede her deploy sonrasında Caddy&rsquo;nin dosyaları okuyamama sorunu  ortadan kalkar.</p>
+</blockquote><p>Okudugunuz icin tesekkur ederim.</p>
 </article>
  
       
@@ -517,7 +702,29 @@ https://github.com/alex-shpak/hugo-book
     <div class="book-toc-content">
       
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-vps-ve-kullanıcı-yapılandırması">1. VPS ve Kullanıcı Yapılandırması</a>
+      <ul>
+        <li><a href="#kullanıcı-ve-dizin-hazırlığı-debian-vps">Kullanıcı ve Dizin Hazırlığı (Debian VPS):</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-ssh-ve-güvenlik-şifresiz-ssh--secrets">2. SSH ve Güvenlik (Şifresiz SSH &amp; Secrets)</a>
+      <ul>
+        <li><a href="#adım-a-ssh-key-üretimi">Adım A: SSH Key Üretimi</a></li>
+        <li><a href="#adım-b-public-keyi-vpse-ekleme">Adım B: Public Key&rsquo;i VPS&rsquo;e Ekleme</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-caddy-yapılandırması">3. Caddy Yapılandırması</a></li>
+    <li><a href="#4-github-repository-secrets-tanımlama">4. GitHub Repository Secrets Tanımlama</a></li>
+    <li><a href="#5-github-actions-workflow-dosyası-githubworkflowsdeployyml">5. GitHub Actions Workflow Dosyası (<code>.github/workflows/deploy.yml</code>)</a>
+      <ul>
+        <li><a href="#rsync-parametrelerinin-detayları">Rsync Parametrelerinin Detayları:</a></li>
+        <li><a href="#setgid-bitinin-sunucu-tarafında-tanımlanması">SetGID Bitinin Sunucu Tarafında Tanımlanması</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
