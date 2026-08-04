@@ -101,7 +101,7 @@ Pull requests allow team members to see what changes are being proposed and to d
 
 # My Team Workflow
 
-When you're working with a _team_, Git gets a bit more involved (and we'll cover more of this in part 2 of this course). Here's what I do:
+When you're working with a _team_, Git gets a bit more involved .Here's what I do:
 
 - Update my local `main` branch with `git pull origin main`
 - Checkout a new branch for the changes I want to make with `git switch -c <branchname>`
