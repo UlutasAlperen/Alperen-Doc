@@ -6,11 +6,7 @@ Continuous Deployment (CD) is the process of automatically deploying code change
 
 We'll be using GitHub Actions again, but we'll create a new workflow for CD: `cd.yml`
 
-Click to hide video
-
-Your browser does not support playing HTML5 video. You can instead. Here is a description of the content: continuous deployment
-
-## Assignment
+## How to create cd
 
 1.  Create a new workflow `.github/workflows/cd.yml`
 2.  It should trigger on `push` into the `main` branch.

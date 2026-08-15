@@ -15,7 +15,7 @@ Here at Boot.dev  CI tests that run each time a new pull request is opened. The 
 
 _CI is all about automating as much of the testing and review process as possible._
 
-## Assignment
+## How to create Continuous Integration (CI) for go program
 
 1.  While still on the `addtests` branch, create a new `.github` directory in the root of your repository
 2.  Create a new directory inside `.github` called `workflows`
