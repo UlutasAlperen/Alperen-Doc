@@ -12,8 +12,8 @@ Your browser does not support playing HTML5 video. You can instead. Here is a de
 
 ## Assignment
 
-1. [ ] Create a new workflow `.github/workflows/cd.yml`
-2. [ ] It should trigger on `push` into the `main` branch.
+1.  Create a new workflow `.github/workflows/cd.yml`
+2.  It should trigger on `push` into the `main` branch.
 
 ```yaml
 on:

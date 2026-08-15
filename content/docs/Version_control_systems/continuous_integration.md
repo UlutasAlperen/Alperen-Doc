@@ -25,7 +25,7 @@ _CI is all about automating as much of the testing and review process as possibl
 
 >GitHub Actions workflows are written in [YAML](https://en.wikipedia.org/wiki/YAML), and GitHub automatically checks for and runs workflows in the `.github/workflows` directory of your repository.
 
-4. [ ] Open `ci.yml` in your editor and add the following:
+4.  Open `ci.yml` in your editor and add the following:
 
 ```yaml
 name: ci
@@ -241,12 +241,12 @@ If _any_ of the tests fail, the build is considered "broken" and the developer i
 
 The Notely repo has, _gasp_, zero unit tests!
 
-1. [ ] Create `internal/auth/get_api_key_test.go`.
-2. [ ] Add a couple unit tests for `GetAPIKey`.
+1.  Create `internal/auth/get_api_key_test.go`.
+2.  Add a couple unit tests for `GetAPIKey`.
     
     If you're still a little fuzzy on how to write unit tests in Go, I'd highly recommend Dave Cheney's [excellent blog post](https://dave.cheney.net/2019/05/07/prefer-table-driven-tests) on the subject.
     
-3. [ ] Run them locally to make sure they work:
+3.  Run them locally to make sure they work:
     
     ```bash
     go test ./...
