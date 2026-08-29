@@ -46,11 +46,11 @@ scalable, and production-ready infrastructure using modern DevOps and cloud-nati
 ---
 
 ### Technical Skills & Documented Topics {anchor=false}
-- **Programming:** Python, Go, Bash
+- **Programming Languages:** Python, Go, Bash
 - **Containers & Orchestration:** Docker, Kubernetes, Podman
 - **CI/CD & GitOps:** Jenkins, ArgoCD, Git
-- **Monitoring & Logging:** Prometheus, Grafana, Loki, Zabbix
-- **Virtualization & Infrastructure:** Proxmox VE, Nginx, Caddy, HAProxy, Keepalived
+- **Monitoring & Logging:** Prometheus, Grafana, Loki, Zabbix, VictoriaMetrics
+- **Virtualization & Infrastructure:** Proxmox VE, Nginx, Caddy, HAProxy, Keepalived, Aws, Terraform
 
 ---
 
