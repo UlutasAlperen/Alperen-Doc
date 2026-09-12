@@ -194,7 +194,7 @@ sudo find /var/www/kole/public -type d -exec chmod g+s {} \;
 
 > **SetGID Nasıl Çalışır?** `g+s` izni alan bir klasörün altında oluşturulan her yeni dosya veya alt klasör, onu oluşturan kullanıcının (bu senaryoda `kole`) birincil grubuna bakmaksızın, otomatik olarak üst klasörün grubunu (`caddy`) miras alır. Bu sayede her deploy sonrasında Caddy'nin dosyaları okuyamama sorunu  ortadan kalkar. Artık rsync her deploy'da `D2750` ile geldiği için bu işlem kalıcı hale gelir.
 
-## Güncelleme: Birincil/İkincil Grup ve Bir Deploy İzni Vakası (403/404)
+## Güncelleme: Birincil/İkincil Grup ve Bir Deploy İzni hatasi (403/404)
 
 Bu dokümanı yazdıktan bir süre sonra, iki yeni sayfayı deploy ettiğimde canlıda ilginç bir sorunla karşılaştım: sayfalar build ediliyor, GitHub Actions deploy'u başarılı görünüyordu, ama sunucuda iki sayfa 404 döndürüyordu. İşte bu vaka, yukarıdaki anlatımdaki varsayımların gerçekte her zaman geçerli olmadığını öğretti.
 
@@ -250,9 +250,9 @@ sudo usermod -aG caddy kole   # ikincil gruba ekler → YENİ dosyaların grubu 
 sudo usermod -g caddy kole    # birincil grubu değiştirir → YENİ dosyalar otomatik grup caddy olur
 ```
 
-### Kalıcı Çözümler (tavsiye sırasıyla)
+### Kalıcı Çözümler
 
-**1. ACL - önerilen:**
+**1. ACL:**
 
 ```bash
 sudo setfacl -R -m g:caddy:rX,d:g:caddy:rX /var/www/kole/public
@@ -278,7 +278,7 @@ rsync -avz --delete \
 
 `--no-perms` kaldırılır; böylece `--chmod` her transferde deterministik uygulanır. Sunucuya hiç dokunmazsınız ama dosyalar world-readable (644) olur - herkese açık bir statik site için zararsızdır.
 
-### Anlık Onarım (vakada kullandığım komutlar)
+### Anlık Onarım
 
 Mevcut dosyaları hemen düzeltmek için:
 
@@ -288,6 +288,6 @@ sudo chmod -R g+rX,o-rwx <etkilenen-dizinler>
 sudo chmod g+s <etkilenen-dizinler>   # bir daha aynı sorun yaşanmasın diye setgid
 ```
 
-Ve unutmayın: bu komutların `usermod -aG caddy kole` ile ikame edilebileceğini düşünmeyin - ikincil grup eklemek yeni dosyaların grubunu değiştirmez. Bu döngüden kalıcı çıkmak için yukarıdaki üç çözümden birini uygulamak gerekir; ben ACL yolunu deneyeceğim (bu doküman yazıldığında henüz uygulamış değildim).
+Ve unutmayın: bu komutların `usermod -aG caddy kole` ile ikame edilebileceğini düşünmeyin - ikincil grup eklemek yeni dosyaların grubunu değiştirmez. Bu döngüden kalıcı çıkmak için yukarıdaki üç çözümden birini uygulamak gerekir; ben 2. yolu yaptim.
 
 Okudugunuz icin tesekkur ederim.
