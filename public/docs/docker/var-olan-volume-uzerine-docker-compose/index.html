@@ -8,25 +8,25 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="İlk olarak ben örnek olarak vereceğim# kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor ve compose dosyası oluştururken# docker compose up -d # -d flag arka planda çalıştır demek böyle yaptığımdan dolayı arka planda çalıştırdığımdan dolayı output olarak yazdı ama ben görmedim direkt aslında
-docker compose up bana şifreyi verecekti ama ben çoktan iş işten geçti :D şifreyi de hash’li olarak sakladığından dosyalara girsem bile fayda vermeyecekti
+<meta name="description" content="İlk olarak ben örnek olarak vereceğim# kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor arka planda calisirken ve docker logs da baktigimdada parolayi goruntuleyemedigimden boyle bir yol izledim# docker compose up -d # -d flag arka planda çalıştır demek böyle yaptığımdan arka planda çalıştigindan parolayi olusturdu ama cikti olarak vermedi onuda olusturdugu persistent volume yazdi ama ben görmedim
+docker compose up bana şifreyi verecekti ama çoktan iş işten geçti :D şifreyi de hash’li olarak sakladığından dosyalara girsem bile fayda vermeyecekti
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://dev.ulutasalperen.com/docs/docker/var-olan-volume-uzerine-docker-compose/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="var-olan-volume-uzerine-docker-compose">
-	<meta property="og:description" content="İlk olarak ben örnek olarak vereceğim# kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor ve compose dosyası oluştururken# docker compose up -d # -d flag arka planda çalıştır demek böyle yaptığımdan dolayı arka planda çalıştırdığımdan dolayı output olarak yazdı ama ben görmedim direkt aslında
-docker compose up bana şifreyi verecekti ama ben çoktan iş işten geçti :D şifreyi de hash’li olarak sakladığından dosyalara girsem bile fayda vermeyecekti">
+	<meta property="og:description" content="İlk olarak ben örnek olarak vereceğim# kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor arka planda calisirken ve docker logs da baktigimdada parolayi goruntuleyemedigimden boyle bir yol izledim# docker compose up -d # -d flag arka planda çalıştır demek böyle yaptığımdan arka planda çalıştigindan parolayi olusturdu ama cikti olarak vermedi onuda olusturdugu persistent volume yazdi ama ben görmedim
+docker compose up bana şifreyi verecekti ama çoktan iş işten geçti :D şifreyi de hash’li olarak sakladığından dosyalara girsem bile fayda vermeyecekti">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="var-olan-volume-uzerine-docker-compose">
-	<meta itemprop="description" content="İlk olarak ben örnek olarak vereceğim# kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor ve compose dosyası oluştururken# docker compose up -d # -d flag arka planda çalıştır demek böyle yaptığımdan dolayı arka planda çalıştırdığımdan dolayı output olarak yazdı ama ben görmedim direkt aslında
-docker compose up bana şifreyi verecekti ama ben çoktan iş işten geçti :D şifreyi de hash’li olarak sakladığından dosyalara girsem bile fayda vermeyecekti">
-	<meta itemprop="wordCount" content="259">
+	<meta itemprop="description" content="İlk olarak ben örnek olarak vereceğim# kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor arka planda calisirken ve docker logs da baktigimdada parolayi goruntuleyemedigimden boyle bir yol izledim# docker compose up -d # -d flag arka planda çalıştır demek böyle yaptığımdan arka planda çalıştigindan parolayi olusturdu ama cikti olarak vermedi onuda olusturdugu persistent volume yazdi ama ben görmedim
+docker compose up bana şifreyi verecekti ama çoktan iş işten geçti :D şifreyi de hash’li olarak sakladığından dosyalara girsem bile fayda vermeyecekti">
+	<meta itemprop="wordCount" content="272">
 
 <title>var-olan-volume-uzerine-docker-compose • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ docker compose up bana şifreyi verecekti ama ben çoktan iş işten geçti :D �
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.74cca6436cdc1a061a498e6397bcee8b64c2e1bdf1778b9788e8bf0e205e6247.js" integrity="sha256-dMymQ2zcGgYaSY5jl7zui2TC4b3xd4uXiOi/DiBeYkc=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.0e9b7d8761d13f45af5b599dffdfb21ef44a189ceef3faf407293721e8d29f13.js" integrity="sha256-Dpt9h2HRP0WvW1md/9&#43;yHvRKGJzu8/r0Byk3IejSnxM=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -635,7 +635,7 @@ docker compose up bana şifreyi verecekti ama ben çoktan iş işten geçti :D �
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#kullanmak-istediğim-uygulama-filebrowser-kurulum-yaparken-admin-kullanıcının-yanında-rastgele-encrypted-şifre-oluşturuyor-ve-compose-dosyası-oluştururken">kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor ve compose dosyası oluştururken</a></li>
+    <li><a href="#kullanmak-istediğim-uygulama-filebrowser-kurulum-yaparken-admin-kullanıcının-yanında-rastgele-encrypted-şifre-oluşturuyor-arka-planda-calisirken-ve-docker-logs-da-baktigimdada-parolayi-goruntuleyemedigimden-boyle-bir-yol-izledim">kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor arka planda calisirken ve <code>docker logs</code> da baktigimdada parolayi goruntuleyemedigimden boyle bir yol izledim</a></li>
     <li><a href="#en-baştan-yaml-dosyamı-yazıyorum">en baştan yaml dosyamı yazıyorum</a></li>
     <li><a href="#başta-normal-ayarlayıp-compose-up-ile-çıktıyı-görüp-yapabilirdim">başta normal ayarlayıp compose up ile çıktıyı görüp yapabilirdim</a></li>
   </ul>
@@ -651,11 +651,11 @@ docker compose up bana şifreyi verecekti ama ben çoktan iş işten geçti :D �
       
       
   <article class="markdown book-article"><h1 id="ilk-olarak-ben-örnek-olarak-vereceğim">İlk olarak ben örnek olarak vereceğim<a class="anchor" href="#ilk-olarak-ben-%c3%b6rnek-olarak-verece%c4%9fim">#</a></h1>
-<h2 id="kullanmak-istediğim-uygulama-filebrowser-kurulum-yaparken-admin-kullanıcının-yanında-rastgele-encrypted-şifre-oluşturuyor-ve-compose-dosyası-oluştururken">kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor ve compose dosyası oluştururken<a class="anchor" href="#kullanmak-istedi%c4%9fim-uygulama-filebrowser-kurulum-yaparken-admin-kullan%c4%b1c%c4%b1n%c4%b1n-yan%c4%b1nda-rastgele-encrypted-%c5%9fifre-olu%c5%9fturuyor-ve-compose-dosyas%c4%b1-olu%c5%9ftururken">#</a></h2>
+<h2 id="kullanmak-istediğim-uygulama-filebrowser-kurulum-yaparken-admin-kullanıcının-yanında-rastgele-encrypted-şifre-oluşturuyor-arka-planda-calisirken-ve-docker-logs-da-baktigimdada-parolayi-goruntuleyemedigimden-boyle-bir-yol-izledim">kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor arka planda calisirken ve <code>docker logs</code> da baktigimdada parolayi goruntuleyemedigimden boyle bir yol izledim<a class="anchor" href="#kullanmak-istedi%c4%9fim-uygulama-filebrowser-kurulum-yaparken-admin-kullan%c4%b1c%c4%b1n%c4%b1n-yan%c4%b1nda-rastgele-encrypted-%c5%9fifre-olu%c5%9fturuyor-arka-planda-calisirken-ve-docker-logs-da-baktigimdada-parolayi-goruntuleyemedigimden-boyle-bir-yol-izledim">#</a></h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up -d <span style="color:#75715e"># -d flag arka planda çalıştır demek</span></span></span></code></pre></div><blockquote class='book-hint '>
-<p>böyle yaptığımdan dolayı arka planda çalıştırdığımdan dolayı <code>output</code> olarak yazdı ama ben görmedim direkt aslında</p>
+<p>böyle yaptığımdan arka planda çalıştigindan parolayi olusturdu ama cikti olarak vermedi onuda olusturdugu persistent volume yazdi  ama ben görmedim</p>
 </blockquote><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up</span></span></code></pre></div><blockquote class='book-hint '>
-<p>bana şifreyi verecekti ama ben çoktan iş işten geçti :D şifreyi de hash&rsquo;li olarak sakladığından dosyalara girsem bile fayda vermeyecekti</p>
+<p>bana şifreyi verecekti ama çoktan iş işten geçti :D şifreyi de hash&rsquo;li olarak sakladığından dosyalara girsem bile fayda vermeyecekti</p>
 </blockquote><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>    --name filebrowser <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>    -v filebrowser_data:/srv <span style="color:#ae81ff">\
@@ -779,7 +779,7 @@ docker compose up bana şifreyi verecekti ama ben çoktan iş işten geçti :D �
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#kullanmak-istediğim-uygulama-filebrowser-kurulum-yaparken-admin-kullanıcının-yanında-rastgele-encrypted-şifre-oluşturuyor-ve-compose-dosyası-oluştururken">kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor ve compose dosyası oluştururken</a></li>
+    <li><a href="#kullanmak-istediğim-uygulama-filebrowser-kurulum-yaparken-admin-kullanıcının-yanında-rastgele-encrypted-şifre-oluşturuyor-arka-planda-calisirken-ve-docker-logs-da-baktigimdada-parolayi-goruntuleyemedigimden-boyle-bir-yol-izledim">kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor arka planda calisirken ve <code>docker logs</code> da baktigimdada parolayi goruntuleyemedigimden boyle bir yol izledim</a></li>
     <li><a href="#en-baştan-yaml-dosyamı-yazıyorum">en baştan yaml dosyamı yazıyorum</a></li>
     <li><a href="#başta-normal-ayarlayıp-compose-up-ile-çıktıyı-görüp-yapabilirdim">başta normal ayarlayıp compose up ile çıktıyı görüp yapabilirdim</a></li>
   </ul>

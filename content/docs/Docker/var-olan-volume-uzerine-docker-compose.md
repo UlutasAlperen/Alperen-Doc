@@ -5,18 +5,19 @@ weight: 11
 # İlk olarak ben örnek olarak vereceğim
 
 
-## kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor ve compose dosyası oluştururken
+## kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor arka planda calisirken ve `docker logs` da baktigimdada parolayi goruntuleyemedigimden boyle bir yol izledim
+
 
 ```bash
 docker compose up -d # -d flag arka planda çalıştır demek
 ```
 
-> böyle yaptığımdan dolayı arka planda çalıştırdığımdan dolayı `output` olarak yazdı ama ben görmedim direkt aslında
+> böyle yaptığımdan arka planda çalıştigindan parolayi olusturdu ama cikti olarak vermedi onuda olusturdugu persistent volume yazdi  ama ben görmedim 
 
 ```bash
 docker compose up
 ```
-> bana şifreyi verecekti ama ben çoktan iş işten geçti :D şifreyi de hash'li olarak sakladığından dosyalara girsem bile fayda vermeyecekti
+> bana şifreyi verecekti ama çoktan iş işten geçti :D şifreyi de hash'li olarak sakladığından dosyalara girsem bile fayda vermeyecekti
 
 
 ```bash
