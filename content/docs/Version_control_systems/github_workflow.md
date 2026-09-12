@@ -175,6 +175,8 @@ jobs:
 - `--no-perms`, `--no-owner`, `--no-group`: GitHub runner üzerindeki lokal kullanıcı izinlerinin ve sahiplik bilgilerinin hedef sunucuya olduğu gibi taşınmasını engeller.
     
 - `--chmod=D2750,F640`: Klasörleri (`D`) 2750 (`rwxr-s---`), dosyaları (`F`) ise 640 (`rw-r-----`) yetkisiyle hedefe yazar. Baştaki `2` = `SetGID` bitidir. Böylece her yeni klasör `caddy` grubunu otomatik miras alır, Caddy sorunsuz okurken `other=0` olduğu için dışarıdan erişim engellenir. `D750` kullanılsaydı yeni klasörler `s` olmadan oluşup grup mirası kırılırdı.
+
+> **Güncelleme:** Yukarıdaki varsayımın canlıda her zaman çalışmadığı bir vaka yaşadım; detaylı analiz için dokümanın sonundaki **"Güncelleme: Birincil/İkincil Grup ve Bir Deploy İzni Vakası"** bölümüne bakın.
     
 
 ### SetGID Bitinin Sunucu Tarafında Tanımlanması
@@ -191,5 +193,101 @@ sudo find /var/www/kole/public -type d -exec chmod g+s {} \;
 ```
 
 > **SetGID Nasıl Çalışır?** `g+s` izni alan bir klasörün altında oluşturulan her yeni dosya veya alt klasör, onu oluşturan kullanıcının (bu senaryoda `kole`) birincil grubuna bakmaksızın, otomatik olarak üst klasörün grubunu (`caddy`) miras alır. Bu sayede her deploy sonrasında Caddy'nin dosyaları okuyamama sorunu  ortadan kalkar. Artık rsync her deploy'da `D2750` ile geldiği için bu işlem kalıcı hale gelir.
+
+## Güncelleme: Birincil/İkincil Grup ve Bir Deploy İzni Vakası (403/404)
+
+Bu dokümanı yazdıktan bir süre sonra, iki yeni sayfayı deploy ettiğimde canlıda ilginç bir sorunla karşılaştım: sayfalar build ediliyor, GitHub Actions deploy'u başarılı görünüyordu, ama sunucuda iki sayfa 404 döndürüyordu. İşte bu vaka, yukarıdaki anlatımdaki varsayımların gerçekte her zaman geçerli olmadığını öğretti.
+
+### Vakanın Özeti
+
+Deploy sonrası durum:
+
+| URL | Sonuç |
+|---|---|
+| Eski bir sayfa (`/docs/docker/docker-logs/`) | `200` |
+| Yeni eklenen sayfa (`/docs/docker/docker-distroless-container-images/`) | `404` |
+| Aynı sayfanın dosyası (`.../index.html`) | `403` |
+| Hiç var olmayan bir sayfa | `404` |
+
+Ayrıca Actions'un rsync adımının logu, ilgili `index.html` dosyalarının sunucuya aktarıldığını açıkça gösteriyordu. Yani Hugo build'i ve deploy'un kendisi sağlamdı; sorun **sunucu tarafındaki dosya izinlerindeydi**.
+
+Sunucuya girip baktığımda tablo şuydu:
+
+```bash
+$ ls -la /var/www/kole/public/docs/docker/
+drwxr-s--- 2 kole caddy docker-logs/                              # eski: setgid VAR
+drwxr-x--- 2 kole caddy docker-distroless-container-images/      # yeni: setgid YOK (750)
+drwxr-x--- 2 kole caddy docker-kurulum-hardening-rocky/          # yeni: setgid YOK (750)
+
+$ ls -la /var/www/kole/public/docs/docker/docker-distroless-container-images/
+-rw-r----- 1 kole kole index.html   # grup caddy DEĞİL!
+```
+
+### Kök Neden
+
+403/404 ayrımı klasik bir izin semptomudur: dosya **sunucuda duruyor** ama Caddy süreci (grup `caddy` üzerinden erişiyor) onu **okuyamıyor** → dosyaya direkt istek `403`; dizin URL'sinde ise Caddy, okunamayan `index.html`'i "yok" sayıp `404` döndürüyor.
+
+Peki zincir nasıl işledi?
+
+1. rsync komutunda `--no-perms` vardı. rsync'in man sayfasına göre `--chmod` bu durumda **mevcut dosyalara hiç uygulanmaz**; yeni öğelerde de sunucu umask'i kazanabiliyor.
+2. rsync yeni dizini `mkdir` ile yarattığında kernel setgid bitini aslında kopyalar; ama `--no-perms` yüzünden rsync sonradan klasik bir `chmod` yapar (umask ile maskeleme → `750`) ve **chmod çağrısı setgid bitini siler**.
+3. Setgid'siz bir dizinde yaratılan dosyalar, oluşturan sürecin **birincil grubunu** alır → `index.html` `kole:kole 640` oldu.
+4. Caddy, `caddy` grubuyla okumaya çalıştığı için `EACCES` → `403/404`.
+
+Eski dosyaların çalışması ise kurulum sırasında manuel yaptığım `chgrp`/`chmod g+s` komutlarının kalıntısıydı; her deploy'da **yeni** dosyalara bu düzeltmeler otomatik uygulanmıyordu. Yani "rsync `D2750` ile geldiği için setgid kalıcıdır" varsayımım yanlıştı.
+
+### Birincil ve İkincil Grup Kavramı
+
+Bu vakanın merkezinde, Linux'un grup kavramının bir detayı var:
+
+- **Birincil grup (primary group):** `/etc/passwd`'de kullanıcının satırında görünen **tek** GID'dir. Bir süreç yeni bir dosya yarattığında dosyanın grubu **buradan** gelir - tek istisna: dosyanın yaratıldığı dizin **setgid** (`g+s`) bitine sahipse dosya üst dizinin grubunu miras alır.
+- **İkincil gruplar (secondary groups):** `groups` veya `id` komutuyla listelenirler. Dosya erişim denetiminde (izin hesabında) geçerlidirler; ama **yeni yaratılan dosyaların grubunu etkilemezler.**
+
+Bu yüzden şu iki komut birbiriyle karıştırılmamalı:
+
+```bash
+sudo usermod -aG caddy kole   # ikincil gruba ekler → YENİ dosyaların grubu DEĞİŞMEZ, sorunu çözmez
+sudo usermod -g caddy kole    # birincil grubu değiştirir → YENİ dosyalar otomatik grup caddy olur
+```
+
+### Kalıcı Çözümler (tavsiye sırasıyla)
+
+**1. ACL - önerilen:**
+
+```bash
+sudo setfacl -R -m g:caddy:rX,d:g:caddy:rX /var/www/kole/public
+```
+
+`d:` (default ACL) bu ağaç altında bundan sonra yaratılacak **her** yeni dosya ve dizine, kim yaratırsa yaratsın (rsync dahil), grup `caddy`'ye okuma iznini kernel seviyesinde verir; `--no-perms` ve umask oyunları bu mirası ezip geçemez. `rsync --delete` ile silinip yeniden açılan dizinler bile üst dizinden default ACL'yi devralır. En büyük avantajı: etkisi yalnızca webroot ile sınırlıdır, kullanıcı/grup yapılandırmasına dokunmaz. Doğrulama için `getfacl /var/www/kole/public/docs/docker` yeterli.
+
+**2. Birincil grup değişikliği:**
+
+```bash
+sudo usermod -g caddy kole
+```
+
+Çalışır ve tek komuttur; ama `kole` bundan sonra yaratacağı **tüm** dosyalara grup `caddy` verecek. `/home/kole` 750 `kole:kole` kaldığı için büyük bir risk yok; yine de `/tmp` gibi herkesin travers edebildiği dizinlerde yarattığı dosyalar Caddy süreci tarafından okunabilir hale gelir - düşük ama sıfır olmayan bir risk.
+
+**3. Workflow tarafı:**
+
+```yaml
+rsync -avz --delete \
+  --chmod=D2755,F644 \
+  ...
+```
+
+`--no-perms` kaldırılır; böylece `--chmod` her transferde deterministik uygulanır. Sunucuya hiç dokunmazsınız ama dosyalar world-readable (644) olur - herkese açık bir statik site için zararsızdır.
+
+### Anlık Onarım (vakada kullandığım komutlar)
+
+Mevcut dosyaları hemen düzeltmek için:
+
+```bash
+sudo chgrp -R caddy <etkilenen-dizinler>
+sudo chmod -R g+rX,o-rwx <etkilenen-dizinler>
+sudo chmod g+s <etkilenen-dizinler>   # bir daha aynı sorun yaşanmasın diye setgid
+```
+
+Ve unutmayın: bu komutların `usermod -aG caddy kole` ile ikame edilebileceğini düşünmeyin - ikincil grup eklemek yeni dosyaların grubunu değiştirmez. Bu döngüden kalıcı çıkmak için yukarıdaki üç çözümden birini uygulamak gerekir; ben ACL yolunu deneyeceğim (bu doküman yazıldığında henüz uygulamış değildim).
 
 Okudugunuz icin tesekkur ederim.

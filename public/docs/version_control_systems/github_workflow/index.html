@@ -29,7 +29,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 	<meta itemprop="description" content="001 - continuous_integration 002 - continuous_deployment
 Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosyalarını statik bir siteye dönüştüren bir araç. Bu yazıda, suan bulundugunuz siteyi nasil hugo-book temasını kullanırken aynı zamanda GitHub Workflow kullanarak her değişikliği debian tabanli uzak sunucuma nasıl otomatik olarak deploy edeceğimi anlatmak istedim.
 1. VPS ve Kullanıcı Yapılandırması# İlk başta sistemi --system parametresiyle kurmayı düşünmüştüm. Sistem kullanıcısı oluşturmak mantıklı çünkü bu kullanıcının varsayılan olarak bir şifresi ve interaktif bir shell oturumu olmaz (tabi belirli komutlarla yapilabilir). Bu da sunucunun guvenligini arttirir.">
-	<meta itemprop="wordCount" content="947">
+	<meta itemprop="wordCount" content="1614">
 
 <title>github_workflow • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.5bf4c826d74c9015800ea46fa817316bbdca2141644f50608abbdfc0366460c1.js" integrity="sha256-W/TIJtdMkBWADqRvqBcxa73KIUFkT1BgirvfwDZkYME=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.d24fc2bcea6771dfd5e3d00bc9e6a55359a19647574ee42cce62e8f00b2b9098.js" integrity="sha256-0k/CvOpncd/V49ALyealU1mhlkdXTuQszmLo8AsrkJg=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -685,6 +685,15 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
         <li><a href="#setgid-bitinin-sunucu-tarafında-tanımlanması">SetGID Bitinin Sunucu Tarafında Tanımlanması</a></li>
       </ul>
     </li>
+    <li><a href="#güncelleme-birincilikincil-grup-ve-bir-deploy-izni-vakası-403404">Güncelleme: Birincil/İkincil Grup ve Bir Deploy İzni Vakası (403/404)</a>
+      <ul>
+        <li><a href="#vakanın-özeti">Vakanın Özeti</a></li>
+        <li><a href="#kök-neden">Kök Neden</a></li>
+        <li><a href="#birincil-ve-ikincil-grup-kavramı">Birincil ve İkincil Grup Kavramı</a></li>
+        <li><a href="#kalıcı-çözümler-tavsiye-sırasıyla">Kalıcı Çözümler (tavsiye sırasıyla)</a></li>
+        <li><a href="#anlık-onarım-vakada-kullandığım-komutlar">Anlık Onarım (vakada kullandığım komutlar)</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -848,7 +857,9 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 <p><code>--chmod=D2750,F640</code>: Klasörleri (<code>D</code>) 2750 (<code>rwxr-s---</code>), dosyaları (<code>F</code>) ise 640 (<code>rw-r-----</code>) yetkisiyle hedefe yazar. Baştaki <code>2</code> = <code>SetGID</code> bitidir. Böylece her yeni klasör <code>caddy</code> grubunu otomatik miras alır, Caddy sorunsuz okurken <code>other=0</code> olduğu için dışarıdan erişim engellenir. <code>D750</code> kullanılsaydı yeni klasörler <code>s</code> olmadan oluşup grup mirası kırılırdı.</p>
 </li>
 </ul>
-<h3 id="setgid-bitinin-sunucu-tarafında-tanımlanması">SetGID Bitinin Sunucu Tarafında Tanımlanması<a class="anchor" href="#setgid-bitinin-sunucu-taraf%c4%b1nda-tan%c4%b1mlanmas%c4%b1">#</a></h3>
+<blockquote class='book-hint '>
+<p><strong>Güncelleme:</strong> Yukarıdaki varsayımın canlıda her zaman çalışmadığı bir vaka yaşadım; detaylı analiz için dokümanın sonundaki <strong>&ldquo;Güncelleme: Birincil/İkincil Grup ve Bir Deploy İzni Vakası&rdquo;</strong> bölümüne bakın.</p>
+</blockquote><h3 id="setgid-bitinin-sunucu-tarafında-tanımlanması">SetGID Bitinin Sunucu Tarafında Tanımlanması<a class="anchor" href="#setgid-bitinin-sunucu-taraf%c4%b1nda-tan%c4%b1mlanmas%c4%b1">#</a></h3>
 <p>SetGID&rsquo;nin hedef klasörde (<code>/var/www/kole/public</code>) aktif olduğunu garanti altına almak için VPS üzerinde şu komutları bir kez çalıştırmamız gerekiyor:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Klasörün grubunu caddy olarak ayarlıyoruz</span>
 </span></span><span style="display:flex;"><span>sudo chown -R kole:caddy /var/www/kole/public
@@ -856,7 +867,77 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Mevcut ve yeni açılacak tüm alt klasörlere SetGID yetkisi veriyoruz (g+s)</span>
 </span></span><span style="display:flex;"><span>sudo find /var/www/kole/public -type d -exec chmod g+s <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span></span></span></code></pre></div><blockquote class='book-hint '>
 <p><strong>SetGID Nasıl Çalışır?</strong> <code>g+s</code> izni alan bir klasörün altında oluşturulan her yeni dosya veya alt klasör, onu oluşturan kullanıcının (bu senaryoda <code>kole</code>) birincil grubuna bakmaksızın, otomatik olarak üst klasörün grubunu (<code>caddy</code>) miras alır. Bu sayede her deploy sonrasında Caddy&rsquo;nin dosyaları okuyamama sorunu  ortadan kalkar. Artık rsync her deploy&rsquo;da <code>D2750</code> ile geldiği için bu işlem kalıcı hale gelir.</p>
-</blockquote><p>Okudugunuz icin tesekkur ederim.</p>
+</blockquote><h2 id="güncelleme-birincilikincil-grup-ve-bir-deploy-izni-vakası-403404">Güncelleme: Birincil/İkincil Grup ve Bir Deploy İzni Vakası (403/404)<a class="anchor" href="#g%c3%bcncelleme-birincilikincil-grup-ve-bir-deploy-izni-vakas%c4%b1-403404">#</a></h2>
+<p>Bu dokümanı yazdıktan bir süre sonra, iki yeni sayfayı deploy ettiğimde canlıda ilginç bir sorunla karşılaştım: sayfalar build ediliyor, GitHub Actions deploy&rsquo;u başarılı görünüyordu, ama sunucuda iki sayfa 404 döndürüyordu. İşte bu vaka, yukarıdaki anlatımdaki varsayımların gerçekte her zaman geçerli olmadığını öğretti.</p>
+<h3 id="vakanın-özeti">Vakanın Özeti<a class="anchor" href="#vakan%c4%b1n-%c3%b6zeti">#</a></h3>
+<p>Deploy sonrası durum:</p>
+<table>
+	<thead>
+			<tr>
+					<th>URL</th>
+					<th>Sonuç</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Eski bir sayfa (<code>/docs/docker/docker-logs/</code>)</td>
+					<td><code>200</code></td>
+			</tr>
+			<tr>
+					<td>Yeni eklenen sayfa (<code>/docs/docker/docker-distroless-container-images/</code>)</td>
+					<td><code>404</code></td>
+			</tr>
+			<tr>
+					<td>Aynı sayfanın dosyası (<code>.../index.html</code>)</td>
+					<td><code>403</code></td>
+			</tr>
+			<tr>
+					<td>Hiç var olmayan bir sayfa</td>
+					<td><code>404</code></td>
+			</tr>
+	</tbody>
+</table>
+<p>Ayrıca Actions&rsquo;un rsync adımının logu, ilgili <code>index.html</code> dosyalarının sunucuya aktarıldığını açıkça gösteriyordu. Yani Hugo build&rsquo;i ve deploy&rsquo;un kendisi sağlamdı; sorun <strong>sunucu tarafındaki dosya izinlerindeydi</strong>.</p>
+<p>Sunucuya girip baktığımda tablo şuydu:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ls -la /var/www/kole/public/docs/docker/
+</span></span><span style="display:flex;"><span>drwxr-s--- <span style="color:#ae81ff">2</span> kole caddy docker-logs/                              <span style="color:#75715e"># eski: setgid VAR</span>
+</span></span><span style="display:flex;"><span>drwxr-x--- <span style="color:#ae81ff">2</span> kole caddy docker-distroless-container-images/      <span style="color:#75715e"># yeni: setgid YOK (750)</span>
+</span></span><span style="display:flex;"><span>drwxr-x--- <span style="color:#ae81ff">2</span> kole caddy docker-kurulum-hardening-rocky/          <span style="color:#75715e"># yeni: setgid YOK (750)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ ls -la /var/www/kole/public/docs/docker/docker-distroless-container-images/
+</span></span><span style="display:flex;"><span>-rw-r----- <span style="color:#ae81ff">1</span> kole kole index.html   <span style="color:#75715e"># grup caddy DEĞİL!</span></span></span></code></pre></div><h3 id="kök-neden">Kök Neden<a class="anchor" href="#k%c3%b6k-neden">#</a></h3>
+<p>403/404 ayrımı klasik bir izin semptomudur: dosya <strong>sunucuda duruyor</strong> ama Caddy süreci (grup <code>caddy</code> üzerinden erişiyor) onu <strong>okuyamıyor</strong> → dosyaya direkt istek <code>403</code>; dizin URL&rsquo;sinde ise Caddy, okunamayan <code>index.html</code>&lsquo;i &ldquo;yok&rdquo; sayıp <code>404</code> döndürüyor.</p>
+<p>Peki zincir nasıl işledi?</p>
+<ol>
+<li>rsync komutunda <code>--no-perms</code> vardı. rsync&rsquo;in man sayfasına göre <code>--chmod</code> bu durumda <strong>mevcut dosyalara hiç uygulanmaz</strong>; yeni öğelerde de sunucu umask&rsquo;i kazanabiliyor.</li>
+<li>rsync yeni dizini <code>mkdir</code> ile yarattığında kernel setgid bitini aslında kopyalar; ama <code>--no-perms</code> yüzünden rsync sonradan klasik bir <code>chmod</code> yapar (umask ile maskeleme → <code>750</code>) ve <strong>chmod çağrısı setgid bitini siler</strong>.</li>
+<li>Setgid&rsquo;siz bir dizinde yaratılan dosyalar, oluşturan sürecin <strong>birincil grubunu</strong> alır → <code>index.html</code> <code>kole:kole 640</code> oldu.</li>
+<li>Caddy, <code>caddy</code> grubuyla okumaya çalıştığı için <code>EACCES</code> → <code>403/404</code>.</li>
+</ol>
+<p>Eski dosyaların çalışması ise kurulum sırasında manuel yaptığım <code>chgrp</code>/<code>chmod g+s</code> komutlarının kalıntısıydı; her deploy&rsquo;da <strong>yeni</strong> dosyalara bu düzeltmeler otomatik uygulanmıyordu. Yani &ldquo;rsync <code>D2750</code> ile geldiği için setgid kalıcıdır&rdquo; varsayımım yanlıştı.</p>
+<h3 id="birincil-ve-ikincil-grup-kavramı">Birincil ve İkincil Grup Kavramı<a class="anchor" href="#birincil-ve-ikincil-grup-kavram%c4%b1">#</a></h3>
+<p>Bu vakanın merkezinde, Linux&rsquo;un grup kavramının bir detayı var:</p>
+<ul>
+<li><strong>Birincil grup (primary group):</strong> <code>/etc/passwd</code>&lsquo;de kullanıcının satırında görünen <strong>tek</strong> GID&rsquo;dir. Bir süreç yeni bir dosya yarattığında dosyanın grubu <strong>buradan</strong> gelir - tek istisna: dosyanın yaratıldığı dizin <strong>setgid</strong> (<code>g+s</code>) bitine sahipse dosya üst dizinin grubunu miras alır.</li>
+<li><strong>İkincil gruplar (secondary groups):</strong> <code>groups</code> veya <code>id</code> komutuyla listelenirler. Dosya erişim denetiminde (izin hesabında) geçerlidirler; ama <strong>yeni yaratılan dosyaların grubunu etkilemezler.</strong></li>
+</ul>
+<p>Bu yüzden şu iki komut birbiriyle karıştırılmamalı:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo usermod -aG caddy kole   <span style="color:#75715e"># ikincil gruba ekler → YENİ dosyaların grubu DEĞİŞMEZ, sorunu çözmez</span>
+</span></span><span style="display:flex;"><span>sudo usermod -g caddy kole    <span style="color:#75715e"># birincil grubu değiştirir → YENİ dosyalar otomatik grup caddy olur</span></span></span></code></pre></div><h3 id="kalıcı-çözümler-tavsiye-sırasıyla">Kalıcı Çözümler (tavsiye sırasıyla)<a class="anchor" href="#kal%c4%b1c%c4%b1-%c3%a7%c3%b6z%c3%bcmler-tavsiye-s%c4%b1ras%c4%b1yla">#</a></h3>
+<p><strong>1. ACL - önerilen:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo setfacl -R -m g:caddy:rX,d:g:caddy:rX /var/www/kole/public</span></span></code></pre></div><p><code>d:</code> (default ACL) bu ağaç altında bundan sonra yaratılacak <strong>her</strong> yeni dosya ve dizine, kim yaratırsa yaratsın (rsync dahil), grup <code>caddy</code>&lsquo;ye okuma iznini kernel seviyesinde verir; <code>--no-perms</code> ve umask oyunları bu mirası ezip geçemez. <code>rsync --delete</code> ile silinip yeniden açılan dizinler bile üst dizinden default ACL&rsquo;yi devralır. En büyük avantajı: etkisi yalnızca webroot ile sınırlıdır, kullanıcı/grup yapılandırmasına dokunmaz. Doğrulama için <code>getfacl /var/www/kole/public/docs/docker</code> yeterli.</p>
+<p><strong>2. Birincil grup değişikliği:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo usermod -g caddy kole</span></span></code></pre></div><p>Çalışır ve tek komuttur; ama <code>kole</code> bundan sonra yaratacağı <strong>tüm</strong> dosyalara grup <code>caddy</code> verecek. <code>/home/kole</code> 750 <code>kole:kole</code> kaldığı için büyük bir risk yok; yine de <code>/tmp</code> gibi herkesin travers edebildiği dizinlerde yarattığı dosyalar Caddy süreci tarafından okunabilir hale gelir - düşük ama sıfır olmayan bir risk.</p>
+<p><strong>3. Workflow tarafı:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ae81ff">rsync -avz --delete \</span>
+</span></span><span style="display:flex;"><span>  --<span style="color:#ae81ff">chmod=D2755,F644 \</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">...</span></span></span></code></pre></div><p><code>--no-perms</code> kaldırılır; böylece <code>--chmod</code> her transferde deterministik uygulanır. Sunucuya hiç dokunmazsınız ama dosyalar world-readable (644) olur - herkese açık bir statik site için zararsızdır.</p>
+<h3 id="anlık-onarım-vakada-kullandığım-komutlar">Anlık Onarım (vakada kullandığım komutlar)<a class="anchor" href="#anl%c4%b1k-onar%c4%b1m-vakada-kulland%c4%b1%c4%9f%c4%b1m-komutlar">#</a></h3>
+<p>Mevcut dosyaları hemen düzeltmek için:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo chgrp -R caddy &lt;etkilenen-dizinler&gt;
+</span></span><span style="display:flex;"><span>sudo chmod -R g+rX,o-rwx &lt;etkilenen-dizinler&gt;
+</span></span><span style="display:flex;"><span>sudo chmod g+s &lt;etkilenen-dizinler&gt;   <span style="color:#75715e"># bir daha aynı sorun yaşanmasın diye setgid</span></span></span></code></pre></div><p>Ve unutmayın: bu komutların <code>usermod -aG caddy kole</code> ile ikame edilebileceğini düşünmeyin - ikincil grup eklemek yeni dosyaların grubunu değiştirmez. Bu döngüden kalıcı çıkmak için yukarıdaki üç çözümden birini uygulamak gerekir; ben ACL yolunu deneyeceğim (bu doküman yazıldığında henüz uygulamış değildim).</p>
+<p>Okudugunuz icin tesekkur ederim.</p>
 </article>
  
       
@@ -941,6 +1022,15 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
       <ul>
         <li><a href="#rsync-parametrelerinin-detayları">Rsync Parametrelerinin Detayları:</a></li>
         <li><a href="#setgid-bitinin-sunucu-tarafında-tanımlanması">SetGID Bitinin Sunucu Tarafında Tanımlanması</a></li>
+      </ul>
+    </li>
+    <li><a href="#güncelleme-birincilikincil-grup-ve-bir-deploy-izni-vakası-403404">Güncelleme: Birincil/İkincil Grup ve Bir Deploy İzni Vakası (403/404)</a>
+      <ul>
+        <li><a href="#vakanın-özeti">Vakanın Özeti</a></li>
+        <li><a href="#kök-neden">Kök Neden</a></li>
+        <li><a href="#birincil-ve-ikincil-grup-kavramı">Birincil ve İkincil Grup Kavramı</a></li>
+        <li><a href="#kalıcı-çözümler-tavsiye-sırasıyla">Kalıcı Çözümler (tavsiye sırasıyla)</a></li>
+        <li><a href="#anlık-onarım-vakada-kullandığım-komutlar">Anlık Onarım (vakada kullandığım komutlar)</a></li>
       </ul>
     </li>
   </ul>
