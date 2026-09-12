@@ -8,25 +8,25 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="ilk olarak ben ornek olarak verecegim# kullanmak istedigim uygulama (vault) kurulum yaparken admin kullanicinin yaninda rastgele encyprepted sifre olusuruyor ve compose dosyasi olusturuken# docker compose up -d # -d flag arka planda calistir demek boyle yaptigimdan dolayi arkaplanda calisttirdigimdan dolayi output olarak yazdi ama ben gormedim direk aslinda
-docker compose up bana sifreyi verecekti ama ben coktan is isten gecti :D sifreyide hashli olarak sakladigindan dosyara girsem bile fayda vermeyecekti
+<meta name="description" content="İlk olarak ben örnek olarak vereceğim# kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor ve compose dosyası oluştururken# docker compose up -d # -d flag arka planda çalıştır demek böyle yaptığımdan dolayı arka planda çalıştırdığımdan dolayı output olarak yazdı ama ben görmedim direkt aslında
+docker compose up bana şifreyi verecekti ama ben çoktan iş işten geçti :D şifreyi de hash’li olarak sakladığından dosyalara girsem bile fayda vermeyecekti
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://dev.ulutasalperen.com/docs/docker/var-olan-volume-uzerine-docker-compose/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="var-olan-volume-uzerine-docker-compose">
-	<meta property="og:description" content="ilk olarak ben ornek olarak verecegim# kullanmak istedigim uygulama (vault) kurulum yaparken admin kullanicinin yaninda rastgele encyprepted sifre olusuruyor ve compose dosyasi olusturuken# docker compose up -d # -d flag arka planda calistir demek boyle yaptigimdan dolayi arkaplanda calisttirdigimdan dolayi output olarak yazdi ama ben gormedim direk aslinda
-docker compose up bana sifreyi verecekti ama ben coktan is isten gecti :D sifreyide hashli olarak sakladigindan dosyara girsem bile fayda vermeyecekti">
+	<meta property="og:description" content="İlk olarak ben örnek olarak vereceğim# kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor ve compose dosyası oluştururken# docker compose up -d # -d flag arka planda çalıştır demek böyle yaptığımdan dolayı arka planda çalıştırdığımdan dolayı output olarak yazdı ama ben görmedim direkt aslında
+docker compose up bana şifreyi verecekti ama ben çoktan iş işten geçti :D şifreyi de hash’li olarak sakladığından dosyalara girsem bile fayda vermeyecekti">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="var-olan-volume-uzerine-docker-compose">
-	<meta itemprop="description" content="ilk olarak ben ornek olarak verecegim# kullanmak istedigim uygulama (vault) kurulum yaparken admin kullanicinin yaninda rastgele encyprepted sifre olusuruyor ve compose dosyasi olusturuken# docker compose up -d # -d flag arka planda calistir demek boyle yaptigimdan dolayi arkaplanda calisttirdigimdan dolayi output olarak yazdi ama ben gormedim direk aslinda
-docker compose up bana sifreyi verecekti ama ben coktan is isten gecti :D sifreyide hashli olarak sakladigindan dosyara girsem bile fayda vermeyecekti">
-	<meta itemprop="wordCount" content="233">
+	<meta itemprop="description" content="İlk olarak ben örnek olarak vereceğim# kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor ve compose dosyası oluştururken# docker compose up -d # -d flag arka planda çalıştır demek böyle yaptığımdan dolayı arka planda çalıştırdığımdan dolayı output olarak yazdı ama ben görmedim direkt aslında
+docker compose up bana şifreyi verecekti ama ben çoktan iş işten geçti :D şifreyi de hash’li olarak sakladığından dosyalara girsem bile fayda vermeyecekti">
+	<meta itemprop="wordCount" content="259">
 
 <title>var-olan-volume-uzerine-docker-compose • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ docker compose up bana sifreyi verecekti ama ben coktan is isten gecti :D sifrey
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.660bf93061e7db7c416ce6d379be035c6980b993f80a4a406adea3e75a9ffb5a.js" integrity="sha256-Zgv5MGHn23xBbObTeb4DXGmAuZP4CkpAat6j51qf&#43;1o=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.74cca6436cdc1a061a498e6397bcee8b64c2e1bdf1778b9788e8bf0e205e6247.js" integrity="sha256-dMymQ2zcGgYaSY5jl7zui2TC4b3xd4uXiOi/DiBeYkc=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -635,9 +635,9 @@ docker compose up bana sifreyi verecekti ama ben coktan is isten gecti :D sifrey
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#kullanmak-istedigim-uygulama-vault-kurulum-yaparken-admin-kullanicinin-yaninda-rastgele-encyprepted-sifre-olusuruyor-ve-compose-dosyasi-olusturuken">kullanmak istedigim uygulama (vault) kurulum yaparken admin kullanicinin yaninda rastgele encyprepted sifre olusuruyor ve compose dosyasi olusturuken</a></li>
-    <li><a href="#en-bastan-yaml-dosyami-yaziyorum">en bastan yaml dosyami yaziyorum</a></li>
-    <li><a href="#basta-normal-ayarlayip-compose-up-ile-ciktiyi-gorup-yapabilirdim">basta normal ayarlayip compose up ile ciktiyi gorup yapabilirdim</a></li>
+    <li><a href="#kullanmak-istediğim-uygulama-filebrowser-kurulum-yaparken-admin-kullanıcının-yanında-rastgele-encrypted-şifre-oluşturuyor-ve-compose-dosyası-oluştururken">kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor ve compose dosyası oluştururken</a></li>
+    <li><a href="#en-baştan-yaml-dosyamı-yazıyorum">en baştan yaml dosyamı yazıyorum</a></li>
+    <li><a href="#başta-normal-ayarlayıp-compose-up-ile-çıktıyı-görüp-yapabilirdim">başta normal ayarlayıp compose up ile çıktıyı görüp yapabilirdim</a></li>
   </ul>
 </nav>
 
@@ -650,23 +650,24 @@ docker compose up bana sifreyi verecekti ama ben coktan is isten gecti :D sifrey
 
       
       
-  <article class="markdown book-article"><h1 id="ilk-olarak-ben-ornek-olarak-verecegim">ilk olarak ben ornek olarak verecegim<a class="anchor" href="#ilk-olarak-ben-ornek-olarak-verecegim">#</a></h1>
-<h2 id="kullanmak-istedigim-uygulama-vault-kurulum-yaparken-admin-kullanicinin-yaninda-rastgele-encyprepted-sifre-olusuruyor-ve-compose-dosyasi-olusturuken">kullanmak istedigim uygulama (vault) kurulum yaparken admin kullanicinin yaninda rastgele encyprepted sifre olusuruyor ve compose dosyasi olusturuken<a class="anchor" href="#kullanmak-istedigim-uygulama-vault-kurulum-yaparken-admin-kullanicinin-yaninda-rastgele-encyprepted-sifre-olusuruyor-ve-compose-dosyasi-olusturuken">#</a></h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up -d <span style="color:#75715e"># -d flag arka planda calistir demek</span></span></span></code></pre></div><blockquote class='book-hint '>
-<p>boyle yaptigimdan dolayi arkaplanda calisttirdigimdan dolayi <code>output</code> olarak yazdi ama ben gormedim direk aslinda</p>
-</blockquote><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up </span></span></code></pre></div><blockquote class='book-hint '>
-<p>bana sifreyi verecekti ama ben coktan is isten gecti :D sifreyide hashli olarak sakladigindan dosyara girsem bile fayda vermeyecekti</p>
+  <article class="markdown book-article"><h1 id="ilk-olarak-ben-örnek-olarak-vereceğim">İlk olarak ben örnek olarak vereceğim<a class="anchor" href="#ilk-olarak-ben-%c3%b6rnek-olarak-verece%c4%9fim">#</a></h1>
+<h2 id="kullanmak-istediğim-uygulama-filebrowser-kurulum-yaparken-admin-kullanıcının-yanında-rastgele-encrypted-şifre-oluşturuyor-ve-compose-dosyası-oluştururken">kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor ve compose dosyası oluştururken<a class="anchor" href="#kullanmak-istedi%c4%9fim-uygulama-filebrowser-kurulum-yaparken-admin-kullan%c4%b1c%c4%b1n%c4%b1n-yan%c4%b1nda-rastgele-encrypted-%c5%9fifre-olu%c5%9fturuyor-ve-compose-dosyas%c4%b1-olu%c5%9ftururken">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up -d <span style="color:#75715e"># -d flag arka planda çalıştır demek</span></span></span></code></pre></div><blockquote class='book-hint '>
+<p>böyle yaptığımdan dolayı arka planda çalıştırdığımdan dolayı <code>output</code> olarak yazdı ama ben görmedim direkt aslında</p>
+</blockquote><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up</span></span></code></pre></div><blockquote class='book-hint '>
+<p>bana şifreyi verecekti ama ben çoktan iş işten geçti :D şifreyi de hash&rsquo;li olarak sakladığından dosyalara girsem bile fayda vermeyecekti</p>
 </blockquote><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    --name filebrowser <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>    -v filebrowser_data:/srv <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>    -v filebrowser_database:/database <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>    -v filebrowser_config:/config <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>    -p 8080:80 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    -p 127.0.0.1:8000:80 <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>    filebrowser/filebrowser</span></span></code></pre></div><blockquote class='book-hint '>
-<p><code>docker run </code> ile volumlu bir sekilde olusturmustum ve direk bunu rundan volumeleri kullanarak nasil compose haline getiririm onu halledecegim  burada bana kullanici olarak <em>admin</em> parola olarakda <em>rastgele encyprepted parola</em> verdi bu parola aklimda ve volumde databasede duruyor</p>
-</blockquote><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker -ps -a
-</span></span><span style="display:flex;"><span>dokcer rm -f <span style="color:#66d9ef">$(</span>docker id<span style="color:#66d9ef">)</span></span></span></code></pre></div><blockquote class='book-hint '>
-<p>calisan docker uygulamami kapattim sildim sadece volume duruyor</p>
-</blockquote><h2 id="en-bastan-yaml-dosyami-yaziyorum">en bastan yaml dosyami yaziyorum<a class="anchor" href="#en-bastan-yaml-dosyami-yaziyorum">#</a></h2>
+<p><code>docker run </code> ile volume&rsquo;lü bir şekilde oluşturmuştum ve direkt bunu run&rsquo;dan volume&rsquo;leri kullanarak nasıl compose haline getiririm onu halledeceğim  burada bana kullanıcı olarak <em>admin</em> parola olarak da <em>rastgele encrypted parola</em> verdi bu parola aklımda ve volume&rsquo;de database&rsquo;de duruyor</p>
+</blockquote><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker ps -a
+</span></span><span style="display:flex;"><span>docker rm -f filebrowser</span></span></code></pre></div><blockquote class='book-hint '>
+<p>çalışan docker uygulamamı kapattım sildim sadece volume duruyor</p>
+</blockquote><h2 id="en-baştan-yaml-dosyamı-yazıyorum">en baştan yaml dosyamı yazıyorum<a class="anchor" href="#en-ba%c5%9ftan-yaml-dosyam%c4%b1-yaz%c4%b1yorum">#</a></h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">filebrowser</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">services</span>:
@@ -679,7 +680,7 @@ docker compose up bana sifreyi verecekti ama ben coktan is isten gecti :D sifrey
 </span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">filebrowser_data:/srv</span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">filebrowser_database:/database</span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">filebrowser_config:/config</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">unless-stopped	  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">unless-stopped</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">filebrowser_data</span>:
@@ -688,8 +689,8 @@ docker compose up bana sifreyi verecekti ama ben coktan is isten gecti :D sifrey
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">external</span>: <span style="color:#66d9ef">true</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">filebrowser_config</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">external</span>: <span style="color:#66d9ef">true</span></span></span></code></pre></div><blockquote class='book-hint '>
-<p>burada tekrardan olusturmasini engellemek icin <code>external</code> olarak volumeleri belirttim  artik hazir</p>
-</blockquote><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up -d</span></span></code></pre></div><h2 id="basta-normal-ayarlayip-compose-up-ile-ciktiyi-gorup-yapabilirdim">basta normal ayarlayip compose up ile ciktiyi gorup yapabilirdim<a class="anchor" href="#basta-normal-ayarlayip-compose-up-ile-ciktiyi-gorup-yapabilirdim">#</a></h2>
+<p>burada tekrardan oluşturmasını engellemek için <code>external</code> olarak volume&rsquo;leri belirttim  artık hazır</p>
+</blockquote><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up -d</span></span></code></pre></div><h2 id="başta-normal-ayarlayıp-compose-up-ile-çıktıyı-görüp-yapabilirdim">başta normal ayarlayıp compose up ile çıktıyı görüp yapabilirdim<a class="anchor" href="#ba%c5%9fta-normal-ayarlay%c4%b1p-compose-up-ile-%c3%a7%c4%b1kt%c4%b1y%c4%b1-g%c3%b6r%c3%bcp-yapabilirdim">#</a></h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">filebrowser</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">services</span>:
@@ -701,14 +702,16 @@ docker compose up bana sifreyi verecekti ama ben coktan is isten gecti :D sifrey
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
 </span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">filebrowser_data:/srv</span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">filebrowser_database:/database</span>
-</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">filebrowser_config:/config </span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">unless-stopped	  </span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">filebrowser_config:/config</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">unless-stopped</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">filebrowser_data</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">filebrowser_database</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">filebrowser_config:</span></span></span></code></pre></div><blockquote class='book-hint '>
-<p><code>restart: unless-stopped</code> burada ben durdurmadigim surece sistem kapanip acilsa bile tekrar calisir</p>
+<p><code>restart: unless-stopped</code> burada ben durdurmadığım sürece sistem kapanıp açılsa bile tekrar çalışır</p>
+</blockquote><blockquote class='book-hint '>
+<p>Not: bu ikinci dosya sıfırdan kurulum içindir, <code>external</code> olmadığı için compose <code>filebrowser_filebrowser_data</code> gibi prefix&rsquo;li yeni volume yaratır, eski volume&rsquo;lerdeki veriyi kullanmaz</p>
 </blockquote></article>
  
       
@@ -776,9 +779,9 @@ docker compose up bana sifreyi verecekti ama ben coktan is isten gecti :D sifrey
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#kullanmak-istedigim-uygulama-vault-kurulum-yaparken-admin-kullanicinin-yaninda-rastgele-encyprepted-sifre-olusuruyor-ve-compose-dosyasi-olusturuken">kullanmak istedigim uygulama (vault) kurulum yaparken admin kullanicinin yaninda rastgele encyprepted sifre olusuruyor ve compose dosyasi olusturuken</a></li>
-    <li><a href="#en-bastan-yaml-dosyami-yaziyorum">en bastan yaml dosyami yaziyorum</a></li>
-    <li><a href="#basta-normal-ayarlayip-compose-up-ile-ciktiyi-gorup-yapabilirdim">basta normal ayarlayip compose up ile ciktiyi gorup yapabilirdim</a></li>
+    <li><a href="#kullanmak-istediğim-uygulama-filebrowser-kurulum-yaparken-admin-kullanıcının-yanında-rastgele-encrypted-şifre-oluşturuyor-ve-compose-dosyası-oluştururken">kullanmak istediğim uygulama (filebrowser) kurulum yaparken admin kullanıcının yanında rastgele encrypted şifre oluşturuyor ve compose dosyası oluştururken</a></li>
+    <li><a href="#en-baştan-yaml-dosyamı-yazıyorum">en baştan yaml dosyamı yazıyorum</a></li>
+    <li><a href="#başta-normal-ayarlayıp-compose-up-ile-çıktıyı-görüp-yapabilirdim">başta normal ayarlayıp compose up ile çıktıyı görüp yapabilirdim</a></li>
   </ul>
 </nav>
 
