@@ -6,7 +6,7 @@ weight: 1
 
 #### 1. Sistem Hazırlığı ve Bağımlılıklar
 
-Kuruluma başlamadan önce sistemin güncel olduğundan ve paketleri HTTPS üzerinden alabilmek için gerekli araçların yüklendiğinden emin oluyoruz.
+Kuruluma başlamadan önce sistemin güncel olduğundan ve paketleri HTTP üzerinden alabilmek için gerekli araçların yüklendiğinden emin oluyoruz.
 
 ```bash
 sudo apt update && sudo apt upgrade -y

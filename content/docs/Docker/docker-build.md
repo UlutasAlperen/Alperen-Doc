@@ -164,7 +164,7 @@ docker build . -t goserver:latest
 docker run -p 8991:8991 goserver
 ```
 
-### example for js file 
+### example for js project 
 
 Start by reading the application code to understand its configuration and signal handling.
 
