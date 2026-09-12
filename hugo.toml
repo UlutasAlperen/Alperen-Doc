@@ -1,4 +1,4 @@
-baseURL = 'https://doc.ulutasalperen.com/'
+baseURL = 'https://dev.ulutasalperen.com/'
 title = 'Alperen Doc'
 theme = 'hugo-book'
 
