@@ -8,36 +8,33 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Debian 13 İçin Güvenli Docker ve Docker Compose Kurulum Dokümantasyonu# 1. Sistem Hazırlığı ve Bağımlılıklar# Kuruluma başlamadan önce sistemin güncel olduğundan ve paketleri HTTPS üzerinden alabilmek için gerekli araçların yüklendiğinden emin oluyoruz.
-sudo apt update &amp;&amp; sudo apt upgrade -y sudo apt install -y ca-certificates curl gnupg2. Resmi Docker Deposu ve GPG Anahtarının Eklenmesi# Paketlerin bütünlüğünü doğrulamak için Docker’ın resmi GPG anahtarını eklemek güvenlik açısından zorunludur.
-GPG anahtarını indirip yapılandırıyoruz:
-sudo install -m 0755 -d /etc/apt/keyrings sudo rm -f /etc/apt/keyrings/docker.gpg curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg sudo chmod a&#43;r /etc/apt/keyrings/docker.gpg rm -f satırını ekledik çünkü anahtar daha önce indirilmişse gpg --dearmor -o komutu “File exists” hatası verir. Bu sayede komut güvenle tekrar çalıştırılabilir.
+<meta name="description" content="Rocky Linux İçin Güvenli Docker ve Docker Compose Kurulum Dokümantasyonu# 1. Sistem Hazırlığı ve Bağımlılıklar# Kuruluma başlamadan önce sistemin güncel olduğundan ve Docker deposunu yönetmemizi sağlayacak araçların yüklendiğinden emin oluyoruz.
+sudo dnf update -y sudo dnf install -y dnf-plugins-core2. Resmi Docker Deposunun Eklenmesi# Docker, Rocky için ayrı bir depo yayınlamıyor; RHEL türevleri için tek bir depo tutuyor ve bu depo CentOS olarak adlandırılıyor. Rocky’de de bu depoyu kullanıyoruz:
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo Rocky 10’da paket yöneticisi dnf5’e geçti; orada komut biraz farklı: sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/centos/docker-ce.repo. Rocky 9’da (dnf4) yukarıdaki komut olduğu gibi çalışır.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://dev.ulutasalperen.com/docs/docker/docker-kurulum-hardening-debian/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://dev.ulutasalperen.com/docs/docker/docker-kurulum-hardening-rocky/">
 	<meta property="og:site_name" content="Alperen Doc">
-	<meta property="og:title" content="docker-kurulum-hardening-debian">
-	<meta property="og:description" content="Debian 13 İçin Güvenli Docker ve Docker Compose Kurulum Dokümantasyonu# 1. Sistem Hazırlığı ve Bağımlılıklar# Kuruluma başlamadan önce sistemin güncel olduğundan ve paketleri HTTPS üzerinden alabilmek için gerekli araçların yüklendiğinden emin oluyoruz.
-sudo apt update &amp;&amp; sudo apt upgrade -y sudo apt install -y ca-certificates curl gnupg2. Resmi Docker Deposu ve GPG Anahtarının Eklenmesi# Paketlerin bütünlüğünü doğrulamak için Docker’ın resmi GPG anahtarını eklemek güvenlik açısından zorunludur.
-GPG anahtarını indirip yapılandırıyoruz:
-sudo install -m 0755 -d /etc/apt/keyrings sudo rm -f /etc/apt/keyrings/docker.gpg curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg sudo chmod a&#43;r /etc/apt/keyrings/docker.gpg rm -f satırını ekledik çünkü anahtar daha önce indirilmişse gpg --dearmor -o komutu “File exists” hatası verir. Bu sayede komut güvenle tekrar çalıştırılabilir.">
+	<meta property="og:title" content="docker-kurulum-hardening-rocky">
+	<meta property="og:description" content="Rocky Linux İçin Güvenli Docker ve Docker Compose Kurulum Dokümantasyonu# 1. Sistem Hazırlığı ve Bağımlılıklar# Kuruluma başlamadan önce sistemin güncel olduğundan ve Docker deposunu yönetmemizi sağlayacak araçların yüklendiğinden emin oluyoruz.
+sudo dnf update -y sudo dnf install -y dnf-plugins-core2. Resmi Docker Deposunun Eklenmesi# Docker, Rocky için ayrı bir depo yayınlamıyor; RHEL türevleri için tek bir depo tutuyor ve bu depo CentOS olarak adlandırılıyor. Rocky’de de bu depoyu kullanıyoruz:
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo Rocky 10’da paket yöneticisi dnf5’e geçti; orada komut biraz farklı: sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/centos/docker-ce.repo. Rocky 9’da (dnf4) yukarıdaki komut olduğu gibi çalışır.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
-	<meta itemprop="name" content="docker-kurulum-hardening-debian">
-	<meta itemprop="description" content="Debian 13 İçin Güvenli Docker ve Docker Compose Kurulum Dokümantasyonu# 1. Sistem Hazırlığı ve Bağımlılıklar# Kuruluma başlamadan önce sistemin güncel olduğundan ve paketleri HTTPS üzerinden alabilmek için gerekli araçların yüklendiğinden emin oluyoruz.
-sudo apt update &amp;&amp; sudo apt upgrade -y sudo apt install -y ca-certificates curl gnupg2. Resmi Docker Deposu ve GPG Anahtarının Eklenmesi# Paketlerin bütünlüğünü doğrulamak için Docker’ın resmi GPG anahtarını eklemek güvenlik açısından zorunludur.
-GPG anahtarını indirip yapılandırıyoruz:
-sudo install -m 0755 -d /etc/apt/keyrings sudo rm -f /etc/apt/keyrings/docker.gpg curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg sudo chmod a&#43;r /etc/apt/keyrings/docker.gpg rm -f satırını ekledik çünkü anahtar daha önce indirilmişse gpg --dearmor -o komutu “File exists” hatası verir. Bu sayede komut güvenle tekrar çalıştırılabilir.">
-	<meta itemprop="wordCount" content="782">
+	<meta itemprop="name" content="docker-kurulum-hardening-rocky">
+	<meta itemprop="description" content="Rocky Linux İçin Güvenli Docker ve Docker Compose Kurulum Dokümantasyonu# 1. Sistem Hazırlığı ve Bağımlılıklar# Kuruluma başlamadan önce sistemin güncel olduğundan ve Docker deposunu yönetmemizi sağlayacak araçların yüklendiğinden emin oluyoruz.
+sudo dnf update -y sudo dnf install -y dnf-plugins-core2. Resmi Docker Deposunun Eklenmesi# Docker, Rocky için ayrı bir depo yayınlamıyor; RHEL türevleri için tek bir depo tutuyor ve bu depo CentOS olarak adlandırılıyor. Rocky’de de bu depoyu kullanıyoruz:
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo Rocky 10’da paket yöneticisi dnf5’e geçti; orada komut biraz farklı: sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/centos/docker-ce.repo. Rocky 9’da (dnf4) yukarıdaki komut olduğu gibi çalışır.">
+	<meta itemprop="wordCount" content="1107">
 
-<title>docker-kurulum-hardening-debian • Alperen Doc</title>
+<title>docker-kurulum-hardening-rocky • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://dev.ulutasalperen.com/docs/docker/docker-kurulum-hardening-debian/">
+<link rel="canonical" href="https://dev.ulutasalperen.com/docs/docker/docker-kurulum-hardening-rocky/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
@@ -424,7 +421,7 @@ sudo install -m 0755 -d /etc/apt/keyrings sudo rm -f /etc/apt/keyrings/docker.gp
   
 
   
-    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="active">
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
       docker-kurulum-hardening-debian</a>
   
 
@@ -592,7 +589,7 @@ sudo install -m 0755 -d /etc/apt/keyrings sudo rm -f /etc/apt/keyrings/docker.gp
   
 
   
-    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="active">
       docker-kurulum-hardening-rocky</a>
   
 
@@ -653,7 +650,7 @@ sudo install -m 0755 -d /etc/apt/keyrings sudo rm -f /etc/apt/keyrings/docker.gp
     <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>docker-kurulum-hardening-debian</h3>
+  <h3>docker-kurulum-hardening-rocky</h3>
 
   <label for="toc-control">
     
@@ -671,7 +668,7 @@ sudo install -m 0755 -d /etc/apt/keyrings sudo rm -f /etc/apt/keyrings/docker.gp
   <ul>
     <li>
       <ul>
-        <li><a href="#debian-13-için-güvenli-docker-ve-docker-compose-kurulum-dokümantasyonu">Debian 13 İçin Güvenli Docker ve Docker Compose Kurulum Dokümantasyonu</a></li>
+        <li><a href="#rocky-linux-için-güvenli-docker-ve-docker-compose-kurulum-dokümantasyonu">Rocky Linux İçin Güvenli Docker ve Docker Compose Kurulum Dokümantasyonu</a></li>
       </ul>
     </li>
   </ul>
@@ -686,26 +683,18 @@ sudo install -m 0755 -d /etc/apt/keyrings sudo rm -f /etc/apt/keyrings/docker.gp
 
       
       
-  <article class="markdown book-article"><h3 id="debian-13-için-güvenli-docker-ve-docker-compose-kurulum-dokümantasyonu">Debian 13 İçin Güvenli Docker ve Docker Compose Kurulum Dokümantasyonu<a class="anchor" href="#debian-13-i%c3%a7in-g%c3%bcvenli-docker-ve-docker-compose-kurulum-dok%c3%bcmantasyonu">#</a></h3>
+  <article class="markdown book-article"><h3 id="rocky-linux-için-güvenli-docker-ve-docker-compose-kurulum-dokümantasyonu">Rocky Linux İçin Güvenli Docker ve Docker Compose Kurulum Dokümantasyonu<a class="anchor" href="#rocky-linux-i%c3%a7in-g%c3%bcvenli-docker-ve-docker-compose-kurulum-dok%c3%bcmantasyonu">#</a></h3>
 <h4 id="1-sistem-hazırlığı-ve-bağımlılıklar">1. Sistem Hazırlığı ve Bağımlılıklar<a class="anchor" href="#1-sistem-haz%c4%b1rl%c4%b1%c4%9f%c4%b1-ve-ba%c4%9f%c4%b1ml%c4%b1l%c4%b1klar">#</a></h4>
-<p>Kuruluma başlamadan önce sistemin güncel olduğundan ve paketleri HTTPS üzerinden alabilmek için gerekli araçların yüklendiğinden emin oluyoruz.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt update <span style="color:#f92672">&amp;&amp;</span> sudo apt upgrade -y
-</span></span><span style="display:flex;"><span>sudo apt install -y ca-certificates curl gnupg</span></span></code></pre></div><h4 id="2-resmi-docker-deposu-ve-gpg-anahtarının-eklenmesi">2. Resmi Docker Deposu ve GPG Anahtarının Eklenmesi<a class="anchor" href="#2-resmi-docker-deposu-ve-gpg-anahtar%c4%b1n%c4%b1n-eklenmesi">#</a></h4>
-<p>Paketlerin bütünlüğünü doğrulamak için Docker&rsquo;ın resmi GPG anahtarını eklemek güvenlik açısından zorunludur.</p>
-<p>GPG anahtarını indirip yapılandırıyoruz:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo install -m <span style="color:#ae81ff">0755</span> -d /etc/apt/keyrings
-</span></span><span style="display:flex;"><span>sudo rm -f /etc/apt/keyrings/docker.gpg
-</span></span><span style="display:flex;"><span>curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-</span></span><span style="display:flex;"><span>sudo chmod a+r /etc/apt/keyrings/docker.gpg</span></span></code></pre></div><blockquote class='book-hint '>
-<p><code>rm -f</code> satırını ekledik çünkü anahtar daha önce indirilmişse <code>gpg --dearmor -o</code> komutu &ldquo;File exists&rdquo; hatası verir. Bu sayede komut güvenle tekrar çalıştırılabilir.</p>
-</blockquote><p>APT deposunu sisteme tanımlıyoruz. Bu komut, işletim sistemimizin kod adını (Debian 13 için <code>trixie</code>) otomatik olarak algılayıp ilgili depoyu ekler:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;deb [arch=</span><span style="color:#66d9ef">$(</span>dpkg --print-architecture<span style="color:#66d9ef">)</span><span style="color:#e6db74"> signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  </span><span style="color:#66d9ef">$(</span>. /etc/os-release <span style="color:#f92672">&amp;&amp;</span> echo <span style="color:#e6db74">&#34;</span>$VERSION_CODENAME<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74"> stable&#34;</span> | <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span></span></code></pre></div><h4 id="3-kurulum-işlemi">3. Kurulum İşlemi<a class="anchor" href="#3-kurulum-i%c5%9flemi">#</a></h4>
-<p>Depoları güncelleyip Docker Engine, Containerd ile Compose eklentisini kuruyoruz. Docker Compose, ayrı bir binary (<code>docker-compose</code>) yerine artık bir CLI eklentisi (<code>docker compose</code>) olarak dağıtılmaktadır.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt update
-</span></span><span style="display:flex;"><span>sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span></span></code></pre></div><p>Servisin çalıştığını doğruluyoruz:</p>
+<p>Kuruluma başlamadan önce sistemin güncel olduğundan ve Docker deposunu yönetmemizi sağlayacak araçların yüklendiğinden emin oluyoruz.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf update -y
+</span></span><span style="display:flex;"><span>sudo dnf install -y dnf-plugins-core</span></span></code></pre></div><h4 id="2-resmi-docker-deposunun-eklenmesi">2. Resmi Docker Deposunun Eklenmesi<a class="anchor" href="#2-resmi-docker-deposunun-eklenmesi">#</a></h4>
+<p>Docker, Rocky için ayrı bir depo yayınlamıyor; RHEL türevleri için tek bir depo tutuyor ve bu depo <strong>CentOS</strong> olarak adlandırılıyor. Rocky&rsquo;de de bu depoyu kullanıyoruz:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span></span></code></pre></div><blockquote class='book-hint '>
+<p>Rocky 10&rsquo;da paket yöneticisi dnf5&rsquo;e geçti; orada komut biraz farklı: <code>sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/centos/docker-ce.repo</code>. Rocky 9&rsquo;da (dnf4) yukarıdaki komut olduğu gibi çalışır.</p>
+</blockquote><p>Depo doğru eklendiyse şöyle kontrol edebiliriz:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dnf repolist | grep docker</span></span></code></pre></div><h4 id="3-kurulum-işlemi">3. Kurulum İşlemi<a class="anchor" href="#3-kurulum-i%c5%9flemi">#</a></h4>
+<p>Docker Engine, Containerd ile Compose eklentisini kuruyoruz. Docker Compose, ayrı bir binary (<code>docker-compose</code>) yerine artık bir CLI eklentisi (<code>docker compose</code>) olarak dağıtılmaktadır.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span></span></code></pre></div><p>Servisi etkinleştirip çalıştığını doğruluyoruz:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl enable --now docker
 </span></span><span style="display:flex;"><span>sudo systemctl status docker --no-pager</span></span></code></pre></div><blockquote class='book-hint '>
 <p>Not: <code>docker-ce</code> paketi servisi genellikle kurulum sırasında otomatik olarak etkinleştirir; <code>enable --now</code> komutu bunun garantilenmesi içindir (etkinleştirilmişse sorun çıkmaz).</p>
@@ -744,9 +733,9 @@ sudo install -m 0755 -d /etc/apt/keyrings sudo rm -f /etc/apt/keyrings/docker.gp
 <p>Bu dosya oluşturulduktan sonra servisi yeniden başlatıyoruz; <code>userns-remap: default</code> ayarı ilk başlatmada <code>dockremap</code> kullanıcısını otomatik olarak oluşturur.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl restart docker</span></span></code></pre></div><blockquote class='book-hint '>
 <p><strong>Dikkat:</strong> <code>userns-remap</code> etkinleştirildiğinde container image ve volume&rsquo;ların sahiplik UID&rsquo;leri yeniden eşlenir (165536+ aralığına) ve <strong>mevcut image/volume&rsquo;lar erişilemez hale gelir</strong>. Yeni kurulumda bu bir sorun değildir; ancak üzerinde veri bulunan bir sistemde bu değişiklikten sonra image&rsquo;ların yeniden pull edilmesi, volume&rsquo;ların yeniden oluşturulması ve host dizinlerinin bind mount&rsquo;larda sahiplik uyumunun gözden geçirilmesi gerekir.</p>
-</blockquote><p><strong>C. Güvenlik Duvarı (iptables) Davranışı</strong></p>
-<p>Docker, port yönlendirmeleri için doğrudan iptables kurallarına müdahale eder ve UFW gibi araçların kurallarını bypass eder.</p>
-<p>UFW kullanıyorsanız ve <code>docker run -p 8080:80 ...</code> komutunu çalıştırırsanız, UFW&rsquo;de port 8080 kapalı olsa bile Docker bu portu tüm dünyaya (0.0.0.0) açar. Bunu engellemek için portları yayınlarken her zaman loopback&rsquo;e bağlıyoruz. Önüne bir reverse proxy / web sunucu servisi koyarak bu riskin önüne geçmiş oluyoruz.</p>
+</blockquote><p><strong>C. Güvenlik Duvarı (firewalld) Davranışı</strong></p>
+<p>Rocky&rsquo;de güvenlik duvarı olarak <code>firewalld</code> gelir ve UFW benzeri bir davranış vardır. Docker, port yönlendirmeleri için doğrudan iptables kurallarına müdahale eder ve firewalld&rsquo;ın kurallarını bypass eder.</p>
+<p>Yani <code>docker run -p 8080:80 ...</code> komutunu çalıştırırsanız, firewalld&rsquo;de port 8080 kapalı olsa bile Docker bu portu tüm dünyaya (0.0.0.0) açar. Bunu engellemek için portları yayınlarken her zaman loopback&rsquo;e bağlıyoruz. Önüne bir reverse proxy / web sunucu servisi koyarak bu riskin önüne geçmiş oluyoruz.</p>
 <p>Güvenli port yayınlama yöntemi:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -p 127.0.0.1:8080:80 nginx</span></span></code></pre></div><p>Aynı mantık <code>docker-compose.yml</code> dosyaları için de geçerlidir:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">services</span>:
@@ -757,11 +746,33 @@ sudo install -m 0755 -d /etc/apt/keyrings sudo rm -f /etc/apt/keyrings/docker.gp
 <p>Portların bir kısmının container&rsquo;a dışarıdan erişilebilir olması gerekiyorsa (loopback&rsquo;e bağlamak yerine), firewall kuralı koymak için doğru yer Docker&rsquo;ın kullandığı iptables zinciridir: <code>DOCKER-USER</code>. Docker, kendi yönettiği zincirlerden (örn. <code>DOCKER</code>) önce bu zincire bakar, bu yüzden buraya eklenen kurallar Docker tarafından silinmez ve bypass edilemez.</p>
 <p>Örnek: <code>8080</code> portuna sadece belirli bir IP üzerinden erişim tanımlamak:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo iptables -I DOCKER-USER -p tcp --dport <span style="color:#ae81ff">8080</span> ! -s 203.0.113.10 -j DROP</span></span></code></pre></div><blockquote class='book-hint '>
-<p>Not: <code>iptables</code> kuralları kalıcı değildir; sistem yeniden başlatıldığında kaybolurlar. Kalıcı hale getirmek için <code>iptables-persistent</code> paketi kullanılabilir (<code>sudo apt install iptables-persistent</code>).</p>
+<p>Not: <code>DOCKER-USER</code> kuralları Docker tarafından yeniden başlatmada silinmez, ama sistem yeniden başlatıldığında kaybolurlar. Kalıcı hale getirmek için <code>iptables-services</code> paketiyle <code>iptables-save &gt; /etc/sysconfig/iptables</code> yöntemini ya da kuralı systemd unit&rsquo;ine ekleyen küçük bir script kullanabiliriz.</p>
 <p>Bu tek kural yeterlidir, çünkü container&rsquo;dan giden trafiğin dönüş paketleri hedef port olarak <code>8080</code> içermez (<code>DOCKER-USER</code> zinciri FORWARD trafiği için değerlendirilir).</p>
-</blockquote><p><strong>D. Rootless Mode (Alternatif Güvenlik Mimarisi)</strong></p>
-<p>Sistem genelinde root bağımlılığını tamamen ortadan kaldırmak için, Docker daemon&rsquo;ın root olmayan bir kullanıcı alanında çalıştırıldığı &ldquo;Rootless Mode&rdquo; tercih edilebilir. Bu kurulum mevcut daemon&rsquo;ı durdurmayı ve belirli bağımlılıkları (<code>uidmap</code>, <code>dbus-user-session</code>) kurmayı gerektirir. Eğer üretim ortamında kritik izolasyon gerekiyorsa, resmi Docker Rootless kurulum dokümantasyonu referans alınarak standart kurulum yerine bu mimari uygulanmalıdır.</p>
-</article>
+</blockquote><p><strong>D. SELinux Notları (Rocky&rsquo;ye Özel)</strong></p>
+<p>Rocky, SELinux&rsquo;u <code>enforcing</code> modda kurar ve container&rsquo;larla en çok takılınan yer de tam burasıdır. Docker&rsquo;ın image&rsquo;ları <code>container-selinux</code> ile hazır politikalarla gelir; volume kullanırken sorun çıkmaz. Ancak <strong>host&rsquo;tan bind mount</strong> yaptığımızda klasik hata şudur:</p>
+<pre tabindex="0"><code>permission denied while trying to bind mount ...</code></pre><p>Çünkü host&rsquo;taki dizin <code>usr_t</code> veya benzeri bir context&rsquo;e sahiptir, container içinden okunamaz. Test amaçlı <code>setenforce 0</code> ile geçici olarak kapatmak tanıyı kolaylaştırır ama asla kalıcı çözüm değildir. Kalıcı çözüm, dizine container&rsquo;ın okuyup yazabileceği bir context atamaktır:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo chcon -Rt container_file_t /data/myapp</span></span></code></pre></div><p>Bu yöntem dosya system&rsquo;i yeniden etiketlenince (relabel) kaybolur. Kalıcı istiyorsak policy tabanlı etiketleme yaparız:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo semanage fcontext -a -t container_file_t <span style="color:#e6db74">&#39;/data/myapp(/.*)?&#39;</span>
+</span></span><span style="display:flex;"><span>sudo restorecon -Rv /data/myapp</span></span></code></pre></div><blockquote class='book-hint '>
+<p><code>semanage</code> komutu <code>policycoreutils-python-utils</code> paketinde gelir; kurulu değilse <code>sudo dnf install -y policycoreutils-python-utils</code> ile ekleriz.</p>
+</blockquote><p>Bind mount&rsquo;ı compose veya <code>docker run</code> sırasında da etiketleyebiliriz; <code>z</code> (paylaşımlı) ve <code>Z</code> (özel) flag&rsquo;leri tam bu işe yarar:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -v /data/myapp:/data:z nginx</span></span></code></pre></div><blockquote class='book-hint '>
+<p><code>Z</code> flag&rsquo;i mount edilen dizini yalnızca o container&rsquo;a özel etiketler; <code>z</code> ise birden fazla container aynı volume&rsquo;ü paylaşıyorsa kullanılır.</p>
+</blockquote><p>SELinux&rsquo;un engellediği bir işlemi bulmak için denetim loglarına bakarız:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ausearch -m avc -ts recent</span></span></code></pre></div><p><strong>E. Podman Alternatifi (Neden Rootless Podman Daha İyi?)</strong></p>
+<p>Rocky, Docker&rsquo;a alternatif olarak kendi container ekosisteminde <strong>Podman</strong>&lsquo;ı öneriyor. Kurulumu kolaydır ve aynı komut satırı arayüzünü kullanır:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf install -y podman podman-compose</span></span></code></pre></div><p><code>docker</code> komutunu birebir kullanan bir alışkanlığımız varsa uyumluluk katmanını da ekleyebiliriz:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf install -y podman-docker</span></span></code></pre></div><p>Neden rootless Podman daha iyi bir seçenek?</p>
+<ul>
+<li><strong>Daemon yok.</strong> Docker&rsquo;da container&rsquo;ları yöneten her zaman çalışan, root yetkisiyle koşan bir daemon (<code>dockerd</code>) vardır. Bu daemon exploite edilirse saldırgan doğrudan host root&rsquo;una geçer. Podman daemonless çalışır; container&rsquo;lar, kullanıcı process&rsquo;inin fork/exec çocuğu olarak başlar. Sürekli koşan bir privileged süreç olmadığından saldırı yüzeyi küçülür.</li>
+<li><strong>Rootless tasarımı default.</strong> Docker&rsquo;da rootless mode sonradan eklenen bir özellik ve kurulumda ek adım gerektiriyor. Podman ise baştan rootless&rsquo;a göre tasarlandı; tek <code>sudo dnf install podman</code> komutu ile root olmayan kullanıcı bile container çalıştırabilir.</li>
+<li><strong>systemd entegrasyonu.</strong> Podman&rsquo;ın systemd ile native entegrasyonu (Quadlet) sayesinde container&rsquo;ları kullanıcı seviyesinde systemd unit&rsquo;leri gibi yönetebiliriz; <code>systemctl --user</code> komutlarıyla reboot sonrası otomatik başlatma root yetkisi olmadan yapılır.</li>
+<li><strong>SELinux entegrasyonu.</strong> Rocky ve RHEL ekosisteminde Podman&rsquo;ın SELinux politikaları daha kusursuz çalışır; RHEL&rsquo;in kendi container araçları olduğundan SELinux ile uyum testleri Docker&rsquo;a göre daha kapsamlıdır.</li>
+<li><strong>Docker CLI uyumluluğu.</strong> <code>podman-docker</code> paketi sayesinde mevcut scriptler ve <code>docker</code> komutları değişiklik olmadan çalışır; Docker Compose yerine <code>podman-compose</code> kullanılır.</li>
+</ul>
+<blockquote class='book-hint '>
+<p>Not: Üretimde kritik izolasyon gerekiyorsa, Docker rootless modu (önceki bölümlerde anlatılan hardening&rsquo;le birlikte) da geçerli bir mimaridir. Ancak Rocky&rsquo;de <strong>rootless Podman</strong> varsayılan davranış ve daha küçük saldırı yüzeyi nedeniyle genelde daha temiz bir tercihtir.</p>
+</blockquote></article>
  
       
 
@@ -782,16 +793,16 @@ sudo install -m 0755 -d /etc/apt/keyrings sudo rm -f /etc/apt/keyrings/docker.gp
 <div class="flex flex-wrap justify-between">
     <span>
     
-      <a href="/docs/docker/" class="flex align-center">
+      <a href="/docs/docker/docker-publish/" class="flex align-center">
         <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
-        <span>Docker</span>
+        <span>docker-publish</span>
       </a>
     
     </span>
     <span>
     
-      <a href="/docs/docker/manage-docker-as-non-root-user/" class="flex align-center">
-        <span>manage-docker-as-non-root-user</span>
+      <a href="/docs/docker/docker-distroless-container-images/" class="flex align-center">
+        <span>docker-distroless-container-images</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     
@@ -830,7 +841,7 @@ sudo install -m 0755 -d /etc/apt/keyrings sudo rm -f /etc/apt/keyrings/docker.gp
   <ul>
     <li>
       <ul>
-        <li><a href="#debian-13-için-güvenli-docker-ve-docker-compose-kurulum-dokümantasyonu">Debian 13 İçin Güvenli Docker ve Docker Compose Kurulum Dokümantasyonu</a></li>
+        <li><a href="#rocky-linux-için-güvenli-docker-ve-docker-compose-kurulum-dokümantasyonu">Rocky Linux İçin Güvenli Docker ve Docker Compose Kurulum Dokümantasyonu</a></li>
       </ul>
     </li>
   </ul>

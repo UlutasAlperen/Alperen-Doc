@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Distroless Container Image’leri: İçlerinde Ne Var, Neden Kullanılır?# 1. Distroless Nedir, Neden Var?# debian, ubuntu veya türevlerinden (node:lts, python:3 gibi) FROM ile başlayan container image’leri, genellikle dolu dolu bir Linux dağıtımıyla birlikte gelir. Gündelik işler için harikadır ama çoğu container uygulaması çalışma zamanında bu araçların ve kütüphanelerin neredeyse hiçbirine ihtiyaç duymaz. Sonuç? Teknik bir gerekçe olmaksızın daha büyük image boyutu ve yönetmesi gereken daha fazla güvenlik açığı (CVE).
+Küçük, güvenli image’ler üretme isteği gayet doğal. Bunun en ekstrem yolu FROM scratch ile başlamaktır; yani boş bir base image’e sadece uygulamamızın gerçekten ihtiyaç duyduğu dosyaları eklemek. Ancak FROM scratch ile başlayan container’lar varsayılan olarak şunları içermez:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://dev.ulutasalperen.com/docs/docker/docker-distroless-container-images/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="docker-distroless-container-images">
+	<meta property="og:description" content="Distroless Container Image’leri: İçlerinde Ne Var, Neden Kullanılır?# 1. Distroless Nedir, Neden Var?# debian, ubuntu veya türevlerinden (node:lts, python:3 gibi) FROM ile başlayan container image’leri, genellikle dolu dolu bir Linux dağıtımıyla birlikte gelir. Gündelik işler için harikadır ama çoğu container uygulaması çalışma zamanında bu araçların ve kütüphanelerin neredeyse hiçbirine ihtiyaç duymaz. Sonuç? Teknik bir gerekçe olmaksızın daha büyük image boyutu ve yönetmesi gereken daha fazla güvenlik açığı (CVE).
+Küçük, güvenli image’ler üretme isteği gayet doğal. Bunun en ekstrem yolu FROM scratch ile başlamaktır; yani boş bir base image’e sadece uygulamamızın gerçekten ihtiyaç duyduğu dosyaları eklemek. Ancak FROM scratch ile başlayan container’lar varsayılan olarak şunları içermez:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="docker-distroless-container-images">
+	<meta itemprop="description" content="Distroless Container Image’leri: İçlerinde Ne Var, Neden Kullanılır?# 1. Distroless Nedir, Neden Var?# debian, ubuntu veya türevlerinden (node:lts, python:3 gibi) FROM ile başlayan container image’leri, genellikle dolu dolu bir Linux dağıtımıyla birlikte gelir. Gündelik işler için harikadır ama çoğu container uygulaması çalışma zamanında bu araçların ve kütüphanelerin neredeyse hiçbirine ihtiyaç duymaz. Sonuç? Teknik bir gerekçe olmaksızın daha büyük image boyutu ve yönetmesi gereken daha fazla güvenlik açığı (CVE).
+Küçük, güvenli image’ler üretme isteği gayet doğal. Bunun en ekstrem yolu FROM scratch ile başlamaktır; yani boş bir base image’e sadece uygulamamızın gerçekten ihtiyaç duyduğu dosyaları eklemek. Ancak FROM scratch ile başlayan container’lar varsayılan olarak şunları içermez:">
+	<meta itemprop="wordCount" content="1926">
+
+<title>docker-distroless-container-images • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://dev.ulutasalperen.com/docs/docker/docker-distroless-container-images/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.5bf4c826d74c9015800ea46fa817316bbdca2141644f50608abbdfc0366460c1.js" integrity="sha256-W/TIJtdMkBWADqRvqBcxa73KIUFkT1BgirvfwDZkYME=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle" checked />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="active">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>docker-distroless-container-images</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#distroless-container-imageleri-içlerinde-ne-var-neden-kullanılır">Distroless Container Image&rsquo;leri: İçlerinde Ne Var, Neden Kullanılır?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h3 id="distroless-container-imageleri-içlerinde-ne-var-neden-kullanılır">Distroless Container Image&rsquo;leri: İçlerinde Ne Var, Neden Kullanılır?<a class="anchor" href="#distroless-container-imageleri-i%c3%a7lerinde-ne-var-neden-kullan%c4%b1l%c4%b1r">#</a></h3>
+<h4 id="1-distroless-nedir-neden-var">1. Distroless Nedir, Neden Var?<a class="anchor" href="#1-distroless-nedir-neden-var">#</a></h4>
+<p><code>debian</code>, <code>ubuntu</code> veya türevlerinden (<code>node:lts</code>, <code>python:3</code> gibi) <code>FROM</code> ile başlayan container image&rsquo;leri, genellikle dolu dolu bir Linux dağıtımıyla birlikte gelir. Gündelik işler için harikadır ama çoğu container uygulaması çalışma zamanında bu araçların ve kütüphanelerin neredeyse hiçbirine ihtiyaç duymaz. Sonuç? Teknik bir gerekçe olmaksızın daha büyük image boyutu ve yönetmesi gereken daha fazla güvenlik açığı (CVE).</p>
+<p>Küçük, güvenli image&rsquo;ler üretme isteği gayet doğal. Bunun en ekstrem yolu <code>FROM scratch</code> ile başlamaktır; yani boş bir base image&rsquo;e sadece uygulamamızın gerçekten ihtiyaç duyduğu dosyaları eklemek. Ancak <code>FROM scratch</code> ile başlayan container&rsquo;lar varsayılan olarak şunları içermez:</p>
+<ul>
+<li><code>/tmp</code>, <code>/home</code>, <code>/var</code> gibi sistem dizinleri.</li>
+<li>HTTPS için CA sertifikaları.</li>
+<li>Kullanıcı yönetim dosyaları (<code>/etc/passwd</code>, <code>/etc/group</code>).</li>
+<li>Dinamik bağlanan uygulamalar için paylaşılan kütüphaneler.</li>
+<li>Saat dilimi bilgisi (tzdata).</li>
+</ul>
+<p>&hellip;ve ihtiyaca göre daha fazlası.</p>
+<blockquote class='book-hint '>
+<p><strong>Önemli:</strong> <code>FROM scratch</code> container&rsquo;ları temiz bir başlangıç sunar ama bu boşlukları elle doldurmak ciddi manuel emek ister; bu haliyle çoğu zaman üretim için eksik ve sorunludur.</p>
+</blockquote><p>İşte tam bu noktada distroless image&rsquo;ler sahneye çıkar! <a href="https://github.com/GoogleContainerTools/distroless">GoogleContainerTools/distroless</a> projesi, <code>scratch</code>&lsquo;e mümkün olduğunca yakın ama gerekli sistem dosyaları ve dizinleri yerinde olan hazır minimal base image&rsquo;ler sağlar. Yapmamız gereken tek şey hiyerarşilerini anlamak ve uygulamamıza en uygun olanını seçmek.</p>
+<blockquote class='book-hint '>
+<p>İlgili doküman: Multi-stage build zaten image küçültmenin bir yolu olarak <a href="../optimize-container-images-with-multi-stage-builds/">optimize-container-images-with-multi-stage-builds</a> dokümanında anlatılmıştı; distroless de aynı hedefe giden ama tamamen farklı bir yoldur.</p>
+</blockquote><h4 id="2-birinci-katman-gcriodistrolessstatic">2. Birinci Katman: <code>gcr.io/distroless/static</code><a class="anchor" href="#2-birinci-katman-gcriodistrolessstatic">#</a></h4>
+<p>Distroless ailesiyle tanışmak için iyi bir başlangıç noktası <code>gcr.io/distroless/static</code> image&rsquo;idir:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker pull gcr.io/distroless/static
+</span></span><span style="display:flex;"><span>docker images</span></span></code></pre></div><p>Çıktı:</p>
+<pre tabindex="0"><code>REPOSITORY                  TAG       IMAGE ID       SIZE
+gcr.io/distroless/static    latest    5d7d2b425607   1.99MB</code></pre><p>Dosya sistemini incelediğimizde şunları görürüz:</p>
+<ul>
+<li>Sadece ~2MB (alpine image&rsquo;ının ~%25&rsquo;i 🤯).</li>
+<li>Tipik bir Linux dağıtım dizin yapısına sahip.</li>
+<li><code>/etc/passwd</code>, <code>/etc/group</code> hatta <code>/etc/nsswitch.conf</code> dosyaları yerinde.</li>
+<li>Sertifikalar ve saat dilimi bilgisi de mevcut.</li>
+<li>Image Debian bazlı (yani distroless image&rsquo;inin içinde aslında bir dağıtım var, ama eti kemiklerine kadar soyulmuş).</li>
+<li>Lisanslar da korunmuş görünüyor (ben telif uzmanı değilim ama).</li>
+</ul>
+<p>Ve hepsi bu! Yani %99.99 statik varlık. Paket yok, paket yöneticisi yok, <code>libc</code> yok ve <strong>0 CVE</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>trivy image gcr.io/distroless/static</span></span></code></pre></div><pre tabindex="0"><code>gcr.io/distroless/static (debian 12.9)
+
+Total: 0 (UNKNOWN: 0, LOW: 0, MEDIUM: 0, HIGH: 0, CRITICAL: 0)</code></pre><blockquote class='book-hint '>
+<p><strong>Özet:</strong> <code>gcr.io/distroless/static</code>, <code>scratch</code>&lsquo;in daha pratik eşdeğeridir; gerekli sistem dosyalarını ve dizinlerini sağlayan tamamen minimal bir base&rsquo;dir ve CVE tanımaz.</p>
+</blockquote><h4 id="3-her-program-statik-bağlanmış-değildir">3. Her Program Statik Bağlanmış Değildir<a class="anchor" href="#3-her-program-statik-ba%c4%9flanm%c4%b1%c5%9f-de%c4%9fildir">#</a></h4>
+<p><code>FROM scratch</code> denemelerinin güzel bir yan faydası, bir programın çalışması için aslında neye ihtiyaç duyduğunu anlamamıza yardımcı olmasıdır. Statik bağlanmış (statically linked) bir executable için genellikle birkaç config dosyası ve düzgün bir rootfs dizin yapısı yeterlidir. Peki dinamik bağlanmış (dynamically linked) bir executable için?</p>
+<p>Bunu görmek için CGO etkin şekilde derlenmiş bir Go programı hazırlıyoruz (Go&rsquo;da bile CGO devreye girince <code>libc</code> gibi paylaşılan kütüphanelere muhtaç hale geliyoruz):</p>
+<p><code>~/Dockerfile.cgo</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#75715e"># syntax=docker/dockerfile:1</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># -=== Builder image ===-</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">golang:1</span> <span style="color:#66d9ef">AS</span> <span style="color:#e6db74">builder</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">WORKDIR</span> <span style="color:#e6db74">/app</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> &lt;&lt;EOF main.go<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>package main<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>import <span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;fmt&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;os/user&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">)</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>func main<span style="color:#f92672">()</span> <span style="color:#f92672">{</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>  u, err :<span style="color:#f92672">=</span> user.Current<span style="color:#f92672">()</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> err !<span style="color:#f92672">=</span> nil <span style="color:#f92672">{</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>    panic<span style="color:#f92672">(</span>err<span style="color:#f92672">)</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>  fmt.Println<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hello from&#34;</span>, u.Username<span style="color:#f92672">)</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">}</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>EOF<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> CGO_ENABLED<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> go build main.go<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># -=== Target image ===-</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">ubuntu</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>builder /app/main /<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;/main&#34;</span>]</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker build -f ~/Dockerfile.cgo -t go-cgo-ubuntu .
+</span></span><span style="display:flex;"><span>docker run --rm go-cgo-ubuntu</span></span></code></pre></div><pre tabindex="0"><code>Hello from root</code></pre><p>Program çalışıyor. Şimdi kutsal <code>ldd</code> ile hangi kütüphaneleri dinamik olarak yüklüyor bakalım:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run --rm go-cgo-ubuntu ldd /main</span></span></code></pre></div><pre tabindex="0"><code>linux-vdso.so.1 (0x00007ffd9acd5000)
+libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fb862292000)
+/lib64/ld-linux-x86-64.so.2 (0x00007fb8624a8000)</code></pre><p>Standart bir dinamik Linux executable&rsquo;ının ihtiyaç duyduğu paylaşılan kütüphane seti, dahil <code>libc</code>. Ama tabii ki bunların hiçbiri <code>gcr.io/distroless/static</code> image&rsquo;inde bulunmuyor&hellip;</p>
+<h4 id="4-ikinci-katman-gcriodistrolessbase-ve-base-nossl">4. İkinci Katman: <code>gcr.io/distroless/base</code> ve <code>base-nossl</code><a class="anchor" href="#4-ikinci-katman-gcriodistrolessbase-ve-base-nossl">#</a></h4>
+<p><code>gcr.io/distroless/static</code>, programınız statik bağlanmış bir Go binary&rsquo;siyse mükemmel bir seçim. Peki CGO kullanmak zorundaysak ve bağlı olduğunuz kütüphaneler statik bağlanamıyorsa (<code>libc</code>&lsquo;ye bakarım), ya da Rust, C veya statik build desteği Go kadar iyi olmayan başka derlenmiş bir dil yazıyorsanız? Karşınızda <code>gcr.io/distroless/base</code> ve <code>gcr.io/distroless/base-nossl</code> image&rsquo;leri:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker pull gcr.io/distroless/base
+</span></span><span style="display:flex;"><span>docker pull gcr.io/distroless/base-nossl
+</span></span><span style="display:flex;"><span>docker images</span></span></code></pre></div><pre tabindex="0"><code>REPOSITORY                     TAG       IMAGE ID       SIZE
+gcr.io/distroless/static       latest    5d7d2b425607   1.99MB
+gcr.io/distroless/base-nossl   latest    ae4cc24e698d   14.8MB
+gcr.io/distroless/base         latest    fab58a7ef52e   20.7MB</code></pre><p>Daha küçük olan <code>gcr.io/distroless/base-nossl</code> dosya sistemini incelediğimizde:</p>
+<ul>
+<li><code>gcr.io/distroless/static</code>&lsquo;ten yaklaşık 7 kat büyük (ama hala sadece ~15MB).</li>
+<li>Tamamen <code>gcr.io/distroless/static</code> üzerine kurulu (rootfs düzeni, CA sertifikaları, tzdata vb. dahil).</li>
+<li>Ekstra katmanlar bir düzine paylaşılan kütüphane getiriyor; en önemlileri <code>libc</code>, <code>libresolv</code>, <code>libnss</code> ve <code>libpthread</code>.</li>
+<li>&hellip;ve yine, tipik bir Linux dağıtımı kalabalığı yok.</li>
+</ul>
+<p>Biraz daha büyük olan <code>gcr.io/distroless/base</code> ise tamamen <code>gcr.io/distroless/base-nossl</code> üzerine kurulu ve fazladan tek bir paylaşılan kütüphane getiriyor: <code>libssl</code> (ve bağımlılıkları).</p>
+<p><code>gcr.io/distroless/base</code>&lsquo;in <code>libc</code> ve <code>libssl</code> kütüphanelerinden gelen birkaç CVE&rsquo;si var, ama çoğu zaman sorun olmaz çünkü bu kütüphanelerdeki kritik CVE&rsquo;ler nadir görülür ve hızla düzeltilir:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>trivy image gcr.io/distroless/base</span></span></code></pre></div><pre tabindex="0"><code>gcr.io/distroless/base (debian 12.9)
+
+Total: 8 (UNKNOWN: 0, LOW: 7, MEDIUM: 1, HIGH: 0, CRITICAL: 0)</code></pre><p>Go örneğimizi yeni distroless base ile çalışacak şekilde düzenliyoruz:</p>
+<p><code>~/Dockerfile.cgo</code> (target stage):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span>...build stage aynı kalıyor...<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># -=== Target image ===-</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># &#39;FROM scratch&#39; yerine &#39;FROM gcr.io/distroless/base-nossl&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">gcr.io/distroless/base-nossl</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>builder /app/main /<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;/main&#34;</span>]</span></span></code></pre></div><blockquote class='book-hint '>
+<p><strong>Özet:</strong> <code>gcr.io/distroless/base-nossl</code> ve <code>gcr.io/distroless/base</code>, <code>glibc</code>&lsquo;ye (ve isteğe bağlı olarak <code>libssl</code>&lsquo;ye) bağımlı dinamik bağlanmış uygulamalar için <code>FROM scratch</code>&lsquo;in daha pratik eşdeğerleridir.</p>
+</blockquote><h4 id="5-üçüncü-katman-gcriodistrolesscc">5. Üçüncü Katman: <code>gcr.io/distroless/cc</code><a class="anchor" href="#5-%c3%bc%c3%a7%c3%bcnc%c3%bc-katman-gcriodistrolesscc">#</a></h4>
+<p>Önceki bölümde Rust&rsquo;tan bahsetmiştim; çünkü bu günlerde oldukça popüler. <code>gcr.io/distroless/base</code> image&rsquo;iyle gerçekten çalışabilir mi? Basit bir hello-world programı yazalım:</p>
+<p><code>~/Dockerfile.rust</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#75715e"># syntax=docker/dockerfile:1</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># -=== Builder image ===-</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">rust:1</span> <span style="color:#66d9ef">AS</span> <span style="color:#e6db74">builder</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">WORKDIR</span> <span style="color:#e6db74">/app</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> &lt;&lt;EOF Cargo.toml<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>package<span style="color:#f92672">]</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello-world&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>version <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0.0.1&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>EOF<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> &lt;&lt;EOF src/main.rs<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>fn main<span style="color:#f92672">()</span> <span style="color:#f92672">{</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>  println!<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hello world! (Rust edition)&#34;</span><span style="color:#f92672">)</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672">}</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span>EOF<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> cargo install --path .<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># -=== Target image ===-</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">gcr.io/distroless/base</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>builder /usr/local/cargo/bin/hello-world /<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;/hello-world&#34;</span>]</span></span></code></pre></div><p>Çalıştıralım:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker build -f ~/Dockerfile.rust -t distroless-base-rust .
+</span></span><span style="display:flex;"><span>docker run --rm distroless-base-rust</span></span></code></pre></div><pre tabindex="0"><code>/hello-world: error while loading shared libraries:
+libgcc_s.so.1: cannot open shared object file:
+No such file or directory</code></pre><p>Ağzı açık kaldık! Görünüşe göre <code>gcr.io/distroless/base</code> image&rsquo;i tüm gerekli paylaşılan kütüphaneleri sağlamıyor. Rust&rsquo;ın bir çalışma zamanı bağımlılığı var: <code>libgcc</code>. Ve bu, container&rsquo;da yok.</p>
+<p>Dinamik bağlanmış binary&rsquo;ler için bu bağımlılık o kadar yaygın ki, ona özel bir distroless base image bile tanıtılmış: <code>gcr.io/distroless/cc</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker pull gcr.io/distroless/cc
+</span></span><span style="display:flex;"><span>docker images</span></span></code></pre></div><pre tabindex="0"><code>REPOSITORY                     TAG       IMAGE ID       SIZE
+gcr.io/distroless/static       latest    5d7d2b425607   1.99MB
+gcr.io/distroless/base-nossl   latest    ae4cc24e698d   14.8MB
+gcr.io/distroless/base         latest    fab58a7ef52e   20.7MB
+gcr.io/distroless/cc           latest    6f09ff5d0af8   23.4MB</code></pre><p><code>gcr.io/distroless/cc</code> dosya sistemini incelediğimizde:</p>
+<ul>
+<li>Tamamen <code>gcr.io/distroless/base</code> üzerine kurulu.</li>
+<li>Yeni katmanlar image boyutuna sadece ~2MB ekliyor.</li>
+<li>Image, <code>libgcc</code>&lsquo;yi (ve bağımlılıklarını) ve birkaç başka paylaşılan kütüphaneyi içeriyor.</li>
+</ul>
+<p>Rust örneğini <code>gcr.io/distroless/cc</code> image&rsquo;iyle düzeltiyoruz:</p>
+<p><code>~/Dockerfile.rust</code> (target stage):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span>...build stage aynı kalıyor...<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># -=== Target image ===-</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># &#39;FROM gcr.io/distroless/base&#39; yerine &#39;FROM gcr.io/distroless/cc&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">gcr.io/distroless/cc</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>builder /usr/local/cargo/bin/hello-world /<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;/hello-world&#34;</span>]</span></span></code></pre></div><p>Ara sonuç artık net olmalı:</p>
+<blockquote class='book-hint '>
+<p><strong>Özet:</strong> <code>gcr.io/distroless/cc</code>, <code>libgcc</code>&lsquo;ye ekstra bir çalışma zamanı bağımlılığı olan dinamik bağlanmış uygulamalar için <code>FROM scratch</code>&lsquo;in daha pratik eşdeğeridir.</p>
+</blockquote><h4 id="6-yorumlanan-veya-vm-tabanlı-diller-için-distroless-imageleri">6. Yorumlanan veya VM Tabanlı Diller İçin Distroless Image&rsquo;leri<a class="anchor" href="#6-yorumlanan-veya-vm-tabanl%c4%b1-diller-i%c3%a7in-distroless-imageleri">#</a></h4>
+<p>Bazı diller (Python gibi) script&rsquo;in çalışması için bir interpreter ister. Bazıları (JavaScript veya Java gibi) tam teşekküllü bir runtime ister (Node.js veya JVM gibi). Şimdiye kadar ele aldığımız distroless image&rsquo;leri paket yöneticisi olmadığı için bunları eklemek sorunlu olabilir (kendi türetilmiş distroless image&rsquo;inizi üretmek için <a href="https://github.com/GoogleContainerTools/rules_distroless">Bazel öğrenmeniz</a> gerekir).</p>
+<p>Neyse ki distroless projesi en popüler runtime&rsquo;ları hazır olarak destekliyor:</p>
+<ul>
+<li><a href="https://github.com/GoogleContainerTools/distroless/blob/dca9008b864a381b5ce97196a4d8399ac3c2fa65/java/README.md">gcr.io/distroless/java</a> - Java 17 ve 21 (bu yazının yazıldığı tarihte)</li>
+<li><a href="https://github.com/GoogleContainerTools/distroless/blob/dca9008b864a381b5ce97196a4d8399ac3c2fa65/nodejs/README.md">gcr.io/distroless/nodejs</a> - Node.js 18, 20 ve 22</li>
+<li><a href="https://github.com/GoogleContainerTools/distroless/tree/dca9008b864a381b5ce97196a4d8399ac3c2fa65/python3">gcr.io/distroless/python3</a> - Python 3</li>
+</ul>
+<p>Python ve Node.js image&rsquo;leri <code>gcr.io/distroless/cc</code> üzerine, Java image&rsquo;i ise daha küçük olan <code>gcr.io/distroless/base-nossl</code> üzerine kurulu; hepsi runtime ve/veya interpreter&rsquo;ı içeren bir-iki ekstra katman daha getiriyor.</p>
+<p>Hiyerarşinin son hali şöyle:</p>
+<pre tabindex="0"><code>gcr.io/distroless/static
+└── base-nossl (+ libc, libpthread, ...)
+    ├── base (+ libssl)
+    │   └── cc (+ libgcc)
+    │       ├── python3 (+ Python interpreter)
+    │       └── nodejs (+ Node.js runtime)
+    └── java (+ JVM / OpenJDK)</code></pre><h4 id="7-distroless-üzerine-nasıl-build-edilir">7. Distroless Üzerine Nasıl Build Edilir?<a class="anchor" href="#7-distroless-%c3%bczerine-nas%c4%b1l-build-edilir">#</a></h4>
+<p>Tüm distroless image&rsquo;leri bilinçli olarak shell ve paket yöneticisi olmadan build edilir. Bu, onları üretim için daha güvenli yapar; ama Dockerfile&rsquo;ınızı distroless&rsquo;a dayandırdığınızda <code>RUN</code> komutu çalışmaz.</p>
+<p><code>RUN</code> genellikle şu amaçlarla kullanılır:</p>
+<ul>
+<li>Ek OS-seviyesi paketler kurmak.</li>
+<li>Uygulama bağımlılıklarını kurmak.</li>
+<li>Uygulamayı build etmek ve/veya paketlemek.</li>
+</ul>
+<blockquote class='book-hint '>
+<p>Teknik olarak shell&rsquo;i olan (<code>busybox</code> üzerinden) distroless varyantları vardır:</p>
+<ul>
+<li><code>gcr.io/distroless/static:debug</code></li>
+<li><code>gcr.io/distroless/base:debug</code></li>
+<li><code>gcr.io/distroless/cc:debug</code></li>
+<li><code>gcr.io/distroless/java:debug</code></li>
+<li>vb.</li>
+</ul>
+<p>&hellip;ama bunları üretimde kullanmak istemezsiniz (ve bu debug varyantlarında yine paket yöneticisi yoktur).</p>
+</blockquote><p>Uygulama bağımlılıklarını kurmak veya uygulamayı build etmek gerekiyorsa, bunu daha developer-friendly bir image&rsquo;e dayanan <a href="https://labs.iximiuz.com/tutorials/docker-multi-stage-builds">ayrı bir build stage</a>&lsquo;de yapıp, build edilmiş uygulamayı distroless tabanlı runtime image&rsquo;ine kopyalayabiliriz. (Kulağa tanıdık geldiyse çünkü bu, multi-stage build dokümanındaki aynı stratejidir.)</p>
+<p>Örneğin bir Node.js uygulaması için şöyle yapabiliriz:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">node:22</span> <span style="color:#66d9ef">AS</span> <span style="color:#e6db74">build</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> . /app<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">WORKDIR</span> <span style="color:#e6db74">/app</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> npm ci --omit<span style="color:#f92672">=</span>dev<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">gcr.io/distroless/nodejs22:nonroot</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>build /app /app<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">WORKDIR</span> <span style="color:#e6db74">/app</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;hello.js&#34;</span>]</span></span></code></pre></div><blockquote class='book-hint '>
+<p>Not: Yukarıdaki örnekteki <code>:nonroot</code> tag&rsquo;ine dikkatinizi çekerim. Her distroless image&rsquo;inin birkaç &ldquo;çeşidi&rdquo; vardır:</p>
+<ul>
+<li><code>:latest</code> - root kullanıcı, shell yok.</li>
+<li><code>:nonroot</code> - non-root kullanıcı, shell yok.</li>
+<li><code>:debug</code> - root kullanıcı, shell var.</li>
+<li><code>:debug-nonroot</code> - non-root kullanıcı, shell var.</li>
+</ul>
+<p>&hellip;ve <code>gcr.io/distroless/&lt;name&gt;</code> aslında <code>gcr.io/distroless/&lt;name&gt;-debian&lt;version&gt;</code> için bir takma addır. Build alırken muhtemelen spesifik olmayı ve Debian sürümü ile tag&rsquo;i sabitlemeyi (pin) isteriz.</p>
+</blockquote><p>Buna karşılık, distroless base image&rsquo;ine ekstra bir OS-seviyesi paket eklemek çok daha karmaşıktır. Bu image&rsquo;ler Bazel ile build edilir ve onlardan yeni bir image türetmek için bazı ekstra <a href="https://github.com/GoogleContainerTools/rules_distroless">Bazel kuralları</a> yazmamız gerekir. Build stage&rsquo;den paket dosyalarını kopyalamak teorik olarak da mümkün, ama süreç biraz kırılgandır.</p>
+<h4 id="8-kim-kullanıyor-bu-distroless-imageleri">8. Kim Kullanıyor Bu Distroless Image&rsquo;leri?<a class="anchor" href="#8-kim-kullan%c4%b1yor-bu-distroless-imageleri">#</a></h4>
+<p>Ben kullanıyorum! Özellikle <code>gcr.io/distroless/static</code>; favori <code>FROM scratch</code> alternatifim. Daha ciddi konuşacak olursak, distroless image&rsquo;lerinin kayda değer bir takım kullanıcıları var:</p>
+<ul>
+<li><a href="https://github.com/kubernetes/enhancements/blob/25fe46543fc69838b0ae8004830149372b5b5c72/keps/sig-release/1729-rebase-images-to-distroless/README.md">Kubernetes</a></li>
+<li>Knative</li>
+<li><a href="https://github.com/kubernetes-sigs/kubebuilder">Kubebuilder</a></li>
+<li><a href="https://github.com/tektoncd/operator">Tekton</a></li>
+<li><a href="https://github.com/gravitational/teleport">Teleport</a></li>
+<li><del><a href="https://github.com/google/ko">ko</a></del> (<a href="https://github.com/ko-build/ko/blob/79df6d5691992cb52e3f159f1661ce00c341e570/docs/configuration.md">cgr.dev/chainguard/static&rsquo;e geçti</a>)</li>
+<li><del><a href="https://github.com/GoogleContainerTools/jib">Jib</a></del> (<a href="https://github.com/GoogleContainerTools/jib/blob/5d9beaee002e21fdeeb868edbc09e3727696937c/docs/default_base_image.md">eclipse-temurin&rsquo;e geçti</a>)</li>
+</ul>
+<p>&hellip;ve GitHub code search&rsquo;te <code>FROM gcr.io/distroless</code> için <a href="https://github.com/search?q=%22FROM&#43;gcr.io%2Fdistroless%22&amp;type=code">40.000+ eşleşme</a>.</p>
+<h4 id="9-artıları-eksileri-ve-alternatifleri">9. Artıları, Eksileri ve Alternatifleri<a class="anchor" href="#9-art%c4%b1lar%c4%b1-eksileri-ve-alternatifleri">#</a></h4>
+<p><strong>GoogleContainerTools distroless image&rsquo;leri küçük, hızlı ve daha güvenlidir.</strong> <code>FROM scratch</code> benzeri senaryolar için <code>gcr.io/distroless/static</code> kullanmak düşünülmesine bile gerek olmayan bariz bir tercihtir; Node.js, Python ve Java uygulamaları da en azından distroless runtime image&rsquo;lerini değerlendirmelidir.</p>
+<p>Proje, upstream Debian sürümlerini otomatik takip eder; CVE düzeltmelerini Debian&rsquo;ın yaptığıyla aynı hızda alır ve distro&rsquo;daki kadar iyi yamar .</p>
+<p>Buna karşılık:</p>
+<ul>
+<li><strong>Distroless base&rsquo;e yeni OS paketi eklemek zordur.</strong> Base&rsquo;i değiştirmek Bazel bilmeyi (ve fork maintainer&rsquo;ı olmayı?) gerektirir; sonradan bir şey eklemek paket yöneticisi olmadığından uğraştırır.</li>
+<li><strong>Base image seçimi kısıtlıdır.</strong> Uygulamanız desteklenen runtime&rsquo;lara uymuyorsa, distroless&rsquo;tan yararlanamazsınız.</li>
+<li><strong>Operasyonel yük getirir.</strong> Shell&rsquo;i ve paket yöneticisi olmayan bir image&rsquo;de üretim workload&rsquo;ünü debug etmek, kendine has bir meydan okumadır.</li>
+</ul>
+<p>Minimal bir base&rsquo;den image&rsquo;leri özenle üretme fikrine aşık olduysak, alternatiflere de göz atabiliriz:</p>
+<ul>
+<li><a href="https://github.com/chainguard-images">Chainguard Images</a> - Wolfi&rsquo;yi minimal ve güvenli base olarak kullanır; <a href="https://github.com/chainguard-dev/apko">apko</a> ve <a href="https://github.com/chainguard-dev/melange">melange</a> araçlarıyla uygulamanıza özel, sadece (çoğunlukla?) gerekli bağımlılıkları içeren image&rsquo;ler build etmeyi sağlar. Başlıca eksiği: <strong>kapalı kaynak ve epey pahalı</strong> 🙈</li>
+<li><a href="https://github.com/canonical/chisel">Chisel</a> - Yukarıdakiyle benzer bir fikir, ama Canonical&rsquo;dan; dolayısıyla Ubuntu tabanlı. Proje çok yeni değil ve ciddi kullanıcıları var (<a href="https://devblogs.microsoft.com/dotnet/dotnet-6-is-now-in-ubuntu-2204/">Microsoft, .NET runtime image&rsquo;leri için kullanıyor</a>), ama <strong>benimseme oranları hala çok yüksek değil</strong>.</li>
+<li><a href="https://github.com/containers/buildah">Buildah</a> - Container image&rsquo;leri build etmek için güçlü bir araç; özellikle <code>FROM scratch</code>&lsquo;ten başlayıp container&rsquo;a build araçlarını kurmadan host&rsquo;un build araçlarından yararlanarak image üretmeye izin verir.</li>
+<li><a href="https://labs.iximiuz.com/tutorials/docker-multi-stage-builds">Multi-stage builds</a> - Şaka bir yana! <code>FROM scratch</code> veya slim bir runtime base&rsquo;den başlayıp, build stage&rsquo;lerden sadece gereken bitleri dikkatle kopyalayabiliriz. (Bu zaten bizim multi-stage dokümanındaki ana strateji.)</li>
+</ul>
+<p>Hala minimalistic container image&rsquo;leri istiyorsunuz ama yukarıdakilar için vaktiniz yok mu? O zaman size bu var:</p>
+<ul>
+<li><a href="https://labs.iximiuz.com/playgrounds/mintoolkit">minT(oolkit)</a> (eski adıyla DockerSlim) - Hedef container&rsquo;ı çalışma zamanında analiz edip gereksiz her şeyi atarak &ldquo;şişkin&rdquo; bir container image&rsquo;ini otomatik olarak &ldquo;slim&rdquo; bir hale dönüştüren bir CLI aracı.</li>
+</ul>
+<h4 id="10-sonuç-ne-zaman-hangisi">10. Sonuç: Ne Zaman Hangisi?<a class="anchor" href="#10-sonu%c3%a7-ne-zaman-hangisi">#</a></h4>
+<p>Distroless image&rsquo;leri <strong>küçük, hızlı ve daha güvenlidir</strong>; ama etkili kullanımları için ekstra bilgi ister. Mevcut distroless base image&rsquo;leri arasındaki farkı anlamak ve uygulamaya özel gereksinimlere göre optimal varyantı seçmek gerekir. Ayrıca distroless image&rsquo;lerini ekstra OS paketleriyle genişletmek kolay değildir ve desteklenen dil runtime&rsquo;larının seçimi GoogleContainerTools projesi maintainers&rsquo;larının tercihleriyle sınırlıdır.</p>
+<p>Peki distroless image&rsquo;lerini ne zaman kullanmalı? İşte benim pratik kuralım:</p>
+<ul>
+<li><code>FROM scratch</code> ile image build etmek istediğiniz <strong>her</strong> seferinde, <code>gcr.io/distroless/static</code> image&rsquo;ini daha iyi bir alternatif olarak düşünün.</li>
+<li>Binary&rsquo;niz statik bağlanamıyorsa - yani <code>FROM scratch</code> image&rsquo;ine <code>libc</code>, <code>libssl</code>, <code>libgcc</code> gibi paylaşılan kütüphaneler eklemeye başladıysanız - <code>gcr.io/distroless/base</code> (ya da <code>base-nossl</code>) veya <code>gcr.io/distroless/cc</code> size biçilmiş kaftandır.</li>
+<li>Yüksek regülasyona tabi bir ortamda çalışıyorsanız ve güvenlik/compliance en öncelikli konuysa, <code>gcr.io/distroless/{java,nodejs,python}</code> image&rsquo;leri denemeye değerdir.</li>
+<li>Ekstra OS-seviyesi paketler kurmanız gerekiyor ve Bazel öğrenmek fazla yorucu geliyorsa? Alternatiflere bakın: <a href="https://labs.iximiuz.com/tutorials/docker-multi-stage-builds">multi-stage build</a> + slim bir runtime base, <a href="https://github.com/chainguard-images">Chainguard</a>, <a href="https://github.com/canonical/chisel">Chisel</a> ve <a href="https://labs.iximiuz.com/playgrounds/mintoolkit">minT(oolkit)</a>.</li>
+</ul>
+<p>Bu dokümanı hazırlarken <a href="https://labs.iximiuz.com">iximiuz.com</a>&lsquo;dan bolca yararlandım - kendilerine teşekkür ederim.</p>
+<p>Okuduğunuz için teşekkür ederim. İyi build&rsquo;ler!</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>docker-kurulum-hardening-rocky</span>
+      </a>
+    
+    </span>
+    <span>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#distroless-container-imageleri-içlerinde-ne-var-neden-kullanılır">Distroless Container Image&rsquo;leri: İçlerinde Ne Var, Neden Kullanılır?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

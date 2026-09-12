@@ -9,22 +9,22 @@ https://github.com/alex-shpak/hugo-book
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Docker is the container platform. Nearly every DevOps workflow uses it to package, ship and run applications. I use Docker to:
-Package apps with their dependencies into portable images Run isolated containers across homelab and production Persist state with volumes and connect containers with networks Ship images via registries (Docker Hub) into deployment pipelines And much more Docker konular# docker-kurulum-hardening-debian manage-docker-as-non-root-user docker-containers-images docker-volumes docker-build optimize-container-images-with-multi-stage-builds docker-network docker-exec-shell docker-logs docker-compose-basic var-olan-volume-uzerine-docker-compose docker-publish Temeller# docker-containers-images = Container ve image kavramları, docker run, docker ps, docker stop docker-volumes = docker volume create/ls/inspect, Ghost örneği ile kalıcı veri docker-exec-shell = docker exec, interactive shell (-it /bin/sh) docker-network = --network none, custom bridge network, Caddy load balancer docker-logs = docker logs -f --tail, docker stats, docker top, resource limits Build ve Publish# docker-build = Dockerfile yazma, docker build -t, Go/Python server dockerize etme, ENV PORT optimize-container-images-with-multi-stage-builds = Multi-stage build ile Go (~800MB&#43; → 15-20MB) ve TypeScript image optimizasyonu, COPY --from docker-publish = Docker Hub’a docker push/pull, tag (latest vs semver), deployment pipeline Compose ve Operasyon# docker-compose-basic = docker compose up/down/ps/logs/build/exec var-olan-volume-uzerine-docker-compose = var olan volume’ü external: true ile compose’a bağlama docker-kurulum-hardening-debian = Debian’a güvenli kurulum, daemon.json hardening, iptables/UFW notları manage-docker-as-non-root-user = docker grubu, rootless notları, systemd ile boot’ta başlatma ">
+Package apps with their dependencies into portable images Run isolated containers across homelab and production Persist state with volumes and connect containers with networks Ship images via registries (Docker Hub) into deployment pipelines And much more Docker konular# docker-kurulum-hardening-debian manage-docker-as-non-root-user docker-containers-images docker-volumes docker-build optimize-container-images-with-multi-stage-builds docker-network docker-exec-shell docker-logs docker-compose-basic var-olan-volume-uzerine-docker-compose docker-publish docker-kurulum-hardening-rocky docker-distroless-container-images Temeller# docker-containers-images = Container ve image kavramları, docker run, docker ps, docker stop docker-volumes = docker volume create/ls/inspect, Ghost örneği ile kalıcı veri docker-exec-shell = docker exec, interactive shell (-it /bin/sh) docker-network = --network none, custom bridge network, Caddy load balancer docker-logs = docker logs -f --tail, docker stats, docker top, resource limits Build ve Publish# docker-build = Dockerfile yazma, docker build -t, Go/Python server dockerize etme, ENV PORT optimize-container-images-with-multi-stage-builds = Multi-stage build ile Go (~800MB&#43; → 15-20MB) ve TypeScript image optimizasyonu, COPY --from docker-distroless-container-images = distroless image hiyerarşisi (static → base → cc → runtimes), FROM scratch karşılaştırması, trivy ile CVE taraması, :nonroot/:debug tag’leri, Chainguard/Chisel alternatifleri docker-publish = Docker Hub’a docker push/pull, tag (latest vs semver), deployment pipeline Compose ve Operasyon# docker-compose-basic = docker compose up/down/ps/logs/build/exec var-olan-volume-uzerine-docker-compose = var olan volume’ü external: true ile compose’a bağlama docker-kurulum-hardening-debian = Debian’a güvenli kurulum, daemon.json hardening, iptables/UFW notları docker-kurulum-hardening-rocky = Rocky’ye güvenli kurulum, firewalld &#43; SELinux notları, Podman rootless karşılaştırması, daemon.json hardening manage-docker-as-non-root-user = docker grubu, rootless notları, systemd ile boot’ta başlatma ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://dev.ulutasalperen.com/docs/docker/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="Docker">
 	<meta property="og:description" content="Docker is the container platform. Nearly every DevOps workflow uses it to package, ship and run applications. I use Docker to:
-Package apps with their dependencies into portable images Run isolated containers across homelab and production Persist state with volumes and connect containers with networks Ship images via registries (Docker Hub) into deployment pipelines And much more Docker konular# docker-kurulum-hardening-debian manage-docker-as-non-root-user docker-containers-images docker-volumes docker-build optimize-container-images-with-multi-stage-builds docker-network docker-exec-shell docker-logs docker-compose-basic var-olan-volume-uzerine-docker-compose docker-publish Temeller# docker-containers-images = Container ve image kavramları, docker run, docker ps, docker stop docker-volumes = docker volume create/ls/inspect, Ghost örneği ile kalıcı veri docker-exec-shell = docker exec, interactive shell (-it /bin/sh) docker-network = --network none, custom bridge network, Caddy load balancer docker-logs = docker logs -f --tail, docker stats, docker top, resource limits Build ve Publish# docker-build = Dockerfile yazma, docker build -t, Go/Python server dockerize etme, ENV PORT optimize-container-images-with-multi-stage-builds = Multi-stage build ile Go (~800MB&#43; → 15-20MB) ve TypeScript image optimizasyonu, COPY --from docker-publish = Docker Hub’a docker push/pull, tag (latest vs semver), deployment pipeline Compose ve Operasyon# docker-compose-basic = docker compose up/down/ps/logs/build/exec var-olan-volume-uzerine-docker-compose = var olan volume’ü external: true ile compose’a bağlama docker-kurulum-hardening-debian = Debian’a güvenli kurulum, daemon.json hardening, iptables/UFW notları manage-docker-as-non-root-user = docker grubu, rootless notları, systemd ile boot’ta başlatma">
+Package apps with their dependencies into portable images Run isolated containers across homelab and production Persist state with volumes and connect containers with networks Ship images via registries (Docker Hub) into deployment pipelines And much more Docker konular# docker-kurulum-hardening-debian manage-docker-as-non-root-user docker-containers-images docker-volumes docker-build optimize-container-images-with-multi-stage-builds docker-network docker-exec-shell docker-logs docker-compose-basic var-olan-volume-uzerine-docker-compose docker-publish docker-kurulum-hardening-rocky docker-distroless-container-images Temeller# docker-containers-images = Container ve image kavramları, docker run, docker ps, docker stop docker-volumes = docker volume create/ls/inspect, Ghost örneği ile kalıcı veri docker-exec-shell = docker exec, interactive shell (-it /bin/sh) docker-network = --network none, custom bridge network, Caddy load balancer docker-logs = docker logs -f --tail, docker stats, docker top, resource limits Build ve Publish# docker-build = Dockerfile yazma, docker build -t, Go/Python server dockerize etme, ENV PORT optimize-container-images-with-multi-stage-builds = Multi-stage build ile Go (~800MB&#43; → 15-20MB) ve TypeScript image optimizasyonu, COPY --from docker-distroless-container-images = distroless image hiyerarşisi (static → base → cc → runtimes), FROM scratch karşılaştırması, trivy ile CVE taraması, :nonroot/:debug tag’leri, Chainguard/Chisel alternatifleri docker-publish = Docker Hub’a docker push/pull, tag (latest vs semver), deployment pipeline Compose ve Operasyon# docker-compose-basic = docker compose up/down/ps/logs/build/exec var-olan-volume-uzerine-docker-compose = var olan volume’ü external: true ile compose’a bağlama docker-kurulum-hardening-debian = Debian’a güvenli kurulum, daemon.json hardening, iptables/UFW notları docker-kurulum-hardening-rocky = Rocky’ye güvenli kurulum, firewalld &#43; SELinux notları, Podman rootless karşılaştırması, daemon.json hardening manage-docker-as-non-root-user = docker grubu, rootless notları, systemd ile boot’ta başlatma">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="website">
 
 
 	<meta itemprop="name" content="Docker">
 	<meta itemprop="description" content="Docker is the container platform. Nearly every DevOps workflow uses it to package, ship and run applications. I use Docker to:
-Package apps with their dependencies into portable images Run isolated containers across homelab and production Persist state with volumes and connect containers with networks Ship images via registries (Docker Hub) into deployment pipelines And much more Docker konular# docker-kurulum-hardening-debian manage-docker-as-non-root-user docker-containers-images docker-volumes docker-build optimize-container-images-with-multi-stage-builds docker-network docker-exec-shell docker-logs docker-compose-basic var-olan-volume-uzerine-docker-compose docker-publish Temeller# docker-containers-images = Container ve image kavramları, docker run, docker ps, docker stop docker-volumes = docker volume create/ls/inspect, Ghost örneği ile kalıcı veri docker-exec-shell = docker exec, interactive shell (-it /bin/sh) docker-network = --network none, custom bridge network, Caddy load balancer docker-logs = docker logs -f --tail, docker stats, docker top, resource limits Build ve Publish# docker-build = Dockerfile yazma, docker build -t, Go/Python server dockerize etme, ENV PORT optimize-container-images-with-multi-stage-builds = Multi-stage build ile Go (~800MB&#43; → 15-20MB) ve TypeScript image optimizasyonu, COPY --from docker-publish = Docker Hub’a docker push/pull, tag (latest vs semver), deployment pipeline Compose ve Operasyon# docker-compose-basic = docker compose up/down/ps/logs/build/exec var-olan-volume-uzerine-docker-compose = var olan volume’ü external: true ile compose’a bağlama docker-kurulum-hardening-debian = Debian’a güvenli kurulum, daemon.json hardening, iptables/UFW notları manage-docker-as-non-root-user = docker grubu, rootless notları, systemd ile boot’ta başlatma">
-	<meta itemprop="wordCount" content="204">
+Package apps with their dependencies into portable images Run isolated containers across homelab and production Persist state with volumes and connect containers with networks Ship images via registries (Docker Hub) into deployment pipelines And much more Docker konular# docker-kurulum-hardening-debian manage-docker-as-non-root-user docker-containers-images docker-volumes docker-build optimize-container-images-with-multi-stage-builds docker-network docker-exec-shell docker-logs docker-compose-basic var-olan-volume-uzerine-docker-compose docker-publish docker-kurulum-hardening-rocky docker-distroless-container-images Temeller# docker-containers-images = Container ve image kavramları, docker run, docker ps, docker stop docker-volumes = docker volume create/ls/inspect, Ghost örneği ile kalıcı veri docker-exec-shell = docker exec, interactive shell (-it /bin/sh) docker-network = --network none, custom bridge network, Caddy load balancer docker-logs = docker logs -f --tail, docker stats, docker top, resource limits Build ve Publish# docker-build = Dockerfile yazma, docker build -t, Go/Python server dockerize etme, ENV PORT optimize-container-images-with-multi-stage-builds = Multi-stage build ile Go (~800MB&#43; → 15-20MB) ve TypeScript image optimizasyonu, COPY --from docker-distroless-container-images = distroless image hiyerarşisi (static → base → cc → runtimes), FROM scratch karşılaştırması, trivy ile CVE taraması, :nonroot/:debug tag’leri, Chainguard/Chisel alternatifleri docker-publish = Docker Hub’a docker push/pull, tag (latest vs semver), deployment pipeline Compose ve Operasyon# docker-compose-basic = docker compose up/down/ps/logs/build/exec var-olan-volume-uzerine-docker-compose = var olan volume’ü external: true ile compose’a bağlama docker-kurulum-hardening-debian = Debian’a güvenli kurulum, daemon.json hardening, iptables/UFW notları docker-kurulum-hardening-rocky = Rocky’ye güvenli kurulum, firewalld &#43; SELinux notları, Podman rootless karşılaştırması, daemon.json hardening manage-docker-as-non-root-user = docker grubu, rootless notları, systemd ile boot’ta başlatma">
+	<meta itemprop="wordCount" content="243">
 
 <title>Docker • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -33,7 +33,7 @@ Package apps with their dependencies into portable images Run isolated container
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.85a8928d8e6dea9b6ce4c7c39c3ac1f1c4840be2a87d48f3673aa3f453efd4e2.js" integrity="sha256-haiSjY5t6pts5MfDnDrB8cSEC&#43;KofUjzZzqj9FPv1OI=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.5bf4c826d74c9015800ea46fa817316bbdca2141644f50608abbdfc0366460c1.js" integrity="sha256-W/TIJtdMkBWADqRvqBcxa73KIUFkT1BgirvfwDZkYME=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://dev.ulutasalperen.com/docs/docker/index.xml" title="Docker" />
 
   
@@ -578,6 +578,34 @@ Package apps with their dependencies into portable images Run isolated container
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -675,6 +703,8 @@ Package apps with their dependencies into portable images Run isolated container
 <li><a href="docker-compose-basic/">docker-compose-basic</a></li>
 <li><a href="var-olan-volume-uzerine-docker-compose/">var-olan-volume-uzerine-docker-compose</a></li>
 <li><a href="docker-publish/">docker-publish</a></li>
+<li><a href="docker-kurulum-hardening-rocky/">docker-kurulum-hardening-rocky</a></li>
+<li><a href="docker-distroless-container-images/">docker-distroless-container-images</a></li>
 </ol>
 <h3 id="temeller">Temeller<a class="anchor" href="#temeller">#</a></h3>
 <ul>
@@ -688,6 +718,7 @@ Package apps with their dependencies into portable images Run isolated container
 <ul>
 <li><a href="docker-build/">docker-build</a> = Dockerfile yazma, <code>docker build -t</code>, Go/Python server dockerize etme, <code>ENV PORT</code></li>
 <li><a href="optimize-container-images-with-multi-stage-builds/">optimize-container-images-with-multi-stage-builds</a> = Multi-stage build ile Go (~800MB+ → 15-20MB) ve TypeScript image optimizasyonu, <code>COPY --from</code></li>
+<li><a href="docker-distroless-container-images/">docker-distroless-container-images</a> = distroless image hiyerarşisi (<code>static</code> → <code>base</code> → <code>cc</code> → runtimes), <code>FROM scratch</code> karşılaştırması, <code>trivy</code> ile CVE taraması, <code>:nonroot</code>/<code>:debug</code> tag&rsquo;leri, Chainguard/Chisel alternatifleri</li>
 <li><a href="docker-publish/">docker-publish</a> = Docker Hub&rsquo;a <code>docker push/pull</code>, tag (<code>latest</code> vs semver), deployment pipeline</li>
 </ul>
 <h3 id="compose-ve-operasyon">Compose ve Operasyon<a class="anchor" href="#compose-ve-operasyon">#</a></h3>
@@ -695,6 +726,7 @@ Package apps with their dependencies into portable images Run isolated container
 <li><a href="docker-compose-basic/">docker-compose-basic</a> = <code>docker compose up/down/ps/logs/build/exec</code></li>
 <li><a href="var-olan-volume-uzerine-docker-compose/">var-olan-volume-uzerine-docker-compose</a> = var olan volume&rsquo;ü <code>external: true</code> ile compose&rsquo;a bağlama</li>
 <li><a href="docker-kurulum-hardening-debian/">docker-kurulum-hardening-debian</a> = Debian&rsquo;a güvenli kurulum, <code>daemon.json</code> hardening, iptables/UFW notları</li>
+<li><a href="docker-kurulum-hardening-rocky/">docker-kurulum-hardening-rocky</a> = Rocky&rsquo;ye güvenli kurulum, firewalld + SELinux notları, Podman rootless karşılaştırması, <code>daemon.json</code> hardening</li>
 <li><a href="manage-docker-as-non-root-user/">manage-docker-as-non-root-user</a> = <code>docker</code> grubu, rootless notları, systemd ile boot&rsquo;ta başlatma</li>
 </ul>
 </article>
