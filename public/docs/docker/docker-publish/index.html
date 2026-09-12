@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -13,7 +13,7 @@ Rebuild the Go binary: GOOS=linux GOARCH=amd64 go build Rebuild the image. You‚Ä
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/docker/docker-publish/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://doc.ulutasalperen.com/docs/docker/docker-publish/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="docker-publish">
 	<meta property="og:description" content="Publishing to Docker Hub# Let‚Äôs publish the Go server we Dockerized up to Docker Hub.
@@ -31,11 +31,11 @@ Rebuild the Go binary: GOOS=linux GOARCH=amd64 go build Rebuild the image. You‚Ä
 <title>docker-publish ‚Ä¢ Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="http://localhost:1313/docs/docker/docker-publish/">
+<link rel="canonical" href="https://doc.ulutasalperen.com/docs/docker/docker-publish/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.693ff8fab5045e0580564154b4cf638c47d2a15c3189eddeaef1ef0a2d1f421c.js" integrity="sha256-aT/4&#43;rUEXgWAVkFUtM9jjEfSoVwxie3ervHvCi0fQhw=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.572eef2d36386f661080d222bc419d2aba00d050548cde57f085b8a0fec807f1.js" integrity="sha256-Vy7vLTY4b2YQgNIivEGdKroA0FBUjN5X8IW4oP7IB/E=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -693,8 +693,8 @@ Rebuild the Go binary: GOOS=linux GOARCH=amd64 go build Rebuild the image. You‚Ä
 <h2 id="should-i-use-latest">Should I Use ‚Äúlatest‚Äù?<a class="anchor" href="#should-i-use-latest">#</a></h2>
 <p>The convention I&rsquo;m familiar with is to use <a href="https://semver.org/">semantic versioning</a> on all your images, but to <em>also</em> push to the &ldquo;latest&rdquo; tag on your most recent image. That way you can keep all of your old versions around, but the <code>latest</code> tag still always points to the latest version.</p>
 <p>So, for example, if I were updating an application to version 5.4.6, I would probably do it like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker build -t bootdotdev/awesomeimage:5.4.6 -t bootdotdev/awesomeimage:latest .
-</span></span><span style="display:flex;"><span>docker push bootdotdev/awesomeimage --all-tags</span></span></code></pre></div><h1 id="the-bigger-picture">The Bigger Picture<a class="anchor" href="#the-bigger-picture">#</a></h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker build -t ulutasalperen/awesomeimage:5.4.6 -t ulutasalperen/awesomeimage:latest .
+</span></span><span style="display:flex;"><span>docker push ulutasalperen/awesomeimage --all-tags</span></span></code></pre></div><h1 id="the-bigger-picture">The Bigger Picture<a class="anchor" href="#the-bigger-picture">#</a></h1>
 <p>This is the last lesson, but before we go, I want to reiterate how Docker fits into the software development lifecycle, particularly at modern &ldquo;DevOpsy&rdquo; tech companies, because it&rsquo;s <em>really important</em> to understand.</p>
 <h2 id="the-deployment-process">The Deployment Process<a class="anchor" href="#the-deployment-process">#</a></h2>
 <ol>
