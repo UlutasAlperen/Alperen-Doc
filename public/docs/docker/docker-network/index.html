@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Docker-Network# Offline# Now, let’s force a container into offline mode!
+You might be thinking, “why would I want to turn off networking?!?” Well, usually it’s for security reasons. You might want to remove the network connection from a container in one of these scenarios:
+You’re running 3rd party code that you don’t trust, and it shouldn’t need network access You’re building an e-learning site, and you’re allowing students to execute code on your machines You know a container has a virus that’s sending malicious requests over the internet, and you want to do an audit Network None# The docker run command has a --network none flag that makes it so that the container can’t network with the outside world, which is super useful for isolating containers.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/docker/docker-network/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="docker-network">
+	<meta property="og:description" content="Docker-Network# Offline# Now, let’s force a container into offline mode!
+You might be thinking, “why would I want to turn off networking?!?” Well, usually it’s for security reasons. You might want to remove the network connection from a container in one of these scenarios:
+You’re running 3rd party code that you don’t trust, and it shouldn’t need network access You’re building an e-learning site, and you’re allowing students to execute code on your machines You know a container has a virus that’s sending malicious requests over the internet, and you want to do an audit Network None# The docker run command has a --network none flag that makes it so that the container can’t network with the outside world, which is super useful for isolating containers.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="docker-network">
+	<meta itemprop="description" content="Docker-Network# Offline# Now, let’s force a container into offline mode!
+You might be thinking, “why would I want to turn off networking?!?” Well, usually it’s for security reasons. You might want to remove the network connection from a container in one of these scenarios:
+You’re running 3rd party code that you don’t trust, and it shouldn’t need network access You’re building an e-learning site, and you’re allowing students to execute code on your machines You know a container has a virus that’s sending malicious requests over the internet, and you want to do an audit Network None# The docker run command has a --network none flag that makes it so that the container can’t network with the outside world, which is super useful for isolating containers.">
+	<meta itemprop="wordCount" content="1621">
+
+<title>docker-network • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/docker/docker-network/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.693ff8fab5045e0580564154b4cf638c47d2a15c3189eddeaef1ef0a2d1f421c.js" integrity="sha256-aT/4&#43;rUEXgWAVkFUtM9jjEfSoVwxie3ervHvCi0fQhw=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle" checked />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="active">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>docker-network</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#offline">Offline</a></li>
+    <li><a href="#network-none">Network None</a></li>
+    <li><a href="#load-balancers">Load Balancers</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#caddyfiles">Caddyfiles</a>
+      <ul>
+        <li><a href="#docker-network-aslında-nasıl-çalışıyor">docker network aslında nasıl çalışıyor</a></li>
+        <li><a href="#bridge">bridge</a></li>
+        <li><a href="#custom-bridge-vs-default-bridge">custom bridge vs default bridge</a></li>
+        <li><a href="#host">host</a></li>
+        <li><a href="#none">none</a></li>
+        <li><a href="#temel-komutlar">temel komutlar</a></li>
+        <li><a href="#composeda-network">compose&rsquo;da network</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="docker-network">Docker-Network<a class="anchor" href="#docker-network">#</a></h1>
+<h2 id="offline">Offline<a class="anchor" href="#offline">#</a></h2>
+<p>Now, let&rsquo;s force a container into <em>offline</em> mode!</p>
+<p>You might be thinking, &ldquo;why would I want to turn off networking?!?&rdquo; Well, usually it&rsquo;s for security reasons. You might want to remove the network connection from a container in one of these scenarios:</p>
+<ul>
+<li>You&rsquo;re running 3rd party code that you don&rsquo;t trust, and it shouldn&rsquo;t need network access</li>
+<li>You&rsquo;re building an e-learning site, and you&rsquo;re allowing students to execute code on your machines</li>
+<li>You know a container has a virus that&rsquo;s sending malicious requests over the internet, and you want to do an audit</li>
+</ul>
+<h2 id="network-none">Network None<a class="anchor" href="#network-none">#</a></h2>
+<p>The <code>docker run</code> command has a <code>--network none</code> flag that makes it so that the container can&rsquo;t network with the outside world, which is super useful for isolating containers.</p>
+<ol>
+<li>Use <code>docker ps</code>, <code>docker stop</code>, and <code>docker rm</code> to stop and remove the &ldquo;getting started&rdquo; container if it&rsquo;s running.</li>
+<li>Start a new &ldquo;Getting Started&rdquo; container in <code>--network none</code> mode:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d --network none docker/getting-started</span></span></code></pre></div><ol start="3">
+<li>Run the <code>ping</code> command with a timeout of 2 seconds inside the container:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker exec CONTAINER_ID ping google.com -W <span style="color:#ae81ff">2</span></span></span></code></pre></div><p>If all goes well, the program should hang for 2 seconds, then <strong>report an error message</strong>, because you don&rsquo;t have internet access!</p>
+<h2 id="load-balancers">Load Balancers<a class="anchor" href="#load-balancers">#</a></h2>
+<p>Let&rsquo;s try something a bit more complex: configuring a load balancer!</p>
+<p>A load balancer behaves as advertised: it balances a load of network traffic across some number of servers. Think of a huge website like Google.com. There&rsquo;s no way that a single server (literally a single computer) could handle all of the Google searches for the entire world. Google uses load balancers to route requests to different servers.</p>
+<p>A central server, called the &ldquo;load balancer&rdquo;, receives traffic from users (aka clients), then routes those requests to different back-end application servers. In the case of Google, this splits the world&rsquo;s traffic across potentially many different thousands of computers.</p>
+<p>A good load balancer sends new traffic to servers that have lower current resource utilization (CPU and memory). The goal is to &ldquo;balance the load&rdquo; so that no single backend server becomes overwhelmed. There are many strategies that load balancers use, but a simple strategy is the &ldquo;round robin&rdquo; where requests are simply routed one after the other to different back-end servers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span>Request <span style="color:#ae81ff">1</span> <span style="color:#f92672">-&gt;</span> Server <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>Request <span style="color:#ae81ff">2</span> <span style="color:#f92672">-&gt;</span> Server <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>Request <span style="color:#ae81ff">3</span> <span style="color:#f92672">-&gt;</span> Server <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>Request <span style="color:#ae81ff">4</span> <span style="color:#f92672">-&gt;</span> Server <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>Request <span style="color:#ae81ff">5</span> <span style="color:#f92672">-&gt;</span> Server <span style="color:#ae81ff">2</span></span></span></code></pre></div><h1 id="custom-network">Custom Network<a class="anchor" href="#custom-network">#</a></h1>
+<p>create custom <a href="https://docs.docker.com/network/bridge/">bridge</a> networks so that containers can communicate with each other if we want them to, but still otherwise remain isolated. Let&rsquo;s build a system where our application servers are hidden within a custom network, and only our load balancer is exposed to the host.</p>
+<p>This is a very common setup in backend architecture. The load balancer is exposed to the public internet, but the application servers are only accessible <em>via</em> the load balancer.</p>
+<ol>
+<li>Let&rsquo;s create a custom bridge network called &ldquo;caddytest&rdquo;.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker network create caddytest</span></span></code></pre></div><ol start="2">
+<li>See if it worked by listing all the networks:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker network ls</span></span></code></pre></div><ol start="3">
+<li>Stop and restart your caddy application servers, but this time, make sure you attach them to the <code>caddytest</code> network.
+<ul>
+<li>Use the <code>--network caddytest</code> flag to attach them to network</li>
+<li>Use the <code>--name</code> flag to name them <code>caddy1</code> and <code>caddy2</code> respectively so it&rsquo;s easier to reference them later</li>
+<li>Do <em>not</em> use the <code>-p</code> flag to expose ports. We don&rsquo;t want these accessible from the host machine.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d --name caddy2 --network caddytest -v $PWD/index2.html:/usr/share/caddy/index.html caddy</span></span></code></pre></div><ol start="4">
+<li>Create another &ldquo;getting started&rdquo; container on the same network and start a shell session within it:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -it --network caddytest docker/getting-started /bin/sh</span></span></code></pre></div><p>By giving our containers some names, <code>caddy1</code> and <code>caddy2</code>, and providing a bridge network, Docker has set up name resolution for us! The container names resolve to the individual containers from all other containers on the network.</p>
+<ol start="5">
+<li>Within your <code>docker/getting-started</code> container shell, <a href="https://curl.se/">curl</a> the first container:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl caddy1</span></span></code></pre></div><ol start="6">
+<li>Also <code>curl</code> the second container:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl caddy2</span></span></code></pre></div><ol start="7">
+<li>If you get the HTML responses that you expect, <code>exit</code> out of your shell session within the &ldquo;getting started&rdquo; container.</li>
+</ol>
+<p>If you need to restart your caddy application servers after naming them, you can use: <code>docker start caddy1</code> and <code>docker start caddy2</code>.</p>
+<h1 id="configuring-the-load-balancer">Configuring the Load Balancer<a class="anchor" href="#configuring-the-load-balancer">#</a></h1>
+<p>We&rsquo;ve confirmed that we have 2 application servers (Caddy) working properly on a custom bridge network. Let&rsquo;s create a load balancer that balances network requests between the two! We&rsquo;ll use a round-robin balancing strategy, so each request should route back and forth between the servers.</p>
+<h2 id="caddyfiles">Caddyfiles<a class="anchor" href="#caddyfiles">#</a></h2>
+<p>Caddy works great as a file server, which is what our little HTML servers are, but it also works great as a load balancer! To use Caddy as a load balancer we&rsquo;ll need to create a custom <a href="https://caddyserver.com/docs/caddyfile">Caddyfile</a> to tell Caddy how we want it to balance the traffic. It&rsquo;s just a config file for Caddy.</p>
+<ol>
+<li>Stop and remove any containers that aren&rsquo;t the 2 caddy servers we&rsquo;re working with currently.</li>
+<li>Create a new file in your local directory called <code>Caddyfile</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Caddyfile" data-lang="Caddyfile"><span style="display:flex;"><span>localhost:80
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">reverse_proxy</span> caddy1:<span style="color:#ae81ff">80</span> caddy2:<span style="color:#ae81ff">80</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">lb_policy</span>       <span style="color:#e6db74">round_robin</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>This tells Caddy to run on <code>localhost:80</code>, and to round robin any incoming traffic to <code>caddy1:80</code> and <code>caddy2:80</code>. Remember, this only works because we&rsquo;re going to run the loadbalancer <em>on the same network</em>, so <code>caddy1</code> and <code>caddy2</code> will automatically resolve to our application server&rsquo;s containers.</p>
+<ol start="3">
+<li>Start the load balancer container on port <code>8880</code>. Instead of an <code>index.html</code>, give it our custom <code>Caddyfile</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d --network caddytest -p 8880:80 -v $PWD/Caddyfile:/etc/caddy/Caddyfile caddy</span></span></code></pre></div><ol start="4">
+<li>Hit the load balancer on <code>http://localhost:8880/</code>! You should either get a response from server 1 or server 2, and if you hard refresh the page, it should swap back and forth.</li>
+</ol>
+<p>If it&rsquo;s not swapping properly, try using <code>curl</code> instead. Your browser might be caching the HTML.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl http://localhost:8880/</span></span></code></pre></div><h3 id="docker-network-aslında-nasıl-çalışıyor">docker network aslında nasıl çalışıyor<a class="anchor" href="#docker-network-asl%c4%b1nda-nas%c4%b1l-%c3%a7al%c4%b1%c5%9f%c4%b1yor">#</a></h3>
+<p>docker network ne işe yarıyor dersek, konteynerlerin birbirleriyle ve dışarıyla nasıl konuşacağını ayarlamamıza yarıyor, her konteynere ayrı bir network namespace açılıyor yani her konteynerin kendi IP&rsquo;si kendi <code>eth0</code>&lsquo;ı varmış gibi düşün</p>
+<p>temel çalışma mantığı şöyle, konteynerin <code>eth0</code>&lsquo;ı bir <code>veth</code> kablosuyla host&rsquo;taki <code>docker0</code> bridge&rsquo;ine bağlı, apartman koridoru gibi düşün herkes aynı koridora çıkıyor ama herkesin kendi odası var</p>
+<ul>
+<li><strong><code>veth + bridge</code></strong>: burada konteynerin odasıyla host&rsquo;un koridoru birbirine bağlanıyor, <code>docker0</code> gelen gideni yönlendiriyor</li>
+<li><strong><code>NAT</code></strong>: burada konteynerin dışarı çıkışı host&rsquo;un IP&rsquo;si üzerinden maskeleniyor, konteyner google&rsquo;a gider ama google host&rsquo;u görüyor</li>
+<li><strong><code>port yayınlama</code></strong>: burada dışarıdan içeri girişi biz açıyoruz, <code>8080:80</code> yazmazsan dışarıdan kimse odaya giremez</li>
+<li><strong><code>embedded DNS</code></strong>: burada isimle konuşma oluyor, <code>127.0.0.11</code> adresinde koşuyor, sadece custom network&rsquo;te düzgün çalışıyor</li>
+</ul>
+<h3 id="bridge">bridge<a class="anchor" href="#bridge">#</a></h3>
+<p>default olarak zaten bridge kullanıyoruz, <code>docker run</code> deyince konteyner buraya düşüyor</p>
+<ul>
+<li><strong><code>IP</code></strong>: burada konteynere ayrı fake IP veriyor, örn: <code>172.18.0.3</code>, kendi odası var</li>
+<li><strong><code>NAT</code></strong>: burada host ile arasında NAT / port kapısı var, sen <code>8080:80</code> yazmazsan dışarıdan kimse giremez ama konteyner dışarı çıkabilir</li>
+<li><strong><code>izolasyon</code></strong>: burada iki konteyner aynı bridge&rsquo;deyse konuşur, değilse göremez</li>
+<li><strong><code>DNS sorunu</code></strong>: burada default bridge&rsquo;de isimle konuşma yok, IP ile uğraşıyorsun, <code>ping 172.18.0.3</code> çalışır ama <code>ping caddy1</code> çalışmaz</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d --network bridge nginx
+</span></span><span style="display:flex;"><span>docker network inspect bridge</span></span></code></pre></div><blockquote class='book-hint '>
+<p><code>inspect</code> çıktısında <code>Containers</code> kısmına bak, hangi konteynerin hangi IP&rsquo;yi aldığını oradan görüyoruz</p>
+</blockquote><h3 id="custom-bridge-vs-default-bridge">custom bridge vs default bridge<a class="anchor" href="#custom-bridge-vs-default-bridge">#</a></h3>
+<p>yukarıda caddy örneğinde zaten <code>caddytest</code> diye custom bridge kurduk, aslında olay bu, default bridge yetmiyor diye kendi networkümüzü açıyoruz</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker network create caddytest
+</span></span><span style="display:flex;"><span>docker run -d --name caddy1 --network caddytest caddy
+</span></span><span style="display:flex;"><span>docker run -d --name caddy2 --network caddytest caddy</span></span></code></pre></div><ul>
+<li><strong><code>DNS</code></strong>: burada compose DNS var, <code>web -&gt; db:5432</code> diye isimle konuşur, <code>curl caddy1</code> yazınca direkt o konteynere gider</li>
+<li><strong><code>izolasyon</code></strong>: burada sadece bu network&rsquo;tekiler birbirini görüyor, dışarı kapalı, load balancer&rsquo;ı <code>8880:80</code> ile dışarı açtık ama app server&rsquo;ları açmadık ya o mantık işte</li>
+<li><strong><code>neden custom</code></strong>: burada default bridge&rsquo;de <code>--link</code> gibi eski şeylerle uğraşmıyoruz, custom açınca DNS otomatik geliyor</li>
+</ul>
+<blockquote class='book-hint '>
+<p>Caddyfile&rsquo;da <code>reverse_proxy caddy1:80 caddy2:80</code> yazdık ya, o isimler sadece aynı custom network&rsquo;te olduğumuz için çözülüyor</p>
+</blockquote><h3 id="host">host<a class="anchor" href="#host">#</a></h3>
+<ul>
+<li><strong><code>IP</code></strong>: burada ayrı IP yok, konteyner host&rsquo;un IP&rsquo;sini kullanıyor, oda yok aynı evde yaşıyoruz</li>
+<li><strong><code>NAT</code></strong>: burada NAT yok kapı yok, uygulama <code>80</code> açtıysa host&rsquo;un <code>80</code>&lsquo;i doldu</li>
+<li><strong><code>ports</code></strong>: burada <code>ports:</code> yazsan da takılmıyor, zaten host&rsquo;un portundasın, <code>-p 8080:80</code> yazmanın anlamı yok</li>
+<li><strong><code>konuşma</code></strong>: burada isimle konuşma yok, <code>localhost:port</code> ile konuşuyorsun, sanki host&rsquo;a kurmuşsun gibi oluyor</li>
+<li><strong><code>çakışma</code></strong>: burada hangi konteyner ne açtıysa hepsi birbirinin portunu görür, çakışır, iki tane <code>80</code> açamazsın</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d --network host nginx</span></span></code></pre></div><blockquote class='book-hint '>
+<p>burada performans iyi oluyor çünkü NAT yok ama güvenlik zayıf oluyor, bir de UFW&rsquo;yi bypass ediyor, güvenli yayınlama için <a href="docker-kurulum-hardening-debian/">docker-kurulum-hardening-debian</a> sayfasındaki <code>127.0.0.1:8080:80</code> mantığına bak</p>
+</blockquote><h3 id="none">none<a class="anchor" href="#none">#</a></h3>
+<ul>
+<li><strong><code>durum</code></strong>: burada loopback&rsquo;ten başka interface yok, offline kasa gibi düşün</li>
+<li><strong><code>ne işe yarıyor</code></strong>: burada dışarıyla konuşmasını istemediğimiz işleri koşuyoruz, güvenmediğimiz 3rd party kodu çalıştırırken ya da virüslü konteyneri audit ederken kullanıyoruz</li>
+<li><strong><code>deneme</code></strong>: burada yukarıdaki <code>Offline</code> bölümünde yaptığımız gibi <code>ping google.com -W 2</code> yazınca hata veriyor, internet yok çünkü</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d --network none docker/getting-started
+</span></span><span style="display:flex;"><span>docker exec CONTAINER_ID ping google.com -W <span style="color:#ae81ff">2</span></span></span></code></pre></div><h3 id="temel-komutlar">temel komutlar<a class="anchor" href="#temel-komutlar">#</a></h3>
+<p>komutlarla networkleri kurcalıyoruz, <code>docker network --help</code> yazınca hepsi çıkıyor zaten</p>
+<ul>
+<li><strong><code>docker network ls</code></strong>: burada hangi networkler var ona bakıyoruz, <code>bridge host none</code> default geliyor</li>
+<li><strong><code>docker network inspect caddytest</code></strong>: burada o networkün içine bakıyoruz, hangi konteyner hangi IP&rsquo;yi almış görüyoruz</li>
+<li><strong><code>docker network create my-net</code></strong>: burada kendi custom bridge&rsquo;imizi açıyoruz, DNS otomatik geliyor</li>
+<li><strong><code>docker network connect my-net konteyner-adi</code></strong>: burada çalışan konteyneri sonradan bir network&rsquo;e sokuyoruz</li>
+<li><strong><code>docker network disconnect my-net konteyner-adi</code></strong>: burada konteyneri networkten çıkarıyoruz</li>
+<li><strong><code>docker network rm my-net</code></strong>: burada kullanmadığımız networkü siliyoruz</li>
+<li><strong><code>docker network prune</code></strong>: burada boşta duran networkleri topluca temizliyoruz</li>
+</ul>
+<h3 id="composeda-network">compose&rsquo;da network<a class="anchor" href="#composeda-network">#</a></h3>
+<p>compose&rsquo;da zaten <code>networks:</code> yazınca arka planda custom bridge açıyor, tek tek <code>docker network create</code> ile uğraşmıyoruz</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">web</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">nginx:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8080:80&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_net</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">db</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">postgres:15</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_net</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">app_net</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">driver</span>: <span style="color:#ae81ff">bridge</span></span></span></code></pre></div><ul>
+<li><strong><code>networks</code></strong>: burada konteynerlerin hangi network üzerinden konuşacağını yazıyoruz, servisleri birbirine bağlıyoruz</li>
+<li><strong><code>driver: bridge</code></strong>: burada tek makinede izole network açıyoruz, <code>web -&gt; db:5432</code> diye isimle konuşuyorlar</li>
+<li><strong><code>ports vs expose</code></strong>: <code>ports</code> yazarsak konteyner portunu host&rsquo;a yayınlıyoruz, dışarıdan erişilebiliyor; <code>expose</code> ise sadece belgeleme amaçlı, ek izolasyon sağlamıyor — aynı network&rsquo;teki servisler zaten birbirine tüm dinleyen portlardan erişebiliyor</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>optimize-container-images-with-multi-stage-builds</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/docker/docker-exec-shell/" class="flex align-center">
+        <span>docker-exec-shell</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#offline">Offline</a></li>
+    <li><a href="#network-none">Network None</a></li>
+    <li><a href="#load-balancers">Load Balancers</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#caddyfiles">Caddyfiles</a>
+      <ul>
+        <li><a href="#docker-network-aslında-nasıl-çalışıyor">docker network aslında nasıl çalışıyor</a></li>
+        <li><a href="#bridge">bridge</a></li>
+        <li><a href="#custom-bridge-vs-default-bridge">custom bridge vs default bridge</a></li>
+        <li><a href="#host">host</a></li>
+        <li><a href="#none">none</a></li>
+        <li><a href="#temel-komutlar">temel komutlar</a></li>
+        <li><a href="#composeda-network">compose&rsquo;da network</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

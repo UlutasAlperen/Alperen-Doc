@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="docker compose ne isimize yariyor dersek, birden fazla konteyneri tek bir yaml dosyasindan yonetmemize yariyor, tek tek docker run ile ugrasmiyoruz ve ayni zamanda restart sayesinde sistem acilinca uygulamayi otomatik ayakta tutabiliyoruz
+temel calisma mantigi# proje klasorunde docker-compose.yml diye bir dosya aciyoruz, icine servisleri, networkleri ve volumeleri yazip sonra compose bunlari otomatik kurup birbirine bagliyor ve dayyum! uygulamalar ayakta oluyor, istegimize gore state’ini ayarlayabiliyoruz
+ornek 1 - tier1 (docker-compose.yml)# asagidaki ornekte bir nginx web sunucusu ve bir postgres veritabani var, en cok kullandigimiz temel seyler icinde.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/docker/docker-compose-basic/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="docker-compose-basic">
+	<meta property="og:description" content="docker compose ne isimize yariyor dersek, birden fazla konteyneri tek bir yaml dosyasindan yonetmemize yariyor, tek tek docker run ile ugrasmiyoruz ve ayni zamanda restart sayesinde sistem acilinca uygulamayi otomatik ayakta tutabiliyoruz
+temel calisma mantigi# proje klasorunde docker-compose.yml diye bir dosya aciyoruz, icine servisleri, networkleri ve volumeleri yazip sonra compose bunlari otomatik kurup birbirine bagliyor ve dayyum! uygulamalar ayakta oluyor, istegimize gore state’ini ayarlayabiliyoruz
+ornek 1 - tier1 (docker-compose.yml)# asagidaki ornekte bir nginx web sunucusu ve bir postgres veritabani var, en cok kullandigimiz temel seyler icinde.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="docker-compose-basic">
+	<meta itemprop="description" content="docker compose ne isimize yariyor dersek, birden fazla konteyneri tek bir yaml dosyasindan yonetmemize yariyor, tek tek docker run ile ugrasmiyoruz ve ayni zamanda restart sayesinde sistem acilinca uygulamayi otomatik ayakta tutabiliyoruz
+temel calisma mantigi# proje klasorunde docker-compose.yml diye bir dosya aciyoruz, icine servisleri, networkleri ve volumeleri yazip sonra compose bunlari otomatik kurup birbirine bagliyor ve dayyum! uygulamalar ayakta oluyor, istegimize gore state’ini ayarlayabiliyoruz
+ornek 1 - tier1 (docker-compose.yml)# asagidaki ornekte bir nginx web sunucusu ve bir postgres veritabani var, en cok kullandigimiz temel seyler icinde.">
+	<meta itemprop="wordCount" content="665">
+
+<title>docker-compose-basic • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/docker/docker-compose-basic/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.693ff8fab5045e0580564154b4cf638c47d2a15c3189eddeaef1ef0a2d1f421c.js" integrity="sha256-aT/4&#43;rUEXgWAVkFUtM9jjEfSoVwxie3ervHvCi0fQhw=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle" checked />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="active">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>docker-compose-basic</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#temel-calisma-mantigi">temel calisma mantigi</a></li>
+        <li><a href="#ornek-1---tier1-docker-composeyml">ornek 1 - tier1 (docker-compose.yml)</a></li>
+        <li><a href="#tier1-variable-anlamlari">tier1 variable anlamlari</a></li>
+        <li><a href="#ornek-2---tier2-docker-composeyml">ornek 2 - tier2 (docker-compose.yml)</a></li>
+        <li><a href="#tier2-variable-anlamlari">tier2 variable anlamlari</a></li>
+        <li><a href="#temel-komutlar">temel komutlar</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p>docker compose ne isimize yariyor dersek, birden fazla konteyneri tek bir yaml dosyasindan yonetmemize yariyor, tek tek docker run ile ugrasmiyoruz ve ayni zamanda restart sayesinde sistem acilinca uygulamayi otomatik ayakta tutabiliyoruz</p>
+<h3 id="temel-calisma-mantigi">temel calisma mantigi<a class="anchor" href="#temel-calisma-mantigi">#</a></h3>
+<p>proje klasorunde docker-compose.yml diye bir dosya aciyoruz, icine servisleri, networkleri ve volumeleri yazip sonra compose bunlari otomatik kurup birbirine bagliyor ve dayyum! uygulamalar ayakta oluyor, istegimize gore state&rsquo;ini ayarlayabiliyoruz</p>
+<h3 id="ornek-1---tier1-docker-composeyml">ornek 1 - tier1 (docker-compose.yml)<a class="anchor" href="#ornek-1---tier1-docker-composeyml">#</a></h3>
+<p>asagidaki ornekte bir nginx web sunucusu ve bir postgres veritabani var, en cok kullandigimiz temel seyler icinde.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">web</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">nginx:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">my-web</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">build</span>: <span style="color:#ae81ff">./web</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8080:80&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">unless-stopped</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">env_file</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./web.env</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;nginx&#34;</span>, <span style="color:#e6db74">&#34;-g&#34;</span>, <span style="color:#e6db74">&#34;daemon off;&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">db</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">condition</span>: <span style="color:#ae81ff">service_healthy</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_net</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">db</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">postgres:15</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">my-db</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">restart</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">POSTGRES_USER</span>: <span style="color:#ae81ff">admin</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">POSTGRES_PASSWORD</span>: <span style="color:#ae81ff">secretpassword</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">env_file</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./db.env</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">db_data:/var/lib/postgresql/data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_net</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">healthcheck</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">test</span>: [<span style="color:#e6db74">&#34;CMD-SHELL&#34;</span>, <span style="color:#e6db74">&#34;pg_isready -U admin&#34;</span>]
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">interval</span>: <span style="color:#ae81ff">10s</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">timeout</span>: <span style="color:#ae81ff">5s</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">retries</span>: <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">app_net</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">driver</span>: <span style="color:#ae81ff">bridge</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">db_data:</span></span></span></code></pre></div><h3 id="tier1-variable-anlamlari">tier1 variable anlamlari<a class="anchor" href="#tier1-variable-anlamlari">#</a></h3>
+<ul>
+<li><strong><code>image</code></strong>: burada kullanacak oldugumuz uygulamanin build edilmis image&rsquo;ini (docker hub, github, etc&hellip;) ve versiyonunu yaziyoruz</li>
+<li><strong><code>ports</code></strong>: burada kullandigimiz image&rsquo;in hangi port uzerinden calisacagini belirtiyoruz, 8080 host portu 80 de zaten nginx&rsquo;in klasik http portu</li>
+<li><strong><code>environment</code></strong>: burada developer tarafinda tanimlanan, uygulamamiz icin gerekli olan env varlari yazmak icin kullaniyoruz</li>
+<li><strong><code>volumes</code></strong>: burada yaptigimiz islemlerin kaybolmamasi icin volume ayarliyoruz, konteyner silinse bile veri duruyor</li>
+<li><strong><code>depends_on</code></strong>: burada hangi servisin once baslamasi gerektigini yaziyoruz, mesela web db&rsquo;den once baslamasin diye kullaniyoruz</li>
+<li><strong><code>build</code></strong>: burada hazir image kullanmak yerine kendi Dockerfile&rsquo;imizdan build almak icin path yaziyoruz</li>
+<li><strong><code>restart</code></strong>: burada konteyner kapanirsa ne olacagini yaziyoruz, mesela always yazarsak hep yeniden baslatiyor</li>
+<li><strong><code>networks</code></strong>: burada konteynerlerin hangi network uzerinden konusacagini yaziyoruz, servisleri birbirine baglamak icin kullaniyoruz</li>
+<li><strong><code>env_file</code></strong>: burada env varlari tek tek yazmak yerine .env dosyasi yolunu veriyoruz</li>
+<li><strong><code>container_name</code></strong>: burada konteynere kendimiz isim veriyoruz, yazmazsak compose kendi ismini veriyor</li>
+<li><strong><code>command</code></strong>: burada image&rsquo;in default komutunu ezmek icin kendi calistiracagimiz komutu yaziyoruz</li>
+<li><strong><code>healthcheck</code></strong>: burada konteynerin saglikli olup olmadigini anlamak icin kontrol yaziyoruz, hazir olmadan diger servis gecmesin diye kullaniyoruz</li>
+</ul>
+<h3 id="ornek-2---tier2-docker-composeyml">ornek 2 - tier2 (docker-compose.yml)<a class="anchor" href="#ornek-2---tier2-docker-composeyml">#</a></h3>
+<p>bu ornekte tier2&rsquo;deki daha az kullandigimiz ama isimize yarayan ayarlar var, yine ayni web + db uzerinden gidiyoruz.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">web</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">nginx:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">expose</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;80&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">pull_policy</span>: <span style="color:#ae81ff">always</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">profiles</span>: [<span style="color:#e6db74">&#34;frontend&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">working_dir</span>: <span style="color:#ae81ff">/usr/share/nginx/html</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">entrypoint</span>: [<span style="color:#e6db74">&#34;/docker-entrypoint.sh&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_net</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">logging</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">driver</span>: <span style="color:#ae81ff">json-file</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">options</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">max-size</span>: <span style="color:#e6db74">&#34;10m&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">max-file</span>: <span style="color:#e6db74">&#34;3&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deploy</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">limits</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">cpus</span>: <span style="color:#e6db74">&#34;0.50&#34;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">512M</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">db</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">postgres:15</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">user</span>: <span style="color:#e6db74">&#34;999:999&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">app_net</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">stop_grace_period</span>: <span style="color:#ae81ff">30s</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">secrets</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">db_password</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">app_net</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">driver</span>: <span style="color:#ae81ff">bridge</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">secrets</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">db_password</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">file</span>: <span style="color:#ae81ff">./db_password.txt</span></span></span></code></pre></div><h3 id="tier2-variable-anlamlari">tier2 variable anlamlari<a class="anchor" href="#tier2-variable-anlamlari">#</a></h3>
+<ul>
+<li><strong><code>expose</code></strong>: burada portu sadece compose icindeki servislere aciyoruz, host makineye acmiyoruz, ports gibi disari vermiyor</li>
+<li><strong><code>entrypoint</code></strong>: burada konteyner acilirken calisacak ana komutu ezmek icin yaziyoruz, command&rsquo;dan daha oncelikli calisiyor</li>
+<li><strong><code>working_dir</code></strong>: burada konteynerin icinde hangi klasorde calisacagimizi yaziyoruz</li>
+<li><strong><code>user</code></strong>: burada konteynerin hangi kullanici ile calisacagini yaziyoruz, root yerine guvenlik icin kullaniyoruz</li>
+<li><strong><code>deploy</code></strong>: burada resources limit ve replica yaziyoruz, mesela cpus memory ve kac tane calisacak diye belirtiyoruz</li>
+<li><strong><code>logging</code></strong>: burada loglarin nasil tutulacagini yaziyoruz, mesela max-size verip loglarin sismesini engelliyoruz</li>
+<li><strong><code>secrets</code></strong>: burada password gibi hassas seyleri env yerine secret olarak veriyoruz, daha guvenli oluyor</li>
+<li><strong><code>profiles</code></strong>: burada hangi servisin ne zaman acilacagini yaziyoruz, mesela frontend yazarsak sadece &ndash;profile frontend deyince aciliyor</li>
+<li><strong><code>pull_policy</code></strong>: burada image&rsquo;in ne zaman cekilecegini yaziyoruz, mesela always yazarsak hep en gunceli cekiyor</li>
+<li><strong><code>stop_grace_period</code></strong>: burada konteyner kapanirken ne kadar bekleyecegini yaziyoruz, db gibi seyler icin lazim oluyor</li>
+</ul>
+<h3 id="temel-komutlar">temel komutlar<a class="anchor" href="#temel-komutlar">#</a></h3>
+<p>komutlari <code>docker-compose.yml</code> dosyasinin oldugu klasorde calistiriyoruz, yeni dockerlarda <code>docker-compose</code> degil <code>docker compose</code> diye kullaniyoruz.</p>
+<ul>
+<li><strong><code>docker compose up</code></strong>: burada dosyada yazdigimiz tum servisleri olusturup baslatiyoruz, loglar ekrana akiyor</li>
+<li><strong><code>docker compose up -d</code></strong>: burada servisleri arkada baslatiyoruz, terminal bize kaliyor</li>
+<li><strong><code>docker compose down</code></strong>: burada calisan servisleri durdurup konteynerleri ve networkleri siliyoruz, volumeler duruyor</li>
+<li><strong><code>docker compose down -v</code></strong>: burada servisleri durdurup volumeleri de siliyoruz, db gibi veriler gidiyor dikkat et</li>
+<li><strong><code>docker compose ps</code></strong>: burada bu projeye ait konteynerlerin durumuna bakiyoruz</li>
+<li><strong><code>docker compose logs</code></strong>: burada servislerin loglarini goruyoruz, canli izlemek icin <code>docker compose logs -f</code> yaziyoruz</li>
+<li><strong><code>docker compose build</code></strong>: burada Dockerfile&rsquo;dan image build ediyoruz, kod degisince yeniden build icin kullaniyoruz</li>
+<li><strong><code>docker compose exec [servis_adi] [komut]</code></strong>: burada calisan konteynerin icine girip komut calistiriyoruz, mesela <code>docker compose exec db psql -U admin</code> gibi</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/docker/docker-logs/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>docker-logs</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="flex align-center">
+        <span>var-olan-volume-uzerine-docker-compose</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#temel-calisma-mantigi">temel calisma mantigi</a></li>
+        <li><a href="#ornek-1---tier1-docker-composeyml">ornek 1 - tier1 (docker-compose.yml)</a></li>
+        <li><a href="#tier1-variable-anlamlari">tier1 variable anlamlari</a></li>
+        <li><a href="#ornek-2---tier2-docker-composeyml">ornek 2 - tier2 (docker-compose.yml)</a></li>
+        <li><a href="#tier2-variable-anlamlari">tier2 variable anlamlari</a></li>
+        <li><a href="#temel-komutlar">temel komutlar</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Docker is the container platform. Nearly every DevOps workflow uses it to package, ship and run applications. I use Docker to:
+Package apps with their dependencies into portable images Run isolated containers across homelab and production Persist state with volumes and connect containers with networks Ship images via registries (Docker Hub) into deployment pipelines And much more Docker konular# docker-kurulum-hardening-debian manage-docker-as-non-root-user docker-containers-images docker-volumes docker-build optimize-container-images-with-multi-stage-builds docker-network docker-exec-shell docker-logs docker-compose-basic var-olan-volume-uzerine-docker-compose docker-publish Temeller# docker-containers-images = Container ve image kavramları, docker run, docker ps, docker stop docker-volumes = docker volume create/ls/inspect, Ghost örneği ile kalıcı veri docker-exec-shell = docker exec, interactive shell (-it /bin/sh) docker-network = --network none, custom bridge network, Caddy load balancer docker-logs = docker logs -f --tail, docker stats, docker top, resource limits Build ve Publish# docker-build = Dockerfile yazma, docker build -t, Go/Python server dockerize etme, ENV PORT optimize-container-images-with-multi-stage-builds = Multi-stage build ile Go (~800MB&#43; → 15-20MB) ve TypeScript image optimizasyonu, COPY --from docker-publish = Docker Hub’a docker push/pull, tag (latest vs semver), deployment pipeline Compose ve Operasyon# docker-compose-basic = docker compose up/down/ps/logs/build/exec var-olan-volume-uzerine-docker-compose = var olan volume’ü external: true ile compose’a bağlama docker-kurulum-hardening-debian = Debian’a güvenli kurulum, daemon.json hardening, iptables/UFW notları manage-docker-as-non-root-user = docker grubu, rootless notları, systemd ile boot’ta başlatma ">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/docker/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="Docker">
+	<meta property="og:description" content="Docker is the container platform. Nearly every DevOps workflow uses it to package, ship and run applications. I use Docker to:
+Package apps with their dependencies into portable images Run isolated containers across homelab and production Persist state with volumes and connect containers with networks Ship images via registries (Docker Hub) into deployment pipelines And much more Docker konular# docker-kurulum-hardening-debian manage-docker-as-non-root-user docker-containers-images docker-volumes docker-build optimize-container-images-with-multi-stage-builds docker-network docker-exec-shell docker-logs docker-compose-basic var-olan-volume-uzerine-docker-compose docker-publish Temeller# docker-containers-images = Container ve image kavramları, docker run, docker ps, docker stop docker-volumes = docker volume create/ls/inspect, Ghost örneği ile kalıcı veri docker-exec-shell = docker exec, interactive shell (-it /bin/sh) docker-network = --network none, custom bridge network, Caddy load balancer docker-logs = docker logs -f --tail, docker stats, docker top, resource limits Build ve Publish# docker-build = Dockerfile yazma, docker build -t, Go/Python server dockerize etme, ENV PORT optimize-container-images-with-multi-stage-builds = Multi-stage build ile Go (~800MB&#43; → 15-20MB) ve TypeScript image optimizasyonu, COPY --from docker-publish = Docker Hub’a docker push/pull, tag (latest vs semver), deployment pipeline Compose ve Operasyon# docker-compose-basic = docker compose up/down/ps/logs/build/exec var-olan-volume-uzerine-docker-compose = var olan volume’ü external: true ile compose’a bağlama docker-kurulum-hardening-debian = Debian’a güvenli kurulum, daemon.json hardening, iptables/UFW notları manage-docker-as-non-root-user = docker grubu, rootless notları, systemd ile boot’ta başlatma">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="website">
+
+
+	<meta itemprop="name" content="Docker">
+	<meta itemprop="description" content="Docker is the container platform. Nearly every DevOps workflow uses it to package, ship and run applications. I use Docker to:
+Package apps with their dependencies into portable images Run isolated containers across homelab and production Persist state with volumes and connect containers with networks Ship images via registries (Docker Hub) into deployment pipelines And much more Docker konular# docker-kurulum-hardening-debian manage-docker-as-non-root-user docker-containers-images docker-volumes docker-build optimize-container-images-with-multi-stage-builds docker-network docker-exec-shell docker-logs docker-compose-basic var-olan-volume-uzerine-docker-compose docker-publish Temeller# docker-containers-images = Container ve image kavramları, docker run, docker ps, docker stop docker-volumes = docker volume create/ls/inspect, Ghost örneği ile kalıcı veri docker-exec-shell = docker exec, interactive shell (-it /bin/sh) docker-network = --network none, custom bridge network, Caddy load balancer docker-logs = docker logs -f --tail, docker stats, docker top, resource limits Build ve Publish# docker-build = Dockerfile yazma, docker build -t, Go/Python server dockerize etme, ENV PORT optimize-container-images-with-multi-stage-builds = Multi-stage build ile Go (~800MB&#43; → 15-20MB) ve TypeScript image optimizasyonu, COPY --from docker-publish = Docker Hub’a docker push/pull, tag (latest vs semver), deployment pipeline Compose ve Operasyon# docker-compose-basic = docker compose up/down/ps/logs/build/exec var-olan-volume-uzerine-docker-compose = var olan volume’ü external: true ile compose’a bağlama docker-kurulum-hardening-debian = Debian’a güvenli kurulum, daemon.json hardening, iptables/UFW notları manage-docker-as-non-root-user = docker grubu, rootless notları, systemd ile boot’ta başlatma">
+	<meta itemprop="wordCount" content="204">
+
+<title>Docker • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/docker/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.693ff8fab5045e0580564154b4cf638c47d2a15c3189eddeaef1ef0a2d1f421c.js" integrity="sha256-aT/4&#43;rUEXgWAVkFUtM9jjEfSoVwxie3ervHvCi0fQhw=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/docs/docker/index.xml" title="Docker" />
+
+  
+</head>
+<body dir="ltr" class="book-kind-section book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle" checked />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="active">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Docker</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#docker-konular">Docker konular</a>
+      <ul>
+        <li><a href="#temeller">Temeller</a></li>
+        <li><a href="#build-ve-publish">Build ve Publish</a></li>
+        <li><a href="#compose-ve-operasyon">Compose ve Operasyon</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p><a href="https://docs.docker.com/">Docker</a> is <em>the</em> container platform. Nearly every DevOps workflow uses it to package, ship and run applications. I use Docker to:</p>
+<ul>
+<li>Package apps with their dependencies into portable images</li>
+<li>Run isolated containers across homelab and production</li>
+<li>Persist state with volumes and connect containers with networks</li>
+<li>Ship images via registries (Docker Hub) into deployment pipelines</li>
+<li>And much more</li>
+</ul>
+<h2 id="docker-konular">Docker konular<a class="anchor" href="#docker-konular">#</a></h2>
+<ol>
+<li><a href="docker-kurulum-hardening-debian/">docker-kurulum-hardening-debian</a></li>
+<li><a href="manage-docker-as-non-root-user/">manage-docker-as-non-root-user</a></li>
+<li><a href="docker-containers-images/">docker-containers-images</a></li>
+<li><a href="docker-volumes/">docker-volumes</a></li>
+<li><a href="docker-build/">docker-build</a></li>
+<li><a href="optimize-container-images-with-multi-stage-builds/">optimize-container-images-with-multi-stage-builds</a></li>
+<li><a href="docker-network/">docker-network</a></li>
+<li><a href="docker-exec-shell/">docker-exec-shell</a></li>
+<li><a href="docker-logs/">docker-logs</a></li>
+<li><a href="docker-compose-basic/">docker-compose-basic</a></li>
+<li><a href="var-olan-volume-uzerine-docker-compose/">var-olan-volume-uzerine-docker-compose</a></li>
+<li><a href="docker-publish/">docker-publish</a></li>
+</ol>
+<h3 id="temeller">Temeller<a class="anchor" href="#temeller">#</a></h3>
+<ul>
+<li><a href="docker-containers-images/">docker-containers-images</a> = Container ve image kavramları, <code>docker run</code>, <code>docker ps</code>, <code>docker stop</code></li>
+<li><a href="docker-volumes/">docker-volumes</a> = <code>docker volume create/ls/inspect</code>, Ghost örneği ile kalıcı veri</li>
+<li><a href="docker-exec-shell/">docker-exec-shell</a> = <code>docker exec</code>, interactive shell (<code>-it /bin/sh</code>)</li>
+<li><a href="docker-network/">docker-network</a> = <code>--network none</code>, custom bridge network, Caddy load balancer</li>
+<li><a href="docker-logs/">docker-logs</a> = <code>docker logs -f --tail</code>, <code>docker stats</code>, <code>docker top</code>, resource limits</li>
+</ul>
+<h3 id="build-ve-publish">Build ve Publish<a class="anchor" href="#build-ve-publish">#</a></h3>
+<ul>
+<li><a href="docker-build/">docker-build</a> = Dockerfile yazma, <code>docker build -t</code>, Go/Python server dockerize etme, <code>ENV PORT</code></li>
+<li><a href="optimize-container-images-with-multi-stage-builds/">optimize-container-images-with-multi-stage-builds</a> = Multi-stage build ile Go (~800MB+ → 15-20MB) ve TypeScript image optimizasyonu, <code>COPY --from</code></li>
+<li><a href="docker-publish/">docker-publish</a> = Docker Hub&rsquo;a <code>docker push/pull</code>, tag (<code>latest</code> vs semver), deployment pipeline</li>
+</ul>
+<h3 id="compose-ve-operasyon">Compose ve Operasyon<a class="anchor" href="#compose-ve-operasyon">#</a></h3>
+<ul>
+<li><a href="docker-compose-basic/">docker-compose-basic</a> = <code>docker compose up/down/ps/logs/build/exec</code></li>
+<li><a href="var-olan-volume-uzerine-docker-compose/">var-olan-volume-uzerine-docker-compose</a> = var olan volume&rsquo;ü <code>external: true</code> ile compose&rsquo;a bağlama</li>
+<li><a href="docker-kurulum-hardening-debian/">docker-kurulum-hardening-debian</a> = Debian&rsquo;a güvenli kurulum, <code>daemon.json</code> hardening, iptables/UFW notları</li>
+<li><a href="manage-docker-as-non-root-user/">manage-docker-as-non-root-user</a> = <code>docker</code> grubu, rootless notları, systemd ile boot&rsquo;ta başlatma</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/version_control_systems/plumping/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>plumping</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/docker/docker-kurulum-hardening-debian/" class="flex align-center">
+        <span>docker-kurulum-hardening-debian</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#docker-konular">Docker konular</a>
+      <ul>
+        <li><a href="#temeller">Temeller</a></li>
+        <li><a href="#build-ve-publish">Build ve Publish</a></li>
+        <li><a href="#compose-ve-operasyon">Compose ve Operasyon</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

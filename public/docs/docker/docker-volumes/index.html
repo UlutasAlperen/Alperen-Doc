@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Volumes# By default, Docker containers don’t retain any state from past containers. For example, if I:
+Start a container from an image Make some changes to the filesystem (like installing a new package) in that container Stop the container Start a new container from the same image The new container does not have the changes I made in step 2. However, if I restart the stopped container, it will have the changes I made. This is only worth mentioning because sometimes developers think that killing an old container and starting a new one is the same as restarting a process - but that’s not true… it’s more like resetting the state of the entire machine to the original image.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/docker/docker-volumes/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="docker-volumes">
+	<meta property="og:description" content="Volumes# By default, Docker containers don’t retain any state from past containers. For example, if I:
+Start a container from an image Make some changes to the filesystem (like installing a new package) in that container Stop the container Start a new container from the same image The new container does not have the changes I made in step 2. However, if I restart the stopped container, it will have the changes I made. This is only worth mentioning because sometimes developers think that killing an old container and starting a new one is the same as restarting a process - but that’s not true… it’s more like resetting the state of the entire machine to the original image.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="docker-volumes">
+	<meta itemprop="description" content="Volumes# By default, Docker containers don’t retain any state from past containers. For example, if I:
+Start a container from an image Make some changes to the filesystem (like installing a new package) in that container Stop the container Start a new container from the same image The new container does not have the changes I made in step 2. However, if I restart the stopped container, it will have the changes I made. This is only worth mentioning because sometimes developers think that killing an old container and starting a new one is the same as restarting a process - but that’s not true… it’s more like resetting the state of the entire machine to the original image.">
+	<meta itemprop="wordCount" content="577">
+
+<title>docker-volumes • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/docker/docker-volumes/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.693ff8fab5045e0580564154b4cf638c47d2a15c3189eddeaef1ef0a2d1f421c.js" integrity="sha256-aT/4&#43;rUEXgWAVkFUtM9jjEfSoVwxie3ervHvCi0fQhw=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle" checked />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="active">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>docker-volumes</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#remove-docker-volume">Remove docker volume</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="volumes">Volumes<a class="anchor" href="#volumes">#</a></h1>
+<p>By default, Docker containers don&rsquo;t retain any state from <em>past</em> containers. For example, if I:</p>
+<ol>
+<li>Start a container from an image</li>
+<li>Make some changes to the filesystem (like installing a new package) in that container</li>
+<li>Stop the container</li>
+<li>Start a new container from the same image</li>
+<li>The new container does <em>not</em> have the changes I made in step 2.</li>
+</ol>
+<p>However, if I restart the <em>stopped</em> container, it <em>will</em> have the changes I made. This is only worth mentioning because sometimes developers think that killing an old container and starting a new one is the same as <em>restarting a process</em> - but that&rsquo;s not true&hellip; it&rsquo;s more like resetting the state of the <em>entire machine</em> to the original image.</p>
+<p>All this said, Docker <em>does</em> have ways to support &ldquo;persistent state&rdquo; through <a href="https://docs.docker.com/storage/volumes/">storage volumes</a>. They&rsquo;re basically a filesystem that lives outside of the container, but can be accessed by the container.</p>
+<p>Create a new empty volume called <code>ghost-vol</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker volume create ghost-vol</span></span></code></pre></div><p>Make sure it worked:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker volume ls</span></span></code></pre></div><p>Inspect the volume to see where it is on your local machine:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker volume inspect ghost-vol</span></span></code></pre></div><p>Docker hosts an official image for Ghost on <a href="https://hub.docker.com/_/ghost">Docker Hub</a>.</p>
+<p>Pull the Ghost image from Docker Hub:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker pull ghost</span></span></code></pre></div><p>Run the Ghost image in a new container:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d -e NODE_ENV<span style="color:#f92672">=</span>development -e url<span style="color:#f92672">=</span>http://localhost:3001 -p 3001:2368 -v ghost-vol:/var/lib/ghost ghost</span></span></code></pre></div><ul>
+<li><code>-d</code> runs the image in detached mode to avoid blocking the terminal.</li>
+<li><code>-e NODE_ENV=development</code> sets an <a href="https://en.wikipedia.org/wiki/Environment_variable">environment variable</a> within the container. This tells Ghost to run in &ldquo;development&rdquo; mode (rather than &ldquo;production&rdquo;, for instance)</li>
+<li><code>-e url=http://localhost:3001</code> sets another environment variable, this one tells Ghost that we want to be able to access Ghost via a URL on our host machine.</li>
+<li>We&rsquo;ve used <code>-p</code> before. <code>-p 3001:2368</code> does some <a href="https://en.wikipedia.org/wiki/Port_forwarding">port-forwarding</a> between the container and our host machine.</li>
+<li><code>-v ghost-vol:/var/lib/ghost</code> mounts the <code>ghost-vol</code> volume that we created before to the <code>/var/lib/ghost</code> path in the container. Ghost will use the <code>/var/lib/ghost</code> directory to persist stateful data (files) between runs.</li>
+</ul>
+<ol start="3">
+<li>Navigate to <code>http://localhost:3001/</code> in your browser, you should see your new Ghost CMS!</li>
+</ol>
+<h2 id="remove-docker-volume">Remove docker volume<a class="anchor" href="#remove-docker-volume">#</a></h2>
+<p>Use <code>docker ps -a</code> to see <em>all</em> containers, even those that aren&rsquo;t running.
+Stop the running Ghost container
+Remove the ghost container. Use <code>docker --help</code> to find the right command.
+Remove the <code>ghost-vol</code> volume. Use <code>docker volume --help</code> to find the right command.
+Now that it&rsquo;s gone, let&rsquo;s see what happens if we try to start the Ghost container back up and attach it to a volume that doesn&rsquo;t exist.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d -e NODE_ENV<span style="color:#f92672">=</span>development -e url<span style="color:#f92672">=</span>http://localhost:3001 -p 3001:2368 -v ghost-vol:/var/lib/ghost ghost</span></span></code></pre></div><p>Navigate to <code>http://localhost:3001/</code> in your browser, and you should see a fresh CMS. That&rsquo;s weird, why no errors?</p>
+<p>Run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker volume ls</span></span></code></pre></div><p>The <code>ghost-vol</code> is back from the dead!?! It turns out the <code>-v ghost-vol:/var/lib/ghost</code> flag binds to a &ldquo;ghost-vol&rdquo; volume if it exists, otherwise, it creates it automatically!</p>
+<p>So, we now have a fresh installation. Our post that was on the old volume is gone, but this new volume will persist if we don&rsquo;t delete it.</p>
+<p>Bu çıktı, <code>docker ps -a</code> listesidir.
+İçinde:</p>
+<ul>
+<li><strong>İlk satır (62a79dd0b7e4)</strong> → aktif çalışan container (<code>Up 11 minutes</code>).</li>
+<li>Diğerleri → durdurulmuş (Exited).</li>
+</ul>
+<p>Tümünü - çalışan ve durdurulmuş dahil - sadece ID olarak bastırmak için:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker ps -aq</span></span></code></pre></div><p>Silmek istersek:</p>
+<ul>
+<li>Sadece durdurlumus state&rsquo;de olanlar:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker ps -aq -f status<span style="color:#f92672">=</span>exited | xargs docker rm</span></span></code></pre></div><ul>
+<li>Hepsi :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker rm -f <span style="color:#66d9ef">$(</span>docker ps -aq<span style="color:#66d9ef">)</span></span></span></code></pre></div><p>Bu ikinci komut tüm container’ları  durdurur ve siler.</p>
+<p>Var olan bir volume üzerine compose ile devam etmek için <a href="var-olan-volume-uzerine-docker-compose/">var-olan-volume-uzerine-docker-compose</a> sayfasına bak.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/docker/docker-containers-images/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>docker-containers-images</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/docker/docker-build/" class="flex align-center">
+        <span>docker-build</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#remove-docker-volume">Remove docker volume</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

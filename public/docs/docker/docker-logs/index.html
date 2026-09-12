@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Docker Logs# When containers are running in detached mode with the -d flag, you don’t see any output in your terminal, which is nice for keeping your terminal clean, but what if something goes wrong?
+Enter the docker logs command.
+docker logs [OPTIONS] CONTAINEROrnek log# Let’s run the Linux alpine image in a new container in detached mode, and give it a simple command to run to generate some standard output: docker run -d --name logdate alpine sh -c &#39;while true; do echo &#34;LOGGING: $(date)&#34;; sleep 1; done&#39;The sh -c &#39;while true; do echo &#34;LOGGING: $(date)&#34;; sleep 1; done&#39; part is just a simple shell script to execute inside the container that prints the current date and time every second.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/docker/docker-logs/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="docker-logs">
+	<meta property="og:description" content="Docker Logs# When containers are running in detached mode with the -d flag, you don’t see any output in your terminal, which is nice for keeping your terminal clean, but what if something goes wrong?
+Enter the docker logs command.
+docker logs [OPTIONS] CONTAINEROrnek log# Let’s run the Linux alpine image in a new container in detached mode, and give it a simple command to run to generate some standard output: docker run -d --name logdate alpine sh -c &#39;while true; do echo &#34;LOGGING: $(date)&#34;; sleep 1; done&#39;The sh -c &#39;while true; do echo &#34;LOGGING: $(date)&#34;; sleep 1; done&#39; part is just a simple shell script to execute inside the container that prints the current date and time every second.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="docker-logs">
+	<meta itemprop="description" content="Docker Logs# When containers are running in detached mode with the -d flag, you don’t see any output in your terminal, which is nice for keeping your terminal clean, but what if something goes wrong?
+Enter the docker logs command.
+docker logs [OPTIONS] CONTAINEROrnek log# Let’s run the Linux alpine image in a new container in detached mode, and give it a simple command to run to generate some standard output: docker run -d --name logdate alpine sh -c &#39;while true; do echo &#34;LOGGING: $(date)&#34;; sleep 1; done&#39;The sh -c &#39;while true; do echo &#34;LOGGING: $(date)&#34;; sleep 1; done&#39; part is just a simple shell script to execute inside the container that prints the current date and time every second.">
+	<meta itemprop="wordCount" content="536">
+
+<title>docker-logs • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/docker/docker-logs/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.693ff8fab5045e0580564154b4cf638c47d2a15c3189eddeaef1ef0a2d1f421c.js" integrity="sha256-aT/4&#43;rUEXgWAVkFUtM9jjEfSoVwxie3ervHvCi0fQhw=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle" checked />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="active">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>docker-logs</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#ornek-log">Ornek log</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#practice">PRACTICE</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="docker-logs">Docker Logs<a class="anchor" href="#docker-logs">#</a></h1>
+<p>When containers are running in detached mode with the <code>-d</code> flag, you don&rsquo;t see any output in your terminal, which is nice for keeping your terminal clean, but what if something goes <em>wrong</em>?</p>
+<p><em>Enter the <code>docker logs</code> command</em>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker logs <span style="color:#f92672">[</span>OPTIONS<span style="color:#f92672">]</span> CONTAINER</span></span></code></pre></div><h2 id="ornek-log">Ornek log<a class="anchor" href="#ornek-log">#</a></h2>
+<ol>
+<li>Let&rsquo;s run the Linux <code>alpine</code> image in a new container in detached mode, and give it a simple command to run to generate some standard output:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d --name logdate alpine sh -c <span style="color:#e6db74">&#39;while true; do echo &#34;LOGGING: $(date)&#34;; sleep 1; done&#39;</span></span></span></code></pre></div><p>The <code>sh -c 'while true; do echo &quot;LOGGING: $(date)&quot;; sleep 1; done'</code> part is just a simple shell script to execute inside the container that prints the current date and time every second.</p>
+<ol start="2">
+<li>Find the ID of the running container with <code>docker ps</code>.</li>
+<li>Use the <code>docker logs</code> command to view the logs of the container.</li>
+</ol>
+<p>Notice that if you run <code>docker logs</code> over and over again, you will get different output. That&rsquo;s because you&rsquo;re only getting the most recent logs each time.</p>
+<ol start="4">
+<li>Add the <code>-f</code> flag to the <code>docker logs</code> command to follow the logs in real-time.</li>
+<li>Exit the logs with <code>ctrl+c</code>, then view only the most recent 5 logs with the <code>--tail</code> option:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker logs --tail <span style="color:#ae81ff">5</span> CONTAINER</span></span></code></pre></div><h1 id="stats">Stats<a class="anchor" href="#stats">#</a></h1>
+<p>Okay, we know how to inspect a containers logs, but what if we want to see the resource utilization?</p>
+<p>It&rsquo;s common to spin up some Docker containers, forget about them, and then wonder why your host machine has gotten really slow. It&rsquo;s really nice to see how much RAM/CPU each container is using, and it&rsquo;s <em>critical</em> in production environments.</p>
+<p>The <code>docker stats</code> command gives you a live data stream of resource usage for running containers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker stats <span style="color:#f92672">[</span>OPTIONS<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>CONTAINER...<span style="color:#f92672">]</span></span></span></code></pre></div><h2 id="practice">PRACTICE<a class="anchor" href="#practice">#</a></h2>
+<ol>
+<li>The pre-built <a href="https://hub.docker.com/r/alexeiled/stress-ng">stress-ng</a> image is a nice little image that we can use to create a container that artificially uses a lot of CPU/memory resources. Start a container that uses a full CPU core:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d --name cpu-stress alexeiled/stress-ng --cpu <span style="color:#ae81ff">2</span> --timeout 10m</span></span></code></pre></div><p>This is going to slow down your machine somewhat while it&rsquo;s running, but don&rsquo;t worry we&rsquo;ll kill it soon. We added a timeout of 10 minutes just in case you forget to kill it later.</p>
+<ol start="2">
+<li>Start another container that uses some memory:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d --name mem-stress alexeiled/stress-ng --vm <span style="color:#ae81ff">1</span> --vm-bytes 1G --timeout 10m</span></span></code></pre></div><p>This one will allocate a full gigabyte of memory for the container, which is a lot for a single container. Again, we&rsquo;ll kill it soon.</p>
+<ol start="3">
+<li>Run <code>docker stats</code> to see the live resource usage of the two containers. <em>Take a good look</em>! You should see a table with CPU, memory, network I/O, and block I/O usage for each container. Press Ctrl+C to exit the stats view.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker stats</span></span></code></pre></div><h1 id="top">Top<a class="anchor" href="#top">#</a></h1>
+<p>The <code>docker top</code> command shows the running <em>processes inside</em> a container.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker top CONTAINER <span style="color:#f92672">[</span>ps OPTIONS<span style="color:#f92672">]</span></span></span></code></pre></div><h1 id="resource-limits">Resource Limits<a class="anchor" href="#resource-limits">#</a></h1>
+<p>When you notice a container&rsquo;s using too many resources, if you don&rsquo;t have the time or the ability to &ldquo;fix&rdquo; the code, you can limit the resources the container has available. The <code>docker run</code> command has a few options for limiting resources:</p>
+<ul>
+<li><code>--memory</code>: Limit the memory available to the container</li>
+<li><code>--cpus</code>: Limit the CPU shares available to the container</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> docker run -d --cpus<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.25&#34;</span> --name cpu-stress alexeiled/stress-ng --cpu <span style="color:#ae81ff">2</span> --timeout 10m</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/docker/docker-exec-shell/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>docker-exec-shell</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/docker/docker-compose-basic/" class="flex align-center">
+        <span>docker-compose-basic</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#ornek-log">Ornek log</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#practice">PRACTICE</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

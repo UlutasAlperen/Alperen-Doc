@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Containers# A container is a standard unit of software that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another.
+– Docker
+Containers, on the other hand, gives us 90% of the benefits of virtual machines, but are super lightweight. Containers boot up in seconds, while virtual machines can take minutes.
+Virtual Machine Architecture# Container (Docker) Architectures# ">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/docker/docker-containers-images/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="docker-containers-images">
+	<meta property="og:description" content="Containers# A container is a standard unit of software that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another.
+– Docker
+Containers, on the other hand, gives us 90% of the benefits of virtual machines, but are super lightweight. Containers boot up in seconds, while virtual machines can take minutes.
+Virtual Machine Architecture# Container (Docker) Architectures#">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="docker-containers-images">
+	<meta itemprop="description" content="Containers# A container is a standard unit of software that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another.
+– Docker
+Containers, on the other hand, gives us 90% of the benefits of virtual machines, but are super lightweight. Containers boot up in seconds, while virtual machines can take minutes.
+Virtual Machine Architecture# Container (Docker) Architectures#">
+	<meta itemprop="wordCount" content="554">
+
+<title>docker-containers-images • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/docker/docker-containers-images/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.693ff8fab5045e0580564154b4cf638c47d2a15c3189eddeaef1ef0a2d1f421c.js" integrity="sha256-aT/4&#43;rUEXgWAVkFUtM9jjEfSoVwxie3ervHvCi0fQhw=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle" checked />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="active">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>docker-containers-images</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#virtual-machine-architecture">Virtual Machine Architecture</a></li>
+    <li><a href="#container-docker-architectures">Container (Docker) Architectures</a></li>
+    <li><a href="#why-are-containers-lightweight">Why Are Containers Lightweight?</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="containers">Containers<a class="anchor" href="#containers">#</a></h1>
+<blockquote class='book-hint '>
+<p>A container is a standard unit of software that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another.</p>
+<p>&ndash; <a href="https://www.docker.com/resources/what-container/">Docker</a></p>
+</blockquote><p>Containers, on the other hand, gives us 90% of the benefits of virtual machines, but are <em>super</em> lightweight. <em>Containers boot up in seconds, while virtual machines can take minutes.</em></p>
+<h2 id="virtual-machine-architecture">Virtual Machine Architecture<a class="anchor" href="#virtual-machine-architecture">#</a></h2>
+<p><img src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/QS4HGNG.png" alt="" /></p>
+<h2 id="container-docker-architectures">Container (Docker) Architectures<a class="anchor" href="#container-docker-architectures">#</a></h2>
+<p><img src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/fmZG1Zd-662x400.png" alt="" /></p>
+<h2 id="why-are-containers-lightweight">Why Are Containers Lightweight?<a class="anchor" href="#why-are-containers-lightweight">#</a></h2>
+<p>Virtual machines virtualize <em>hardware</em>, they emulate what a physical computer does at a low level. Containers virtualize at the <em>operating system</em> level. Isolation between containers that are running on the same machine is still <em>really good</em>. For the most part, each container <em>feels like</em> it has its own operating and filesystem. In reality, a lot of resources are being shared, but they&rsquo;re being shared securely through <a href="https://docs.docker.com/engine/security/userns-remap/">namespaces</a>.</p>
+<p>Your browser does not support playing HTML5 video. You can instead. Here is a description of the content: containers vs virtual machines</p>
+<h1 id="images">Images<a class="anchor" href="#images">#</a></h1>
+<p>So a &ldquo;container&rdquo; is kinda like a lightweight VM, great&hellip; so what&rsquo;s an <em>image</em>?</p>
+<ul>
+<li><strong>Image</strong>: A read-only <em>definition</em> of a container</li>
+<li><strong>Container</strong>: an <em>instance</em> of a virtualized read-write environment</li>
+</ul>
+<p>A container is basically an image that&rsquo;s <strong>actively running</strong>. In other words, you boot up a container <em>from</em> an image. You can create multiple separate containers all from the same image (it&rsquo;s <em>kinda</em> like the relationship between classes and objects).</p>
+<blockquote class='book-hint '>
+<p>pull to your local machine</p>
+</blockquote><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker pull docker/getting-started</span></span></code></pre></div><blockquote class='book-hint '>
+<p>see what u pull your local machine</p>
+</blockquote><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker images</span></span></code></pre></div><h1 id="run-a-container">Run a Container<a class="anchor" href="#run-a-container">#</a></h1>
+<p>Now that you&rsquo;ve downloaded the <a href="https://hub.docker.com/r/docker/getting-started">getting started image</a>, let&rsquo;s <em>run</em> it inside a new container. The <code>docker run</code> command starts a new container from an image. Let&rsquo;s break down the syntax:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># this is just an example, don&#39;t run this</span>
+</span></span><span style="display:flex;"><span>docker run -d -p hostport:containerport namespace/name:tag</span></span></code></pre></div><ul>
+<li><code>-d</code>: Run in detached mode (doesn&rsquo;t block your terminal)</li>
+<li><code>-p</code>: Publish a container&rsquo;s port to the host (forwarding)</li>
+<li><code>hostport</code>: The port on your local machine</li>
+<li><code>containerport</code>: The port inside the container</li>
+<li><code>namespace/name</code>: The name of the image (usually in the format <code>username/repo</code>)</li>
+<li><code>tag</code>: The version of the image (often <code>latest</code>)</li>
+</ul>
+<ol>
+<li>Use the <code>run</code> command to start a new container from the &ldquo;getting started&rdquo; image:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d -p 8965:80 docker/getting-started:latest</span></span></code></pre></div><ol start="2">
+<li>You should see the container running in the &ldquo;Containers&rdquo; tab of Docker Desktop. Run this on the command line to see the running containers:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker ps</span></span></code></pre></div><p>On one of the columns you should see this:</p>
+<pre tabindex="0"><code>PORTS
+0.0.0.0:8965-&gt;80/tcp</code></pre><p>This is saying that port <code>8965</code> on your local &ldquo;host&rdquo; machine is being forwarded to port <code>80</code> on the running container. Port <code>80</code> is conventionally used for HTTP web traffic. Navigate to <code>http://localhost:8965</code> and you should see a webpage served from the container!</p>
+<p><strong>Run and submit</strong> the CLI tests <strong>against your &ldquo;getting started&rdquo; container on <code>http://localhost:8965</code></strong>.</p>
+<h1 id="stop-a-container">Stop a Container<a class="anchor" href="#stop-a-container">#</a></h1>
+<p>Okay, now you know how to start a new instance of a container from an image&hellip; but how do you <em>stop</em> it? There are two primary ways:</p>
+<ul>
+<li><code>docker stop</code>: This stops the container by issuing a <code>SIGTERM</code> signal to the container. You&rsquo;ll typically want to use <code>docker stop</code>.</li>
+<li><code>docker kill</code>: This stops the container by issuing a <code>SIGKILL</code> signal to the container. This is a more forceful way to stop a container, and should be used as a last resort.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> id in <span style="color:#66d9ef">$(</span>docker ps -q<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    docker stop <span style="color:#e6db74">&#34;</span>$id<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span></span></span></code></pre></div><p>For persistent data, see <a href="docker-volumes/">docker-volumes</a>.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/docker/manage-docker-as-non-root-user/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>manage-docker-as-non-root-user</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/docker/docker-volumes/" class="flex align-center">
+        <span>docker-volumes</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#virtual-machine-architecture">Virtual Machine Architecture</a></li>
+    <li><a href="#container-docker-architectures">Container (Docker) Architectures</a></li>
+    <li><a href="#why-are-containers-lightweight">Why Are Containers Lightweight?</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

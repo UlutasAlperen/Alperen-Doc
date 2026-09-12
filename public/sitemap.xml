@@ -6,17 +6,43 @@
   </url><url>
     <loc>http://localhost:1313/docs/version_control_systems/basic_git_conf/</loc>
   </url><url>
+    <loc>http://localhost:1313/docs/docker/docker-kurulum-hardening-debian/</loc>
+  </url><url>
     <loc>http://localhost:1313/docs/version_control_systems/basic_git_knowledge/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/docker/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/docker/manage-docker-as-non-root-user/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/docker/docker-containers-images/</loc>
   </url><url>
     <loc>http://localhost:1313/docs/version_control_systems/github_workflow/</loc>
   </url><url>
     <loc>http://localhost:1313/docs/version_control_systems/continuous_integration/</loc>
   </url><url>
+    <loc>http://localhost:1313/docs/docker/docker-volumes/</loc>
+  </url><url>
     <loc>http://localhost:1313/docs/version_control_systems/continuous_deployment/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/docker/docker-build/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/docker/optimize-container-images-with-multi-stage-builds/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/docker/docker-network/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/docker/docker-exec-shell/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/docker/docker-logs/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/docker/docker-compose-basic/</loc>
   </url><url>
     <loc>http://localhost:1313/docs/version_control_systems/git-status/</loc>
   </url><url>
     <loc>http://localhost:1313/docs/version_control_systems/git-add/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/docker/var-olan-volume-uzerine-docker-compose/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/docker/docker-publish/</loc>
   </url><url>
     <loc>http://localhost:1313/docs/version_control_systems/git-commit/</loc>
   </url><url>

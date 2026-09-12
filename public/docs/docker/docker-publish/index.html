@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Publishing to Docker Hub# Let’s publish the Go server we Dockerized up to Docker Hub.
+Rebuild the Go binary: GOOS=linux GOARCH=amd64 go build Rebuild the image. You’ll need to use a name that corresponds to your namespace on Docker Hub. Swap out USERNAME for your Docker Hub username. docker build . -t USERNAME/goserver Run your image in a container to make sure it still works: docker run -p 8991:8991 USERNAME/goserver Push the image to Docker Hub: docker push USERNAME/goserverDelete and Pull# Let’s delete our local copy of the image, then pull it back down from Docker Hub. Just like with GitHub, the nice thing about having images in the cloud is that if something happens to your computer, or you’re working on another machine, you can always pull down your images.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/docker/docker-publish/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="docker-publish">
+	<meta property="og:description" content="Publishing to Docker Hub# Let’s publish the Go server we Dockerized up to Docker Hub.
+Rebuild the Go binary: GOOS=linux GOARCH=amd64 go build Rebuild the image. You’ll need to use a name that corresponds to your namespace on Docker Hub. Swap out USERNAME for your Docker Hub username. docker build . -t USERNAME/goserver Run your image in a container to make sure it still works: docker run -p 8991:8991 USERNAME/goserver Push the image to Docker Hub: docker push USERNAME/goserverDelete and Pull# Let’s delete our local copy of the image, then pull it back down from Docker Hub. Just like with GitHub, the nice thing about having images in the cloud is that if something happens to your computer, or you’re working on another machine, you can always pull down your images.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="docker-publish">
+	<meta itemprop="description" content="Publishing to Docker Hub# Let’s publish the Go server we Dockerized up to Docker Hub.
+Rebuild the Go binary: GOOS=linux GOARCH=amd64 go build Rebuild the image. You’ll need to use a name that corresponds to your namespace on Docker Hub. Swap out USERNAME for your Docker Hub username. docker build . -t USERNAME/goserver Run your image in a container to make sure it still works: docker run -p 8991:8991 USERNAME/goserver Push the image to Docker Hub: docker push USERNAME/goserverDelete and Pull# Let’s delete our local copy of the image, then pull it back down from Docker Hub. Just like with GitHub, the nice thing about having images in the cloud is that if something happens to your computer, or you’re working on another machine, you can always pull down your images.">
+	<meta itemprop="wordCount" content="677">
+
+<title>docker-publish • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/docker/docker-publish/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.693ff8fab5045e0580564154b4cf638c47d2a15c3189eddeaef1ef0a2d1f421c.js" integrity="sha256-aT/4&#43;rUEXgWAVkFUtM9jjEfSoVwxie3ervHvCi0fQhw=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle" checked />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="active">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>docker-publish</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#deployment-pipelines">Deployment Pipelines</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#should-i-use-latest">Should I Use “latest”?</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#the-deployment-process">The Deployment Process</a></li>
+    <li><a href="#its-never-the-same">It&rsquo;s Never the Same</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="publishing-to-docker-hub">Publishing to Docker Hub<a class="anchor" href="#publishing-to-docker-hub">#</a></h1>
+<p>Let&rsquo;s publish the Go server we Dockerized up to Docker Hub.</p>
+<ol>
+<li>Rebuild the Go binary:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>GOOS<span style="color:#f92672">=</span>linux GOARCH<span style="color:#f92672">=</span>amd64 go build</span></span></code></pre></div><ol start="2">
+<li>Rebuild the image. You&rsquo;ll need to use a name that corresponds to <em>your</em> namespace on Docker Hub. Swap out <code>USERNAME</code> for <em>your</em> Docker Hub username.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker build . -t USERNAME/goserver</span></span></code></pre></div><ol start="3">
+<li>Run your image in a container to make sure it still works:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -p 8991:8991 USERNAME/goserver</span></span></code></pre></div><ol start="4">
+<li>Push the image to Docker Hub:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker push USERNAME/goserver</span></span></code></pre></div><h1 id="delete-and-pull">Delete and Pull<a class="anchor" href="#delete-and-pull">#</a></h1>
+<p>Let&rsquo;s delete our local copy of the image, then pull it back down from Docker Hub. Just like with GitHub, the nice thing about having images in the cloud is that if something happens to your computer, or you&rsquo;re working on another machine, you can always pull down your images.</p>
+<ol>
+<li>Remove your local <code>USERNAME/goserver</code> image:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker image rm USERNAME/goserver</span></span></code></pre></div><ol start="2">
+<li>Pull it back down from Docker Hub:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker pull USERNAME/goserver</span></span></code></pre></div><ol start="3">
+<li>Run it to make sure it works:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -p 8991:8991 USERNAME/goserver</span></span></code></pre></div><h1 id="tags">Tags<a class="anchor" href="#tags">#</a></h1>
+<p>Let&rsquo;s publish a new <em>version</em> of our web server. With Docker, a tag is a label that you can assign to a specific version of an image, similar to a tag in Git.</p>
+<p>The <code>latest</code> tag is the default tag that Docker uses when you don&rsquo;t specify one. It&rsquo;s a convention to use <code>latest</code> for the most recent version of an image, but it&rsquo;s also common to include other tags, often <a href="https://semver.org/">semantic versioning</a> tags like <code>0.1.0</code>, <code>0.2.0</code>, etc.</p>
+<h2 id="deployment-pipelines">Deployment Pipelines<a class="anchor" href="#deployment-pipelines">#</a></h2>
+<p>Publishing new versions of Docker images is a <em>very common</em> method of deploying cloud-native back-end servers. Here&rsquo;s a diagram describing the deployment pipeline of many production systems (including the server that powers the Boot.dev site you&rsquo;re on currently).</p>
+<p><img src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/P1cZo5d-1086x720.png" alt="" /></p>
+<h1 id="latest">Latest<a class="anchor" href="#latest">#</a></h1>
+<p>If you look closely, you&rsquo;ll notice that your <em>old</em> version is tagged &ldquo;latest&rdquo;&hellip; that&rsquo;s a bit confusing. As it turns out, the <code>latest</code> tag doesn&rsquo;t always indicate that a specific tag is the latest version of an image. In reality, <code>latest</code> is just the <em>default</em> tag that&rsquo;s used if you don&rsquo;t explicitly supply one. We didn&rsquo;t use a tag on our first version, that&rsquo;s why it was tagged with &ldquo;latest&rdquo;.</p>
+<h2 id="should-i-use-latest">Should I Use “latest”?<a class="anchor" href="#should-i-use-latest">#</a></h2>
+<p>The convention I&rsquo;m familiar with is to use <a href="https://semver.org/">semantic versioning</a> on all your images, but to <em>also</em> push to the &ldquo;latest&rdquo; tag on your most recent image. That way you can keep all of your old versions around, but the <code>latest</code> tag still always points to the latest version.</p>
+<p>So, for example, if I were updating an application to version 5.4.6, I would probably do it like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker build -t bootdotdev/awesomeimage:5.4.6 -t bootdotdev/awesomeimage:latest .
+</span></span><span style="display:flex;"><span>docker push bootdotdev/awesomeimage --all-tags</span></span></code></pre></div><h1 id="the-bigger-picture">The Bigger Picture<a class="anchor" href="#the-bigger-picture">#</a></h1>
+<p>This is the last lesson, but before we go, I want to reiterate how Docker fits into the software development lifecycle, particularly at modern &ldquo;DevOpsy&rdquo; tech companies, because it&rsquo;s <em>really important</em> to understand.</p>
+<h2 id="the-deployment-process">The Deployment Process<a class="anchor" href="#the-deployment-process">#</a></h2>
+<ol>
+<li>The developer (you) writes some new code</li>
+<li>The developer commits the code to Git</li>
+<li>The developer pushes a new branch to GitHub</li>
+<li>The developer opens a <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests">pull request</a> to the <code>main</code> branch</li>
+<li>A teammate reviews the PR and approves it (if it looks good)</li>
+<li>The developer merges the pull request</li>
+<li>Upon merging, an automated script, perhaps a <a href="https://docs.github.com/en/actions">GitHub action</a>, is started</li>
+<li>The script builds the code (if it&rsquo;s a compiled language)</li>
+<li>The script builds a new docker image with the latest program</li>
+<li>The script pushes the new image to Docker Hub</li>
+<li>The server that runs the containers, perhaps a <a href="https://kubernetes.io/">Kubernetes</a> cluster, is told there is a new version</li>
+<li>The k8s cluster pulls down the latest image</li>
+<li>The k8s cluster shuts down old containers as it spins up new containers of the latest image</li>
+</ol>
+<h2 id="its-never-the-same">It&rsquo;s Never the Same<a class="anchor" href="#its-never-the-same">#</a></h2>
+<p>While the deployment process I&rsquo;ve outlined above is a common one, especially at newer &ldquo;cloud native&rdquo; companies, two companies rarely have identical processes. Instead of GitHub, it might be GitLab. Instead of Docker Hub, it might be ECR. Instead of Kubernetes, it might be Docker Swarm or a more managed service.</p>
+<p>That said, I hope this helps give you an idea of what to expect in the wild.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>var-olan-volume-uzerine-docker-compose</span>
+      </a>
+    
+    </span>
+    <span>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#deployment-pipelines">Deployment Pipelines</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#should-i-use-latest">Should I Use “latest”?</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#the-deployment-process">The Deployment Process</a></li>
+    <li><a href="#its-never-the-same">It&rsquo;s Never the Same</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
