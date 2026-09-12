@@ -29,7 +29,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 	<meta itemprop="description" content="001 - continuous_integration 002 - continuous_deployment
 Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosyalarını statik bir siteye dönüştüren bir araç. Bu yazıda, suan bulundugunuz siteyi nasil hugo-book temasını kullanırken aynı zamanda GitHub Workflow kullanarak her değişikliği debian tabanli uzak sunucuma nasıl otomatik olarak deploy edeceğimi anlatmak istedim.
 1. VPS ve Kullanıcı Yapılandırması# İlk başta sistemi --system parametresiyle kurmayı düşünmüştüm. Sistem kullanıcısı oluşturmak mantıklı çünkü bu kullanıcının varsayılan olarak bir şifresi ve interaktif bir shell oturumu olmaz (tabi belirli komutlarla yapilabilir). Bu da sunucunun guvenligini arttirir.">
-	<meta itemprop="wordCount" content="914">
+	<meta itemprop="wordCount" content="947">
 
 <title>github_workflow • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.572eef2d36386f661080d222bc419d2aba00d050548cde57f085b8a0fec807f1.js" integrity="sha256-Vy7vLTY4b2YQgNIivEGdKroA0FBUjN5X8IW4oP7IB/E=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.660bf93061e7db7c416ce6d379be035c6980b993f80a4a406adea3e75a9ffb5a.js" integrity="sha256-Zgv5MGHn23xBbObTeb4DXGmAuZP4CkpAat6j51qf&#43;1o=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -751,7 +751,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 </span></span><span style="display:flex;"><span><span style="color:#f92672">on</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">push</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">branches</span>:
-</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">main  </span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">main</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">deploy</span>:
@@ -761,17 +761,17 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Checkout Source Code</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v4</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">submodules</span>: <span style="color:#ae81ff">recursive </span> <span style="color:#75715e"># hugo-book teması submodule olarak ekliyse indirmek için şart</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">submodules</span>: <span style="color:#ae81ff">recursive</span> <span style="color:#75715e"># Hugo temaları (hugo-book) submodule icin gerekli</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">fetch-depth</span>: <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      <span style="color:#75715e"># 2. Hugo Kurulumu</span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Setup Hugo</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">peaceiris/actions-hugo@v3</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">hugo-version</span>: <span style="color:#e6db74">&#39;latest&#39;</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">extended</span>: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># hugo-book veya kullandığınız temalar sass/scss derliyorsa true olmalı</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">hugo-version</span>: <span style="color:#e6db74">&#34;latest&#34;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">extended</span>: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># hugo-book veya temalar sass/scss kullanıyorum o yuzden true</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># 3. Hugo Build </span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># 3. Hugo Build</span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build Hugo Site</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">hugo --minify</span>
 </span></span><span style="display:flex;"><span>
@@ -780,10 +780,10 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">shimataro/ssh-key-action@v2</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">key</span>: <span style="color:#ae81ff">${{ secrets.SSH_PRIVATE_KEY }}</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">known_hosts</span>: <span style="color:#e6db74">&#39;unnecessary&#39;</span> 
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">known_hosts</span>: <span style="color:#e6db74">&#34;unnecessary&#34;</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">if_key_exists</span>: <span style="color:#ae81ff">replace</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># 5. VPS IP&#39;sini bilinen hostlar listesine ekliyoruz (bağlantıda onay sormaması ve güvenlik için)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># 5. VPS IP&#39;sini bilinen hostlar listesine ekliyorum hem sormasin hemde guvenlik icin</span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Adding Known Hosts</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          mkdir -p ~/.ssh
@@ -794,7 +794,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          rsync -avz --delete \
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            --no-perms --no-owner --no-group \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            --chmod=D750,F640 \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            --chmod=D2750,F640 \
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            -e &#34;ssh -p ${{ secrets.SSH_PORT }}&#34; \
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            public/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/kole/public/</span></span></span></code></pre></div><h3 id="rsync-parametrelerinin-detayları">Rsync Parametrelerinin Detayları:<a class="anchor" href="#rsync-parametrelerinin-detaylar%c4%b1">#</a></h3>
 <ul>
@@ -817,7 +817,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 <p><code>--no-perms</code>, <code>--no-owner</code>, <code>--no-group</code>: GitHub runner üzerindeki lokal kullanıcı izinlerinin ve sahiplik bilgilerinin hedef sunucuya olduğu gibi taşınmasını engeller.</p>
 </li>
 <li>
-<p><code>--chmod=D750,F640</code>: Klasörleri (<code>D</code>) 750 yetkisiyle, dosyaları (<code>F</code>) ise 640 yetkisiyle hedefe yazar. Böylece Caddy dosyaları sorunsuz okurken, dışarıdan yetkisiz yazma işlemlerinin önüne geçilir.</p>
+<p><code>--chmod=D2750,F640</code>: Klasörleri (<code>D</code>) 2750 (<code>rwxr-s---</code>), dosyaları (<code>F</code>) ise 640 (<code>rw-r-----</code>) yetkisiyle hedefe yazar. Baştaki <code>2</code> = <code>SetGID</code> bitidir. Böylece her yeni klasör <code>caddy</code> grubunu otomatik miras alır, Caddy sorunsuz okurken <code>other=0</code> olduğu için dışarıdan erişim engellenir. <code>D750</code> kullanılsaydı yeni klasörler <code>s</code> olmadan oluşup grup mirası kırılırdı.</p>
 </li>
 </ul>
 <h3 id="setgid-bitinin-sunucu-tarafında-tanımlanması">SetGID Bitinin Sunucu Tarafında Tanımlanması<a class="anchor" href="#setgid-bitinin-sunucu-taraf%c4%b1nda-tan%c4%b1mlanmas%c4%b1">#</a></h3>
@@ -827,7 +827,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Mevcut ve yeni açılacak tüm alt klasörlere SetGID yetkisi veriyoruz (g+s)</span>
 </span></span><span style="display:flex;"><span>sudo find /var/www/kole/public -type d -exec chmod g+s <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span></span></span></code></pre></div><blockquote class='book-hint '>
-<p><strong>SetGID Nasıl Çalışır?</strong> <code>g+s</code> izni alan bir klasörün altında oluşturulan her yeni dosya veya alt klasör, onu oluşturan kullanıcının (bu senaryoda <code>kole</code>) birincil grubuna bakmaksızın, otomatik olarak üst klasörün grubunu (<code>caddy</code>) miras alır. Bu sayede her deploy sonrasında Caddy&rsquo;nin dosyaları okuyamama sorunu  ortadan kalkar.</p>
+<p><strong>SetGID Nasıl Çalışır?</strong> <code>g+s</code> izni alan bir klasörün altında oluşturulan her yeni dosya veya alt klasör, onu oluşturan kullanıcının (bu senaryoda <code>kole</code>) birincil grubuna bakmaksızın, otomatik olarak üst klasörün grubunu (<code>caddy</code>) miras alır. Bu sayede her deploy sonrasında Caddy&rsquo;nin dosyaları okuyamama sorunu  ortadan kalkar. Artık rsync her deploy&rsquo;da <code>D2750</code> ile geldiği için bu işlem kalıcı hale gelir.</p>
 </blockquote><p>Okudugunuz icin tesekkur ederim.</p>
 </article>
  

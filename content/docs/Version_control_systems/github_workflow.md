@@ -107,14 +107,13 @@ Deponuzun kök dizininde `.github/workflows/deploy.yml` dosyasını oluşturun v
 3. SSH Private Key'i geçici olarak runner'a yükler.
 4. `rsync` ile sadece değişen dosyaları güvenli bir şekilde VPS'e aktarır ve izinleri sunucu üzerinde yeniden yazar.
 
-
 ```yaml
 name: Deploy Hugo Site
 
 on:
   push:
     branches:
-      - main  
+      - main
 
 jobs:
   deploy:
@@ -124,17 +123,17 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v4
         with:
-          submodules: recursive  # hugo-book teması submodule olarak ekliyse indirmek için şart
+          submodules: recursive # Hugo temaları (hugo-book) submodule icin gerekli
           fetch-depth: 0
 
       # 2. Hugo Kurulumu
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest'
-          extended: true # hugo-book veya kullandığınız temalar sass/scss derliyorsa true olmalı
+          hugo-version: "latest"
+          extended: true # hugo-book veya temalar sass/scss kullanıyorum o yuzden true
 
-      # 3. Hugo Build 
+      # 3. Hugo Build
       - name: Build Hugo Site
         run: hugo --minify
 
@@ -143,10 +142,10 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: 'unnecessary' 
+          known_hosts: "unnecessary"
           if_key_exists: replace
 
-      # 5. VPS IP'sini bilinen hostlar listesine ekliyoruz (bağlantıda onay sormaması ve güvenlik için)
+      # 5. VPS IP'sini bilinen hostlar listesine ekliyorum hem sormasin hemde guvenlik icin
       - name: Adding Known Hosts
         run: |
           mkdir -p ~/.ssh
@@ -157,11 +156,10 @@ jobs:
         run: |
           rsync -avz --delete \
             --no-perms --no-owner --no-group \
-            --chmod=D750,F640 \
+            --chmod=D2750,F640 \
             -e "ssh -p ${{ secrets.SSH_PORT }}" \
             public/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/kole/public/
 ```
-
 ### Rsync Parametrelerinin Detayları:
 
 - `-a` (archive): Dosya izinlerini, sahipliklerini ve tarihlerini korur.
@@ -176,7 +174,7 @@ jobs:
     
 - `--no-perms`, `--no-owner`, `--no-group`: GitHub runner üzerindeki lokal kullanıcı izinlerinin ve sahiplik bilgilerinin hedef sunucuya olduğu gibi taşınmasını engeller.
     
-- `--chmod=D750,F640`: Klasörleri (`D`) 750 yetkisiyle, dosyaları (`F`) ise 640 yetkisiyle hedefe yazar. Böylece Caddy dosyaları sorunsuz okurken, dışarıdan yetkisiz yazma işlemlerinin önüne geçilir.
+- `--chmod=D2750,F640`: Klasörleri (`D`) 2750 (`rwxr-s---`), dosyaları (`F`) ise 640 (`rw-r-----`) yetkisiyle hedefe yazar. Baştaki `2` = `SetGID` bitidir. Böylece her yeni klasör `caddy` grubunu otomatik miras alır, Caddy sorunsuz okurken `other=0` olduğu için dışarıdan erişim engellenir. `D750` kullanılsaydı yeni klasörler `s` olmadan oluşup grup mirası kırılırdı.
     
 
 ### SetGID Bitinin Sunucu Tarafında Tanımlanması
@@ -192,6 +190,6 @@ sudo chown -R kole:caddy /var/www/kole/public
 sudo find /var/www/kole/public -type d -exec chmod g+s {} \;
 ```
 
-> **SetGID Nasıl Çalışır?** `g+s` izni alan bir klasörün altında oluşturulan her yeni dosya veya alt klasör, onu oluşturan kullanıcının (bu senaryoda `kole`) birincil grubuna bakmaksızın, otomatik olarak üst klasörün grubunu (`caddy`) miras alır. Bu sayede her deploy sonrasında Caddy'nin dosyaları okuyamama sorunu  ortadan kalkar.
+> **SetGID Nasıl Çalışır?** `g+s` izni alan bir klasörün altında oluşturulan her yeni dosya veya alt klasör, onu oluşturan kullanıcının (bu senaryoda `kole`) birincil grubuna bakmaksızın, otomatik olarak üst klasörün grubunu (`caddy`) miras alır. Bu sayede her deploy sonrasında Caddy'nin dosyaları okuyamama sorunu  ortadan kalkar. Artık rsync her deploy'da `D2750` ile geldiği için bu işlem kalıcı hale gelir.
 
 Okudugunuz icin tesekkur ederim.
