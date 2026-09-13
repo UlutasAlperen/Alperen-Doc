@@ -12,7 +12,7 @@ https://github.com/alex-shpak/hugo-book
 Package apps with their dependencies into portable images Run isolated containers across homelab and production Persist state with volumes and connect containers with networks Ship images via registries (Docker Hub) into deployment pipelines And much more Docker konular# docker-kurulum-hardening-debian manage-docker-as-non-root-user docker-containers-images docker-volumes docker-build optimize-container-images-with-multi-stage-builds docker-network docker-exec-shell docker-logs docker-compose-basic var-olan-volume-uzerine-docker-compose docker-publish docker-kurulum-hardening-rocky docker-distroless-container-images Temeller# docker-containers-images = Container ve image kavramları, docker run, docker ps, docker stop docker-volumes = docker volume create/ls/inspect, Ghost örneği ile kalıcı veri docker-exec-shell = docker exec, interactive shell (-it /bin/sh) docker-network = --network none, custom bridge network, Caddy load balancer docker-logs = docker logs -f --tail, docker stats, docker top, resource limits Build ve Publish# docker-build = Dockerfile yazma, docker build -t, Go/Python server dockerize etme, ENV PORT optimize-container-images-with-multi-stage-builds = Multi-stage build ile Go (~800MB&#43; → 15-20MB) ve TypeScript image optimizasyonu, COPY --from docker-distroless-container-images = distroless image hiyerarşisi (static → base → cc → runtimes), FROM scratch karşılaştırması, trivy ile CVE taraması, :nonroot/:debug tag’leri, Chainguard/Chisel alternatifleri docker-publish = Docker Hub’a docker push/pull, tag (latest vs semver), deployment pipeline Compose ve Operasyon# docker-compose-basic = docker compose up/down/ps/logs/build/exec var-olan-volume-uzerine-docker-compose = var olan volume’ü external: true ile compose’a bağlama docker-kurulum-hardening-debian = Debian’a güvenli kurulum, daemon.json hardening, iptables/UFW notları docker-kurulum-hardening-rocky = Rocky’ye güvenli kurulum, firewalld &#43; SELinux notları, Podman rootless karşılaştırması, daemon.json hardening manage-docker-as-non-root-user = docker grubu, rootless notları, systemd ile boot’ta başlatma ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://dev.ulutasalperen.com/docs/docker/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/docker/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="Docker">
 	<meta property="og:description" content="Docker is the container platform. Nearly every DevOps workflow uses it to package, ship and run applications. I use Docker to:
@@ -29,12 +29,12 @@ Package apps with their dependencies into portable images Run isolated container
 <title>Docker • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://dev.ulutasalperen.com/docs/docker/">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/docker/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.a7cea30a1712fe5f10a89dde406f609911b39ebfd357d49217c9839e14ab55fb.js" integrity="sha256-p86jChcS/l8QqJ3eQG9gmRGznr/TV9SSF8mDnhSrVfs=" crossorigin="anonymous"></script>
-<link rel="alternate" type="application/rss+xml" href="https://dev.ulutasalperen.com/docs/docker/index.xml" title="Docker" />
+  <script defer type="module" src="/en.search.min.9354049d0540e7d51157ac1baa2c2e6db343c8b6d9bf7765e5214ad83b4bf49c.js" integrity="sha256-k1QEnQVA59URV6wbqiwubbNDyLbZv3dl5SFK2DtL9Jw=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/docker/index.xml" title="Docker" />
 
   
 </head>

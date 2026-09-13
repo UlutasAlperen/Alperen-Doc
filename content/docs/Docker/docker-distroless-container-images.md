@@ -42,14 +42,14 @@ gcr.io/distroless/static    latest    5d7d2b425607   1.99MB
 
 Dosya sistemini incelediğimizde şunları görürüz:
 
-- Sadece ~2MB (alpine image'ının ~%25'i 🤯).
+- Sadece ~2MB (alpine image'ının ~%25'i).
 - Tipik bir Linux dağıtım dizin yapısına sahip.
 - `/etc/passwd`, `/etc/group` hatta `/etc/nsswitch.conf` dosyaları yerinde.
 - Sertifikalar ve saat dilimi bilgisi de mevcut.
 - Image Debian bazlı (yani distroless image'inin içinde aslında bir dağıtım var, ama eti kemiklerine kadar soyulmuş).
 - Lisanslar da korunmuş görünüyor (ben telif uzmanı değilim ama).
 
-Ve hepsi bu! Yani %99.99 statik varlık. Paket yok, paket yöneticisi yok, `libc` yok ve **0 CVE**:
+Yani %99.99 statik. Paket yok, paket yöneticisi yok, `libc` yok ve **0 CVE**:
 
 ```bash
 trivy image gcr.io/distroless/static
@@ -225,7 +225,7 @@ libgcc_s.so.1: cannot open shared object file:
 No such file or directory
 ```
 
-Ağzı açık kaldık! Görünüşe göre `gcr.io/distroless/base` image'i tüm gerekli paylaşılan kütüphaneleri sağlamıyor. Rust'ın bir çalışma zamanı bağımlılığı var: `libgcc`. Ve bu, container'da yok.
+Dayyum! Görünüşe göre `gcr.io/distroless/base` image'i tüm gerekli paylaşılan kütüphaneleri sağlamıyor. Rust'ın bir çalışma zamanı bağımlılığı var: `libgcc`. Ve bu, container'da yok.
 
 Dinamik bağlanmış binary'ler için bu bağımlılık o kadar yaygın ki, ona özel bir distroless base image bile tanıtılmış: `gcr.io/distroless/cc`:
 

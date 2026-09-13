@@ -13,7 +13,7 @@ Küçük, güvenli image’ler üretme isteği gayet doğal. Bunun en ekstrem yo
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://dev.ulutasalperen.com/docs/docker/docker-distroless-container-images/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/docker/docker-distroless-container-images/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="docker-distroless-container-images">
 	<meta property="og:description" content="Distroless Container Image’leri: İçlerinde Ne Var, Neden Kullanılır?# 1. Distroless Nedir, Neden Var?# debian, ubuntu veya türevlerinden (node:lts, python:3 gibi) FROM ile başlayan container image’leri, genellikle dolu dolu bir Linux dağıtımıyla birlikte gelir. Gündelik işler için harikadır ama çoğu container uygulaması çalışma zamanında bu araçların ve kütüphanelerin neredeyse hiçbirine ihtiyaç duymaz. Sonuç? Teknik bir gerekçe olmaksızın daha büyük image boyutu ve yönetmesi gereken daha fazla güvenlik açığı (CVE).
@@ -26,16 +26,16 @@ Küçük, güvenli image’ler üretme isteği gayet doğal. Bunun en ekstrem yo
 	<meta itemprop="name" content="docker-distroless-container-images">
 	<meta itemprop="description" content="Distroless Container Image’leri: İçlerinde Ne Var, Neden Kullanılır?# 1. Distroless Nedir, Neden Var?# debian, ubuntu veya türevlerinden (node:lts, python:3 gibi) FROM ile başlayan container image’leri, genellikle dolu dolu bir Linux dağıtımıyla birlikte gelir. Gündelik işler için harikadır ama çoğu container uygulaması çalışma zamanında bu araçların ve kütüphanelerin neredeyse hiçbirine ihtiyaç duymaz. Sonuç? Teknik bir gerekçe olmaksızın daha büyük image boyutu ve yönetmesi gereken daha fazla güvenlik açığı (CVE).
 Küçük, güvenli image’ler üretme isteği gayet doğal. Bunun en ekstrem yolu FROM scratch ile başlamaktır; yani boş bir base image’e sadece uygulamamızın gerçekten ihtiyaç duyduğu dosyaları eklemek. Ancak FROM scratch ile başlayan container’lar varsayılan olarak şunları içermez:">
-	<meta itemprop="wordCount" content="1926">
+	<meta itemprop="wordCount" content="1919">
 
 <title>docker-distroless-container-images • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://dev.ulutasalperen.com/docs/docker/docker-distroless-container-images/">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/docker/docker-distroless-container-images/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.a7cea30a1712fe5f10a89dde406f609911b39ebfd357d49217c9839e14ab55fb.js" integrity="sha256-p86jChcS/l8QqJ3eQG9gmRGznr/TV9SSF8mDnhSrVfs=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.9354049d0540e7d51157ac1baa2c2e6db343c8b6d9bf7765e5214ad83b4bf49c.js" integrity="sha256-k1QEnQVA59URV6wbqiwubbNDyLbZv3dl5SFK2DtL9Jw=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -704,14 +704,14 @@ Küçük, güvenli image’ler üretme isteği gayet doğal. Bunun en ekstrem yo
 <pre tabindex="0"><code>REPOSITORY                  TAG       IMAGE ID       SIZE
 gcr.io/distroless/static    latest    5d7d2b425607   1.99MB</code></pre><p>Dosya sistemini incelediğimizde şunları görürüz:</p>
 <ul>
-<li>Sadece ~2MB (alpine image&rsquo;ının ~%25&rsquo;i 🤯).</li>
+<li>Sadece ~2MB (alpine image&rsquo;ının ~%25&rsquo;i).</li>
 <li>Tipik bir Linux dağıtım dizin yapısına sahip.</li>
 <li><code>/etc/passwd</code>, <code>/etc/group</code> hatta <code>/etc/nsswitch.conf</code> dosyaları yerinde.</li>
 <li>Sertifikalar ve saat dilimi bilgisi de mevcut.</li>
 <li>Image Debian bazlı (yani distroless image&rsquo;inin içinde aslında bir dağıtım var, ama eti kemiklerine kadar soyulmuş).</li>
 <li>Lisanslar da korunmuş görünüyor (ben telif uzmanı değilim ama).</li>
 </ul>
-<p>Ve hepsi bu! Yani %99.99 statik varlık. Paket yok, paket yöneticisi yok, <code>libc</code> yok ve <strong>0 CVE</strong>:</p>
+<p>Yani %99.99 statik. Paket yok, paket yöneticisi yok, <code>libc</code> yok ve <strong>0 CVE</strong>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>trivy image gcr.io/distroless/static</span></span></code></pre></div><pre tabindex="0"><code>gcr.io/distroless/static (debian 12.9)
 
 Total: 0 (UNKNOWN: 0, LOW: 0, MEDIUM: 0, HIGH: 0, CRITICAL: 0)</code></pre><blockquote class='book-hint '>
@@ -810,7 +810,7 @@ Total: 8 (UNKNOWN: 0, LOW: 7, MEDIUM: 1, HIGH: 0, CRITICAL: 0)</code></pre><p>Go
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker build -f ~/Dockerfile.rust -t distroless-base-rust .
 </span></span><span style="display:flex;"><span>docker run --rm distroless-base-rust</span></span></code></pre></div><pre tabindex="0"><code>/hello-world: error while loading shared libraries:
 libgcc_s.so.1: cannot open shared object file:
-No such file or directory</code></pre><p>Ağzı açık kaldık! Görünüşe göre <code>gcr.io/distroless/base</code> image&rsquo;i tüm gerekli paylaşılan kütüphaneleri sağlamıyor. Rust&rsquo;ın bir çalışma zamanı bağımlılığı var: <code>libgcc</code>. Ve bu, container&rsquo;da yok.</p>
+No such file or directory</code></pre><p>Dayyum! Görünüşe göre <code>gcr.io/distroless/base</code> image&rsquo;i tüm gerekli paylaşılan kütüphaneleri sağlamıyor. Rust&rsquo;ın bir çalışma zamanı bağımlılığı var: <code>libgcc</code>. Ve bu, container&rsquo;da yok.</p>
 <p>Dinamik bağlanmış binary&rsquo;ler için bu bağımlılık o kadar yaygın ki, ona özel bir distroless base image bile tanıtılmış: <code>gcr.io/distroless/cc</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker pull gcr.io/distroless/cc
 </span></span><span style="display:flex;"><span>docker images</span></span></code></pre></div><pre tabindex="0"><code>REPOSITORY                     TAG       IMAGE ID       SIZE
