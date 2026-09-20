@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="GitOps# My site deploys with GitHub Actions &#43; rsync over SSH (see github_workflow). That’s a push model: CI runs, then pushes files to the server. GitOps flips it: the cluster pulls its own desired state from git and reconciles itself continuously.
+The four principles (from OpenGitOps):
+Declarative - the entire desired state is expressed declaratively (manifests, charts, kustomize overlays) Versioned and immutable - state lives in git; every change is a commit, every deploy is a merge Pulled automatically - an agent inside the cluster pulls; nothing outside pushes into the cluster Continuously reconciled - actual state is compared with desired state all the time, and drift is corrected That fourth principle is what push-based CD structurally cannot give you. With push CD, the 2am kubectl edit sticks forever - nobody re-runs the pipeline for a change they didn’t make. With pull CD, drift is detected within seconds and reverted.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/gitops-argocd/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="gitops-argocd">
+	<meta property="og:description" content="GitOps# My site deploys with GitHub Actions &#43; rsync over SSH (see github_workflow). That’s a push model: CI runs, then pushes files to the server. GitOps flips it: the cluster pulls its own desired state from git and reconciles itself continuously.
+The four principles (from OpenGitOps):
+Declarative - the entire desired state is expressed declaratively (manifests, charts, kustomize overlays) Versioned and immutable - state lives in git; every change is a commit, every deploy is a merge Pulled automatically - an agent inside the cluster pulls; nothing outside pushes into the cluster Continuously reconciled - actual state is compared with desired state all the time, and drift is corrected That fourth principle is what push-based CD structurally cannot give you. With push CD, the 2am kubectl edit sticks forever - nobody re-runs the pipeline for a change they didn’t make. With pull CD, drift is detected within seconds and reverted.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="gitops-argocd">
+	<meta itemprop="description" content="GitOps# My site deploys with GitHub Actions &#43; rsync over SSH (see github_workflow). That’s a push model: CI runs, then pushes files to the server. GitOps flips it: the cluster pulls its own desired state from git and reconciles itself continuously.
+The four principles (from OpenGitOps):
+Declarative - the entire desired state is expressed declaratively (manifests, charts, kustomize overlays) Versioned and immutable - state lives in git; every change is a commit, every deploy is a merge Pulled automatically - an agent inside the cluster pulls; nothing outside pushes into the cluster Continuously reconciled - actual state is compared with desired state all the time, and drift is corrected That fourth principle is what push-based CD structurally cannot give you. With push CD, the 2am kubectl edit sticks forever - nobody re-runs the pipeline for a change they didn’t make. With pull CD, drift is detected within seconds and reverted.">
+	<meta itemprop="wordCount" content="942">
+
+<title>gitops-argocd • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/gitops-argocd/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="active">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>gitops-argocd</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#sync-waves-and-hooks">Sync Waves and Hooks</a></li>
+    <li><a href="#app-of-apps-and-applicationset">App-of-Apps and ApplicationSet</a></li>
+    <li><a href="#push-mı-pull-mı">Push mı Pull mı?</a></li>
+    <li><a href="#how-to-install-argocd-and-log-in-via-cli">How to Install ArgoCD and Log In via CLI</a></li>
+    <li><a href="#how-to-onboard-an-application-with-auto-sync">How to Onboard an Application with Auto-Sync</a></li>
+    <li><a href="#how-to-test-drift-correction">How to Test Drift Correction</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="gitops">GitOps<a class="anchor" href="#gitops">#</a></h1>
+<p>My site deploys with GitHub Actions + rsync over SSH (see <a href="../../version_control_systems/github_workflow/">github_workflow</a>). That&rsquo;s a <strong>push</strong> model: CI runs, then <em>pushes</em> files to the server. GitOps flips it: the cluster <em>pulls</em> its own desired state from git and reconciles itself continuously.</p>
+<p>The four principles (from <a href="https://opengitops.dev/">OpenGitOps</a>):</p>
+<ol>
+<li><strong>Declarative</strong> - the entire desired state is expressed declaratively (manifests, charts, kustomize overlays)</li>
+<li><strong>Versioned and immutable</strong> - state lives in git; every change is a commit, every deploy is a merge</li>
+<li><strong>Pulled automatically</strong> - an agent inside the cluster pulls; nothing outside pushes into the cluster</li>
+<li><strong>Continuously reconciled</strong> - actual state is compared with desired state <em>all the time</em>, and drift is corrected</li>
+</ol>
+<p>That fourth principle is what push-based CD structurally cannot give you. With push CD, the 2am <code>kubectl edit</code> sticks forever - nobody re-runs the pipeline for a change they didn&rsquo;t make. With pull CD, drift is detected within seconds and reverted.</p>
+<h1 id="argocd-architecture">ArgoCD Architecture<a class="anchor" href="#argocd-architecture">#</a></h1>
+<p><a href="https://argo-cd.readthedocs.io/">ArgoCD</a> is the most popular GitOps controller. It runs <em>inside</em> the cluster and keeps it matching git:</p>
+<ul>
+<li><strong>API server + UI + CLI</strong>: dashboard, gRPC API, and the <code>argocd</code> binary for imperative operations</li>
+<li><strong>Repo server</strong>: clones and renders your repo - plain YAML, Helm, or kustomize (it detects <code>kustomization.yaml</code> automatically)</li>
+<li><strong>Application controller</strong>: the reconciler. Continuously diffs rendered git state vs live cluster state, computes health, and (when auto-sync is on) corrects it</li>
+</ul>
+<p>The unit of work is the <code>Application</code> CRD:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">argoproj.io/v1alpha1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Application</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">argocd</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">project</span>: <span style="color:#ae81ff">default</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">source</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">repoURL</span>: <span style="color:#ae81ff">https://github.com/&lt;your-user&gt;/k8s-manifests</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">targetRevision</span>: <span style="color:#ae81ff">main</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">path</span>: <span style="color:#ae81ff">base</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">destination</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">server</span>: <span style="color:#ae81ff">https://kubernetes.default.svc</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">default</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">syncPolicy</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">automated</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">prune</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">selfHeal</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">syncOptions</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">CreateNamespace=true</span></span></span></code></pre></div><ul>
+<li><code>source</code>: repo, revision, path. For private repos you register credentials first (<code>argocd repo add</code> or via UI)</li>
+<li><code>syncPolicy.automated</code>: sync on git changes without human click</li>
+<li><code>prune: true</code>: resource deleted in git gets deleted in cluster too - without this, deletions silently do nothing</li>
+<li><code>selfHeal: true</code>: manual <code>kubectl edit/scale/delete</code> gets reverted to git&rsquo;s state</li>
+</ul>
+<h2 id="sync-waves-and-hooks">Sync Waves and Hooks<a class="anchor" href="#sync-waves-and-hooks">#</a></h2>
+<p>Deployments have <em>ordering</em> requirements: the namespace first, then configmaps, then deployments, then an ingress. ArgoCD supports this with annotations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">argocd.argoproj.io/sync-wave</span>: <span style="color:#e6db74">&#34;1&#34;</span></span></span></code></pre></div><p>Lower waves sync first and must be Healthy before the next wave proceeds. For one-off work (migrations, seed data), hooks run Jobs at sync phases:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">argocd.argoproj.io/hook</span>: <span style="color:#ae81ff">PreSync</span></span></span></code></pre></div><p><code>helm install</code>&lsquo;ün <a href="helm/">hooks</a> kavramına aynen benziyor - sadece burada tetikleyici git sync&rsquo;i.</p>
+<h2 id="app-of-apps-and-applicationset">App-of-Apps and ApplicationSet<a class="anchor" href="#app-of-apps-and-applicationset">#</a></h2>
+<p>Once you have more than a handful of Applications, you get the chicken-and-egg problem: who manages the Applications themselves? Two standard answers:</p>
+<ul>
+<li><strong>App-of-apps</strong>: one root <code>Application</code> whose source directory contains only other <code>Application</code> manifests. ArgoCD bootstraps itself</li>
+<li><strong>ApplicationSet</strong>: generates Applications from templates (one app per git directory, per cluster, per PR - <a href="https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/">PR environments</a> fall out almost for free)</li>
+</ul>
+<h2 id="push-mı-pull-mı">Push mı Pull mı?<a class="anchor" href="#push-m%c4%b1-pull-m%c4%b1">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th>GitHub Actions (push)</th>
+					<th>ArgoCD (pull)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Tetikleme</td>
+					<td>CI pipeline&rsquo;ı deploy eder</td>
+					<td>Cluster kendi durumunu çeker</td>
+			</tr>
+			<tr>
+					<td>Kimlik</td>
+					<td>CI&rsquo;ın cluster&rsquo;a SSH/API erişimi gerekir</td>
+					<td>Sadece içeriden çıkan bağlantı; dışarıya açık erişim yok</td>
+			</tr>
+			<tr>
+					<td>Drift</td>
+					<td>2am <code>kubectl edit</code> kalıcı olur</td>
+					<td><code>selfHeal</code> geri alır</td>
+			</tr>
+			<tr>
+					<td>Secrets</td>
+					<td>GitHub secrets&rsquo;ta</td>
+					<td>Repo/cluster&rsquo;da (External Secrets ile dışarı taşınır)</td>
+			</tr>
+			<tr>
+					<td>State</td>
+					<td>Actions logları</td>
+					<td><code>Application</code> CRD + canlı UI</td>
+			</tr>
+	</tbody>
+</table>
+<p>Benim sonucum: build/test CI&rsquo;da kalır; <strong>deploy&rsquo;u</strong> ArgoCD&rsquo;ye devretmek drift&rsquo;i ve &ldquo;kim ne deploy etti&rdquo; sorusunu ortadan kaldırıyor. CI image&rsquo;ı build edip registry&rsquo;ye push&rsquo;lar, manifest&rsquo;teki tag&rsquo;i güncelleyen PR&rsquo;ı açar, gerisini ArgoCD halleder.</p>
+<h2 id="how-to-install-argocd-and-log-in-via-cli">How to Install ArgoCD and Log In via CLI<a class="anchor" href="#how-to-install-argocd-and-log-in-via-cli">#</a></h2>
+<ol>
+<li>Install with Helm (see <a href="helm/">helm</a>):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add argo https://argoproj.github.io/argo-helm
+</span></span><span style="display:flex;"><span>helm repo update
+</span></span><span style="display:flex;"><span>helm install argocd argo/argo-cd --namespace argocd --create-namespace
+</span></span><span style="display:flex;"><span>kubectl -n argocd get pods --watch</span></span></code></pre></div><ol start="2">
+<li>Expose the UI locally and fetch the admin password:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl port-forward svc/argocd-server 8080:443 -n argocd
+</span></span><span style="display:flex;"><span>kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.data.password}&#39;</span> | base64 -d</span></span></code></pre></div><blockquote class='book-hint '>
+<p>That initial secret contains a <em>generated</em> admin password - after your first login, change it or disable local admin entirely and use SSO/RBAC. Leaving the initial secret around is a documented footgun.</p>
+</blockquote><ol start="3">
+<li>Install the CLI and log in (self-signed cert in dev, hence <code>--insecure</code>):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>argocd login localhost:8080 --username admin --password &lt;pw&gt; --insecure
+</span></span><span style="display:flex;"><span>argocd account list</span></span></code></pre></div><ol start="4">
+<li>Change the admin password immediately:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>argocd account update-password</span></span></code></pre></div><h2 id="how-to-onboard-an-application-with-auto-sync">How to Onboard an Application with Auto-Sync<a class="anchor" href="#how-to-onboard-an-application-with-auto-sync">#</a></h2>
+<ol>
+<li>
+<p>Push your SynergyChat manifests (the <code>base/</code> folder from <a href="kustomize/">kustomize</a>) to a GitHub repo.</p>
+</li>
+<li>
+<p>Register the repo (needed once, and mandatory for private repos):</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>argocd repo add https://github.com/&lt;your-user&gt;/k8s-manifests.git</span></span></code></pre></div><ol start="3">
+<li>Create the Application (the YAML from the architecture section above), then watch it through the CLI instead of the UI:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f synergychat-app.yaml
+</span></span><span style="display:flex;"><span>argocd app list
+</span></span><span style="display:flex;"><span>argocd app get synergychat
+</span></span><span style="display:flex;"><span>argocd app sync synergychat   <span style="color:#75715e"># only needed if automated isn&#39;t on yet</span></span></span></code></pre></div><p><code>argocd app get</code> shows the interesting state: <code>Synced</code>/<code>OutOfSync</code>, and per-resource <code>Health</code> (Progressing/Healthy/Degraded) - which is k8s health checks read for you.</p>
+<ol start="4">
+<li>The UI (<code>kubectl port-forward svc/argocd-server 8080:443 -n argocd</code>) renders the resource tree - worth seeing once, since it visualizes exactly which manifest owns which live resource.</li>
+</ol>
+<h2 id="how-to-test-drift-correction">How to Test Drift Correction<a class="anchor" href="#how-to-test-drift-correction">#</a></h2>
+<ol>
+<li>Scale by hand, like the 2am cowboy you&rsquo;re not supposed to be:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl scale deployment/synergychat-api --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>argocd app get synergychat</span></span></code></pre></div><p>Status flips to <code>OutOfSync</code>; with <code>selfHeal</code> on, the controller reconciles it back within seconds - verify the replica count returns to git&rsquo;s value.</p>
+<ol start="2">
+<li>
+<p>Change git instead: open a PR that bumps <code>replicas</code> in the base, merge it, and watch <code>argocd app get</code> flip to <code>Synced</code> after the refresh loop picks it up. <em>Deploy = git push.</em></p>
+</li>
+<li>
+<p>Test <code>prune</code>: delete a manifest from the repo, commit, and confirm the resource disappears from the cluster. That&rsquo;s the property that makes git the single source of truth - <em>including deletions</em>.</p>
+</li>
+</ol>
+<blockquote class='book-hint '>
+<p>Watch out: <code>prune: true</code> means git deletions are destructive on the cluster, too. Deleting the wrong directory in a PR takes down real workloads - that&rsquo;s why prod repos get branch protection and why <code>argocd app sync --prune</code> in manual mode deserves a second look before Enter.</p>
+</blockquote><p>for more <a href="vpa-cluster-autoscaler/">vpa-cluster-autoscaler</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>kubernetes-troubleshooting</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="flex align-center">
+        <span>vpa-cluster-autoscaler</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#sync-waves-and-hooks">Sync Waves and Hooks</a></li>
+    <li><a href="#app-of-apps-and-applicationset">App-of-Apps and ApplicationSet</a></li>
+    <li><a href="#push-mı-pull-mı">Push mı Pull mı?</a></li>
+    <li><a href="#how-to-install-argocd-and-log-in-via-cli">How to Install ArgoCD and Log In via CLI</a></li>
+    <li><a href="#how-to-onboard-an-application-with-auto-sync">How to Onboard an Application with Auto-Sync</a></li>
+    <li><a href="#how-to-test-drift-correction">How to Test Drift Correction</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

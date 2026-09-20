@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Nodes# We’ve talked about how in a production environment, you’ll have multiple nodes in your cluster. For this course, we’ve been using a single node cluster with minikube. The nice thing about Kubernetes is that almost everything you do with it is abstracted away from the underlying infrastructure with the kubectl CLI.
+All the commands we’ve been using locally will work the same way on a production cluster.
+Ways to Deploy to Production# There are several popular ways to deploy a Kubernetes cluster to production:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-nodes-basic/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="kubernetes-nodes-basic">
+	<meta property="og:description" content="Nodes# We’ve talked about how in a production environment, you’ll have multiple nodes in your cluster. For this course, we’ve been using a single node cluster with minikube. The nice thing about Kubernetes is that almost everything you do with it is abstracted away from the underlying infrastructure with the kubectl CLI.
+All the commands we’ve been using locally will work the same way on a production cluster.
+Ways to Deploy to Production# There are several popular ways to deploy a Kubernetes cluster to production:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="kubernetes-nodes-basic">
+	<meta itemprop="description" content="Nodes# We’ve talked about how in a production environment, you’ll have multiple nodes in your cluster. For this course, we’ve been using a single node cluster with minikube. The nice thing about Kubernetes is that almost everything you do with it is abstracted away from the underlying infrastructure with the kubectl CLI.
+All the commands we’ve been using locally will work the same way on a production cluster.
+Ways to Deploy to Production# There are several popular ways to deploy a Kubernetes cluster to production:">
+	<meta itemprop="wordCount" content="1124">
+
+<title>kubernetes-nodes-basic • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-nodes-basic/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle" checked />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="active">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>kubernetes-nodes-basic</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#ways-to-deploy-to-production">Ways to Deploy to Production</a>
+      <ul>
+        <li><a href="#gke-eks-aks">Gke, Eks, Aks</a></li>
+        <li><a href="#manual">Manual</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#why-do-we-need-requests">Why Do We Need Requests?</a></li>
+    <li><a href="#assignment">Assignment</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#memory-is-scarier">Memory Is Scarier</a></li>
+    <li><a href="#limits-are-for-protection">Limits Are for Protection</a></li>
+    <li><a href="#requests-are-for-scheduling">Requests Are for Scheduling</a></li>
+    <li><a href="#it-all-depends">It All Depends!</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="nodes">Nodes<a class="anchor" href="#nodes">#</a></h1>
+<p>We&rsquo;ve talked about how in a production environment, you&rsquo;ll have multiple nodes in your cluster. For this course, we&rsquo;ve been using a single node cluster with <code>minikube</code>. The nice thing about Kubernetes is that almost everything you do with it is abstracted away from the underlying infrastructure with the <code>kubectl</code> CLI.</p>
+<p>All the commands we&rsquo;ve been using locally will work the same way on a production cluster.</p>
+<h2 id="ways-to-deploy-to-production">Ways to Deploy to Production<a class="anchor" href="#ways-to-deploy-to-production">#</a></h2>
+<p>There are several popular ways to deploy a Kubernetes cluster to production:</p>
+<ul>
+<li><a href="https://cloud.google.com/kubernetes-engine">GKE (Google Kubernetes Engine) / Autopilot</a></li>
+<li><a href="https://aws.amazon.com/eks/">EKS (Amazon Elastic Kubernetes Service)</a></li>
+<li><a href="https://azure.microsoft.com/en-us/products/kubernetes-service">AKS (Azure Kubernetes Service)</a></li>
+<li><a href="https://kubernetes.io/docs/setup/production-environment/">Manual Deployment</a></li>
+</ul>
+<h3 id="gke-eks-aks">Gke, Eks, Aks<a class="anchor" href="#gke-eks-aks">#</a></h3>
+<p>These are all managed Kubernetes services, offered by the big 3 cloud providers. They&rsquo;re all pretty similar, though I believe GKE is generally the most feature-rich of the three. GKE also has a cool <a href="https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview">auto-pilot mode</a> that makes it so that you don&rsquo;t have to worry about managing nodes at all.</p>
+<p>The nice thing about a managed offering is that it can be configured to handle autoscaling at the node level. This means that you can set up your cluster to automatically add and remove nodes based on the load of your cluster.</p>
+<h3 id="manual">Manual<a class="anchor" href="#manual">#</a></h3>
+<p>You can also set up your own cluster manually. I&rsquo;ve worked on teams where a cloud engineering team has custom scripts that configure a cluster on top of standard EC2 instances. Then they have their own autoscaling scripts that add and remove nodes based on the load of the cluster. I happened to work at a company that manually deployed k8s to a group of AWS virtual machines, but you could also do the same thing on physical machines.</p>
+<p>Deploying manually was more popular before the managed services were released, but it&rsquo;s still a viable option if you want more control over your cluster.</p>
+<h1 id="node-types">Node Types<a class="anchor" href="#node-types">#</a></h1>
+<p>Broadly speaking, there are two types of machines in a production Kubernetes cluster:</p>
+<ul>
+<li>Control Plane</li>
+<li>Worker Nodes</li>
+</ul>
+<p><img src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/6vd1h1w-1280x605.png" alt="" /></p>
+<p>The control plane is responsible for managing the cluster. It&rsquo;s where the API server, scheduler, and controller manager live. The control plane used to be called &ldquo;master nodes&rdquo;, but that term is deprecated now.</p>
+<p>When you hear the word &ldquo;node&rdquo; used in isolation it&rsquo;s <em>usually</em> referring to worker nodes. In fact, because I&rsquo;m using GKE for Boot.dev, when I run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get nodes</span></span></code></pre></div><p>I get back:</p>
+<pre tabindex="0"><code>NAME                                       STATUS   ROLES    AGE     VERSION
+gk3-kube-prod-nap-1cmjprlt-92e1dc91-jmi8   Ready    &lt;none&gt;   5d21h   v1.25.12-gke.500
+gk3-kube-prod-nap-1cmjprlt-dfe4d6de-cq0k   Ready    &lt;none&gt;   5d21h   v1.25.12-gke.500</code></pre><p>These are my worker nodes. They&rsquo;re the machines that are actually running my containers. The control plane is fully managed by GKE, so I don&rsquo;t have to worry about it. That&rsquo;s usually fine because as the load on my cluster increases, I&rsquo;m mostly concerned with scaling out my worker nodes and making sure they&rsquo;re healthy. The control plane is fairly static.</p>
+<h1 id="resource-requests">Resource Requests<a class="anchor" href="#resource-requests">#</a></h1>
+<p>We talked about resource <em>limits</em>, but there&rsquo;s another critical concept to understand: resource <em>requests</em>.</p>
+<p>A resource request is the amount of a resource that a pod <em>requests</em> from the node it&rsquo;s running on. A resource limit, on the other hand, is the <em>maximum</em> amount of a resource that a pod is allowed to consume before it&rsquo;s throttled or killed.</p>
+<h2 id="why-do-we-need-requests">Why Do We Need Requests?<a class="anchor" href="#why-do-we-need-requests">#</a></h2>
+<p>Let&rsquo;s say we have 2 nodes:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Node</th>
+					<th>RAM</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Node 1</td>
+					<td>8GB</td>
+			</tr>
+			<tr>
+					<td>Node 2</td>
+					<td>8GB</td>
+			</tr>
+	</tbody>
+</table>
+<p>And we have 4 pods:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Pod</th>
+					<th>Node</th>
+					<th>RAM</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Pod 1</td>
+					<td>Node 1</td>
+					<td>3GB</td>
+			</tr>
+			<tr>
+					<td>Pod 2</td>
+					<td>Node 1</td>
+					<td>3GB</td>
+			</tr>
+			<tr>
+					<td>Pod 3</td>
+					<td>Node 2</td>
+					<td>3GB</td>
+			</tr>
+			<tr>
+					<td>Pod 4</td>
+					<td>Node 2</td>
+					<td>3GB</td>
+			</tr>
+	</tbody>
+</table>
+<p>This is valid. Currently, only 6/8 GB of RAM is being used on each node. The trouble is, even though each node has 2GB of RAM left, if we try to add another pod, and it ends up utilizing more than 2GB of RAM (like the 3GB it will likely need), it will crash.</p>
+<p><em>Resource requests solve this</em>.</p>
+<p>If we add a resource request of 3GB, Kubernetes will know that each pod needs 3GB of RAM to run. If we try to <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#how-pods-with-resource-requests-are-scheduled">schedule</a> a new pod with the request in place, k8s will gracefully tell us it doesn&rsquo;t have enough resources to do so, or it will use a node in the cluster that has at least 3GB of RAM available.</p>
+<h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
+<p>Let&rsquo;s set an absurdly high resource request for our <code>synergychat-testram</code> pods.</p>
+<ol>
+<li><input disabled="" type="checkbox"> Update the <code>resources</code> section of its deployment. I used 40GB:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">limits</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">40000Mi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">40000Mi</span></span></span></code></pre></div><p>Apply the deployment, then check on your pods:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods</span></span></code></pre></div><p>You <em>should</em> see that the pod is &ldquo;Pending&rdquo;. If it worked&hellip; well you have more money than me to spend on hardware. Go even higher!</p>
+<ol start="2">
+<li><input disabled="" type="checkbox"> Once you&rsquo;ve got it in a pending state, <code>describe</code> the pod and look at the &ldquo;Events&rdquo; section of the output to see what&rsquo;s going on:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl describe pod &lt;pod-name&gt;</span></span></code></pre></div><h1 id="requests">Requests<a class="anchor" href="#requests">#</a></h1>
+<p>One of the most important things to get right when working with pod autoscalers in Kubernetes are the resource requests and limits. If you don&rsquo;t set them correctly, you can end up with a situation where your pods are crashing, or your autoscaler is scaling up too many pods.</p>
+<p>Generally speaking, my rule of thumb is:</p>
+<ul>
+<li>Set memory <em>requests</em> ~10% higher than the average memory usage of your pods</li>
+<li>Set CPU <em>requests</em> to 50% of the average CPU usage of your pods</li>
+<li>Set memory <em>limits</em> ~100% higher than the average memory usage of your pods</li>
+<li>Set CPU <em>limits</em> ~100% higher than the average CPU usage of your pods</li>
+</ul>
+<p>Why these numbers? Consider several points:</p>
+<h2 id="memory-is-scarier">Memory Is Scarier<a class="anchor" href="#memory-is-scarier">#</a></h2>
+<p>Memory is the scariest resource to run out of. If you run out of CPU, your pods will just slow down. If you run out of memory, your pods will crash. For that reason, it&rsquo;s more important to add a buffer to your memory requests than your CPU requests.</p>
+<h2 id="limits-are-for-protection">Limits Are for Protection<a class="anchor" href="#limits-are-for-protection">#</a></h2>
+<p>Limits should only take effect when a pod is using more resources than it should. Limits are like a safety net. If your limits are constantly being hit, you should either increase them or fix your application code so that it uses fewer resources.</p>
+<p>As such, limits should generally be set higher than requests.</p>
+<h2 id="requests-are-for-scheduling">Requests Are for Scheduling<a class="anchor" href="#requests-are-for-scheduling">#</a></h2>
+<p>Because requests are used to schedule pods, you want to make sure that your requests are high enough that once scheduled, your pods will have the resources, but not so high that you&rsquo;re wasting resources. If you set your requests too high, you&rsquo;ll end up with a situation where you can&rsquo;t schedule pods because k8s <em>thinks</em> it doesn&rsquo;t have enough resources, even though it does.</p>
+<h2 id="it-all-depends">It All Depends!<a class="anchor" href="#it-all-depends">#</a></h2>
+<p>These are just rules of thumb! At the end of the day, you always need to understand how your applications work, and what resources they need. The right numbers for your applications might be drastically different than the numbers I&rsquo;ve suggested here.
+for more <a href="kubernetes-scaling-vertical/">scaling-vertical</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes/kubernetes-statefulsets/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>kubernetes-statefulsets</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes_v2/" class="flex align-center">
+        <span>Kubernetes v2</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#ways-to-deploy-to-production">Ways to Deploy to Production</a>
+      <ul>
+        <li><a href="#gke-eks-aks">Gke, Eks, Aks</a></li>
+        <li><a href="#manual">Manual</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#why-do-we-need-requests">Why Do We Need Requests?</a></li>
+    <li><a href="#assignment">Assignment</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#memory-is-scarier">Memory Is Scarier</a></li>
+    <li><a href="#limits-are-for-protection">Limits Are for Protection</a></li>
+    <li><a href="#requests-are-for-scheduling">Requests Are for Scheduling</a></li>
+    <li><a href="#it-all-depends">It All Depends!</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kubernetes is the container orchestration platform. Nearly every modern DevOps workflow runs on top of it in production. I use Kubernetes to:
+Orchestrate containers across single-node (Minikube) and multi-node (GKE) clusters Declare the desired state with YAML manifests and let controllers reconcile it Load balance and expose services through Services and Gateways Scale workloads vertically and horizontally (HPA) Persist state with volumes, PVCs and persistent storage Run stateful workloads like databases with StatefulSets Run batch work and scheduled tasks with Jobs and CronJobs And much more Kubernetes konular# kubernetes-minikube kubernetes-pods-minikube kubernetes-deployments-minikube kubernetes-probes kubernetes-yaml-configurations kubernetes-secrets kubernetes-jobs-cronjobs kubernetes-services kubernetes-gateway-minikube kubernetes-namespaces kubernetes-scaling-vertical kubernetes-scaling-horizontal kubernetes-storage kubernetes-persistent-volumes kubernetes-statefulsets kubernetes-nodes-basic Temeller# kubernetes-minikube = Minikube ile local cluster, kubectl create deployment, port-forward, Prod vs Minikube farkı kubernetes-pods-minikube = Pod kavramı, ephemeral doğası, kubectl logs/delete pod, pod’ların unique IP adresleri kubernetes-deployments-minikube = Deployment ve ReplicaSet, desired vs current state, kubectl get/edit deployment kubernetes-probes = Liveness/Readiness/Startup probes, httpGet/tcpSocket/exec, rolling update’lerde probes’un rolü kubernetes-yaml-configurations = YAML manifest yapısı (apiVersion, kind, spec), ConfigMap, env/envFrom, Secrets Secret’lar ve Batch İşleri# kubernetes-secrets = kubectl create secret, secretKeyRef/envFrom/volume mount, base64 ≠ şifreleme, Sealed Secrets/External Secrets kubernetes-jobs-cronjobs = Job (completions/parallelism/backoffLimit), CronJob (schedule/concurrencyPolicy), db.json yedekleme pipeline’ı Ağ (Services &amp; Gateway)# kubernetes-services = ClusterIP, NodePort, LoadBalancer, ExternalName, stable endpoint ve load balancing kubernetes-gateway-minikube = Gateway API (Envoy), HTTPRoute, /etc/hosts &#43; minikube tunnel, annotations kubernetes-namespaces = kubectl create ns, -n flag, intra-cluster DNS (svc.cluster.local) Ölçeklendirme# kubernetes-scaling-vertical = metrics-server, kubectl top, resource limits (50m CPU, 256Mi RAM), CrashLoopBackOff kubernetes-scaling-horizontal = HorizontalPodAutoscaler (HPA), minReplicas/maxReplicas, CPU hedefli otomatik ölçekleme Depolama# kubernetes-storage = Ephemeral filesystem, emptyDir volumes, multi-container pod’lar (sidecar), veritabanları kubernetes-persistent-volumes = PersistentVolume (PV), PersistentVolumeClaim (PVC), dynamic provisioning, volumeMounts kubernetes-statefulsets = Stable identity, volumeClaimTemplates ile pod başına PVC, headless services, PostgreSQL örneği Prod’e Geçiş# kubernetes-nodes-basic = Control plane ve worker node’lar, GKE/EKS/AKS, resource requests vs limits ">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="Kubernetes">
+	<meta property="og:description" content="Kubernetes is the container orchestration platform. Nearly every modern DevOps workflow runs on top of it in production. I use Kubernetes to:
+Orchestrate containers across single-node (Minikube) and multi-node (GKE) clusters Declare the desired state with YAML manifests and let controllers reconcile it Load balance and expose services through Services and Gateways Scale workloads vertically and horizontally (HPA) Persist state with volumes, PVCs and persistent storage Run stateful workloads like databases with StatefulSets Run batch work and scheduled tasks with Jobs and CronJobs And much more Kubernetes konular# kubernetes-minikube kubernetes-pods-minikube kubernetes-deployments-minikube kubernetes-probes kubernetes-yaml-configurations kubernetes-secrets kubernetes-jobs-cronjobs kubernetes-services kubernetes-gateway-minikube kubernetes-namespaces kubernetes-scaling-vertical kubernetes-scaling-horizontal kubernetes-storage kubernetes-persistent-volumes kubernetes-statefulsets kubernetes-nodes-basic Temeller# kubernetes-minikube = Minikube ile local cluster, kubectl create deployment, port-forward, Prod vs Minikube farkı kubernetes-pods-minikube = Pod kavramı, ephemeral doğası, kubectl logs/delete pod, pod’ların unique IP adresleri kubernetes-deployments-minikube = Deployment ve ReplicaSet, desired vs current state, kubectl get/edit deployment kubernetes-probes = Liveness/Readiness/Startup probes, httpGet/tcpSocket/exec, rolling update’lerde probes’un rolü kubernetes-yaml-configurations = YAML manifest yapısı (apiVersion, kind, spec), ConfigMap, env/envFrom, Secrets Secret’lar ve Batch İşleri# kubernetes-secrets = kubectl create secret, secretKeyRef/envFrom/volume mount, base64 ≠ şifreleme, Sealed Secrets/External Secrets kubernetes-jobs-cronjobs = Job (completions/parallelism/backoffLimit), CronJob (schedule/concurrencyPolicy), db.json yedekleme pipeline’ı Ağ (Services &amp; Gateway)# kubernetes-services = ClusterIP, NodePort, LoadBalancer, ExternalName, stable endpoint ve load balancing kubernetes-gateway-minikube = Gateway API (Envoy), HTTPRoute, /etc/hosts &#43; minikube tunnel, annotations kubernetes-namespaces = kubectl create ns, -n flag, intra-cluster DNS (svc.cluster.local) Ölçeklendirme# kubernetes-scaling-vertical = metrics-server, kubectl top, resource limits (50m CPU, 256Mi RAM), CrashLoopBackOff kubernetes-scaling-horizontal = HorizontalPodAutoscaler (HPA), minReplicas/maxReplicas, CPU hedefli otomatik ölçekleme Depolama# kubernetes-storage = Ephemeral filesystem, emptyDir volumes, multi-container pod’lar (sidecar), veritabanları kubernetes-persistent-volumes = PersistentVolume (PV), PersistentVolumeClaim (PVC), dynamic provisioning, volumeMounts kubernetes-statefulsets = Stable identity, volumeClaimTemplates ile pod başına PVC, headless services, PostgreSQL örneği Prod’e Geçiş# kubernetes-nodes-basic = Control plane ve worker node’lar, GKE/EKS/AKS, resource requests vs limits">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="website">
+
+
+	<meta itemprop="name" content="Kubernetes">
+	<meta itemprop="description" content="Kubernetes is the container orchestration platform. Nearly every modern DevOps workflow runs on top of it in production. I use Kubernetes to:
+Orchestrate containers across single-node (Minikube) and multi-node (GKE) clusters Declare the desired state with YAML manifests and let controllers reconcile it Load balance and expose services through Services and Gateways Scale workloads vertically and horizontally (HPA) Persist state with volumes, PVCs and persistent storage Run stateful workloads like databases with StatefulSets Run batch work and scheduled tasks with Jobs and CronJobs And much more Kubernetes konular# kubernetes-minikube kubernetes-pods-minikube kubernetes-deployments-minikube kubernetes-probes kubernetes-yaml-configurations kubernetes-secrets kubernetes-jobs-cronjobs kubernetes-services kubernetes-gateway-minikube kubernetes-namespaces kubernetes-scaling-vertical kubernetes-scaling-horizontal kubernetes-storage kubernetes-persistent-volumes kubernetes-statefulsets kubernetes-nodes-basic Temeller# kubernetes-minikube = Minikube ile local cluster, kubectl create deployment, port-forward, Prod vs Minikube farkı kubernetes-pods-minikube = Pod kavramı, ephemeral doğası, kubectl logs/delete pod, pod’ların unique IP adresleri kubernetes-deployments-minikube = Deployment ve ReplicaSet, desired vs current state, kubectl get/edit deployment kubernetes-probes = Liveness/Readiness/Startup probes, httpGet/tcpSocket/exec, rolling update’lerde probes’un rolü kubernetes-yaml-configurations = YAML manifest yapısı (apiVersion, kind, spec), ConfigMap, env/envFrom, Secrets Secret’lar ve Batch İşleri# kubernetes-secrets = kubectl create secret, secretKeyRef/envFrom/volume mount, base64 ≠ şifreleme, Sealed Secrets/External Secrets kubernetes-jobs-cronjobs = Job (completions/parallelism/backoffLimit), CronJob (schedule/concurrencyPolicy), db.json yedekleme pipeline’ı Ağ (Services &amp; Gateway)# kubernetes-services = ClusterIP, NodePort, LoadBalancer, ExternalName, stable endpoint ve load balancing kubernetes-gateway-minikube = Gateway API (Envoy), HTTPRoute, /etc/hosts &#43; minikube tunnel, annotations kubernetes-namespaces = kubectl create ns, -n flag, intra-cluster DNS (svc.cluster.local) Ölçeklendirme# kubernetes-scaling-vertical = metrics-server, kubectl top, resource limits (50m CPU, 256Mi RAM), CrashLoopBackOff kubernetes-scaling-horizontal = HorizontalPodAutoscaler (HPA), minReplicas/maxReplicas, CPU hedefli otomatik ölçekleme Depolama# kubernetes-storage = Ephemeral filesystem, emptyDir volumes, multi-container pod’lar (sidecar), veritabanları kubernetes-persistent-volumes = PersistentVolume (PV), PersistentVolumeClaim (PVC), dynamic provisioning, volumeMounts kubernetes-statefulsets = Stable identity, volumeClaimTemplates ile pod başına PVC, headless services, PostgreSQL örneği Prod’e Geçiş# kubernetes-nodes-basic = Control plane ve worker node’lar, GKE/EKS/AKS, resource requests vs limits">
+	<meta itemprop="wordCount" content="295">
+
+<title>Kubernetes • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/kubernetes/index.xml" title="Kubernetes" />
+
+  
+</head>
+<body dir="ltr" class="book-kind-section book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle" checked />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="active">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Kubernetes</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#kubernetes-konular">Kubernetes konular</a>
+      <ul>
+        <li><a href="#temeller">Temeller</a></li>
+        <li><a href="#secretlar-ve-batch-işleri">Secret&rsquo;lar ve Batch İşleri</a></li>
+        <li><a href="#ağ-services--gateway">Ağ (Services &amp; Gateway)</a></li>
+        <li><a href="#ölçeklendirme">Ölçeklendirme</a></li>
+        <li><a href="#depolama">Depolama</a></li>
+        <li><a href="#prode-geçiş">Prod&rsquo;e Geçiş</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p><a href="https://kubernetes.io/">Kubernetes</a> is <em>the</em> container orchestration platform. Nearly every modern DevOps workflow runs on top of it in production. I use Kubernetes to:</p>
+<ul>
+<li>Orchestrate containers across single-node (Minikube) and multi-node (GKE) clusters</li>
+<li>Declare the desired state with YAML manifests and let controllers reconcile it</li>
+<li>Load balance and expose services through Services and Gateways</li>
+<li>Scale workloads vertically and horizontally (HPA)</li>
+<li>Persist state with volumes, PVCs and persistent storage</li>
+<li>Run stateful workloads like databases with StatefulSets</li>
+<li>Run batch work and scheduled tasks with Jobs and CronJobs</li>
+<li>And much more</li>
+</ul>
+<h2 id="kubernetes-konular">Kubernetes konular<a class="anchor" href="#kubernetes-konular">#</a></h2>
+<ol>
+<li><a href="kubernetes-minikube/">kubernetes-minikube</a></li>
+<li><a href="kubernetes-pods-minikube/">kubernetes-pods-minikube</a></li>
+<li><a href="kubernetes-deployments-minikube/">kubernetes-deployments-minikube</a></li>
+<li><a href="kubernetes-probes/">kubernetes-probes</a></li>
+<li><a href="kubernetes-yaml-configurations/">kubernetes-yaml-configurations</a></li>
+<li><a href="kubernetes-secrets/">kubernetes-secrets</a></li>
+<li><a href="kubernetes-jobs-cronjobs/">kubernetes-jobs-cronjobs</a></li>
+<li><a href="kubernetes-services/">kubernetes-services</a></li>
+<li><a href="kubernetes-gateway-minikube/">kubernetes-gateway-minikube</a></li>
+<li><a href="kubernetes-namespaces/">kubernetes-namespaces</a></li>
+<li><a href="kubernetes-scaling-vertical/">kubernetes-scaling-vertical</a></li>
+<li><a href="kubernetes-scaling-horizontal/">kubernetes-scaling-horizontal</a></li>
+<li><a href="kubernetes-storage/">kubernetes-storage</a></li>
+<li><a href="kubernetes-persistent-volumes/">kubernetes-persistent-volumes</a></li>
+<li><a href="kubernetes-statefulsets/">kubernetes-statefulsets</a></li>
+<li><a href="kubernetes-nodes-basic/">kubernetes-nodes-basic</a></li>
+</ol>
+<h3 id="temeller">Temeller<a class="anchor" href="#temeller">#</a></h3>
+<ul>
+<li><a href="kubernetes-minikube/">kubernetes-minikube</a> = Minikube ile local cluster, <code>kubectl create deployment</code>, <code>port-forward</code>, Prod vs Minikube farkı</li>
+<li><a href="kubernetes-pods-minikube/">kubernetes-pods-minikube</a> = Pod kavramı, ephemeral doğası, <code>kubectl logs/delete pod</code>, pod&rsquo;ların unique IP adresleri</li>
+<li><a href="kubernetes-deployments-minikube/">kubernetes-deployments-minikube</a> = Deployment ve ReplicaSet, desired vs current state, <code>kubectl get/edit deployment</code></li>
+<li><a href="kubernetes-probes/">kubernetes-probes</a> = Liveness/Readiness/Startup probes, <code>httpGet</code>/<code>tcpSocket</code>/<code>exec</code>, rolling update&rsquo;lerde probes&rsquo;un rolü</li>
+<li><a href="kubernetes-yaml-configurations/">kubernetes-yaml-configurations</a> = YAML manifest yapısı (<code>apiVersion</code>, <code>kind</code>, <code>spec</code>), ConfigMap, <code>env</code>/<code>envFrom</code>, Secrets</li>
+</ul>
+<h3 id="secretlar-ve-batch-işleri">Secret&rsquo;lar ve Batch İşleri<a class="anchor" href="#secretlar-ve-batch-i%c5%9fleri">#</a></h3>
+<ul>
+<li><a href="kubernetes-secrets/">kubernetes-secrets</a> = <code>kubectl create secret</code>, <code>secretKeyRef</code>/<code>envFrom</code>/volume mount, base64 ≠ şifreleme, Sealed Secrets/External Secrets</li>
+<li><a href="kubernetes-jobs-cronjobs/">kubernetes-jobs-cronjobs</a> = Job (<code>completions</code>/<code>parallelism</code>/<code>backoffLimit</code>), CronJob (<code>schedule</code>/<code>concurrencyPolicy</code>), db.json yedekleme pipeline&rsquo;ı</li>
+</ul>
+<h3 id="ağ-services--gateway">Ağ (Services &amp; Gateway)<a class="anchor" href="#a%c4%9f-services--gateway">#</a></h3>
+<ul>
+<li><a href="kubernetes-services/">kubernetes-services</a> = <code>ClusterIP</code>, <code>NodePort</code>, <code>LoadBalancer</code>, <code>ExternalName</code>, stable endpoint ve load balancing</li>
+<li><a href="kubernetes-gateway-minikube/">kubernetes-gateway-minikube</a> = Gateway API (Envoy), <code>HTTPRoute</code>, <code>/etc/hosts</code> + <code>minikube tunnel</code>, annotations</li>
+<li><a href="kubernetes-namespaces/">kubernetes-namespaces</a> = <code>kubectl create ns</code>, <code>-n</code> flag, intra-cluster DNS (<code>svc.cluster.local</code>)</li>
+</ul>
+<h3 id="ölçeklendirme">Ölçeklendirme<a class="anchor" href="#%c3%b6l%c3%a7eklendirme">#</a></h3>
+<ul>
+<li><a href="kubernetes-scaling-vertical/">kubernetes-scaling-vertical</a> = <code>metrics-server</code>, <code>kubectl top</code>, resource limits (<code>50m</code> CPU, <code>256Mi</code> RAM), CrashLoopBackOff</li>
+<li><a href="kubernetes-scaling-horizontal/">kubernetes-scaling-horizontal</a> = <code>HorizontalPodAutoscaler</code> (HPA), <code>minReplicas</code>/<code>maxReplicas</code>, CPU hedefli otomatik ölçekleme</li>
+</ul>
+<h3 id="depolama">Depolama<a class="anchor" href="#depolama">#</a></h3>
+<ul>
+<li><a href="kubernetes-storage/">kubernetes-storage</a> = Ephemeral filesystem, <code>emptyDir</code> volumes, multi-container pod&rsquo;lar (sidecar), veritabanları</li>
+<li><a href="kubernetes-persistent-volumes/">kubernetes-persistent-volumes</a> = <code>PersistentVolume</code> (PV), <code>PersistentVolumeClaim</code> (PVC), dynamic provisioning, volumeMounts</li>
+<li><a href="kubernetes-statefulsets/">kubernetes-statefulsets</a> = Stable identity, <code>volumeClaimTemplates</code> ile pod başına PVC, headless services, PostgreSQL örneği</li>
+</ul>
+<h3 id="prode-geçiş">Prod&rsquo;e Geçiş<a class="anchor" href="#prode-ge%c3%a7i%c5%9f">#</a></h3>
+<ul>
+<li><a href="kubernetes-nodes-basic/">kubernetes-nodes-basic</a> = Control plane ve worker node&rsquo;lar, GKE/EKS/AKS, resource requests vs limits</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/docker/docker-distroless-container-images/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>docker-distroless-container-images</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes/kubernetes-minikube/" class="flex align-center">
+        <span>kubernetes-minikube</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#kubernetes-konular">Kubernetes konular</a>
+      <ul>
+        <li><a href="#temeller">Temeller</a></li>
+        <li><a href="#secretlar-ve-batch-işleri">Secret&rsquo;lar ve Batch İşleri</a></li>
+        <li><a href="#ağ-services--gateway">Ağ (Services &amp; Gateway)</a></li>
+        <li><a href="#ölçeklendirme">Ölçeklendirme</a></li>
+        <li><a href="#depolama">Depolama</a></li>
+        <li><a href="#prode-geçiş">Prod&rsquo;e Geçiş</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

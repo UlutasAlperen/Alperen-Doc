@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="These are the follow-up notes to my Kubernetes section - same Minikube cluster, next level: packaging, hardening, operations and multi-node. I use this section to:
+Package and distribute applications with Helm charts Manage my own manifests with Kustomize overlays Lock down pod-to-pod traffic with NetworkPolicies and secure containers with Security Contexts Debug broken workloads like an operator, not a tourist Move CD from push (GitHub Actions &#43; rsync) to pull (ArgoCD) Complete the autoscaling trio (HPA → VPA → Cluster Autoscaler) Schedule pods with taints, tolerations and spread constraints on multi-node clusters Run distributed block storage with Longhorn and build real PostgreSQL HA with read replicas And much more Kubernetes v2 konular# helm kustomize network-policy security-context kubernetes-troubleshooting gitops-argocd vpa-cluster-autoscaler taints-affinity-quotas multi-node-kubeadm-k3s longhorn postgresql-statefulset-replication postgresql-longhorn-read-replicas Araçlar (Helm &amp; Kustomize)# helm = Chart anatomy (crds/, subcharts), values precedence, hooks &amp; weights, release storage; How-to: chart inceleme, Prometheus kurulumu, rollback kustomize = base/overlays, strategic merge vs JSON6902, configMapGenerator hash trick; How-to: overlay yapısı, dev→prod promotion, config change auto-roll Güvenlik ve Ağ# network-policy = additive/union semantiği, AND vs OR selectors, ipBlock, CNI gerçekliği; How-to: default-deny zone, web→api kuralı, netshoot doğrulama security-context = runAsNonRoot/fsGroup/seccompProfile, readOnlyRootFilesystem, Pod Security Admission; How-to: non-root API, restricted profile geçişi Operasyon# kubernetes-troubleshooting = pod durumları &#43; exit code cheat-sheet, kubectl debug (ephemeral containers, node debug), jsonpath; How-to: CrashLoopBackOff teşhisi, shell-less debug, scheduling trace gitops-argocd = GitOps prensipleri, sync waves/hooks, app-of-apps/ApplicationSet; How-to: ArgoCD kurulum &#43; CLI login, auto-sync onboarding, drift testi Ölçeklendirme ve Scheduling# vpa-cluster-autoscaler = HPA→VPA→CA üçlüsü, VPA bileşen mimarisi (recommender/webhook/updater), PDB ilişkisi; How-to: öneri okuma, controlled mode uygulama taints-affinity-quotas = Taints/Tolerations, affinity, topologySpreadConstraints, ResourceQuota/LimitRange; How-to: node rezerve etme, replica dağıtma, namespace cap Multi-Node (Homelab)# multi-node-kubeadm-k3s = kubeadm ile 3 node’lu k8s (GPG’li apt, containerd, CNI), k3s alternatifi, etcd backup; How-to: bootstrap, worker join, node remove/re-add Depolama ve HA# longhorn = dağıtık block storage CSI, engine/replica mimarisi, snapshot vs backup; How-to: node hazırlığı (iscsid), helm kurulumu, default SC, node failover testi postgresql-statefulset-replication = WAL streaming replication elle: replication user, pg_basebackup -R, pg_stat_replication; manuel pg_promote ve split-brain uyarısı postgresql-longhorn-read-replicas = CloudNativePG Cluster CRD, -rw/-ro service üçlüsü, otomatik failover; snapshot ≠ PG backup uyarısı ">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="Kubernetes v2">
+	<meta property="og:description" content="These are the follow-up notes to my Kubernetes section - same Minikube cluster, next level: packaging, hardening, operations and multi-node. I use this section to:
+Package and distribute applications with Helm charts Manage my own manifests with Kustomize overlays Lock down pod-to-pod traffic with NetworkPolicies and secure containers with Security Contexts Debug broken workloads like an operator, not a tourist Move CD from push (GitHub Actions &#43; rsync) to pull (ArgoCD) Complete the autoscaling trio (HPA → VPA → Cluster Autoscaler) Schedule pods with taints, tolerations and spread constraints on multi-node clusters Run distributed block storage with Longhorn and build real PostgreSQL HA with read replicas And much more Kubernetes v2 konular# helm kustomize network-policy security-context kubernetes-troubleshooting gitops-argocd vpa-cluster-autoscaler taints-affinity-quotas multi-node-kubeadm-k3s longhorn postgresql-statefulset-replication postgresql-longhorn-read-replicas Araçlar (Helm &amp; Kustomize)# helm = Chart anatomy (crds/, subcharts), values precedence, hooks &amp; weights, release storage; How-to: chart inceleme, Prometheus kurulumu, rollback kustomize = base/overlays, strategic merge vs JSON6902, configMapGenerator hash trick; How-to: overlay yapısı, dev→prod promotion, config change auto-roll Güvenlik ve Ağ# network-policy = additive/union semantiği, AND vs OR selectors, ipBlock, CNI gerçekliği; How-to: default-deny zone, web→api kuralı, netshoot doğrulama security-context = runAsNonRoot/fsGroup/seccompProfile, readOnlyRootFilesystem, Pod Security Admission; How-to: non-root API, restricted profile geçişi Operasyon# kubernetes-troubleshooting = pod durumları &#43; exit code cheat-sheet, kubectl debug (ephemeral containers, node debug), jsonpath; How-to: CrashLoopBackOff teşhisi, shell-less debug, scheduling trace gitops-argocd = GitOps prensipleri, sync waves/hooks, app-of-apps/ApplicationSet; How-to: ArgoCD kurulum &#43; CLI login, auto-sync onboarding, drift testi Ölçeklendirme ve Scheduling# vpa-cluster-autoscaler = HPA→VPA→CA üçlüsü, VPA bileşen mimarisi (recommender/webhook/updater), PDB ilişkisi; How-to: öneri okuma, controlled mode uygulama taints-affinity-quotas = Taints/Tolerations, affinity, topologySpreadConstraints, ResourceQuota/LimitRange; How-to: node rezerve etme, replica dağıtma, namespace cap Multi-Node (Homelab)# multi-node-kubeadm-k3s = kubeadm ile 3 node’lu k8s (GPG’li apt, containerd, CNI), k3s alternatifi, etcd backup; How-to: bootstrap, worker join, node remove/re-add Depolama ve HA# longhorn = dağıtık block storage CSI, engine/replica mimarisi, snapshot vs backup; How-to: node hazırlığı (iscsid), helm kurulumu, default SC, node failover testi postgresql-statefulset-replication = WAL streaming replication elle: replication user, pg_basebackup -R, pg_stat_replication; manuel pg_promote ve split-brain uyarısı postgresql-longhorn-read-replicas = CloudNativePG Cluster CRD, -rw/-ro service üçlüsü, otomatik failover; snapshot ≠ PG backup uyarısı">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="website">
+
+
+	<meta itemprop="name" content="Kubernetes v2">
+	<meta itemprop="description" content="These are the follow-up notes to my Kubernetes section - same Minikube cluster, next level: packaging, hardening, operations and multi-node. I use this section to:
+Package and distribute applications with Helm charts Manage my own manifests with Kustomize overlays Lock down pod-to-pod traffic with NetworkPolicies and secure containers with Security Contexts Debug broken workloads like an operator, not a tourist Move CD from push (GitHub Actions &#43; rsync) to pull (ArgoCD) Complete the autoscaling trio (HPA → VPA → Cluster Autoscaler) Schedule pods with taints, tolerations and spread constraints on multi-node clusters Run distributed block storage with Longhorn and build real PostgreSQL HA with read replicas And much more Kubernetes v2 konular# helm kustomize network-policy security-context kubernetes-troubleshooting gitops-argocd vpa-cluster-autoscaler taints-affinity-quotas multi-node-kubeadm-k3s longhorn postgresql-statefulset-replication postgresql-longhorn-read-replicas Araçlar (Helm &amp; Kustomize)# helm = Chart anatomy (crds/, subcharts), values precedence, hooks &amp; weights, release storage; How-to: chart inceleme, Prometheus kurulumu, rollback kustomize = base/overlays, strategic merge vs JSON6902, configMapGenerator hash trick; How-to: overlay yapısı, dev→prod promotion, config change auto-roll Güvenlik ve Ağ# network-policy = additive/union semantiği, AND vs OR selectors, ipBlock, CNI gerçekliği; How-to: default-deny zone, web→api kuralı, netshoot doğrulama security-context = runAsNonRoot/fsGroup/seccompProfile, readOnlyRootFilesystem, Pod Security Admission; How-to: non-root API, restricted profile geçişi Operasyon# kubernetes-troubleshooting = pod durumları &#43; exit code cheat-sheet, kubectl debug (ephemeral containers, node debug), jsonpath; How-to: CrashLoopBackOff teşhisi, shell-less debug, scheduling trace gitops-argocd = GitOps prensipleri, sync waves/hooks, app-of-apps/ApplicationSet; How-to: ArgoCD kurulum &#43; CLI login, auto-sync onboarding, drift testi Ölçeklendirme ve Scheduling# vpa-cluster-autoscaler = HPA→VPA→CA üçlüsü, VPA bileşen mimarisi (recommender/webhook/updater), PDB ilişkisi; How-to: öneri okuma, controlled mode uygulama taints-affinity-quotas = Taints/Tolerations, affinity, topologySpreadConstraints, ResourceQuota/LimitRange; How-to: node rezerve etme, replica dağıtma, namespace cap Multi-Node (Homelab)# multi-node-kubeadm-k3s = kubeadm ile 3 node’lu k8s (GPG’li apt, containerd, CNI), k3s alternatifi, etcd backup; How-to: bootstrap, worker join, node remove/re-add Depolama ve HA# longhorn = dağıtık block storage CSI, engine/replica mimarisi, snapshot vs backup; How-to: node hazırlığı (iscsid), helm kurulumu, default SC, node failover testi postgresql-statefulset-replication = WAL streaming replication elle: replication user, pg_basebackup -R, pg_stat_replication; manuel pg_promote ve split-brain uyarısı postgresql-longhorn-read-replicas = CloudNativePG Cluster CRD, -rw/-ro service üçlüsü, otomatik failover; snapshot ≠ PG backup uyarısı">
+	<meta itemprop="wordCount" content="351">
+
+<title>Kubernetes v2 • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/index.xml" title="Kubernetes v2" />
+
+  
+</head>
+<body dir="ltr" class="book-kind-section book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="active">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Kubernetes v2</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#kubernetes-v2-konular">Kubernetes v2 konular</a>
+      <ul>
+        <li><a href="#araçlar-helm--kustomize">Araçlar (Helm &amp; Kustomize)</a></li>
+        <li><a href="#güvenlik-ve-ağ">Güvenlik ve Ağ</a></li>
+        <li><a href="#operasyon">Operasyon</a></li>
+        <li><a href="#ölçeklendirme-ve-scheduling">Ölçeklendirme ve Scheduling</a></li>
+        <li><a href="#multi-node-homelab">Multi-Node (Homelab)</a></li>
+        <li><a href="#depolama-ve-ha">Depolama ve HA</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p>These are the follow-up notes to my <a href="../../kubernetes/">Kubernetes</a> section - same Minikube cluster, next level: packaging, hardening, operations and multi-node. I use this section to:</p>
+<ul>
+<li>Package and distribute applications with Helm charts</li>
+<li>Manage my own manifests with Kustomize overlays</li>
+<li>Lock down pod-to-pod traffic with NetworkPolicies and secure containers with Security Contexts</li>
+<li>Debug broken workloads like an operator, not a tourist</li>
+<li>Move CD from push (GitHub Actions + rsync) to pull (ArgoCD)</li>
+<li>Complete the autoscaling trio (HPA → VPA → Cluster Autoscaler)</li>
+<li>Schedule pods with taints, tolerations and spread constraints on multi-node clusters</li>
+<li>Run distributed block storage with Longhorn and build real PostgreSQL HA with read replicas</li>
+<li>And much more</li>
+</ul>
+<h2 id="kubernetes-v2-konular">Kubernetes v2 konular<a class="anchor" href="#kubernetes-v2-konular">#</a></h2>
+<ol>
+<li><a href="helm/">helm</a></li>
+<li><a href="kustomize/">kustomize</a></li>
+<li><a href="network-policy/">network-policy</a></li>
+<li><a href="security-context/">security-context</a></li>
+<li><a href="kubernetes-troubleshooting/">kubernetes-troubleshooting</a></li>
+<li><a href="gitops-argocd/">gitops-argocd</a></li>
+<li><a href="vpa-cluster-autoscaler/">vpa-cluster-autoscaler</a></li>
+<li><a href="taints-affinity-quotas/">taints-affinity-quotas</a></li>
+<li><a href="multi-node-kubeadm-k3s/">multi-node-kubeadm-k3s</a></li>
+<li><a href="longhorn/">longhorn</a></li>
+<li><a href="postgresql-statefulset-replication/">postgresql-statefulset-replication</a></li>
+<li><a href="postgresql-longhorn-read-replicas/">postgresql-longhorn-read-replicas</a></li>
+</ol>
+<h3 id="araçlar-helm--kustomize">Araçlar (Helm &amp; Kustomize)<a class="anchor" href="#ara%c3%a7lar-helm--kustomize">#</a></h3>
+<ul>
+<li><a href="helm/">helm</a> = Chart anatomy (<code>crds/</code>, subcharts), values precedence, hooks &amp; weights, release storage; How-to: chart inceleme, Prometheus kurulumu, rollback</li>
+<li><a href="kustomize/">kustomize</a> = <code>base</code>/<code>overlays</code>, strategic merge vs JSON6902, <code>configMapGenerator</code> hash trick; How-to: overlay yapısı, dev→prod promotion, config change auto-roll</li>
+</ul>
+<h3 id="güvenlik-ve-ağ">Güvenlik ve Ağ<a class="anchor" href="#g%c3%bcvenlik-ve-a%c4%9f">#</a></h3>
+<ul>
+<li><a href="network-policy/">network-policy</a> = additive/union semantiği, AND vs OR selectors, <code>ipBlock</code>, CNI gerçekliği; How-to: default-deny zone, web→api kuralı, netshoot doğrulama</li>
+<li><a href="security-context/">security-context</a> = <code>runAsNonRoot</code>/<code>fsGroup</code>/<code>seccompProfile</code>, readOnlyRootFilesystem, Pod Security Admission; How-to: non-root API, restricted profile geçişi</li>
+</ul>
+<h3 id="operasyon">Operasyon<a class="anchor" href="#operasyon">#</a></h3>
+<ul>
+<li><a href="kubernetes-troubleshooting/">kubernetes-troubleshooting</a> = pod durumları + exit code cheat-sheet, <code>kubectl debug</code> (ephemeral containers, node debug), jsonpath; How-to: CrashLoopBackOff teşhisi, shell-less debug, scheduling trace</li>
+<li><a href="gitops-argocd/">gitops-argocd</a> = GitOps prensipleri, sync waves/hooks, app-of-apps/ApplicationSet; How-to: ArgoCD kurulum + CLI login, auto-sync onboarding, drift testi</li>
+</ul>
+<h3 id="ölçeklendirme-ve-scheduling">Ölçeklendirme ve Scheduling<a class="anchor" href="#%c3%b6l%c3%a7eklendirme-ve-scheduling">#</a></h3>
+<ul>
+<li><a href="vpa-cluster-autoscaler/">vpa-cluster-autoscaler</a> = HPA→VPA→CA üçlüsü, VPA bileşen mimarisi (recommender/webhook/updater), PDB ilişkisi; How-to: öneri okuma, controlled mode uygulama</li>
+<li><a href="taints-affinity-quotas/">taints-affinity-quotas</a> = Taints/Tolerations, affinity, topologySpreadConstraints, ResourceQuota/LimitRange; How-to: node rezerve etme, replica dağıtma, namespace cap</li>
+</ul>
+<h3 id="multi-node-homelab">Multi-Node (Homelab)<a class="anchor" href="#multi-node-homelab">#</a></h3>
+<ul>
+<li><a href="multi-node-kubeadm-k3s/">multi-node-kubeadm-k3s</a> = kubeadm ile 3 node&rsquo;lu k8s (GPG&rsquo;li apt, containerd, CNI), k3s alternatifi, etcd backup; How-to: bootstrap, worker join, node remove/re-add</li>
+</ul>
+<h3 id="depolama-ve-ha">Depolama ve HA<a class="anchor" href="#depolama-ve-ha">#</a></h3>
+<ul>
+<li><a href="longhorn/">longhorn</a> = dağıtık block storage CSI, engine/replica mimarisi, snapshot vs backup; How-to: node hazırlığı (iscsid), helm kurulumu, default SC, node failover testi</li>
+<li><a href="postgresql-statefulset-replication/">postgresql-statefulset-replication</a> = WAL streaming replication elle: replication user, <code>pg_basebackup -R</code>, <code>pg_stat_replication</code>; manuel <code>pg_promote</code> ve split-brain uyarısı</li>
+<li><a href="postgresql-longhorn-read-replicas/">postgresql-longhorn-read-replicas</a> = CloudNativePG <code>Cluster</code> CRD, <code>-rw</code>/<code>-ro</code> service üçlüsü, otomatik failover; snapshot ≠ PG backup uyarısı</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>kubernetes-nodes-basic</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes_v2/helm/" class="flex align-center">
+        <span>helm</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#kubernetes-v2-konular">Kubernetes v2 konular</a>
+      <ul>
+        <li><a href="#araçlar-helm--kustomize">Araçlar (Helm &amp; Kustomize)</a></li>
+        <li><a href="#güvenlik-ve-ağ">Güvenlik ve Ağ</a></li>
+        <li><a href="#operasyon">Operasyon</a></li>
+        <li><a href="#ölçeklendirme-ve-scheduling">Ölçeklendirme ve Scheduling</a></li>
+        <li><a href="#multi-node-homelab">Multi-Node (Homelab)</a></li>
+        <li><a href="#depolama-ve-ha">Depolama ve HA</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

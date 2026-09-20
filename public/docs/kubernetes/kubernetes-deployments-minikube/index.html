@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Deployments# A Deployment provides declarative updates for Pods and ReplicaSets.
+You describe your desired state in a Deployment, and the Deployment Controller’s job is to make the current state match the desired state. You declare your hopes and dreams, and it’s Kubernetes’ job to make them come true.
+Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you delete a pod, only to see that a new pod was created in its place? It’s kinda like chopping heads off of a hydra.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-deployments-minikube/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="kubernetes-deployments-minikube">
+	<meta property="og:description" content="Deployments# A Deployment provides declarative updates for Pods and ReplicaSets.
+You describe your desired state in a Deployment, and the Deployment Controller’s job is to make the current state match the desired state. You declare your hopes and dreams, and it’s Kubernetes’ job to make them come true.
+Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you delete a pod, only to see that a new pod was created in its place? It’s kinda like chopping heads off of a hydra.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="kubernetes-deployments-minikube">
+	<meta itemprop="description" content="Deployments# A Deployment provides declarative updates for Pods and ReplicaSets.
+You describe your desired state in a Deployment, and the Deployment Controller’s job is to make the current state match the desired state. You declare your hopes and dreams, and it’s Kubernetes’ job to make them come true.
+Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you delete a pod, only to see that a new pod was created in its place? It’s kinda like chopping heads off of a hydra.">
+	<meta itemprop="wordCount" content="1104">
+
+<title>kubernetes-deployments-minikube • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-deployments-minikube/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle" checked />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="active">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>kubernetes-deployments-minikube</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#why-deleting-a-pod-doesnt-feel-like-a-deletion">Why Deleting a Pod Doesn&rsquo;t Feel Like a Deletion</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#look-at-your-replica-sets">Look at Your Replica Sets</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#create-a-deployment-configuration">Create a Deployment Configuration</a></li>
+    <li><a href="#create-the-deployment">Create the Deployment</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="deployments">Deployments<a class="anchor" href="#deployments">#</a></h1>
+<p>A <em><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a></em> provides declarative updates for Pods and ReplicaSets.</p>
+<p><img src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/6Pgwx6u-1280x720.png" alt="" /></p>
+<p>You describe your <em>desired state</em> in a Deployment, and the Deployment Controller&rsquo;s job is to make the <em>current state</em> match the <em>desired state</em>. You declare your hopes and dreams, and it&rsquo;s Kubernetes&rsquo; job to make them come true.</p>
+<h2 id="why-deleting-a-pod-doesnt-feel-like-a-deletion">Why Deleting a Pod Doesn&rsquo;t Feel Like a Deletion<a class="anchor" href="#why-deleting-a-pod-doesnt-feel-like-a-deletion">#</a></h2>
+<p>Remember when we had you delete a pod, only to see that a new pod was created in its place? It&rsquo;s kinda like chopping heads off of a hydra.</p>
+<p>That&rsquo;s because the <em>desired state</em> described in our Deployment says we want 2 pods running at all times. When we delete one, the Deployment Controller sees that the <em>current state</em> doesn&rsquo;t match the <em>desired state</em>, so it creates a new pod to make them match again.</p>
+<p>Take a look at the YAML file for your current deployment in the CLI:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get deployment synergychat-web -o yaml</span></span></code></pre></div><p>Edit the deployment and change the number of replicas from 2 to 10:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl edit deployment synergychat-web</span></span></code></pre></div><p>Make sure you&rsquo;ve got 10 pods running:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pod</span></span></code></pre></div><p>Keep using <code>kubectl get pod</code> to check on your pods until all 10 are in a &ldquo;ready&rdquo; state. Once they are, run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl proxy</span></span></code></pre></div><h1 id="replica-sets">Replica Sets<a class="anchor" href="#replica-sets">#</a></h1>
+<p>A <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSet</a> maintains a stable set of replica Pods running at any given time. It&rsquo;s the thing that makes sure that the number of Pods you want running is the same as the number of Pods that are actually running.</p>
+<p>You might be thinking, &ldquo;I thought that&rsquo;s what a Deployment does.&rdquo; Well&hellip;yes.</p>
+<p>A Deployment is a higher-level abstraction that manages the ReplicaSets for you. You can think of a Deployment as a wrapper around a ReplicaSet. Here&rsquo;s the rub:</p>
+<p><em>You will probably never use ReplicaSets directly.</em> I just need to mention what they are because you&rsquo;ll hear the term thrown around, and might even see them referenced in logs and such.</p>
+<h2 id="look-at-your-replica-sets">Look at Your Replica Sets<a class="anchor" href="#look-at-your-replica-sets">#</a></h2>
+<p>Let&rsquo;s take a look at the ReplicaSets that are running in your cluster:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get replicasets</span></span></code></pre></div><p>Just like with pods, notice that <em>we never directly created the replica set</em>. We created a deployment, and the deployment created the replica set.</p>
+<h1 id="yaml-config">YAML Config<a class="anchor" href="#yaml-config">#</a></h1>
+<p>Kubernetes resources are primarily configured using YAML files. We&rsquo;ve used the <code>kubectl edit</code> command to edit resources in the cluster on-demand, but let&rsquo;s inspect our deployment&rsquo;s YAML file a bit more closely.</p>
+<p><a href="https://storage.googleapis.com/qvault-webapp-dynamic-assets/lesson_videos/what-is-yaml.mp4">https://storage.googleapis.com/qvault-webapp-dynamic-assets/lesson_videos/what-is-yaml.mp4</a></p>
+<p>First, download a copy of your deployment&rsquo;s YAML file and save it in your current directory:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get deployment synergychat-web -o yaml &gt; web-deployment.yaml</span></span></code></pre></div><p>Then open it in your text editor. There are 5 top-level fields in the file:</p>
+<ul>
+<li><code>apiVersion: apps/v1</code> - Specifies the version of the Kubernetes API you&rsquo;re using to create the object (e.g., apps/v1 for Deployments).</li>
+<li><code>kind: Deployment</code> - Specifies the type of object you&rsquo;re configuring</li>
+<li><code>metadata</code> - Metadata about the deployment, like when it was created, its name, and its ID</li>
+<li><code>spec</code> - The desired state of the deployment. Most impactful edits, like how many replicas you want, will be made here.</li>
+<li><code>status</code> - The current state of the deployment. You won&rsquo;t edit this directly, it&rsquo;s just for you to see what&rsquo;s going on with your deployment.</li>
+</ul>
+<p>Inside your editor, change the number of replicas to 3 and save the file. Notice that you&rsquo;re just editing a file on your machine! It won&rsquo;t yet have any effect on the deployment in your cluster.</p>
+<p>To apply the changes, run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f web-deployment.yaml</span></span></code></pre></div><p>You should get a warning that lets you know that you&rsquo;re missing the <code>last-applied-configuration</code> annotation. That&rsquo;s okay! we got that warning because we created this deployment the quick and dirty way, by using <code>kubectl create deployment</code> instead of creating a YAML file and using <code>kubectl apply -f</code>.</p>
+<p>However, because we&rsquo;ve now <em>updated</em> it with <code>kubectl apply</code>, the annotation is now there, and we won&rsquo;t get the warning again.</p>
+<p>Download the YAML file again and take a look at it. You should see the annotation now.</p>
+<p>Apply the configuration a second time, you won&rsquo;t get the warning. <em>Save this YAML file in a git repo for this course! We&rsquo;ll be making more configuration files. Kubernetes is an &ldquo;infra-as-code&rdquo; tool, so it&rsquo;s important to keep your configuration files in a git repo.</em></p>
+<p>Finally, start the proxy server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl proxy</span></span></code></pre></div><h1 id="api-service">API Service<a class="anchor" href="#api-service">#</a></h1>
+<p>We&rsquo;ve deployed one service, and we&rsquo;ve deployed multiple instances of it. Time to deploy a second service!</p>
+<p>This service doesn&rsquo;t serve a webpage! It&rsquo;s a JSON API. It&rsquo;s the backend for our chat application. By deploying the API and configuring the front-end to talk to it, we&rsquo;ll have a functional chat application!</p>
+<h2 id="create-a-deployment-configuration">Create a Deployment Configuration<a class="anchor" href="#create-a-deployment-configuration">#</a></h2>
+<p>Let&rsquo;s write a deployment from scratch.</p>
+<p>Feel free to reference the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#creating-a-deployment">k8s docs here</a> as you go for examples of the proper structure.</p>
+<ol>
+<li>Create a new file called <code>api-deployment.yaml</code>.</li>
+<li>Add the <code>apiVersion</code> and <code>kind</code> fields. The <code>apiVersion</code> is <code>apps/v1</code> and, since this is a deployment, the <code>kind</code> is <code>Deployment</code>.</li>
+<li>Add a <code>metadata/name</code> field, and let&rsquo;s name our deployment <code>synergychat-api</code> for consistency.</li>
+<li>Add a <code>metadata/labels/app</code> field, and also set it to <code>synergychat-api</code>. This will be used to select the pods that this deployment manages.</li>
+<li>Add a <code>spec/replicas</code> field and let&rsquo;s set it to <code>1</code>. We can always scale up to more pods later.</li>
+<li>Add a <code>spec/selector/matchLabels/app</code> field and set it to <code>synergychat-api</code>. This should match the label we set in step 4.</li>
+<li>Add a <code>spec/template/metadata/labels/app</code> field and set it to <code>synergychat-api</code>. Again, this should match the label we set in step 4. Labels are important because they&rsquo;re how Kubernetes knows which pods belong to which deployments.</li>
+<li>Add a <code>spec/template/spec/containers</code> field. This actually contains a list of containers that will be deployed:
+<ol>
+<li>Note: A hyphen is how you denote a list item in YAML</li>
+<li>Set the <code>name</code> of the container to <code>synergychat-api</code>.</li>
+<li>Set the <code>image</code> to <code>bootdotdev/synergychat-api:latest</code>. This tells k8s where to download the Docker image from.</li>
+</ol>
+</li>
+</ol>
+<p>I don&rsquo;t want to give you the YAML because I want you to type it out, but here&rsquo;s the equivalent JSON:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;apiVersion&#34;</span>: <span style="color:#e6db74">&#34;apps/v1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;kind&#34;</span>: <span style="color:#e6db74">&#34;Deployment&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;metadata&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;synergychat-api&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;labels&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;app&#34;</span>: <span style="color:#e6db74">&#34;synergychat-api&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;spec&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;replicas&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;selector&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;matchLabels&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;app&#34;</span>: <span style="color:#e6db74">&#34;synergychat-api&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;template&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;metadata&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;labels&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;app&#34;</span>: <span style="color:#e6db74">&#34;synergychat-api&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;spec&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;containers&#34;</span>: [
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;synergychat-api&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;image&#34;</span>: <span style="color:#e6db74">&#34;bootdotdev/synergychat-api:latest&#34;</span>
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h2 id="create-the-deployment">Create the Deployment<a class="anchor" href="#create-the-deployment">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f api-deployment.yaml</span></span></code></pre></div><p>Next, take a look at all the pods you have running now. You should see pods for the web service and a pod for the api service.</p>
+<p>However, you might notice that the api pod isn&rsquo;t in a &ldquo;ready&rdquo; state. In fact, it should be stuck in a &ldquo;CrashLoopBackOff&rdquo; status. Oh no! We&rsquo;ve created a thrashing pod!</p>
+<p>Run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl proxy</span></span></code></pre></div><p>for more <a href="kubernetes-probes/">probes</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>kubernetes-pods-minikube</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes/kubernetes-probes/" class="flex align-center">
+        <span>kubernetes-probes</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#why-deleting-a-pod-doesnt-feel-like-a-deletion">Why Deleting a Pod Doesn&rsquo;t Feel Like a Deletion</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#look-at-your-replica-sets">Look at Your Replica Sets</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#create-a-deployment-configuration">Create a Deployment Configuration</a></li>
+    <li><a href="#create-the-deployment">Create the Deployment</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

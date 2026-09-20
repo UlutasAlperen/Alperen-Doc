@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work there are two realistic paths to real multi-node Kubernetes: kubeadm (vanilla k8s, everything in your hands) and k3s (single binary, batteries included). This note walks through kubeadm on VMs, with k3s as the lightweight alternative.
+The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/multi-node-kubeadm-k3s/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="multi-node-kubeadm-k3s">
+	<meta property="og:description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work there are two realistic paths to real multi-node Kubernetes: kubeadm (vanilla k8s, everything in your hands) and k3s (single binary, batteries included). This note walks through kubeadm on VMs, with k3s as the lightweight alternative.
+The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="multi-node-kubeadm-k3s">
+	<meta itemprop="description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work there are two realistic paths to real multi-node Kubernetes: kubeadm (vanilla k8s, everything in your hands) and k3s (single binary, batteries included). This note walks through kubeadm on VMs, with k3s as the lightweight alternative.
+The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
+	<meta itemprop="wordCount" content="1300">
+
+<title>multi-node-kubeadm-k3s • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/multi-node-kubeadm-k3s/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="active">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>multi-node-kubeadm-k3s</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-plan">The Plan</a></li>
+    <li><a href="#prep-on-all-nodes">Prep on All Nodes</a></li>
+    <li><a href="#containerd">Containerd</a></li>
+    <li><a href="#k8s-packages-apt-the-careful-way">K8s Packages (apt, the careful way)</a></li>
+    <li><a href="#control-plane">Control Plane</a></li>
+    <li><a href="#workers-join">Workers Join</a></li>
+    <li><a href="#node-lifecycle">Node Lifecycle</a></li>
+    <li><a href="#backups-and-upgrades">Backups and Upgrades</a></li>
+    <li><a href="#k3s-alternatifi">k3s Alternatifi</a></li>
+    <li><a href="#how-to-bootstrap-a-3-node-cluster-with-kubeadm">How to Bootstrap a 3-Node Cluster with kubeadm</a></li>
+    <li><a href="#how-to-join-workers-and-verify-the-cluster">How to Join Workers and Verify the Cluster</a></li>
+    <li><a href="#how-to-remove-and-re-add-a-node-safely">How to Remove and Re-add a Node Safely</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="multi-node-from-minikube-to-a-real-cluster">Multi-Node: From Minikube to a Real Cluster<a class="anchor" href="#multi-node-from-minikube-to-a-real-cluster">#</a></h1>
+<p>Minikube is a single-node cluster - we&rsquo;ve repeated that warning since the very first <a href="../../kubernetes/kubernetes-nodes-basic/">v1 notes</a>. For homelab work there are two realistic paths to <em>real</em> multi-node Kubernetes: <code>kubeadm</code> (vanilla k8s, everything in your hands) and <code>k3s</code> (single binary, batteries included). This note walks through kubeadm on VMs, with k3s as the lightweight alternative.</p>
+<h2 id="the-plan">The Plan<a class="anchor" href="#the-plan">#</a></h2>
+<p>On my Proxmox box I spin up 3 Debian 12 VMs, <code>2 vCPU / 4GB</code> each:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>kmaster   192.168.1.50   control plane
+</span></span><span style="display:flex;"><span>kworker1  192.168.1.51   worker
+</span></span><span style="display:flex;"><span>kworker2  192.168.1.52   worker</span></span></code></pre></div><p>Add them to <code>/etc/hosts</code> on all nodes and on your laptop, make sure SSH with key auth works, and keep the k8s minor version pinned identically everywhere - mixed minor versions within one cluster are supported only one step ahead and are a support nightmare.</p>
+<h2 id="prep-on-all-nodes">Prep on All Nodes<a class="anchor" href="#prep-on-all-nodes">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Disable swap - kubelet refuses to work with it</span>
+</span></span><span style="display:flex;"><span>sudo swapoff -a
+</span></span><span style="display:flex;"><span>sudo sed -i <span style="color:#e6db74">&#39;/ swap / s/^/#/&#39;</span> /etc/fstab
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Kernel modules + sysctl for the pod network</span>
+</span></span><span style="display:flex;"><span>cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">overlay
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">br_netfilter
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>sudo modprobe overlay
+</span></span><span style="display:flex;"><span>sudo modprobe br_netfilter
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cat <span style="color:#e6db74">&lt;&lt;EOF | sudo tee /etc/sysctl.d/k8s.conf
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">net.bridge.bridge-nf-call-iptables  = 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">net.bridge.bridge-nf-call-ip6tables = 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">net.ipv4.ip_forward                 = 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>sudo sysctl --system</span></span></code></pre></div><blockquote class='book-hint '>
+<p><code>net.bridge.bridge-nf-call-iptables = 1</code> looks arcane but matters: without it, traffic through the bridge is not processed by iptables - which breaks Service NAT rules and makes <a href="network-policy/">NetworkPolicy</a> enforcement silently unreliable.</p>
+</blockquote><h2 id="containerd">Containerd<a class="anchor" href="#containerd">#</a></h2>
+<p>Kubernetes ships its own <a href="https://github.com/containerd/containerd">containerd</a> expectations; the important detail is the cgroup driver:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get install -y containerd
+</span></span><span style="display:flex;"><span>sudo mkdir -p /etc/containerd
+</span></span><span style="display:flex;"><span>containerd config default | sudo tee /etc/containerd/config.toml
+</span></span><span style="display:flex;"><span>sudo sed -i <span style="color:#e6db74">&#39;s/SystemdCgroup = false/SystemdCgroup = true/&#39;</span> /etc/containerd/config.toml
+</span></span><span style="display:flex;"><span>sudo systemctl restart containerd</span></span></code></pre></div><blockquote class='book-hint '>
+<p><code>SystemdCgroup = true</code> is not optional anymore: kubelet defaults to the systemd cgroup driver, and a mismatch with the container runtime is the classic cause of pods stuck in <code>ContainerCreating</code> or kubelet crash-looping at join time. The v1 <a href="kubernetes-troubleshooting/">troubleshooting</a> checklist applies to nodes too.</p>
+</blockquote><h2 id="k8s-packages-apt-the-careful-way">K8s Packages (apt, the careful way)<a class="anchor" href="#k8s-packages-apt-the-careful-way">#</a></h2>
+<p>Same discipline as my <a href="../../docker/docker-kurulum-hardening-debian/">Docker hardening doc</a>: verify with GPG, pin versions, avoid surprise upgrades.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo install -m <span style="color:#ae81ff">0755</span> -d /etc/apt/keyrings
+</span></span><span style="display:flex;"><span>curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+</span></span><span style="display:flex;"><span>sudo chmod a+r /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/v1.31:/deb/ /&#34;</span> | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  sudo tee /etc/apt/sources.list.d/kubernetes.list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo apt-get update
+</span></span><span style="display:flex;"><span>sudo apt-get install -y kubelet kubeadm kubectl
+</span></span><span style="display:flex;"><span>sudo apt-mark hold kubelet kubeadm kubectl</span></span></code></pre></div><blockquote class='book-hint '>
+<p><code>apt-mark hold</code> is the part everyone skips and then regrets: unattended-upgrades bumping kubelet on one node only is a textbook way to end up with version-skew symptoms that look like random network failures.</p>
+</blockquote><h2 id="control-plane">Control Plane<a class="anchor" href="#control-plane">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo kubeadm init --pod-network-cidr<span style="color:#f92672">=</span>10.244.0.0/16</span></span></code></pre></div><ul>
+<li><code>--pod-network-cidr</code> must match what your CNI expects (flannel&rsquo;s default is exactly <code>10.244.0.0/16</code>; calico defaults elsewhere - check first, this is painful to change later)</li>
+<li>The output prints a <code>kubeadm join ...</code> command - <strong>save it</strong></li>
+<li>For anything beyond a lab, add <code>--control-plane-endpoint=&lt;stable-DNS-or-VIP&gt;</code> - this is what makes a later control-plane HA setup possible without rebuilding everything</li>
+</ul>
+<p>Set up kubeconfig, then install a CNI. Flannel is the no-frills homelab choice:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir -p $HOME/.kube
+</span></span><span style="display:flex;"><span>sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+</span></span><span style="display:flex;"><span>sudo chown <span style="color:#66d9ef">$(</span>id -u<span style="color:#66d9ef">)</span>:<span style="color:#66d9ef">$(</span>id -g<span style="color:#66d9ef">)</span> $HOME/.kube/config
+</span></span><span style="display:flex;"><span>kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml</span></span></code></pre></div><p>(Ben policy enforcement&rsquo;i de denemek istiyorsam <a href="https://docs.tigera.io/calico/latest/about/about-kubernetes">calico</a> kuruyorum - <a href="network-policy/">NetworkPolicy</a> notundaki CNI konusunun ta kendisi.)</p>
+<h2 id="workers-join">Workers Join<a class="anchor" href="#workers-join">#</a></h2>
+<p>On each worker, run the saved join command. If you lost it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeadm token create --print-join-command   <span style="color:#75715e"># on the control plane</span></span></span></code></pre></div><p>Verification - both nodes join, then everything flips to <code>Ready</code> (CNI first, then nodes):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get nodes -o wide
+</span></span><span style="display:flex;"><span>kubectl get pods -n kube-system</span></span></code></pre></div><p>Note: control-plane nodes carry the taint <code>node-role.kubernetes.io/control-plane:NoSchedule</code> by default - workloads land on workers only. The v1 notes&rsquo; <a href="../../kubernetes/kubernetes-nodes-basic/">control plane vs workers</a> distinction is now something you can literally <code>kubectl describe</code>.</p>
+<h2 id="node-lifecycle">Node Lifecycle<a class="anchor" href="#node-lifecycle">#</a></h2>
+<ul>
+<li><code>kubectl cordon &lt;node&gt;</code> - mark unschedulable, running pods keep running</li>
+<li><code>kubectl drain &lt;node&gt; --ignore-daemonsets</code> - evict everything reschedulable (daemonsets excluded, they&rsquo;re per-node by design)</li>
+<li><code>kubectl uncordon &lt;node&gt;</code> - schedulable again</li>
+<li>On the node itself: <code>sudo kubeadm reset</code> cleans up most of the k8s state (PVC data and some config survive - read the warning it prints), then <code>kubectl delete node &lt;name&gt;</code> on the control plane removes the object</li>
+</ul>
+<h2 id="backups-and-upgrades">Backups and Upgrades<a class="anchor" href="#backups-and-upgrades">#</a></h2>
+<p>Control-plane state lives in etcd. Snapshot it periodically:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo etcdctl --endpoints<span style="color:#f92672">=</span>https://127.0.0.1:2379 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --cacert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/ca.crt <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --cert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.crt <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --key<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.key <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  snapshot save /backup/etcd-snapshot-<span style="color:#66d9ef">$(</span>date +%F<span style="color:#66d9ef">)</span>.db</span></span></code></pre></div><p>Proxmox tarafında ayrıca VM-level snapshot almak bedava sigortadır - ama etcd snapshot&rsquo;ı deployment&rsquo;ları da kurtarırken, VM snapshot&rsquo;ı tüm control-plane&rsquo;i olduğu geri alır; ikisinin yerini tutmaz.</p>
+<p>Upgrades: control plane first, one minor at a time, <code>apt-mark unhold</code> before, hold again after, drain per node in between. Never skip minors on kubeadm clusters.</p>
+<h2 id="k3s-alternatifi">k3s Alternatifi<a class="anchor" href="#k3s-alternatifi">#</a></h2>
+<p>If the VMs are small (2GB) and the goal is &ldquo;lightweight but real cluster&rdquo;, <a href="https://docs.k3s.io/">k3s</a> installs in five minutes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Master</span>
+</span></span><span style="display:flex;"><span>curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode <span style="color:#ae81ff">644</span>
+</span></span><span style="display:flex;"><span>sudo cat /var/lib/rancher/k3s/server/node-token
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Worker (agent)</span>
+</span></span><span style="display:flex;"><span>curl -sfL https://get.k3s.io | K3S_URL<span style="color:#f92672">=</span>https://192.168.1.50:6443 K3S_TOKEN<span style="color:#f92672">=</span>&lt;token&gt; sh -</span></span></code></pre></div><p>Differences worth knowing before choosing:</p>
+<ul>
+<li>Single binary with kubelet, kube-proxy, embedded containerd, flannel and CoreDNS bundled - far fewer moving parts to break</li>
+<li>State store defaults to <strong>sqlite</strong> (single server); for HA it supports embedded etcd (<code>--cluster-init</code>) or external datastore - not a toy, but read the HA docs before assuming parity with kubeadm&rsquo;s etcd</li>
+<li>Ships <a href="https://traefik.io/">traefik</a> and the local-path storage provisioner by default; <code>--disable traefik</code> if you run your own ingress - my Proxmox VMs are small, and this alone saves RAM</li>
+<li>No <code>kubeadm</code>; upgrades are a re-run of the install script with a version flag</li>
+</ul>
+<p>Benim tercihim: kaynak bolken kubeadm (standart k8s, her şeyi sen yönetiyorsun); 2GB&rsquo;lık VPS&rsquo;lerde ve düşük kaynaklı Proxmox VM&rsquo;lerinde k3s.</p>
+<h2 id="how-to-bootstrap-a-3-node-cluster-with-kubeadm">How to Bootstrap a 3-Node Cluster with kubeadm<a class="anchor" href="#how-to-bootstrap-a-3-node-cluster-with-kubeadm">#</a></h2>
+<ol>
+<li>
+<p>Prep all three VMs (swap, modules, sysctl, containerd, packages) - identical commands everywhere, and verify each step&rsquo;s output rather than assuming.</p>
+</li>
+<li>
+<p>On <code>kmaster</code>, initialize and capture the join command:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo kubeadm init --pod-network-cidr<span style="color:#f92672">=</span>10.244.0.0/16</span></span></code></pre></div><p>Copy kubeconfig, verify <code>kubectl get nodes</code> shows one <code>NotReady</code> control plane (no CNI yet - that&rsquo;s expected).</p>
+<ol start="3">
+<li>Apply flannel and watch the control plane flip to <code>Ready</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+</span></span><span style="display:flex;"><span>kubectl get nodes --watch</span></span></code></pre></div><blockquote class='book-hint '>
+<p>If nodes stay <code>NotReady</code> after flannel, check <code>kubectl get pods -n kube-system</code> - flannel pods should be Running on every node. NotReady + flannel Running is usually a CIDR mismatch from step 2; there&rsquo;s no clean fix for a wrong <code>--pod-network-cidr</code>, plan the CIDR before <code>init</code>.</p>
+</blockquote><h2 id="how-to-join-workers-and-verify-the-cluster">How to Join Workers and Verify the Cluster<a class="anchor" href="#how-to-join-workers-and-verify-the-cluster">#</a></h2>
+<ol>
+<li>
+<p>On each worker, paste the join command. A successful join ends with <code>This node has joined the cluster</code>.</p>
+</li>
+<li>
+<p>From the control plane, confirm the fleet and that the worker role reads as <code>&lt;none&gt;</code>:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get nodes -o wide</span></span></code></pre></div><p>Check <code>INTERNAL-IP</code>, <code>OS-IMAGE</code>, <code>VERSION</code> columns - and confirm all nodes run the <em>same</em> k8s minor version (the <code>hold</code> pins should guarantee it).</p>
+<ol start="3">
+<li>Deploy the web app with 3 replicas and watch placement:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -o wide</span></span></code></pre></div><p>Pods landing on <em>different</em> worker nodes is the v1 <a href="../../kubernetes/kubernetes-minikube/">minikube limits</a> table happening for real.</p>
+<ol start="4">
+<li>Sanity-check the control-plane taint keeps pods off the master:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl describe node kmaster | grep -iA3 taints</span></span></code></pre></div><h2 id="how-to-remove-and-re-add-a-node-safely">How to Remove and Re-add a Node Safely<a class="anchor" href="#how-to-remove-and-re-add-a-node-safely">#</a></h2>
+<ol>
+<li>Evacuate first - drain moves the workloads away before you touch anything:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl drain kworker1 --ignore-daemonsets
+</span></span><span style="display:flex;"><span>kubectl get pods -o wide --watch</span></span></code></pre></div><p>Watch the web pods reschedule onto remaining nodes (this is also the moment you notice if you lack a <a href="taints-affinity-quotas/">spread constraint</a> - everything may pile onto one node).</p>
+<ol start="2">
+<li>From the cluster&rsquo;s view, remove the node object:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl delete node kworker1</span></span></code></pre></div><ol start="3">
+<li>On the node itself, clean k8s state:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo kubeadm reset -f
+</span></span><span style="display:flex;"><span>sudo iptables -F <span style="color:#f92672">&amp;&amp;</span> sudo iptables -t nat -F <span style="color:#f92672">&amp;&amp;</span> sudo iptables -t mangle -F
+</span></span><span style="display:flex;"><span>sudo rm -rf /etc/cni /var/lib/cni/ /var/lib/kubelet/*</span></span></code></pre></div><blockquote class='book-hint '>
+<p>The iptables flush and kubelet cleanup are what make a <em>re</em>-join work cleanly; skipping them produces join failures that look like token problems but are actually stale state.</p>
+</blockquote><ol start="4">
+<li>Re-join with a fresh token from the control plane and verify it returns to <code>Ready</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeadm token create --print-join-command   <span style="color:#75715e"># on kmaster</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># paste on kworker1</span>
+</span></span><span style="display:flex;"><span>kubectl get nodes --watch</span></span></code></pre></div><p>for more <a href="longhorn/">longhorn</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>taints-affinity-quotas</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes_v2/longhorn/" class="flex align-center">
+        <span>longhorn</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-plan">The Plan</a></li>
+    <li><a href="#prep-on-all-nodes">Prep on All Nodes</a></li>
+    <li><a href="#containerd">Containerd</a></li>
+    <li><a href="#k8s-packages-apt-the-careful-way">K8s Packages (apt, the careful way)</a></li>
+    <li><a href="#control-plane">Control Plane</a></li>
+    <li><a href="#workers-join">Workers Join</a></li>
+    <li><a href="#node-lifecycle">Node Lifecycle</a></li>
+    <li><a href="#backups-and-upgrades">Backups and Upgrades</a></li>
+    <li><a href="#k3s-alternatifi">k3s Alternatifi</a></li>
+    <li><a href="#how-to-bootstrap-a-3-node-cluster-with-kubeadm">How to Bootstrap a 3-Node Cluster with kubeadm</a></li>
+    <li><a href="#how-to-join-workers-and-verify-the-cluster">How to Join Workers and Verify the Cluster</a></li>
+    <li><a href="#how-to-remove-and-re-add-a-node-safely">How to Remove and Re-add a Node Safely</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

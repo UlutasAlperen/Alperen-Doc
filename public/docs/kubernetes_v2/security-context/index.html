@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Security Context# In manage-docker-as-non-root-user we made the case for not running containers as root on Docker. Kubernetes has the same problem: most container images still run their process as uid 0. A Security Context sets the security options for a pod or container - and there’s a whole family of them, not just “the user”.
+The Field Set# Container level (per container in spec.containers[].securityContext):
+securityContext: runAsNonRoot: true runAsUser: 1000 runAsGroup: 1000 allowPrivilegeEscalation: false readOnlyRootFilesystem: true capabilities: drop: [&#34;ALL&#34;] seccompProfile: type: RuntimeDefault runAsNonRoot: true - kubelet refuses to start the container if the image’s effective user resolves to 0. The most valuable single line in this chapter runAsUser/runAsGroup - override the image’s user with numeric UID/GID (names don’t work; id -u of the image user is what you need) allowPrivilegeEscalation: false - blocks setuid binaries and capability-gain inside the container readOnlyRootFilesystem: true - container filesystem becomes immutable; writes must target mounted volumes capabilities.drop: [&#34;ALL&#34;] - drops Linux capabilities; add back only what the app genuinely needs (add: [&#34;NET_BIND_SERVICE&#34;] for binding ports &lt; 1024) seccompProfile: RuntimeDefault - applies the container runtime’s default syscall filter. In restricted PSA this is required, and most runtimes’ default is a reasonable baseline Pod level (spec.securityContext) - applies to every container and to volumes:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/security-context/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="security-context">
+	<meta property="og:description" content="Security Context# In manage-docker-as-non-root-user we made the case for not running containers as root on Docker. Kubernetes has the same problem: most container images still run their process as uid 0. A Security Context sets the security options for a pod or container - and there’s a whole family of them, not just “the user”.
+The Field Set# Container level (per container in spec.containers[].securityContext):
+securityContext: runAsNonRoot: true runAsUser: 1000 runAsGroup: 1000 allowPrivilegeEscalation: false readOnlyRootFilesystem: true capabilities: drop: [&#34;ALL&#34;] seccompProfile: type: RuntimeDefault runAsNonRoot: true - kubelet refuses to start the container if the image’s effective user resolves to 0. The most valuable single line in this chapter runAsUser/runAsGroup - override the image’s user with numeric UID/GID (names don’t work; id -u of the image user is what you need) allowPrivilegeEscalation: false - blocks setuid binaries and capability-gain inside the container readOnlyRootFilesystem: true - container filesystem becomes immutable; writes must target mounted volumes capabilities.drop: [&#34;ALL&#34;] - drops Linux capabilities; add back only what the app genuinely needs (add: [&#34;NET_BIND_SERVICE&#34;] for binding ports &lt; 1024) seccompProfile: RuntimeDefault - applies the container runtime’s default syscall filter. In restricted PSA this is required, and most runtimes’ default is a reasonable baseline Pod level (spec.securityContext) - applies to every container and to volumes:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="security-context">
+	<meta itemprop="description" content="Security Context# In manage-docker-as-non-root-user we made the case for not running containers as root on Docker. Kubernetes has the same problem: most container images still run their process as uid 0. A Security Context sets the security options for a pod or container - and there’s a whole family of them, not just “the user”.
+The Field Set# Container level (per container in spec.containers[].securityContext):
+securityContext: runAsNonRoot: true runAsUser: 1000 runAsGroup: 1000 allowPrivilegeEscalation: false readOnlyRootFilesystem: true capabilities: drop: [&#34;ALL&#34;] seccompProfile: type: RuntimeDefault runAsNonRoot: true - kubelet refuses to start the container if the image’s effective user resolves to 0. The most valuable single line in this chapter runAsUser/runAsGroup - override the image’s user with numeric UID/GID (names don’t work; id -u of the image user is what you need) allowPrivilegeEscalation: false - blocks setuid binaries and capability-gain inside the container readOnlyRootFilesystem: true - container filesystem becomes immutable; writes must target mounted volumes capabilities.drop: [&#34;ALL&#34;] - drops Linux capabilities; add back only what the app genuinely needs (add: [&#34;NET_BIND_SERVICE&#34;] for binding ports &lt; 1024) seccompProfile: RuntimeDefault - applies the container runtime’s default syscall filter. In restricted PSA this is required, and most runtimes’ default is a reasonable baseline Pod level (spec.securityContext) - applies to every container and to volumes:">
+	<meta itemprop="wordCount" content="869">
+
+<title>security-context • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/security-context/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="active">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>security-context</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-field-set">The Field Set</a></li>
+    <li><a href="#who-is-the-images-user-anyway">Who Is the Image&rsquo;s User, Anyway?</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#not-rootless-container--rootless-node">Not: Rootless Container ≠ Rootless Node</a></li>
+    <li><a href="#how-to-run-the-api-as-non-root">How to Run the API as Non-Root</a></li>
+    <li><a href="#how-to-pass-the-restricted-psa-profile">How to Pass the restricted PSA Profile</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="security-context">Security Context<a class="anchor" href="#security-context">#</a></h1>
+<p>In <a href="../../docker/manage-docker-as-non-root-user/">manage-docker-as-non-root-user</a> we made the case for not running containers as root on Docker. Kubernetes has the same problem: most container images still run their process as <code>uid 0</code>. A <a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">Security Context</a> sets the security options for a pod or container - and there&rsquo;s a whole family of them, not just &ldquo;the user&rdquo;.</p>
+<h2 id="the-field-set">The Field Set<a class="anchor" href="#the-field-set">#</a></h2>
+<p><strong>Container level</strong> (per container in <code>spec.containers[].securityContext</code>):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">securityContext</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">runAsNonRoot</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">runAsUser</span>: <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">runAsGroup</span>: <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">allowPrivilegeEscalation</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">readOnlyRootFilesystem</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">capabilities</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">drop</span>: [<span style="color:#e6db74">&#34;ALL&#34;</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">seccompProfile</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">type</span>: <span style="color:#ae81ff">RuntimeDefault</span></span></span></code></pre></div><ul>
+<li><code>runAsNonRoot: true</code> - kubelet <em>refuses to start</em> the container if the image&rsquo;s effective user resolves to 0. The most valuable single line in this chapter</li>
+<li><code>runAsUser</code>/<code>runAsGroup</code> - override the image&rsquo;s user with numeric UID/GID (names don&rsquo;t work; <code>id -u</code> of the image user is what you need)</li>
+<li><code>allowPrivilegeEscalation: false</code> - blocks <code>setuid</code> binaries and capability-gain inside the container</li>
+<li><code>readOnlyRootFilesystem: true</code> - container filesystem becomes immutable; writes must target mounted volumes</li>
+<li><code>capabilities.drop: [&quot;ALL&quot;]</code> - drops Linux capabilities; add back only what the app genuinely needs (<code>add: [&quot;NET_BIND_SERVICE&quot;]</code> for binding ports &lt; 1024)</li>
+<li><code>seccompProfile: RuntimeDefault</code> - applies the container runtime&rsquo;s default syscall filter. In restricted PSA this is required, and most runtimes&rsquo; default is a reasonable baseline</li>
+</ul>
+<p><strong>Pod level</strong> (<code>spec.securityContext</code>) - applies to every container and to volumes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">securityContext</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">fsGroup</span>: <span style="color:#ae81ff">2000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">fsGroupChangePolicy</span>: <span style="color:#ae81ff">OnRootMismatch</span></span></span></code></pre></div><p><code>fsGroup</code> sets group ownership of mounted volumes so a uid-1000 process can write to a PVC. <code>fsGroupChangePolicy: OnRootMismatch</code> skips recursive chown when the volume root already has the right group - a meaningful startup-time saver for big volumes.</p>
+<h2 id="who-is-the-images-user-anyway">Who Is the Image&rsquo;s User, Anyway?<a class="anchor" href="#who-is-the-images-user-anyway">#</a></h2>
+<p><code>runAsUser</code> is only sane if it matches what the image expects. Two common situations:</p>
+<ul>
+<li>Image declares <code>USER 1000</code> (distroless runtimes, many official images) → just <code>runAsNonRoot: true</code> suffices, no UID override needed</li>
+<li>Image declares nothing → defaults to root → you must supply <code>runAsUser</code> pointing at a UID that owns nothing the app needs to write at build time, plus a writable volume or <code>fsGroup</code> for its data</li>
+</ul>
+<p><a href="../../docker/docker-distroless-container-images/">distroless</a> images ship dedicated <code>:nonroot</code> tags (uid 65532) exactly for this. If the image hardcodes user 0, <code>runAsNonRoot: true</code> simply refuses to start it - that refusal is the feature working.</p>
+<h1 id="pod-security-admission">Pod Security Admission<a class="anchor" href="#pod-security-admission">#</a></h1>
+<p>Hand-writing every field doesn&rsquo;t scale. <a href="https://kubernetes.io/docs/concepts/security/pod-security-admission/">Pod Security Admission</a> lets a namespace <em>enforce</em> a profile:</p>
+<ul>
+<li><code>privileged</code>: no restrictions (today&rsquo;s implicit default)</li>
+<li><code>baseline</code>: blocks the obviously dangerous (hostNetwork, hostPath, privileged containers, most hostPaths)</li>
+<li><code>restricted</code>: heavily hardened - non-root, no escalation, seccomp required, dropped capabilities, readonly root filesystem <em>not</em> required but capabilities must be dropped</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">pod-security.kubernetes.io/enforce</span>: <span style="color:#ae81ff">restricted</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">pod-security.kubernetes.io/enforce-version</span>: <span style="color:#ae81ff">v1.31</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">pod-security.kubernetes.io/warn</span>: <span style="color:#ae81ff">restricted</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">pod-security.kubernetes.io/audit</span>: <span style="color:#ae81ff">restricted</span></span></span></code></pre></div><p>Türkçe not: üç etiket üç farklı davranışı kontrol eder - <code>enforce</code> geçersiz pod&rsquo;u <em>reddeder</em>, <code>warn</code> kabul eder ama API yanıtına uyarı ekler, <code>audit</code> sadece audit log&rsquo;a yazar. Geçiş stratejim: önce <code>warn</code> + <code>audit</code> koy, bir hafta logları izle, hangi deployment&rsquo;ların ihlal ettiğini gör, düzelt, en son <code>enforce</code>&lsquo;a geç. Version label&rsquo;ı (<code>enforce-version</code>) pinlemek de önemli - aksi halde cluster&rsquo;ı yükseltince yeni API&rsquo;ler ihlal sayılabilir ve pod&rsquo;lar aniden reddedilmeye başlar.</p>
+<h2 id="not-rootless-container--rootless-node">Not: Rootless Container ≠ Rootless Node<a class="anchor" href="#not-rootless-container--rootless-node">#</a></h2>
+<p>İki farklı root konusu var, karıştırmayalım:</p>
+<ul>
+<li><strong>Container içindeki root</strong>: bu yazının konusu - <code>runAsNonRoot</code> ile process root olmuyor</li>
+<li><strong>Node üzerindeki container runtime&rsquo;ı</strong>: Docker yazısındaki rootless daemon ve <code>userns-remap</code> konusu - k8s tarafında node hardening&rsquo;i ayrı bir başlık; burada sadece pod&rsquo;ların process izolasyonunu konuşuyoruz</li>
+</ul>
+<h2 id="how-to-run-the-api-as-non-root">How to Run the API as Non-Root<a class="anchor" href="#how-to-run-the-api-as-non-root">#</a></h2>
+<ol>
+<li>Find out what the image does by default (before guessing a UID):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker inspect bootdotdev/synergychat-api:latest --format <span style="color:#e6db74">&#39;{{.Config.User}}&#39;</span></span></span></code></pre></div><p>Empty output means &ldquo;runs as root by default&rdquo; - we must override.</p>
+<ol start="2">
+<li>Add to the container spec in <code>api-deployment.yaml</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">securityContext</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">runAsNonRoot</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">runAsUser</span>: <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">runAsGroup</span>: <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">allowPrivilegeEscalation</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">capabilities</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">drop</span>: [<span style="color:#e6db74">&#34;ALL&#34;</span>]</span></span></code></pre></div><ol start="3">
+<li>And at pod level, since the api writes <code>db.json</code> to its PVC:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">securityContext</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">fsGroup</span>: <span style="color:#ae81ff">2000</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">fsGroupChangePolicy</span>: <span style="color:#ae81ff">OnRootMismatch</span></span></span></code></pre></div><ol start="4">
+<li>Apply and verify inside the container:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f api-deployment.yaml
+</span></span><span style="display:flex;"><span>kubectl exec &lt;api-pod&gt; -- id</span></span></code></pre></div><p>You want <code>uid=1000</code>, <code>gid=2000</code> (the fsGroup supplement) - not <code>uid=0</code>.</p>
+<blockquote class='book-hint '>
+<p>If the pod crashes with <code>Permission denied</code> writing to <code>/persist</code>, that&rsquo;s not a bug - it&rsquo;s your config being honest. Inspect the mount: <code>kubectl exec &lt;pod&gt; -- ls -la /persist</code>. The directory should be group-owned by <code>2000</code>. If it isn&rsquo;t, either the volume was created before <code>fsGroup</code> existed (recreate the PVC) or you picked the wrong GID.</p>
+</blockquote><ol start="5">
+<li>Tighten further: add <code>readOnlyRootFilesystem: true</code> and check the app still works - any temp-file needs become an <code>emptyDir</code> mount at <code>/tmp</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">tmp</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/tmp</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">tmp</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">emptyDir</span>: {}</span></span></code></pre></div><h2 id="how-to-pass-the-restricted-psa-profile">How to Pass the restricted PSA Profile<a class="anchor" href="#how-to-pass-the-restricted-psa-profile">#</a></h2>
+<ol>
+<li>Warn-and-audit first, so you can <em>see</em> violations without breaking anything:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl label ns default pod-security.kubernetes.io/warn<span style="color:#f92672">=</span>restricted pod-security.kubernetes.io/audit<span style="color:#f92672">=</span>restricted</span></span></code></pre></div><ol start="2">
+<li>
+<p>Re-apply the api deployment. The API response should now be clean (no warnings) if you did the non-root work above. If it still warns, the messages name each violated field - fix them one by one (<code>runAsNonRoot</code> set? seccomp set? capabilities dropped? escalation off?).</p>
+</li>
+<li>
+<p>Enforce, pinned to your cluster&rsquo;s version:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl label ns default pod-security.kubernetes.io/enforce<span style="color:#f92672">=</span>restricted pod-security.kubernetes.io/enforce-version<span style="color:#f92672">=</span>v1.31</span></span></code></pre></div><ol start="4">
+<li>Prove enforcement with an obviously-bad pod:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl run bad --image<span style="color:#f92672">=</span>busybox:1.36</span></span></code></pre></div><p>It must be rejected with a <code>Forbidden</code> message listing the violated rules. Then run the same image with a proper <code>securityContext</code> and watch it start - that contrast is your regression test.</p>
+<blockquote class='book-hint '>
+<p>PSA is namespace-scoped and <em>not</em> inherited. Label every namespace you care about, and prefer pinning <code>enforce-version</code> so a cluster upgrade doesn&rsquo;t silently change your security posture.</p>
+</blockquote><p>for more <a href="kubernetes-troubleshooting/">kubernetes-troubleshooting</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes_v2/network-policy/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>network-policy</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="flex align-center">
+        <span>kubernetes-troubleshooting</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-field-set">The Field Set</a></li>
+    <li><a href="#who-is-the-images-user-anyway">Who Is the Image&rsquo;s User, Anyway?</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#not-rootless-container--rootless-node">Not: Rootless Container ≠ Rootless Node</a></li>
+    <li><a href="#how-to-run-the-api-as-non-root">How to Run the API as Non-Root</a></li>
+    <li><a href="#how-to-pass-the-restricted-psa-profile">How to Pass the restricted PSA Profile</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

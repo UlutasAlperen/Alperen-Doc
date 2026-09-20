@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Three Autoscalers# In the scaling notes we built an HPA. But HPA is one of three autoscalers, and they operate at different layers - mixing them up is a classic design mistake:
+Autoscaler Katman Soru Ne yapar HPA Pod sayısı “Kaç pod?” Metriğe göre replica sayısını değiştirir VPA Pod kaynakları “Bir pod ne kadar ister?” requests/limits‘i otomatik ayarlar (restart ile) Cluster Autoscaler Node sayısı “Kaç node?” Pending pod’lar için node ekler, boş node’u çıkarır The layering matters because they solve different problems: HPA handles variable load for a fixed-per-pod footprint; VPA fixes wrong resource estimates; CA fixes fleet capacity.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/vpa-cluster-autoscaler/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="vpa-cluster-autoscaler">
+	<meta property="og:description" content="The Three Autoscalers# In the scaling notes we built an HPA. But HPA is one of three autoscalers, and they operate at different layers - mixing them up is a classic design mistake:
+Autoscaler Katman Soru Ne yapar HPA Pod sayısı “Kaç pod?” Metriğe göre replica sayısını değiştirir VPA Pod kaynakları “Bir pod ne kadar ister?” requests/limits‘i otomatik ayarlar (restart ile) Cluster Autoscaler Node sayısı “Kaç node?” Pending pod’lar için node ekler, boş node’u çıkarır The layering matters because they solve different problems: HPA handles variable load for a fixed-per-pod footprint; VPA fixes wrong resource estimates; CA fixes fleet capacity.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="vpa-cluster-autoscaler">
+	<meta itemprop="description" content="The Three Autoscalers# In the scaling notes we built an HPA. But HPA is one of three autoscalers, and they operate at different layers - mixing them up is a classic design mistake:
+Autoscaler Katman Soru Ne yapar HPA Pod sayısı “Kaç pod?” Metriğe göre replica sayısını değiştirir VPA Pod kaynakları “Bir pod ne kadar ister?” requests/limits‘i otomatik ayarlar (restart ile) Cluster Autoscaler Node sayısı “Kaç node?” Pending pod’lar için node ekler, boş node’u çıkarır The layering matters because they solve different problems: HPA handles variable load for a fixed-per-pod footprint; VPA fixes wrong resource estimates; CA fixes fleet capacity.">
+	<meta itemprop="wordCount" content="817">
+
+<title>vpa-cluster-autoscaler • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/vpa-cluster-autoscaler/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="active">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>vpa-cluster-autoscaler</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-hpavpa-conflict-and-the-rule">The HPA+VPA Conflict (and the Rule)</a></li>
+    <li><a href="#how-to-read-a-vpa-recommendation">How to Read a VPA Recommendation</a></li>
+    <li><a href="#how-to-apply-recommendations-in-controlled-mode">How to Apply Recommendations in Controlled Mode</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="the-three-autoscalers">The Three Autoscalers<a class="anchor" href="#the-three-autoscalers">#</a></h1>
+<p>In the <a href="../../kubernetes/kubernetes-scaling-horizontal/">scaling notes</a> we built an HPA. But HPA is one of <em>three</em> autoscalers, and they operate at different layers - mixing them up is a classic design mistake:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Autoscaler</th>
+					<th>Katman</th>
+					<th>Soru</th>
+					<th>Ne yapar</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>HPA</strong></td>
+					<td>Pod sayısı</td>
+					<td>&ldquo;Kaç pod?&rdquo;</td>
+					<td>Metriğe göre replica sayısını değiştirir</td>
+			</tr>
+			<tr>
+					<td><strong>VPA</strong></td>
+					<td>Pod kaynakları</td>
+					<td>&ldquo;Bir pod ne kadar ister?&rdquo;</td>
+					<td><code>requests</code>/<code>limits</code>&lsquo;i otomatik ayarlar (restart ile)</td>
+			</tr>
+			<tr>
+					<td><strong>Cluster Autoscaler</strong></td>
+					<td>Node sayısı</td>
+					<td>&ldquo;Kaç node?&rdquo;</td>
+					<td>Pending pod&rsquo;lar için node ekler, boş node&rsquo;u çıkarır</td>
+			</tr>
+	</tbody>
+</table>
+<p>The layering matters because they solve <em>different</em> problems: HPA handles variable load for a fixed-per-pod footprint; VPA fixes wrong resource estimates; CA fixes fleet capacity.</p>
+<h1 id="vertical-pod-autoscaler-architecture">Vertical Pod Autoscaler: Architecture<a class="anchor" href="#vertical-pod-autoscaler-architecture">#</a></h1>
+<p>A <a href="https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler">VPA</a> is actually three cooperating components - knowing them explains every behavior you&rsquo;ll observe:</p>
+<ul>
+<li><strong>Recommender</strong> - watches metrics-server history, builds percentile histograms per container, and computes <code>Low</code>/<code>Target</code>/<code>Upper</code> recommendations with a built-in safety margin (target estimator adds headroom ~15% above observed median-ish usage)</li>
+<li><strong>Admission controller</strong> - a webhook that patches <code>requests</code>/<code>limits</code> into pods <em>at creation time</em></li>
+<li><strong>Updater</strong> - the evictor. In <code>Auto</code> mode it deletes pods so they restart with the recommended resources, at a controlled eviction rate</li>
+</ul>
+<p>The three <code>updateMode</code> values map onto those components:</p>
+<ul>
+<li><code>Off</code>: only the recommender runs; publish recommendations, touch nothing</li>
+<li><code>Initial</code>: recommendations applied to <em>newly created</em> pods only (no eviction)</li>
+<li><code>Auto</code>: evict pods to apply recommendations (the admission webhook patches their requests on restart)</li>
+</ul>
+<p>A recommendation-only VPA:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">autoscaling.k8s.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">VerticalPodAutoscaler</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">testram-vpa</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">targetRef</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-testram</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">updatePolicy</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">updateMode</span>: <span style="color:#e6db74">&#34;Off&#34;</span></span></span></code></pre></div><h2 id="the-hpavpa-conflict-and-the-rule">The HPA+VPA Conflict (and the Rule)<a class="anchor" href="#the-hpavpa-conflict-and-the-rule">#</a></h2>
+<p>The trap: VPA <code>Auto</code> and CPU-based HPA fight over the same pods. VPA changes each pod&rsquo;s CPU <em>request</em>, which is the exact number HPA uses to compute utilization percentages - so the HPA&rsquo;s math silently corrupts. The standard resolutions:</p>
+<ul>
+<li>CPU-based <strong>HPA</strong> + memory-based <strong>VPA</strong> → compatible (different resources)</li>
+<li>Two autoscalers on the same resource → pick one</li>
+<li><a href="https://keda.sh/">KEDA</a> enters when the metric isn&rsquo;t CPU/memory at all (queue length, Kafka lag, HTTP RPS) - it&rsquo;s a scaler layer, not a VPA replacement</li>
+</ul>
+<blockquote class='book-hint '>
+<p>Cluster Autoscaler + HPA is the pairing that <em>does</em> compose cleanly: HPA grows pod count → pods go <code>Pending</code> → CA adds nodes → pods land. VPA in <code>Auto</code> is the one that plays badly, because its tool is eviction - and eviction is also what PodDisruptionBudgets try to guard against, so the updater respects PDBs (<code>minAvailable</code>) when evicting. Put a sane PDB in front of anything VPA <code>Auto</code> touches.</p>
+</blockquote><p>Minikube&rsquo;da Cluster Autoscaler&rsquo;ın gerçek bir karşılığı yok (tek node zaten); davranışı elle taklit edebilirsin:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>minikube node add
+</span></span><span style="display:flex;"><span>minikube node list</span></span></code></pre></div><p>Üretimde bu managed service&rsquo;in işidir (GKE Autopilot node autoscaling&rsquo;i varsayılan olarak yönetir; <a href="../../kubernetes/kubernetes-nodes-basic/">nodes-basic</a> notlarındaki &ldquo;managed offering node-level autoscaling&rdquo; sözünün ta kendisi).</p>
+<h2 id="how-to-read-a-vpa-recommendation">How to Read a VPA Recommendation<a class="anchor" href="#how-to-read-a-vpa-recommendation">#</a></h2>
+<ol>
+<li>Install the minimum for recommendation mode (CRDs + recommender):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f https://github.com/kubernetes/autoscaler/releases/latest/download/vpa-v1-crd-gen.yaml
+</span></span><span style="display:flex;"><span>kubectl apply -f https://github.com/kubernetes/autoscaler/releases/latest/download/vpa-recommender-deployment.yaml
+</span></span><span style="display:flex;"><span>kubectl -n kube-system get pods -l app<span style="color:#f92672">=</span>vpa-recommender</span></span></code></pre></div><ol start="2">
+<li>Point a <code>Off</code>-mode VPA at the <code>synergychat-testram</code> deployment from v1:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">autoscaling.k8s.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">VerticalPodAutoscaler</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">testram-vpa</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">targetRef</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-testram</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">updatePolicy</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">updateMode</span>: <span style="color:#e6db74">&#34;Off&#34;</span></span></span></code></pre></div><ol start="3">
+<li>Let it collect a few minutes of metrics, then read:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl describe vpa testram-vpa</span></span></code></pre></div><p>The <code>Status</code> section carries three bands per resource: <code>Lower Bound</code>, <code>Target</code>, <code>Upper Bound</code>.</p>
+<ol start="4">
+<li>Interpret them against what you hand-set in v1:</li>
+</ol>
+<ul>
+<li><code>Target</code> = what the recommender would set as request (observed usage + safety margin)</li>
+<li><code>Upper Bound</code> = the level at which throttling/OOM becomes likely if you go lower</li>
+<li><code>Lower Bound</code> = the absolute floor for saving resources</li>
+</ul>
+<blockquote class='book-hint '>
+<p>Compare <code>Target</code> with the static <code>256Mi</code> limit we chose by hand in the <a href="../../kubernetes/kubernetes-scaling-vertical/">vertical scaling</a> notes. If the target says <code>9Mi</code> for a pod limited at <code>256Mi</code>, you just learned your limits were 25x too generous - that&rsquo;s wasted schedulable capacity on every node it runs on.</p>
+</blockquote><ol start="5">
+<li>Cross-check with <code>kubectl top pod</code> - the recommendation is computed from <em>this</em> history, so a pod that just restarted has thin data. VPA needs days of history for stable numbers; treat day-one recommendations as a first draft.</li>
+</ol>
+<h2 id="how-to-apply-recommendations-in-controlled-mode">How to Apply Recommendations in Controlled Mode<a class="anchor" href="#how-to-apply-recommendations-in-controlled-mode">#</a></h2>
+<ol>
+<li>Switch to <code>Initial</code> - apply recommendations without evicting anything:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">updatePolicy</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">updateMode</span>: <span style="color:#e6db74">&#34;Initial&#34;</span></span></span></code></pre></div><ol start="2">
+<li>Delete the pod so a fresh one is created (that&rsquo;s all <code>Initial</code> needs):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl delete pod &lt;testram-pod&gt;
+</span></span><span style="display:flex;"><span>kubectl get pod &lt;new-pod&gt; -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.spec.containers[0].resources}{&#34;\n&#34;}&#39;</span></span></span></code></pre></div><p>The <code>requests</code> should now match the VPA&rsquo;s recommendation instead of the manifest&rsquo;s static values - the webhook patched them at admission.</p>
+<blockquote class='book-hint '>
+<p>Notice what this means for your YAML: the manifest&rsquo;s <code>resources</code> values are now only a starting point. If you later run <code>Auto</code>, live pods&rsquo; requests will drift from git - and if you use <a href="gitops-argocd/">ArgoCD</a> with <code>selfHeal</code>, it will fight the VPA over pod specs. Decision to make consciously: either don&rsquo;t use <code>Auto</code> with git-managed manifests, or exclude <code>resources</code> from diffing (<code>ignoreDifferences</code>).</p>
+</blockquote><ol start="3">
+<li>Optional: flip to <code>Auto</code> on a throwaway deployment and watch eviction happen (<code>kubectl get pods --watch</code> - the pod terminates and restarts with new requests). Never do this on something you care about without a PodDisruptionBudget first.</li>
+</ol>
+<p>for more <a href="taints-affinity-quotas/">taints-affinity-quotas</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes_v2/gitops-argocd/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>gitops-argocd</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="flex align-center">
+        <span>taints-affinity-quotas</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-hpavpa-conflict-and-the-rule">The HPA+VPA Conflict (and the Rule)</a></li>
+    <li><a href="#how-to-read-a-vpa-recommendation">How to Read a VPA Recommendation</a></li>
+    <li><a href="#how-to-apply-recommendations-in-controlled-mode">How to Apply Recommendations in Controlled Mode</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

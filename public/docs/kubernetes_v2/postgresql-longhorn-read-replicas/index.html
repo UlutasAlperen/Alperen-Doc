@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PostgreSQL Read Replicas with CloudNativePG# The manual setup taught us the mechanics: WAL, basebackup, standby. It also showed the catch - failover is a human job, and humans don’t get paged at 3am for fun. CloudNativePG (CNPG) is the operator that automates the whole lifecycle: primary election, failover, replica management, backups - as a declarative Cluster CRD. On top of Longhorn it turns our 3-node homelab into a genuinely production-shaped database platform.
+What the Operator Buys You# Elle StatefulSet CloudNativePG Replication kurulumu pg_basebackup, pg_hba, init script’ler instances: 3 Failover Manuel pg_promote() &#43; split-brain riski Otomatik: primary ölürse en güncel replica promote edilir Primary DNS Kendi service şemanı yazarsın -rw / -ro / -r service üçlüsü hazır Pg upgrade/resize Kendin Operator rolling update yapar Monitoring Kendin Hazır metrics endpoint The service trio is the part your apps touch - and it’s the read-replica payoff:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-longhorn-read-replicas/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="postgresql-longhorn-read-replicas">
+	<meta property="og:description" content="PostgreSQL Read Replicas with CloudNativePG# The manual setup taught us the mechanics: WAL, basebackup, standby. It also showed the catch - failover is a human job, and humans don’t get paged at 3am for fun. CloudNativePG (CNPG) is the operator that automates the whole lifecycle: primary election, failover, replica management, backups - as a declarative Cluster CRD. On top of Longhorn it turns our 3-node homelab into a genuinely production-shaped database platform.
+What the Operator Buys You# Elle StatefulSet CloudNativePG Replication kurulumu pg_basebackup, pg_hba, init script’ler instances: 3 Failover Manuel pg_promote() &#43; split-brain riski Otomatik: primary ölürse en güncel replica promote edilir Primary DNS Kendi service şemanı yazarsın -rw / -ro / -r service üçlüsü hazır Pg upgrade/resize Kendin Operator rolling update yapar Monitoring Kendin Hazır metrics endpoint The service trio is the part your apps touch - and it’s the read-replica payoff:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="postgresql-longhorn-read-replicas">
+	<meta itemprop="description" content="PostgreSQL Read Replicas with CloudNativePG# The manual setup taught us the mechanics: WAL, basebackup, standby. It also showed the catch - failover is a human job, and humans don’t get paged at 3am for fun. CloudNativePG (CNPG) is the operator that automates the whole lifecycle: primary election, failover, replica management, backups - as a declarative Cluster CRD. On top of Longhorn it turns our 3-node homelab into a genuinely production-shaped database platform.
+What the Operator Buys You# Elle StatefulSet CloudNativePG Replication kurulumu pg_basebackup, pg_hba, init script’ler instances: 3 Failover Manuel pg_promote() &#43; split-brain riski Otomatik: primary ölürse en güncel replica promote edilir Primary DNS Kendi service şemanı yazarsın -rw / -ro / -r service üçlüsü hazır Pg upgrade/resize Kendin Operator rolling update yapar Monitoring Kendin Hazır metrics endpoint The service trio is the part your apps touch - and it’s the read-replica payoff:">
+	<meta itemprop="wordCount" content="935">
+
+<title>postgresql-longhorn-read-replicas • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-longhorn-read-replicas/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="active">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>postgresql-longhorn-read-replicas</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-the-operator-buys-you">What the Operator Buys You</a></li>
+    <li><a href="#how-to-install-cloudnativepg">How to Install CloudNativePG</a></li>
+    <li><a href="#how-to-create-a-postgresql-cluster-on-longhorn">How to Create a PostgreSQL Cluster on Longhorn</a></li>
+    <li><a href="#how-to-use-the-read-replicas">How to Use the Read Replicas</a></li>
+    <li><a href="#how-to-test-failover">How to Test Failover</a></li>
+    <li><a href="#elle-setup-mı-operator-mı">Elle Setup mı Operator mı?</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="postgresql-read-replicas-with-cloudnativepg">PostgreSQL Read Replicas with CloudNativePG<a class="anchor" href="#postgresql-read-replicas-with-cloudnativepg">#</a></h1>
+<p>The <a href="postgresql-statefulset-replication/">manual setup</a> taught us the mechanics: WAL, basebackup, standby. It also showed the catch - failover is a human job, and humans don&rsquo;t get paged at 3am for fun. <a href="https://cloudnative-pg.io/">CloudNativePG</a> (CNPG) is the operator that automates the whole lifecycle: primary election, failover, replica management, backups - as a declarative <code>Cluster</code> CRD. On top of <a href="longhorn/">Longhorn</a> it turns our 3-node homelab into a genuinely production-shaped database platform.</p>
+<h2 id="what-the-operator-buys-you">What the Operator Buys You<a class="anchor" href="#what-the-operator-buys-you">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Elle StatefulSet</th>
+					<th>CloudNativePG</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Replication kurulumu</td>
+					<td><code>pg_basebackup</code>, <code>pg_hba</code>, init script&rsquo;ler</td>
+					<td><code>instances: 3</code></td>
+			</tr>
+			<tr>
+					<td>Failover</td>
+					<td>Manuel <code>pg_promote()</code> + split-brain riski</td>
+					<td>Otomatik: primary ölürse en güncel replica promote edilir</td>
+			</tr>
+			<tr>
+					<td>Primary DNS</td>
+					<td>Kendi service şemanı yazarsın</td>
+					<td><code>-rw</code> / <code>-ro</code> / <code>-r</code> service üçlüsü hazır</td>
+			</tr>
+			<tr>
+					<td>Pg upgrade/resize</td>
+					<td>Kendin</td>
+					<td>Operator rolling update yapar</td>
+			</tr>
+			<tr>
+					<td>Monitoring</td>
+					<td>Kendin</td>
+					<td>Hazır metrics endpoint</td>
+			</tr>
+	</tbody>
+</table>
+<p>The service trio is the part your apps touch - and it&rsquo;s the read-replica payoff:</p>
+<ul>
+<li><code>&lt;cluster&gt;-rw</code> → always the primary (writes)</li>
+<li><code>&lt;cluster&gt;-ro</code> → only the replicas (reads)</li>
+<li><code>&lt;cluster&gt;-r</code> → any instance (least useful, mostly for tooling)</li>
+</ul>
+<blockquote class='book-hint '>
+<p>One honest warning before we start: Longhorn snapshots are <em>not</em> a PostgreSQL backup strategy. Snapshots capture the filesystem at a moment; a database mid-write can produce a torn state, and there&rsquo;s no point-in-time recovery across WAL. CNPG integrates barman-based backups (object storage) with proper PITR - snapshots are extra safety, never the substitute.</p>
+</blockquote><h2 id="how-to-install-cloudnativepg">How to Install CloudNativePG<a class="anchor" href="#how-to-install-cloudnativepg">#</a></h2>
+<ol>
+<li>Install the operator with Helm (<a href="helm/">helm notes</a>):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add cnpg https://cloudnative-pg.github.io/charts
+</span></span><span style="display:flex;"><span>helm repo update
+</span></span><span style="display:flex;"><span>helm install cnpg cnpg/cloudnative-pg --namespace cnpg-system --create-namespace
+</span></span><span style="display:flex;"><span>kubectl -n cnpg-system get pods --watch</span></span></code></pre></div><ol start="2">
+<li>Verify the CRDs and the operator pod:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get crd | grep postgresql.cnpg.io
+</span></span><span style="display:flex;"><span>kubectl -n cnpg-system get pods</span></span></code></pre></div><p>You should see <code>Cluster</code>, <code>Pooler</code>, <code>Backup</code> and friends registered - the operator itself is a single pod, which is refreshingly small.</p>
+<ol start="3">
+<li>Optional but recommended for CLI workflows: the <code>kubectl cnpg</code> plugin:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -sSfL https://github.com/cloudnative-pg/cloudnative-pg/raw/main/hack/install.sh | sh
+</span></span><span style="display:flex;"><span>kubectl cnpg --help</span></span></code></pre></div><h2 id="how-to-create-a-postgresql-cluster-on-longhorn">How to Create a PostgreSQL Cluster on Longhorn<a class="anchor" href="#how-to-create-a-postgresql-cluster-on-longhorn">#</a></h2>
+<ol>
+<li>The <code>Cluster</code> CRD - notice there is no StatefulSet, no pg_hba, no basebackup in sight:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">postgresql.cnpg.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Cluster</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-db</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">instances</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">storage</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">size</span>: <span style="color:#ae81ff">5Gi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">storageClass</span>: <span style="color:#ae81ff">longhorn</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">bootstrap</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">initdb</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">database</span>: <span style="color:#ae81ff">appdb</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">owner</span>: <span style="color:#ae81ff">app</span></span></span></code></pre></div><p>CNPG derives everything: pod identities (<code>app-db-1/2/3</code>), the streaming replication user, <code>pg_hba.conf</code>, services, and three PVCs on the <code>longhorn</code> class - each one a 3-replica Longhorn volume spread across our nodes.</p>
+<ol start="2">
+<li>Apply and watch the choreography - the operator starts instances <em>in order</em> (<code>-1</code> first, as the primary, then joins the others as standbys):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f app-db-cluster.yaml
+</span></span><span style="display:flex;"><span>kubectl get pods -o wide --watch
+</span></span><span style="display:flex;"><span>kubectl get pvc</span></span></code></pre></div><ol start="3">
+<li>Inspect the credentials CNPG generated for you - it created a superuser secret automatically:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get secret app-db-superuser -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.data.username}&#39;</span> | base64 -d; echo
+</span></span><span style="display:flex;"><span>kubectl get secret app-db-superuser -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.data.password}&#39;</span> | base64 -d</span></span></code></pre></div><p>Same <a href="../../kubernetes/kubernetes-secrets/">base64-isn&rsquo;t-encryption</a> rules apply as always - the secret&rsquo;s protection is RBAC, not the encoding.</p>
+<ol start="4">
+<li>Check the topology:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl cnpg status app-db</span></span></code></pre></div><p>Primary on one instance, two hot standbys streaming - exactly the manual setup from the previous chapter, minus every manual step.</p>
+<h2 id="how-to-use-the-read-replicas">How to Use the Read Replicas<a class="anchor" href="#how-to-use-the-read-replicas">#</a></h2>
+<ol>
+<li>Look at the three services the operator created:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get svc -l cnpg.io/cluster<span style="color:#f92672">=</span>app-db</span></span></code></pre></div><p><code>app-db-rw</code> points at the primary, <code>app-db-ro</code> only at standbys. That&rsquo;s your application contract: writes to <code>-rw</code>, reads to <code>-ro</code>.</p>
+<ol start="2">
+<li>Write through the primary:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl exec -it app-db-1 -- psql -U app -d appdb <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -c <span style="color:#e6db74">&#34;CREATE TABLE messages (id serial, body text);&#34;</span>
+</span></span><span style="display:flex;"><span>kubectl exec -it app-db-1 -- psql -U app -d appdb <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -c <span style="color:#e6db74">&#34;INSERT INTO messages (body) VALUES (&#39;written on primary&#39;);&#34;</span></span></span></code></pre></div><ol start="3">
+<li>Read from a replica - and prove it&rsquo;s read-only:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl exec -it app-db-2 -- psql -U app -d appdb -c <span style="color:#e6db74">&#34;SELECT count(*) FROM messages;&#34;</span>
+</span></span><span style="display:flex;"><span>kubectl exec -it app-db-2 -- psql -U app -d appdb -c <span style="color:#e6db74">&#34;SELECT pg_is_in_recovery();&#34;</span></span></span></code></pre></div><p><code>t</code> - you just read replicated data. And a write against <code>-ro</code> fails exactly like the manual standby did: <code>ERROR: cannot execute ... in a read-only transaction</code>.</p>
+<ol start="4">
+<li>From <em>inside the cluster</em>, point your app at the service names and you get connection-level read/write splitting for free - a <code>netshoot</code> pod test:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl run nettest --rm -it --image<span style="color:#f92672">=</span>cilium/netshoot:latest -- <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  pg_isready -h app-db-ro -p <span style="color:#ae81ff">5432</span></span></span></code></pre></div><h2 id="how-to-test-failover">How to Test Failover<a class="anchor" href="#how-to-test-failover">#</a></h2>
+<ol>
+<li>Find the primary and delete it - the operator&rsquo;s turn to shine:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pod -l cnpg.io/cluster<span style="color:#f92672">=</span>app-db -L cnpg.io/instanceRole
+</span></span><span style="display:flex;"><span>kubectl delete pod app-db-1
+</span></span><span style="display:flex;"><span>kubectl get pods -o wide --watch</span></span></code></pre></div><p>Watch the sequence: the most up-to-date standby gets promoted to primary, a replacement instance is <em>created</em> and rejoins as a replica - the roles re-shuffle automatically. Check the labels again; <code>instanceRole: primary</code> moved to a different pod.</p>
+<ol start="2">
+<li>Verify continuity through the <code>-rw</code> service - the app-level story:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl exec -it app-db-2 -- psql -U app -d appdb -c <span style="color:#e6db74">&#34;SELECT count(*) FROM messages;&#34;</span></span></span></code></pre></div><p>The <code>app-db-rw</code> service followed the new primary; your application never knew.</p>
+<ol start="3">
+<li>Reconcile with git, if you run <a href="gitops-argocd/">ArgoCD</a>: the CRD is declarative state, so the operator is self-healing by design - a deleted <code>Cluster</code> resource gets recreated, but <em>deleting the CRD deletes the database</em>, so treat cluster deletion like <code>DROP DATABASE</code>.</li>
+</ol>
+<blockquote class='book-hint '>
+<p>That last line deserves its own emphasis: <code>kubectl delete cluster app-db</code> is <code>DROP DATABASE</code> for your whole fleet. CNPG uses the <code>finalizer</code> mechanism, so deleting the CR tears down the PVCs too. Deleting a pod (as we did above) is safe - it&rsquo;s rescheduled; deleting the <code>Cluster</code> is the dangerous one.</p>
+</blockquote><h2 id="elle-setup-mı-operator-mı">Elle Setup mı Operator mı?<a class="anchor" href="#elle-setup-m%c4%b1-operator-m%c4%b1">#</a></h2>
+<ul>
+<li>Öğrenmek için elle StatefulSet kurulumu paha biçilemez - replication&rsquo;ın ne olduğunu <em>görüyorsun</em></li>
+<li>Ama 3am failover, lag-based failover seçimi, timeline yönetimi, managed upgrade&rsquo;ler - bunları elle yapmak, operatorün çözdüğü ve <strong>her seferinde</strong> yanlış yapılabilen işler</li>
+<li>Benim kuralım: homelab&rsquo;da önce elle kurdum (önceki yazı), gerçek kullanım için CNPG. ArgoCD ile birleştirince <code>Cluster</code> CRD&rsquo;si de git&rsquo;ten yönetilir - GitOps tüm stack&rsquo;i kapsar</li>
+</ul>
+<p>for more, circle back to where it all started: <a href="../../kubernetes/kubernetes-minikube/">kubernetes-minikube</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>postgresql-statefulset-replication</span>
+      </a>
+    
+    </span>
+    <span>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-the-operator-buys-you">What the Operator Buys You</a></li>
+    <li><a href="#how-to-install-cloudnativepg">How to Install CloudNativePG</a></li>
+    <li><a href="#how-to-create-a-postgresql-cluster-on-longhorn">How to Create a PostgreSQL Cluster on Longhorn</a></li>
+    <li><a href="#how-to-use-the-read-replicas">How to Use the Read Replicas</a></li>
+    <li><a href="#how-to-test-failover">How to Test Failover</a></li>
+    <li><a href="#elle-setup-mı-operator-mı">Elle Setup mı Operator mı?</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

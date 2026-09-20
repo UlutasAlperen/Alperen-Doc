@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Storage in Kubernetes# By default, containers running in pods on Kubernetes have access to the filesystem, but as we’re about to find out, there are some big limitations to this.
+example# The api application in SynergyChat can be configured to save its data (the messages) to a file on the filesystem. That way, even if the program is restarted, the messages will still be there.
+Update the api service’s ConfigMap to include a new environment variable:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-storage/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="kubernetes-storage">
+	<meta property="og:description" content="Storage in Kubernetes# By default, containers running in pods on Kubernetes have access to the filesystem, but as we’re about to find out, there are some big limitations to this.
+example# The api application in SynergyChat can be configured to save its data (the messages) to a file on the filesystem. That way, even if the program is restarted, the messages will still be there.
+Update the api service’s ConfigMap to include a new environment variable:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="kubernetes-storage">
+	<meta itemprop="description" content="Storage in Kubernetes# By default, containers running in pods on Kubernetes have access to the filesystem, but as we’re about to find out, there are some big limitations to this.
+example# The api application in SynergyChat can be configured to save its data (the messages) to a file on the filesystem. That way, even if the program is restarted, the messages will still be there.
+Update the api service’s ConfigMap to include a new environment variable:">
+	<meta itemprop="wordCount" content="2184">
+
+<title>kubernetes-storage • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-storage/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle" checked />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="active">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>kubernetes-storage</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#example">example</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#example-1">example</a>
+      <ul>
+        <li><a href="#pod-ve-multi-container-çoklu-container-mantığı">Pod ve Multi-Container (Çoklu Container) Mantığı</a></li>
+        <li><a href="#metindeki-teknik-hata-ölçeklendirme">Metindeki Teknik Hata (Ölçeklendirme)</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#persistent-volumes-pv">Persistent Volumes (PV)</a></li>
+    <li><a href="#persistent-volume-claims-pvc">Persistent Volume Claims (PVC)</a></li>
+    <li><a href="#assignment">Assignment</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#assignment-1">Assignment</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#when-would-you-use-a-database-on-kubernetes">When Would You Use a Database on Kubernetes?</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="storage-in-kubernetes">Storage in Kubernetes<a class="anchor" href="#storage-in-kubernetes">#</a></h1>
+<p>By default, containers running in pods on Kubernetes have access to the filesystem, but as we&rsquo;re about to find out, there are some big limitations to this.</p>
+<h2 id="example">example<a class="anchor" href="#example">#</a></h2>
+<p>The <code>api</code> application in SynergyChat can be configured to save its data (the messages) to a file on the filesystem. That way, even if the program is restarted, the messages will still be there.</p>
+<p>Update the <code>api</code> service&rsquo;s ConfigMap to include a new environment variable:</p>
+<ul>
+<li><code>API_DB_FILEPATH</code>: <code>/var/lib/synergychat/api/db.json</code></li>
+</ul>
+<p>Next, update the <code>api</code> service&rsquo;s deployment to use the new value.</p>
+<p>Take a look at the logs of the new pod (<code>kubectl logs &lt;podname&gt;</code>). You should see a message saying that the filesystem will be used for the database. If you do, everything is working as intended!</p>
+<p>Now, let&rsquo;s test the persistent storage:</p>
+<ol>
+<li>Open a webpage to <code>http://synchat.internal</code>.</li>
+<li>Create a few messages as different users.</li>
+<li>Refresh the page</li>
+<li>The messages should still be there because they&rsquo;re saved in the server&rsquo;s memory.</li>
+<li>Now, delete the <code>api</code> pod</li>
+<li>Once k8s replaces the deleted pod with a new one, refresh the page again.</li>
+</ol>
+<p><em>Perhaps to your surprise</em>, the messages are gone! What??? Why??? We saved them to the filesystem, didn&rsquo;t we? Well, we did, but in Kubernetes the filesystem is ephemeral. That means that when a pod is deleted, the filesystem is deleted with it.</p>
+<p>This has to do with the philosophy behind Kubernetes and even containers in general: when we spin up a new one, it should always be a blank slate, which makes reproducing and debugging issues much easier. No messy state to worry about.</p>
+<p>So how do we get persistent storage??? We&rsquo;ll cover that next.</p>
+<h1 id="ephemeral-volumes">Ephemeral Volumes<a class="anchor" href="#ephemeral-volumes">#</a></h1>
+<p>On-disk files in a container are ephemeral as we saw in the last lesson. This presents some problems for applications that want to save long-lived data across restarts. For example, user data in a database.</p>
+<p>The Kubernetes <a href="https://kubernetes.io/docs/concepts/storage/volumes/">volume</a> abstraction solves two primary problems:</p>
+<ol>
+<li>Data persistence</li>
+<li>Data sharing across containers</li>
+</ol>
+<p>As it turns out, there are <em>a lot</em> of different types of &ldquo;volumes&rdquo; in Kubernetes. Some are even ephemeral as well, just like a container&rsquo;s standard filesystem. The primary reason for using an ephemeral volume is to share data between containers in a pod.</p>
+<h2 id="example-1">example<a class="anchor" href="#example-1">#</a></h2>
+<p>It&rsquo;s time to shift our focus back to the <a href="https://github.com/bootdotdev/synergychat/#crawler-service">crawler service</a>. The crawler service continuously crawls Project Gutenberg and exposes the information that it finds via a JSON API. That data is then made available via slash commands in the chat application.</p>
+<p>The crawler is <em>pretty slow</em> by default. Each instance only crawls one book every 30 seconds.</p>
+<p>To see what I mean, run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl logs &lt;crawler-podname&gt;</span></span></code></pre></div><p>You should see some logs with timestamps that show you the crawler&rsquo;s progress.</p>
+<p>We can speed it up by increasing the number of concurrent crawlers. The trouble with scaling up beyond one instance is that each crawler currently stores its data in memory. We need all pods to share the same data so they can each add their findings to the same database.</p>
+<p>Let&rsquo;s update the crawler deployment to use a volume that will be shared across all containers in the crawler pod, and scale up the number of containers in the pod.</p>
+<ol>
+<li>Add a <code>volumes</code> section to <code>spec/template/spec</code>.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cache-volume</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">emptyDir</span>: {}</span></span></code></pre></div><ol start="2">
+<li>Add a new <code>volumeMounts</code> section to the container entry. This will mount the volume we just created at the <code>/cache</code> path.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">cache-volume</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/cache</span></span></span></code></pre></div><ol start="3">
+<li>Duplicate the entire first entry in the <code>containers</code> list twice (you should now have 3 total containers). Update the name of each:
+<ol>
+<li><code>synergychat-crawler-1</code></li>
+<li><code>synergychat-crawler-2</code></li>
+<li><code>synergychat-crawler-3</code></li>
+</ol>
+</li>
+</ol>
+<p>Now all the containers in the pod will share the same volume at <code>/cache</code>. It&rsquo;s just an empty directory, but the crawler will use it to store its data.</p>
+<ol start="4">
+<li>Add a <code>CRAWLER_DB_PATH</code> environment variable to the crawler&rsquo;s ConfigMap. Set it to <code>/cache/db</code>. The crawler will use a directory called <code>db</code> inside the volume to store its data.</li>
+</ol>
+<p>When you run the next step, your pods are going to crash. Don&rsquo;t worry, we&rsquo;ll fix it!</p>
+<ol start="5">
+<li>Apply the new ConfigMap and Deployment, and use <code>kubectl get pod</code> to see the status of your new pod.</li>
+</ol>
+<p>You should notice that there&rsquo;s a problem with the pod! Only 1/3 of containers should be &ldquo;ready&rdquo;. Use the <code>logs</code> command to get the logs for all 3 containers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl logs &lt;podname&gt; --all-containers</span></span></code></pre></div><p>You should see something like this:</p>
+<pre tabindex="0"><code>listen tcp :8080: bind: address already in use</code></pre><p>Because pods share the same network namespace, they can&rsquo;t all bind to the same port! Hmm&hellip; let&rsquo;s put a band-aid on this by binding each container to a different port. <code>8080</code> is the only one that will be exposed via the service, but that&rsquo;s okay for now. We can add redundancy later.</p>
+<ol start="6">
+<li>Add two new values to the crawler&rsquo;s ConfigMap:
+<ol>
+<li><code>CRAWLER_PORT_2</code>: <code>8081</code></li>
+<li><code>CRAWLER_PORT_3</code>: <code>8082</code></li>
+</ol>
+</li>
+<li>Update the crawler deployment:</li>
+</ol>
+<p>Change the second and third containers to map <code>CRAWLER_PORT_2</code> -&gt; <code>CRAWLER_PORT</code> and <code>CRAWLER_PORT_3</code> -&gt; <code>CRAWLER_PORT</code> respectively (the Docker image expects a variable named &ldquo;CRAWLER_PORT&rdquo;). I&rsquo;m not going to give you the code, but know that it&rsquo;s gonna be a bit tedious because you need to use <code>env:</code> instead of <code>envFrom:</code> for the second and third containers. Don&rsquo;t forget to continue exposing the <code>CRAWLER_KEYWORDS</code> and <code>CRAWLER_DB_PATH</code> environment variables for all containers.</p>
+<p>When you&rsquo;re done, apply the changes and run <code>kubectl get pods</code> again. All three containers should be ready, each serving on a different port, with only the first exposed via the service.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ae81ff">NAME                                 READY   STATUS    RESTARTS   AGE</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">synergychat-api-78d7968fbd-v7dst     1/1     Running   0          126m</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">synergychat-crawler-7f88968f-r5mnm   3/3     Running   0          7m59s</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">synergychat-web-5466578854-j4jtk     1/1     Running   0          4h34m</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">synergychat-web-5466578854-l4jwk     1/1     Running   0          4h35m</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">synergychat-web-5466578854-pq2rz     1/1     Running   0          4h35m</span></span></span></code></pre></div><ul>
+<li>
+<p><code>synergychat-api</code> ve <code>synergychat-web</code> pod&rsquo;larının <code>READY</code> (Hazır) durumu <strong>1/1</strong> olarak görünüyor. Bu, pod&rsquo;un içinde sadece 1 adet container olduğu ve bunun başarıyla çalıştığı anlamına gelir.</p>
+</li>
+<li>
+<p><code>synergychat-crawler</code> pod&rsquo;unun durumu ise <strong>3/3</strong> olarak görünüyor. Bu, o pod&rsquo;un içinde 3 farklı container&rsquo;ın bulunduğu ve üçünün de çalıştığı anlamına gelir. Bu durum, metindeki &ldquo;tek bir pod içinde birden fazla container çalışabilir&rdquo; (multiple containers can run in a single pod) ifadesinin pratik bir örneğidir.</p>
+</li>
+</ul>
+<h3 id="pod-ve-multi-container-çoklu-container-mantığı">Pod ve Multi-Container (Çoklu Container) Mantığı<a class="anchor" href="#pod-ve-multi-container-%c3%a7oklu-container-mant%c4%b1%c4%9f%c4%b1">#</a></h3>
+<p>Kubernetes&rsquo;te en küçük dağıtım birimi container değil, Pod&rsquo;dur. Genellikle her Pod bir tane container barındırır. Ancak, birbirine çok sıkı bağlı olan ve kaynakları paylaşması gereken container&rsquo;lar aynı Pod içine yerleştirilir.</p>
+<p>Aynı Pod içindeki container&rsquo;ların paylaştığı temel kaynaklar şunlardır:</p>
+<ul>
+<li>
+<p><strong>Ağ (Network Namespace):</strong> Pod içindeki tüm container&rsquo;lar aynı IP adresini ve port alanını paylaşır. Birbirleriyle iletişim kurmak için ağ üzerinden değil, doğrudan <code>localhost</code> üzerinden haberleşirler.</p>
+</li>
+<li>
+<p><strong>Depolama (Storage Volumes):</strong> Pod düzeyinde tanımlanan veri alanlarına (volume) içindeki tüm container&rsquo;lar erişebilir ve dosya okuyup yazabilir.</p>
+</li>
+</ul>
+<p><strong>Kullanım Senaryosu:</strong> Ana bir web sunucusu container&rsquo;ınız olduğunu varsayalım. Bu sunucunun ürettiği logları alıp başka bir merkeze aktaracak ikinci bir yardımcı yazılıma ihtiyacınız varsa, bu iki yazılım farklı pod&rsquo;larda değil, aynı pod içinde farklı container&rsquo;lar olarak (Sidecar pattern) çalıştırılır. Dosyaları paylaşarak senkronize şekilde görev yaparlar.</p>
+<h3 id="metindeki-teknik-hata-ölçeklendirme">Metindeki Teknik Hata (Ölçeklendirme)<a class="anchor" href="#metindeki-teknik-hata-%c3%b6l%c3%a7eklendirme">#</a></h3>
+<p>Paylaştığın metnin son cümlesi Kubernetes&rsquo;in mimari yapısına göre <strong>hatalıdır</strong>:</p>
+<blockquote class='book-hint '>
+<p><em>&ldquo;In other words, we can scale up the instances of an application either at the container level or at the pod level.&rdquo;</em> (Başka bir deyişle, bir uygulamanın örneklerini container veya pod düzeyinde ölçeklendirebiliriz.)</p>
+</blockquote><p><strong>Doğrusu:</strong> Kubernetes&rsquo;te bir uygulamanın ölçeklendirilmesi (scaling) <strong>sadece Pod düzeyinde</strong> (veya node/sunucu düzeyinde) yapılır, container düzeyinde yapılmaz.</p>
+<p>Eğer uygulamanıza gelen yük artarsa, aynı pod&rsquo;un içine aynı container&rsquo;dan bir tane daha eklemezsiniz. Bunun yerine, pod&rsquo;un yeni bir kopyasını (replica) yaratırsınız. Aynı pod içine aynı görevi yapan (örneğin aynı portu dinleyen) iki web container&rsquo;ı koymak, port çakışmalarına (port conflict) neden olur ve Kubernetes anti-pattern&rsquo;i (yanlış uygulama) olarak kabul edilir. Aynı pod içindeki container&rsquo;lar aynı işi ölçeklendirmek için değil, birbirini tamamlayan farklı işleri yapmak için bir arada bulunurlar.</p>
+<h1 id="persistence">Persistence<a class="anchor" href="#persistence">#</a></h1>
+<p>All the volumes we&rsquo;ve worked with so far have been ephemeral, meaning when the associated pod is deleted the volume is deleted as well. This is fine for some use cases, but for most CRUD apps we want to persist data even if the pod is deleted.</p>
+<p>If you think about it, it&rsquo;s not even just when pods are explicitly deleted with <code>kubectl</code> that we need to worry about data loss. Pods can be deleted for several reasons:</p>
+<ul>
+<li>The node they&rsquo;re running on could fail</li>
+<li>A new version of the image was published (code was updated, etc)</li>
+<li>A new node was added to the cluster and the pod was rescheduled</li>
+</ul>
+<p>In all of these cases, we want to make sure that our data is still available. <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent volumes</a> allow us to do this.</p>
+<h2 id="persistent-volumes-pv">Persistent Volumes (PV)<a class="anchor" href="#persistent-volumes-pv">#</a></h2>
+<p>Instead of simply adding a volume to a deployment, a persistent volume is a cluster-level resource that is created separately from the pod and then attached to the pod. It&rsquo;s similar to a ConfigMap in that way.</p>
+<p>PVs can be created statically or dynamically.</p>
+<ul>
+<li>Static PVs are created manually by a cluster admin</li>
+<li>Dynamic PVs are created automatically when a pod requests a volume that doesn&rsquo;t exist yet</li>
+</ul>
+<p>Generally speaking, and especially in the cloud-native world, we want to use dynamic PVs. It&rsquo;s less work and more flexible.</p>
+<h2 id="persistent-volume-claims-pvc">Persistent Volume Claims (PVC)<a class="anchor" href="#persistent-volume-claims-pvc">#</a></h2>
+<p>A <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims">persistent volume claim</a> is a <em>request</em> for a persistent volume. When using dynamic provisioning, a PVC will automatically create a PV if one doesn&rsquo;t exist that matches the claim.</p>
+<p>The PVC is then attached to a pod, just like a volume would be.</p>
+<h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
+<p>Create a new file called <code>api-pvc.yaml</code> and add the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PersistentVolumeClaim</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">xxx</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">accessModes</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">xxx</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">xxx</span></span></span></code></pre></div><p>Add the following properties:</p>
+<ul>
+<li><code>metadata/name</code>: <code>synergychat-api-pvc</code></li>
+<li><code>spec/accessModes</code>: An array with one entry:
+<ul>
+<li><code>ReadWriteOnce</code></li>
+</ul>
+</li>
+<li><code>spec/resources/requests/storage</code>: <code>1Gi</code></li>
+</ul>
+<p>This creates a new PVC called <code>synergychat-api-pvc</code> with a few properties that can be read from and written to by multiple pods at the same time. It also requests 1GB of storage.</p>
+<p>Apply the PVC.</p>
+<p>Run both of these commands:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pvc
+</span></span><span style="display:flex;"><span>kubectl get pv</span></span></code></pre></div><p>You should see that a new PV was created automatically!</p>
+<p>Now <em>delete</em> the PVC:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl delete pvc &lt;pvc-name&gt;</span></span></code></pre></div><p>Make sure both the PVC and PV are gone:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pvc
+</span></span><span style="display:flex;"><span>kubectl get pv</span></span></code></pre></div><hr>
+<h1 id="attach-persistence">Attach Persistence<a class="anchor" href="#attach-persistence">#</a></h1>
+<p>So far all we&rsquo;ve done is create an empty persistent volume. Let&rsquo;s get the <code>api</code> application to use it.</p>
+<h2 id="assignment-1">Assignment<a class="anchor" href="#assignment-1">#</a></h2>
+<p>Use your <code>crawler</code> deployment and the <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims">docs</a> as a reference. Create a new volume in the api-deployment referencing your pvc:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api-volume</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">persistentVolumeClaim</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">claimName</span>: <span style="color:#ae81ff">synergychat-api-pvc</span></span></span></code></pre></div><p>Then mount it in the container under the <code>/persist</code> directory:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api-volume</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/persist</span></span></span></code></pre></div><p>Update the <code>API_DB_FILEPATH</code> environment variable you added earlier to instead use the new mount path: <code>/persist/db.json</code></p>
+<p>Apply the changes, then check to make sure all your pods are healthy:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods</span></span></code></pre></div><p>With your tunnel running (<code>minikube tunnel -c</code>), open <code>http://synchat.internal/</code> in your browser.</p>
+<ol>
+<li>Send some messages.</li>
+<li>Delete the <code>api</code> pod.</li>
+<li>Once the new pod is running, refresh the page and make sure your messages are still there. If they are, your persistent volume is working!</li>
+</ol>
+<p><code>api-deployment.yaml</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">synergychat-api</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">synergychat-api</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">synergychat-api</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">image</span>: <span style="color:#ae81ff">bootdotdev/synergychat-api:latest</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api-volume</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/persist</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">API_PORT</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">valueFrom</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">configMapKeyRef</span>:
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api-configmap</span>
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">key</span>: <span style="color:#ae81ff">API_PORT</span>
+</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">API_DB_FILEPATH</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">valueFrom</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">configMapKeyRef</span>:
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api-configmap</span>
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">key</span>: <span style="color:#ae81ff">API_DB_FILEPATH</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api-volume</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">persistentVolumeClaim</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">claimName</span>: <span style="color:#ae81ff">synergychat-api-pvc</span>
+</span></span><span style="display:flex;"><span>---</span></span></code></pre></div><p><code>api-configmap.yaml</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api-configmap</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">data</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">API_PORT</span>: <span style="color:#e6db74">&#34;8080&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">API_DB_FILEPATH</span>: <span style="color:#ae81ff">/persist/db.json</span>
+</span></span><span style="display:flex;"><span>---</span></span></code></pre></div><h1 id="databases">Databases<a class="anchor" href="#databases">#</a></h1>
+<p>Now that you know all about volumes, you might be thinking, &ldquo;Awesome! I&rsquo;ll host my CRUD app on Kubernetes and use a volume to store my PostgreSQL database data!&rdquo;.</p>
+<p>That&rsquo;s certainly possible, but frankly, it&rsquo;s not always the best idea. For example, the Boot.dev system that powers this website has the following components:</p>
+<ul>
+<li>A web application, currently served by Cloudflare (this could easily be a Kubernetes deployment if we cared to move it)</li>
+<li>Several backend microservices, all running on Kubernetes in Google Cloud
+<ul>
+<li>Our main JSON CRUD API</li>
+<li>A Discord bot</li>
+<li>A service that compiles student&rsquo;s Go code to WASM</li>
+<li>etc</li>
+</ul>
+</li>
+<li>A managed PostgreSQL database, hosted by Cloud SQL (GCP)</li>
+</ul>
+<p>Why do we do this? Well, Kubernetes isn&rsquo;t always the <em>simplest</em> way to get a job done. We could certainly host a PostgreSQL database on Kubernetes, but it would require a lot of extra work to get it to work well. For example, we&rsquo;d need to manually build all the configurations to:</p>
+<ul>
+<li>Create a persistent volume</li>
+<li>Handle Postgres version updates</li>
+<li>Set resource limits</li>
+<li>Set up automated backups</li>
+</ul>
+<p>For that reason, when I need an SQL database, I typically use a managed service like Cloud SQL or RDS. There are exceptions to that rule, but it&rsquo;s a good rule of thumb.</p>
+<h2 id="when-would-you-use-a-database-on-kubernetes">When Would You Use a Database on Kubernetes?<a class="anchor" href="#when-would-you-use-a-database-on-kubernetes">#</a></h2>
+<p>I have used databases on Kubernetes in the past, but I&rsquo;ve usually done it when the deployment wasn&rsquo;t exactly mission-critical. For example, I&rsquo;ve deployed <a href="https://grafana.com/">Grafana</a> and <a href="https://prometheus.io/">Prometheus</a> on Kubernetes, and they both have out-of-the-box support for in-cluster databases. I didn&rsquo;t care too much about backups and automatic upgrades for my telemetry data, and I knew the data set was small and static, so it was a good fit.</p>
+<p>If you do want to run a database in-cluster, the right tool for the job is a <a href="kubernetes-statefulsets/">StatefulSet</a> - it gives each pod a stable identity and its own PVC.
+for more <a href="kubernetes-persistent-volumes/">persistent-volumes</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>kubernetes-scaling-horizontal</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="flex align-center">
+        <span>kubernetes-persistent-volumes</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#example">example</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#example-1">example</a>
+      <ul>
+        <li><a href="#pod-ve-multi-container-çoklu-container-mantığı">Pod ve Multi-Container (Çoklu Container) Mantığı</a></li>
+        <li><a href="#metindeki-teknik-hata-ölçeklendirme">Metindeki Teknik Hata (Ölçeklendirme)</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#persistent-volumes-pv">Persistent Volumes (PV)</a></li>
+    <li><a href="#persistent-volume-claims-pvc">Persistent Volume Claims (PVC)</a></li>
+    <li><a href="#assignment">Assignment</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#assignment-1">Assignment</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#when-would-you-use-a-database-on-kubernetes">When Would You Use a Database on Kubernetes?</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

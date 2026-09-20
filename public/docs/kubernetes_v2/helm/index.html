@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Helm# In the v1 notes we wrote every manifest by hand: deployments, configmaps, services, gateways. That’s fine for a handful of resources you own. It falls apart the moment you want Prometheus &#43; Grafana &#43; Loki - three interdependent applications that together ship hundreds of YAML lines, with version matrices between them.
+Helm is the package manager for Kubernetes. Instead of raw manifests you install charts: versioned, templatized bundles that ship with sane defaults you can override. Think apt/npm, but the package installs into your cluster.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/helm/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="helm">
+	<meta property="og:description" content="Helm# In the v1 notes we wrote every manifest by hand: deployments, configmaps, services, gateways. That’s fine for a handful of resources you own. It falls apart the moment you want Prometheus &#43; Grafana &#43; Loki - three interdependent applications that together ship hundreds of YAML lines, with version matrices between them.
+Helm is the package manager for Kubernetes. Instead of raw manifests you install charts: versioned, templatized bundles that ship with sane defaults you can override. Think apt/npm, but the package installs into your cluster.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="helm">
+	<meta itemprop="description" content="Helm# In the v1 notes we wrote every manifest by hand: deployments, configmaps, services, gateways. That’s fine for a handful of resources you own. It falls apart the moment you want Prometheus &#43; Grafana &#43; Loki - three interdependent applications that together ship hundreds of YAML lines, with version matrices between them.
+Helm is the package manager for Kubernetes. Instead of raw manifests you install charts: versioned, templatized bundles that ship with sane defaults you can override. Think apt/npm, but the package installs into your cluster.">
+	<meta itemprop="wordCount" content="865">
+
+<title>helm • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/helm/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="active">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>helm</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#chart-anatomy">Chart Anatomy</a></li>
+    <li><a href="#values-and-their-precedence">Values and Their Precedence</a></li>
+    <li><a href="#hooks-and-weights">Hooks and Weights</a></li>
+    <li><a href="#where-does-release-state-live">Where Does Release State Live?</a></li>
+    <li><a href="#how-to-inspect-a-chart-before-installing-it">How to Inspect a Chart Before Installing It</a></li>
+    <li><a href="#how-to-install-prometheus-with-custom-values">How to Install Prometheus with Custom Values</a></li>
+    <li><a href="#how-to-roll-back-a-bad-upgrade">How to Roll Back a Bad Upgrade</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="helm">Helm<a class="anchor" href="#helm">#</a></h1>
+<p>In the <a href="../../kubernetes/kubernetes-yaml-configurations/">v1 notes</a> we wrote every manifest by hand: deployments, configmaps, services, gateways. That&rsquo;s fine for a handful of resources you own. It falls apart the moment you want Prometheus + Grafana + Loki - three interdependent applications that together ship <em>hundreds</em> of YAML lines, with version matrices between them.</p>
+<p><a href="https://helm.sh/docs/">Helm</a> is <em>the</em> package manager for Kubernetes. Instead of raw manifests you install <em>charts</em>: versioned, templatized bundles that ship with sane defaults you can override. Think apt/npm, but the package installs into your cluster.</p>
+<h2 id="chart-anatomy">Chart Anatomy<a class="anchor" href="#chart-anatomy">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>mychart/
+</span></span><span style="display:flex;"><span>├── Chart.yaml          # name, version (chart version), appVersion (app version)
+</span></span><span style="display:flex;"><span>├── values.yaml         # default configuration
+</span></span><span style="display:flex;"><span>├── values.schema.json  # optional: JSON schema validating values
+</span></span><span style="display:flex;"><span>├── charts/             # subchart dependencies (vendored or pulled via dependencies)
+</span></span><span style="display:flex;"><span>├── crds/               # CRDs installed BEFORE templates, never upgraded/rolled back
+</span></span><span style="display:flex;"><span>├── templates/
+</span></span><span style="display:flex;"><span>│   ├── _helpers.tpl    # reusable template snippets (labels, names)
+</span></span><span style="display:flex;"><span>│   ├── deployment.yaml
+</span></span><span style="display:flex;"><span>│   └── service.yaml
+</span></span><span style="display:flex;"><span>└── .helmignore</span></span></code></pre></div><p>Things beginners usually miss:</p>
+<ul>
+<li><strong><code>version</code> vs <code>appVersion</code></strong>: <code>version</code> is the chart&rsquo;s own version (can bump many times for the same app); <code>appVersion</code> is the app&rsquo;s version it deploys. Pin upgrades with <code>helm upgrade --version &lt;chart-version&gt;</code></li>
+<li><strong><code>crds/</code> is special</strong>: CRDs there are applied before everything else on install, but Helm does <em>not</em> upgrade or roll them back with the rest of the chart. That&rsquo;s why the Helm maintainers warn you not to manage volatile resources in it</li>
+<li><strong><code>charts/</code> and dependencies</strong>: a chart can declare dependencies in <code>Chart.yaml</code> (<code>dependencies:</code> with <code>condition:</code> flags); <code>helm dependency build</code> vendors them. That&rsquo;s how <code>kube-prometheus-stack</code> pulls in grafana, alertmanager and prometheus as subcharts</li>
+</ul>
+<h2 id="values-and-their-precedence">Values and Their Precedence<a class="anchor" href="#values-and-their-precedence">#</a></h2>
+<p>This is the part that bites everyone eventually. Helm merges values from multiple sources, and the precedence is fixed:</p>
+<ol>
+<li>Chart&rsquo;s <code>values.yaml</code> (lowest)</li>
+<li>Each <code>-f my-values.yaml</code> (later <code>-f</code> wins over earlier ones)</li>
+<li>Each <code>--set key=value</code> flag (highest)</li>
+</ol>
+<blockquote class='book-hint '>
+<p><code>--set</code> convenience is a trap: values set via <code>--set</code> don&rsquo;t live in any file, so six months later nobody knows where the config came from. <code>helm get values &lt;release&gt;</code> shows the <em>user-supplied</em> values, which is your recovery tool. My rule: everything reproducible goes in a values file, <code>--set</code> only for throwaway experiments.</p>
+</blockquote><p>Also note that <code>--set</code> has its own parsing quirks (type coercion, commas in lists, <code>null</code> semantics via <code>--set key=null</code>). For anything non-trivial, <code>-f</code> with a file is more honest.</p>
+<p>To see the defaults you&rsquo;re about to inherit:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm show values prometheus-community/prometheus</span></span></code></pre></div><p>And since some charts ship a <code>values.schema.json</code>, bad values fail fast at install time instead of producing broken manifests.</p>
+<h2 id="hooks-and-weights">Hooks and Weights<a class="anchor" href="#hooks-and-weights">#</a></h2>
+<p>Helm doesn&rsquo;t just apply YAML; it also <em>executes lifecycle actions</em> via annotations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;helm.sh/hook&#34;: </span><span style="color:#ae81ff">pre-install</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;helm.sh/hook-weight&#34;: </span><span style="color:#e6db74">&#34;-5&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;helm.sh/hook-delete-policy&#34;: </span><span style="color:#ae81ff">before-hook-creation,hook-succeeded</span></span></span></code></pre></div><p>Typical use: a <code>pre-install</code>/<code>pre-upgrade</code> Job that migrates a database schema before the new pods roll out. <code>hook-weight</code> controls ordering between hooks.</p>
+<h2 id="where-does-release-state-live">Where Does Release State Live?<a class="anchor" href="#where-does-release-state-live">#</a></h2>
+<p><code>helm history</code>, <code>rollback</code> and friends work because Helm stores release state in the cluster - by default as Secrets named <code>sh.helm.release.v1.&lt;release&gt;.v&lt;revision&gt;</code> in the release namespace. Delete those secrets and Helm forgets everything. This also means: <code>kubectl</code> deletions and Helm state can drift apart (see the <a href="kubernetes-troubleshooting/">troubleshooting notes</a> for the <code>helm uninstall</code> vs <code>kubectl delete</code> mess this can cause).</p>
+<p><strong>Özet - üçlü ilişki:</strong></p>
+<ul>
+<li><strong>Chart</strong> = tarifeli YAML paketi (versiyonlanmış, template&rsquo;li)</li>
+<li><strong>Release</strong> = chart&rsquo;ın cluster&rsquo;a kurulmuş instance&rsquo;ı (aynı chart&rsquo;tan N tane olabilir)</li>
+<li><strong>Values</strong> = kurulumun parametreleri (precedence sırası: chart defaults &lt; <code>-f</code> &lt; <code>--set</code>)</li>
+<li>Her <code>helm upgrade</code> bir <strong>revision</strong> üretir; rollback bu revision&rsquo;lar üzerinden çalışır</li>
+</ul>
+<h2 id="how-to-inspect-a-chart-before-installing-it">How to Inspect a Chart Before Installing It<a class="anchor" href="#how-to-inspect-a-chart-before-installing-it">#</a></h2>
+<p>Blind <code>helm install</code> is how people end up with 4Gi PVCs they didn&rsquo;t ask for. Inspect first:</p>
+<ol>
+<li>Add the repo and refresh its index:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+</span></span><span style="display:flex;"><span>helm repo update</span></span></code></pre></div><ol start="2">
+<li>Dump the chart&rsquo;s default values and <em>read them</em>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm show values prometheus-community/prometheus | less</span></span></code></pre></div><p>Search for <code>retention</code>, <code>persistentVolume</code>, <code>resources</code> - these are the knobs you&rsquo;ll almost certainly want to override.</p>
+<ol start="3">
+<li>Render the full manifest set locally, without touching the cluster:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm template monitor prometheus-community/prometheus &gt; rendered.yaml</span></span></code></pre></div><blockquote class='book-hint '>
+<p><code>helm template</code> renders from files only; it doesn&rsquo;t know what&rsquo;s already in your cluster. Use it for quick reads, not final verification.</p>
+</blockquote><ol start="4">
+<li>Do the dry run, which also catches API version and namespace issues:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install monitor prometheus-community/prometheus --dry-run --debug</span></span></code></pre></div><h2 id="how-to-install-prometheus-with-custom-values">How to Install Prometheus with Custom Values<a class="anchor" href="#how-to-install-prometheus-with-custom-values">#</a></h2>
+<ol>
+<li>Install with defaults to establish a baseline:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install monitor prometheus-community/prometheus
+</span></span><span style="display:flex;"><span>kubectl get pods --watch</span></span></code></pre></div><p>You should see <code>monitor-prometheus-server</code> running.</p>
+<ol start="2">
+<li>Override settings the reproducible way. Create <code>monitor-values.yaml</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">server</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">persistentVolume</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">size</span>: <span style="color:#ae81ff">4Gi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">retention</span>: <span style="color:#ae81ff">7d</span></span></span></code></pre></div><blockquote class='book-hint '>
+<p>Note the nesting: <code>server.persistentVolume.size</code> - the file mirrors the chart&rsquo;s <code>values.yaml</code> hierarchy. A flat <code>size: 4Gi</code> at the top would silently do nothing.</p>
+</blockquote><ol start="3">
+<li>Apply it with <code>upgrade</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm upgrade monitor prometheus-community/prometheus -f monitor-values.yaml</span></span></code></pre></div><ol start="4">
+<li>Prove the values took effect:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm get values monitor
+</span></span><span style="display:flex;"><span>kubectl get pvc</span></span></code></pre></div><h2 id="how-to-roll-back-a-bad-upgrade">How to Roll Back a Bad Upgrade<a class="anchor" href="#how-to-roll-back-a-bad-upgrade">#</a></h2>
+<ol>
+<li>Break something on purpose - scale the server to an absurd replica count:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm upgrade monitor prometheus-community/prometheus <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --set server.replicaCount<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> --reuse-values</span></span></code></pre></div><ol start="2">
+<li>Watch it hurt:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -l app<span style="color:#f92672">=</span>prometheus
+</span></span><span style="display:flex;"><span>helm history monitor</span></span></code></pre></div><p>Each <code>upgrade</code> created a revision; <code>deployed</code> shows the active one.</p>
+<ol start="3">
+<li>Roll back to the previous revision:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm rollback monitor &lt;previous-revision&gt;
+</span></span><span style="display:flex;"><span>kubectl get pods --watch</span></span></code></pre></div><ol start="4">
+<li>Verify what&rsquo;s actually deployed:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm get values monitor</span></span></code></pre></div><blockquote class='book-hint '>
+<p><code>helm rollback</code> restores the release state but does <em>not</em> revert your values files in git. Fix the file too, or your next <code>helm upgrade</code> re-introduces the problem.</p>
+</blockquote><p>for more <a href="kustomize/">kustomize</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes_v2/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>Kubernetes v2</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes_v2/kustomize/" class="flex align-center">
+        <span>kustomize</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#chart-anatomy">Chart Anatomy</a></li>
+    <li><a href="#values-and-their-precedence">Values and Their Precedence</a></li>
+    <li><a href="#hooks-and-weights">Hooks and Weights</a></li>
+    <li><a href="#where-does-release-state-live">Where Does Release State Live?</a></li>
+    <li><a href="#how-to-inspect-a-chart-before-installing-it">How to Inspect a Chart Before Installing It</a></li>
+    <li><a href="#how-to-install-prometheus-with-custom-values">How to Install Prometheus with Custom Values</a></li>
+    <li><a href="#how-to-roll-back-a-bad-upgrade">How to Roll Back a Bad Upgrade</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

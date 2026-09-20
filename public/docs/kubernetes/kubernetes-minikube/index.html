@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Deploying an Image# The kubectl create deployment command will create a “deployment” for us. We’ll talk more about the nuances of “deployments” later. But to put it simply, we only need to provide two things:
+The name of the deployment (this can be anything, it’s used to identify the deployment) The ID of the Docker image we want to deploy (it would be a full URL if we weren’t hosting the image on Docker Hub, which is the default) kubectl create deployment synergychat-web --image=docker.io/bootdotdev/synergychat-web:latestThis command will deploy a container built from this Docker image to your local k8s cluster.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-minikube/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="kubernetes-minikube">
+	<meta property="og:description" content="Deploying an Image# The kubectl create deployment command will create a “deployment” for us. We’ll talk more about the nuances of “deployments” later. But to put it simply, we only need to provide two things:
+The name of the deployment (this can be anything, it’s used to identify the deployment) The ID of the Docker image we want to deploy (it would be a full URL if we weren’t hosting the image on Docker Hub, which is the default) kubectl create deployment synergychat-web --image=docker.io/bootdotdev/synergychat-web:latestThis command will deploy a container built from this Docker image to your local k8s cluster.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="kubernetes-minikube">
+	<meta itemprop="description" content="Deploying an Image# The kubectl create deployment command will create a “deployment” for us. We’ll talk more about the nuances of “deployments” later. But to put it simply, we only need to provide two things:
+The name of the deployment (this can be anything, it’s used to identify the deployment) The ID of the Docker image we want to deploy (it would be a full URL if we weren’t hosting the image on Docker Hub, which is the default) kubectl create deployment synergychat-web --image=docker.io/bootdotdev/synergychat-web:latestThis command will deploy a container built from this Docker image to your local k8s cluster.">
+	<meta itemprop="wordCount" content="610">
+
+<title>kubernetes-minikube • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-minikube/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle" checked />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="active">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>kubernetes-minikube</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#deploying-an-image">Deploying an Image</a></li>
+    <li><a href="#viewing-deployments">Viewing Deployments</a></li>
+    <li><a href="#accessing-the-web-page">Accessing the Web Page</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#distributed-systems-are-complex">Distributed Systems Are Complex</a></li>
+    <li><a href="#resources-and-nodes">Resources and Nodes</a>
+      <ul>
+        <li><a href="#3-nodes-machines">3 Nodes (Machines)</a></li>
+        <li><a href="#5-pods-applications">5 Pods (Applications)</a></li>
+      </ul>
+    </li>
+    <li><a href="#this-wont-work-with-minikube">This Won&rsquo;t Work With Minikube</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="deploying-an-image">Deploying an Image<a class="anchor" href="#deploying-an-image">#</a></h2>
+<p>The <code>kubectl create deployment</code> command will create a &ldquo;deployment&rdquo; for us. We&rsquo;ll talk more about the nuances of &ldquo;deployments&rdquo; later. But to put it simply, we only need to provide two things:</p>
+<ol>
+<li>The name of the deployment (this can be anything, it&rsquo;s used to identify the deployment)</li>
+<li>The ID of the Docker image we want to deploy (it would be a full URL if we weren&rsquo;t hosting the image on Docker Hub, which is the default)</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create deployment synergychat-web --image<span style="color:#f92672">=</span>docker.io/bootdotdev/synergychat-web:latest</span></span></code></pre></div><p>This command will deploy a container built from <a href="https://hub.docker.com/r/bootdotdev/synergychat-web">this Docker image</a> to your local k8s cluster.</p>
+<h2 id="viewing-deployments">Viewing Deployments<a class="anchor" href="#viewing-deployments">#</a></h2>
+<p>To make sure the deployment was successful, run:</p>
+<p><code>kubectl get deployments</code></p>
+<h2 id="accessing-the-web-page">Accessing the Web Page<a class="anchor" href="#accessing-the-web-page">#</a></h2>
+<p>By default, resources inside of Kubernetes run on a private, isolated network. They&rsquo;re visible to other resources within the cluster, but not to the outside world.</p>
+<p>In order to access the application from your local network, you&rsquo;ll need to use <code>kubectl</code> to do some port forwarding. First, run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods</span></span></code></pre></div><p>We&rsquo;ll talk more about pods later, but for now, a pod is an abstraction over a container, and remember, a container is just a running instance of an image. To oversimplify, <strong>a pod is a running application</strong>.</p>
+<p>You should see something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>NAME                                   READY   STATUS    RESTARTS   AGE
+</span></span><span style="display:flex;"><span>synergychat-web-679cbcc6cd-cq6vx       1/1     Running   <span style="color:#ae81ff">0</span>          20m</span></span></code></pre></div><p>Next, run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl port-forward PODNAME 8080:8080</span></span></code></pre></div><p>Be sure to replace <code>PODNAME</code> with <em>your</em> pod&rsquo;s name. In my case, it was <code>synergychat-web-679cbcc6cd-cq6vx</code>.</p>
+<h1 id="minikube-vs-prod">Minikube vs. Prod<a class="anchor" href="#minikube-vs-prod">#</a></h1>
+<p>Minikube is a great tool for learning Kubernetes, but it&rsquo;s not a production-scale Kubernetes cluster. The primary difference is that Minikube runs a single-node cluster, whereas production clusters are multi-node distributed systems.</p>
+<h2 id="distributed-systems-are-complex">Distributed Systems Are Complex<a class="anchor" href="#distributed-systems-are-complex">#</a></h2>
+<p>Whenever you&rsquo;re dealing with a system that involves multiple machines talking to each other over a network, you&rsquo;re dealing with a distributed system. Distributed systems are inherently complex, and Kubernetes is no exception, but that complexity is generally abstracted away from you as a K8s user. That&rsquo;s what makes Kubernetes so cool! <em>It does a lot of the hard work for you.</em></p>
+<h2 id="resources-and-nodes">Resources and Nodes<a class="anchor" href="#resources-and-nodes">#</a></h2>
+<p>To zoom way out, Kubernetes&rsquo; job is to run software applications, and applications require resources. Resources are things like:</p>
+<ul>
+<li>CPU</li>
+<li>Memory</li>
+<li>Disk space</li>
+</ul>
+<p>Kubernetes&rsquo; job is to manage those resources and allocate them to the applications that are running on it. Let&rsquo;s look at an oversimplified example:</p>
+<h3 id="3-nodes-machines">3 Nodes (Machines)<a class="anchor" href="#3-nodes-machines">#</a></h3>
+<table>
+	<thead>
+			<tr>
+					<th>Node</th>
+					<th>RAM</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Node 1</td>
+					<td>16GB</td>
+			</tr>
+			<tr>
+					<td>Node 2</td>
+					<td>8GB</td>
+			</tr>
+			<tr>
+					<td>Node 3</td>
+					<td>8GB</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="5-pods-applications">5 Pods (Applications)<a class="anchor" href="#5-pods-applications">#</a></h3>
+<table>
+	<thead>
+			<tr>
+					<th>App</th>
+					<th>Required RAM</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>App 1</td>
+					<td>12GB</td>
+			</tr>
+			<tr>
+					<td>App 2</td>
+					<td>2GB</td>
+			</tr>
+			<tr>
+					<td>App 3</td>
+					<td>5GB</td>
+			</tr>
+			<tr>
+					<td>App 4</td>
+					<td>4GB</td>
+			</tr>
+			<tr>
+					<td>App 5</td>
+					<td>4GB</td>
+			</tr>
+	</tbody>
+</table>
+<p>Kubernetes looks at the resources required by each application and decides which node to run it on. In this case, it might do something like this:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Node</th>
+					<th>Apps</th>
+					<th>RAM Left Over</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Node 1</td>
+					<td>App 1 (12GB), App 2 (2GB)</td>
+					<td>2GB</td>
+			</tr>
+			<tr>
+					<td>Node 2</td>
+					<td>App 4 (4GB), App 5 (4GB)</td>
+					<td>0GB</td>
+			</tr>
+			<tr>
+					<td>Node 3</td>
+					<td>App 3 (5GB)</td>
+					<td>3GB</td>
+			</tr>
+	</tbody>
+</table>
+<p>What happens if we get a new application that requires 10GB of RAM? The cluster doesn&rsquo;t have enough resources to run it! The solution? Easy. Just add another node to the cluster and let Kubernetes figure out where to run it.</p>
+<h2 id="this-wont-work-with-minikube">This Won&rsquo;t Work With Minikube<a class="anchor" href="#this-wont-work-with-minikube">#</a></h2>
+<p>With Minikube, you only get one node! So once your machine runs out of resources, you&rsquo;re out of luck. That&rsquo;s why Minikube is great for learning, but not for production.</p>
+<p>Kubernetes clusters are running in production that have <em>thousands</em> of nodes. That&rsquo;s a lot of resources to manage! But that&rsquo;s the beauty of Kubernetes.</p>
+<p><em>If you&rsquo;re interested, you can find some <a href="https://www.cncf.io/case-studies/">case studies here</a>. I liked <a href="https://www.cncf.io/case-studies/bloomberg/">this one</a> from Bloomberg that shows they run hundreds of clusters with thousands of nodes each.</em>
+for more <a href="kubernetes-pods-minikube/">pods</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>Kubernetes</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="flex align-center">
+        <span>kubernetes-pods-minikube</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#deploying-an-image">Deploying an Image</a></li>
+    <li><a href="#viewing-deployments">Viewing Deployments</a></li>
+    <li><a href="#accessing-the-web-page">Accessing the Web Page</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#distributed-systems-are-complex">Distributed Systems Are Complex</a></li>
+    <li><a href="#resources-and-nodes">Resources and Nodes</a>
+      <ul>
+        <li><a href="#3-nodes-machines">3 Nodes (Machines)</a></li>
+        <li><a href="#5-pods-applications">5 Pods (Applications)</a></li>
+      </ul>
+    </li>
+    <li><a href="#this-wont-work-with-minikube">This Won&rsquo;t Work With Minikube</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

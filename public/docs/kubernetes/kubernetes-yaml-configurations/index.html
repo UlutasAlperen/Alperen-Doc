@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="YAML Config# Kubernetes resources are primarily configured using YAML files. We’ve used the kubectl edit command to edit resources in the cluster on-demand, but let’s inspect our deployment’s YAML file a bit more closely.
+Assignment# First, download a copy of your deployment’s YAML file and save it in your current directory:
+kubectl get deployment synergychat-web -o yaml &gt; web-deployment.yamlThen open it in your text editor. There are 5 top-level fields in the file:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-yaml-configurations/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="kubernetes-yaml-configurations">
+	<meta property="og:description" content="YAML Config# Kubernetes resources are primarily configured using YAML files. We’ve used the kubectl edit command to edit resources in the cluster on-demand, but let’s inspect our deployment’s YAML file a bit more closely.
+Assignment# First, download a copy of your deployment’s YAML file and save it in your current directory:
+kubectl get deployment synergychat-web -o yaml &gt; web-deployment.yamlThen open it in your text editor. There are 5 top-level fields in the file:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="kubernetes-yaml-configurations">
+	<meta itemprop="description" content="YAML Config# Kubernetes resources are primarily configured using YAML files. We’ve used the kubectl edit command to edit resources in the cluster on-demand, but let’s inspect our deployment’s YAML file a bit more closely.
+Assignment# First, download a copy of your deployment’s YAML file and save it in your current directory:
+kubectl get deployment synergychat-web -o yaml &gt; web-deployment.yamlThen open it in your text editor. There are 5 top-level fields in the file:">
+	<meta itemprop="wordCount" content="1404">
+
+<title>kubernetes-yaml-configurations • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-yaml-configurations/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle" checked />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="active">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>kubernetes-yaml-configurations</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#assignment">Assignment</a></li>
+    <li><a href="#create-a-deployment-configuration">Create a Deployment Configuration</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#example">Example</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#assignment-1">Assignment</a>
+      <ul>
+        <li><a href="#add-a-new-config-map">Add a New Config Map</a></li>
+        <li><a href="#add-a-new-deployment">Add a New Deployment</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="yaml-config">YAML Config<a class="anchor" href="#yaml-config">#</a></h1>
+<p>Kubernetes resources are primarily configured using YAML files. We&rsquo;ve used the <code>kubectl edit</code> command to edit resources in the cluster on-demand, but let&rsquo;s inspect our deployment&rsquo;s YAML file a bit more closely.</p>
+<h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
+<p>First, download a copy of your deployment&rsquo;s YAML file and save it in your current directory:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get deployment synergychat-web -o yaml &gt; web-deployment.yaml</span></span></code></pre></div><p>Then open it in your text editor. There are 5 top-level fields in the file:</p>
+<ul>
+<li><code>apiVersion: apps/v1</code> - Specifies the version of the Kubernetes API you&rsquo;re using to create the object (e.g., apps/v1 for Deployments).</li>
+<li><code>kind: Deployment</code> - Specifies the type of object you&rsquo;re configuring</li>
+<li><code>metadata</code> - Metadata about the deployment, like when it was created, its name, and its ID</li>
+<li><code>spec</code> - The desired state of the deployment. Most impactful edits, like how many replicas you want, will be made here.</li>
+<li><code>status</code> - The current state of the deployment. You won&rsquo;t edit this directly, it&rsquo;s just for you to see what&rsquo;s going on with your deployment.</li>
+</ul>
+<p>Inside your editor, change the number of replicas to 3 and save the file. Notice that you&rsquo;re just editing a file on your machine! It won&rsquo;t yet have any effect on the deployment in your cluster.</p>
+<p>To apply the changes, run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f web-deployment.yaml</span></span></code></pre></div><p>You should get a warning that lets you know that you&rsquo;re missing the <code>last-applied-configuration</code> annotation. That&rsquo;s okay! we got that warning because we created this deployment the quick and dirty way, by using <code>kubectl create deployment</code> instead of creating a YAML file and using <code>kubectl apply -f</code>.</p>
+<p>However, because we&rsquo;ve now <em>updated</em> it with <code>kubectl apply</code>, the annotation is now there, and we won&rsquo;t get the warning again.</p>
+<p>Download the YAML file again and take a look at it. You should see the annotation now.</p>
+<p>Apply the configuration a second time, you won&rsquo;t get the warning. <em>Save this YAML file in a git repo for this course! We&rsquo;ll be making more configuration files. Kubernetes is an &ldquo;infra-as-code&rdquo; tool, so it&rsquo;s important to keep your configuration files in a git repo.</em></p>
+<h2 id="create-a-deployment-configuration">Create a Deployment Configuration<a class="anchor" href="#create-a-deployment-configuration">#</a></h2>
+<p>Let&rsquo;s write a deployment from scratch.</p>
+<p>Feel free to reference the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#creating-a-deployment">k8s docs here</a> as you go for examples of the proper structure.</p>
+<ol>
+<li>Create a new file called <code>api-deployment.yaml</code>.</li>
+<li>Add the <code>apiVersion</code> and <code>kind</code> fields. The <code>apiVersion</code> is <code>apps/v1</code> and, since this is a deployment, the <code>kind</code> is <code>Deployment</code>.</li>
+<li>Add a <code>metadata/name</code> field, and let&rsquo;s name our deployment <code>synergychat-api</code> for consistency.</li>
+<li>Add a <code>metadata/labels/app</code> field, and also set it to <code>synergychat-api</code>. This will be used to select the pods that this deployment manages.</li>
+<li>Add a <code>spec/replicas</code> field and let&rsquo;s set it to <code>1</code>. We can always scale up to more pods later.</li>
+<li>Add a <code>spec/selector/matchLabels/app</code> field and set it to <code>synergychat-api</code>. This should match the label we set in step 4.</li>
+<li>Add a <code>spec/template/metadata/labels/app</code> field and set it to <code>synergychat-api</code>. Again, this should match the label we set in step 4. Labels are important because they&rsquo;re how Kubernetes knows which pods belong to which deployments.</li>
+<li>Add a <code>spec/template/spec/containers</code> field. This actually contains a list of containers that will be deployed:
+<ol>
+<li>Note: A hyphen is how you denote a list item in YAML</li>
+<li>Set the <code>name</code> of the container to <code>synergychat-api</code>.</li>
+<li>Set the <code>image</code> to <code>bootdotdev/synergychat-api:latest</code>. This tells k8s where to download the Docker image from.</li>
+</ol>
+</li>
+</ol>
+<p>here&rsquo;s the equivalent JSON:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;apiVersion&#34;</span>: <span style="color:#e6db74">&#34;apps/v1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;kind&#34;</span>: <span style="color:#e6db74">&#34;Deployment&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;metadata&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;synergychat-api&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;labels&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;app&#34;</span>: <span style="color:#e6db74">&#34;synergychat-api&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;spec&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;replicas&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;selector&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;matchLabels&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;app&#34;</span>: <span style="color:#e6db74">&#34;synergychat-api&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;template&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;metadata&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;labels&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;app&#34;</span>: <span style="color:#e6db74">&#34;synergychat-api&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;spec&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;containers&#34;</span>: [
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;synergychat-api&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;image&#34;</span>: <span style="color:#e6db74">&#34;bootdotdev/synergychat-api:latest&#34;</span>
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h1 id="config-maps">Config Maps<a class="anchor" href="#config-maps">#</a></h1>
+<p>There are several ways to manage environment variables in Kubernetes. One of the most common ways is to use <a href="https://kubernetes.io/docs/concepts/configuration/configmap/">ConfigMaps</a>. ConfigMaps allow us to decouple our configurations from our container images, which is important because we don&rsquo;t want to have to rebuild our images every time we want to change a configuration value.</p>
+<p>In a Dockerfile we can set environment variables like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">ENV</span> PORT<span style="color:#f92672">=</span><span style="color:#ae81ff">3000</span></span></span></code></pre></div><p>The trouble is, that means that everyone using that image will have to use port 3000. It also means that if we want to change the port, we have to rebuild the image.</p>
+<h2 id="example">Example<a class="anchor" href="#example">#</a></h2>
+<p>First, let&rsquo;s take a closer look at our crashing pod and try to figure out why it&rsquo;s crashing.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods</span></span></code></pre></div><p>Copy the pod name and then get the logs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl logs &lt;pod-name&gt;</span></span></code></pre></div><p>You should see that a specific environment variable is missing! Let&rsquo;s fix that.</p>
+<p>Create a new file. Let&rsquo;s call it <code>api-configmap.yaml</code>. Add the following YAML to it:</p>
+<ul>
+<li><code>apiVersion</code>: <code>v1</code></li>
+<li><code>kind</code>: <code>ConfigMap</code></li>
+<li><code>metadata/name</code>: <code>synergychat-api-configmap</code></li>
+<li><code>data/API_PORT</code>: <code>&quot;8080&quot;</code></li>
+</ul>
+<p>Next, apply the config map:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f api-configmap.yaml</span></span></code></pre></div><p>Now, we haven&rsquo;t yet connected the config map to our pod, so it should still be crashing. However, for now, let&rsquo;s just validate that the config map was created successfully:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get configmaps</span></span></code></pre></div><h1 id="applying-the-config-map">Applying the Config Map<a class="anchor" href="#applying-the-config-map">#</a></h1>
+<p>Now that we have a config map, we need to connect it to our deployment.</p>
+<p>Open up your <code>api-deployment.yaml</code> file. We&rsquo;re going to add a few things to it. Under the <code>containers</code> section, add the following to the first (and only) entry:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">API_PORT</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">valueFrom</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">configMapKeyRef</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api-configmap</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">key</span>: <span style="color:#ae81ff">API_PORT</span></span></span></code></pre></div><p>This tells Kubernetes to set the <code>API_PORT</code> environment variable to the value of the <code>API_PORT</code> key in the <code>synergychat-api-configmap</code> config map. Reference the <a href="https://kubernetes.io/docs/concepts/configuration/configmap/">official docs</a> if you&rsquo;re confused about the structure of the yaml.</p>
+<p>Next, apply the deployment. Hopefully, you remember the command for this by now.</p>
+<p>Once it&rsquo;s applied, you should be able to take a look at the pods and see that a new API pod has been deployed and isn&rsquo;t crashing!</p>
+<p>Let&rsquo;s forward the API pod&rsquo;s <code>8080</code> port to our local machine so we can test it out.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl port-forward &lt;pod-name&gt; 8080:8080</span></span></code></pre></div><p>Make sure it returns a <code>404</code> response when you hit the root:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl http://localhost:8080</span></span></code></pre></div><h1 id="config-maps-are-insecure">Config Maps Are Insecure<a class="anchor" href="#config-maps-are-insecure">#</a></h1>
+<p>ConfigMaps are a great way to manage innocent environment variables in Kubernetes. Things like:</p>
+<ul>
+<li>Ports</li>
+<li>URLs of other services</li>
+<li>Feature flags</li>
+<li>Settings that change between environments, like <code>DEBUG</code> mode</li>
+</ul>
+<p>However, they are <em>not</em> cryptographically secure. ConfigMaps aren&rsquo;t encrypted, and they can be accessed by anyone with access to the cluster.</p>
+<p>If you need to store sensitive information, you should use <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Kubernetes Secrets</a> or a third-party solution. See the <a href="kubernetes-secrets/">secrets</a> chapter for a full walkthrough.</p>
+<h1 id="crawler">Crawler<a class="anchor" href="#crawler">#</a></h1>
+<p>We&rsquo;ve got one last application to deploy to our cluster: the crawler. This is an application that continuously crawls <a href="https://www.gutenberg.org/">Project Gutenberg</a> and exposes the juicy data that it finds via a JSON API.</p>
+<h2 id="assignment-1">Assignment<a class="anchor" href="#assignment-1">#</a></h2>
+<h3 id="add-a-new-config-map">Add a New Config Map<a class="anchor" href="#add-a-new-config-map">#</a></h3>
+<p>Create a copy of your <code>api-configmap.yaml</code> file and call it <code>crawler-configmap.yaml</code>. We&rsquo;re going to make a few changes to it.</p>
+<ol>
+<li>Name it <code>synergychat-crawler-configmap</code> instead of <code>synergychat-api-configmap</code>.</li>
+<li>Remove the <code>API_PORT</code> environment variable.</li>
+<li>Add some new environment variables:
+<ul>
+<li><code>CRAWLER_PORT</code>: <code>&quot;8080&quot;</code></li>
+<li><code>CRAWLER_KEYWORDS</code>: <code>love,hate,joy,sadness,anger,disgust,fear,surprise</code></li>
+</ul>
+</li>
+</ol>
+<p>It&rsquo;s okay that the <code>CRAWLER_PORT</code> in the <code>crawler</code> deployment is the same as the <code>API_PORT</code> in the <code>api</code> deployment. They&rsquo;re in different pods, and these are pod-internal ports.</p>
+<p>Here&rsquo;s a <a href="https://github.com/bootdotdev/synergychat/tree/main#crawler-service">reference</a> to the docs for the SynergyChat microservices on GitHub in case you want additional info about the crawler.</p>
+<p>Deploy the config map:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f crawler-configmap.yaml</span></span></code></pre></div><h3 id="add-a-new-deployment">Add a New Deployment<a class="anchor" href="#add-a-new-deployment">#</a></h3>
+<p>Create a copy of your <code>api-deployment.yaml</code> file and call it <code>crawler-deployment.yaml</code>. We&rsquo;re going to make a few changes to it.</p>
+<ol>
+<li>Update all <code>synergychat-api</code> references to <code>synergychat-crawler</code>.</li>
+<li>Update the image URL to <code>bootdotdev/synergychat-crawler:latest</code>.</li>
+<li>Update the environment variable references to match the new config map. (See below)</li>
+</ol>
+<p>For the <code>api</code> service, we used this syntax to connect the config map to the deployment:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">bootdotdev/synergychat-api:latest</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">API_PORT</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">valueFrom</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">configMapKeyRef</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api-configmap</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">key</span>: <span style="color:#ae81ff">API_PORT</span></span></span></code></pre></div><p>If we use this same format, it gets kinda verbose and repetitive to list out each environment variable:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">bootdotdev/synergychat-api:latest</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">env</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">THING_ONE</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">valueFrom</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">configMapKeyRef</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api-configmap</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">key</span>: <span style="color:#ae81ff">THING_ONE</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">THING_TWO</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">valueFrom</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">configMapKeyRef</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api-configmap</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">key</span>: <span style="color:#ae81ff">THING_TWO</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">THING_THREE</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#ae81ff">...</span></span></span></code></pre></div><p>We can use the <code>envFrom</code> key instead of the <code>env</code> key to reference the <em>entire</em> config map and make it available to the pods in the deployment:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">envFrom</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">configMapRef</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-crawler-configmap</span></span></span></code></pre></div><p>Once you&rsquo;ve updated the deployment, apply it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f crawler-deployment.yaml</span></span></code></pre></div><p>If the pod isn&rsquo;t &ldquo;ready&rdquo;, check the logs to see if there&rsquo;s an error. If the error is related to environment variables, debug your config map and deployment files and reapply them.</p>
+<p>Once it&rsquo;s ready, forward the pod&rsquo;s <code>8080</code> port to your local machine:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl port-forward &lt;pod-name&gt; 8080:8080</span></span></code></pre></div><p>for more <a href="kubernetes-secrets/">secrets</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes/kubernetes-probes/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>kubernetes-probes</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes/kubernetes-secrets/" class="flex align-center">
+        <span>kubernetes-secrets</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#assignment">Assignment</a></li>
+    <li><a href="#create-a-deployment-configuration">Create a Deployment Configuration</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#example">Example</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#assignment-1">Assignment</a>
+      <ul>
+        <li><a href="#add-a-new-config-map">Add a New Config Map</a></li>
+        <li><a href="#add-a-new-deployment">Add a New Deployment</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

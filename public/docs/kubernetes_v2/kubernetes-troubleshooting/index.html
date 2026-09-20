@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Troubleshooting# Everything that follows builds on one rule: status codes first, logs second, describe always. After writing dozens of deployments in the v1 notes, here’s the operator-grade field guide.
+Pod Status Quick Reference# Status Anlamı İlk bakılacak yer Pending Node’a schedule edilemedi describe → Events (resources? taints? affinity? quota?) ImagePullBackOff Image çekilemiyor (tag/repo/auth) describe → Events &#43; image adı CrashLoopBackOff Başlıyor, çöküyor, üstel beklemeyle tekrar logs --previous &#43; exit code ErrImagePull ImagePullBackOff‘un ilk hali Aynı Running ama broken Process yaşıyor, app ölü logs &#43; port-forward ile elle dene OOMKilled Memory limiti aşıldı describe → Last State Exit Code Cheat Sheet# The exit code in Last State: Terminated usually tells the whole story:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/kubernetes-troubleshooting/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="kubernetes-troubleshooting">
+	<meta property="og:description" content="Troubleshooting# Everything that follows builds on one rule: status codes first, logs second, describe always. After writing dozens of deployments in the v1 notes, here’s the operator-grade field guide.
+Pod Status Quick Reference# Status Anlamı İlk bakılacak yer Pending Node’a schedule edilemedi describe → Events (resources? taints? affinity? quota?) ImagePullBackOff Image çekilemiyor (tag/repo/auth) describe → Events &#43; image adı CrashLoopBackOff Başlıyor, çöküyor, üstel beklemeyle tekrar logs --previous &#43; exit code ErrImagePull ImagePullBackOff‘un ilk hali Aynı Running ama broken Process yaşıyor, app ölü logs &#43; port-forward ile elle dene OOMKilled Memory limiti aşıldı describe → Last State Exit Code Cheat Sheet# The exit code in Last State: Terminated usually tells the whole story:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="kubernetes-troubleshooting">
+	<meta itemprop="description" content="Troubleshooting# Everything that follows builds on one rule: status codes first, logs second, describe always. After writing dozens of deployments in the v1 notes, here’s the operator-grade field guide.
+Pod Status Quick Reference# Status Anlamı İlk bakılacak yer Pending Node’a schedule edilemedi describe → Events (resources? taints? affinity? quota?) ImagePullBackOff Image çekilemiyor (tag/repo/auth) describe → Events &#43; image adı CrashLoopBackOff Başlıyor, çöküyor, üstel beklemeyle tekrar logs --previous &#43; exit code ErrImagePull ImagePullBackOff‘un ilk hali Aynı Running ama broken Process yaşıyor, app ölü logs &#43; port-forward ile elle dene OOMKilled Memory limiti aşıldı describe → Last State Exit Code Cheat Sheet# The exit code in Last State: Terminated usually tells the whole story:">
+	<meta itemprop="wordCount" content="942">
+
+<title>kubernetes-troubleshooting • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/kubernetes-troubleshooting/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="active">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>kubernetes-troubleshooting</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#pod-status-quick-reference">Pod Status Quick Reference</a></li>
+    <li><a href="#exit-code-cheat-sheet">Exit Code Cheat Sheet</a></li>
+    <li><a href="#the-golden-path">The Golden Path</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#how-to-diagnose-a-crashloopbackoff">How to Diagnose a CrashLoopBackOff</a></li>
+    <li><a href="#how-to-debug-a-shell-less-container">How to Debug a Shell-less Container</a></li>
+    <li><a href="#how-to-trace-scheduling-failures">How to Trace Scheduling Failures</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="troubleshooting">Troubleshooting<a class="anchor" href="#troubleshooting">#</a></h1>
+<p>Everything that follows builds on one rule: <strong>status codes first, logs second, <code>describe</code> always</strong>. After writing dozens of deployments in the <a href="../../kubernetes/">v1 notes</a>, here&rsquo;s the operator-grade field guide.</p>
+<h2 id="pod-status-quick-reference">Pod Status Quick Reference<a class="anchor" href="#pod-status-quick-reference">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>Status</th>
+					<th>Anlamı</th>
+					<th>İlk bakılacak yer</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>Pending</code></td>
+					<td>Node&rsquo;a schedule edilemedi</td>
+					<td><code>describe</code> → Events (resources? taints? affinity? quota?)</td>
+			</tr>
+			<tr>
+					<td><code>ImagePullBackOff</code></td>
+					<td>Image çekilemiyor (tag/repo/auth)</td>
+					<td><code>describe</code> → Events + image adı</td>
+			</tr>
+			<tr>
+					<td><code>CrashLoopBackOff</code></td>
+					<td>Başlıyor, çöküyor, üstel beklemeyle tekrar</td>
+					<td><code>logs --previous</code> + exit code</td>
+			</tr>
+			<tr>
+					<td><code>ErrImagePull</code></td>
+					<td><code>ImagePullBackOff</code>&lsquo;un ilk hali</td>
+					<td>Aynı</td>
+			</tr>
+			<tr>
+					<td><code>Running</code> ama broken</td>
+					<td>Process yaşıyor, app ölü</td>
+					<td><code>logs</code> + <code>port-forward</code> ile elle dene</td>
+			</tr>
+			<tr>
+					<td><code>OOMKilled</code></td>
+					<td>Memory limiti aşıldı</td>
+					<td><code>describe</code> → <code>Last State</code></td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="exit-code-cheat-sheet">Exit Code Cheat Sheet<a class="anchor" href="#exit-code-cheat-sheet">#</a></h2>
+<p>The exit code in <code>Last State: Terminated</code> usually tells the whole story:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Code</th>
+					<th>Kim gönderdi</th>
+					<th>Ne anlama gelir</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>0</code></td>
+					<td>Uygulama</td>
+					<td>Temiz çıkış - Job&rsquo;larda başarı, servislerde şüpheli</td>
+			</tr>
+			<tr>
+					<td><code>1</code></td>
+					<td>Uygulama</td>
+					<td>Genel hata - stack trace&rsquo;e bak</td>
+			</tr>
+			<tr>
+					<td><code>126</code></td>
+					<td>Runtime</td>
+					<td>Komut çalıştırılamadı (izin/execute bit)</td>
+			</tr>
+			<tr>
+					<td><code>127</code></td>
+					<td>Runtime</td>
+					<td>Komut yok (<code>command:</code> yazım hatasının klasik belirtisi)</td>
+			</tr>
+			<tr>
+					<td><code>137</code></td>
+					<td>Kernel (SIGKILL)</td>
+					<td><code>128+9</code> → <strong>OOMKilled</strong> ya da elle <code>kill -9</code></td>
+			</tr>
+			<tr>
+					<td><code>139</code></td>
+					<td>Kernel (SIGSEGV)</td>
+					<td>Segmentation fault</td>
+			</tr>
+			<tr>
+					<td><code>143</code></td>
+					<td>Kernel (SIGTERM)</td>
+					<td><code>128+15</code> → k8s&rsquo;in normal kapatması (<code>graceful shutdown</code>)</td>
+			</tr>
+	</tbody>
+</table>
+<blockquote class='book-hint '>
+<p><code>137</code> and <code>143</code> are just <code>128 + signal number</code>. Seeing <code>137</code> on a memory-limited pod? That&rsquo;s the kernel enforcing your limit - go re-read the <a href="../../kubernetes/kubernetes-scaling-vertical/">scaling notes</a> on limits vs requests.</p>
+</blockquote><h2 id="the-golden-path">The Golden Path<a class="anchor" href="#the-golden-path">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 1. Hangi pod, hangi durumda?</span>
+</span></span><span style="display:flex;"><span>kubectl get pods
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. Detay + Events - okunacak en zengin kaynak</span>
+</span></span><span style="display:flex;"><span>kubectl describe pod &lt;pod-name&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. Loglar; çöken pod&#39;un önceki attempt&#39;ı için --previous</span>
+</span></span><span style="display:flex;"><span>kubectl logs &lt;pod-name&gt;
+</span></span><span style="display:flex;"><span>kubectl logs &lt;pod-name&gt; --previous
+</span></span><span style="display:flex;"><span>kubectl logs &lt;pod-name&gt; -c &lt;container-name&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4. İçeri girip elle dene</span>
+</span></span><span style="display:flex;"><span>kubectl exec -it &lt;pod-name&gt; -- sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 5. Cluster geneli olay akışı (neden Pending olduğunu burada da görürsün)</span>
+</span></span><span style="display:flex;"><span>kubectl get events --sort-by<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;.lastTimestamp&#39;</span>
+</span></span><span style="display:flex;"><span>kubectl get events --field-selector reason<span style="color:#f92672">=</span>FailedScheduling</span></span></code></pre></div><p>Useful structured queries once <code>describe</code> walls of text get tiring:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pod &lt;pod&gt; -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.status.containerStatuses[0].lastState.terminated.reason}{&#34; exit=&#34;}{.status.containerStatuses[0].lastState.terminated.exitCode}{&#34;\n&#34;}&#39;</span>
+</span></span><span style="display:flex;"><span>kubectl get pod &lt;pod&gt; -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.spec.containers[*].image}{&#34;\n&#34;}&#39;</span>
+</span></span><span style="display:flex;"><span>kubectl get events --field-selector involvedObject.name<span style="color:#f92672">=</span>&lt;pod&gt;</span></span></code></pre></div><p>And when you&rsquo;re unsure what a field even <em>is</em>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl explain pod.spec.securityContext --recursive | less</span></span></code></pre></div><blockquote class='book-hint '>
+<p>Don&rsquo;t forget <code>get endpoints &lt;service&gt;</code> for &ldquo;service returns 404/connection refused&rdquo; mysteries: an empty endpoints list means the <em>service&rsquo;s selector</em> matches no pods - the app may be perfectly healthy. Half of &ldquo;broken ingress&rdquo; bugs are selector mismatches, not app bugs.</p>
+</blockquote><h1 id="kubectl-debug-debugging-without-a-shell">kubectl debug: Debugging Without a Shell<a class="anchor" href="#kubectl-debug-debugging-without-a-shell">#</a></h1>
+<p><code>exec</code> requires a shell in the image - distroless images have none, and adding tools to prod images is bad practice anyway. <a href="https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#ephemeral-debugging-container">Ephemeral containers</a> solve this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl debug -it &lt;pod-name&gt; --image<span style="color:#f92672">=</span>cilium/netshoot:latest --target<span style="color:#f92672">=</span>app</span></span></code></pre></div><p>What happens: a temporary container joins the pod&rsquo;s <em>process namespace</em>, so you can inspect the target container&rsquo;s processes (<code>ps aux</code>) - no shell required in the target image. <code>--target</code> even shares the target&rsquo;s process namespace specifically.</p>
+<p>For node-level problems (disk, kubelet, network interfaces):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl debug node/&lt;node-name&gt; -it --image<span style="color:#f92672">=</span>ubuntu:22.04</span></span></code></pre></div><p>You get a container on that node with the host&rsquo;s filesystem mounted at <code>/host</code> - the node&rsquo;s logs live at <code>/host/var/log</code>, kubelet&rsquo;s journal via <code>journalctl</code> (run <code>chroot /host</code> first for full tooling).</p>
+<p>Türkçe homelab checklist (kafam karıştığında sırayla uyguladığım liste):</p>
+<ol>
+<li>Pod durumu ne? (<code>get pods</code>)</li>
+<li>Events ne diyor? (<code>describe</code> - Events ve Last State bölümleri)</li>
+<li>Log&rsquo;da stack trace var mı? (<code>logs --previous</code>)</li>
+<li>Exit code ne? (yukarıdaki tablo - <code>137</code> = OOM, <code>127</code> = command yazım hatası)</li>
+<li>Env var&rsquo;lar configmap/secret&rsquo;tan geliyorsa, o key gerçekten var mı?</li>
+<li>Selector&rsquo;lar eşleşiyor mu? (deployment selector ↔ pod labels; service selector ↔ endpoints)</li>
+<li>PVC bağlıysa mount path ve izinler doğru mu? (<code>fsGroup</code> hatırlatması: <a href="security-context/">security-context</a>)</li>
+<li>İzinler/root sorunları distroless image&rsquo;larda mı çıktı? (<a href="../../docker/docker-distroless-container-images/">distroless notları</a>)</li>
+</ol>
+<h2 id="how-to-diagnose-a-crashloopbackoff">How to Diagnose a CrashLoopBackOff<a class="anchor" href="#how-to-diagnose-a-crashloopbackoff">#</a></h2>
+<ol>
+<li>Cause one: point the api deployment at a ConfigMap key that doesn&rsquo;t exist (or delete a key it needs), then watch:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods --watch</span></span></code></pre></div><ol start="2">
+<li>Read the state machine:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pod &lt;api-pod&gt; -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.status.containerStatuses[0].state}{&#34;\n&#34;}&#39;</span></span></span></code></pre></div><p><code>waiting.reason: CrashLoopBackOff</code> - and <code>restartCount</code> climbing.</p>
+<ol start="3">
+<li>Get the <em>last</em> attempt&rsquo;s story:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl logs &lt;api-pod&gt; --previous | tail -n <span style="color:#ae81ff">20</span></span></span></code></pre></div><ol start="4">
+<li>Cross-check the exit code in <code>describe</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl describe pod &lt;api-pod&gt; | grep -A5 <span style="color:#e6db74">&#34;Last State&#34;</span></span></span></code></pre></div><blockquote class='book-hint '>
+<p>The distinction between <code>logs</code> and <code>describe</code> is where beginners lose time: <code>logs</code> shows what the app printed before dying; <code>describe</code>&rsquo;s Events and <code>Last State</code> show what k8s <em>observed</em>. A container that dies before printing anything has an empty <code>logs</code> and a telling <code>describe</code> - missing env, missing file, bad command (exit <code>127</code>).</p>
+</blockquote><ol start="5">
+<li>Fix the root cause (restore the ConfigMap key), and watch <code>restartCount</code> reset with the new pod. Note: k8s does <em>not</em> reset the backoff timer for the same pod; after repeated fixes, <code>delete pod</code> is faster than waiting out a long backoff.</li>
+</ol>
+<h2 id="how-to-debug-a-shell-less-container">How to Debug a Shell-less Container<a class="anchor" href="#how-to-debug-a-shell-less-container">#</a></h2>
+<ol>
+<li>Distroless-style: attach a toolbox container to a running pod and share process visibility:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl debug -it &lt;api-pod&gt; --image<span style="color:#f92672">=</span>cilium/netshoot:latest --target<span style="color:#f92672">=</span>synergychat-api</span></span></code></pre></div><ol start="2">
+<li>Inside the debug container, inspect the target&rsquo;s processes:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ps aux</span></span></code></pre></div><p>You&rsquo;ll see the target container&rsquo;s process tree (thanks to <code>--target</code> + process namespace sharing).</p>
+<ol start="3">
+<li>Test network reachability from inside the pod&rsquo;s network namespace - the debug container shares the pod&rsquo;s IP, so this tests exactly what the app pod sees:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl --max-time <span style="color:#ae81ff">3</span> http://api-service:8080/healthz</span></span></code></pre></div><ol start="4">
+<li>Cleanup happens automatically when you exit (ephemeral containers don&rsquo;t survive pod restarts) - verify with <code>kubectl get pod &lt;pod&gt; -o jsonpath='{.spec.ephemeralContainers}'</code>.</li>
+</ol>
+<h2 id="how-to-trace-scheduling-failures">How to Trace Scheduling Failures<a class="anchor" href="#how-to-trace-scheduling-failures">#</a></h2>
+<ol>
+<li>Reproduce a <code>Pending</code> from the v1 notes - set an absurd resource request on <code>testram</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl set resources deployment/synergychat-testram --limits<span style="color:#f92672">=</span>memory<span style="color:#f92672">=</span>40000Mi --requests<span style="color:#f92672">=</span>memory<span style="color:#f92672">=</span>40000Mi
+</span></span><span style="display:flex;"><span>kubectl get pods --watch</span></span></code></pre></div><ol start="2">
+<li>Filter the noise out of global events:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get events --field-selector reason<span style="color:#f92672">=</span>FailedScheduling</span></span></code></pre></div><p>You&rsquo;ll see exactly why: <code>0/1 nodes are available: 1 Insufficient memory</code>.</p>
+<ol start="3">
+<li>
+<p>Confirm the decision logic in <code>describe</code> (the Events section repeats the same verdict with more context), then reason about the fix path: lower the request, add a node (<code>minikube node add</code>), or remove a <a href="taints-affinity-quotas/">taint</a> that blocks the only candidate node.</p>
+</li>
+<li>
+<p>Clean up and verify recovery:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl set resources deployment/synergychat-testram --limits<span style="color:#f92672">=</span>memory<span style="color:#f92672">=</span>256Mi --requests<span style="color:#f92672">=</span>memory<span style="color:#f92672">=</span>128Mi
+</span></span><span style="display:flex;"><span>kubectl get pods</span></span></code></pre></div><p>for more <a href="gitops-argocd/">gitops-argocd</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes_v2/security-context/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>security-context</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes_v2/gitops-argocd/" class="flex align-center">
+        <span>gitops-argocd</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#pod-status-quick-reference">Pod Status Quick Reference</a></li>
+    <li><a href="#exit-code-cheat-sheet">Exit Code Cheat Sheet</a></li>
+    <li><a href="#the-golden-path">The Golden Path</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#how-to-diagnose-a-crashloopbackoff">How to Diagnose a CrashLoopBackOff</a></li>
+    <li><a href="#how-to-debug-a-shell-less-container">How to Debug a Shell-less Container</a></li>
+    <li><a href="#how-to-trace-scheduling-failures">How to Trace Scheduling Failures</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

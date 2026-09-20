@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NetworkPolicy# When we built custom bridge networks in Docker, the goal was isolation: containers on network A can’t see containers on network B. NetworkPolicy is the cluster-level equivalent - with a twist that trips everyone up at first.
+The default is “allow everything”. No policy = every pod can talk to every pod, everywhere. But the moment a pod is selected by any NetworkPolicy (Ingress or Egress, even an empty one), that flips: all traffic to/from that pod is denied unless another policy explicitly allows it. Policies are additive: the union of all rules selecting a pod defines its allowed traffic. There is no “deny” rule - you deny by omission.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/network-policy/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="network-policy">
+	<meta property="og:description" content="NetworkPolicy# When we built custom bridge networks in Docker, the goal was isolation: containers on network A can’t see containers on network B. NetworkPolicy is the cluster-level equivalent - with a twist that trips everyone up at first.
+The default is “allow everything”. No policy = every pod can talk to every pod, everywhere. But the moment a pod is selected by any NetworkPolicy (Ingress or Egress, even an empty one), that flips: all traffic to/from that pod is denied unless another policy explicitly allows it. Policies are additive: the union of all rules selecting a pod defines its allowed traffic. There is no “deny” rule - you deny by omission.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="network-policy">
+	<meta itemprop="description" content="NetworkPolicy# When we built custom bridge networks in Docker, the goal was isolation: containers on network A can’t see containers on network B. NetworkPolicy is the cluster-level equivalent - with a twist that trips everyone up at first.
+The default is “allow everything”. No policy = every pod can talk to every pod, everywhere. But the moment a pod is selected by any NetworkPolicy (Ingress or Egress, even an empty one), that flips: all traffic to/from that pod is denied unless another policy explicitly allows it. Policies are additive: the union of all rules selecting a pod defines its allowed traffic. There is no “deny” rule - you deny by omission.">
+	<meta itemprop="wordCount" content="802">
+
+<title>network-policy • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/network-policy/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic_git_conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic_git_knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github_workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous_integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous_deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumping/" class="">
+      plumping</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="active">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>network-policy</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#selector-semantics-and-vs-or">Selector Semantics: AND vs OR</a></li>
+    <li><a href="#ipblock-ports-and-named-ports">ipBlock, Ports and Named Ports</a></li>
+    <li><a href="#the-cni-reality-check">The CNI Reality Check</a></li>
+    <li><a href="#how-to-build-a-default-deny-zone">How to Build a Default-Deny Zone</a></li>
+    <li><a href="#how-to-allow-only-web--api-traffic">How to Allow Only web → api Traffic</a></li>
+    <li><a href="#how-to-verify-policies-with-netshoot">How to Verify Policies with netshoot</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="networkpolicy">NetworkPolicy<a class="anchor" href="#networkpolicy">#</a></h1>
+<p>When we built custom bridge networks in <a href="../../docker/docker-network/">Docker</a>, the goal was isolation: containers on <code>network A</code> can&rsquo;t see containers on <code>network B</code>. <a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/">NetworkPolicy</a> is the cluster-level equivalent - with a twist that trips everyone up at first.</p>
+<p><strong>The default is &ldquo;allow everything&rdquo;</strong>. No policy = every pod can talk to every pod, everywhere. But the moment a pod is selected by <em>any</em> NetworkPolicy (Ingress or Egress, even an empty one), that flips: all traffic to/from that pod is denied unless another policy explicitly allows it. Policies are <strong>additive</strong>: the union of all rules selecting a pod defines its allowed traffic. There is no &ldquo;deny&rdquo; rule - you deny by omission.</p>
+<ul>
+<li><code>policyTypes: [Ingress]</code> - only controls who may send traffic <em>to</em> the selected pods</li>
+<li><code>policyTypes: [Ingress, Egress]</code> - also controls what the selected pods may reach</li>
+<li><code>podSelector: {}</code> - selects all pods in the namespace</li>
+<li>An empty <code>ingress:</code> list = allow nothing (that&rsquo;s your default-deny)</li>
+</ul>
+<h2 id="selector-semantics-and-vs-or">Selector Semantics: AND vs OR<a class="anchor" href="#selector-semantics-and-vs-or">#</a></h2>
+<p>The <code>from</code> field mixes two selector types, and their combination rules are subtle:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ingress</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">from</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">podSelector</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">app</span>: <span style="color:#ae81ff">web</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">namespaceSelector</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">team</span>: <span style="color:#ae81ff">backend</span></span></span></code></pre></div><p>Two separate items in the list = <strong>OR</strong>: pods labeled <code>app: web</code> from <em>any</em> namespace, <em>plus</em> any pod from the <code>team: backend</code> namespace. That&rsquo;s almost never what you meant.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ingress</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">from</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">namespaceSelector</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">team</span>: <span style="color:#ae81ff">backend</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">podSelector</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">app</span>: <span style="color:#ae81ff">web</span></span></span></code></pre></div><p>Two selectors in the <em>same</em> item = <strong>AND</strong>: pods labeled <code>app: web</code> that live in namespaces labeled <code>team: backend</code>. Same YAML elements, one less space of indentation - completely different rule.</p>
+<blockquote class='book-hint '>
+<p>Egress&rsquo;te ise selector&rsquo;ların beraberinde DNS&rsquo;i düşünmek zorunlu. Egress&rsquo;i kısıtladığın pod, CoreDNS&rsquo;e ulaşamazsa her domain çözümlemesi ölür. Bu yüzden her egress policy&rsquo;sine <code>kube-dns</code>&lsquo;e <code>53/UDP+TCP</code> izni eklemek standart pratiktir.</p>
+</blockquote><h2 id="ipblock-ports-and-named-ports">ipBlock, Ports and Named Ports<a class="anchor" href="#ipblock-ports-and-named-ports">#</a></h2>
+<p><code>from</code> can also be a CIDR:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">from</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">ipBlock</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">cidr</span>: <span style="color:#ae81ff">192.168.1.0</span><span style="color:#ae81ff">/24</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">except</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#ae81ff">192.168.1.20</span><span style="color:#ae81ff">/32</span></span></span></code></pre></div><blockquote class='book-hint '>
+<p><code>ipBlock</code> matches pod IPs, which are virtual and rescheduled freely. It&rsquo;s appropriate for pods that run on the node host itself, external VMs or (in some setups) node IPs - not for &ldquo;that other deployment&rdquo;. Use label selectors between pods; save CIDRs for genuinely external sources.</p>
+</blockquote><p>Ports can be numeric or - better - <strong>named</strong>, matching the service/container port names:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">http</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span></span></span></code></pre></div><p>Renaming a numeric port later breaks policies silently; named ports keep the policy meaningful. But check your CNI supports named ports (calico does; some older ones don&rsquo;t).</p>
+<h2 id="the-cni-reality-check">The CNI Reality Check<a class="anchor" href="#the-cni-reality-check">#</a></h2>
+<p>NetworkPolicy is just an API. <strong>Enforcement happens in the CNI plugin</strong>, and that&rsquo;s where most homelab confusion lives:</p>
+<ul>
+<li>flannel: implements <em>nothing</em> - policies exist, are ignored</li>
+<li>calico: full enforcement, its own iptables programs</li>
+<li>kube-router, cilium: enforce as well (cilium adds richer eBPF-based policies beyond the standard API)</li>
+</ul>
+<p>Minikube&rsquo;s default CNI doesn&rsquo;t enforce policies. To test anything here, start the cluster policy-aware:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>minikube start --cni<span style="color:#f92672">=</span>calico
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># or: minikube addons enable network-policy</span></span></span></code></pre></div><h2 id="how-to-build-a-default-deny-zone">How to Build a Default-Deny Zone<a class="anchor" href="#how-to-build-a-default-deny-zone">#</a></h2>
+<ol>
+<li>
+<p>Make sure the cluster&rsquo;s CNI actually enforces (see above).</p>
+</li>
+<li>
+<p>Apply the namespace-wide deny:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.k8s.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">NetworkPolicy</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">default-deny-ingress</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">podSelector</span>: {}
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">policyTypes</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">Ingress</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f default-deny-ingress.yaml</span></span></code></pre></div><ol start="3">
+<li>Prove it works - a pod outside your allowed sources should time out, not get an error page:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl run nettest --rm -it --image<span style="color:#f92672">=</span>cilium/netshoot:latest -- curl --max-time <span style="color:#ae81ff">3</span> http://api-service:8080</span></span></code></pre></div><blockquote class='book-hint '>
+<p>Timeout (not connection refused) is the signature of a <em>dropped</em> packet at policy level. Connection refused would mean the pod answered - i.e. your policy isn&rsquo;t being enforced at all.</p>
+</blockquote><ol start="4">
+<li>Check what k8s thinks the policy means:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl describe networkpolicy default-deny-ingress</span></span></code></pre></div><h2 id="how-to-allow-only-web--api-traffic">How to Allow Only web → api Traffic<a class="anchor" href="#how-to-allow-only-web--api-traffic">#</a></h2>
+<ol>
+<li>Write the allow rule with the AND-semantics you actually mean:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.k8s.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">NetworkPolicy</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">allow-web-to-api</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">podSelector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">synergychat-api</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">policyTypes</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">Ingress</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ingress</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">from</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">podSelector</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">app</span>: <span style="color:#ae81ff">synergychat-web</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span></span></span></code></pre></div><ol start="2">
+<li>Apply, then test the allowed path <em>from a properly labeled pod</em> - <code>kubectl run busybox</code> creates an unlabeled pod, so label it at creation:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl run nettest --rm -it --image<span style="color:#f92672">=</span>cilium/netshoot:latest <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --labels<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;app=synergychat-web&#34;</span> -- curl --max-time <span style="color:#ae81ff">3</span> http://api-service:8080</span></span></code></pre></div><ol start="3">
+<li>
+<p>Test the denied path: the same curl <em>without</em> <code>--labels</code> must now fail. That asymmetry (labeled works, unlabeled times out) proves the policy is enforcing, not just present.</p>
+</li>
+<li>
+<p>Roll out the same pattern to the crawler namespace: default-deny there, then allow <code>api → crawler</code> on the crawler&rsquo;s port only.</p>
+</li>
+</ol>
+<h2 id="how-to-verify-policies-with-netshoot">How to Verify Policies with netshoot<a class="anchor" href="#how-to-verify-policies-with-netshoot">#</a></h2>
+<p><a href="https://github.com/cilium/netshoot">cilium/netshoot</a> is a Swiss-army network toolbox container. A few checks worth scripting:</p>
+<ol>
+<li>Confirm DNS still resolves (egress policy sanity):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl run dnstest --rm -it --image<span style="color:#f92672">=</span>cilium/netshoot:latest -- nslookup api-service</span></span></code></pre></div><ol start="2">
+<li>Enumerate what a pod is actually allowed - kubectl has no &ldquo;effective policy&rdquo; view, so check by source:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get networkpolicy -o wide
+</span></span><span style="display:flex;"><span>kubectl get netpol allow-web-to-api -o yaml | grep -A8 <span style="color:#e6db74">&#34;ingress:&#34;</span></span></span></code></pre></div><ol start="3">
+<li>Delete the allow policy and watch the allowed path break, then restore it. Ending on a positive control is what turns &ldquo;I think it works&rdquo; into &ldquo;it demonstrably works&rdquo;.</li>
+</ol>
+<p>for more <a href="security-context/">security-context</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes_v2/kustomize/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>kustomize</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes_v2/security-context/" class="flex align-center">
+        <span>security-context</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#selector-semantics-and-vs-or">Selector Semantics: AND vs OR</a></li>
+    <li><a href="#ipblock-ports-and-named-ports">ipBlock, Ports and Named Ports</a></li>
+    <li><a href="#the-cni-reality-check">The CNI Reality Check</a></li>
+    <li><a href="#how-to-build-a-default-deny-zone">How to Build a Default-Deny Zone</a></li>
+    <li><a href="#how-to-allow-only-web--api-traffic">How to Allow Only web → api Traffic</a></li>
+    <li><a href="#how-to-verify-policies-with-netshoot">How to Verify Policies with netshoot</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

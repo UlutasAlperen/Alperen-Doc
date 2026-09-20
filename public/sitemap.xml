@@ -8,9 +8,17 @@
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-kurulum-hardening-debian/</loc>
   </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/helm/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-minikube/</loc>
+  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/basic_git_knowledge/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-pods-minikube/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/kustomize/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/manage-docker-as-non-root-user/</loc>
   </url><url>
@@ -18,27 +26,67 @@
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/github_workflow/</loc>
   </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-deployments-minikube/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/network-policy/</loc>
+  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/continuous_integration/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-volumes/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-probes/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/security-context/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/continuous_deployment/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-build/</loc>
   </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/kubernetes-troubleshooting/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-yaml-configurations/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/gitops-argocd/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-secrets/</loc>
+  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/optimize-container-images-with-multi-stage-builds/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-network/</loc>
   </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-jobs-cronjobs/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/vpa-cluster-autoscaler/</loc>
+  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-exec-shell/</loc>
   </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-services/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/taints-affinity-quotas/</loc>
+  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-logs/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-gateway-minikube/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/multi-node-kubeadm-k3s/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-compose-basic/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-status/</loc>
   </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-namespaces/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/longhorn/</loc>
+  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-add/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-scaling-vertical/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-statefulset-replication/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/var-olan-volume-uzerine-docker-compose/</loc>
   </url><url>
@@ -46,17 +94,29 @@
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-commit/</loc>
   </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-scaling-horizontal/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-longhorn-read-replicas/</loc>
+  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-kurulum-hardening-rocky/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-push/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-storage/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-distroless-container-images/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-branch/</loc>
   </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-persistent-volumes/</loc>
+  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-pull/</loc>
   </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-statefulsets/</loc>
+  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-log/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-nodes-basic/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-merge/</loc>
   </url><url>
