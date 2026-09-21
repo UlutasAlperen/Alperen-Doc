@@ -71,7 +71,7 @@ metadata:
     argocd.argoproj.io/hook: PreSync
 ```
 
-`helm install`'ün [hooks](helm/) kavramına aynen benziyor - sadece burada tetikleyici git sync'i.
+`helm install`'ün [hooks](../helm/) kavramına aynen benziyor - sadece burada tetikleyici git sync'i.
 
 ## App-of-Apps and ApplicationSet
 
@@ -94,7 +94,7 @@ Benim sonucum: build/test CI'da kalır; **deploy'u** ArgoCD'ye devretmek drift'i
 
 ## How to Install ArgoCD and Log In via CLI
 
-1. Install with Helm (see [helm](helm/)):
+1. Install with Helm (see [helm](../helm/)):
 
 ```bash
 helm repo add argo https://argoproj.github.io/argo-helm
@@ -127,7 +127,7 @@ argocd account update-password
 
 ## How to Onboard an Application with Auto-Sync
 
-1. Push your SynergyChat manifests (the `base/` folder from [kustomize](kustomize/)) to a GitHub repo.
+1. Push your SynergyChat manifests (the `base/` folder from [kustomize](../kustomize/)) to a GitHub repo.
 
 2. Register the repo (needed once, and mandatory for private repos):
 
@@ -165,4 +165,4 @@ Status flips to `OutOfSync`; with `selfHeal` on, the controller reconciles it ba
 
 > Watch out: `prune: true` means git deletions are destructive on the cluster, too. Deleting the wrong directory in a PR takes down real workloads - that's why prod repos get branch protection and why `argocd app sync --prune` in manual mode deserves a second look before Enter.
 
-for more [vpa-cluster-autoscaler](vpa-cluster-autoscaler/)
+for more [vpa-cluster-autoscaler](../vpa-cluster-autoscaler/)

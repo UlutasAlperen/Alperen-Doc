@@ -108,4 +108,4 @@ docker rm -f $(docker ps -aq)
 
 Bu ikinci komut tüm container’ları  durdurur ve siler.
 
-Var olan bir volume üzerine compose ile devam etmek için [var-olan-volume-uzerine-docker-compose](var-olan-volume-uzerine-docker-compose/) sayfasına bak.
+Var olan bir volume üzerine compose ile devam etmek için [var-olan-volume-uzerine-docker-compose](../var-olan-volume-uzerine-docker-compose/) sayfasına bak.

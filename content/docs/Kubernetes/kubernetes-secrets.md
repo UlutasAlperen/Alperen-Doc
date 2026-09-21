@@ -4,7 +4,7 @@ weight: 6
 ---
 # Secrets
 
-In the [YAML config](kubernetes-yaml-configurations/) chapter we saw that ConfigMaps are a great way to manage _innocent_ environment variables - ports, URLs, feature flags. But we also learned that ConfigMaps are **not** encrypted, and anyone with access to the cluster can read them.
+In the [YAML config](../kubernetes-yaml-configurations/) chapter we saw that ConfigMaps are a great way to manage _innocent_ environment variables - ports, URLs, feature flags. But we also learned that ConfigMaps are **not** encrypted, and anyone with access to the cluster can read them.
 
 [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) are the Kubernetes object designed for sensitive data: passwords, tokens, and keys. Functionally, they look a _lot_ like ConfigMaps. The differences are:
 
@@ -152,4 +152,4 @@ kubectl exec <pod-name> -- printenv | grep API_KEY
 
 If you see your token, congrats - your deployment is pulling sensitive config from a Secret instead of a plaintext ConfigMap.
 
-for more [jobs-cronjobs](kubernetes-jobs-cronjobs/)
+for more [jobs-cronjobs](../kubernetes-jobs-cronjobs/)

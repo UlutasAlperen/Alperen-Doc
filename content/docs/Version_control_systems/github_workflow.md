@@ -1,9 +1,9 @@
 ---
-title: "github_workflow"
+title: "github-workflow"
 weight: 3
 ---
-001 - [continuous_integration](continuous_integration/)
-002 - [continuous_deployment](continuous_deployment/)
+001 - [continuous_integration](../continuous_integration/)
+002 - [continuous_deployment](../continuous_deployment/)
 
 # Hugo-Book Teması ve GitHub Actions(workflow) ile VPS'e CD
 

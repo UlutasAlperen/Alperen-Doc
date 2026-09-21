@@ -183,7 +183,7 @@ ConfigMaps are a great way to manage innocent environment variables in Kubernete
 
 However, they are _not_ cryptographically secure. ConfigMaps aren't encrypted, and they can be accessed by anyone with access to the cluster.
 
-If you need to store sensitive information, you should use [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) or a third-party solution. See the [secrets](kubernetes-secrets/) chapter for a full walkthrough.
+If you need to store sensitive information, you should use [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) or a third-party solution. See the [secrets](../kubernetes-secrets/) chapter for a full walkthrough.
 
 # Crawler
 
@@ -279,4 +279,4 @@ kubectl port-forward <pod-name> 8080:8080
 ```
 
 
-for more [secrets](kubernetes-secrets/)
+for more [secrets](../kubernetes-secrets/)

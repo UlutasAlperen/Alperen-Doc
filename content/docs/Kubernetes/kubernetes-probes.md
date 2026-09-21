@@ -84,4 +84,4 @@ In the `Containers` section you should see the `Liveness` and `Readiness` fields
 
 One last thing before we move on: probes are also the gatekeepers of rolling updates. When you `apply` a new version of a deployment, Kubernetes starts the new pod and _waits_ for its readiness probe to pass before terminating the old pod. Without a readiness probe, Kubernetes assumes the new pod is ready instantly - which is how you end up with traffic routed to a pod that's still booting.
 
-for more [yaml-configurations](kubernetes-yaml-configurations/)
+for more [yaml-configurations](../kubernetes-yaml-configurations/)

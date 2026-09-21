@@ -1,5 +1,5 @@
 ---
-title: "continuous_integration"
+title: "continuous-integration"
 weight: 4
 ---
 # Continuous Integration

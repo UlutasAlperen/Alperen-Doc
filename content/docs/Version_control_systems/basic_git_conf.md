@@ -1,5 +1,5 @@
 ---
-title: "basic_git_conf"
+title: "basic-git-conf"
 weight: 1
 ---
 

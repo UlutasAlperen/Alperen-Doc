@@ -359,5 +359,5 @@ For that reason, when I need an SQL database, I typically use a managed service 
 
 I have used databases on Kubernetes in the past, but I've usually done it when the deployment wasn't exactly mission-critical. For example, I've deployed [Grafana](https://grafana.com/) and [Prometheus](https://prometheus.io/) on Kubernetes, and they both have out-of-the-box support for in-cluster databases. I didn't care too much about backups and automatic upgrades for my telemetry data, and I knew the data set was small and static, so it was a good fit.
 
-If you do want to run a database in-cluster, the right tool for the job is a [StatefulSet](kubernetes-statefulsets/) - it gives each pod a stable identity and its own PVC.
-for more [persistent-volumes](kubernetes-persistent-volumes/)
+If you do want to run a database in-cluster, the right tool for the job is a [StatefulSet](../kubernetes-statefulsets/) - it gives each pod a stable identity and its own PVC.
+for more [persistent-volumes](../kubernetes-persistent-volumes/)

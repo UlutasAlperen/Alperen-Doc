@@ -233,4 +233,4 @@ To see what I mean, try the following:
 3. The messages should still be there because they're saved in the server's memory.
 4. Now, delete the `api` pod
 5. Once k8s replaces the deleted pod with a new one, refresh the page again.
-for more [namespaces](kubernetes-namespaces/)
+for more [namespaces](../kubernetes-namespaces/)

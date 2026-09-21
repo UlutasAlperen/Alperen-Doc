@@ -4,7 +4,7 @@ weight: 12
 ---
 # PostgreSQL Read Replicas with CloudNativePG
 
-The [manual setup](postgresql-statefulset-replication/) taught us the mechanics: WAL, basebackup, standby. It also showed the catch - failover is a human job, and humans don't get paged at 3am for fun. [CloudNativePG](https://cloudnative-pg.io/) (CNPG) is the operator that automates the whole lifecycle: primary election, failover, replica management, backups - as a declarative `Cluster` CRD. On top of [Longhorn](longhorn/) it turns our 3-node homelab into a genuinely production-shaped database platform.
+The [manual setup](../postgresql-statefulset-replication/) taught us the mechanics: WAL, basebackup, standby. It also showed the catch - failover is a human job, and humans don't get paged at 3am for fun. [CloudNativePG](https://cloudnative-pg.io/) (CNPG) is the operator that automates the whole lifecycle: primary election, failover, replica management, backups - as a declarative `Cluster` CRD. On top of [Longhorn](../longhorn/) it turns our 3-node homelab into a genuinely production-shaped database platform.
 
 ## What the Operator Buys You
 
@@ -26,7 +26,7 @@ The service trio is the part your apps touch - and it's the read-replica payoff:
 
 ## How to Install CloudNativePG
 
-1. Install the operator with Helm ([helm notes](helm/)):
+1. Install the operator with Helm ([helm notes](../helm/)):
 
 ```bash
 helm repo add cnpg https://cloudnative-pg.github.io/charts
@@ -153,7 +153,7 @@ kubectl exec -it app-db-2 -- psql -U app -d appdb -c "SELECT count(*) FROM messa
 
 The `app-db-rw` service followed the new primary; your application never knew.
 
-3. Reconcile with git, if you run [ArgoCD](gitops-argocd/): the CRD is declarative state, so the operator is self-healing by design - a deleted `Cluster` resource gets recreated, but _deleting the CRD deletes the database_, so treat cluster deletion like `DROP DATABASE`.
+3. Reconcile with git, if you run [ArgoCD](../gitops-argocd/): the CRD is declarative state, so the operator is self-healing by design - a deleted `Cluster` resource gets recreated, but _deleting the CRD deletes the database_, so treat cluster deletion like `DROP DATABASE`.
 
 > That last line deserves its own emphasis: `kubectl delete cluster app-db` is `DROP DATABASE` for your whole fleet. CNPG uses the `finalizer` mechanism, so deleting the CR tears down the PVCs too. Deleting a pod (as we did above) is safe - it's rescheduled; deleting the `Cluster` is the dangerous one.
 

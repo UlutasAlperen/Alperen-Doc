@@ -3,7 +3,7 @@ title: "Kubernetes v2"
 weight: 4
 bookCollapseSection: true
 ---
-These are the follow-up notes to my [Kubernetes](../../kubernetes/) section - same Minikube cluster, next level: packaging, hardening, operations and multi-node. I use this section to:
+These are the follow-up notes to my [Kubernetes](../kubernetes/) section - same Minikube cluster, next level: packaging, hardening, operations and multi-node. I use this section to:
 
 - Package and distribute applications with Helm charts
 - Manage my own manifests with Kustomize overlays

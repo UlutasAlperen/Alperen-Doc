@@ -66,7 +66,7 @@ Typical use: a `pre-install`/`pre-upgrade` Job that migrates a database schema b
 
 ## Where Does Release State Live?
 
-`helm history`, `rollback` and friends work because Helm stores release state in the cluster - by default as Secrets named `sh.helm.release.v1.<release>.v<revision>` in the release namespace. Delete those secrets and Helm forgets everything. This also means: `kubectl` deletions and Helm state can drift apart (see the [troubleshooting notes](kubernetes-troubleshooting/) for the `helm uninstall` vs `kubectl delete` mess this can cause).
+`helm history`, `rollback` and friends work because Helm stores release state in the cluster - by default as Secrets named `sh.helm.release.v1.<release>.v<revision>` in the release namespace. Delete those secrets and Helm forgets everything. This also means: `kubectl` deletions and Helm state can drift apart (see the [troubleshooting notes](../kubernetes-troubleshooting/) for the `helm uninstall` vs `kubectl delete` mess this can cause).
 
 **Özet - üçlü ilişki:**
 
@@ -176,4 +176,4 @@ helm get values monitor
 
 > `helm rollback` restores the release state but does _not_ revert your values files in git. Fix the file too, or your next `helm upgrade` re-introduces the problem.
 
-for more [kustomize](kustomize/)
+for more [kustomize](../kustomize/)

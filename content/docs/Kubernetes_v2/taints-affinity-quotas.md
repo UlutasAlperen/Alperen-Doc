@@ -4,7 +4,7 @@ weight: 8
 ---
 # Taints and Tolerations
 
-On a single-node Minikube cluster scheduling is trivial - there's nowhere else to put a pod. The moment you add nodes ([multi-node notes](multi-node-kubeadm-k3s/) are coming), scheduling decisions become real. [Taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) mark a node as "keep away", and _tolerations_ let specific pods opt in anyway:
+On a single-node Minikube cluster scheduling is trivial - there's nowhere else to put a pod. The moment you add nodes ([multi-node notes](../multi-node-kubeadm-k3s/) are coming), scheduling decisions become real. [Taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) mark a node as "keep away", and _tolerations_ let specific pods opt in anyway:
 
 ```bash
 kubectl taint nodes <node-name> workload=ai:NoSchedule
@@ -62,7 +62,7 @@ affinity:
               values: ["eu-west"]
 ```
 
-- `required...` = hard rule; no node matches → pod stays `Pending` (this is a [troubleshooting](kubernetes-troubleshooting/) classic)
+- `required...` = hard rule; no node matches → pod stays `Pending` (this is a [troubleshooting](../kubernetes-troubleshooting/) classic)
 - `preferred...` = soft preference with a weight; used when "best effort" is acceptable
 - `IgnoredDuringExecution` = if a running pod's node stops matching, the pod keeps running (only _new_ pods are constrained) - there's a `requiredDuringSchedulingRequiredDuringExecution` beta feature for "please move me" semantics
 
@@ -224,4 +224,4 @@ The quota's `status.used` vs `hard` tells the story.
 
 4. Now add the LimitRange (defaults above) to the same namespace, delete the deployment, redeploy with _no_ resource declarations at all - the pods inherit defaults and count against the quota automatically. That's the mechanism that keeps "forgot to set requests" developers from bypassing your accounting.
 
-for more [multi-node-kubeadm-k3s](multi-node-kubeadm-k3s/)
+for more [multi-node-kubeadm-k3s](../multi-node-kubeadm-k3s/)

@@ -1,5 +1,5 @@
 ---
-title: "basic_git_knowledge"
+title: "basic-git-knowledge"
 weight: 2
 ---
 # Simplified Git Commands Guide
@@ -19,7 +19,7 @@ weight: 2
 git add <file_or_directory_name>
 ```
 
-[git add](git-add/)
+[git add](../git-add/)
 ## Checking the Current State
 
 - To see the current state of your repository:
@@ -28,7 +28,7 @@ git add <file_or_directory_name>
 git status
 ```
 
-[git status](git-status/)
+[git status](../git-status/)
 
 ## Committing Changes
 
@@ -37,7 +37,7 @@ git status
 git commit -m "Your commit message"
 ```
 
-[git commit](git-commit/)
+[git commit](../git-commit/)
 ## Branch Management
 
 ### Creating and Switching to a New Branch
@@ -47,7 +47,7 @@ git commit -m "Your commit message"
 ```bash
 git switch -c my_new_branch
 ```
-_This is easier than using `git branch` followed by `git switch`._ [git branch](git-branch/)
+_This is easier than using `git branch` followed by `git switch`._ [git branch](../git-branch/)
 ### Switching Between Branches
 
 - To switch to an existing branch:
@@ -72,7 +72,7 @@ git branch
 git log
 ```
 
-[git log](git-log/)
+[git log](../git-log/)
 
 - Optionally, you can specify a branch name:
 ```bash
@@ -99,7 +99,7 @@ git gitmap
 git fetch
 ```
 
-[git fetch](git-fetch/)
+[git fetch](../git-fetch/)
 ## Working with Remote Repositories
 
 - To add a remote repository:
@@ -125,7 +125,7 @@ git remote remove <name>
 ```bash
 git remote add origin https://github.com/your-username/repo_name
 ```
-[git remote](git-remote/)
+[git remote](../git-remote/)
 ## Merging Branches
 
 - To merge a branch into the current branch:
@@ -153,7 +153,7 @@ git rebase main
 ```
 
 ***Example: If you're on branch `example_brach`, this command brings changes from `main` onto `example_brach`.***
-[git rebase](git-rebase/)
+[git rebase](../git-rebase/)
 ## Resetting Commits
 
 - To undo commits:
@@ -168,7 +168,7 @@ git reset --soft commit
 ```bash
 git reset --hard commit
 ```
-[git reset](git-reset/)
+[git reset](../git-reset/)
 
 # Git Push
 
@@ -178,7 +178,7 @@ The `git push` command pushes (sends) local changes to any "remote" - in our cas
 git push origin <branch_name>
 ```
 
-[git push](git-push/)
+[git push](../git-push/)
 
 # Git pull
 
@@ -188,7 +188,7 @@ git push origin <branch_name>
 git pull origin <branch_name>
 ```
   
- [git pull](git-pull/)
+ [git pull](../git-pull/)
 
 
 ### What happens when you `git clone`?

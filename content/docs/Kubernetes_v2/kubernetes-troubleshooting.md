@@ -97,7 +97,7 @@ Türkçe homelab checklist (kafam karıştığında sırayla uyguladığım list
 4. Exit code ne? (yukarıdaki tablo - `137` = OOM, `127` = command yazım hatası)
 5. Env var'lar configmap/secret'tan geliyorsa, o key gerçekten var mı?
 6. Selector'lar eşleşiyor mu? (deployment selector ↔ pod labels; service selector ↔ endpoints)
-7. PVC bağlıysa mount path ve izinler doğru mu? (`fsGroup` hatırlatması: [security-context](security-context/))
+7. PVC bağlıysa mount path ve izinler doğru mu? (`fsGroup` hatırlatması: [security-context](../security-context/))
 8. İzinler/root sorunları distroless image'larda mı çıktı? ([distroless notları](../../docker/docker-distroless-container-images/))
 
 ## How to Diagnose a CrashLoopBackOff
@@ -173,7 +173,7 @@ kubectl get events --field-selector reason=FailedScheduling
 
 You'll see exactly why: `0/1 nodes are available: 1 Insufficient memory`.
 
-3. Confirm the decision logic in `describe` (the Events section repeats the same verdict with more context), then reason about the fix path: lower the request, add a node (`minikube node add`), or remove a [taint](taints-affinity-quotas/) that blocks the only candidate node.
+3. Confirm the decision logic in `describe` (the Events section repeats the same verdict with more context), then reason about the fix path: lower the request, add a node (`minikube node add`), or remove a [taint](../taints-affinity-quotas/) that blocks the only candidate node.
 
 4. Clean up and verify recovery:
 
@@ -182,4 +182,4 @@ kubectl set resources deployment/synergychat-testram --limits=memory=256Mi --req
 kubectl get pods
 ```
 
-for more [gitops-argocd](gitops-argocd/)
+for more [gitops-argocd](../gitops-argocd/)

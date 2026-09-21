@@ -154,4 +154,4 @@ It must be rejected with a `Forbidden` message listing the violated rules. Then 
 
 > PSA is namespace-scoped and _not_ inherited. Label every namespace you care about, and prefer pinning `enforce-version` so a cluster upgrade doesn't silently change your security posture.
 
-for more [kubernetes-troubleshooting](kubernetes-troubleshooting/)
+for more [kubernetes-troubleshooting](../kubernetes-troubleshooting/)

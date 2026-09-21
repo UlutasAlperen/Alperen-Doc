@@ -174,4 +174,4 @@ kubectl get netpol allow-web-to-api -o yaml | grep -A8 "ingress:"
 
 3. Delete the allow policy and watch the allowed path break, then restore it. Ending on a positive control is what turns "I think it works" into "it demonstrably works".
 
-for more [security-context](security-context/)
+for more [security-context](../security-context/)

@@ -50,4 +50,4 @@ Being able to run one-off commands is nice, but it's often more convenient to st
 docker exec -it CONTAINER_ID /bin/sh
 ```
 
-Compose içinde komut çalıştırmak için [docker-compose-basic](docker-compose-basic/) sayfasındaki `docker compose exec` bölümüne bak.
+Compose içinde komut çalıştırmak için [docker-compose-basic](../docker-compose-basic/) sayfasındaki `docker compose exec` bölümüne bak.

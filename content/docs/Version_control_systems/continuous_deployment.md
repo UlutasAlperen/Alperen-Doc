@@ -1,5 +1,5 @@
 ---
-title: "continuous_deployment"
+title: "continuous-deployment"
 weight: 5
 ---
 Continuous Deployment (CD) is the process of automatically deploying code changes to a production environment after the code has been built and tested. Let's set up CD for Notely!

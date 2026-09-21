@@ -102,4 +102,4 @@ With Minikube, you only get one node! So once your machine runs out of resources
 Kubernetes clusters are running in production that have _thousands_ of nodes. That's a lot of resources to manage! But that's the beauty of Kubernetes.
 
 _If you're interested, you can find some [case studies here](https://www.cncf.io/case-studies/). I liked [this one](https://www.cncf.io/case-studies/bloomberg/) from Bloomberg that shows they run hundreds of clusters with thousands of nodes each._
-for more [pods](kubernetes-pods-minikube/)
+for more [pods](../kubernetes-pods-minikube/)

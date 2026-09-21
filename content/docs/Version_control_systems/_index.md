@@ -1,5 +1,5 @@
 ---
-itle: "Version Control Systems"
+title: "Version Control Systems"
 weight: 1
 # bookFlatSection: false
 # bookToc: true
@@ -42,7 +42,7 @@ In Git, commands are divided into high-level ("porcelain") commands and low-leve
 - [git fetch](git-fetch/) =This downloads copies of all the contents of the .git/objects 
 - [git switch](git-switch/) = switching branch , using -c flag crate ,if use committed hash back to old repo
 
-[plumping](plumping/) commands are:
+[plumbing](plumbing/) commands are:
 
 - `git apply`
 - `git commit-tree`

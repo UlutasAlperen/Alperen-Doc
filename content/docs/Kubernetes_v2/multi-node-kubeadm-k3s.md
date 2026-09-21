@@ -41,7 +41,7 @@ EOF
 sudo sysctl --system
 ```
 
-> `net.bridge.bridge-nf-call-iptables = 1` looks arcane but matters: without it, traffic through the bridge is not processed by iptables - which breaks Service NAT rules and makes [NetworkPolicy](network-policy/) enforcement silently unreliable.
+> `net.bridge.bridge-nf-call-iptables = 1` looks arcane but matters: without it, traffic through the bridge is not processed by iptables - which breaks Service NAT rules and makes [NetworkPolicy](../network-policy/) enforcement silently unreliable.
 
 ## Containerd
 
@@ -55,7 +55,7 @@ sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/conf
 sudo systemctl restart containerd
 ```
 
-> `SystemdCgroup = true` is not optional anymore: kubelet defaults to the systemd cgroup driver, and a mismatch with the container runtime is the classic cause of pods stuck in `ContainerCreating` or kubelet crash-looping at join time. The v1 [troubleshooting](kubernetes-troubleshooting/) checklist applies to nodes too.
+> `SystemdCgroup = true` is not optional anymore: kubelet defaults to the systemd cgroup driver, and a mismatch with the container runtime is the classic cause of pods stuck in `ContainerCreating` or kubelet crash-looping at join time. The v1 [troubleshooting](../kubernetes-troubleshooting/) checklist applies to nodes too.
 
 ## K8s Packages (apt, the careful way)
 
@@ -95,7 +95,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 ```
 
-(Ben policy enforcement'i de denemek istiyorsam [calico](https://docs.tigera.io/calico/latest/about/about-kubernetes) kuruyorum - [NetworkPolicy](network-policy/) notundaki CNI konusunun ta kendisi.)
+(Ben policy enforcement'i de denemek istiyorsam [calico](https://docs.tigera.io/calico/latest/about/about-kubernetes) kuruyorum - [NetworkPolicy](../network-policy/) notundaki CNI konusunun ta kendisi.)
 
 ## Workers Join
 
@@ -215,7 +215,7 @@ kubectl drain kworker1 --ignore-daemonsets
 kubectl get pods -o wide --watch
 ```
 
-Watch the web pods reschedule onto remaining nodes (this is also the moment you notice if you lack a [spread constraint](taints-affinity-quotas/) - everything may pile onto one node).
+Watch the web pods reschedule onto remaining nodes (this is also the moment you notice if you lack a [spread constraint](../taints-affinity-quotas/) - everything may pile onto one node).
 
 2. From the cluster's view, remove the node object:
 
@@ -241,4 +241,4 @@ kubeadm token create --print-join-command   # on kmaster
 kubectl get nodes --watch
 ```
 
-for more [longhorn](longhorn/)
+for more [longhorn](../longhorn/)

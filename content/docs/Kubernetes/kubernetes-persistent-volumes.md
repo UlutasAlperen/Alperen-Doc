@@ -163,4 +163,4 @@ data:
   API_DB_FILEPATH: /persist/db.json
 ---
 ```
-for more [statefulsets](kubernetes-statefulsets/)
+for more [statefulsets](../kubernetes-statefulsets/)

@@ -228,4 +228,4 @@ Containers:
 
 
 
-for more [scaling-horizontal](kubernetes-scaling-horizontal/)
+for more [scaling-horizontal](../kubernetes-scaling-horizontal/)

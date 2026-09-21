@@ -10,7 +10,7 @@ As you've seen, it's _pretty normal_ to use the following workflow from the top 
 2. `git commit -m "some message here"`
 3. `git push origin main`
 
-A problem arises when we want to put files in our project's directory, but we _don't_ want to track them with Git. **[gitignore](gitignore/) file solves this.** For example, if you work with Python, you probably want to ignore automatically generated files like `.pyc` and `__pycache__`. If you are building a server, you probably want to ignore `.env` files that might hold private keys. If you (I'm sorry) work with JavaScript, you might want to ignore the `node_modules` directory.
+A problem arises when we want to put files in our project's directory, but we _don't_ want to track them with Git. **[gitignore](../gitignore/) file solves this.** For example, if you work with Python, you probably want to ignore automatically generated files like `.pyc` and `__pycache__`. If you are building a server, you probably want to ignore `.env` files that might hold private keys. If you (I'm sorry) work with JavaScript, you might want to ignore the `node_modules` directory.
 
 ![node_modules](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/Mn7FERh.png)
 

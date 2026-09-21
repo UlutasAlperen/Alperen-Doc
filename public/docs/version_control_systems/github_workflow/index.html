@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -14,9 +14,9 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/version_control_systems/github_workflow/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/version_control_systems/github_workflow/">
 	<meta property="og:site_name" content="Alperen Doc">
-	<meta property="og:title" content="github_workflow">
+	<meta property="og:title" content="github-workflow">
 	<meta property="og:description" content="001 - continuous_integration 002 - continuous_deployment
 Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosyalarını statik bir siteye dönüştüren bir araç. Bu yazıda, suan bulundugunuz siteyi nasil hugo-book temasını kullanırken aynı zamanda GitHub Workflow kullanarak her değişikliği debian tabanli uzak sunucuma nasıl otomatik olarak deploy edeceğimi anlatmak istedim.
 1. VPS ve Kullanıcı Yapılandırması# İlk başta sistemi --system parametresiyle kurmayı düşünmüştüm. Sistem kullanıcısı oluşturmak mantıklı çünkü bu kullanıcının varsayılan olarak bir şifresi ve interaktif bir shell oturumu olmaz (tabi belirli komutlarla yapilabilir). Bu da sunucunun guvenligini arttirir.">
@@ -25,20 +25,20 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 		<meta property="article:section" content="docs">
 
 
-	<meta itemprop="name" content="github_workflow">
+	<meta itemprop="name" content="github-workflow">
 	<meta itemprop="description" content="001 - continuous_integration 002 - continuous_deployment
 Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosyalarını statik bir siteye dönüştüren bir araç. Bu yazıda, suan bulundugunuz siteyi nasil hugo-book temasını kullanırken aynı zamanda GitHub Workflow kullanarak her değişikliği debian tabanli uzak sunucuma nasıl otomatik olarak deploy edeceğimi anlatmak istedim.
 1. VPS ve Kullanıcı Yapılandırması# İlk başta sistemi --system parametresiyle kurmayı düşünmüştüm. Sistem kullanıcısı oluşturmak mantıklı çünkü bu kullanıcının varsayılan olarak bir şifresi ve interaktif bir shell oturumu olmaz (tabi belirli komutlarla yapilabilir). Bu da sunucunun guvenligini arttirir.">
 	<meta itemprop="wordCount" content="1601">
 
-<title>github_workflow • Alperen Doc</title>
+<title>github-workflow • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/version_control_systems/github_workflow/">
+<link rel="canonical" href="http://localhost:1313/docs/version_control_systems/github_workflow/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.888e8253f310b394dd0834a34e89cfb413aa6c7836fb31cb60b39ae37e4c8cd1.js" integrity="sha256-iI6CU/MQs5TdCDSjTonPtBOqbHg2&#43;zHLYLOa435MjNE=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.f98c12b38a7071cd8ac30f7867bd982891991e86e9e4153668116aab5e72397e.js" integrity="sha256-&#43;YwSs4pwcc2Kww94Z72YKJGZHobp5BU2aBFqq15yOX4=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -105,7 +105,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/basic_git_conf/" class="">
-      basic_git_conf</a>
+      basic-git-conf</a>
   
 
         </li>
@@ -119,7 +119,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
-      basic_git_knowledge</a>
+      basic-git-knowledge</a>
   
 
         </li>
@@ -133,7 +133,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/github_workflow/" class="active">
-      github_workflow</a>
+      github-workflow</a>
   
 
         </li>
@@ -147,7 +147,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/continuous_integration/" class="">
-      continuous_integration</a>
+      continuous-integration</a>
   
 
         </li>
@@ -161,7 +161,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/continuous_deployment/" class="">
-      continuous_deployment</a>
+      continuous-deployment</a>
   
 
         </li>
@@ -175,7 +175,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/git-status/" class="">
-      git status</a>
+      git-status</a>
   
 
         </li>
@@ -189,7 +189,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/git-add/" class="">
-      git add</a>
+      git-add</a>
   
 
         </li>
@@ -203,7 +203,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/git-commit/" class="">
-      git commit</a>
+      git-commit</a>
   
 
         </li>
@@ -217,7 +217,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/git-push/" class="">
-      git push</a>
+      git-push</a>
   
 
         </li>
@@ -231,7 +231,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/git-branch/" class="">
-      git branch</a>
+      git-branch</a>
   
 
         </li>
@@ -245,7 +245,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/git-pull/" class="">
-      git pull</a>
+      git-pull</a>
   
 
         </li>
@@ -259,7 +259,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/git-log/" class="">
-      git log</a>
+      git-log</a>
   
 
         </li>
@@ -273,7 +273,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/git-merge/" class="">
-      git merge</a>
+      git-merge</a>
   
 
         </li>
@@ -287,7 +287,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/git-rebase/" class="">
-      git rebase</a>
+      git-rebase</a>
   
 
         </li>
@@ -301,7 +301,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/git-reset/" class="">
-      git reset</a>
+      git-reset</a>
   
 
         </li>
@@ -315,7 +315,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/git-remote/" class="">
-      git remote</a>
+      git-remote</a>
   
 
         </li>
@@ -329,7 +329,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/git-fetch/" class="">
-      git fetch</a>
+      git-fetch</a>
   
 
         </li>
@@ -343,7 +343,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/git-switch/" class="">
-      git switch</a>
+      git-switch</a>
   
 
         </li>
@@ -357,7 +357,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
   
     <a href="/docs/version_control_systems/git-config/" class="">
-      git config</a>
+      git-config</a>
   
 
         </li>
@@ -384,8 +384,8 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
   
 
   
-    <a href="/docs/version_control_systems/plumping/" class="">
-      plumping</a>
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
   
 
         </li>
@@ -1088,7 +1088,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
     <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>github_workflow</h3>
+  <h3>github-workflow</h3>
 
   <label for="toc-control">
     
@@ -1144,8 +1144,8 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 
       
       
-  <article class="markdown book-article"><p>001 - <a href="continuous_integration/">continuous_integration</a>
-002 - <a href="continuous_deployment/">continuous_deployment</a></p>
+  <article class="markdown book-article"><p>001 - <a href="../continuous_integration/">continuous_integration</a>
+002 - <a href="../continuous_deployment/">continuous_deployment</a></p>
 <h1 id="hugo-book-teması-ve-github-actionsworkflow-ile-vpse-cd">Hugo-Book Teması ve GitHub Actions(workflow) ile VPS&rsquo;e CD<a class="anchor" href="#hugo-book-temas%c4%b1-ve-github-actionsworkflow-ile-vpse-cd">#</a></h1>
 <p>Hugo,Markdown dosyalarını statik bir siteye dönüştüren bir araç. Bu yazıda, suan bulundugunuz siteyi nasil <em>hugo-book</em> temasını kullanırken aynı zamanda GitHub Workflow kullanarak her değişikliği debian tabanli uzak sunucuma nasıl otomatik olarak deploy edeceğimi anlatmak istedim.</p>
 <h2 id="1-vps-ve-kullanıcı-yapılandırması">1. VPS ve Kullanıcı Yapılandırması<a class="anchor" href="#1-vps-ve-kullan%c4%b1c%c4%b1-yap%c4%b1land%c4%b1rmas%c4%b1">#</a></h2>
@@ -1399,14 +1399,14 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
     
       <a href="/docs/version_control_systems/basic_git_knowledge/" class="flex align-center">
         <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
-        <span>basic_git_knowledge</span>
+        <span>basic-git-knowledge</span>
       </a>
     
     </span>
     <span>
     
       <a href="/docs/version_control_systems/continuous_integration/" class="flex align-center">
-        <span>continuous_integration</span>
+        <span>continuous-integration</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     

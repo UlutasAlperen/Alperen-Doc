@@ -144,4 +144,4 @@ Because requests are used to schedule pods, you want to make sure that your requ
 ## It All Depends!
 
 These are just rules of thumb! At the end of the day, you always need to understand how your applications work, and what resources they need. The right numbers for your applications might be drastically different than the numbers I've suggested here.
-for more [scaling-vertical](kubernetes-scaling-vertical/)
+for more [scaling-vertical](../kubernetes-scaling-vertical/)

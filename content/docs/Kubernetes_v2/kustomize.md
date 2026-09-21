@@ -114,7 +114,7 @@ The generated ConfigMap is named `api-config-hg8b7fcfd2`. Change `config.env`, r
 | Release/rollback | Helm'in kendi state'i (revision) | Git'te versiyonlarsan `git revert` |
 | Öğrenme eğrisi | Template dili + chart yapısı | Neredeyse yok |
 
-Benim pratik kuralım: başkasının yazdığı karmaşık uygulamayı (Prometheus, ArgoCD, cert-manager) kuracaksam **Helm**; kendi deployment'larımı ortamlara göre yönetiyorsam **Kustomize**. İkisi bir arada da yaygın - ve [ArgoCD](gitops-argocd/) ikisini de source olarak destekler.
+Benim pratik kuralım: başkasının yazdığı karmaşık uygulamayı (Prometheus, ArgoCD, cert-manager) kuracaksam **Helm**; kendi deployment'larımı ortamlara göre yönetiyorsam **Kustomize**. İkisi bir arada da yaygın - ve [ArgoCD](../gitops-argocd/) ikisini de source olarak destekler.
 
 ## How to Structure a Base and Overlays
 
@@ -218,4 +218,4 @@ kubectl get pods --watch
 
 > If the ConfigMap is referenced via `envFrom` the roll happens because the pod template changes. If some pod reads the ConfigMap via a mounted volume at runtime, the _file_ updates on disk but pods still won't restart automatically unless the hash trick applies - that's exactly why `envFrom` + generator is the sanest pattern here.
 
-for more [network-policy](network-policy/)
+for more [network-policy](../network-policy/)

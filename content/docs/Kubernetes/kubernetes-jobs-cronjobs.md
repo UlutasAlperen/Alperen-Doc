@@ -4,7 +4,7 @@ weight: 7
 ---
 # Jobs
 
-Everything we've deployed so far has been a long-running service. A [deployment](kubernetes-deployments-minikube/) promises "keep N replicas running at all times". But a lot of real work is the opposite: run once, finish, exit. Think database backups, schema migrations, or batch processing.
+Everything we've deployed so far has been a long-running service. A [deployment](../kubernetes-deployments-minikube/) promises "keep N replicas running at all times". But a lot of real work is the opposite: run once, finish, exit. Think database backups, schema migrations, or batch processing.
 
 A [Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) creates one or more pods and keeps retrying them until the specified number of pods _successfully terminate_.
 
@@ -100,7 +100,7 @@ Two more useful spec fields:
 
 # Assignment
 
-Remember the `db.json` file that our api writes to its persistent volume (see [storage](kubernetes-storage/) and [persistent volumes](kubernetes-persistent-volumes/))? Let's build a backup CronJob for it. Create `api-backup-cronjob.yaml`:
+Remember the `db.json` file that our api writes to its persistent volume (see [storage](../kubernetes-storage/) and [persistent volumes](../kubernetes-persistent-volumes/))? Let's build a backup CronJob for it. Create `api-backup-cronjob.yaml`:
 
 ```yaml
 apiVersion: batch/v1
@@ -162,4 +162,4 @@ kubectl logs job/manual-backup
 
 You should see the timestamped `db-YYYYMMDD-HHMMSS.json` file in the listing, and the contents of the messages database in the logs. Congratulations - you now have a scheduleable, retryable backup pipeline in a single YAML file.
 
-for more [services](kubernetes-services/)
+for more [services](../kubernetes-services/)

@@ -99,4 +99,4 @@ Here is why it scales down to 1:
 4. **Replicas Override**: By removing the `replicas: 3` line from the deployment, you handed over the "steering wheel" to the HPA. It saw that the load was low and immediately moved to the `minReplicas` floor you defined in the HPA manifest.
 
 In a real-world scenario, this is exactly what you want: your cluster should shrink when nobody is using your site to save you money, and grow only when the traffic spikes!
-for more [storage](kubernetes-storage/)
+for more [storage](../kubernetes-storage/)

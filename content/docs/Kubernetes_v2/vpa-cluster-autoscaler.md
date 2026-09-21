@@ -125,8 +125,8 @@ kubectl get pod <new-pod> -o jsonpath='{.spec.containers[0].resources}{"\n"}'
 
 The `requests` should now match the VPA's recommendation instead of the manifest's static values - the webhook patched them at admission.
 
-> Notice what this means for your YAML: the manifest's `resources` values are now only a starting point. If you later run `Auto`, live pods' requests will drift from git - and if you use [ArgoCD](gitops-argocd/) with `selfHeal`, it will fight the VPA over pod specs. Decision to make consciously: either don't use `Auto` with git-managed manifests, or exclude `resources` from diffing (`ignoreDifferences`).
+> Notice what this means for your YAML: the manifest's `resources` values are now only a starting point. If you later run `Auto`, live pods' requests will drift from git - and if you use [ArgoCD](../gitops-argocd/) with `selfHeal`, it will fight the VPA over pod specs. Decision to make consciously: either don't use `Auto` with git-managed manifests, or exclude `resources` from diffing (`ignoreDifferences`).
 
 3. Optional: flip to `Auto` on a throwaway deployment and watch eviction happen (`kubectl get pods --watch` - the pod terminates and restarts with new requests). Never do this on something you care about without a PodDisruptionBudget first.
 
-for more [taints-affinity-quotas](taints-affinity-quotas/)
+for more [taints-affinity-quotas](../taints-affinity-quotas/)

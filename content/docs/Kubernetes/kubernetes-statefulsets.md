@@ -4,7 +4,7 @@ weight: 15
 ---
 # StatefulSets
 
-In [storage](kubernetes-storage/) we learned that the filesystem inside a pod is ephemeral, and in [persistent volumes](kubernetes-persistent-volumes/) we attached a PVC to keep data alive across pod restarts. But there's one piece of the puzzle missing.
+In [storage](../kubernetes-storage/) we learned that the filesystem inside a pod is ephemeral, and in [persistent volumes](../kubernetes-persistent-volumes/) we attached a PVC to keep data alive across pod restarts. But there's one piece of the puzzle missing.
 
 Deployments treat all their pods as **identical, interchangeable clones**. `synergychat-web-679cbcc6cd-cq6vx` could die at any moment and a fresh `synergychat-web-679cbcc6cd-x9k2f` takes its place - nobody cares which is which. That's perfect for web servers and APIs.
 
@@ -40,7 +40,7 @@ That's what makes peer-to-peer protocols (database replication, cluster gossip) 
 
 # Assignment
 
-Let's deploy a single-replica PostgreSQL with a StatefulSet. First, we need a password. Instead of a plaintext ConfigMap, we'll use the [Secret](kubernetes-secrets/) approach from the last chapter:
+Let's deploy a single-replica PostgreSQL with a StatefulSet. First, we need a password. Instead of a plaintext ConfigMap, we'll use the [Secret](../kubernetes-secrets/) approach from the last chapter:
 
 ```bash
 kubectl create secret generic postgres-secret \
@@ -129,6 +129,6 @@ Her workload StatefulSet gerektirmez. Karar kuralım şu:
 - Uygulamanın pods arasında _farkı yoksa_ ve veri paylaşılmıyorsa → **Deployment** + tek PVC yeterli (SynergyChat'in `db.json`'u böyle)
 - Her instance'ın kendi verisi, kendi kimliği veya sıralı kurulum gereksinimi varsa → **StatefulSet**
 
-Ne zaman bir veritabanını Kubernetes'te çalıştırmak istesem de, [Databases](kubernetes-storage/#databases) bölümünde bahsettiğim gibi operasyonel yükünü hesaba katmak gerekir - ama bunu yapacaksam, doğru araç StatefulSet'tir.
+Ne zaman bir veritabanını Kubernetes'te çalıştırmak istesem de, [Databases](../kubernetes-storage/#databases) bölümünde bahsettiğim gibi operasyonel yükünü hesaba katmak gerekir - ama bunu yapacaksam, doğru araç StatefulSet'tir.
 
-for more, see the follow-up chapters in v2: [streaming replication on Longhorn](../kubernetes_v2/postgresql-statefulset-replication/)
+for more, see the follow-up chapters in v2: [streaming replication on Longhorn](../../kubernetes_v2/postgresql-statefulset-replication/)

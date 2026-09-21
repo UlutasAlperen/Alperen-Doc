@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Kubernetes on Alperen Doc</title>
-		<link>https://blog.ulutasalperen.com/docs/kubernetes/</link>
+		<link>http://localhost:1313/docs/kubernetes/</link>
 		<description>Recent content in Kubernetes on Alperen Doc</description>
 		<generator>Hugo</generator>
 		<language>en</language>
@@ -10,117 +10,117 @@
 		
 		
 		
-			<atom:link href="https://blog.ulutasalperen.com/docs/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="http://localhost:1313/docs/kubernetes/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>kubernetes-minikube</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-minikube/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-minikube/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-minikube/</guid>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-minikube/</guid>
 				<description>&lt;h2 id=&#34;deploying-an-image&#34;&gt;Deploying an Image&lt;a class=&#34;anchor&#34; href=&#34;#deploying-an-image&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;code&gt;kubectl create deployment&lt;/code&gt; command will create a &amp;ldquo;deployment&amp;rdquo; for us. We&amp;rsquo;ll talk more about the nuances of &amp;ldquo;deployments&amp;rdquo; later. But to put it simply, we only need to provide two things:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;The name of the deployment (this can be anything, it&amp;rsquo;s used to identify the deployment)&lt;/li&gt;&#xA;&lt;li&gt;The ID of the Docker image we want to deploy (it would be a full URL if we weren&amp;rsquo;t hosting the image on Docker Hub, which is the default)&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create deployment synergychat-web --image&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;docker.io/bootdotdev/synergychat-web:latest&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This command will deploy a container built from &lt;a href=&#34;https://hub.docker.com/r/bootdotdev/synergychat-web&#34;&gt;this Docker image&lt;/a&gt; to your local k8s cluster.&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-pods-minikube</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-pods-minikube/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-pods-minikube/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-pods-minikube/</guid>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-pods-minikube/</guid>
 				<description>&lt;h1 id=&#34;pods&#34;&gt;Pods&lt;a class=&#34;anchor&#34; href=&#34;#pods&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;blockquote class=&#39;book-hint &#39;&gt;&#xA;&lt;p&gt;&amp;ldquo;Pods are the smallest deployable units of computing that you can create and manage in Kubernetes.&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;&amp;ndash; The &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/pods/&#34;&gt;Kubernetes team&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&lt;p&gt;A Pod is the smallest and simplest unit in the Kubernetes object model that you create or deploy. It represents one (or sometimes more) running container(s) in a cluster. In a simple web application, you might have one single pod: the web server. As traffic grows, you might deploy that same code to multiple pods to handle the increased load. Several pods, one codebase. In a more complex backend system, you might have several pods for the web server and several pods that handle video processing. Multiple pods, multiple codebases.&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-deployments-minikube</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-deployments-minikube/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-deployments-minikube/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-deployments-minikube/</guid>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-deployments-minikube/</guid>
 				<description>&lt;h1 id=&#34;deployments&#34;&gt;Deployments&lt;a class=&#34;anchor&#34; href=&#34;#deployments&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;A &lt;em&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/controllers/deployment/&#34;&gt;Deployment&lt;/a&gt;&lt;/em&gt; provides declarative updates for Pods and ReplicaSets.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/6Pgwx6u-1280x720.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&#xA;&lt;p&gt;You describe your &lt;em&gt;desired state&lt;/em&gt; in a Deployment, and the Deployment Controller&amp;rsquo;s job is to make the &lt;em&gt;current state&lt;/em&gt; match the &lt;em&gt;desired state&lt;/em&gt;. You declare your hopes and dreams, and it&amp;rsquo;s Kubernetes&amp;rsquo; job to make them come true.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-deleting-a-pod-doesnt-feel-like-a-deletion&#34;&gt;Why Deleting a Pod Doesn&amp;rsquo;t Feel Like a Deletion&lt;a class=&#34;anchor&#34; href=&#34;#why-deleting-a-pod-doesnt-feel-like-a-deletion&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Remember when we had you delete a pod, only to see that a new pod was created in its place? It&amp;rsquo;s kinda like chopping heads off of a hydra.&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-probes</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-probes/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-probes/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-probes/</guid>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-probes/</guid>
 				<description>&lt;h1 id=&#34;probes&#34;&gt;Probes&lt;a class=&#34;anchor&#34; href=&#34;#probes&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;We&amp;rsquo;ve created pods, watched them get replaced when we deleted them, and even debugged a &lt;code&gt;CrashLoopBackOff&lt;/code&gt; or two. But here&amp;rsquo;s the uncomfortable truth: &lt;strong&gt;&lt;code&gt;Running&lt;/code&gt; does not mean &lt;code&gt;healthy&lt;/code&gt;&lt;/strong&gt;. A pod can be &amp;ldquo;Running&amp;rdquo; while the app inside is completely broken - a web server listening on the wrong port, an API that hangs on every request, or a process that deadlocked mid-chat.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/&#34;&gt;Probes&lt;/a&gt; are Kubernetes&amp;rsquo; way of asking your application: &amp;ldquo;are you &lt;em&gt;actually&lt;/em&gt; okay?&amp;rdquo; They come in three flavors:&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-yaml-configurations</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-yaml-configurations/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-yaml-configurations/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-yaml-configurations/</guid>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-yaml-configurations/</guid>
 				<description>&lt;h1 id=&#34;yaml-config&#34;&gt;YAML Config&lt;a class=&#34;anchor&#34; href=&#34;#yaml-config&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Kubernetes resources are primarily configured using YAML files. We&amp;rsquo;ve used the &lt;code&gt;kubectl edit&lt;/code&gt; command to edit resources in the cluster on-demand, but let&amp;rsquo;s inspect our deployment&amp;rsquo;s YAML file a bit more closely.&lt;/p&gt;&#xA;&lt;h2 id=&#34;assignment&#34;&gt;Assignment&lt;a class=&#34;anchor&#34; href=&#34;#assignment&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;First, download a copy of your deployment&amp;rsquo;s YAML file and save it in your current directory:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get deployment synergychat-web -o yaml &amp;gt; web-deployment.yaml&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then open it in your text editor. There are 5 top-level fields in the file:&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-secrets</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-secrets/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-secrets/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-secrets/</guid>
-				<description>&lt;h1 id=&#34;secrets&#34;&gt;Secrets&lt;a class=&#34;anchor&#34; href=&#34;#secrets&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;In the &lt;a href=&#34;kubernetes-yaml-configurations/&#34;&gt;YAML config&lt;/a&gt; chapter we saw that ConfigMaps are a great way to manage &lt;em&gt;innocent&lt;/em&gt; environment variables - ports, URLs, feature flags. But we also learned that ConfigMaps are &lt;strong&gt;not&lt;/strong&gt; encrypted, and anyone with access to the cluster can read them.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/secret/&#34;&gt;Secrets&lt;/a&gt; are the Kubernetes object designed for sensitive data: passwords, tokens, and keys. Functionally, they look a &lt;em&gt;lot&lt;/em&gt; like ConfigMaps. The differences are:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Values are stored base64-encoded in the object&lt;/li&gt;&#xA;&lt;li&gt;Access can be restricted with RBAC (who can read which secrets)&lt;/li&gt;&#xA;&lt;li&gt;etcd can be configured to encrypt secret data at rest&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;creating-a-secret&#34;&gt;Creating a Secret&lt;a class=&#34;anchor&#34; href=&#34;#creating-a-secret&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;The imperative way:&lt;/p&gt;</description>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-secrets/</guid>
+				<description>&lt;h1 id=&#34;secrets&#34;&gt;Secrets&lt;a class=&#34;anchor&#34; href=&#34;#secrets&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;In the &lt;a href=&#34;../kubernetes-yaml-configurations/&#34;&gt;YAML config&lt;/a&gt; chapter we saw that ConfigMaps are a great way to manage &lt;em&gt;innocent&lt;/em&gt; environment variables - ports, URLs, feature flags. But we also learned that ConfigMaps are &lt;strong&gt;not&lt;/strong&gt; encrypted, and anyone with access to the cluster can read them.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/secret/&#34;&gt;Secrets&lt;/a&gt; are the Kubernetes object designed for sensitive data: passwords, tokens, and keys. Functionally, they look a &lt;em&gt;lot&lt;/em&gt; like ConfigMaps. The differences are:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Values are stored base64-encoded in the object&lt;/li&gt;&#xA;&lt;li&gt;Access can be restricted with RBAC (who can read which secrets)&lt;/li&gt;&#xA;&lt;li&gt;etcd can be configured to encrypt secret data at rest&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;creating-a-secret&#34;&gt;Creating a Secret&lt;a class=&#34;anchor&#34; href=&#34;#creating-a-secret&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;The imperative way:&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-jobs-cronjobs</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-jobs-cronjobs/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-jobs-cronjobs/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-jobs-cronjobs/</guid>
-				<description>&lt;h1 id=&#34;jobs&#34;&gt;Jobs&lt;a class=&#34;anchor&#34; href=&#34;#jobs&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Everything we&amp;rsquo;ve deployed so far has been a long-running service. A &lt;a href=&#34;kubernetes-deployments-minikube/&#34;&gt;deployment&lt;/a&gt; promises &amp;ldquo;keep N replicas running at all times&amp;rdquo;. But a lot of real work is the opposite: run once, finish, exit. Think database backups, schema migrations, or batch processing.&lt;/p&gt;&#xA;&lt;p&gt;A &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/controllers/job/&#34;&gt;Job&lt;/a&gt; creates one or more pods and keeps retrying them until the specified number of pods &lt;em&gt;successfully terminate&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Deployment&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Job&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Amaç&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Servis sürekli çalışsın&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;İş tamamlanana kadar çalışsın&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Pod durumu&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;Running&lt;/code&gt; (olması beklenen)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;Completed&lt;/code&gt; (başarı sinyali)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Çalışma biçimi&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Sonsuz döngü&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Bitince exit code ile biter&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Örnek&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;web, api, crawler&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;migration, backup, batch&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;A minimal job looks like this:&lt;/p&gt;</description>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-jobs-cronjobs/</guid>
+				<description>&lt;h1 id=&#34;jobs&#34;&gt;Jobs&lt;a class=&#34;anchor&#34; href=&#34;#jobs&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Everything we&amp;rsquo;ve deployed so far has been a long-running service. A &lt;a href=&#34;../kubernetes-deployments-minikube/&#34;&gt;deployment&lt;/a&gt; promises &amp;ldquo;keep N replicas running at all times&amp;rdquo;. But a lot of real work is the opposite: run once, finish, exit. Think database backups, schema migrations, or batch processing.&lt;/p&gt;&#xA;&lt;p&gt;A &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/controllers/job/&#34;&gt;Job&lt;/a&gt; creates one or more pods and keeps retrying them until the specified number of pods &lt;em&gt;successfully terminate&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;table&gt;&#xA;&#x9;&lt;thead&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Deployment&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;th&gt;Job&lt;/th&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/thead&gt;&#xA;&#x9;&lt;tbody&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Amaç&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Servis sürekli çalışsın&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;İş tamamlanana kadar çalışsın&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Pod durumu&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;Running&lt;/code&gt; (olması beklenen)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;&lt;code&gt;Completed&lt;/code&gt; (başarı sinyali)&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Çalışma biçimi&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Sonsuz döngü&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Bitince exit code ile biter&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&lt;tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;Örnek&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;web, api, crawler&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;td&gt;migration, backup, batch&lt;/td&gt;&#xA;&#x9;&#x9;&#x9;&lt;/tr&gt;&#xA;&#x9;&lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;p&gt;A minimal job looks like this:&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-services</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-services/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-services/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-services/</guid>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-services/</guid>
 				<description>&lt;h1 id=&#34;services&#34;&gt;Services&lt;a class=&#34;anchor&#34; href=&#34;#services&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;We&amp;rsquo;ve spun up pods and connected to them individually, but that&amp;rsquo;s frankly not super useful if we want to distribute real traffic across those pods. That&amp;rsquo;s where services come in.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/service/&#34;&gt;Services&lt;/a&gt; provide a stable endpoint for pods. They are an abstraction used to provide a stable endpoint and load balance traffic across a group of Pods. By &amp;ldquo;stable endpoint&amp;rdquo;, I just mean that the service will always be available at a given URL, even if the pod is destroyed and recreated.&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-gateway-minikube</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-gateway-minikube/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-gateway-minikube/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-gateway-minikube/</guid>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-gateway-minikube/</guid>
 				<description>&lt;h1 id=&#34;gateway&#34;&gt;Gateway&lt;a class=&#34;anchor&#34; href=&#34;#gateway&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;A &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/gateway/&#34;&gt;Gateway&lt;/a&gt; resource exposes services to the outside world and is used often in production environments. From the docs:&lt;/p&gt;&#xA;&lt;blockquote class=&#39;book-hint &#39;&gt;&#xA;&lt;p&gt;A Gateway describes an instance of traffic handling infrastructure. It defines a network endpoint that can be used for processing traffic, i.e. filtering, balancing, splitting, etc. for backends such as a Service. For example, a Gateway may represent a cloud load balancer or an in-cluster proxy server that is configured to accept HTTP traffic.&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-namespaces</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-namespaces/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-namespaces/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-namespaces/</guid>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-namespaces/</guid>
 				<description>&lt;h1 id=&#34;namespaces&#34;&gt;Namespaces&lt;a class=&#34;anchor&#34; href=&#34;#namespaces&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;To quote the &lt;a href=&#34;https://www.python.org/dev/peps/pep-0020/&#34;&gt;Zen of Python&lt;/a&gt;:&lt;/p&gt;&#xA;&lt;blockquote class=&#39;book-hint &#39;&gt;&#xA;&lt;p&gt;Namespaces are one honking great idea &amp;ndash; let&amp;rsquo;s do more of those!&lt;/p&gt;&#xA;&lt;/blockquote&gt;&lt;p&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/&#34;&gt;Namespaces&lt;/a&gt; are a way to isolate cluster resources into groups. They&amp;rsquo;re a bit like directories on your computer, but instead of containing files, they contain Kubernetes objects. As you&amp;rsquo;ve already learned, every resource in Kubernetes has a name. Some of our names include:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;synergychat-api-configmap&lt;/li&gt;&#xA;&lt;li&gt;api-service&lt;/li&gt;&#xA;&lt;li&gt;api-deployment&lt;/li&gt;&#xA;&lt;li&gt;web-deployment&lt;/li&gt;&#xA;&lt;li&gt;&amp;hellip;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;You can only use a name once. It is a unique identifier. That&amp;rsquo;s how &lt;code&gt;kubectl apply&lt;/code&gt; knows when it should create a new resource and when it should update an existing one. Namespaces allow us to use the same name for different resources, as long as they&amp;rsquo;re in different namespaces.&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-scaling-vertical</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-scaling-vertical/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-scaling-vertical/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-scaling-vertical/</guid>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-scaling-vertical/</guid>
 				<description>&lt;h1 id=&#34;top&#34;&gt;Top&lt;a class=&#34;anchor&#34; href=&#34;#top&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;We&amp;rsquo;ve already learned how to look at logs for k8s pods, but sometimes that&amp;rsquo;s not enough when it comes to debugging. Sometimes we want to know about the &lt;em&gt;resources&lt;/em&gt; that a pod is using.&lt;/p&gt;&#xA;&lt;p&gt;To get metrics working, we need to enable the &lt;code&gt;metrics-server&lt;/code&gt; addon. Run:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;minikube addons enable metrics-server&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Take a look inside the &lt;code&gt;kube-system&lt;/code&gt; namespace:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl -n kube-system get pod&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You should see a new &amp;ldquo;metrics-server&amp;rdquo; pod. &lt;em&gt;It might take a couple of minutes to get started&lt;/em&gt;, but once that pod is ready, you should be able to run:&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-scaling-horizontal</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-scaling-horizontal/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-scaling-horizontal/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-scaling-horizontal/</guid>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-scaling-horizontal/</guid>
 				<description>&lt;h1 id=&#34;horizontal-pod-autoscaling-hpa&#34;&gt;Horizontal Pod Autoscaling (HPA)&lt;a class=&#34;anchor&#34; href=&#34;#horizontal-pod-autoscaling-hpa&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;A &lt;a href=&#34;https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/&#34;&gt;Horizontal Pod Autoscaler&lt;/a&gt; can automatically scale the number of Pods in a Deployment based on observed CPU utilization or other custom metrics. It&amp;rsquo;s very common in a Kubernetes environment to have a low number of pods in a deployment, and then scale up the number of pods automatically as CPU usage increases.&lt;/p&gt;&#xA;&lt;h2 id=&#34;assignment&#34;&gt;Assignment&lt;a class=&#34;anchor&#34; href=&#34;#assignment&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;First, delete the &lt;code&gt;replicas: 1&lt;/code&gt; line from the &lt;code&gt;synergychat-testcpu&lt;/code&gt; deployment. This will allow our new autoscaler to have full control over the number of pods.&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-storage</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-storage/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-storage/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-storage/</guid>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-storage/</guid>
 				<description>&lt;h1 id=&#34;storage-in-kubernetes&#34;&gt;Storage in Kubernetes&lt;a class=&#34;anchor&#34; href=&#34;#storage-in-kubernetes&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;By default, containers running in pods on Kubernetes have access to the filesystem, but as we&amp;rsquo;re about to find out, there are some big limitations to this.&lt;/p&gt;&#xA;&lt;h2 id=&#34;example&#34;&gt;example&lt;a class=&#34;anchor&#34; href=&#34;#example&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;code&gt;api&lt;/code&gt; application in SynergyChat can be configured to save its data (the messages) to a file on the filesystem. That way, even if the program is restarted, the messages will still be there.&lt;/p&gt;&#xA;&lt;p&gt;Update the &lt;code&gt;api&lt;/code&gt; service&amp;rsquo;s ConfigMap to include a new environment variable:&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-persistent-volumes</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-persistent-volumes/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-persistent-volumes/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-persistent-volumes/</guid>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-persistent-volumes/</guid>
 				<description>&lt;h2 id=&#34;persistent-volumes-pv&#34;&gt;Persistent Volumes (PV)&lt;a class=&#34;anchor&#34; href=&#34;#persistent-volumes-pv&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Instead of simply adding a volume to a deployment, a persistent volume is a cluster-level resource that is created separately from the pod and then attached to the pod. It&amp;rsquo;s similar to a ConfigMap in that way.&lt;/p&gt;&#xA;&lt;p&gt;PVs can be created statically or dynamically.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Static PVs are created manually by a cluster admin&lt;/li&gt;&#xA;&lt;li&gt;Dynamic PVs are created automatically when a pod requests a volume that doesn&amp;rsquo;t exist yet&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Generally speaking, and especially in the cloud-native world, we want to use dynamic PVs. It&amp;rsquo;s less work and more flexible.&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-statefulsets</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-statefulsets/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-statefulsets/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-statefulsets/</guid>
-				<description>&lt;h1 id=&#34;statefulsets&#34;&gt;StatefulSets&lt;a class=&#34;anchor&#34; href=&#34;#statefulsets&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;In &lt;a href=&#34;kubernetes-storage/&#34;&gt;storage&lt;/a&gt; we learned that the filesystem inside a pod is ephemeral, and in &lt;a href=&#34;kubernetes-persistent-volumes/&#34;&gt;persistent volumes&lt;/a&gt; we attached a PVC to keep data alive across pod restarts. But there&amp;rsquo;s one piece of the puzzle missing.&lt;/p&gt;&#xA;&lt;p&gt;Deployments treat all their pods as &lt;strong&gt;identical, interchangeable clones&lt;/strong&gt;. &lt;code&gt;synergychat-web-679cbcc6cd-cq6vx&lt;/code&gt; could die at any moment and a fresh &lt;code&gt;synergychat-web-679cbcc6cd-x9k2f&lt;/code&gt; takes its place - nobody cares which is which. That&amp;rsquo;s perfect for web servers and APIs.&lt;/p&gt;&#xA;&lt;p&gt;Databases are different. Each instance needs:&lt;/p&gt;</description>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-statefulsets/</guid>
+				<description>&lt;h1 id=&#34;statefulsets&#34;&gt;StatefulSets&lt;a class=&#34;anchor&#34; href=&#34;#statefulsets&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;In &lt;a href=&#34;../kubernetes-storage/&#34;&gt;storage&lt;/a&gt; we learned that the filesystem inside a pod is ephemeral, and in &lt;a href=&#34;../kubernetes-persistent-volumes/&#34;&gt;persistent volumes&lt;/a&gt; we attached a PVC to keep data alive across pod restarts. But there&amp;rsquo;s one piece of the puzzle missing.&lt;/p&gt;&#xA;&lt;p&gt;Deployments treat all their pods as &lt;strong&gt;identical, interchangeable clones&lt;/strong&gt;. &lt;code&gt;synergychat-web-679cbcc6cd-cq6vx&lt;/code&gt; could die at any moment and a fresh &lt;code&gt;synergychat-web-679cbcc6cd-x9k2f&lt;/code&gt; takes its place - nobody cares which is which. That&amp;rsquo;s perfect for web servers and APIs.&lt;/p&gt;&#xA;&lt;p&gt;Databases are different. Each instance needs:&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>kubernetes-nodes-basic</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-nodes-basic/</link>
+				<link>http://localhost:1313/docs/kubernetes/kubernetes-nodes-basic/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-nodes-basic/</guid>
+				<guid>http://localhost:1313/docs/kubernetes/kubernetes-nodes-basic/</guid>
 				<description>&lt;h1 id=&#34;nodes&#34;&gt;Nodes&lt;a class=&#34;anchor&#34; href=&#34;#nodes&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;We&amp;rsquo;ve talked about how in a production environment, you&amp;rsquo;ll have multiple nodes in your cluster. For this course, we&amp;rsquo;ve been using a single node cluster with &lt;code&gt;minikube&lt;/code&gt;. The nice thing about Kubernetes is that almost everything you do with it is abstracted away from the underlying infrastructure with the &lt;code&gt;kubectl&lt;/code&gt; CLI.&lt;/p&gt;&#xA;&lt;p&gt;All the commands we&amp;rsquo;ve been using locally will work the same way on a production cluster.&lt;/p&gt;&#xA;&lt;h2 id=&#34;ways-to-deploy-to-production&#34;&gt;Ways to Deploy to Production&lt;a class=&#34;anchor&#34; href=&#34;#ways-to-deploy-to-production&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;There are several popular ways to deploy a Kubernetes cluster to production:&lt;/p&gt;</description>
 			</item>
 	</channel>

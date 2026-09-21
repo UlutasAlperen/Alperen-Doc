@@ -186,4 +186,4 @@ Run:
 kubectl proxy
 ```
 
-for more [probes](kubernetes-probes/)
+for more [probes](../kubernetes-probes/)

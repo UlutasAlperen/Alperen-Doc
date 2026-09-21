@@ -92,4 +92,4 @@ for id in $(docker ps -q); do
 done
 ```
 
-For persistent data, see [docker-volumes](docker-volumes/).
+For persistent data, see [docker-volumes](../docker-volumes/).

@@ -4,7 +4,7 @@ weight: 11
 ---
 # PostgreSQL Streaming Replication (The Manual Way)
 
-In the [StatefulSet notes](../../kubernetes/kubernetes-statefulsets/) we ran a single-replica PostgreSQL: pod dies, new pod mounts the same PVC, data survives. But there's still exactly _one_ copy of the data, and if the primary goes down, your database is down until it comes back. On a 3-node cluster with [Longhorn](longhorn/) underneath, we can finally do the real thing: a primary plus streaming replicas.
+In the [StatefulSet notes](../../kubernetes/kubernetes-statefulsets/) we ran a single-replica PostgreSQL: pod dies, new pod mounts the same PVC, data survives. But there's still exactly _one_ copy of the data, and if the primary goes down, your database is down until it comes back. On a 3-node cluster with [Longhorn](../longhorn/) underneath, we can finally do the real thing: a primary plus streaming replicas.
 
 ## Two Different Layers of Protection
 
@@ -251,4 +251,4 @@ kubectl exec -it postgres-replica-0 -- psql -U app -d appdb -c "SELECT pg_promot
 
 > Promoting a standby is a one-way door: it detaches from the primary permanently. If the old primary comes back, it's still convinced it's the primary - that's the classic **split-brain**, two postgreSQL instances both accepting writes. Rejoining the old primary means wiping its data and re-cloning. This is the real reason bare-managed replication is a learning exercise: automating this dance safely (elections, fencing, timeline management) is what operators like CloudNativePG do - that's the next chapter.
 
-for more [postgresql-longhorn-read-replicas](postgresql-longhorn-read-replicas/)
+for more [postgresql-longhorn-read-replicas](../postgresql-longhorn-read-replicas/)

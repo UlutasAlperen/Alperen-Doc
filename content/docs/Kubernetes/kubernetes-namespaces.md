@@ -173,4 +173,4 @@ Unless a service really needs to be made available to the outside world, it's be
 - Communication is inherently more secure because it runs on an internal network (usually don't even need HTTPS)
 
 The architecture of SynergyChat is a good example of this. We expose a single JSON API to the outside world, and if the pod that serves those HTTP requests doesn't have all the info it needs locally, it makes internal HTTP requests to other services.
-for more [scaling-vertical](kubernetes-scaling-vertical/)
+for more [scaling-vertical](../kubernetes-scaling-vertical/)

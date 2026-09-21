@@ -193,7 +193,7 @@ docker run -d --name caddy2 --network caddytest caddy
 docker run -d --network host nginx
 ```
 
-> burada performans iyi oluyor çünkü NAT yok ama güvenlik zayıf oluyor, bir de UFW'yi bypass ediyor, güvenli yayınlama için [docker-kurulum-hardening-debian](docker-kurulum-hardening-debian/) sayfasındaki `127.0.0.1:8080:80` mantığına bak
+> burada performans iyi oluyor çünkü NAT yok ama güvenlik zayıf oluyor, bir de UFW'yi bypass ediyor, güvenli yayınlama için [docker-kurulum-hardening-debian](../docker-kurulum-hardening-debian/) sayfasındaki `127.0.0.1:8080:80` mantığına bak
 
 ### none
 
