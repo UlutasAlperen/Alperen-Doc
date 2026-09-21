@@ -5,7 +5,7 @@ bookCollapseSection: true
 ---
 [Kubernetes](https://kubernetes.io/) is _the_ container orchestration platform. Nearly every modern DevOps workflow runs on top of it in production. I use Kubernetes to:
 
-- Orchestrate containers across single-node (Minikube) and multi-node (GKE) clusters
+- Orchestrate containers across single-node (Minikube) and multi-node aws(WORK IN PROGRESS) clusters
 - Declare the desired state with YAML manifests and let controllers reconcile it
 - Load balance and expose services through Services and Gateways
 - Scale workloads vertically and horizontally (HPA)
