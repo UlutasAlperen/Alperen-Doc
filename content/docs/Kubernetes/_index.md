@@ -14,7 +14,7 @@ bookCollapseSection: true
 - Run batch work and scheduled tasks with Jobs and CronJobs
 - And much more
 
-## Kubernetes konular
+## Kubernetes konular (Konuları sırayla takip ederseniz, verdiğim görevlerin birbiriyle bağlantılı olduğunu ve sistemin pratikte nasıl çalıştığını daha net görebilirsiniz.)
 
 1. [kubernetes-minikube](kubernetes-minikube/)
 2. [kubernetes-pods-minikube](kubernetes-pods-minikube/)
