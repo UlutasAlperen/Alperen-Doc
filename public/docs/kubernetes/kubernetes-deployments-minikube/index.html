@@ -8,28 +8,25 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Deployments# A Deployment provides declarative updates for Pods and ReplicaSets.
-You describe your desired state in a Deployment, and the Deployment Controller’s job is to make the current state match the desired state. You declare your hopes and dreams, and it’s Kubernetes’ job to make them come true.
-Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you delete a pod, only to see that a new pod was created in its place? It’s kinda like chopping heads off of a hydra.
+<meta name="description" content="Deployments# Deploying an Image# The kubectl create deployment command will create a “deployment” for us. We’ll talk more about the nuances of “deployments” later. But to put it simply, we only need to provide two things:
+The name of the deployment (this can be anything, it’s used to identify the deployment) The ID of the Docker image we want to deploy (it would be a full URL if we weren’t hosting the image on Docker Hub, which is the default) kubectl create deployment synergychat-web --image=docker.io/bootdotdev/synergychat-web:latestThis command will deploy a container built from this Docker image to your local k8s cluster.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-deployments-minikube/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="kubernetes-deployments-minikube">
-	<meta property="og:description" content="Deployments# A Deployment provides declarative updates for Pods and ReplicaSets.
-You describe your desired state in a Deployment, and the Deployment Controller’s job is to make the current state match the desired state. You declare your hopes and dreams, and it’s Kubernetes’ job to make them come true.
-Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you delete a pod, only to see that a new pod was created in its place? It’s kinda like chopping heads off of a hydra.">
+	<meta property="og:description" content="Deployments# Deploying an Image# The kubectl create deployment command will create a “deployment” for us. We’ll talk more about the nuances of “deployments” later. But to put it simply, we only need to provide two things:
+The name of the deployment (this can be anything, it’s used to identify the deployment) The ID of the Docker image we want to deploy (it would be a full URL if we weren’t hosting the image on Docker Hub, which is the default) kubectl create deployment synergychat-web --image=docker.io/bootdotdev/synergychat-web:latestThis command will deploy a container built from this Docker image to your local k8s cluster.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="kubernetes-deployments-minikube">
-	<meta itemprop="description" content="Deployments# A Deployment provides declarative updates for Pods and ReplicaSets.
-You describe your desired state in a Deployment, and the Deployment Controller’s job is to make the current state match the desired state. You declare your hopes and dreams, and it’s Kubernetes’ job to make them come true.
-Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you delete a pod, only to see that a new pod was created in its place? It’s kinda like chopping heads off of a hydra.">
-	<meta itemprop="wordCount" content="1095">
+	<meta itemprop="description" content="Deployments# Deploying an Image# The kubectl create deployment command will create a “deployment” for us. We’ll talk more about the nuances of “deployments” later. But to put it simply, we only need to provide two things:
+The name of the deployment (this can be anything, it’s used to identify the deployment) The ID of the Docker image we want to deploy (it would be a full URL if we weren’t hosting the image on Docker Hub, which is the default) kubectl create deployment synergychat-web --image=docker.io/bootdotdev/synergychat-web:latestThis command will deploy a container built from this Docker image to your local k8s cluster.">
+	<meta itemprop="wordCount" content="1193">
 
 <title>kubernetes-deployments-minikube • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +35,7 @@ Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you dele
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.ec6f78d87ac21c4d2ad8442ea15bb45967146ec513c5274364faaccb3c07debc.js" integrity="sha256-7G942HrCHE0q2EQuoVu0WWcUbsUTxSdDZPqsyzwH3rw=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.57a66b41b8c42e1ac05630bb76a53a2a13ac966e70bb31947af10ce33f365327.js" integrity="sha256-V6ZrQbjELhrAVjC7dqU6KhOslm5wuzGUevEM4z82Uyc=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1104,6 +1101,7 @@ Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you dele
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#deploying-an-image">Deploying an Image</a></li>
     <li><a href="#why-deleting-a-pod-doesnt-feel-like-a-deletion">Why Deleting a Pod Doesn&rsquo;t Feel Like a Deletion</a></li>
   </ul>
 
@@ -1127,6 +1125,13 @@ Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you dele
       
       
   <article class="markdown book-article"><h1 id="deployments">Deployments<a class="anchor" href="#deployments">#</a></h1>
+<h2 id="deploying-an-image">Deploying an Image<a class="anchor" href="#deploying-an-image">#</a></h2>
+<p>The <code>kubectl create deployment</code> command will create a &ldquo;deployment&rdquo; for us. We&rsquo;ll talk more about the nuances of &ldquo;deployments&rdquo; later. But to put it simply, we only need to provide two things:</p>
+<ol>
+<li>The name of the deployment (this can be anything, it&rsquo;s used to identify the deployment)</li>
+<li>The ID of the Docker image we want to deploy (it would be a full URL if we weren&rsquo;t hosting the image on Docker Hub, which is the default)</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create deployment synergychat-web --image<span style="color:#f92672">=</span>docker.io/bootdotdev/synergychat-web:latest</span></span></code></pre></div><p>This command will deploy a container built from <a href="https://hub.docker.com/r/bootdotdev/synergychat-web">this Docker image</a> to your local k8s cluster.</p>
 <p>A <em><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a></em> provides declarative updates for Pods and ReplicaSets.</p>
 <p>You describe your <em>desired state</em> in a Deployment, and the Deployment Controller&rsquo;s job is to make the <em>current state</em> match the <em>desired state</em>. You declare your hopes and dreams, and it&rsquo;s Kubernetes&rsquo; job to make them come true.</p>
 <h2 id="why-deleting-a-pod-doesnt-feel-like-a-deletion">Why Deleting a Pod Doesn&rsquo;t Feel Like a Deletion<a class="anchor" href="#why-deleting-a-pod-doesnt-feel-like-a-deletion">#</a></h2>
@@ -1136,7 +1141,7 @@ Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you dele
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get deployment synergychat-web -o yaml</span></span></code></pre></div><p>Edit the deployment and change the number of replicas from 2 to 10:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl edit deployment synergychat-web</span></span></code></pre></div><p>Make sure you&rsquo;ve got 10 pods running:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pod</span></span></code></pre></div><p>Keep using <code>kubectl get pod</code> to check on your pods until all 10 are in a &ldquo;ready&rdquo; state. Once they are, run:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl proxy</span></span></code></pre></div><h1 id="replica-sets">Replica Sets<a class="anchor" href="#replica-sets">#</a></h1>
+<h1 id="replica-sets">Replica Sets<a class="anchor" href="#replica-sets">#</a></h1>
 <p>A <a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSet</a> maintains a stable set of replica Pods running at any given time. It&rsquo;s the thing that makes sure that the number of Pods you want running is the same as the number of Pods that are actually running.</p>
 <p>You might be thinking, &ldquo;I thought that&rsquo;s what a Deployment does.&rdquo; Well&hellip;yes.</p>
 <p>A Deployment is a higher-level abstraction that manages the ReplicaSets for you. You can think of a Deployment as a wrapper around a ReplicaSet. Here&rsquo;s the rub:</p>
@@ -1287,6 +1292,7 @@ Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you dele
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#deploying-an-image">Deploying an Image</a></li>
     <li><a href="#why-deleting-a-pod-doesnt-feel-like-a-deletion">Why Deleting a Pod Doesn&rsquo;t Feel Like a Deletion</a></li>
   </ul>
 

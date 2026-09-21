@@ -8,23 +8,30 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Kubernetes is the container orchestration platform. Nearly every modern DevOps workflow runs on top of it in production. I use Kubernetes to:
-Orchestrate containers across single-node (Minikube) and multi-node aws(WORK IN PROGRESS) clusters Declare the desired state with YAML manifests and let controllers reconcile it Load balance and expose services through Services and Gateways Scale workloads vertically and horizontally (HPA) Persist state with volumes, PVCs and persistent storage Run stateful workloads like databases with StatefulSets Run batch work and scheduled tasks with Jobs and CronJobs And much more Kubernetes konular (Konuları sırayla takip ederseniz, verdiğim görevlerin birbiriyle bağlantılı olduğunu ve sistemin pratikte nasıl çalıştığını daha net görebilirsiniz.)# kubernetes-minikube kubernetes-pods-minikube kubernetes-deployments-minikube kubernetes-probes kubernetes-yaml-configurations kubernetes-secrets kubernetes-jobs-cronjobs kubernetes-services kubernetes-gateway-minikube kubernetes-namespaces kubernetes-scaling-vertical kubernetes-scaling-horizontal kubernetes-storage kubernetes-persistent-volumes kubernetes-statefulsets kubernetes-nodes-basic Temeller# kubernetes-minikube = Minikube ile local cluster, kubectl create deployment, port-forward, Prod vs Minikube farkı kubernetes-pods-minikube = Pod kavramı, ephemeral doğası, kubectl logs/delete pod, pod’ların unique IP adresleri kubernetes-deployments-minikube = Deployment ve ReplicaSet, desired vs current state, kubectl get/edit deployment kubernetes-probes = Liveness/Readiness/Startup probes, httpGet/tcpSocket/exec, rolling update’lerde probes’un rolü kubernetes-yaml-configurations = YAML manifest yapısı (apiVersion, kind, spec), ConfigMap, env/envFrom, Secrets Secret’lar ve Batch İşleri# kubernetes-secrets = kubectl create secret, secretKeyRef/envFrom/volume mount, base64 ≠ şifreleme, Sealed Secrets/External Secrets kubernetes-jobs-cronjobs = Job (completions/parallelism/backoffLimit), CronJob (schedule/concurrencyPolicy), db.json yedekleme pipeline’ı Ağ (Services &amp; Gateway)# kubernetes-services = ClusterIP, NodePort, LoadBalancer, ExternalName, stable endpoint ve load balancing kubernetes-gateway-minikube = Gateway API (Envoy), HTTPRoute, /etc/hosts &#43; minikube tunnel, annotations kubernetes-namespaces = kubectl create ns, -n flag, intra-cluster DNS (svc.cluster.local) Ölçeklendirme# kubernetes-scaling-vertical = metrics-server, kubectl top, resource limits (50m CPU, 256Mi RAM), CrashLoopBackOff kubernetes-scaling-horizontal = HorizontalPodAutoscaler (HPA), minReplicas/maxReplicas, CPU hedefli otomatik ölçekleme Depolama# kubernetes-storage = Ephemeral filesystem, emptyDir volumes, multi-container pod’lar (sidecar), veritabanları kubernetes-persistent-volumes = PersistentVolume (PV), PersistentVolumeClaim (PVC), dynamic provisioning, volumeMounts kubernetes-statefulsets = Stable identity, volumeClaimTemplates ile pod başına PVC, headless services, PostgreSQL örneği Prod’e Geçiş# kubernetes-nodes-basic = Control plane ve worker node’lar, GKE/EKS/AKS, resource requests vs limits ">
+<meta name="description" content="What Is Kubernetes?# Kubernetes, also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
+– The Kubernetes team
+Kubernetes orchestrates and manages collections of containers (often using container runtimes like containerd). It takes care of scaling, distribution, and connectivity among these containers. Think of it as a system to manage many containers and the infrastructure they run on.
+For example, you could install Docker on a single server, and route traffic directly to it. That’s fairly simple to set up, but what if you want 10 instances of that server? What about 1000 instances? What if you want to deploy many different services, each scaling up with more instances depending on load? Those are the problems that Kubernetes solves.
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="Kubernetes">
-	<meta property="og:description" content="Kubernetes is the container orchestration platform. Nearly every modern DevOps workflow runs on top of it in production. I use Kubernetes to:
-Orchestrate containers across single-node (Minikube) and multi-node aws(WORK IN PROGRESS) clusters Declare the desired state with YAML manifests and let controllers reconcile it Load balance and expose services through Services and Gateways Scale workloads vertically and horizontally (HPA) Persist state with volumes, PVCs and persistent storage Run stateful workloads like databases with StatefulSets Run batch work and scheduled tasks with Jobs and CronJobs And much more Kubernetes konular (Konuları sırayla takip ederseniz, verdiğim görevlerin birbiriyle bağlantılı olduğunu ve sistemin pratikte nasıl çalıştığını daha net görebilirsiniz.)# kubernetes-minikube kubernetes-pods-minikube kubernetes-deployments-minikube kubernetes-probes kubernetes-yaml-configurations kubernetes-secrets kubernetes-jobs-cronjobs kubernetes-services kubernetes-gateway-minikube kubernetes-namespaces kubernetes-scaling-vertical kubernetes-scaling-horizontal kubernetes-storage kubernetes-persistent-volumes kubernetes-statefulsets kubernetes-nodes-basic Temeller# kubernetes-minikube = Minikube ile local cluster, kubectl create deployment, port-forward, Prod vs Minikube farkı kubernetes-pods-minikube = Pod kavramı, ephemeral doğası, kubectl logs/delete pod, pod’ların unique IP adresleri kubernetes-deployments-minikube = Deployment ve ReplicaSet, desired vs current state, kubectl get/edit deployment kubernetes-probes = Liveness/Readiness/Startup probes, httpGet/tcpSocket/exec, rolling update’lerde probes’un rolü kubernetes-yaml-configurations = YAML manifest yapısı (apiVersion, kind, spec), ConfigMap, env/envFrom, Secrets Secret’lar ve Batch İşleri# kubernetes-secrets = kubectl create secret, secretKeyRef/envFrom/volume mount, base64 ≠ şifreleme, Sealed Secrets/External Secrets kubernetes-jobs-cronjobs = Job (completions/parallelism/backoffLimit), CronJob (schedule/concurrencyPolicy), db.json yedekleme pipeline’ı Ağ (Services &amp; Gateway)# kubernetes-services = ClusterIP, NodePort, LoadBalancer, ExternalName, stable endpoint ve load balancing kubernetes-gateway-minikube = Gateway API (Envoy), HTTPRoute, /etc/hosts &#43; minikube tunnel, annotations kubernetes-namespaces = kubectl create ns, -n flag, intra-cluster DNS (svc.cluster.local) Ölçeklendirme# kubernetes-scaling-vertical = metrics-server, kubectl top, resource limits (50m CPU, 256Mi RAM), CrashLoopBackOff kubernetes-scaling-horizontal = HorizontalPodAutoscaler (HPA), minReplicas/maxReplicas, CPU hedefli otomatik ölçekleme Depolama# kubernetes-storage = Ephemeral filesystem, emptyDir volumes, multi-container pod’lar (sidecar), veritabanları kubernetes-persistent-volumes = PersistentVolume (PV), PersistentVolumeClaim (PVC), dynamic provisioning, volumeMounts kubernetes-statefulsets = Stable identity, volumeClaimTemplates ile pod başına PVC, headless services, PostgreSQL örneği Prod’e Geçiş# kubernetes-nodes-basic = Control plane ve worker node’lar, GKE/EKS/AKS, resource requests vs limits">
+	<meta property="og:description" content="What Is Kubernetes?# Kubernetes, also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
+– The Kubernetes team
+Kubernetes orchestrates and manages collections of containers (often using container runtimes like containerd). It takes care of scaling, distribution, and connectivity among these containers. Think of it as a system to manage many containers and the infrastructure they run on.
+For example, you could install Docker on a single server, and route traffic directly to it. That’s fairly simple to set up, but what if you want 10 instances of that server? What about 1000 instances? What if you want to deploy many different services, each scaling up with more instances depending on load? Those are the problems that Kubernetes solves.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="website">
 
 
 	<meta itemprop="name" content="Kubernetes">
-	<meta itemprop="description" content="Kubernetes is the container orchestration platform. Nearly every modern DevOps workflow runs on top of it in production. I use Kubernetes to:
-Orchestrate containers across single-node (Minikube) and multi-node aws(WORK IN PROGRESS) clusters Declare the desired state with YAML manifests and let controllers reconcile it Load balance and expose services through Services and Gateways Scale workloads vertically and horizontally (HPA) Persist state with volumes, PVCs and persistent storage Run stateful workloads like databases with StatefulSets Run batch work and scheduled tasks with Jobs and CronJobs And much more Kubernetes konular (Konuları sırayla takip ederseniz, verdiğim görevlerin birbiriyle bağlantılı olduğunu ve sistemin pratikte nasıl çalıştığını daha net görebilirsiniz.)# kubernetes-minikube kubernetes-pods-minikube kubernetes-deployments-minikube kubernetes-probes kubernetes-yaml-configurations kubernetes-secrets kubernetes-jobs-cronjobs kubernetes-services kubernetes-gateway-minikube kubernetes-namespaces kubernetes-scaling-vertical kubernetes-scaling-horizontal kubernetes-storage kubernetes-persistent-volumes kubernetes-statefulsets kubernetes-nodes-basic Temeller# kubernetes-minikube = Minikube ile local cluster, kubectl create deployment, port-forward, Prod vs Minikube farkı kubernetes-pods-minikube = Pod kavramı, ephemeral doğası, kubectl logs/delete pod, pod’ların unique IP adresleri kubernetes-deployments-minikube = Deployment ve ReplicaSet, desired vs current state, kubectl get/edit deployment kubernetes-probes = Liveness/Readiness/Startup probes, httpGet/tcpSocket/exec, rolling update’lerde probes’un rolü kubernetes-yaml-configurations = YAML manifest yapısı (apiVersion, kind, spec), ConfigMap, env/envFrom, Secrets Secret’lar ve Batch İşleri# kubernetes-secrets = kubectl create secret, secretKeyRef/envFrom/volume mount, base64 ≠ şifreleme, Sealed Secrets/External Secrets kubernetes-jobs-cronjobs = Job (completions/parallelism/backoffLimit), CronJob (schedule/concurrencyPolicy), db.json yedekleme pipeline’ı Ağ (Services &amp; Gateway)# kubernetes-services = ClusterIP, NodePort, LoadBalancer, ExternalName, stable endpoint ve load balancing kubernetes-gateway-minikube = Gateway API (Envoy), HTTPRoute, /etc/hosts &#43; minikube tunnel, annotations kubernetes-namespaces = kubectl create ns, -n flag, intra-cluster DNS (svc.cluster.local) Ölçeklendirme# kubernetes-scaling-vertical = metrics-server, kubectl top, resource limits (50m CPU, 256Mi RAM), CrashLoopBackOff kubernetes-scaling-horizontal = HorizontalPodAutoscaler (HPA), minReplicas/maxReplicas, CPU hedefli otomatik ölçekleme Depolama# kubernetes-storage = Ephemeral filesystem, emptyDir volumes, multi-container pod’lar (sidecar), veritabanları kubernetes-persistent-volumes = PersistentVolume (PV), PersistentVolumeClaim (PVC), dynamic provisioning, volumeMounts kubernetes-statefulsets = Stable identity, volumeClaimTemplates ile pod başına PVC, headless services, PostgreSQL örneği Prod’e Geçiş# kubernetes-nodes-basic = Control plane ve worker node’lar, GKE/EKS/AKS, resource requests vs limits">
-	<meta itemprop="wordCount" content="314">
+	<meta itemprop="description" content="What Is Kubernetes?# Kubernetes, also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
+– The Kubernetes team
+Kubernetes orchestrates and manages collections of containers (often using container runtimes like containerd). It takes care of scaling, distribution, and connectivity among these containers. Think of it as a system to manage many containers and the infrastructure they run on.
+For example, you could install Docker on a single server, and route traffic directly to it. That’s fairly simple to set up, but what if you want 10 instances of that server? What about 1000 instances? What if you want to deploy many different services, each scaling up with more instances depending on load? Those are the problems that Kubernetes solves.">
+	<meta itemprop="wordCount" content="602">
 
 <title>Kubernetes • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -33,7 +40,7 @@ Orchestrate containers across single-node (Minikube) and multi-node aws(WORK IN 
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.ec6f78d87ac21c4d2ad8442ea15bb45967146ec513c5274364faaccb3c07debc.js" integrity="sha256-7G942HrCHE0q2EQuoVu0WWcUbsUTxSdDZPqsyzwH3rw=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.57a66b41b8c42e1ac05630bb76a53a2a13ac966e70bb31947af10ce33f365327.js" integrity="sha256-V6ZrQbjELhrAVjC7dqU6KhOslm5wuzGUevEM4z82Uyc=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/kubernetes/index.xml" title="Kubernetes" />
 
   
@@ -1100,6 +1107,15 @@ Orchestrate containers across single-node (Minikube) and multi-node aws(WORK IN 
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#kubectl">Kubectl</a></li>
+    <li><a href="#install">Install</a></li>
+    <li><a href="#verify-installation">Verify Installation</a></li>
+    <li><a href="#minikube">Minikube</a>
+      <ul>
+        <li><a href="#run-minikube">Run Minikube</a></li>
+        <li><a href="#previous-minikube-installations">Previous Minikube Installations</a></li>
+      </ul>
+    </li>
     <li><a href="#kubernetes-konular-konuları-sırayla-takip-ederseniz-verdiğim-görevlerin-birbiriyle-bağlantılı-olduğunu-ve-sistemin-pratikte-nasıl-çalıştığını-daha-net-görebilirsiniz">Kubernetes konular (Konuları sırayla takip ederseniz, verdiğim görevlerin birbiriyle bağlantılı olduğunu ve sistemin pratikte nasıl çalıştığını daha net görebilirsiniz.)</a>
       <ul>
         <li><a href="#temeller">Temeller</a></li>
@@ -1122,7 +1138,28 @@ Orchestrate containers across single-node (Minikube) and multi-node aws(WORK IN 
 
       
       
-  <article class="markdown book-article"><p><a href="https://kubernetes.io/">Kubernetes</a> is <em>the</em> container orchestration platform. Nearly every modern DevOps workflow runs on top of it in production. I use Kubernetes to:</p>
+  <article class="markdown book-article"><h1 id="what-is-kubernetes">What Is Kubernetes?<a class="anchor" href="#what-is-kubernetes">#</a></h1>
+<blockquote class='book-hint '>
+<p>Kubernetes, also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.</p>
+<p>&ndash; The <a href="https://kubernetes.io/">Kubernetes</a> team</p>
+</blockquote><p>Kubernetes orchestrates and manages collections of containers (often using container runtimes like containerd). It takes care of scaling, distribution, and connectivity among these containers. Think of it as a <em>system to manage many containers and the infrastructure they run on</em>.</p>
+<p>For example, you <em>could</em> install Docker on a single server, and route traffic directly to it. That&rsquo;s fairly simple to set up, but what if you want 10 instances of that server? What about 1000 instances? What if you want to deploy many different services, each scaling up with more instances depending on load? Those are the problems that Kubernetes solves.</p>
+<h2 id="kubectl">Kubectl<a class="anchor" href="#kubectl">#</a></h2>
+<p>The Kubernetes command-line tool, <code>kubectl</code>, allows you to run commands against Kubernetes clusters. It&rsquo;s a client that communicates with a Kubernetes API server.</p>
+<h2 id="install">Install<a class="anchor" href="#install">#</a></h2>
+<p>Follow the official <a href="https://kubernetes.io/docs/tasks/tools/">installation instructions for kubectl</a>.</p>
+<h2 id="verify-installation">Verify Installation<a class="anchor" href="#verify-installation">#</a></h2>
+<p>Run <code>kubectl version --client</code> to verify that kubectl is installed correctly.</p>
+<h2 id="minikube">Minikube<a class="anchor" href="#minikube">#</a></h2>
+<p>During this course, we&rsquo;ll be using <a href="https://minikube.sigs.k8s.io/docs/">Minikube</a> to practice with Kubernetes. In production, you probably wouldn&rsquo;t use Minikube, you would use a cluster of servers, probably in the cloud. That&rsquo;s expensive! Minikube is a fantastic tool that allows you to run a single-node Kubernetes cluster on your local machine.</p>
+<h3 id="run-minikube">Run Minikube<a class="anchor" href="#run-minikube">#</a></h3>
+<p>We&rsquo;ll be using Kubernetes with Docker, which is arguably the most common way to use Kubernetes. Make sure your Docker daemon is running before starting Minikube.</p>
+<p>Next, run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>minikube start </span></span></code></pre></div><h3 id="previous-minikube-installations">Previous Minikube Installations<a class="anchor" href="#previous-minikube-installations">#</a></h3>
+<p>If you&rsquo;ve installed minikube in the past, you might have conflicts. If you don&rsquo;t care about your old minikube clusters, you can delete them by running:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>minikube stop
+</span></span><span style="display:flex;"><span>minikube delete</span></span></code></pre></div><p>Then restart minikube.</p>
+<p><a href="https://kubernetes.io/">Kubernetes</a> is <em>the</em> container orchestration platform. Nearly every modern DevOps workflow runs on top of it in production. I use Kubernetes to:</p>
 <ul>
 <li>Orchestrate containers across single-node (Minikube) and multi-node aws(WORK IN PROGRESS) clusters</li>
 <li>Declare the desired state with YAML manifests and let controllers reconcile it</li>
@@ -1253,6 +1290,15 @@ Orchestrate containers across single-node (Minikube) and multi-node aws(WORK IN 
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#kubectl">Kubectl</a></li>
+    <li><a href="#install">Install</a></li>
+    <li><a href="#verify-installation">Verify Installation</a></li>
+    <li><a href="#minikube">Minikube</a>
+      <ul>
+        <li><a href="#run-minikube">Run Minikube</a></li>
+        <li><a href="#previous-minikube-installations">Previous Minikube Installations</a></li>
+      </ul>
+    </li>
     <li><a href="#kubernetes-konular-konuları-sırayla-takip-ederseniz-verdiğim-görevlerin-birbiriyle-bağlantılı-olduğunu-ve-sistemin-pratikte-nasıl-çalıştığını-daha-net-görebilirsiniz">Kubernetes konular (Konuları sırayla takip ederseniz, verdiğim görevlerin birbiriyle bağlantılı olduğunu ve sistemin pratikte nasıl çalıştığını daha net görebilirsiniz.)</a>
       <ul>
         <li><a href="#temeller">Temeller</a></li>
