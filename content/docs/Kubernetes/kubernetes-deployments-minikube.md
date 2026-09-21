@@ -6,8 +6,6 @@ weight: 3
 
 A _[Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)_ provides declarative updates for Pods and ReplicaSets.
 
-![](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/6Pgwx6u-1280x720.png)
-
 You describe your _desired state_ in a Deployment, and the Deployment Controller's job is to make the _current state_ match the _desired state_. You declare your hopes and dreams, and it's Kubernetes' job to make them come true.
 
 ## Why Deleting a Pod Doesn't Feel Like a Deletion
