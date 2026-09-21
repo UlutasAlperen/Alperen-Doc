@@ -99,12 +99,6 @@ Download the YAML file again and take a look at it. You should see the annotatio
 
 Apply the configuration a second time, you won't get the warning. _Save this YAML file in a git repo for this course! We'll be making more configuration files. Kubernetes is an "infra-as-code" tool, so it's important to keep your configuration files in a git repo._
 
-Finally, start the proxy server:
-
-```bash
-kubectl proxy
-```
-
 
 # API Service
 
@@ -177,11 +171,5 @@ kubectl apply -f api-deployment.yaml
 Next, take a look at all the pods you have running now. You should see pods for the web service and a pod for the api service.
 
 However, you might notice that the api pod isn't in a "ready" state. In fact, it should be stuck in a "CrashLoopBackOff" status. Oh no! We've created a thrashing pod!
-
-Run:
-
-```bash
-kubectl proxy
-```
 
 for more [probes](../kubernetes-probes/)

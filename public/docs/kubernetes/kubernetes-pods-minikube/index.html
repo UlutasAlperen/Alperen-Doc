@@ -29,7 +29,7 @@ A Pod is the smallest and simplest unit in the Kubernetes object model that you 
 	<meta itemprop="description" content="Pods# “Pods are the smallest deployable units of computing that you can create and manage in Kubernetes.”
 – The Kubernetes team
 A Pod is the smallest and simplest unit in the Kubernetes object model that you create or deploy. It represents one (or sometimes more) running container(s) in a cluster. In a simple web application, you might have one single pod: the web server. As traffic grows, you might deploy that same code to multiple pods to handle the increased load. Several pods, one codebase. In a more complex backend system, you might have several pods for the web server and several pods that handle video processing. Multiple pods, multiple codebases.">
-	<meta itemprop="wordCount" content="633">
+	<meta itemprop="wordCount" content="591">
 
 <title>kubernetes-pods-minikube • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ A Pod is the smallest and simplest unit in the Kubernetes object model that you 
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.e84c50d484ea6a98ddbfecd908827912439bc7e1eb6c1e2ab6b84dc664b0b237.js" integrity="sha256-6ExQ1ITqapjdv&#43;zZCIJ5EkObx&#43;HrbB4qtrhNxmSwsjc=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.9a746517baa7a640daf8adb6ffad34a866149ced8e838ef592e72f6facf1398a.js" integrity="sha256-mnRlF7qnpkDa&#43;K22/600qGYUnO2Og471kucvb6zxOYo=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1152,8 +1152,6 @@ A Pod is the smallest and simplest unit in the Kubernetes object model that you 
 <h2 id="example">Example<a class="anchor" href="#example">#</a></h2>
 <p>Run this command to get a &ldquo;wide&rdquo; output of your pods:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -o wide</span></span></code></pre></div><p>It gives a few more columns of information, including the IP address of each Pod. Notice that each Pod has a unique IP address!</p>
-<p>Next, run:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl proxy</span></span></code></pre></div><p>This will start a proxy server on your local machine, probably on <code>127.0.0.1:8001</code>. Assuming that&rsquo;s the host, navigate to <code>http://127.0.0.1:8001/api/v1/namespaces/default/pods</code> in your browser. You should see a big nasty JSON blob that describes the pods that you have running.</p>
 <p>for more <a href="../kubernetes-deployments-minikube/">deployments</a></p>
 </article>
  

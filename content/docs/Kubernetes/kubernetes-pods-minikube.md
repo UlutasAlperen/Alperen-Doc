@@ -75,13 +75,5 @@ kubectl get pods -o wide
 
 It gives a few more columns of information, including the IP address of each Pod. Notice that each Pod has a unique IP address!
 
-Next, run:
-
-```bash
-kubectl proxy
-```
-
-This will start a proxy server on your local machine, probably on `127.0.0.1:8001`. Assuming that's the host, navigate to `http://127.0.0.1:8001/api/v1/namespaces/default/pods` in your browser. You should see a big nasty JSON blob that describes the pods that you have running.
-
 
 for more [deployments](../kubernetes-deployments-minikube/)

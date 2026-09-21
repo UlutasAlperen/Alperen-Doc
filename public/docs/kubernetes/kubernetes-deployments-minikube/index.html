@@ -29,7 +29,7 @@ Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you dele
 	<meta itemprop="description" content="Deployments# A Deployment provides declarative updates for Pods and ReplicaSets.
 You describe your desired state in a Deployment, and the Deployment Controller’s job is to make the current state match the desired state. You declare your hopes and dreams, and it’s Kubernetes’ job to make them come true.
 Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you delete a pod, only to see that a new pod was created in its place? It’s kinda like chopping heads off of a hydra.">
-	<meta itemprop="wordCount" content="1104">
+	<meta itemprop="wordCount" content="1096">
 
 <title>kubernetes-deployments-minikube • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you dele
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.e84c50d484ea6a98ddbfecd908827912439bc7e1eb6c1e2ab6b84dc664b0b237.js" integrity="sha256-6ExQ1ITqapjdv&#43;zZCIJ5EkObx&#43;HrbB4qtrhNxmSwsjc=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.9a746517baa7a640daf8adb6ffad34a866149ced8e838ef592e72f6facf1398a.js" integrity="sha256-mnRlF7qnpkDa&#43;K22/600qGYUnO2Og471kucvb6zxOYo=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1162,8 +1162,7 @@ Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you dele
 <p>However, because we&rsquo;ve now <em>updated</em> it with <code>kubectl apply</code>, the annotation is now there, and we won&rsquo;t get the warning again.</p>
 <p>Download the YAML file again and take a look at it. You should see the annotation now.</p>
 <p>Apply the configuration a second time, you won&rsquo;t get the warning. <em>Save this YAML file in a git repo for this course! We&rsquo;ll be making more configuration files. Kubernetes is an &ldquo;infra-as-code&rdquo; tool, so it&rsquo;s important to keep your configuration files in a git repo.</em></p>
-<p>Finally, start the proxy server:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl proxy</span></span></code></pre></div><h1 id="api-service">API Service<a class="anchor" href="#api-service">#</a></h1>
+<h1 id="api-service">API Service<a class="anchor" href="#api-service">#</a></h1>
 <p>We&rsquo;ve deployed one service, and we&rsquo;ve deployed multiple instances of it. Time to deploy a second service!</p>
 <p>This service doesn&rsquo;t serve a webpage! It&rsquo;s a JSON API. It&rsquo;s the backend for our chat application. By deploying the API and configuring the front-end to talk to it, we&rsquo;ll have a functional chat application!</p>
 <h2 id="create-a-deployment-configuration">Create a Deployment Configuration<a class="anchor" href="#create-a-deployment-configuration">#</a></h2>
@@ -1221,8 +1220,7 @@ Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you dele
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h2 id="create-the-deployment">Create the Deployment<a class="anchor" href="#create-the-deployment">#</a></h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f api-deployment.yaml</span></span></code></pre></div><p>Next, take a look at all the pods you have running now. You should see pods for the web service and a pod for the api service.</p>
 <p>However, you might notice that the api pod isn&rsquo;t in a &ldquo;ready&rdquo; state. In fact, it should be stuck in a &ldquo;CrashLoopBackOff&rdquo; status. Oh no! We&rsquo;ve created a thrashing pod!</p>
-<p>Run:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl proxy</span></span></code></pre></div><p>for more <a href="../kubernetes-probes/">probes</a></p>
+<p>for more <a href="../kubernetes-probes/">probes</a></p>
 </article>
  
       
