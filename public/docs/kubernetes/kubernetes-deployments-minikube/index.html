@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -14,7 +14,7 @@ Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you dele
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-deployments-minikube/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/kubernetes/kubernetes-deployments-minikube/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="kubernetes-deployments-minikube">
 	<meta property="og:description" content="Deployments# A Deployment provides declarative updates for Pods and ReplicaSets.
@@ -29,16 +29,16 @@ Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you dele
 	<meta itemprop="description" content="Deployments# A Deployment provides declarative updates for Pods and ReplicaSets.
 You describe your desired state in a Deployment, and the Deployment Controller’s job is to make the current state match the desired state. You declare your hopes and dreams, and it’s Kubernetes’ job to make them come true.
 Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you delete a pod, only to see that a new pod was created in its place? It’s kinda like chopping heads off of a hydra.">
-	<meta itemprop="wordCount" content="1096">
+	<meta itemprop="wordCount" content="1095">
 
 <title>kubernetes-deployments-minikube • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-deployments-minikube/">
+<link rel="canonical" href="http://localhost:1313/docs/kubernetes/kubernetes-deployments-minikube/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.9a746517baa7a640daf8adb6ffad34a866149ced8e838ef592e72f6facf1398a.js" integrity="sha256-mnRlF7qnpkDa&#43;K22/600qGYUnO2Og471kucvb6zxOYo=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.4203c4f13083f69045a1562118fd21de7d0ae7d78d154e39a07f5625864cb009.js" integrity="sha256-QgPE8TCD9pBFoVYhGP0h3n0K59eNFU45oH9WJYZMsAk=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1146,7 +1146,6 @@ Why Deleting a Pod Doesn’t Feel Like a Deletion# Remember when we had you dele
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get replicasets</span></span></code></pre></div><p>Just like with pods, notice that <em>we never directly created the replica set</em>. We created a deployment, and the deployment created the replica set.</p>
 <h1 id="yaml-config">YAML Config<a class="anchor" href="#yaml-config">#</a></h1>
 <p>Kubernetes resources are primarily configured using YAML files. We&rsquo;ve used the <code>kubectl edit</code> command to edit resources in the cluster on-demand, but let&rsquo;s inspect our deployment&rsquo;s YAML file a bit more closely.</p>
-<p><a href="https://storage.googleapis.com/qvault-webapp-dynamic-assets/lesson_videos/what-is-yaml.mp4">https://storage.googleapis.com/qvault-webapp-dynamic-assets/lesson_videos/what-is-yaml.mp4</a></p>
 <p>First, download a copy of your deployment&rsquo;s YAML file and save it in your current directory:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get deployment synergychat-web -o yaml &gt; web-deployment.yaml</span></span></code></pre></div><p>Then open it in your text editor. There are 5 top-level fields in the file:</p>
 <ul>

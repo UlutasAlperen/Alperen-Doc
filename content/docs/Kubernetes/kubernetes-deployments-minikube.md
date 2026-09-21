@@ -66,9 +66,6 @@ Just like with pods, notice that _we never directly created the replica set_. We
 Kubernetes resources are primarily configured using YAML files. We've used the `kubectl edit` command to edit resources in the cluster on-demand, but let's inspect our deployment's YAML file a bit more closely.
 
 
-https://storage.googleapis.com/qvault-webapp-dynamic-assets/lesson_videos/what-is-yaml.mp4
-
-
 First, download a copy of your deployment's YAML file and save it in your current directory:
 
 ```bash
