@@ -90,7 +90,7 @@ If we add a resource request of 3GB, Kubernetes will know that each pod needs 3G
 
 Let's set an absurdly high resource request for our `synergychat-testram` pods.
 
-1. [ ] Update the `resources` section of its deployment. I used 40GB:
+1.  Update the `resources` section of its deployment. I used 40GB:
 
 ```yaml
 resources:
@@ -108,7 +108,7 @@ kubectl get pods
 
 You _should_ see that the pod is "Pending". If it worked... well you have more money than me to spend on hardware. Go even higher!
 
-2. [ ] Once you've got it in a pending state, `describe` the pod and look at the "Events" section of the output to see what's going on:
+2.  Once you've got it in a pending state, `describe` the pod and look at the "Events" section of the output to see what's going on:
 
 ```bash
 kubectl describe pod <pod-name>
