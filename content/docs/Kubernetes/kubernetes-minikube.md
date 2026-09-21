@@ -2,6 +2,54 @@
 title: "kubernetes-minikube"
 weight: 1
 ---
+# Minikube
+
+During this blog, we'll be using [Minikube](https://minikube.sigs.k8s.io/docs/) to practice with Kubernetes. In production, you probably wouldn't use Minikube, you would use a cluster of servers, probably in the cloud. That's expensive! Minikube is a fantastic tool that allows you to run a single-node Kubernetes cluster on your local machine.
+
+## Kubectl
+
+The Kubernetes command-line tool, `kubectl`, allows you to run commands against Kubernetes clusters. It's a client that communicates with a Kubernetes API server.
+
+## Installing `kubectl`
+
+Follow the official [installation instructions for kubectl](https://kubernetes.io/docs/tasks/tools/).
+
+## Verify Installation
+
+Run `kubectl version --client` to verify that kubectl is installed correctly.
+
+## Install Minikube
+
+Follow the official [installation instructions for Minikube](https://minikube.sigs.k8s.io/docs/start/). Select the correct instructions for your system, choose either Linux/WSL or macOS. Notice at the top the "what you'll need" section. If you don't have the system requirements, you'll have a hard time getting everything up and running, unfortunately.
+
+## Verify Installation
+
+Run `minikube version` to verify that Minikube is installed correctly.
+
+## Run Minikube
+
+We'll be using Kubernetes with Docker, which is arguably the most common way to use Kubernetes. Make sure your Docker daemon is running before starting Minikube. 
+
+Next, run:
+
+```bash
+minikube start 
+```
+
+### Previous Minikube Installations
+
+If you've installed minikube in the past, you might have conflicts. If you don't care about your old minikube clusters, you can delete them by running:
+
+```bash
+minikube stop
+minikube delete
+```
+
+Then restart minikube.
+
+        
+
+
 ## Deploying an Image
 
 The `kubectl create deployment` command will create a "deployment" for us. We'll talk more about the nuances of "deployments" later. But to put it simply, we only need to provide two things:

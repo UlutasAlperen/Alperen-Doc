@@ -4,20 +4,6 @@ weight: 3
 ---
 # Deployments
 
-## Deploying an Image
-
-The `kubectl create deployment` command will create a "deployment" for us. We'll talk more about the nuances of "deployments" later. But to put it simply, we only need to provide two things:
-
-1. The name of the deployment (this can be anything, it's used to identify the deployment)
-2. The ID of the Docker image we want to deploy (it would be a full URL if we weren't hosting the image on Docker Hub, which is the default)
-
-```bash
-kubectl create deployment synergychat-web --image=docker.io/bootdotdev/synergychat-web:latest
-```
-
-This command will deploy a container built from [this Docker image](https://hub.docker.com/r/bootdotdev/synergychat-web) to your local k8s cluster.
-
-
 A _[Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)_ provides declarative updates for Pods and ReplicaSets.
 
 You describe your _desired state_ in a Deployment, and the Deployment Controller's job is to make the _current state_ match the _desired state_. You declare your hopes and dreams, and it's Kubernetes' job to make them come true.

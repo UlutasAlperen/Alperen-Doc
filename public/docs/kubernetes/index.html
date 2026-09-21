@@ -31,7 +31,7 @@ For example, you could install Docker on a single server, and route traffic dire
 – The Kubernetes team
 Kubernetes orchestrates and manages collections of containers (often using container runtimes like containerd). It takes care of scaling, distribution, and connectivity among these containers. Think of it as a system to manage many containers and the infrastructure they run on.
 For example, you could install Docker on a single server, and route traffic directly to it. That’s fairly simple to set up, but what if you want 10 instances of that server? What about 1000 instances? What if you want to deploy many different services, each scaling up with more instances depending on load? Those are the problems that Kubernetes solves.">
-	<meta itemprop="wordCount" content="602">
+	<meta itemprop="wordCount" content="440">
 
 <title>Kubernetes • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -40,7 +40,7 @@ For example, you could install Docker on a single server, and route traffic dire
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.13c2c0668a6308c6595a41ea4e0c8fd4169ba09d2936ff1ef613440df2081726.js" integrity="sha256-E8LAZopjCMZZWkHqTgyP1BaboJ0pNv8e9hNEDfIIFyY=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.cdfbcd3ffab4520b4244c131ff9bb92483042c745d4d72d3e6e9fa7d1c4d88cc.js" integrity="sha256-zfvNP/q0UgtCRMEx/5u5JIMELHRdTXLT5un6fRxNiMw=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/kubernetes/index.xml" title="Kubernetes" />
 
   
@@ -1107,15 +1107,6 @@ For example, you could install Docker on a single server, and route traffic dire
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#kubectl">Kubectl</a></li>
-    <li><a href="#install">Install</a></li>
-    <li><a href="#verify-installation">Verify Installation</a></li>
-    <li><a href="#minikube">Minikube</a>
-      <ul>
-        <li><a href="#run-minikube">Run Minikube</a></li>
-        <li><a href="#previous-minikube-installations">Previous Minikube Installations</a></li>
-      </ul>
-    </li>
     <li><a href="#kubernetes-konular-konuları-sırayla-takip-ederseniz-verdiğim-görevlerin-birbiriyle-bağlantılı-olduğunu-ve-sistemin-pratikte-nasıl-çalıştığını-daha-net-görebilirsiniz">Kubernetes konular (Konuları sırayla takip ederseniz, verdiğim görevlerin birbiriyle bağlantılı olduğunu ve sistemin pratikte nasıl çalıştığını daha net görebilirsiniz.)</a>
       <ul>
         <li><a href="#temeller">Temeller</a></li>
@@ -1144,21 +1135,6 @@ For example, you could install Docker on a single server, and route traffic dire
 <p>&ndash; The <a href="https://kubernetes.io/">Kubernetes</a> team</p>
 </blockquote><p>Kubernetes orchestrates and manages collections of containers (often using container runtimes like containerd). It takes care of scaling, distribution, and connectivity among these containers. Think of it as a <em>system to manage many containers and the infrastructure they run on</em>.</p>
 <p>For example, you <em>could</em> install Docker on a single server, and route traffic directly to it. That&rsquo;s fairly simple to set up, but what if you want 10 instances of that server? What about 1000 instances? What if you want to deploy many different services, each scaling up with more instances depending on load? Those are the problems that Kubernetes solves.</p>
-<h2 id="kubectl">Kubectl<a class="anchor" href="#kubectl">#</a></h2>
-<p>The Kubernetes command-line tool, <code>kubectl</code>, allows you to run commands against Kubernetes clusters. It&rsquo;s a client that communicates with a Kubernetes API server.</p>
-<h2 id="install">Install<a class="anchor" href="#install">#</a></h2>
-<p>Follow the official <a href="https://kubernetes.io/docs/tasks/tools/">installation instructions for kubectl</a>.</p>
-<h2 id="verify-installation">Verify Installation<a class="anchor" href="#verify-installation">#</a></h2>
-<p>Run <code>kubectl version --client</code> to verify that kubectl is installed correctly.</p>
-<h2 id="minikube">Minikube<a class="anchor" href="#minikube">#</a></h2>
-<p>During this blog, we&rsquo;ll be using <a href="https://minikube.sigs.k8s.io/docs/">Minikube</a> to practice with Kubernetes. In production, you probably wouldn&rsquo;t use Minikube, you would use a cluster of servers, probably in the cloud. That&rsquo;s expensive! Minikube is a fantastic tool that allows you to run a single-node Kubernetes cluster on your local machine.</p>
-<h3 id="run-minikube">Run Minikube<a class="anchor" href="#run-minikube">#</a></h3>
-<p>We&rsquo;ll be using Kubernetes with Docker, which is arguably the most common way to use Kubernetes. Make sure your Docker daemon is running before starting Minikube.</p>
-<p>Next, run:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>minikube start </span></span></code></pre></div><h3 id="previous-minikube-installations">Previous Minikube Installations<a class="anchor" href="#previous-minikube-installations">#</a></h3>
-<p>If you&rsquo;ve installed minikube in the past, you might have conflicts. If you don&rsquo;t care about your old minikube clusters, you can delete them by running:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>minikube stop
-</span></span><span style="display:flex;"><span>minikube delete</span></span></code></pre></div><p>Then restart minikube.</p>
 <p><a href="https://kubernetes.io/">Kubernetes</a> is <em>the</em> container orchestration platform. Nearly every modern DevOps workflow runs on top of it in production. I use Kubernetes to:</p>
 <ul>
 <li>Orchestrate containers across single-node (Minikube) and multi-node aws(WORK IN PROGRESS) clusters</li>
@@ -1290,15 +1266,6 @@ For example, you could install Docker on a single server, and route traffic dire
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#kubectl">Kubectl</a></li>
-    <li><a href="#install">Install</a></li>
-    <li><a href="#verify-installation">Verify Installation</a></li>
-    <li><a href="#minikube">Minikube</a>
-      <ul>
-        <li><a href="#run-minikube">Run Minikube</a></li>
-        <li><a href="#previous-minikube-installations">Previous Minikube Installations</a></li>
-      </ul>
-    </li>
     <li><a href="#kubernetes-konular-konuları-sırayla-takip-ederseniz-verdiğim-görevlerin-birbiriyle-bağlantılı-olduğunu-ve-sistemin-pratikte-nasıl-çalıştığını-daha-net-görebilirsiniz">Kubernetes konular (Konuları sırayla takip ederseniz, verdiğim görevlerin birbiriyle bağlantılı olduğunu ve sistemin pratikte nasıl çalıştığını daha net görebilirsiniz.)</a>
       <ul>
         <li><a href="#temeller">Temeller</a></li>

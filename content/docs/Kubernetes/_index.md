@@ -13,43 +13,6 @@ Kubernetes orchestrates and manages collections of containers (often using conta
 
 For example, you _could_ install Docker on a single server, and route traffic directly to it. That's fairly simple to set up, but what if you want 10 instances of that server? What about 1000 instances? What if you want to deploy many different services, each scaling up with more instances depending on load? Those are the problems that Kubernetes solves.
 
-## Kubectl
-
-The Kubernetes command-line tool, `kubectl`, allows you to run commands against Kubernetes clusters. It's a client that communicates with a Kubernetes API server.
-
-## Install
-
-Follow the official [installation instructions for kubectl](https://kubernetes.io/docs/tasks/tools/).
-
-## Verify Installation
-
-Run `kubectl version --client` to verify that kubectl is installed correctly.
-
-## Minikube
-
-During this blog, we'll be using [Minikube](https://minikube.sigs.k8s.io/docs/) to practice with Kubernetes. In production, you probably wouldn't use Minikube, you would use a cluster of servers, probably in the cloud. That's expensive! Minikube is a fantastic tool that allows you to run a single-node Kubernetes cluster on your local machine.
-
-### Run Minikube
-
-We'll be using Kubernetes with Docker, which is arguably the most common way to use Kubernetes. Make sure your Docker daemon is running before starting Minikube. 
-
-Next, run:
-
-```bash
-minikube start 
-```
-
-### Previous Minikube Installations
-
-If you've installed minikube in the past, you might have conflicts. If you don't care about your old minikube clusters, you can delete them by running:
-
-```bash
-minikube stop
-minikube delete
-```
-
-Then restart minikube.
-
 [Kubernetes](https://kubernetes.io/) is _the_ container orchestration platform. Nearly every modern DevOps workflow runs on top of it in production. I use Kubernetes to:
 
 - Orchestrate containers across single-node (Minikube) and multi-node aws(WORK IN PROGRESS) clusters
