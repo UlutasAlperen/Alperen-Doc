@@ -198,7 +198,7 @@ sudo find /var/www/kole/public -type d -exec chmod g+s {} \;
 
 Bu dokümanı yazdıktan bir süre sonra, iki yeni sayfayı deploy ettiğimde canlıda ilginç bir sorunla karşılaştım: sayfalar build ediliyor, GitHub Actions deploy'u başarılı görünüyordu, ama sunucuda iki sayfa 404 döndürüyordu. İşte bu vaka, yukarıdaki anlatımdaki varsayımların gerçekte her zaman geçerli olmadığını öğretti.
 
-### Vakanın Özeti
+### Problemin Özeti
 
 Deploy sonrası durum:
 
@@ -223,7 +223,7 @@ $ ls -la /var/www/kole/public/docs/docker/docker-distroless-container-images/
 -rw-r----- 1 kole kole index.html   # grup caddy DEĞİL!
 ```
 
-### Kök Neden
+### Kök Problem
 
 403/404 ayrımı klasik bir izin semptomudur: dosya **sunucuda duruyor** ama Caddy süreci (grup `caddy` üzerinden erişiyor) onu **okuyamıyor** → dosyaya direkt istek `403`; dizin URL'sinde ise Caddy, okunamayan `index.html`'i "yok" sayıp `404` döndürüyor.
 

@@ -38,7 +38,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.344542664d8d5e68b33098a02374c41f96d2429712a4f803762345a1cf36111a.js" integrity="sha256-NEVCZk2NXmizMJigI3TEH5bSQpcSpPgDdiNFoc82ERo=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.179add252826433df802ccea614129248d0c331c2ce31bf45e7bbab25dfb742d.js" integrity="sha256-F5rdJSgmQz34AszqYUEpJI0MMxws4xv0Xnu6sl37dC0=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1125,8 +1125,8 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
     </li>
     <li><a href="#güncelleme-birincilikincil-grup-ve-bir-deploy-izni-hatasi-403404">Güncelleme: Birincil/İkincil Grup ve Bir Deploy İzni hatasi (403/404)</a>
       <ul>
-        <li><a href="#vakanın-özeti">Vakanın Özeti</a></li>
-        <li><a href="#kök-neden">Kök Neden</a></li>
+        <li><a href="#problemin-özeti">Problemin Özeti</a></li>
+        <li><a href="#kök-problem">Kök Problem</a></li>
         <li><a href="#birincil-ve-ikincil-grup-kavramı">Birincil ve İkincil Grup Kavramı</a></li>
         <li><a href="#kalıcı-çözümler">Kalıcı Çözümler</a></li>
         <li><a href="#anlık-onarım">Anlık Onarım</a></li>
@@ -1307,7 +1307,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 <p><strong>SetGID Nasıl Çalışır?</strong> <code>g+s</code> izni alan bir klasörün altında oluşturulan her yeni dosya veya alt klasör, onu oluşturan kullanıcının (bu senaryoda <code>kole</code>) birincil grubuna bakmaksızın, otomatik olarak üst klasörün grubunu (<code>caddy</code>) miras alır. Bu sayede her deploy sonrasında Caddy&rsquo;nin dosyaları okuyamama sorunu  ortadan kalkar. Artık rsync her deploy&rsquo;da <code>D2750</code> ile geldiği için bu işlem kalıcı hale gelir.</p>
 </blockquote><h2 id="güncelleme-birincilikincil-grup-ve-bir-deploy-izni-hatasi-403404">Güncelleme: Birincil/İkincil Grup ve Bir Deploy İzni hatasi (403/404)<a class="anchor" href="#g%c3%bcncelleme-birincilikincil-grup-ve-bir-deploy-izni-hatasi-403404">#</a></h2>
 <p>Bu dokümanı yazdıktan bir süre sonra, iki yeni sayfayı deploy ettiğimde canlıda ilginç bir sorunla karşılaştım: sayfalar build ediliyor, GitHub Actions deploy&rsquo;u başarılı görünüyordu, ama sunucuda iki sayfa 404 döndürüyordu. İşte bu vaka, yukarıdaki anlatımdaki varsayımların gerçekte her zaman geçerli olmadığını öğretti.</p>
-<h3 id="vakanın-özeti">Vakanın Özeti<a class="anchor" href="#vakan%c4%b1n-%c3%b6zeti">#</a></h3>
+<h3 id="problemin-özeti">Problemin Özeti<a class="anchor" href="#problemin-%c3%b6zeti">#</a></h3>
 <p>Deploy sonrası durum:</p>
 <table>
 	<thead>
@@ -1343,7 +1343,7 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
 </span></span><span style="display:flex;"><span>drwxr-x--- <span style="color:#ae81ff">2</span> kole caddy docker-kurulum-hardening-rocky/          <span style="color:#75715e"># yeni: setgid YOK (750)</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ ls -la /var/www/kole/public/docs/docker/docker-distroless-container-images/
-</span></span><span style="display:flex;"><span>-rw-r----- <span style="color:#ae81ff">1</span> kole kole index.html   <span style="color:#75715e"># grup caddy DEĞİL!</span></span></span></code></pre></div><h3 id="kök-neden">Kök Neden<a class="anchor" href="#k%c3%b6k-neden">#</a></h3>
+</span></span><span style="display:flex;"><span>-rw-r----- <span style="color:#ae81ff">1</span> kole kole index.html   <span style="color:#75715e"># grup caddy DEĞİL!</span></span></span></code></pre></div><h3 id="kök-problem">Kök Problem<a class="anchor" href="#k%c3%b6k-problem">#</a></h3>
 <p>403/404 ayrımı klasik bir izin semptomudur: dosya <strong>sunucuda duruyor</strong> ama Caddy süreci (grup <code>caddy</code> üzerinden erişiyor) onu <strong>okuyamıyor</strong> → dosyaya direkt istek <code>403</code>; dizin URL&rsquo;sinde ise Caddy, okunamayan <code>index.html</code>&lsquo;i &ldquo;yok&rdquo; sayıp <code>404</code> döndürüyor.</p>
 <p>Peki zincir nasıl işledi?</p>
 <ol>
@@ -1464,8 +1464,8 @@ Hugo-Book Teması ve GitHub Actions(workflow) ile VPS’e CD# Hugo,Markdown dosy
     </li>
     <li><a href="#güncelleme-birincilikincil-grup-ve-bir-deploy-izni-hatasi-403404">Güncelleme: Birincil/İkincil Grup ve Bir Deploy İzni hatasi (403/404)</a>
       <ul>
-        <li><a href="#vakanın-özeti">Vakanın Özeti</a></li>
-        <li><a href="#kök-neden">Kök Neden</a></li>
+        <li><a href="#problemin-özeti">Problemin Özeti</a></li>
+        <li><a href="#kök-problem">Kök Problem</a></li>
         <li><a href="#birincil-ve-ikincil-grup-kavramı">Birincil ve İkincil Grup Kavramı</a></li>
         <li><a href="#kalıcı-çözümler">Kalıcı Çözümler</a></li>
         <li><a href="#anlık-onarım">Anlık Onarım</a></li>

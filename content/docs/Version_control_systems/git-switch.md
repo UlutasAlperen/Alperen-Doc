@@ -22,13 +22,13 @@ The [switch](https://git-scm.com/docs/git-switch) command allows you to switch b
 
 When you create a new branch, it uses the _current commit_ you are on as the branch base. For example, if you're on your `main` branch with 3 commits, `A`, `B`, and `C`, and then you run `git switch -c my_new_branch`, your new branch will look like this:
 
-![branch diagram same commits](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/oah2FRD.png)# New Branch
+![branch diagram same commits](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/oah2FRD.png)
 
 We need a new feature branch, but to be able to practice a [rebase](https://git-scm.com/docs/git-rebase), we want it to _not_ include some of the recent commits on `main`.
 
-## Assignment
+## Example
 
-1. [ ] Use the [git switch](https://git-scm.com/docs/git-switch) command to create and switch to a new branch called `update_dune`, but branch off of the `D` commit. You can supply the commit hash directly to the `git switch` command:
+1.  Use the [git switch](https://git-scm.com/docs/git-switch) command to create and switch to a new branch called `update_dune`, but branch off of the `D` commit. You can supply the commit hash directly to the `git switch` command:
 
 ```bash
 git switch -c update_dune COMMITHASH
