@@ -20,7 +20,7 @@ Run `kubectl version --client` to verify that kubectl is installed correctly.
 
 ## Install Minikube
 
-Follow the official [installation instructions for Minikube](https://minikube.sigs.k8s.io/docs/start/). Select the correct instructions for your system, choose either Linux/WSL or macOS. Notice at the top the "what you'll need" section. If you don't have the system requirements, you'll have a hard time getting everything up and running, unfortunately.
+Follow the official [installation instructions for Minikube](https://minikube.sigs.k8s.io/docs/start/). Select the correct instructions for your system, choose either Linux/WSL or macOS.If you don't have the system requirements, you'll have a hard time getting everything up and running, unfortunately.
 
 ## Verify Installation
 
