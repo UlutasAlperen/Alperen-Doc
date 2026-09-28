@@ -26,7 +26,7 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
 	<meta itemprop="name" content="kubernetes-rbac">
 	<meta itemprop="description" content="RBAC# In the secrets chapter we said that secret data “can be restricted with RBAC”. That was a promise we haven’t paid off yet. Let’s pay it off.
 RBAC - Role Based Access Control - answers one question: who is allowed to do what to which objects. It’s the bouncer at the club door. Everyone with a kubeconfig on your laptop is a cluster-admin, which is why it never came up until now. But the moment you hand a namespace to a team, or give an app a token, the bouncer starts working.">
-	<meta itemprop="wordCount" content="730">
+	<meta itemprop="wordCount" content="729">
 
 <title>kubernetes-rbac • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.f0c4d41e54753ab68925d55efdc26a70595003c4132b421cb296666d12d9e0d4.js" integrity="sha256-8MTUHlR1OraJJdVe/cJqcFlQA8QTK0IcspZmbRLZ4NQ=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.e812e6d786249c95095edc1ae1698018944c5e8313d4214f4401aa33baa9bfb5.js" integrity="sha256-6BLm14YknJUJXtwa4WmAGJRMXoMT1CFPRAGqM7qpv7U=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1272,7 +1272,7 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
 <li><strong>Role</strong>: a list of permissions (&ldquo;can <code>get</code> and <code>list</code> pods&rdquo;)</li>
 <li><strong>RoleBinding</strong>: attaches that role to a user, group, or ServiceAccount (&ldquo;and <em>this</em> app gets those permissions&rdquo;)</li>
 </ul>
-<p><strong>Küçük model:</strong> Role = yetki listesi, RoleBinding = &ldquo;kim&rdquo; ile &ldquo;ne yetkisi&rdquo; eşleştirmesi. Role tek başına kimseye bir şey vermez, RoleBinding ise boş bir Role&rsquo;ü kimseye bir şey yaptıramaz.</p>
+<p><em>özetlersek</em> Role = yetki listesi, RoleBinding = &ldquo;kim&rdquo; ile &ldquo;yetkisi nedir&rdquo; desek daha dogru olur. <em>Rol</em> tek başına kimseye yetki vermez, RoleBinding&rsquo;i olmanan bir Role&rsquo;de bir şey yaptıramazsin.</p>
 <h1 id="serviceaccounts">ServiceAccounts<a class="anchor" href="#serviceaccounts">#</a></h1>
 <p>Every request to the API server runs as <em>some</em> identity. Humans use certificates; pods use <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/">ServiceAccounts</a>. If you don&rsquo;t name one, the pod gets <code>default</code> in its namespace - which is one more reason not to leave the <code>default</code> namespace full of half-finished experiments.</p>
 <p>Create one the imperative way:</p>
@@ -1356,7 +1356,7 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
 </span></span><span style="display:flex;"><span>kubectl auth can-i delete pods -n crawler --as<span style="color:#f92672">=</span>system:serviceaccount:crawler:crawler-sa
 </span></span><span style="display:flex;"><span>kubectl auth can-i get secrets -n crawler --as<span style="color:#f92672">=</span>system:serviceaccount:crawler:crawler-sa</span></span></code></pre></div><p>You want <code>yes</code>, <code>no</code>, <code>no</code>. That asymmetry is the entire point of RBAC - the crawler can see itself, but can&rsquo;t touch its neighbors or read the secrets it doesn&rsquo;t need.</p>
 <blockquote class='book-hint '>
-<p><strong>Dikkat:</strong> <code>kubectl auth can-i</code> ile test ettiğin kimlik, <code>--as</code> vermezsen senin kendi kimliğin. &ldquo;Ben görebiliyorum ama pod göremiyor&rdquo; sendromunun sebebi budur - her zaman pod&rsquo;un ServiceAccount&rsquo;ı ile test et.</p>
+<p><strong>Dikkat:</strong> <code>kubectl auth can-i</code> ile test ettiğin kimlik, <code>--as</code> vermezsen kendi kimliğin oldugundan &ldquo;ben görebiliyorum ama pod göremiyor&rdquo; probleminin ana sebebidir - her zaman pod&rsquo;un ServiceAccount&rsquo;ı ile test et.</p>
 </blockquote><p>for more <a href="../kubernetes-jobs-cronjobs/">jobs-cronjobs</a></p>
 </article>
  

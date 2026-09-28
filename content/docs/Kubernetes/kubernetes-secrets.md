@@ -102,11 +102,11 @@ volumes:
 
 Yani secret'ların "güvenliği" şunlardan gelir:
 
-- **RBAC**: Kimin hangi secret'ı okuyabildiğini kısıtlar - [rbac](../kubernetes-rbac/) notlarında adım adım
+- **RBAC**: Kimin hangi secret'ı okuyabildiğini kısıtlar - [rbac](../kubernetes-rbac/) notlarında ele aldim.
 - **etcd encryption at rest**: Disk üzerinde şifreli saklanması
 - **Least privilege**: Secret'ları sadece ihtiyacı olan deployment'ların namespace'lerinde tutmak
 
-Kısacası: `kubectl` erişimi olan birinden base64 korumaz, ama yanlışlıkla bir ConfigMap'te `password: super-secret` yazmaktan çok daha iyidir.
+Kısacası: `kubectl` erişimi olan birinden base64 korumaz, ama yanlışlıkla bir ConfigMap'te `password: gizli-parola` yazmaktan daha iyidir.
 
 # Alternatives
 

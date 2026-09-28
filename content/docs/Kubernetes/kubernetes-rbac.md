@@ -13,7 +13,7 @@ Two halves, and they're separate on purpose:
 - **Role**: a list of permissions ("can `get` and `list` pods")
 - **RoleBinding**: attaches that role to a user, group, or ServiceAccount ("and _this_ app gets those permissions")
 
-**Küçük model:** Role = yetki listesi, RoleBinding = "kim" ile "ne yetkisi" eşleştirmesi. Role tek başına kimseye bir şey vermez, RoleBinding ise boş bir Role'ü kimseye bir şey yaptıramaz.
+*özetlersek* Role = yetki listesi, RoleBinding = "kim" ile "yetkisi nedir" desek daha dogru olur. *Rol* tek başına kimseye yetki vermez, RoleBinding'i olmanan bir Role'de bir şey yaptıramazsin.
 
 # ServiceAccounts
 
@@ -144,6 +144,6 @@ kubectl auth can-i get secrets -n crawler --as=system:serviceaccount:crawler:cra
 
 You want `yes`, `no`, `no`. That asymmetry is the entire point of RBAC - the crawler can see itself, but can't touch its neighbors or read the secrets it doesn't need.
 
-> **Dikkat:** `kubectl auth can-i` ile test ettiğin kimlik, `--as` vermezsen senin kendi kimliğin. "Ben görebiliyorum ama pod göremiyor" sendromunun sebebi budur - her zaman pod'un ServiceAccount'ı ile test et.
+> **Dikkat:** `kubectl auth can-i` ile test ettiğin kimlik, `--as` vermezsen kendi kimliğin oldugundan "ben görebiliyorum ama pod göremiyor" probleminin ana sebebidir - her zaman pod'un ServiceAccount'ı ile test et.
 
 for more [jobs-cronjobs](../kubernetes-jobs-cronjobs/)

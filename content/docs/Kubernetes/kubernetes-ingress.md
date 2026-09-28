@@ -10,7 +10,7 @@ A `LoadBalancer` service gives every app its own cloud load balancer and its own
 
 [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) is that entry point. It's a set of _rules_ for routing HTTP traffic by hostname and path to services inside the cluster. It's the front door with a very organized mailroom.
 
-**Küçük model:** Service = uygulamanın dengelenmiş adresi; Ingress = "hangi URL, hangi servise gider" tablosu. Ingress kendisi trafiği taşımaz, sadece talimat yazar.
+**:Özetle** Service = uygulamanın dengelenmiş/atanmis(rastgele veya degil) adresi; Ingress = "hangi URL, hangi servise gider". Ingress kendisi trafiğini taşımaz, sadece talimat yazar.
 
 # Ingress Controller
 

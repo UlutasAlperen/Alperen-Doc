@@ -29,7 +29,7 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
 	<meta itemprop="description" content="Secrets# In the YAML config chapter we saw that ConfigMaps are a great way to manage innocent environment variables - ports, URLs, feature flags. But we also learned that ConfigMaps are not encrypted, and anyone with access to the cluster can read them.
 Secrets are the Kubernetes object designed for sensitive data: passwords, tokens, and keys. Functionally, they look a lot like ConfigMaps. The differences are:
 Values are stored base64-encoded in the object Access can be restricted with RBAC (who can read which secrets) etcd can be configured to encrypt secret data at rest Creating a Secret# The imperative way:">
-	<meta itemprop="wordCount" content="521">
+	<meta itemprop="wordCount" content="520">
 
 <title>kubernetes-secrets • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.f0c4d41e54753ab68925d55efdc26a70595003c4132b421cb296666d12d9e0d4.js" integrity="sha256-8MTUHlR1OraJJdVe/cJqcFlQA8QTK0IcspZmbRLZ4NQ=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.e812e6d786249c95095edc1ae1698018944c5e8313d4214f4401aa33baa9bfb5.js" integrity="sha256-6BLm14YknJUJXtwa4WmAGJRMXoMT1CFPRAGqM7qpv7U=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1322,11 +1322,11 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
 <p><strong>Dikkat:</strong> Secret değerlerinin base64 ile kodlanmış olması onları <em>güvenli</em> yapmaz. Base64 sadece bir <strong>encoding</strong> tekniğidir, şifreleme (encryption) değildir. <code>kubectl get secret db-auth -o yaml</code> çıktısını görüp <code>base64 -d</code> çalıştırabilen herkes değerleri geri okur.</p>
 <p>Yani secret&rsquo;ların &ldquo;güvenliği&rdquo; şunlardan gelir:</p>
 <ul>
-<li><strong>RBAC</strong>: Kimin hangi secret&rsquo;ı okuyabildiğini kısıtlar - <a href="../kubernetes-rbac/">rbac</a> notlarında adım adım</li>
+<li><strong>RBAC</strong>: Kimin hangi secret&rsquo;ı okuyabildiğini kısıtlar - <a href="../kubernetes-rbac/">rbac</a> notlarında ele aldim.</li>
 <li><strong>etcd encryption at rest</strong>: Disk üzerinde şifreli saklanması</li>
 <li><strong>Least privilege</strong>: Secret&rsquo;ları sadece ihtiyacı olan deployment&rsquo;ların namespace&rsquo;lerinde tutmak</li>
 </ul>
-<p>Kısacası: <code>kubectl</code> erişimi olan birinden base64 korumaz, ama yanlışlıkla bir ConfigMap&rsquo;te <code>password: super-secret</code> yazmaktan çok daha iyidir.</p>
+<p>Kısacası: <code>kubectl</code> erişimi olan birinden base64 korumaz, ama yanlışlıkla bir ConfigMap&rsquo;te <code>password: gizli-parola</code> yazmaktan daha iyidir.</p>
 <h1 id="alternatives">Alternatives<a class="anchor" href="#alternatives">#</a></h1>
 <p>If you need more serious secret management, there are third-party options:</p>
 <ul>
