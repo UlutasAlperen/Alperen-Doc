@@ -4,7 +4,7 @@ weight: 14
 ---
 # High Availability
 
-The [multi-node](../multi-node-kubeadm-k3s/) notes left a check on the wall: `--control-plane-endpoint=<VIP>` "makes later HA possible". This is later.
+The [multi-node](../multi-node-kubeadm/) notes left a check on the wall: `--control-plane-endpoint=<VIP>` "makes later HA possible". This is later.
 
 A cluster with one control-plane node has one single point of failure: kill that node and `kubectl` stops working, the scheduler stops placing pods, and every controller stops reconciling. The _workloads_ keep running (kubelets and containers don't need the apiserver to stay alive), but the cluster stops being managed. For a homelab that's an annoyance; for anything real it's an outage.
 
@@ -49,9 +49,9 @@ kubeadm init phase upload-certs --upload-certs
 kubeadm token create --print-join-command
 ```
 
-The `--certificate-key` from the first command is single-use and short-lived. The [multi-node](../multi-node-kubeadm-k3s/) notes used the same token flow for workers; the `--control-plane` flag and the cert key are what make this a control-plane join.
+The `--certificate-key` from the first command is single-use and short-lived. The [multi-node](../multi-node-kubeadm/) notes used the same token flow for workers; the `--control-plane` flag and the cert key are what make this a control-plane join.
 
-2. Prepare the new node exactly like the first one - swap off, kernel modules, containerd, matching versions ([multi-node](../multi-node-kubeadm-k3s/) prep steps verbatim).
+2. Prepare the new node exactly like the first one - swap off, kernel modules, containerd, matching versions ([multi-node](../multi-node-kubeadm/) prep steps verbatim).
 
 3. Join it as a control plane member:
 
@@ -133,4 +133,4 @@ kubectl get nodes
 
 > **Dikkat:** quorum düşerse (`etcdctl member list` "unstarted" / "learner" ya da leader yok) etcd yazmayı reddeder ve cluster **read-only** gibi davranır. Eksik üyeyi geri getirmek, yeni bir üye eklemekten daha hızlıdır - `etcdctl member remove` + yeni makineyle yeniden join, çoğu durumda kurtarma yoludur. Önce [backup](../kubeadm-upgrade-etcd/) alsan iyi olur.
 
-for more [longhorn](../longhorn/)
+for more [devops-control-plane](../devops-control-plane/)

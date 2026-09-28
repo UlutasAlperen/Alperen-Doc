@@ -96,7 +96,7 @@
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-gateway-minikube/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/multi-node-kubeadm-k3s/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/multi-node-kubeadm/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-kurulum-hardening-rocky/</loc>
   </url><url>
@@ -114,27 +114,29 @@
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-dns-coredns/</loc>
   </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/devops-control-plane/</loc>
+  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-pull/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-scaling-vertical/</loc>
-  </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/longhorn/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-log/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-scaling-horizontal/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-statefulset-replication/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/longhorn/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-merge/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-storage/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-longhorn-read-replicas/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-statefulset-replication/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-rebase/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-persistent-volumes/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-longhorn-read-replicas/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-reset/</loc>
   </url><url>

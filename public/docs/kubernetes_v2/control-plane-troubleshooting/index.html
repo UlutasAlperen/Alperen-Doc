@@ -38,7 +38,7 @@ Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl bura
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.bcb7780d1e8dc035cc2ae9624faf9e15b5c71aacd73331a68d41d4f3450bfae9.js" integrity="sha256-vLd4DR6NwDXMKuliT6&#43;eFbXHGqzXMzGmjUHU80UL&#43;uk=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.f0c4d41e54753ab68925d55efdc26a70595003c4132b421cb296666d12d9e0d4.js" integrity="sha256-8MTUHlR1OraJJdVe/cJqcFlQA8QTK0IcspZmbRLZ4NQ=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1111,8 +1111,8 @@ Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl bura
   
 
   
-    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
-      multi-node-kubeadm-k3s</a>
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
   
 
         </li>
@@ -1141,6 +1141,20 @@ Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl bura
   
     <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
       ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
   
 
         </li>
@@ -1287,7 +1301,7 @@ Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl bura
 			</tr>
 	</tbody>
 </table>
-<p>On a <a href="../multi-node-kubeadm-k3s/">kubeadm</a> cluster these run as <strong>static pods</strong> - not Deployments, not systemd units. The kubelet reads YAML files from <code>/etc/kubernetes/manifests/</code> and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.</p>
+<p>On a <a href="../multi-node-kubeadm/">kubeadm</a> cluster these run as <strong>static pods</strong> - not Deployments, not systemd units. The kubelet reads YAML files from <code>/etc/kubernetes/manifests/</code> and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls /etc/kubernetes/manifests/
 </span></span><span style="display:flex;"><span>crictl ps</span></span></code></pre></div><blockquote class='book-hint '>
 <p>On Minikube you can see the same objects with <code>kubectl get pods -n kube-system</code> because the kubelet still reports static pods through the API. On a bare kubeadm node with a broken API server, <code>crictl ps</code> is your only window - which is exactly why it earns a spot in the <a href="../cluster-extensions/">cluster-extensions</a> CRI notes.</p>
@@ -1351,7 +1365,7 @@ Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl bura
 <ol>
 <li>Is the kubelet process alive? <code>systemctl status kubelet</code></li>
 <li>If it&rsquo;s crash-looping: <code>journalctl -u kubelet -e --no-pager | tail -n 40</code></li>
-<li>Look for the classics: cgroup driver mismatch (see <a href="../multi-node-kubeadm-k3s/">multi-node</a> notes), expired certs, wrong <code>--kubeconfig</code>, containerd down</li>
+<li>Look for the classics: cgroup driver mismatch (see <a href="../multi-node-kubeadm/">multi-node</a> notes), expired certs, wrong <code>--kubeconfig</code>, containerd down</li>
 <li>Is the node out of resources? <code>kubectl describe node &lt;node-name&gt;</code> - look at <code>Conditions</code> and <code>Allocatable</code> vs <code>Allocated</code></li>
 </ol>
 <p>Common kubelet log signatures:</p>

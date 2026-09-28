@@ -15,7 +15,7 @@ The four components, and what they own:
 | kube-scheduler | Pod'ları node'lara yerleştirir | static pod |
 | kube-controller-manager | Reconcile döngüleri (deployment, rs, node...) | static pod |
 
-On a [kubeadm](../multi-node-kubeadm-k3s/) cluster these run as **static pods** - not Deployments, not systemd units. The kubelet reads YAML files from `/etc/kubernetes/manifests/` and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.
+On a [kubeadm](../multi-node-kubeadm/) cluster these run as **static pods** - not Deployments, not systemd units. The kubelet reads YAML files from `/etc/kubernetes/manifests/` and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.
 
 ```bash
 ls /etc/kubernetes/manifests/
@@ -68,7 +68,7 @@ A node that shows `NotReady` is reporting "the kubelet on me is not healthy" - t
 
 1. Is the kubelet process alive? `systemctl status kubelet`
 2. If it's crash-looping: `journalctl -u kubelet -e --no-pager | tail -n 40`
-3. Look for the classics: cgroup driver mismatch (see [multi-node](../multi-node-kubeadm-k3s/) notes), expired certs, wrong `--kubeconfig`, containerd down
+3. Look for the classics: cgroup driver mismatch (see [multi-node](../multi-node-kubeadm/) notes), expired certs, wrong `--kubeconfig`, containerd down
 4. Is the node out of resources? `kubectl describe node <node-name>` - look at `Conditions` and `Allocatable` vs `Allocated`
 
 Common kubelet log signatures:

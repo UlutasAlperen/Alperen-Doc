@@ -38,7 +38,7 @@ NoSchedule: new pods without a matching toleration can’t be scheduled here (ru
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.bcb7780d1e8dc035cc2ae9624faf9e15b5c71aacd73331a68d41d4f3450bfae9.js" integrity="sha256-vLd4DR6NwDXMKuliT6&#43;eFbXHGqzXMzGmjUHU80UL&#43;uk=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.f0c4d41e54753ab68925d55efdc26a70595003c4132b421cb296666d12d9e0d4.js" integrity="sha256-8MTUHlR1OraJJdVe/cJqcFlQA8QTK0IcspZmbRLZ4NQ=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1111,8 +1111,8 @@ NoSchedule: new pods without a matching toleration can’t be scheduled here (ru
   
 
   
-    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
-      multi-node-kubeadm-k3s</a>
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
   
 
         </li>
@@ -1141,6 +1141,20 @@ NoSchedule: new pods without a matching toleration can’t be scheduled here (ru
   
     <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
       ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
   
 
         </li>
@@ -1260,7 +1274,7 @@ NoSchedule: new pods without a matching toleration can’t be scheduled here (ru
       
       
   <article class="markdown book-article"><h1 id="taints-and-tolerations">Taints and Tolerations<a class="anchor" href="#taints-and-tolerations">#</a></h1>
-<p>On a single-node Minikube cluster scheduling is trivial - there&rsquo;s nowhere else to put a pod. The moment you add nodes (<a href="../multi-node-kubeadm-k3s/">multi-node notes</a> are coming), scheduling decisions become real. <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">Taints</a> mark a node as &ldquo;keep away&rdquo;, and <em>tolerations</em> let specific pods opt in anyway:</p>
+<p>On a single-node Minikube cluster scheduling is trivial - there&rsquo;s nowhere else to put a pod. The moment you add nodes (<a href="../multi-node-kubeadm/">multi-node notes</a> are coming), scheduling decisions become real. <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">Taints</a> mark a node as &ldquo;keep away&rdquo;, and <em>tolerations</em> let specific pods opt in anyway:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl taint nodes &lt;node-name&gt; workload<span style="color:#f92672">=</span>ai:NoSchedule</span></span></code></pre></div><p>The three effects behave differently:</p>
 <ul>
 <li><code>NoSchedule</code>: new pods without a matching toleration can&rsquo;t be scheduled here (running pods are left alone)</li>

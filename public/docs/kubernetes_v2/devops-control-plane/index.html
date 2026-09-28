@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Who Owns the Control Plane# Everything until now assumed we own the cluster: we built it on multi-node VMs, we SSH’d into it when it broke, we joined control-plane nodes by hand. That’s the homelab model. The moment a second team shows up, the question changes from “how do I run this” to “who is allowed to do what” - and that’s a platform engineering question, not a kubectl one.
+The split that every real org lands on eventually:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/devops-control-plane/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="devops-control-plane">
+	<meta property="og:description" content="Who Owns the Control Plane# Everything until now assumed we own the cluster: we built it on multi-node VMs, we SSH’d into it when it broke, we joined control-plane nodes by hand. That’s the homelab model. The moment a second team shows up, the question changes from “how do I run this” to “who is allowed to do what” - and that’s a platform engineering question, not a kubectl one.
+The split that every real org lands on eventually:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="devops-control-plane">
+	<meta itemprop="description" content="Who Owns the Control Plane# Everything until now assumed we own the cluster: we built it on multi-node VMs, we SSH’d into it when it broke, we joined control-plane nodes by hand. That’s the homelab model. The moment a second team shows up, the question changes from “how do I run this” to “who is allowed to do what” - and that’s a platform engineering question, not a kubectl one.
+The split that every real org lands on eventually:">
+	<meta itemprop="wordCount" content="2174">
+
+<title>devops-control-plane • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/devops-control-plane/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.f0c4d41e54753ab68925d55efdc26a70595003c4132b421cb296666d12d9e0d4.js" integrity="sha256-8MTUHlR1OraJJdVe/cJqcFlQA8QTK0IcspZmbRLZ4NQ=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic-git-conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic-git-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github-workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous-integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous-deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git-status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git-add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git-commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git-push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git-branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git-pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git-log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git-merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git-rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git-reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git-remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git-switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="active">
+      devops-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>devops-control-plane</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="who-owns-the-control-plane">Who Owns the Control Plane<a class="anchor" href="#who-owns-the-control-plane">#</a></h1>
+<p>Everything until now assumed <em>we</em> own the cluster: we built it on <a href="../multi-node-kubeadm/">multi-node VMs</a>, we <a href="../control-plane-troubleshooting/">SSH&rsquo;d into it</a> when it broke, we <a href="../ha-control-plane/">joined control-plane nodes</a> by hand. That&rsquo;s the homelab model. The moment a second team shows up, the question changes from &ldquo;how do I run this&rdquo; to <strong>&ldquo;who is allowed to do what&rdquo;</strong> - and that&rsquo;s a platform engineering question, not a kubectl one.</p>
+<p>The split that every real org lands on eventually:</p>
+<ul>
+<li><strong>Platform / DevOps team</strong>: owns the control plane, the nodes, the cluster add-ons (CNI, CSI, ingress, observability), upgrades, and the guardrails. Small team, high blast radius</li>
+<li><strong>Application teams</strong>: own workloads inside their namespaces. Deploy, scale, debug - but not the cluster</li>
+</ul>
+<p>The control plane stops being &ldquo;a server I log into&rdquo; and becomes <strong>an API with policies around it</strong>. Nobody SSH&rsquo;s to <code>kmaster</code> to deploy a feature. The platform team&rsquo;s job is to make sure nobody needs to.</p>
+<p><strong>Küçük model:</strong> cluster bir bina; platform ekibi bina sahibi (asansör, elektrik, yangın merdiveni), uygulama ekipleri kiracılar (kendi dairelerinde serbest, ama duvarı yıkmak yok). İyi bir platform, kiracıya &ldquo;istek at&rdquo; der - &ldquo;ticket aç&rdquo; değil.</p>
+<h1 id="kubeconfig-and-identity">Kubeconfig and Identity<a class="anchor" href="#kubeconfig-and-identity">#</a></h1>
+<p>Access starts with identity. On our kubeadm cluster the first thing <code>kubeadm init</code> hands you is <code>admin.conf</code> - a kubeconfig with cluster-admin baked in. That file is the cluster&rsquo;s master key. Handing it to everyone &ldquo;just for now&rdquo; is how clusters end up with no audit trail and no boundaries.</p>
+<p>A user&rsquo;s access is a kubeconfig of their own:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Config</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">clusters</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">homelab</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cluster</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">server</span>: <span style="color:#ae81ff">https://k8s-api.local:6443</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">certificate-authority-data</span>: <span style="color:#ae81ff">&lt;base64-ca&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">users</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">alice</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">user</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">client-certificate-data</span>: <span style="color:#ae81ff">&lt;base64-cert&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">client-key-data</span>: <span style="color:#ae81ff">&lt;base64-key&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">contexts</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">alice@homelab</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">context</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">cluster</span>: <span style="color:#ae81ff">homelab</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">user</span>: <span style="color:#ae81ff">alice</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">current-context</span>: <span style="color:#ae81ff">alice@homelab</span></span></span></code></pre></div><p>Three identity models, from most DIY to most real-world:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Model</th>
+					<th>Nasıl çalışır</th>
+					<th>Kim kullanır</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Client certs</td>
+					<td>CA ile imzalanmış kullanıcı sertifikası (<code>kubeadm certs</code>)</td>
+					<td>Homelab, küçük ekipler</td>
+			</tr>
+			<tr>
+					<td>ServiceAccount token</td>
+					<td>Pod&rsquo;lara ve CI&rsquo;ya verilen token</td>
+					<td>Otomasyon, pipeline&rsquo;lar</td>
+			</tr>
+			<tr>
+					<td>OIDC / SSO</td>
+					<td>Google/Azure/Dex/Keycloak ile login</td>
+					<td>Gerçek şirketlerin standardı</td>
+			</tr>
+	</tbody>
+</table>
+<p>The kubeconfig mechanics are worth being fast at:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl config get-contexts
+</span></span><span style="display:flex;"><span>kubectl config use-context alice@homelab
+</span></span><span style="display:flex;"><span>kubectl config set-context --current --namespace<span style="color:#f92672">=</span>backend
+</span></span><span style="display:flex;"><span>KUBECONFIG<span style="color:#f92672">=</span>~/.kube/homelab:~/.kube/prod kubectl config get-contexts</span></span></code></pre></div><p>Merged <code>KUBECONFIG</code> (colon-separated) is how operators juggle clusters without overwriting each other&rsquo;s credentials. And when you&rsquo;re helping someone debug <em>their</em> problem, you don&rsquo;t need their kubeconfig - you impersonate:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -n backend --as<span style="color:#f92672">=</span>alice
+</span></span><span style="display:flex;"><span>kubectl auth can-i list secrets -n backend --as<span style="color:#f92672">=</span>alice</span></span></code></pre></div><p>Impersonation is the support tool of choice: &ldquo;let me see exactly what you see&rdquo; without sharing credentials. The <a href="../../kubernetes/kubernetes-rbac/">rbac</a> notes&rsquo; <code>--as</code> flag was practice for this.</p>
+<h1 id="platform-rbac-vs-app-rbac">Platform RBAC vs App RBAC<a class="anchor" href="#platform-rbac-vs-app-rbac">#</a></h1>
+<p>The <a href="../../kubernetes/kubernetes-rbac/">rbac</a> notes showed <em>how</em> to write a Role. Platform engineering decides <em>who gets which kind</em> - and the rule of thumb is embarrassingly simple:</p>
+<ul>
+<li><strong>Platform team</strong>: cluster-scoped permissions - nodes, namespaces, CRDs, storage classes, cluster add-ons. Their tooling needs <code>ClusterRole</code>s</li>
+<li><strong>App teams</strong>: namespaced permissions inside their own namespace - deployments, services, configmaps, secrets, pods/log. A <code>Role</code> + <code>RoleBinding</code>, nothing wider</li>
+<li><strong>CI pipelines</strong>: a <code>ServiceAccount</code> with exactly the verbs the pipeline needs (<code>create</code>, <code>update</code> deployments; not <code>delete</code> namespaces)</li>
+</ul>
+<p><strong>Türkçe özet - yetki katmanları:</strong></p>
+<ul>
+<li><strong>Cluster-admin</strong> = sadece platform, sadece break-glass (aşağıda)</li>
+<li><strong>Namespace admin</strong> = takım liderleri, kendi namespace&rsquo;inde</li>
+<li><strong>Namespace edit</strong> = geliştiriciler, günlük işler</li>
+<li><strong>View / pod exec</strong> = destek ve gözlemci roller</li>
+</ul>
+<p>Namespace-as-a-service is this pattern automated: a team asks for a namespace, and the platform hands over a namespace that already contains the <code>RoleBinding</code>s, a <code>ResourceQuota</code>, a <code>LimitRange</code> and (from the <a href="../taints-affinity-quotas/">taints and quotas</a> notes) sensible defaults. Nobody files a ticket for &ldquo;give me access to my own stuff&rdquo;.</p>
+<blockquote class='book-hint '>
+<p>The sharp edge of cluster-scoped roles: <code>ClusterRoleBinding</code> multiplies blast radius by every namespace. Bind a <code>ClusterRole</code> with a namespaced <code>RoleBinding</code> instead - same role, one namespace. That single substitution is the most common RBAC fix I make.</p>
+</blockquote><h1 id="break-glass-and-audit">Break-Glass and Audit<a class="anchor" href="#break-glass-and-audit">#</a></h1>
+<p>Policies will, at some point, lock out the wrong person - sometimes the only person who can fix the cluster. Every platform setup needs a <strong>break-glass</strong> path: a documented, audited, last-resort way in when RBAC says no and the API is otherwise healthy.</p>
+<p>What that looks like on our kubeadm cluster:</p>
+<ol>
+<li><code>admin.conf</code> is copied to the control-plane node&rsquo;s <code>/root/.kube/config</code> and nowhere else - not in git, not in Slack, not on laptops</li>
+<li>To use it, you SSH to the control-plane node (<a href="../control-plane-troubleshooting/">control-plane troubleshooting</a> style) and work from there</li>
+<li>The SSH session and the subsequent <code>kubectl</code> calls both land in the audit log - which you keep</li>
+</ol>
+<p>Audit logging is the difference between &ldquo;we think someone deleted the namespace&rdquo; and a timeline:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># /etc/kubernetes/audit-policy.yaml (hooked into the apiserver manifest)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">audit.k8s.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Policy</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">level</span>: <span style="color:#ae81ff">Metadata</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">level</span>: <span style="color:#ae81ff">RequestResponse</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">group</span>: <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">resources</span>: [<span style="color:#e6db74">&#34;secrets&#34;</span>, <span style="color:#e6db74">&#34;namespaces&#34;</span>]</span></span></code></pre></div><p>Add <code>--audit-policy-file</code> and <code>--audit-log-path</code> to the static apiserver manifest and restart it - the <a href="../control-plane-troubleshooting/">control-plane notes</a> cover the mechanics of editing and restarting static pods.</p>
+<blockquote class='book-hint '>
+<p><strong>Dikkat:</strong> break-glass bir <em>prosedürdür</em>, bir dosya değildir. Mühürlü bir kasa, yazılı bir sıra (kim, ne zaman, neden), ve sonrasında otomatik bir &ldquo;break-glass kullanıldı&rdquo; alarmı yoksa; o dosya 3 ay sonra herkesin laptop&rsquo;unda duruyordur. Yılda en az bir kez gerçekten kullanarak test et.</p>
+</blockquote><p>Two other pieces of the &ldquo;who did what&rdquo; toolkit:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl auth whoami
+</span></span><span style="display:flex;"><span>kubectl get events -A --sort-by<span style="color:#f92672">=</span>.lastTimestamp | tail -20</span></span></code></pre></div><p><code>kubectl auth whoami</code> (with the <code>SelfSubjectReview</code> API) tells you which identity your kubeconfig actually maps to - the first command to run when &ldquo;why am I forbidden?&rdquo; shows up.</p>
+<h1 id="helm-as-the-platforms-delivery-tool">Helm as the Platform&rsquo;s Delivery Tool<a class="anchor" href="#helm-as-the-platforms-delivery-tool">#</a></h1>
+<p>The <a href="../helm/">helm</a> notes were written from a developer&rsquo;s seat. From the platform seat, Helm is how <strong>cluster add-ons</strong> are installed and upgraded - the CNI from the <a href="../multi-node-kubeadm/">multi-node</a> notes, the ingress controller from <a href="../../kubernetes/kubernetes-ingress/">ingress</a>, Longhorn, cert-manager, the observability stack:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm list -A
+</span></span><span style="display:flex;"><span>helm -n ingress-nginx history ingress-nginx
+</span></span><span style="display:flex;"><span>helm -n ingress-nginx upgrade ingress-nginx ingress-nginx/ingress-nginx -f values-prod.yaml</span></span></code></pre></div><p>The division of labor that keeps this sane:</p>
+<ul>
+<li><strong>Platform team</strong> runs Helm for anything cluster-scoped: CNI, CSI, ingress, cert-manager, monitoring. Values live in a git repo, one file per environment</li>
+<li><strong>App teams</strong> either get a curated internal chart repo (with guardrails baked in) or deploy raw manifests through GitOps - but they don&rsquo;t <code>helm install</code> the ingress controller</li>
+</ul>
+<p><code>helm list -A</code> is the platform team&rsquo;s inventory of what it has actually installed. If something is running and it&rsquo;s not in that list (and not in GitOps), it&rsquo;s shadow infrastructure - someone installed it by hand on a Friday.</p>
+<blockquote class='book-hint '>
+<p>Upgrading a cluster add-on is a change to <em>every</em> team&rsquo;s traffic. The platform&rsquo;s Helm releases deserve the same review, staging and rollback discipline as a production deployment - <code>helm rollback</code> from the helm notes is your friend, but only if you remember <code>helm history</code> first.</p>
+</blockquote><h1 id="gitops-and-self-service">GitOps and Self-Service<a class="anchor" href="#gitops-and-self-service">#</a></h1>
+<p>The endgame of platform engineering is self-service: app teams ship without the platform team being a bottleneck. The <a href="../gitops-argocd/">gitops-argocd</a> notes showed the mechanism - Git is the desired state, ArgoCD reconciles it. Combined with namespace-as-a-service, the flow becomes:</p>
+<ol>
+<li>A team gets a namespace (with RBAC, quota, limits pre-installed)</li>
+<li>Their manifests live in their own folder/repo</li>
+<li>A PR merges → ArgoCD syncs → the platform team is not involved</li>
+<li>The platform team&rsquo;s own add-ons go through the same door, just in a different folder</li>
+</ol>
+<p>The thing that makes this work is what it <em>removes</em>: no shared kubeconfigs, no <code>kubectl apply</code> from laptops to prod, no &ldquo;who has the current version of that YAML&rdquo;. The <a href="../gitops-argocd/">drift test</a> from those notes is how you prove the model holds.</p>
+<blockquote class='book-hint '>
+<p>A common failure: ArgoCD installed with cluster-admin &ldquo;to make it work&rdquo;. ArgoCD only needs permissions on what it manages. Give it a <code>ClusterRole</code> scoped to managed namespaces and the day it&rsquo;s compromised, it can&rsquo;t delete <code>kube-system</code>.</p>
+</blockquote><h1 id="managed-control-planes">Managed Control Planes<a class="anchor" href="#managed-control-planes">#</a></h1>
+<p>On EKS, GKE or AKS the platform team&rsquo;s job changes shape, because someone else runs the control plane:</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Kubeadm (self-hosted)</th>
+					<th>Managed (EKS/GKE/AKS)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>etcd erişimi</td>
+					<td>Tam - backup/restore bizde</td>
+					<td>Yok - sağlayıcıda</td>
+			</tr>
+			<tr>
+					<td>Sertifika yönetimi</td>
+					<td><code>kubeadm certs</code> bizde</td>
+					<td>Sağlayıcı yönetir</td>
+			</tr>
+			<tr>
+					<td>Control-plane upgrade&rsquo;i</td>
+					<td><code>kubeadm upgrade apply</code></td>
+					<td>API çağrısı / console</td>
+			</tr>
+			<tr>
+					<td>SSH ile node erişimi</td>
+					<td>Var</td>
+					<td>Genelde yok (veya kısıtlı)</td>
+			</tr>
+			<tr>
+					<td>Fiyat</td>
+					<td>Sadece VM</td>
+					<td>Cluster ücreti + iş yükü</td>
+			</tr>
+			<tr>
+					<td>Sorumluluk</td>
+					<td>Her şey bizde</td>
+					<td>&ldquo;Shared responsibility&rdquo;</td>
+			</tr>
+	</tbody>
+</table>
+<p>What you lose is exactly what the <a href="../kubeadm-upgrade-etcd/">kubeadm-upgrade-etcd</a> and <a href="../control-plane-troubleshooting/">control-plane troubleshooting</a> notes teach: there is no <code>/etc/kubernetes/manifests</code> to edit, no <code>etcdctl snapshot restore</code>, no static pods. When the API is down, it&rsquo;s the provider&rsquo;s page to answer - and your job becomes the things you still own: node pools, add-ons, RBAC, workloads.</p>
+<p>What you gain is real: no control-plane upgrades at 2am, no cert renewal calendar, no etcd quorum math (<a href="../ha-control-plane/">HA notes</a> become theory you should still know for the interview). Most companies run managed control planes and self-managed everything above them - which is precisely the platform team&rsquo;s domain.</p>
+<blockquote class='book-hint '>
+<p>Learn the self-hosted path anyway. Managed clusters hide the machinery, and the machinery is what breaks at 3am on the one cluster that isn&rsquo;t managed.</p>
+</blockquote><h1 id="policy-and-admission">Policy and Admission<a class="anchor" href="#policy-and-admission">#</a></h1>
+<p>The last platform lever: instead of telling teams &ldquo;don&rsquo;t do that&rdquo;, make &ldquo;that&rdquo; impossible. Admission controllers validate (and mutate) every object before it&rsquo;s stored - the <a href="../security-context/">Pod Security Admission</a> notes used the built-in version. The policy engines extend it to anything:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># Kyverno-style: require an owner label on every Deployment</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">kyverno.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterPolicy</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">require-owner-label</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">validationFailureAction</span>: <span style="color:#ae81ff">Enforce</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">check-owner</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">match</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">any</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">kinds</span>: [<span style="color:#e6db74">&#34;Deployment&#34;</span>]
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">validate</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">message</span>: <span style="color:#e6db74">&#34;every deployment needs an owner label&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">pattern</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">owner</span>: <span style="color:#e6db74">&#34;?*&#34;</span></span></span></code></pre></div><p>Two flavors, with different reputations:</p>
+<ul>
+<li><strong>Kyverno</strong>: policies are YAML, very &ldquo;k8s native&rdquo;, easy to read. <code>Enforce</code> blocks, <code>Audit</code> only reports</li>
+<li><strong>OPA Gatekeeper</strong>: policies in Rego (a real language), more expressive, steeper learning curve</li>
+</ul>
+<p>Both turn platform standards into code that runs on every PR - naming conventions, image registries, required probes, forbidden <code>:latest</code> tags. Combined with <a href="../taints-affinity-quotas/">ResourceQuota and LimitRange</a>, it&rsquo;s the difference between a platform and a wiki page.</p>
+<p><strong>Küçük model:</strong> RBAC &ldquo;kim ne yapabilir&rdquo;, admission &ldquo;ne tür nesneler var olabilir&rdquo;, quota &ldquo;ne kadar kaynak harcanabilir&rdquo;. Platform üçünü birden kullanır; sadece biri yetmez.</p>
+<h1 id="how-to-issue-a-scoped-kubeconfig-for-an-app-team">How to Issue a Scoped kubeconfig for an App Team<a class="anchor" href="#how-to-issue-a-scoped-kubeconfig-for-an-app-team">#</a></h1>
+<ol>
+<li>Create the identity - a ServiceAccount (for CI) or a user cert (for humans):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create ns backend
+</span></span><span style="display:flex;"><span>kubectl -n backend create serviceaccount backend-ci</span></span></code></pre></div><ol start="2">
+<li>Grant exactly what they need - a <code>Role</code>, not a <code>ClusterRole</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n backend apply -f - <span style="color:#e6db74">&lt;&lt;EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">kind: Role
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">metadata:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  name: backend-edit
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  namespace: backend
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">rules:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  - apiGroups: [&#34;apps&#34;, &#34;&#34;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    resources: [&#34;deployments&#34;, &#34;services&#34;, &#34;configmaps&#34;, &#34;pods&#34;, &#34;pods/log&#34;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    verbs: [&#34;get&#34;, &#34;list&#34;, &#34;watch&#34;, &#34;create&#34;, &#34;update&#34;, &#34;patch&#34;, &#34;delete&#34;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>kubectl -n backend create rolebinding backend-edit --role<span style="color:#f92672">=</span>backend-edit --serviceaccount<span style="color:#f92672">=</span>backend:backend-ci</span></span></code></pre></div><ol start="3">
+<li>Mint a token and build a kubeconfig around it (or wire the OIDC claim):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n backend create token backend-ci --duration<span style="color:#f92672">=</span>8760h</span></span></code></pre></div><ol start="4">
+<li>Verify the boundary from both sides - this is the whole point:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl auth can-i create deployments -n backend --as<span style="color:#f92672">=</span>system:serviceaccount:backend:backend-ci
+</span></span><span style="display:flex;"><span>kubectl auth can-i create deployments -n kube-system --as<span style="color:#f92672">=</span>system:serviceaccount:backend:backend-ci</span></span></code></pre></div><p><code>yes</code> then <code>no</code>. Ship that kubeconfig (or the token) to the team and the contract is complete.</p>
+<h1 id="how-to-install-a-cluster-add-on-as-the-platform-team">How to Install a Cluster Add-On as the Platform Team<a class="anchor" href="#how-to-install-a-cluster-add-on-as-the-platform-team">#</a></h1>
+<ol>
+<li>Pick the add-on and inspect the chart before touching the cluster (<a href="../helm/">helm</a> notes: look before you leap):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+</span></span><span style="display:flex;"><span>helm show values ingress-nginx/ingress-nginx &gt; values-ingress.yaml</span></span></code></pre></div><ol start="2">
+<li>Install it into a dedicated namespace with an explicit values file - one file per environment, committed to git:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install ingress-nginx ingress-nginx/ingress-nginx <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -n ingress-nginx --create-namespace <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -f values-ingress.yaml</span></span></code></pre></div><ol start="3">
+<li>Verify it&rsquo;s healthy and record it in the inventory:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm list -A
+</span></span><span style="display:flex;"><span>kubectl get pods -n ingress-nginx</span></span></code></pre></div><ol start="4">
+<li>Practice the rollback on purpose: push a bad value (<code>replicaCount: 0</code>), <code>helm upgrade</code>, then <code>helm rollback ingress-nginx 1 -n ingress-nginx</code> and confirm. Do this before you need it.</li>
+</ol>
+<h1 id="how-to-set-up-break-glass-access">How to Set Up Break-Glass Access<a class="anchor" href="#how-to-set-up-break-glass-access">#</a></h1>
+<ol>
+<li>Keep <code>admin.conf</code> only on the control-plane node, and make the SSH path the documented one:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>scp /etc/kubernetes/admin.conf root@kmaster:/root/.kube/config</span></span></code></pre></div><ol start="2">
+<li>
+<p>Turn on audit logging (policy file + apiserver flags), per the break-glass section above, and ship the log somewhere it survives the node dying.</p>
+</li>
+<li>
+<p>Write the procedure down - who may use it, for what, and what happens after (incident review, credential rotation). Store it where the on-call can reach it when the wiki is down.</p>
+</li>
+<li>
+<p>Test it quarterly: have someone use the break-glass path to fix a staged problem, and verify the audit trail recorded it. Then rotate whatever credentials were touched.</p>
+</li>
+</ol>
+<h1 id="how-to-provision-namespace-as-a-service">How to Provision Namespace-as-a-Service<a class="anchor" href="#how-to-provision-namespace-as-a-service">#</a></h1>
+<ol>
+<li>Template the whole package - namespace, <code>RoleBinding</code>, <code>ResourceQuota</code>, <code>LimitRange</code> (<a href="../taints-affinity-quotas/">taints and quotas</a> for the field reference):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kustomize build platform/namespaces/backend | kubectl apply -f -</span></span></code></pre></div><ol start="2">
+<li>
+<p>Wire the app team&rsquo;s repo into <a href="../gitops-argocd/">ArgoCD</a> pointing at their folder, with their ServiceAccount as the sync identity.</p>
+</li>
+<li>
+<p>Let them verify self-service works end to end - deploy, break something, roll back, read logs - without asking you for a single <code>kubectl</code> command.</p>
+</li>
+<li>
+<p>Audit monthly: <code>kubectl get rolebindings -A</code>, <code>helm list -A</code>, <code>argocd app list</code> - three commands that answer &ldquo;who can do what, what did we install, what is deployed&rdquo;.</p>
+</li>
+</ol>
+<p>Türkçe homelab→platform geçiş checklist:</p>
+<ol>
+<li><code>admin.conf</code> sadece control-plane node&rsquo;da mı? Laptop&rsquo;ta değil</li>
+<li>Her ekibin kendi <code>Role</code> + <code>RoleBinding</code>&lsquo;i var mı (ClusterRoleBinding yok mu)</li>
+<li>CI&rsquo;lar ServiceAccount token ile mi çalışıyor (insan kubeconfig&rsquo;si değil)</li>
+<li><code>kubectl auth whoami</code> ile kimlikler doğrulanabiliyor mu</li>
+<li>Break-glass prosedürü yazılı, mühürlü ve test edilmiş mi</li>
+<li>Cluster add-on&rsquo;ları Helm listesinde + git&rsquo;te mi</li>
+<li>Uygulama değişiklikleri PR + ArgoCD ile mi (laptop&rsquo;tan apply yok)</li>
+<li>Quota/LimitRange her namespace&rsquo;de, admission policy repo&rsquo;da mı</li>
+</ol>
+<p>for more <a href="../longhorn/">longhorn</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes_v2/ha-control-plane/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>ha-control-plane</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes_v2/longhorn/" class="flex align-center">
+        <span>longhorn</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents"></nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,7 +4,7 @@ weight: 3
 ---
 # Extension Interfaces
 
-Everything we've installed so far - the [CNI plugin](../multi-node-kubeadm-k3s/) that gives pods their network, the [Longhorn](../longhorn/) CSI driver that gives them disks, the [containerd](../multi-node-kubeadm-k3s/) runtime that runs them - shares one thing in common: none of them are "Kubernetes". They're plugins, and Kubernetes just provides the sockets they plug into.
+Everything we've installed so far - the [CNI plugin](../multi-node-kubeadm/) that gives pods their network, the [Longhorn](../longhorn/) CSI driver that gives them disks, the [containerd](../multi-node-kubeadm/) runtime that runs them - shares one thing in common: none of them are "Kubernetes". They're plugins, and Kubernetes just provides the sockets they plug into.
 
 Those sockets are the extension interfaces, and knowing them turns "the cluster is broken" into "the _network plugin_ is broken":
 

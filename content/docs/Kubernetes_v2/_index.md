@@ -14,6 +14,7 @@ These are the follow-up notes to my [Kubernetes](../kubernetes/) section - same 
 - Complete the autoscaling trio (HPA → VPA → Cluster Autoscaler)
 - Schedule pods with taints, tolerations, spread constraints and priorities on multi-node clusters
 - Upgrade clusters, restore etcd from snapshots and run a highly-available control plane
+- Operate the control plane like a platform team: identity, RBAC tiers, break-glass, Helm add-ons, GitOps self-service
 - Run distributed block storage with Longhorn and build real PostgreSQL HA with read replicas
 - And much more
 
@@ -30,12 +31,13 @@ These are the follow-up notes to my [Kubernetes](../kubernetes/) section - same 
 9. [vpa-cluster-autoscaler](vpa-cluster-autoscaler/)
 10. [taints-affinity-quotas](taints-affinity-quotas/)
 11. [pod-priority-disruption](pod-priority-disruption/)
-12. [multi-node-kubeadm-k3s](multi-node-kubeadm-k3s/)
+12. [multi-node-kubeadm](multi-node-kubeadm/)
 13. [kubeadm-upgrade-etcd](kubeadm-upgrade-etcd/)
 14. [ha-control-plane](ha-control-plane/)
-15. [longhorn](longhorn/)
-16. [postgresql-statefulset-replication](postgresql-statefulset-replication/)
-17. [postgresql-longhorn-read-replicas](postgresql-longhorn-read-replicas/)
+15. [devops-control-plane](devops-control-plane/)
+16. [longhorn](longhorn/)
+17. [postgresql-statefulset-replication](postgresql-statefulset-replication/)
+18. [postgresql-longhorn-read-replicas](postgresql-longhorn-read-replicas/)
 
 ### Araçlar ve Genişletmeler
 
@@ -62,9 +64,13 @@ These are the follow-up notes to my [Kubernetes](../kubernetes/) section - same 
 
 ### Multi-Node (Homelab)
 
-- [multi-node-kubeadm-k3s](multi-node-kubeadm-k3s/) = kubeadm ile 3 node'lu k8s (GPG'li apt, containerd, CNI), k3s alternatifi, etcd backup; How-to: bootstrap, worker join, node remove/re-add
+- [multi-node-kubeadm](multi-node-kubeadm/) = kubeadm ile 3 node'lu k8s (GPG'li apt, containerd, CNI kurulumu), etcd backup; How-to: bootstrap, worker join, node remove/re-add
 - [kubeadm-upgrade-etcd](kubeadm-upgrade-etcd/) = `kubeadm upgrade plan/apply`, drain sırası, `etcdctl snapshot save/restore`, `kubeadm certs check-expiration/renew`; How-to: CP upgrade, worker upgrade, etcd restore, cert renew
 - [ha-control-plane](ha-control-plane/) = stacked vs external etcd, quorum, `controlPlaneEndpoint` + API LB, `kubeadm join --control-plane`; How-to: 2. CP node, external etcd, failover testi
+
+### Platform Mühendisliği
+
+- [devops-control-plane](devops-control-plane/) = kubeconfig/identity (cert, SA token, OIDC), platform vs app RBAC katmanları, break-glass + audit, Helm ile add-on yönetimi, GitOps self-service, managed control plane karşılaştırması, Kyverno/OPA admission; How-to: scoped kubeconfig, add-on kurulumu, break-glass, namespace-as-a-service
 
 ### Depolama ve HA
 

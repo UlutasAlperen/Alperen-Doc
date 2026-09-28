@@ -8,34 +8,34 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work there are two realistic paths to real multi-node Kubernetes: kubeadm (vanilla k8s, everything in your hands) and k3s (single binary, batteries included). This note walks through kubeadm on VMs, with k3s as the lightweight alternative.
+<meta name="description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work the standard path to real multi-node Kubernetes is kubeadm - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster.
 The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/multi-node-kubeadm-k3s/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/multi-node-kubeadm/">
 	<meta property="og:site_name" content="Alperen Doc">
-	<meta property="og:title" content="multi-node-kubeadm-k3s">
-	<meta property="og:description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work there are two realistic paths to real multi-node Kubernetes: kubeadm (vanilla k8s, everything in your hands) and k3s (single binary, batteries included). This note walks through kubeadm on VMs, with k3s as the lightweight alternative.
+	<meta property="og:title" content="multi-node-kubeadm">
+	<meta property="og:description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work the standard path to real multi-node Kubernetes is kubeadm - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster.
 The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
-	<meta itemprop="name" content="multi-node-kubeadm-k3s">
-	<meta itemprop="description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work there are two realistic paths to real multi-node Kubernetes: kubeadm (vanilla k8s, everything in your hands) and k3s (single binary, batteries included). This note walks through kubeadm on VMs, with k3s as the lightweight alternative.
+	<meta itemprop="name" content="multi-node-kubeadm">
+	<meta itemprop="description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work the standard path to real multi-node Kubernetes is kubeadm - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster.
 The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
-	<meta itemprop="wordCount" content="1325">
+	<meta itemprop="wordCount" content="1171">
 
-<title>multi-node-kubeadm-k3s • Alperen Doc</title>
+<title>multi-node-kubeadm • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/multi-node-kubeadm-k3s/">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/multi-node-kubeadm/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.bcb7780d1e8dc035cc2ae9624faf9e15b5c71aacd73331a68d41d4f3450bfae9.js" integrity="sha256-vLd4DR6NwDXMKuliT6&#43;eFbXHGqzXMzGmjUHU80UL&#43;uk=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.f0c4d41e54753ab68925d55efdc26a70595003c4132b421cb296666d12d9e0d4.js" integrity="sha256-8MTUHlR1OraJJdVe/cJqcFlQA8QTK0IcspZmbRLZ4NQ=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1108,8 +1108,8 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
   
 
   
-    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="active">
-      multi-node-kubeadm-k3s</a>
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="active">
+      multi-node-kubeadm</a>
   
 
         </li>
@@ -1138,6 +1138,20 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
   
     <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
       ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
   
 
         </li>
@@ -1225,7 +1239,7 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
     <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>multi-node-kubeadm-k3s</h3>
+  <h3>multi-node-kubeadm</h3>
 
   <label for="toc-control">
     
@@ -1249,7 +1263,6 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
     <li><a href="#workers-join">Workers Join</a></li>
     <li><a href="#node-lifecycle">Node Lifecycle</a></li>
     <li><a href="#backups-and-upgrades">Backups and Upgrades</a></li>
-    <li><a href="#k3s-alternatifi">k3s Alternatifi</a></li>
     <li><a href="#how-to-bootstrap-a-3-node-cluster-with-kubeadm">How to Bootstrap a 3-Node Cluster with kubeadm</a></li>
     <li><a href="#how-to-join-workers-and-verify-the-cluster">How to Join Workers and Verify the Cluster</a></li>
     <li><a href="#how-to-remove-and-re-add-a-node-safely">How to Remove and Re-add a Node Safely</a></li>
@@ -1266,12 +1279,12 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
       
       
   <article class="markdown book-article"><h1 id="multi-node-from-minikube-to-a-real-cluster">Multi-Node: From Minikube to a Real Cluster<a class="anchor" href="#multi-node-from-minikube-to-a-real-cluster">#</a></h1>
-<p>Minikube is a single-node cluster - we&rsquo;ve repeated that warning since the very first <a href="../../kubernetes/kubernetes-nodes-basic/">v1 notes</a>. For homelab work there are two realistic paths to <em>real</em> multi-node Kubernetes: <code>kubeadm</code> (vanilla k8s, everything in your hands) and <code>k3s</code> (single binary, batteries included). This note walks through kubeadm on VMs, with k3s as the lightweight alternative.</p>
+<p>Minikube is a single-node cluster - we&rsquo;ve repeated that warning since the very first <a href="../../kubernetes/kubernetes-nodes-basic/">v1 notes</a>. For homelab work the standard path to <em>real</em> multi-node Kubernetes is <code>kubeadm</code> - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster.</p>
 <h2 id="the-plan">The Plan<a class="anchor" href="#the-plan">#</a></h2>
 <p>On my Proxmox box I spin up 3 Debian 12 VMs, <code>2 vCPU / 4GB</code> each:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>kmaster   192.168.1.50   control plane
-</span></span><span style="display:flex;"><span>kworker1  192.168.1.51   worker
-</span></span><span style="display:flex;"><span>kworker2  192.168.1.52   worker</span></span></code></pre></div><p>Add them to <code>/etc/hosts</code> on all nodes and on your laptop, make sure SSH with key auth works, and keep the k8s minor version pinned identically everywhere - mixed minor versions within one cluster are supported only one step ahead and are a support nightmare.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>kmaster   192.168.1.200   control plane
+</span></span><span style="display:flex;"><span>kworker1  192.168.1.201   worker
+</span></span><span style="display:flex;"><span>kworker2  192.168.1.202   worker</span></span></code></pre></div><p>Add them to <code>/etc/hosts</code> on all nodes and on your laptop, make sure SSH with key auth works, and keep the k8s minor version pinned identically everywhere - mixed minor versions within one cluster are supported only one step ahead and are a support nightmare.</p>
 <h2 id="prep-on-all-nodes">Prep on All Nodes<a class="anchor" href="#prep-on-all-nodes">#</a></h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Disable swap - kubelet refuses to work with it</span>
 </span></span><span style="display:flex;"><span>sudo swapoff -a
@@ -1344,21 +1357,6 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
 </span></span></span><span style="display:flex;"><span>  --key<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.key <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>  snapshot save /backup/etcd-snapshot-<span style="color:#66d9ef">$(</span>date +%F<span style="color:#66d9ef">)</span>.db</span></span></code></pre></div><p>Proxmox tarafında ayrıca VM-level snapshot almak bedava sigortadır - ama etcd snapshot&rsquo;ı deployment&rsquo;ları da kurtarırken, VM snapshot&rsquo;ı tüm control-plane&rsquo;i olduğu geri alır; ikisinin yerini tutmaz.</p>
 <p>Upgrades: control plane first, one minor at a time, <code>apt-mark unhold</code> before, hold again after, drain per node in between. Never skip minors on kubeadm clusters. The full command-by-command walkthrough - including etcd restore and cert renewal - is in <a href="../kubeadm-upgrade-etcd/">kubeadm-upgrade-etcd</a>; HA topologies that make an upgrade survivable are in <a href="../ha-control-plane/">ha-control-plane</a>.</p>
-<h2 id="k3s-alternatifi">k3s Alternatifi<a class="anchor" href="#k3s-alternatifi">#</a></h2>
-<p>If the VMs are small (2GB) and the goal is &ldquo;lightweight but real cluster&rdquo;, <a href="https://docs.k3s.io/">k3s</a> installs in five minutes:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Master</span>
-</span></span><span style="display:flex;"><span>curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode <span style="color:#ae81ff">644</span>
-</span></span><span style="display:flex;"><span>sudo cat /var/lib/rancher/k3s/server/node-token
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Worker (agent)</span>
-</span></span><span style="display:flex;"><span>curl -sfL https://get.k3s.io | K3S_URL<span style="color:#f92672">=</span>https://192.168.1.50:6443 K3S_TOKEN<span style="color:#f92672">=</span>&lt;token&gt; sh -</span></span></code></pre></div><p>Differences worth knowing before choosing:</p>
-<ul>
-<li>Single binary with kubelet, kube-proxy, embedded containerd, flannel and CoreDNS bundled - far fewer moving parts to break</li>
-<li>State store defaults to <strong>sqlite</strong> (single server); for HA it supports embedded etcd (<code>--cluster-init</code>) or external datastore - not a toy, but read the HA docs before assuming parity with kubeadm&rsquo;s etcd</li>
-<li>Ships <a href="https://traefik.io/">traefik</a> and the local-path storage provisioner by default; <code>--disable traefik</code> if you run your own ingress - my Proxmox VMs are small, and this alone saves RAM</li>
-<li>No <code>kubeadm</code>; upgrades are a re-run of the install script with a version flag</li>
-</ul>
-<p>Benim tercihim: kaynak bolken kubeadm (standart k8s, her şeyi sen yönetiyorsun); 2GB&rsquo;lık VPS&rsquo;lerde ve düşük kaynaklı Proxmox VM&rsquo;lerinde k3s.</p>
 <h2 id="how-to-bootstrap-a-3-node-cluster-with-kubeadm">How to Bootstrap a 3-Node Cluster with kubeadm<a class="anchor" href="#how-to-bootstrap-a-3-node-cluster-with-kubeadm">#</a></h2>
 <ol>
 <li>
@@ -1489,7 +1487,6 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
     <li><a href="#workers-join">Workers Join</a></li>
     <li><a href="#node-lifecycle">Node Lifecycle</a></li>
     <li><a href="#backups-and-upgrades">Backups and Upgrades</a></li>
-    <li><a href="#k3s-alternatifi">k3s Alternatifi</a></li>
     <li><a href="#how-to-bootstrap-a-3-node-cluster-with-kubeadm">How to Bootstrap a 3-Node Cluster with kubeadm</a></li>
     <li><a href="#how-to-join-workers-and-verify-the-cluster">How to Join Workers and Verify the Cluster</a></li>
     <li><a href="#how-to-remove-and-re-add-a-node-safely">How to Remove and Re-add a Node Safely</a></li>

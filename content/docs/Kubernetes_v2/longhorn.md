@@ -1,10 +1,10 @@
 ---
 title: "longhorn"
-weight: 15
+weight: 16
 ---
 # Longhorn
 
-Everything we've done with storage so far lived on _one_ node. In the [v1 notes](../../kubernetes/kubernetes-persistent-volumes/) a PVC was a local disk on (the only) Minikube node, and in the [multi-node notes](../multi-node-kubeadm-k3s/) our workers each keep their own local directories. That means the day `kworker1` dies, every PVC hosted on it dies with it - block storage was the last single point of failure in our homelab.
+Everything we've done with storage so far lived on _one_ node. In the [v1 notes](../../kubernetes/kubernetes-persistent-volumes/) a PVC was a local disk on (the only) Minikube node, and in the [multi-node notes](../multi-node-kubeadm/) our workers each keep their own local directories. That means the day `kworker1` dies, every PVC hosted on it dies with it - block storage was the last single point of failure in our homelab.
 
 [Longhorn](https://longhorn.io/docs/) fixes that: it's a distributed block storage system built as a CSI driver, purpose-made for Kubernetes. Every volume it serves is split into an **engine** plus **N replicas** (default 3) that live on _different_ nodes - scheduled exactly like pods are.
 
@@ -44,7 +44,7 @@ The distinction that saves you from a false sense of safety:
 - Enough free disk under `/var/lib/longhorn` on each node (the default data location)
 - A Linux kernel ≥ 4.18 (5.8+ recommended)
 - NFS client only if you want RWX volumes (the NFS-server-based sharing layer)
-- **A real multi-node cluster.** On Minikube's single node Longhorn installs and runs, but replicas collapse onto one node: zero redundancy. Test it there only to see the UI; this chapter assumes the 3-node cluster from the [multi-node notes](../multi-node-kubeadm-k3s/)
+- **A real multi-node cluster.** On Minikube's single node Longhorn installs and runs, but replicas collapse onto one node: zero redundancy. Test it there only to see the UI; this chapter assumes the 3-node cluster from the [multi-node notes](../multi-node-kubeadm/)
 
 ## How to Prepare the Nodes
 
@@ -100,7 +100,7 @@ Open `http://localhost:8085` - the UI shows nodes, disks, volumes and their repl
 
 ## How to Make Longhorn the Default StorageClass
 
-Our cluster already has a default SC (Minikube's `standard`, or k3s' `local-path` from the [multi-node notes](../multi-node-kubeadm-k3s/)). Two defaults = new PVCs silently going to the wrong backend.
+Minikube already ships a default SC (`standard`); the kubeadm cluster from the [multi-node notes](../multi-node-kubeadm/) starts with none until a driver claims the title. If some other class is already marked default, two defaults = new PVCs silently going to the wrong backend.
 
 1. Demote the old one and promote Longhorn:
 

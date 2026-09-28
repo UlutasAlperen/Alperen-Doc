@@ -35,7 +35,7 @@ A cluster with one control-plane node has one single point of failure: kill that
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.bcb7780d1e8dc035cc2ae9624faf9e15b5c71aacd73331a68d41d4f3450bfae9.js" integrity="sha256-vLd4DR6NwDXMKuliT6&#43;eFbXHGqzXMzGmjUHU80UL&#43;uk=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.f0c4d41e54753ab68925d55efdc26a70595003c4132b421cb296666d12d9e0d4.js" integrity="sha256-8MTUHlR1OraJJdVe/cJqcFlQA8QTK0IcspZmbRLZ4NQ=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1108,8 +1108,8 @@ A cluster with one control-plane node has one single point of failure: kill that
   
 
   
-    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
-      multi-node-kubeadm-k3s</a>
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
   
 
         </li>
@@ -1138,6 +1138,20 @@ A cluster with one control-plane node has one single point of failure: kill that
   
     <a href="/docs/kubernetes_v2/ha-control-plane/" class="active">
       ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
   
 
         </li>
@@ -1251,7 +1265,7 @@ A cluster with one control-plane node has one single point of failure: kill that
       
       
   <article class="markdown book-article"><h1 id="high-availability">High Availability<a class="anchor" href="#high-availability">#</a></h1>
-<p>The <a href="../multi-node-kubeadm-k3s/">multi-node</a> notes left a check on the wall: <code>--control-plane-endpoint=&lt;VIP&gt;</code> &ldquo;makes later HA possible&rdquo;. This is later.</p>
+<p>The <a href="../multi-node-kubeadm/">multi-node</a> notes left a check on the wall: <code>--control-plane-endpoint=&lt;VIP&gt;</code> &ldquo;makes later HA possible&rdquo;. This is later.</p>
 <p>A cluster with one control-plane node has one single point of failure: kill that node and <code>kubectl</code> stops working, the scheduler stops placing pods, and every controller stops reconciling. The <em>workloads</em> keep running (kubelets and containers don&rsquo;t need the apiserver to stay alive), but the cluster stops being managed. For a homelab that&rsquo;s an annoyance; for anything real it&rsquo;s an outage.</p>
 <p>High availability means removing that single point of failure: multiple control-plane members, an etcd that tolerates member loss, and one stable endpoint clients can always reach.</p>
 <p><strong>Küçük model:</strong> tek kontrollü node = tek ışık anahtarı; 3 kontrollü node = 3 anahtar ve oybirliği. Işık yanık kalır çünkü biri düşse bile diğer ikisi kararı verir.</p>
@@ -1306,10 +1320,10 @@ A cluster with one control-plane node has one single point of failure: kill that
 <li>On an existing control-plane node, generate a join command with a certificate key:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeadm init phase upload-certs --upload-certs
-</span></span><span style="display:flex;"><span>kubeadm token create --print-join-command</span></span></code></pre></div><p>The <code>--certificate-key</code> from the first command is single-use and short-lived. The <a href="../multi-node-kubeadm-k3s/">multi-node</a> notes used the same token flow for workers; the <code>--control-plane</code> flag and the cert key are what make this a control-plane join.</p>
+</span></span><span style="display:flex;"><span>kubeadm token create --print-join-command</span></span></code></pre></div><p>The <code>--certificate-key</code> from the first command is single-use and short-lived. The <a href="../multi-node-kubeadm/">multi-node</a> notes used the same token flow for workers; the <code>--control-plane</code> flag and the cert key are what make this a control-plane join.</p>
 <ol start="2">
 <li>
-<p>Prepare the new node exactly like the first one - swap off, kernel modules, containerd, matching versions (<a href="../multi-node-kubeadm-k3s/">multi-node</a> prep steps verbatim).</p>
+<p>Prepare the new node exactly like the first one - swap off, kernel modules, containerd, matching versions (<a href="../multi-node-kubeadm/">multi-node</a> prep steps verbatim).</p>
 </li>
 <li>
 <p>Join it as a control plane member:</p>
@@ -1369,7 +1383,7 @@ A cluster with one control-plane node has one single point of failure: kill that
 </ol>
 <blockquote class='book-hint '>
 <p><strong>Dikkat:</strong> quorum düşerse (<code>etcdctl member list</code> &ldquo;unstarted&rdquo; / &ldquo;learner&rdquo; ya da leader yok) etcd yazmayı reddeder ve cluster <strong>read-only</strong> gibi davranır. Eksik üyeyi geri getirmek, yeni bir üye eklemekten daha hızlıdır - <code>etcdctl member remove</code> + yeni makineyle yeniden join, çoğu durumda kurtarma yoludur. Önce <a href="../kubeadm-upgrade-etcd/">backup</a> alsan iyi olur.</p>
-</blockquote><p>for more <a href="../longhorn/">longhorn</a></p>
+</blockquote><p>for more <a href="../devops-control-plane/">devops-control-plane</a></p>
 </article>
  
       
@@ -1399,8 +1413,8 @@ A cluster with one control-plane node has one single point of failure: kill that
     </span>
     <span>
     
-      <a href="/docs/kubernetes_v2/longhorn/" class="flex align-center">
-        <span>longhorn</span>
+      <a href="/docs/kubernetes_v2/devops-control-plane/" class="flex align-center">
+        <span>devops-control-plane</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     

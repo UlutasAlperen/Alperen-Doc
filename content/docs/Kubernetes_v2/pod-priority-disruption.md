@@ -57,7 +57,7 @@ Kubernetes ships two reserved classes: `system-cluster-critical` and `system-nod
 
 # PodDisruptionBudget
 
-Now the uncomfortable question: when a node is drained for maintenance ([multi-node](../multi-node-kubeadm-k3s/) notes do this routinely), how many of your pods may be down at once? The Deployment's `maxUnavailable` governs rolling updates, but _voluntary_ evictions (drain, upgrade, scale-down) are governed by a [PodDisruptionBudget](https://kubernetes.io/docs/concepts/workloads/pod-disruption-budget/):
+Now the uncomfortable question: when a node is drained for maintenance ([multi-node](../multi-node-kubeadm/) notes do this routinely), how many of your pods may be down at once? The Deployment's `maxUnavailable` governs rolling updates, but _voluntary_ evictions (drain, upgrade, scale-down) are governed by a [PodDisruptionBudget](https://kubernetes.io/docs/concepts/workloads/pod-disruption-budget/):
 
 ```yaml
 apiVersion: policy/v1
@@ -139,4 +139,4 @@ kubectl get pdb synergychat-api-pdb -o yaml | sed -n '/status/,$p'
 
 > **Dikkat:** `minAvailable` replica sayısına eşit veya büyükse drain **asla** bitemez. Node bakımına çıkarken bütçeyi (ya da replica sayısını) bunu bilerek ayarla - aksi hâlde "node drain takıldı" diye 2 saat debug edersin.
 
-for more [multi-node-kubeadm-k3s](../multi-node-kubeadm-k3s/)
+for more [multi-node-kubeadm](../multi-node-kubeadm/)

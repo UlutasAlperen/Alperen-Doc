@@ -4,7 +4,7 @@ weight: 10
 ---
 # Taints and Tolerations
 
-On a single-node Minikube cluster scheduling is trivial - there's nowhere else to put a pod. The moment you add nodes ([multi-node notes](../multi-node-kubeadm-k3s/) are coming), scheduling decisions become real. [Taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) mark a node as "keep away", and _tolerations_ let specific pods opt in anyway:
+On a single-node Minikube cluster scheduling is trivial - there's nowhere else to put a pod. The moment you add nodes ([multi-node notes](../multi-node-kubeadm/) are coming), scheduling decisions become real. [Taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) mark a node as "keep away", and _tolerations_ let specific pods opt in anyway:
 
 ```bash
 kubectl taint nodes <node-name> workload=ai:NoSchedule

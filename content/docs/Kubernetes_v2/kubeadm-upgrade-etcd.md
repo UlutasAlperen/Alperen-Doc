@@ -4,7 +4,7 @@ weight: 13
 ---
 # Cluster Upgrades
 
-The [multi-node](../multi-node-kubeadm-k3s/) notes ended with a one-liner: "upgrade the control plane first, one minor version at a time". That's the policy - this is the practice.
+The [multi-node](../multi-node-kubeadm/) notes ended with a one-liner: "upgrade the control plane first, one minor version at a time". That's the policy - this is the practice.
 
 [Upgrading](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/) a cluster is the most common maintenance task you will ever run, and the most common way to break one. The rules that keep it boring:
 

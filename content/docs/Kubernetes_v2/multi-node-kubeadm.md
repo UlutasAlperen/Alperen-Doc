@@ -1,19 +1,19 @@
 ---
-title: "multi-node-kubeadm-k3s"
+title: "multi-node-kubeadm"
 weight: 12
 ---
 # Multi-Node: From Minikube to a Real Cluster
 
-Minikube is a single-node cluster - we've repeated that warning since the very first [v1 notes](../../kubernetes/kubernetes-nodes-basic/). For homelab work there are two realistic paths to _real_ multi-node Kubernetes: `kubeadm` (vanilla k8s, everything in your hands) and `k3s` (single binary, batteries included). This note walks through kubeadm on VMs, with k3s as the lightweight alternative.
+Minikube is a single-node cluster - we've repeated that warning since the very first [v1 notes](../../kubernetes/kubernetes-nodes-basic/). For homelab work the standard path to _real_ multi-node Kubernetes is `kubeadm` - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster.
 
 ## The Plan
 
 On my Proxmox box I spin up 3 Debian 12 VMs, `2 vCPU / 4GB` each:
 
 ```text
-kmaster   192.168.1.50   control plane
-kworker1  192.168.1.51   worker
-kworker2  192.168.1.52   worker
+kmaster   192.168.1.200   control plane
+kworker1  192.168.1.201   worker
+kworker2  192.168.1.202   worker
 ```
 
 Add them to `/etc/hosts` on all nodes and on your laptop, make sure SSH with key auth works, and keep the k8s minor version pinned identically everywhere - mixed minor versions within one cluster are supported only one step ahead and are a support nightmare.
@@ -136,28 +136,6 @@ sudo etcdctl --endpoints=https://127.0.0.1:2379 \
 Proxmox tarafında ayrıca VM-level snapshot almak bedava sigortadır - ama etcd snapshot'ı deployment'ları da kurtarırken, VM snapshot'ı tüm control-plane'i olduğu geri alır; ikisinin yerini tutmaz.
 
 Upgrades: control plane first, one minor at a time, `apt-mark unhold` before, hold again after, drain per node in between. Never skip minors on kubeadm clusters. The full command-by-command walkthrough - including etcd restore and cert renewal - is in [kubeadm-upgrade-etcd](../kubeadm-upgrade-etcd/); HA topologies that make an upgrade survivable are in [ha-control-plane](../ha-control-plane/).
-
-## k3s Alternatifi
-
-If the VMs are small (2GB) and the goal is "lightweight but real cluster", [k3s](https://docs.k3s.io/) installs in five minutes:
-
-```bash
-# Master
-curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
-sudo cat /var/lib/rancher/k3s/server/node-token
-
-# Worker (agent)
-curl -sfL https://get.k3s.io | K3S_URL=https://192.168.1.50:6443 K3S_TOKEN=<token> sh -
-```
-
-Differences worth knowing before choosing:
-
-- Single binary with kubelet, kube-proxy, embedded containerd, flannel and CoreDNS bundled - far fewer moving parts to break
-- State store defaults to **sqlite** (single server); for HA it supports embedded etcd (`--cluster-init`) or external datastore - not a toy, but read the HA docs before assuming parity with kubeadm's etcd
-- Ships [traefik](https://traefik.io/) and the local-path storage provisioner by default; `--disable traefik` if you run your own ingress - my Proxmox VMs are small, and this alone saves RAM
-- No `kubeadm`; upgrades are a re-run of the install script with a version flag
-
-Benim tercihim: kaynak bolken kubeadm (standart k8s, her şeyi sen yönetiyorsun); 2GB'lık VPS'lerde ve düşük kaynaklı Proxmox VM'lerinde k3s.
 
 ## How to Bootstrap a 3-Node Cluster with kubeadm
 
