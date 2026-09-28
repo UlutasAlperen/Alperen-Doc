@@ -1,6 +1,6 @@
 ---
 title: "network-policy"
-weight: 3
+weight: 4
 ---
 # NetworkPolicy
 

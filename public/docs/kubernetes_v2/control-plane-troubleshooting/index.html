@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Control Plane Components# In the namespaces notes we listed what lives in kube-system and said “you don’t want to mess with it”. Good advice - but understanding it is non-negotiable, because when the control plane misbehaves every debugging tool you own stops working. kubectl get pods that returns the connection to the server was refused is not a pod problem.
+The four components, and what they own:
+Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl buraya gider static pod etcd Tüm cluster state’inin tek kaynağı static pod kube-scheduler Pod’ları node’lara yerleştirir static pod kube-controller-manager Reconcile döngüleri (deployment, rs, node…) static pod On a kubeadm cluster these run as static pods - not Deployments, not systemd units. The kubelet reads YAML files from /etc/kubernetes/manifests/ and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/control-plane-troubleshooting/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="control-plane-troubleshooting">
+	<meta property="og:description" content="Control Plane Components# In the namespaces notes we listed what lives in kube-system and said “you don’t want to mess with it”. Good advice - but understanding it is non-negotiable, because when the control plane misbehaves every debugging tool you own stops working. kubectl get pods that returns the connection to the server was refused is not a pod problem.
+The four components, and what they own:
+Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl buraya gider static pod etcd Tüm cluster state’inin tek kaynağı static pod kube-scheduler Pod’ları node’lara yerleştirir static pod kube-controller-manager Reconcile döngüleri (deployment, rs, node…) static pod On a kubeadm cluster these run as static pods - not Deployments, not systemd units. The kubelet reads YAML files from /etc/kubernetes/manifests/ and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="control-plane-troubleshooting">
+	<meta itemprop="description" content="Control Plane Components# In the namespaces notes we listed what lives in kube-system and said “you don’t want to mess with it”. Good advice - but understanding it is non-negotiable, because when the control plane misbehaves every debugging tool you own stops working. kubectl get pods that returns the connection to the server was refused is not a pod problem.
+The four components, and what they own:
+Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl buraya gider static pod etcd Tüm cluster state’inin tek kaynağı static pod kube-scheduler Pod’ları node’lara yerleştirir static pod kube-controller-manager Reconcile döngüleri (deployment, rs, node…) static pod On a kubeadm cluster these run as static pods - not Deployments, not systemd units. The kubelet reads YAML files from /etc/kubernetes/manifests/ and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.">
+	<meta itemprop="wordCount" content="1137">
+
+<title>control-plane-troubleshooting • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/control-plane-troubleshooting/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.bcb7780d1e8dc035cc2ae9624faf9e15b5c71aacd73331a68d41d4f3450bfae9.js" integrity="sha256-vLd4DR6NwDXMKuliT6&#43;eFbXHGqzXMzGmjUHU80UL&#43;uk=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic-git-conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic-git-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github-workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous-integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous-deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git-status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git-add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git-commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git-push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git-branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git-pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git-log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git-merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git-rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git-reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git-remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git-switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="active">
+      control-plane-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>control-plane-troubleshooting</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="control-plane-components">Control Plane Components<a class="anchor" href="#control-plane-components">#</a></h1>
+<p>In the <a href="../../kubernetes/kubernetes-namespaces/">namespaces</a> notes we listed what lives in <code>kube-system</code> and said &ldquo;you don&rsquo;t want to mess with it&rdquo;. Good advice - but understanding it is non-negotiable, because when the control plane misbehaves <em>every</em> debugging tool you own stops working. <code>kubectl get pods</code> that returns <code>the connection to the server was refused</code> is not a pod problem.</p>
+<p>The four components, and what they own:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Bileşen</th>
+					<th>Ne yapar</th>
+					<th>Nasıl koşar</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>kube-apiserver</td>
+					<td>Tek API yüzeyi; her <code>kubectl</code> buraya gider</td>
+					<td>static pod</td>
+			</tr>
+			<tr>
+					<td>etcd</td>
+					<td>Tüm cluster state&rsquo;inin tek kaynağı</td>
+					<td>static pod</td>
+			</tr>
+			<tr>
+					<td>kube-scheduler</td>
+					<td>Pod&rsquo;ları node&rsquo;lara yerleştirir</td>
+					<td>static pod</td>
+			</tr>
+			<tr>
+					<td>kube-controller-manager</td>
+					<td>Reconcile döngüleri (deployment, rs, node&hellip;)</td>
+					<td>static pod</td>
+			</tr>
+	</tbody>
+</table>
+<p>On a <a href="../multi-node-kubeadm-k3s/">kubeadm</a> cluster these run as <strong>static pods</strong> - not Deployments, not systemd units. The kubelet reads YAML files from <code>/etc/kubernetes/manifests/</code> and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls /etc/kubernetes/manifests/
+</span></span><span style="display:flex;"><span>crictl ps</span></span></code></pre></div><blockquote class='book-hint '>
+<p>On Minikube you can see the same objects with <code>kubectl get pods -n kube-system</code> because the kubelet still reports static pods through the API. On a bare kubeadm node with a broken API server, <code>crictl ps</code> is your only window - which is exactly why it earns a spot in the <a href="../cluster-extensions/">cluster-extensions</a> CRI notes.</p>
+</blockquote><h1 id="the-kubectl-failure-tree">The kubectl Failure Tree<a class="anchor" href="#the-kubectl-failure-tree">#</a></h1>
+<p>Before blaming components, classify the failure. The message tells you where to look:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Hata</th>
+					<th>Kim</th>
+					<th>İlk bakılacak yer</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>connection refused</code></td>
+					<td>apiserver ayakta değil</td>
+					<td><code>crictl ps</code>, <code>/etc/kubernetes/manifests/kube-apiserver.yaml</code>, kubelet log</td>
+			</tr>
+			<tr>
+					<td><code>Unauthorized</code> / <code>Forbidden</code></td>
+					<td>RBAC</td>
+					<td><code>kubectl auth can-i --list</code>, <a href="../../kubernetes/kubernetes-rbac/">rbac</a> notları</td>
+			</tr>
+			<tr>
+					<td><code>timeout</code></td>
+					<td>network / firewall / LB</td>
+					<td>node → apiserver port 6443, <code>ss -tlnp</code></td>
+			</tr>
+			<tr>
+					<td><code>i/o timeout</code> to etcd</td>
+					<td>etcd sorunu</td>
+					<td><code>etcdctl endpoint health</code>, disk IO</td>
+			</tr>
+			<tr>
+					<td>pods stuck <code>Pending</code></td>
+					<td>scheduler</td>
+					<td>scheduler log, node resources</td>
+			</tr>
+			<tr>
+					<td>changes revert themselves</td>
+					<td>controller-manager</td>
+					<td>CM log, leader election</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>Küçük model:</strong> kubectl -&gt; apiserver -&gt; etcd. Zincirin her halkası koparsa kullanıcıya aynı &ldquo;bozuk cluster&rdquo; görünür, ama sebebi tamamen farklıdır. Sırayla test et: apiserver&rsquo;a <code>curl</code>, etcd&rsquo;ye <code>etcdctl</code>, scheduler&rsquo;a log.</p>
+<h1 id="etcd">etcd<a class="anchor" href="#etcd">#</a></h1>
+<p>etcd is the database behind everything. If it&rsquo;s unhappy, the whole cluster is unhappy - slow writes, lost leader elections, API errors that look random.</p>
+<p>Health, from the control-plane node (cert paths are kubeadm defaults):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ETCDCTL_API<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> etcdctl --endpoints<span style="color:#f92672">=</span>https://127.0.0.1:2379 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --cacert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/ca.crt <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --cert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/healthcheck-client.crt <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --key<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/healthcheck-client.key <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  endpoint health</span></span></code></pre></div><p>You want <code>is healthy: true</code>. <code>endpoint status</code> shows who the leader is and how much data is in there. When the DB grows unboundedly (big ConfigMaps, chatty CRDs), <code>defrag</code> reclaims space:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>etcdctl ... defrag
+</span></span><span style="display:flex;"><span>etcdctl ... endpoint status -w table</span></span></code></pre></div><blockquote class='book-hint '>
+<p><strong>Dikkat:</strong> defrag etcd&rsquo;yi bir süreliğine yavaşlatır - uzun süredir defrag edilmemiş, dolu bir etcd&rsquo;yi prime time&rsquo;da defrag etmek &ldquo;hızlandırma&rdquo; değil, kendine DoS yapmaktır. Bunun yedeğini almadan da restore senaryosu denemeye kalkma - backup/restore prosedürü <a href="../kubeadm-upgrade-etcd/">kubeadm-upgrade-etcd</a> notlarında.</p>
+</blockquote><h1 id="kubelet-and-nodes">kubelet and Nodes<a class="anchor" href="#kubelet-and-nodes">#</a></h1>
+<p>A node that shows <code>NotReady</code> is reporting &ldquo;the kubelet on me is not healthy&rdquo; - the kubelet is the node&rsquo;s local babysitter. The decision tree is short:</p>
+<ol>
+<li>Is the kubelet process alive? <code>systemctl status kubelet</code></li>
+<li>If it&rsquo;s crash-looping: <code>journalctl -u kubelet -e --no-pager | tail -n 40</code></li>
+<li>Look for the classics: cgroup driver mismatch (see <a href="../multi-node-kubeadm-k3s/">multi-node</a> notes), expired certs, wrong <code>--kubeconfig</code>, containerd down</li>
+<li>Is the node out of resources? <code>kubectl describe node &lt;node-name&gt;</code> - look at <code>Conditions</code> and <code>Allocatable</code> vs <code>Allocated</code></li>
+</ol>
+<p>Common kubelet log signatures:</p>
+<pre tabindex="0"><code>failed to load Kubelet config ... cgroup driver
+x509: certificate has expired
+container runtime is down</code></pre><p>The first is a config mismatch, the second is cert renewal (covered in <a href="../kubeadm-upgrade-etcd/">kubeadm-upgrade-etcd</a>), the third is your CRI.</p>
+<h1 id="kube-proxy-and-networking">kube-proxy and Networking<a class="anchor" href="#kube-proxy-and-networking">#</a></h1>
+<p>Pod-to-pod and service traffic is programmed by <a href="../network-policy/">kube-proxy</a> (iptables or IPVS) plus your CNI. When services don&rsquo;t route:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl logs -n kube-system -l k8s-app<span style="color:#f92672">=</span>kube-proxy --tail<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>kubectl get endpoints &lt;service&gt;
+</span></span><span style="display:flex;"><span>iptables-save | grep &lt;service-ip&gt;</span></span></code></pre></div><p>Empty endpoints mean the selector matches no ready pods - the <a href="../kubernetes-troubleshooting/">troubleshooting</a> notes covered that one. Endpoints present but no traffic means the datapath: kube-proxy rules stale, or the CNI broken.</p>
+<h1 id="how-to-debug-a-dead-api-server">How to Debug a Dead API Server<a class="anchor" href="#how-to-debug-a-dead-api-server">#</a></h1>
+<ol>
+<li>From the control-plane node, confirm who&rsquo;s dead:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -k https://127.0.0.1:6443/healthz
+</span></span><span style="display:flex;"><span>crictl ps -a | grep kube-apiserver</span></span></code></pre></div><p><code>curl</code> refusing = apiserver down. <code>curl</code> returning <code>401</code>/<code>200</code> = apiserver fine, your kubeconfig is the problem.</p>
+<ol start="2">
+<li>If it&rsquo;s down, look at the manifest and the kubelet:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls -l /etc/kubernetes/manifests/kube-apiserver.yaml
+</span></span><span style="display:flex;"><span>journalctl -u kubelet -e --no-pager | tail -n <span style="color:#ae81ff">30</span></span></span></code></pre></div><p>A missing or malformed manifest is a static-pod problem; a crash-looping apiserver shows up as a pod that keeps restarting in <code>crictl ps</code>.</p>
+<ol start="3">
+<li>Read why it crashes - the apiserver log is inside the container:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>crictl logs <span style="color:#66d9ef">$(</span>crictl ps -a -q --name kube-apiserver | head -1<span style="color:#66d9ef">)</span> | tail -n <span style="color:#ae81ff">40</span></span></span></code></pre></div><p>The usual suspects, in order: etcd unreachable (check etcd next), expired apiserver certs, a bad flag in the manifest after someone edited it, disk full on <code>/var</code>.</p>
+<ol start="4">
+<li>Verify etcd is answering before you blame anything else:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>etcdctl ... endpoint health</span></span></code></pre></div><ol start="5">
+<li>Fix the cause (not the symptom), then confirm:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -k https://127.0.0.1:6443/healthz
+</span></span><span style="display:flex;"><span>kubectl get --raw<span style="color:#f92672">=</span>/healthz</span></span></code></pre></div><h1 id="how-to-diagnose-a-notready-node">How to Diagnose a NotReady Node<a class="anchor" href="#how-to-diagnose-a-notready-node">#</a></h1>
+<ol>
+<li>Get the condition and the age - <code>NotReady</code> for 10 seconds is not <code>NotReady</code> for 10 hours:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl describe node &lt;node-name&gt; | sed -n <span style="color:#e6db74">&#39;/Conditions/,$p&#39;</span></span></span></code></pre></div><p><code>MemoryPressure</code>, <code>DiskPressure</code>, <code>PIDPressure</code>, <code>NetworkUnavailable</code>, <code>Ready=False</code> each point to a different subsystem.</p>
+<ol start="2">
+<li>On the node itself, check the babysitter:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>systemctl status kubelet
+</span></span><span style="display:flex;"><span>journalctl -u kubelet -e --no-pager | tail -n <span style="color:#ae81ff">40</span></span></span></code></pre></div><ol start="3">
+<li>Check the CRI and the disk:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>crictl info &gt;/dev/null <span style="color:#f92672">&amp;&amp;</span> echo runtime-ok
+</span></span><span style="display:flex;"><span>df -h</span></span></code></pre></div><p>A full disk is the quietest cluster-killer there is - the kubelet stops posting status, etcd stops accepting writes, and every symptom is downstream.</p>
+<ol start="4">
+<li>Fix, then wait (or force) the kubelet to re-register. Pods already running on the node usually survive a kubelet restart; they don&rsquo;t survive the node being rebooted if their PVCs are stuck elsewhere.</li>
+</ol>
+<h1 id="how-to-debug-the-scheduler-and-the-controller-manager">How to Debug the Scheduler and the Controller Manager<a class="anchor" href="#how-to-debug-the-scheduler-and-the-controller-manager">#</a></h1>
+<p>These two are quieter than the apiserver but just as load-bearing. Both use leader election - only one instance is active at a time.</p>
+<ol>
+<li>Check the leader (with apiserver up):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get lease -n kube-system</span></span></code></pre></div><ol start="2">
+<li>Check the logs for why work isn&rsquo;t happening:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl logs -n kube-system kube-scheduler --tail<span style="color:#f92672">=</span><span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>kubectl logs -n kube-system kube-controller-manager --tail<span style="color:#f92672">=</span><span style="color:#ae81ff">40</span></span></span></code></pre></div><p>For the scheduler, pods stuck <code>Pending</code> with no events mean it&rsquo;s not running (or can&rsquo;t find a feasible node - <code>describe pod</code> shows the feasibility errors). For the controller-manager, Deployments that don&rsquo;t scale and nodes that never get <code>NotReady</code> are the tells.</p>
+<ol start="3">
+<li>On a static-pod cluster, <code>kubectl logs</code> only works if the apiserver is up. Otherwise go to <code>crictl logs</code> on the node, same as the apiserver.</li>
+</ol>
+<p>Türkçe homelab checklist (kafam karıştığında sırayla uyguladığım liste):</p>
+<ol>
+<li><code>kubectl</code> erişim hatası mı, yoksa iş bitmiyor mu? İkisi farklı arızalar</li>
+<li><code>curl -k https://127.0.0.1:6443/healthz</code> ile apiserver</li>
+<li><code>crictl ps -a</code> ile static pod&rsquo;lar ayakta mı</li>
+<li><code>etcdctl endpoint health</code> ile etcd</li>
+<li><code>systemctl status kubelet</code> + <code>journalctl -u kubelet</code> ile node tarafı</li>
+<li><code>kubectl get lease -n kube-system</code> ile scheduler/CM liderliği</li>
+<li><code>df -h</code> ve <code>kubectl describe node</code> ile kaynak baskısı</li>
+<li>Sonra - ve ancak ondan sonra - uygulama logları</li>
+</ol>
+<p>for more <a href="../gitops-argocd/">gitops-argocd</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>kubernetes-troubleshooting</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes_v2/gitops-argocd/" class="flex align-center">
+        <span>gitops-argocd</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents"></nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

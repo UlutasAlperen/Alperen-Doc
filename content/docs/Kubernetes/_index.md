@@ -17,7 +17,8 @@ For example, you _could_ install Docker on a single server, and route traffic di
 
 - Orchestrate containers across single-node (Minikube) and multi-node aws(WORK IN PROGRESS) clusters
 - Declare the desired state with YAML manifests and let controllers reconcile it
-- Load balance and expose services through Services and Gateways
+- Load balance and expose services through Services, Ingress and Gateways
+- Control who can do what with RBAC
 - Scale workloads vertically and horizontally (HPA)
 - Persist state with volumes, PVCs and persistent storage
 - Run stateful workloads like databases with StatefulSets
@@ -30,18 +31,23 @@ For example, you _could_ install Docker on a single server, and route traffic di
 2. [kubernetes-pods-minikube](kubernetes-pods-minikube/)
 3. [kubernetes-deployments-minikube](kubernetes-deployments-minikube/)
 4. [kubernetes-probes](kubernetes-probes/)
-5. [kubernetes-yaml-configurations](kubernetes-yaml-configurations/)
-6. [kubernetes-secrets](kubernetes-secrets/)
-7. [kubernetes-jobs-cronjobs](kubernetes-jobs-cronjobs/)
-8. [kubernetes-services](kubernetes-services/)
-9. [kubernetes-gateway-minikube](kubernetes-gateway-minikube/)
-10. [kubernetes-namespaces](kubernetes-namespaces/)
-11. [kubernetes-scaling-vertical](kubernetes-scaling-vertical/)
-12. [kubernetes-scaling-horizontal](kubernetes-scaling-horizontal/)
-13. [kubernetes-storage](kubernetes-storage/)
-14. [kubernetes-persistent-volumes](kubernetes-persistent-volumes/)
-15. [kubernetes-statefulsets](kubernetes-statefulsets/)
-16. [kubernetes-nodes-basic](kubernetes-nodes-basic/)
+5. [kubernetes-deployment-rollouts](kubernetes-deployment-rollouts/)
+6. [kubernetes-yaml-configurations](kubernetes-yaml-configurations/)
+7. [kubernetes-secrets](kubernetes-secrets/)
+8. [kubernetes-rbac](kubernetes-rbac/)
+9. [kubernetes-jobs-cronjobs](kubernetes-jobs-cronjobs/)
+10. [kubernetes-services](kubernetes-services/)
+11. [kubernetes-ingress](kubernetes-ingress/)
+12. [kubernetes-gateway-minikube](kubernetes-gateway-minikube/)
+13. [kubernetes-namespaces](kubernetes-namespaces/)
+14. [kubernetes-dns-coredns](kubernetes-dns-coredns/)
+15. [kubernetes-scaling-vertical](kubernetes-scaling-vertical/)
+16. [kubernetes-scaling-horizontal](kubernetes-scaling-horizontal/)
+17. [kubernetes-storage](kubernetes-storage/)
+18. [kubernetes-persistent-volumes](kubernetes-persistent-volumes/)
+19. [kubernetes-storage-classes](kubernetes-storage-classes/)
+20. [kubernetes-statefulsets](kubernetes-statefulsets/)
+21. [kubernetes-nodes-basic](kubernetes-nodes-basic/)
 
 ### Temeller
 
@@ -49,28 +55,33 @@ For example, you _could_ install Docker on a single server, and route traffic di
 - [kubernetes-pods-minikube](kubernetes-pods-minikube/) = Pod kavramı, ephemeral doğası, `kubectl logs/delete pod`, pod'ların unique IP adresleri
 - [kubernetes-deployments-minikube](kubernetes-deployments-minikube/) = Deployment ve ReplicaSet, desired vs current state, `kubectl get/edit deployment`
 - [kubernetes-probes](kubernetes-probes/) = Liveness/Readiness/Startup probes, `httpGet`/`tcpSocket`/`exec`, rolling update'lerde probes'un rolü
+- [kubernetes-deployment-rollouts](kubernetes-deployment-rollouts/) = Rolling update (`maxSurge`/`maxUnavailable`), `kubectl set image`, `rollout status/history/undo`, bozuk imajdan kurtarma
 - [kubernetes-yaml-configurations](kubernetes-yaml-configurations/) = YAML manifest yapısı (`apiVersion`, `kind`, `spec`), ConfigMap, `env`/`envFrom`, Secrets
 
-### Secret'lar ve Batch İşleri
+### Secret'lar, RBAC ve Batch İşleri
 
 - [kubernetes-secrets](kubernetes-secrets/) = `kubectl create secret`, `secretKeyRef`/`envFrom`/volume mount, base64 ≠ şifreleme, Sealed Secrets/External Secrets
+- [kubernetes-rbac](kubernetes-rbac/) = ServiceAccount (token mount), Role/ClusterRole, RoleBinding/ClusterRoleBinding, `kubectl auth can-i --as`
 - [kubernetes-jobs-cronjobs](kubernetes-jobs-cronjobs/) = Job (`completions`/`parallelism`/`backoffLimit`), CronJob (`schedule`/`concurrencyPolicy`), db.json yedekleme pipeline'ı
 
-### Ağ (Services & Gateway)
+### Ağ (Services, Ingress & Gateway)
 
 - [kubernetes-services](kubernetes-services/) = `ClusterIP`, `NodePort`, `LoadBalancer`, `ExternalName`, stable endpoint ve load balancing
+- [kubernetes-ingress](kubernetes-ingress/) = Ingress controller (nginx) vs Ingress resource, host/path kuralları, `ingressClassName`, TLS + Secret
 - [kubernetes-gateway-minikube](kubernetes-gateway-minikube/) = Gateway API (Envoy), `HTTPRoute`, `/etc/hosts` + `minikube tunnel`, annotations
 - [kubernetes-namespaces](kubernetes-namespaces/) = `kubectl create ns`, `-n` flag, intra-cluster DNS (`svc.cluster.local`)
+- [kubernetes-dns-coredns](kubernetes-dns-coredns/) = CoreDNS + Corefile ConfigMap, `dnsPolicy`/`ndots`, `nslookup` ile DNS troubleshooting, kube-dns servisi
 
 ### Ölçeklendirme
 
-- [kubernetes-scaling-vertical](kubernetes-scaling-vertical/) = `metrics-server`, `kubectl top`, resource limits (`50m` CPU, `256Mi` RAM), CrashLoopBackOff
+- [kubernetes-scaling-vertical](kubernetes-scaling-vertical/) = `metrics-server`, `kubectl top` (pod + node), resource limits (`50m` CPU, `256Mi` RAM), CrashLoopBackOff
 - [kubernetes-scaling-horizontal](kubernetes-scaling-horizontal/) = `HorizontalPodAutoscaler` (HPA), `minReplicas`/`maxReplicas`, CPU hedefli otomatik ölçekleme
 
 ### Depolama
 
 - [kubernetes-storage](kubernetes-storage/) = Ephemeral filesystem, `emptyDir` volumes, multi-container pod'lar (sidecar), veritabanları
 - [kubernetes-persistent-volumes](kubernetes-persistent-volumes/) = `PersistentVolume` (PV), `PersistentVolumeClaim` (PVC), dynamic provisioning, volumeMounts
+- [kubernetes-storage-classes](kubernetes-storage-classes/) = StorageClass (`provisioner`/`volumeBindingMode`/`allowVolumeExpansion`), access modes (RWO/ROX/RWX), `reclaimPolicy` Retain/Delete, static PV
 - [kubernetes-statefulsets](kubernetes-statefulsets/) = Stable identity, `volumeClaimTemplates` ile pod başına PVC, headless services, PostgreSQL örneği
 
 ### Prod'e Geçiş

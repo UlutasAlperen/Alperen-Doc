@@ -1,6 +1,6 @@
 ---
 title: "postgresql-statefulset-replication"
-weight: 11
+weight: 16
 ---
 # PostgreSQL Streaming Replication (The Manual Way)
 

@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-yaml-configurations"
-weight: 5
+weight: 6
 ---
 # YAML Config
 

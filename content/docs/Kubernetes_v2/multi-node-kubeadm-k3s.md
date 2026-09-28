@@ -1,6 +1,6 @@
 ---
 title: "multi-node-kubeadm-k3s"
-weight: 9
+weight: 12
 ---
 # Multi-Node: From Minikube to a Real Cluster
 
@@ -135,7 +135,7 @@ sudo etcdctl --endpoints=https://127.0.0.1:2379 \
 
 Proxmox tarafında ayrıca VM-level snapshot almak bedava sigortadır - ama etcd snapshot'ı deployment'ları da kurtarırken, VM snapshot'ı tüm control-plane'i olduğu geri alır; ikisinin yerini tutmaz.
 
-Upgrades: control plane first, one minor at a time, `apt-mark unhold` before, hold again after, drain per node in between. Never skip minors on kubeadm clusters.
+Upgrades: control plane first, one minor at a time, `apt-mark unhold` before, hold again after, drain per node in between. Never skip minors on kubeadm clusters. The full command-by-command walkthrough - including etcd restore and cert renewal - is in [kubeadm-upgrade-etcd](../kubeadm-upgrade-etcd/); HA topologies that make an upgrade survivable are in [ha-control-plane](../ha-control-plane/).
 
 ## k3s Alternatifi
 
@@ -241,4 +241,4 @@ kubeadm token create --print-join-command   # on kmaster
 kubectl get nodes --watch
 ```
 
-for more [longhorn](../longhorn/)
+for more [kubeadm-upgrade-etcd](../kubeadm-upgrade-etcd/)

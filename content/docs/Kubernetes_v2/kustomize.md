@@ -218,4 +218,4 @@ kubectl get pods --watch
 
 > If the ConfigMap is referenced via `envFrom` the roll happens because the pod template changes. If some pod reads the ConfigMap via a mounted volume at runtime, the _file_ updates on disk but pods still won't restart automatically unless the hash trick applies - that's exactly why `envFrom` + generator is the sanest pattern here.
 
-for more [network-policy](../network-policy/)
+for more [cluster-extensions](../cluster-extensions/)

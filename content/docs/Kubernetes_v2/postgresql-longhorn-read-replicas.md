@@ -1,6 +1,6 @@
 ---
 title: "postgresql-longhorn-read-replicas"
-weight: 12
+weight: 17
 ---
 # PostgreSQL Read Replicas with CloudNativePG
 

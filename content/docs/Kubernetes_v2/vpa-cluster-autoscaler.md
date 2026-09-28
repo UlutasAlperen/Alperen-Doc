@@ -1,6 +1,6 @@
 ---
 title: "vpa-cluster-autoscaler"
-weight: 7
+weight: 9
 ---
 # The Three Autoscalers
 
@@ -52,7 +52,7 @@ The trap: VPA `Auto` and CPU-based HPA fight over the same pods. VPA changes eac
 - Two autoscalers on the same resource → pick one
 - [KEDA](https://keda.sh/) enters when the metric isn't CPU/memory at all (queue length, Kafka lag, HTTP RPS) - it's a scaler layer, not a VPA replacement
 
-> Cluster Autoscaler + HPA is the pairing that _does_ compose cleanly: HPA grows pod count → pods go `Pending` → CA adds nodes → pods land. VPA in `Auto` is the one that plays badly, because its tool is eviction - and eviction is also what PodDisruptionBudgets try to guard against, so the updater respects PDBs (`minAvailable`) when evicting. Put a sane PDB in front of anything VPA `Auto` touches.
+> Cluster Autoscaler + HPA is the pairing that _does_ compose cleanly: HPA grows pod count → pods go `Pending` → CA adds nodes → pods land. VPA in `Auto` is the one that plays badly, because its tool is eviction - and eviction is also what PodDisruptionBudgets try to guard against, so the updater respects PDBs (`minAvailable`) when evicting. Put a sane PDB in front of anything VPA `Auto` touches - how to write one (and why `minAvailable` equal to the replica count makes `drain` hang forever) is in [pod-priority-disruption](../pod-priority-disruption/).
 
 Minikube'da Cluster Autoscaler'ın gerçek bir karşılığı yok (tek node zaten); davranışı elle taklit edebilirsin:
 

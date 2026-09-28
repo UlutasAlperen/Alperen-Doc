@@ -1,6 +1,6 @@
 ---
 title: "gitops-argocd"
-weight: 6
+weight: 8
 ---
 # GitOps
 

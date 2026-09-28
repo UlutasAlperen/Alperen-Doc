@@ -29,7 +29,7 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
 	<meta itemprop="description" content="Secrets# In the YAML config chapter we saw that ConfigMaps are a great way to manage innocent environment variables - ports, URLs, feature flags. But we also learned that ConfigMaps are not encrypted, and anyone with access to the cluster can read them.
 Secrets are the Kubernetes object designed for sensitive data: passwords, tokens, and keys. Functionally, they look a lot like ConfigMaps. The differences are:
 Values are stored base64-encoded in the object Access can be restricted with RBAC (who can read which secrets) etcd can be configured to encrypt secret data at rest Creating a Secret# The imperative way:">
-	<meta itemprop="wordCount" content="516">
+	<meta itemprop="wordCount" content="521">
 
 <title>kubernetes-secrets • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.179add252826433df802ccea614129248d0c331c2ce31bf45e7bbab25dfb742d.js" integrity="sha256-F5rdJSgmQz34AszqYUEpJI0MMxws4xv0Xnu6sl37dC0=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.bcb7780d1e8dc035cc2ae9624faf9e15b5c71aacd73331a68d41d4f3450bfae9.js" integrity="sha256-vLd4DR6NwDXMKuliT6&#43;eFbXHGqzXMzGmjUHU80UL&#43;uk=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -696,6 +696,20 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
   
 
   
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
       kubernetes-yaml-configurations</a>
   
@@ -712,6 +726,20 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
   
     <a href="/docs/kubernetes/kubernetes-secrets/" class="active">
       kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
   
 
         </li>
@@ -752,6 +780,20 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
   
 
   
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
       kubernetes-gateway-minikube</a>
   
@@ -768,6 +810,20 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
   
     <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
       kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
   
 
         </li>
@@ -824,6 +880,20 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
   
     <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
       kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
   
 
         </li>
@@ -915,6 +985,20 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
   
 
   
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes_v2/network-policy/" class="">
       network-policy</a>
   
@@ -945,6 +1029,20 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
   
     <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
       kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
   
 
         </li>
@@ -999,8 +1097,50 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
   
 
   
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
       multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
   
 
         </li>
@@ -1127,7 +1267,7 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
 <p><a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secrets</a> are the Kubernetes object designed for sensitive data: passwords, tokens, and keys. Functionally, they look a <em>lot</em> like ConfigMaps. The differences are:</p>
 <ul>
 <li>Values are stored base64-encoded in the object</li>
-<li>Access can be restricted with RBAC (who can read which secrets)</li>
+<li>Access can be restricted with <a href="../kubernetes-rbac/">RBAC</a> (who can read which secrets)</li>
 <li>etcd can be configured to encrypt secret data at rest</li>
 </ul>
 <h2 id="creating-a-secret">Creating a Secret<a class="anchor" href="#creating-a-secret">#</a></h2>
@@ -1168,7 +1308,7 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
 <p><strong>Dikkat:</strong> Secret değerlerinin base64 ile kodlanmış olması onları <em>güvenli</em> yapmaz. Base64 sadece bir <strong>encoding</strong> tekniğidir, şifreleme (encryption) değildir. <code>kubectl get secret db-auth -o yaml</code> çıktısını görüp <code>base64 -d</code> çalıştırabilen herkes değerleri geri okur.</p>
 <p>Yani secret&rsquo;ların &ldquo;güvenliği&rdquo; şunlardan gelir:</p>
 <ul>
-<li><strong>RBAC</strong>: Kimin hangi secret&rsquo;ı okuyabildiğini kısıtlar</li>
+<li><strong>RBAC</strong>: Kimin hangi secret&rsquo;ı okuyabildiğini kısıtlar - <a href="../kubernetes-rbac/">rbac</a> notlarında adım adım</li>
 <li><strong>etcd encryption at rest</strong>: Disk üzerinde şifreli saklanması</li>
 <li><strong>Least privilege</strong>: Secret&rsquo;ları sadece ihtiyacı olan deployment&rsquo;ların namespace&rsquo;lerinde tutmak</li>
 </ul>
@@ -1198,7 +1338,7 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synergychat-api-secret</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">key</span>: <span style="color:#ae81ff">API_KEY</span></span></span></code></pre></div><p>Apply, then prove the env var made it into the container:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl exec &lt;pod-name&gt; -- printenv | grep API_KEY</span></span></code></pre></div><p>If you see your token, congrats - your deployment is pulling sensitive config from a Secret instead of a plaintext ConfigMap.</p>
-<p>for more <a href="../kubernetes-jobs-cronjobs/">jobs-cronjobs</a></p>
+<p>for more <a href="../kubernetes-rbac/">rbac</a></p>
 </article>
  
       
@@ -1228,8 +1368,8 @@ Values are stored base64-encoded in the object Access can be restricted with RBA
     </span>
     <span>
     
-      <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="flex align-center">
-        <span>kubernetes-jobs-cronjobs</span>
+      <a href="/docs/kubernetes/kubernetes-rbac/" class="flex align-center">
+        <span>kubernetes-rbac</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     

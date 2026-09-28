@@ -9,22 +9,22 @@ https://github.com/alex-shpak/hugo-book
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="These are the follow-up notes to my Kubernetes section - same Minikube cluster, next level: packaging, hardening, operations and multi-node. I use this section to:
-Package and distribute applications with Helm charts Manage my own manifests with Kustomize overlays Lock down pod-to-pod traffic with NetworkPolicies and secure containers with Security Contexts Debug broken workloads like an operator, not a tourist Move CD from push (GitHub Actions &#43; rsync) to pull (ArgoCD) Complete the autoscaling trio (HPA → VPA → Cluster Autoscaler) Schedule pods with taints, tolerations and spread constraints on multi-node clusters Run distributed block storage with Longhorn and build real PostgreSQL HA with read replicas And much more Kubernetes v2 konular# helm kustomize network-policy security-context kubernetes-troubleshooting gitops-argocd vpa-cluster-autoscaler taints-affinity-quotas multi-node-kubeadm-k3s longhorn postgresql-statefulset-replication postgresql-longhorn-read-replicas Araçlar (Helm &amp; Kustomize)# helm = Chart anatomy (crds/, subcharts), values precedence, hooks &amp; weights, release storage; How-to: chart inceleme, Prometheus kurulumu, rollback kustomize = base/overlays, strategic merge vs JSON6902, configMapGenerator hash trick; How-to: overlay yapısı, dev→prod promotion, config change auto-roll Güvenlik ve Ağ# network-policy = additive/union semantiği, AND vs OR selectors, ipBlock, CNI gerçekliği; How-to: default-deny zone, web→api kuralı, netshoot doğrulama security-context = runAsNonRoot/fsGroup/seccompProfile, readOnlyRootFilesystem, Pod Security Admission; How-to: non-root API, restricted profile geçişi Operasyon# kubernetes-troubleshooting = pod durumları &#43; exit code cheat-sheet, kubectl debug (ephemeral containers, node debug), jsonpath; How-to: CrashLoopBackOff teşhisi, shell-less debug, scheduling trace gitops-argocd = GitOps prensipleri, sync waves/hooks, app-of-apps/ApplicationSet; How-to: ArgoCD kurulum &#43; CLI login, auto-sync onboarding, drift testi Ölçeklendirme ve Scheduling# vpa-cluster-autoscaler = HPA→VPA→CA üçlüsü, VPA bileşen mimarisi (recommender/webhook/updater), PDB ilişkisi; How-to: öneri okuma, controlled mode uygulama taints-affinity-quotas = Taints/Tolerations, affinity, topologySpreadConstraints, ResourceQuota/LimitRange; How-to: node rezerve etme, replica dağıtma, namespace cap Multi-Node (Homelab)# multi-node-kubeadm-k3s = kubeadm ile 3 node’lu k8s (GPG’li apt, containerd, CNI), k3s alternatifi, etcd backup; How-to: bootstrap, worker join, node remove/re-add Depolama ve HA# longhorn = dağıtık block storage CSI, engine/replica mimarisi, snapshot vs backup; How-to: node hazırlığı (iscsid), helm kurulumu, default SC, node failover testi postgresql-statefulset-replication = WAL streaming replication elle: replication user, pg_basebackup -R, pg_stat_replication; manuel pg_promote ve split-brain uyarısı postgresql-longhorn-read-replicas = CloudNativePG Cluster CRD, -rw/-ro service üçlüsü, otomatik failover; snapshot ≠ PG backup uyarısı ">
+Package and distribute applications with Helm charts Manage my own manifests with Kustomize overlays Lock down pod-to-pod traffic with NetworkPolicies and secure containers with Security Contexts Understand the extension interfaces (CNI/CSI/CRI) and what CRDs and operators really are Debug broken workloads - and broken control planes - like an operator, not a tourist Move CD from push (GitHub Actions &#43; rsync) to pull (ArgoCD) Complete the autoscaling trio (HPA → VPA → Cluster Autoscaler) Schedule pods with taints, tolerations, spread constraints and priorities on multi-node clusters Upgrade clusters, restore etcd from snapshots and run a highly-available control plane Run distributed block storage with Longhorn and build real PostgreSQL HA with read replicas And much more Kubernetes v2 konular# helm kustomize cluster-extensions network-policy security-context kubernetes-troubleshooting control-plane-troubleshooting gitops-argocd vpa-cluster-autoscaler taints-affinity-quotas pod-priority-disruption multi-node-kubeadm-k3s kubeadm-upgrade-etcd ha-control-plane longhorn postgresql-statefulset-replication postgresql-longhorn-read-replicas Araçlar ve Genişletmeler# helm = Chart anatomy (crds/, subcharts), values precedence, hooks &amp; weights, release storage; How-to: chart inceleme, Prometheus kurulumu, rollback kustomize = base/overlays, strategic merge vs JSON6902, configMapGenerator hash trick; How-to: overlay yapısı, dev→prod promotion, config change auto-roll cluster-extensions = CNI/CSI/CRI arayüzleri, crictl, CRD ve Custom Resource’lar, operator reconcile döngüsü; How-to: CRD inceleme, Helm ile operator kurulumu Güvenlik ve Ağ# network-policy = additive/union semantiği, AND vs OR selectors, ipBlock, CNI gerçekliği; How-to: default-deny zone, web→api kuralı, netshoot doğrulama security-context = runAsNonRoot/fsGroup/seccompProfile, readOnlyRootFilesystem, Pod Security Admission; How-to: non-root API, restricted profile geçişi Operasyon# kubernetes-troubleshooting = pod durumları &#43; exit code cheat-sheet, kubectl debug (ephemeral containers, node debug), jsonpath; How-to: CrashLoopBackOff teşhisi, shell-less debug, scheduling trace control-plane-troubleshooting = static pod’lar, kubelet/NotReady karar ağacı, etcdctl endpoint health/defrag, kube-proxy, scheduler/CM leader election; How-to: dead apiserver, NotReady node, Türkçe checklist gitops-argocd = GitOps prensipleri, sync waves/hooks, app-of-apps/ApplicationSet; How-to: ArgoCD kurulum &#43; CLI login, auto-sync onboarding, drift testi Ölçeklendirme ve Scheduling# vpa-cluster-autoscaler = HPA→VPA→CA üçlüsü, VPA bileşen mimarisi (recommender/webhook/updater), PDB ilişkisi; How-to: öneri okuma, controlled mode uygulama taints-affinity-quotas = Taints/Tolerations, affinity, topologySpreadConstraints, ResourceQuota/LimitRange; How-to: node rezerve etme, replica dağıtma, namespace cap pod-priority-disruption = DaemonSet, PriorityClass/preemption, PodDisruptionBudget (minAvailable) ve drain etkileşimi; How-to: ajan-per-node, drain sırasında servis koruma Multi-Node (Homelab)# multi-node-kubeadm-k3s = kubeadm ile 3 node’lu k8s (GPG’li apt, containerd, CNI), k3s alternatifi, etcd backup; How-to: bootstrap, worker join, node remove/re-add kubeadm-upgrade-etcd = kubeadm upgrade plan/apply, drain sırası, etcdctl snapshot save/restore, kubeadm certs check-expiration/renew; How-to: CP upgrade, worker upgrade, etcd restore, cert renew ha-control-plane = stacked vs external etcd, quorum, controlPlaneEndpoint &#43; API LB, kubeadm join --control-plane; How-to: 2. CP node, external etcd, failover testi Depolama ve HA# longhorn = dağıtık block storage CSI, engine/replica mimarisi, snapshot vs backup; How-to: node hazırlığı (iscsid), helm kurulumu, default SC, node failover testi postgresql-statefulset-replication = WAL streaming replication elle: replication user, pg_basebackup -R, pg_stat_replication; manuel pg_promote ve split-brain uyarısı postgresql-longhorn-read-replicas = CloudNativePG Cluster CRD, -rw/-ro service üçlüsü, otomatik failover; snapshot ≠ PG backup uyarısı ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="Kubernetes v2">
 	<meta property="og:description" content="These are the follow-up notes to my Kubernetes section - same Minikube cluster, next level: packaging, hardening, operations and multi-node. I use this section to:
-Package and distribute applications with Helm charts Manage my own manifests with Kustomize overlays Lock down pod-to-pod traffic with NetworkPolicies and secure containers with Security Contexts Debug broken workloads like an operator, not a tourist Move CD from push (GitHub Actions &#43; rsync) to pull (ArgoCD) Complete the autoscaling trio (HPA → VPA → Cluster Autoscaler) Schedule pods with taints, tolerations and spread constraints on multi-node clusters Run distributed block storage with Longhorn and build real PostgreSQL HA with read replicas And much more Kubernetes v2 konular# helm kustomize network-policy security-context kubernetes-troubleshooting gitops-argocd vpa-cluster-autoscaler taints-affinity-quotas multi-node-kubeadm-k3s longhorn postgresql-statefulset-replication postgresql-longhorn-read-replicas Araçlar (Helm &amp; Kustomize)# helm = Chart anatomy (crds/, subcharts), values precedence, hooks &amp; weights, release storage; How-to: chart inceleme, Prometheus kurulumu, rollback kustomize = base/overlays, strategic merge vs JSON6902, configMapGenerator hash trick; How-to: overlay yapısı, dev→prod promotion, config change auto-roll Güvenlik ve Ağ# network-policy = additive/union semantiği, AND vs OR selectors, ipBlock, CNI gerçekliği; How-to: default-deny zone, web→api kuralı, netshoot doğrulama security-context = runAsNonRoot/fsGroup/seccompProfile, readOnlyRootFilesystem, Pod Security Admission; How-to: non-root API, restricted profile geçişi Operasyon# kubernetes-troubleshooting = pod durumları &#43; exit code cheat-sheet, kubectl debug (ephemeral containers, node debug), jsonpath; How-to: CrashLoopBackOff teşhisi, shell-less debug, scheduling trace gitops-argocd = GitOps prensipleri, sync waves/hooks, app-of-apps/ApplicationSet; How-to: ArgoCD kurulum &#43; CLI login, auto-sync onboarding, drift testi Ölçeklendirme ve Scheduling# vpa-cluster-autoscaler = HPA→VPA→CA üçlüsü, VPA bileşen mimarisi (recommender/webhook/updater), PDB ilişkisi; How-to: öneri okuma, controlled mode uygulama taints-affinity-quotas = Taints/Tolerations, affinity, topologySpreadConstraints, ResourceQuota/LimitRange; How-to: node rezerve etme, replica dağıtma, namespace cap Multi-Node (Homelab)# multi-node-kubeadm-k3s = kubeadm ile 3 node’lu k8s (GPG’li apt, containerd, CNI), k3s alternatifi, etcd backup; How-to: bootstrap, worker join, node remove/re-add Depolama ve HA# longhorn = dağıtık block storage CSI, engine/replica mimarisi, snapshot vs backup; How-to: node hazırlığı (iscsid), helm kurulumu, default SC, node failover testi postgresql-statefulset-replication = WAL streaming replication elle: replication user, pg_basebackup -R, pg_stat_replication; manuel pg_promote ve split-brain uyarısı postgresql-longhorn-read-replicas = CloudNativePG Cluster CRD, -rw/-ro service üçlüsü, otomatik failover; snapshot ≠ PG backup uyarısı">
+Package and distribute applications with Helm charts Manage my own manifests with Kustomize overlays Lock down pod-to-pod traffic with NetworkPolicies and secure containers with Security Contexts Understand the extension interfaces (CNI/CSI/CRI) and what CRDs and operators really are Debug broken workloads - and broken control planes - like an operator, not a tourist Move CD from push (GitHub Actions &#43; rsync) to pull (ArgoCD) Complete the autoscaling trio (HPA → VPA → Cluster Autoscaler) Schedule pods with taints, tolerations, spread constraints and priorities on multi-node clusters Upgrade clusters, restore etcd from snapshots and run a highly-available control plane Run distributed block storage with Longhorn and build real PostgreSQL HA with read replicas And much more Kubernetes v2 konular# helm kustomize cluster-extensions network-policy security-context kubernetes-troubleshooting control-plane-troubleshooting gitops-argocd vpa-cluster-autoscaler taints-affinity-quotas pod-priority-disruption multi-node-kubeadm-k3s kubeadm-upgrade-etcd ha-control-plane longhorn postgresql-statefulset-replication postgresql-longhorn-read-replicas Araçlar ve Genişletmeler# helm = Chart anatomy (crds/, subcharts), values precedence, hooks &amp; weights, release storage; How-to: chart inceleme, Prometheus kurulumu, rollback kustomize = base/overlays, strategic merge vs JSON6902, configMapGenerator hash trick; How-to: overlay yapısı, dev→prod promotion, config change auto-roll cluster-extensions = CNI/CSI/CRI arayüzleri, crictl, CRD ve Custom Resource’lar, operator reconcile döngüsü; How-to: CRD inceleme, Helm ile operator kurulumu Güvenlik ve Ağ# network-policy = additive/union semantiği, AND vs OR selectors, ipBlock, CNI gerçekliği; How-to: default-deny zone, web→api kuralı, netshoot doğrulama security-context = runAsNonRoot/fsGroup/seccompProfile, readOnlyRootFilesystem, Pod Security Admission; How-to: non-root API, restricted profile geçişi Operasyon# kubernetes-troubleshooting = pod durumları &#43; exit code cheat-sheet, kubectl debug (ephemeral containers, node debug), jsonpath; How-to: CrashLoopBackOff teşhisi, shell-less debug, scheduling trace control-plane-troubleshooting = static pod’lar, kubelet/NotReady karar ağacı, etcdctl endpoint health/defrag, kube-proxy, scheduler/CM leader election; How-to: dead apiserver, NotReady node, Türkçe checklist gitops-argocd = GitOps prensipleri, sync waves/hooks, app-of-apps/ApplicationSet; How-to: ArgoCD kurulum &#43; CLI login, auto-sync onboarding, drift testi Ölçeklendirme ve Scheduling# vpa-cluster-autoscaler = HPA→VPA→CA üçlüsü, VPA bileşen mimarisi (recommender/webhook/updater), PDB ilişkisi; How-to: öneri okuma, controlled mode uygulama taints-affinity-quotas = Taints/Tolerations, affinity, topologySpreadConstraints, ResourceQuota/LimitRange; How-to: node rezerve etme, replica dağıtma, namespace cap pod-priority-disruption = DaemonSet, PriorityClass/preemption, PodDisruptionBudget (minAvailable) ve drain etkileşimi; How-to: ajan-per-node, drain sırasında servis koruma Multi-Node (Homelab)# multi-node-kubeadm-k3s = kubeadm ile 3 node’lu k8s (GPG’li apt, containerd, CNI), k3s alternatifi, etcd backup; How-to: bootstrap, worker join, node remove/re-add kubeadm-upgrade-etcd = kubeadm upgrade plan/apply, drain sırası, etcdctl snapshot save/restore, kubeadm certs check-expiration/renew; How-to: CP upgrade, worker upgrade, etcd restore, cert renew ha-control-plane = stacked vs external etcd, quorum, controlPlaneEndpoint &#43; API LB, kubeadm join --control-plane; How-to: 2. CP node, external etcd, failover testi Depolama ve HA# longhorn = dağıtık block storage CSI, engine/replica mimarisi, snapshot vs backup; How-to: node hazırlığı (iscsid), helm kurulumu, default SC, node failover testi postgresql-statefulset-replication = WAL streaming replication elle: replication user, pg_basebackup -R, pg_stat_replication; manuel pg_promote ve split-brain uyarısı postgresql-longhorn-read-replicas = CloudNativePG Cluster CRD, -rw/-ro service üçlüsü, otomatik failover; snapshot ≠ PG backup uyarısı">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="website">
 
 
 	<meta itemprop="name" content="Kubernetes v2">
 	<meta itemprop="description" content="These are the follow-up notes to my Kubernetes section - same Minikube cluster, next level: packaging, hardening, operations and multi-node. I use this section to:
-Package and distribute applications with Helm charts Manage my own manifests with Kustomize overlays Lock down pod-to-pod traffic with NetworkPolicies and secure containers with Security Contexts Debug broken workloads like an operator, not a tourist Move CD from push (GitHub Actions &#43; rsync) to pull (ArgoCD) Complete the autoscaling trio (HPA → VPA → Cluster Autoscaler) Schedule pods with taints, tolerations and spread constraints on multi-node clusters Run distributed block storage with Longhorn and build real PostgreSQL HA with read replicas And much more Kubernetes v2 konular# helm kustomize network-policy security-context kubernetes-troubleshooting gitops-argocd vpa-cluster-autoscaler taints-affinity-quotas multi-node-kubeadm-k3s longhorn postgresql-statefulset-replication postgresql-longhorn-read-replicas Araçlar (Helm &amp; Kustomize)# helm = Chart anatomy (crds/, subcharts), values precedence, hooks &amp; weights, release storage; How-to: chart inceleme, Prometheus kurulumu, rollback kustomize = base/overlays, strategic merge vs JSON6902, configMapGenerator hash trick; How-to: overlay yapısı, dev→prod promotion, config change auto-roll Güvenlik ve Ağ# network-policy = additive/union semantiği, AND vs OR selectors, ipBlock, CNI gerçekliği; How-to: default-deny zone, web→api kuralı, netshoot doğrulama security-context = runAsNonRoot/fsGroup/seccompProfile, readOnlyRootFilesystem, Pod Security Admission; How-to: non-root API, restricted profile geçişi Operasyon# kubernetes-troubleshooting = pod durumları &#43; exit code cheat-sheet, kubectl debug (ephemeral containers, node debug), jsonpath; How-to: CrashLoopBackOff teşhisi, shell-less debug, scheduling trace gitops-argocd = GitOps prensipleri, sync waves/hooks, app-of-apps/ApplicationSet; How-to: ArgoCD kurulum &#43; CLI login, auto-sync onboarding, drift testi Ölçeklendirme ve Scheduling# vpa-cluster-autoscaler = HPA→VPA→CA üçlüsü, VPA bileşen mimarisi (recommender/webhook/updater), PDB ilişkisi; How-to: öneri okuma, controlled mode uygulama taints-affinity-quotas = Taints/Tolerations, affinity, topologySpreadConstraints, ResourceQuota/LimitRange; How-to: node rezerve etme, replica dağıtma, namespace cap Multi-Node (Homelab)# multi-node-kubeadm-k3s = kubeadm ile 3 node’lu k8s (GPG’li apt, containerd, CNI), k3s alternatifi, etcd backup; How-to: bootstrap, worker join, node remove/re-add Depolama ve HA# longhorn = dağıtık block storage CSI, engine/replica mimarisi, snapshot vs backup; How-to: node hazırlığı (iscsid), helm kurulumu, default SC, node failover testi postgresql-statefulset-replication = WAL streaming replication elle: replication user, pg_basebackup -R, pg_stat_replication; manuel pg_promote ve split-brain uyarısı postgresql-longhorn-read-replicas = CloudNativePG Cluster CRD, -rw/-ro service üçlüsü, otomatik failover; snapshot ≠ PG backup uyarısı">
-	<meta itemprop="wordCount" content="351">
+Package and distribute applications with Helm charts Manage my own manifests with Kustomize overlays Lock down pod-to-pod traffic with NetworkPolicies and secure containers with Security Contexts Understand the extension interfaces (CNI/CSI/CRI) and what CRDs and operators really are Debug broken workloads - and broken control planes - like an operator, not a tourist Move CD from push (GitHub Actions &#43; rsync) to pull (ArgoCD) Complete the autoscaling trio (HPA → VPA → Cluster Autoscaler) Schedule pods with taints, tolerations, spread constraints and priorities on multi-node clusters Upgrade clusters, restore etcd from snapshots and run a highly-available control plane Run distributed block storage with Longhorn and build real PostgreSQL HA with read replicas And much more Kubernetes v2 konular# helm kustomize cluster-extensions network-policy security-context kubernetes-troubleshooting control-plane-troubleshooting gitops-argocd vpa-cluster-autoscaler taints-affinity-quotas pod-priority-disruption multi-node-kubeadm-k3s kubeadm-upgrade-etcd ha-control-plane longhorn postgresql-statefulset-replication postgresql-longhorn-read-replicas Araçlar ve Genişletmeler# helm = Chart anatomy (crds/, subcharts), values precedence, hooks &amp; weights, release storage; How-to: chart inceleme, Prometheus kurulumu, rollback kustomize = base/overlays, strategic merge vs JSON6902, configMapGenerator hash trick; How-to: overlay yapısı, dev→prod promotion, config change auto-roll cluster-extensions = CNI/CSI/CRI arayüzleri, crictl, CRD ve Custom Resource’lar, operator reconcile döngüsü; How-to: CRD inceleme, Helm ile operator kurulumu Güvenlik ve Ağ# network-policy = additive/union semantiği, AND vs OR selectors, ipBlock, CNI gerçekliği; How-to: default-deny zone, web→api kuralı, netshoot doğrulama security-context = runAsNonRoot/fsGroup/seccompProfile, readOnlyRootFilesystem, Pod Security Admission; How-to: non-root API, restricted profile geçişi Operasyon# kubernetes-troubleshooting = pod durumları &#43; exit code cheat-sheet, kubectl debug (ephemeral containers, node debug), jsonpath; How-to: CrashLoopBackOff teşhisi, shell-less debug, scheduling trace control-plane-troubleshooting = static pod’lar, kubelet/NotReady karar ağacı, etcdctl endpoint health/defrag, kube-proxy, scheduler/CM leader election; How-to: dead apiserver, NotReady node, Türkçe checklist gitops-argocd = GitOps prensipleri, sync waves/hooks, app-of-apps/ApplicationSet; How-to: ArgoCD kurulum &#43; CLI login, auto-sync onboarding, drift testi Ölçeklendirme ve Scheduling# vpa-cluster-autoscaler = HPA→VPA→CA üçlüsü, VPA bileşen mimarisi (recommender/webhook/updater), PDB ilişkisi; How-to: öneri okuma, controlled mode uygulama taints-affinity-quotas = Taints/Tolerations, affinity, topologySpreadConstraints, ResourceQuota/LimitRange; How-to: node rezerve etme, replica dağıtma, namespace cap pod-priority-disruption = DaemonSet, PriorityClass/preemption, PodDisruptionBudget (minAvailable) ve drain etkileşimi; How-to: ajan-per-node, drain sırasında servis koruma Multi-Node (Homelab)# multi-node-kubeadm-k3s = kubeadm ile 3 node’lu k8s (GPG’li apt, containerd, CNI), k3s alternatifi, etcd backup; How-to: bootstrap, worker join, node remove/re-add kubeadm-upgrade-etcd = kubeadm upgrade plan/apply, drain sırası, etcdctl snapshot save/restore, kubeadm certs check-expiration/renew; How-to: CP upgrade, worker upgrade, etcd restore, cert renew ha-control-plane = stacked vs external etcd, quorum, controlPlaneEndpoint &#43; API LB, kubeadm join --control-plane; How-to: 2. CP node, external etcd, failover testi Depolama ve HA# longhorn = dağıtık block storage CSI, engine/replica mimarisi, snapshot vs backup; How-to: node hazırlığı (iscsid), helm kurulumu, default SC, node failover testi postgresql-statefulset-replication = WAL streaming replication elle: replication user, pg_basebackup -R, pg_stat_replication; manuel pg_promote ve split-brain uyarısı postgresql-longhorn-read-replicas = CloudNativePG Cluster CRD, -rw/-ro service üçlüsü, otomatik failover; snapshot ≠ PG backup uyarısı">
+	<meta itemprop="wordCount" content="485">
 
 <title>Kubernetes v2 • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -33,7 +33,7 @@ Package and distribute applications with Helm charts Manage my own manifests wit
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.179add252826433df802ccea614129248d0c331c2ce31bf45e7bbab25dfb742d.js" integrity="sha256-F5rdJSgmQz34AszqYUEpJI0MMxws4xv0Xnu6sl37dC0=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.bcb7780d1e8dc035cc2ae9624faf9e15b5c71aacd73331a68d41d4f3450bfae9.js" integrity="sha256-vLd4DR6NwDXMKuliT6&#43;eFbXHGqzXMzGmjUHU80UL&#43;uk=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/index.xml" title="Kubernetes v2" />
 
   
@@ -692,6 +692,20 @@ Package and distribute applications with Helm charts Manage my own manifests wit
   
 
   
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
       kubernetes-yaml-configurations</a>
   
@@ -708,6 +722,20 @@ Package and distribute applications with Helm charts Manage my own manifests wit
   
     <a href="/docs/kubernetes/kubernetes-secrets/" class="">
       kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
   
 
         </li>
@@ -748,6 +776,20 @@ Package and distribute applications with Helm charts Manage my own manifests wit
   
 
   
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
       kubernetes-gateway-minikube</a>
   
@@ -764,6 +806,20 @@ Package and distribute applications with Helm charts Manage my own manifests wit
   
     <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
       kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
   
 
         </li>
@@ -820,6 +876,20 @@ Package and distribute applications with Helm charts Manage my own manifests wit
   
     <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
       kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
   
 
         </li>
@@ -911,6 +981,20 @@ Package and distribute applications with Helm charts Manage my own manifests wit
   
 
   
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes_v2/network-policy/" class="">
       network-policy</a>
   
@@ -941,6 +1025,20 @@ Package and distribute applications with Helm charts Manage my own manifests wit
   
     <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
       kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
   
 
         </li>
@@ -995,8 +1093,50 @@ Package and distribute applications with Helm charts Manage my own manifests wit
   
 
   
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
       multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
   
 
         </li>
@@ -1102,7 +1242,7 @@ Package and distribute applications with Helm charts Manage my own manifests wit
   <ul>
     <li><a href="#kubernetes-v2-konular">Kubernetes v2 konular</a>
       <ul>
-        <li><a href="#araçlar-helm--kustomize">Araçlar (Helm &amp; Kustomize)</a></li>
+        <li><a href="#araçlar-ve-genişletmeler">Araçlar ve Genişletmeler</a></li>
         <li><a href="#güvenlik-ve-ağ">Güvenlik ve Ağ</a></li>
         <li><a href="#operasyon">Operasyon</a></li>
         <li><a href="#ölçeklendirme-ve-scheduling">Ölçeklendirme ve Scheduling</a></li>
@@ -1127,10 +1267,12 @@ Package and distribute applications with Helm charts Manage my own manifests wit
 <li>Package and distribute applications with Helm charts</li>
 <li>Manage my own manifests with Kustomize overlays</li>
 <li>Lock down pod-to-pod traffic with NetworkPolicies and secure containers with Security Contexts</li>
-<li>Debug broken workloads like an operator, not a tourist</li>
+<li>Understand the extension interfaces (CNI/CSI/CRI) and what CRDs and operators really are</li>
+<li>Debug broken workloads - and broken control planes - like an operator, not a tourist</li>
 <li>Move CD from push (GitHub Actions + rsync) to pull (ArgoCD)</li>
 <li>Complete the autoscaling trio (HPA → VPA → Cluster Autoscaler)</li>
-<li>Schedule pods with taints, tolerations and spread constraints on multi-node clusters</li>
+<li>Schedule pods with taints, tolerations, spread constraints and priorities on multi-node clusters</li>
+<li>Upgrade clusters, restore etcd from snapshots and run a highly-available control plane</li>
 <li>Run distributed block storage with Longhorn and build real PostgreSQL HA with read replicas</li>
 <li>And much more</li>
 </ul>
@@ -1138,21 +1280,27 @@ Package and distribute applications with Helm charts Manage my own manifests wit
 <ol>
 <li><a href="helm/">helm</a></li>
 <li><a href="kustomize/">kustomize</a></li>
+<li><a href="cluster-extensions/">cluster-extensions</a></li>
 <li><a href="network-policy/">network-policy</a></li>
 <li><a href="security-context/">security-context</a></li>
 <li><a href="kubernetes-troubleshooting/">kubernetes-troubleshooting</a></li>
+<li><a href="control-plane-troubleshooting/">control-plane-troubleshooting</a></li>
 <li><a href="gitops-argocd/">gitops-argocd</a></li>
 <li><a href="vpa-cluster-autoscaler/">vpa-cluster-autoscaler</a></li>
 <li><a href="taints-affinity-quotas/">taints-affinity-quotas</a></li>
+<li><a href="pod-priority-disruption/">pod-priority-disruption</a></li>
 <li><a href="multi-node-kubeadm-k3s/">multi-node-kubeadm-k3s</a></li>
+<li><a href="kubeadm-upgrade-etcd/">kubeadm-upgrade-etcd</a></li>
+<li><a href="ha-control-plane/">ha-control-plane</a></li>
 <li><a href="longhorn/">longhorn</a></li>
 <li><a href="postgresql-statefulset-replication/">postgresql-statefulset-replication</a></li>
 <li><a href="postgresql-longhorn-read-replicas/">postgresql-longhorn-read-replicas</a></li>
 </ol>
-<h3 id="araçlar-helm--kustomize">Araçlar (Helm &amp; Kustomize)<a class="anchor" href="#ara%c3%a7lar-helm--kustomize">#</a></h3>
+<h3 id="araçlar-ve-genişletmeler">Araçlar ve Genişletmeler<a class="anchor" href="#ara%c3%a7lar-ve-geni%c5%9fletmeler">#</a></h3>
 <ul>
 <li><a href="helm/">helm</a> = Chart anatomy (<code>crds/</code>, subcharts), values precedence, hooks &amp; weights, release storage; How-to: chart inceleme, Prometheus kurulumu, rollback</li>
 <li><a href="kustomize/">kustomize</a> = <code>base</code>/<code>overlays</code>, strategic merge vs JSON6902, <code>configMapGenerator</code> hash trick; How-to: overlay yapısı, dev→prod promotion, config change auto-roll</li>
+<li><a href="cluster-extensions/">cluster-extensions</a> = CNI/CSI/CRI arayüzleri, <code>crictl</code>, CRD ve Custom Resource&rsquo;lar, operator reconcile döngüsü; How-to: CRD inceleme, Helm ile operator kurulumu</li>
 </ul>
 <h3 id="güvenlik-ve-ağ">Güvenlik ve Ağ<a class="anchor" href="#g%c3%bcvenlik-ve-a%c4%9f">#</a></h3>
 <ul>
@@ -1162,16 +1310,20 @@ Package and distribute applications with Helm charts Manage my own manifests wit
 <h3 id="operasyon">Operasyon<a class="anchor" href="#operasyon">#</a></h3>
 <ul>
 <li><a href="kubernetes-troubleshooting/">kubernetes-troubleshooting</a> = pod durumları + exit code cheat-sheet, <code>kubectl debug</code> (ephemeral containers, node debug), jsonpath; How-to: CrashLoopBackOff teşhisi, shell-less debug, scheduling trace</li>
+<li><a href="control-plane-troubleshooting/">control-plane-troubleshooting</a> = static pod&rsquo;lar, kubelet/<code>NotReady</code> karar ağacı, <code>etcdctl endpoint health/defrag</code>, kube-proxy, scheduler/CM leader election; How-to: dead apiserver, NotReady node, Türkçe checklist</li>
 <li><a href="gitops-argocd/">gitops-argocd</a> = GitOps prensipleri, sync waves/hooks, app-of-apps/ApplicationSet; How-to: ArgoCD kurulum + CLI login, auto-sync onboarding, drift testi</li>
 </ul>
 <h3 id="ölçeklendirme-ve-scheduling">Ölçeklendirme ve Scheduling<a class="anchor" href="#%c3%b6l%c3%a7eklendirme-ve-scheduling">#</a></h3>
 <ul>
 <li><a href="vpa-cluster-autoscaler/">vpa-cluster-autoscaler</a> = HPA→VPA→CA üçlüsü, VPA bileşen mimarisi (recommender/webhook/updater), PDB ilişkisi; How-to: öneri okuma, controlled mode uygulama</li>
 <li><a href="taints-affinity-quotas/">taints-affinity-quotas</a> = Taints/Tolerations, affinity, topologySpreadConstraints, ResourceQuota/LimitRange; How-to: node rezerve etme, replica dağıtma, namespace cap</li>
+<li><a href="pod-priority-disruption/">pod-priority-disruption</a> = DaemonSet, PriorityClass/preemption, PodDisruptionBudget (<code>minAvailable</code>) ve drain etkileşimi; How-to: ajan-per-node, drain sırasında servis koruma</li>
 </ul>
 <h3 id="multi-node-homelab">Multi-Node (Homelab)<a class="anchor" href="#multi-node-homelab">#</a></h3>
 <ul>
 <li><a href="multi-node-kubeadm-k3s/">multi-node-kubeadm-k3s</a> = kubeadm ile 3 node&rsquo;lu k8s (GPG&rsquo;li apt, containerd, CNI), k3s alternatifi, etcd backup; How-to: bootstrap, worker join, node remove/re-add</li>
+<li><a href="kubeadm-upgrade-etcd/">kubeadm-upgrade-etcd</a> = <code>kubeadm upgrade plan/apply</code>, drain sırası, <code>etcdctl snapshot save/restore</code>, <code>kubeadm certs check-expiration/renew</code>; How-to: CP upgrade, worker upgrade, etcd restore, cert renew</li>
+<li><a href="ha-control-plane/">ha-control-plane</a> = stacked vs external etcd, quorum, <code>controlPlaneEndpoint</code> + API LB, <code>kubeadm join --control-plane</code>; How-to: 2. CP node, external etcd, failover testi</li>
 </ul>
 <h3 id="depolama-ve-ha">Depolama ve HA<a class="anchor" href="#depolama-ve-ha">#</a></h3>
 <ul>
@@ -1248,7 +1400,7 @@ Package and distribute applications with Helm charts Manage my own manifests wit
   <ul>
     <li><a href="#kubernetes-v2-konular">Kubernetes v2 konular</a>
       <ul>
-        <li><a href="#araçlar-helm--kustomize">Araçlar (Helm &amp; Kustomize)</a></li>
+        <li><a href="#araçlar-ve-genişletmeler">Araçlar ve Genişletmeler</a></li>
         <li><a href="#güvenlik-ve-ağ">Güvenlik ve Ağ</a></li>
         <li><a href="#operasyon">Operasyon</a></li>
         <li><a href="#ölçeklendirme-ve-scheduling">Ölçeklendirme ve Scheduling</a></li>

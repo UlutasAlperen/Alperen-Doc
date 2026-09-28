@@ -1,6 +1,6 @@
 ---
 title: "taints-affinity-quotas"
-weight: 8
+weight: 10
 ---
 # Taints and Tolerations
 
@@ -224,4 +224,4 @@ The quota's `status.used` vs `hard` tells the story.
 
 4. Now add the LimitRange (defaults above) to the same namespace, delete the deployment, redeploy with _no_ resource declarations at all - the pods inherit defaults and count against the quota automatically. That's the mechanism that keeps "forgot to set requests" developers from bypassing your accounting.
 
-for more [multi-node-kubeadm-k3s](../multi-node-kubeadm-k3s/)
+for more [pod-priority-disruption](../pod-priority-disruption/)

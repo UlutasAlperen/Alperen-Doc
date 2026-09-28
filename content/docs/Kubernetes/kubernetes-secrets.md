@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-secrets"
-weight: 6
+weight: 7
 ---
 # Secrets
 
@@ -9,7 +9,7 @@ In the [YAML config](../kubernetes-yaml-configurations/) chapter we saw that Con
 [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) are the Kubernetes object designed for sensitive data: passwords, tokens, and keys. Functionally, they look a _lot_ like ConfigMaps. The differences are:
 
 - Values are stored base64-encoded in the object
-- Access can be restricted with RBAC (who can read which secrets)
+- Access can be restricted with [RBAC](../kubernetes-rbac/) (who can read which secrets)
 - etcd can be configured to encrypt secret data at rest
 
 ## Creating a Secret
@@ -102,7 +102,7 @@ volumes:
 
 Yani secret'ların "güvenliği" şunlardan gelir:
 
-- **RBAC**: Kimin hangi secret'ı okuyabildiğini kısıtlar
+- **RBAC**: Kimin hangi secret'ı okuyabildiğini kısıtlar - [rbac](../kubernetes-rbac/) notlarında adım adım
 - **etcd encryption at rest**: Disk üzerinde şifreli saklanması
 - **Least privilege**: Secret'ları sadece ihtiyacı olan deployment'ların namespace'lerinde tutmak
 
@@ -152,4 +152,4 @@ kubectl exec <pod-name> -- printenv | grep API_KEY
 
 If you see your token, congrats - your deployment is pulling sensitive config from a Secret instead of a plaintext ConfigMap.
 
-for more [jobs-cronjobs](../kubernetes-jobs-cronjobs/)
+for more [rbac](../kubernetes-rbac/)

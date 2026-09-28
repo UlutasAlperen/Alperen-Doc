@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-services"
-weight: 8
+weight: 10
 ---
 # Services
 
@@ -113,4 +113,4 @@ Because we'll be setting up a Gateway in the next chapter anyway, there's no rea
 
 Switch the `api-service` back to a `ClusterIP` service.
 
-for more [gateway](../kubernetes-gateway-minikube/)
+for more [ingress](../kubernetes-ingress/)

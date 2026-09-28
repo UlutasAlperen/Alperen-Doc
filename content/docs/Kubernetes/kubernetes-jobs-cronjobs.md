@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-jobs-cronjobs"
-weight: 7
+weight: 9
 ---
 # Jobs
 

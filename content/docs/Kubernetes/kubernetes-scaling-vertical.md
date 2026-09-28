@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-scaling-vertical"
-weight: 11
+weight: 15
 ---
 # Top
 
@@ -35,6 +35,14 @@ synergychat-web-846d86c444-w2pqg   1m           15Mi
 ```
 
 The `kubectl top` command (just like the [unix top command](https://en.wikipedia.org/wiki/Top_\(software\))) will show you the resources that each pod is using. In the example above, each pod is using about 1 milliCPU and 15 megabytes of memory.
+
+The same command works one level up - which node is getting full is just as useful as which pod is hungry:
+
+```bash
+kubectl top node
+```
+
+You want to see each node well under its allocatable capacity. A node pinned at `90%+` is where the `Pending` pods from the [horizontal scaling](../kubernetes-scaling-horizontal/) chapter go to wait.
 
 # Vertical and Horizontal Scaling
 

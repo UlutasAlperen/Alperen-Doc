@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-statefulsets"
-weight: 15
+weight: 20
 ---
 # StatefulSets
 
@@ -131,4 +131,6 @@ Her workload StatefulSet gerektirmez. Karar kuralım şu:
 
 Ne zaman bir veritabanını Kubernetes'te çalıştırmak istesem de, [Databases](../kubernetes-storage/#databases) bölümünde bahsettiğim gibi operasyonel yükünü hesaba katmak gerekir - ama bunu yapacaksam, doğru araç StatefulSet'tir.
 
-for more, see the follow-up chapters in v2: [streaming replication on Longhorn](../../kubernetes_v2/postgresql-statefulset-replication/)
+For the follow-up chapters in v2 - streaming replication on [Longhorn](../../kubernetes_v2/postgresql-statefulset-replication/) and the [CloudNativePG](../../kubernetes_v2/postgresql-longhorn-read-replicas/) operator version - see the multi-node notes that close out this section.
+
+for more [nodes-basic](../kubernetes-nodes-basic/)

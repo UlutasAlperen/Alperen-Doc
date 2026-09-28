@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="High Availability# The multi-node notes left a check on the wall: --control-plane-endpoint=&lt;VIP&gt; “makes later HA possible”. This is later.
+A cluster with one control-plane node has one single point of failure: kill that node and kubectl stops working, the scheduler stops placing pods, and every controller stops reconciling. The workloads keep running (kubelets and containers don’t need the apiserver to stay alive), but the cluster stops being managed. For a homelab that’s an annoyance; for anything real it’s an outage.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/ha-control-plane/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="ha-control-plane">
+	<meta property="og:description" content="High Availability# The multi-node notes left a check on the wall: --control-plane-endpoint=&lt;VIP&gt; “makes later HA possible”. This is later.
+A cluster with one control-plane node has one single point of failure: kill that node and kubectl stops working, the scheduler stops placing pods, and every controller stops reconciling. The workloads keep running (kubelets and containers don’t need the apiserver to stay alive), but the cluster stops being managed. For a homelab that’s an annoyance; for anything real it’s an outage.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="ha-control-plane">
+	<meta itemprop="description" content="High Availability# The multi-node notes left a check on the wall: --control-plane-endpoint=&lt;VIP&gt; “makes later HA possible”. This is later.
+A cluster with one control-plane node has one single point of failure: kill that node and kubectl stops working, the scheduler stops placing pods, and every controller stops reconciling. The workloads keep running (kubelets and containers don’t need the apiserver to stay alive), but the cluster stops being managed. For a homelab that’s an annoyance; for anything real it’s an outage.">
+	<meta itemprop="wordCount" content="831">
+
+<title>ha-control-plane • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/ha-control-plane/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.bcb7780d1e8dc035cc2ae9624faf9e15b5c71aacd73331a68d41d4f3450bfae9.js" integrity="sha256-vLd4DR6NwDXMKuliT6&#43;eFbXHGqzXMzGmjUHU80UL&#43;uk=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic-git-conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic-git-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github-workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous-integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous-deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git-status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git-add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git-commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git-push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git-branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git-pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git-log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git-merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git-rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git-reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git-remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git-switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
+      multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="active">
+      ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>ha-control-plane</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="high-availability">High Availability<a class="anchor" href="#high-availability">#</a></h1>
+<p>The <a href="../multi-node-kubeadm-k3s/">multi-node</a> notes left a check on the wall: <code>--control-plane-endpoint=&lt;VIP&gt;</code> &ldquo;makes later HA possible&rdquo;. This is later.</p>
+<p>A cluster with one control-plane node has one single point of failure: kill that node and <code>kubectl</code> stops working, the scheduler stops placing pods, and every controller stops reconciling. The <em>workloads</em> keep running (kubelets and containers don&rsquo;t need the apiserver to stay alive), but the cluster stops being managed. For a homelab that&rsquo;s an annoyance; for anything real it&rsquo;s an outage.</p>
+<p>High availability means removing that single point of failure: multiple control-plane members, an etcd that tolerates member loss, and one stable endpoint clients can always reach.</p>
+<p><strong>Küçük model:</strong> tek kontrollü node = tek ışık anahtarı; 3 kontrollü node = 3 anahtar ve oybirliği. Işık yanık kalır çünkü biri düşse bile diğer ikisi kararı verir.</p>
+<h1 id="topologies">Topologies<a class="anchor" href="#topologies">#</a></h1>
+<p>Two ways to arrange an HA control plane, and the only difference is <em>where etcd lives</em>:</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Stacked etcd</th>
+					<th>External etcd</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>etcd nerede</td>
+					<td>Her CP node&rsquo;unun üzerinde</td>
+					<td>Ayrı makinelerde</td>
+			</tr>
+			<tr>
+					<td>Toplam makine</td>
+					<td>3 CP yeter (3+3)</td>
+					<td>3 CP + 3 etcd (3+3)</td>
+			</tr>
+			<tr>
+					<td>Karmaşıklık</td>
+					<td>Düşük - kubeadm kurar</td>
+					<td>Yüksek - etcd&rsquo;yi sen kurarsın</td>
+			</tr>
+			<tr>
+					<td>Kayıp toleransı</td>
+					<td>1 üye (3&rsquo;te)</td>
+					<td>1 üye (3&rsquo;te)</td>
+			</tr>
+			<tr>
+					<td>Kim kullanır</td>
+					<td>Çoğu kubeadm kurulumu</td>
+					<td>Büyük/regulated ortamlar</td>
+			</tr>
+	</tbody>
+</table>
+<p>Both need an <strong>odd</strong> number of members: 3 or 5. That&rsquo;s quorum - the majority that has to agree before anything is written. Two members is worse than one: either one dying takes the quorum away. Three members tolerate one loss; five tolerate two.</p>
+<blockquote class='book-hint '>
+<p>Adding members without quorum math is how people build clusters that survive a failure <em>less</em> well than before. <code>etcdctl endpoint status -w table</code> shows the member count and who the leader is - check it after every change.</p>
+</blockquote><h1 id="the-stable-endpoint">The Stable Endpoint<a class="anchor" href="#the-stable-endpoint">#</a></h1>
+<p>Clients need one address that survives node failures. That&rsquo;s <code>controlPlaneEndpoint</code> - a DNS name or VIP in front of an API server load balancer:</p>
+<pre tabindex="0"><code>controlPlaneEndpoint: &#34;k8s-api.local:6443&#34;</code></pre><p>The LB (HAProxy, nginx, keepalived + VIP, or a cloud LB) forwards to all healthy apiservers. kubeadm writes this endpoint into every kubeconfig and every component&rsquo;s flags at init time - which is why it must be decided <em>before</em> the first <code>kubeadm init</code>, not retrofitted after.</p>
+<blockquote class='book-hint '>
+<p>The apiserver LB only load-balances the API. Peer traffic between etcd members goes over port 2380 directly - don&rsquo;t put that behind the same LB.</p>
+</blockquote><h1 id="how-to-add-a-second-control-plane-node">How to Add a Second Control Plane Node<a class="anchor" href="#how-to-add-a-second-control-plane-node">#</a></h1>
+<ol>
+<li>On an existing control-plane node, generate a join command with a certificate key:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeadm init phase upload-certs --upload-certs
+</span></span><span style="display:flex;"><span>kubeadm token create --print-join-command</span></span></code></pre></div><p>The <code>--certificate-key</code> from the first command is single-use and short-lived. The <a href="../multi-node-kubeadm-k3s/">multi-node</a> notes used the same token flow for workers; the <code>--control-plane</code> flag and the cert key are what make this a control-plane join.</p>
+<ol start="2">
+<li>
+<p>Prepare the new node exactly like the first one - swap off, kernel modules, containerd, matching versions (<a href="../multi-node-kubeadm-k3s/">multi-node</a> prep steps verbatim).</p>
+</li>
+<li>
+<p>Join it as a control plane member:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeadm join k8s-api.local:6443 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --token &lt;token&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --discovery-token-ca-cert-hash sha256:&lt;hash&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --control-plane <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --certificate-key &lt;key&gt;</span></span></code></pre></div><ol start="4">
+<li>Verify the quorum grew:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get nodes
+</span></span><span style="display:flex;"><span>etcdctl ... member list
+</span></span><span style="display:flex;"><span>kubectl get pods -n kube-system -o wide</span></span></code></pre></div><p>You want three apiserver pods on three nodes, and <code>member list</code> showing three members.</p>
+<h1 id="how-to-set-up-external-etcd">How to Set Up External etcd<a class="anchor" href="#how-to-set-up-external-etcd">#</a></h1>
+<ol>
+<li>
+<p>Set up three dedicated etcd hosts - versions and certs matching your cluster (<a href="../kubeadm-upgrade-etcd/">kubeadm-upgrade-etcd</a> covers cert layout). Generate the etcd PKI once, and hand every member its own cert signed by the same CA.</p>
+</li>
+<li>
+<p>Configure each member with the peer and client URLs, and the full initial cluster:</p>
+</li>
+</ol>
+<pre tabindex="0"><code>--initial-cluster=etcd1=https://10.0.0.11:2380,etcd2=https://10.0.0.12:2380,etcd3=https://10.0.0.13:2380
+--initial-advertise-peer-urls=https://10.0.0.11:2380</code></pre><p>Start them, then check they formed a cluster:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>etcdctl --endpoints<span style="color:#f92672">=</span>https://10.0.0.11:2379,... endpoint status -w table</span></span></code></pre></div><ol start="3">
+<li>
+<p>Write the kubeadm config with an <code>external</code> etcd section pointing at all three endpoints and their client certs, then <code>kubeadm init</code> against it. The control-plane nodes never run etcd themselves.</p>
+</li>
+<li>
+<p>Backups now have to target one of the external members - same <code>snapshot save</code> as always, different <code>--endpoints</code>.</p>
+</li>
+</ol>
+<h1 id="how-to-test-failover">How to Test Failover<a class="anchor" href="#how-to-test-failover">#</a></h1>
+<p>An HA setup you haven&rsquo;t tested is a hope, not a design.</p>
+<ol>
+<li>Record the baseline - who&rsquo;s leader, how many members:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>etcdctl ... endpoint status -w table
+</span></span><span style="display:flex;"><span>kubectl get nodes</span></span></code></pre></div><ol start="2">
+<li>Take one control-plane node down cleanly (or hard-fail it if you&rsquo;re testing the ugly case):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl drain &lt;node-name&gt; --ignore-daemonsets --delete-emptydir-data
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># or: virsh destroy &lt;vm&gt; / pull the power</span></span></span></code></pre></div><ol start="3">
+<li>Prove the cluster still answers during the loss:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get nodes
+</span></span><span style="display:flex;"><span>kubectl run failover-test --image<span style="color:#f92672">=</span>nginx:1.27
+</span></span><span style="display:flex;"><span>kubectl get pods -o wide --watch</span></span></code></pre></div><p>If <code>kubectl</code> responds and pods schedule on the remaining nodes, you have HA. If <code>kubectl</code> hangs, you tested the LB and discovered you don&rsquo;t have one.</p>
+<ol start="4">
+<li>Bring the node back and confirm it rejoins as a full member:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>etcdctl ... member list
+</span></span><span style="display:flex;"><span>kubectl get nodes</span></span></code></pre></div><ol start="5">
+<li>Repeat for the other members until you&rsquo;ve killed each one once. It&rsquo;s the only way to know.</li>
+</ol>
+<blockquote class='book-hint '>
+<p><strong>Dikkat:</strong> quorum düşerse (<code>etcdctl member list</code> &ldquo;unstarted&rdquo; / &ldquo;learner&rdquo; ya da leader yok) etcd yazmayı reddeder ve cluster <strong>read-only</strong> gibi davranır. Eksik üyeyi geri getirmek, yeni bir üye eklemekten daha hızlıdır - <code>etcdctl member remove</code> + yeni makineyle yeniden join, çoğu durumda kurtarma yoludur. Önce <a href="../kubeadm-upgrade-etcd/">backup</a> alsan iyi olur.</p>
+</blockquote><p>for more <a href="../longhorn/">longhorn</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>kubeadm-upgrade-etcd</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes_v2/longhorn/" class="flex align-center">
+        <span>longhorn</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents"></nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -29,7 +29,7 @@ Static PVs are created manually by a cluster admin Dynamic PVs are created autom
 	<meta itemprop="description" content="Persistent Volumes (PV)# Instead of simply adding a volume to a deployment, a persistent volume is a cluster-level resource that is created separately from the pod and then attached to the pod. It’s similar to a ConfigMap in that way.
 PVs can be created statically or dynamically.
 Static PVs are created manually by a cluster admin Dynamic PVs are created automatically when a pod requests a volume that doesn’t exist yet Generally speaking, and especially in the cloud-native world, we want to use dynamic PVs. It’s less work and more flexible.">
-	<meta itemprop="wordCount" content="474">
+	<meta itemprop="wordCount" content="496">
 
 <title>kubernetes-persistent-volumes • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ Static PVs are created manually by a cluster admin Dynamic PVs are created autom
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.179add252826433df802ccea614129248d0c331c2ce31bf45e7bbab25dfb742d.js" integrity="sha256-F5rdJSgmQz34AszqYUEpJI0MMxws4xv0Xnu6sl37dC0=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.bcb7780d1e8dc035cc2ae9624faf9e15b5c71aacd73331a68d41d4f3450bfae9.js" integrity="sha256-vLd4DR6NwDXMKuliT6&#43;eFbXHGqzXMzGmjUHU80UL&#43;uk=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -696,6 +696,20 @@ Static PVs are created manually by a cluster admin Dynamic PVs are created autom
   
 
   
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
       kubernetes-yaml-configurations</a>
   
@@ -712,6 +726,20 @@ Static PVs are created manually by a cluster admin Dynamic PVs are created autom
   
     <a href="/docs/kubernetes/kubernetes-secrets/" class="">
       kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
   
 
         </li>
@@ -752,6 +780,20 @@ Static PVs are created manually by a cluster admin Dynamic PVs are created autom
   
 
   
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
       kubernetes-gateway-minikube</a>
   
@@ -768,6 +810,20 @@ Static PVs are created manually by a cluster admin Dynamic PVs are created autom
   
     <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
       kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
   
 
         </li>
@@ -824,6 +880,20 @@ Static PVs are created manually by a cluster admin Dynamic PVs are created autom
   
     <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="active">
       kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
   
 
         </li>
@@ -915,6 +985,20 @@ Static PVs are created manually by a cluster admin Dynamic PVs are created autom
   
 
   
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes_v2/network-policy/" class="">
       network-policy</a>
   
@@ -945,6 +1029,20 @@ Static PVs are created manually by a cluster admin Dynamic PVs are created autom
   
     <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
       kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
   
 
         </li>
@@ -999,8 +1097,50 @@ Static PVs are created manually by a cluster admin Dynamic PVs are created autom
   
 
   
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
       multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
   
 
         </li>
@@ -1155,7 +1295,7 @@ Static PVs are created manually by a cluster admin Dynamic PVs are created autom
 </li>
 <li><code>spec/resources/requests/storage</code>: <code>1Gi</code></li>
 </ul>
-<p>This creates a new PVC called <code>synergychat-api-pvc</code> with a few properties that can be read from and written to by multiple pods at the same time. It also requests 1GB of storage.</p>
+<p>This creates a new PVC called <code>synergychat-api-pvc</code>. <code>ReadWriteOnce</code> means the volume is mounted read-write by a <strong>single node</strong> at a time - multiple pods on that same node can share it, but pods on other nodes cannot. (The full access-mode story - <code>ReadOnlyMany</code>, <code>ReadWriteMany</code> - lives in <a href="../kubernetes-storage-classes/">storage-classes</a>.) It also requests 1GB of storage.</p>
 <p>Apply the PVC.</p>
 <p>Run both of these commands:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pvc
@@ -1230,7 +1370,7 @@ Static PVs are created manually by a cluster admin Dynamic PVs are created autom
 </span></span><span style="display:flex;"><span><span style="color:#f92672">data</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">API_PORT</span>: <span style="color:#e6db74">&#34;8080&#34;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">API_DB_FILEPATH</span>: <span style="color:#ae81ff">/persist/db.json</span>
-</span></span><span style="display:flex;"><span>---</span></span></code></pre></div><p>for more <a href="../kubernetes-statefulsets/">statefulsets</a></p>
+</span></span><span style="display:flex;"><span>---</span></span></code></pre></div><p>for more <a href="../kubernetes-storage-classes/">storage-classes</a></p>
 </article>
  
       
@@ -1260,8 +1400,8 @@ Static PVs are created manually by a cluster admin Dynamic PVs are created autom
     </span>
     <span>
     
-      <a href="/docs/kubernetes/kubernetes-statefulsets/" class="flex align-center">
-        <span>kubernetes-statefulsets</span>
+      <a href="/docs/kubernetes/kubernetes-storage-classes/" class="flex align-center">
+        <span>kubernetes-storage-classes</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     

@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-persistent-volumes"
-weight: 14
+weight: 18
 ---
 ## Persistent Volumes (PV)
 
@@ -43,7 +43,7 @@ Add the following properties:
     - `ReadWriteOnce`
 - `spec/resources/requests/storage`: `1Gi`
 
-This creates a new PVC called `synergychat-api-pvc` with a few properties that can be read from and written to by multiple pods at the same time. It also requests 1GB of storage.
+This creates a new PVC called `synergychat-api-pvc`. `ReadWriteOnce` means the volume is mounted read-write by a **single node** at a time - multiple pods on that same node can share it, but pods on other nodes cannot. (The full access-mode story - `ReadOnlyMany`, `ReadWriteMany` - lives in [storage-classes](../kubernetes-storage-classes/).) It also requests 1GB of storage.
 
 Apply the PVC.
 
@@ -163,4 +163,4 @@ data:
   API_DB_FILEPATH: /persist/db.json
 ---
 ```
-for more [statefulsets](../kubernetes-statefulsets/)
+for more [storage-classes](../kubernetes-storage-classes/)

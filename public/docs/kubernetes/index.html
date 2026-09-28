@@ -31,7 +31,7 @@ For example, you could install Docker on a single server, and route traffic dire
 – The Kubernetes team
 Kubernetes orchestrates and manages collections of containers (often using container runtimes like containerd). It takes care of scaling, distribution, and connectivity among these containers. Think of it as a system to manage many containers and the infrastructure they run on.
 For example, you could install Docker on a single server, and route traffic directly to it. That’s fairly simple to set up, but what if you want 10 instances of that server? What about 1000 instances? What if you want to deploy many different services, each scaling up with more instances depending on load? Those are the problems that Kubernetes solves.">
-	<meta itemprop="wordCount" content="440">
+	<meta itemprop="wordCount" content="520">
 
 <title>Kubernetes • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -40,7 +40,7 @@ For example, you could install Docker on a single server, and route traffic dire
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.179add252826433df802ccea614129248d0c331c2ce31bf45e7bbab25dfb742d.js" integrity="sha256-F5rdJSgmQz34AszqYUEpJI0MMxws4xv0Xnu6sl37dC0=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.bcb7780d1e8dc035cc2ae9624faf9e15b5c71aacd73331a68d41d4f3450bfae9.js" integrity="sha256-vLd4DR6NwDXMKuliT6&#43;eFbXHGqzXMzGmjUHU80UL&#43;uk=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/kubernetes/index.xml" title="Kubernetes" />
 
   
@@ -699,6 +699,20 @@ For example, you could install Docker on a single server, and route traffic dire
   
 
   
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
       kubernetes-yaml-configurations</a>
   
@@ -715,6 +729,20 @@ For example, you could install Docker on a single server, and route traffic dire
   
     <a href="/docs/kubernetes/kubernetes-secrets/" class="">
       kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
   
 
         </li>
@@ -755,6 +783,20 @@ For example, you could install Docker on a single server, and route traffic dire
   
 
   
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
       kubernetes-gateway-minikube</a>
   
@@ -771,6 +813,20 @@ For example, you could install Docker on a single server, and route traffic dire
   
     <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
       kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
   
 
         </li>
@@ -827,6 +883,20 @@ For example, you could install Docker on a single server, and route traffic dire
   
     <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
       kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
   
 
         </li>
@@ -918,6 +988,20 @@ For example, you could install Docker on a single server, and route traffic dire
   
 
   
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes_v2/network-policy/" class="">
       network-policy</a>
   
@@ -948,6 +1032,20 @@ For example, you could install Docker on a single server, and route traffic dire
   
     <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
       kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
   
 
         </li>
@@ -1002,8 +1100,50 @@ For example, you could install Docker on a single server, and route traffic dire
   
 
   
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes_v2/multi-node-kubeadm-k3s/" class="">
       multi-node-kubeadm-k3s</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
   
 
         </li>
@@ -1110,8 +1250,8 @@ For example, you could install Docker on a single server, and route traffic dire
     <li><a href="#kubernetes-konular-konuları-sırayla-takip-ederseniz-verdiğim-görevlerin-birbiriyle-bağlantılı-olduğunu-ve-sistemin-pratikte-nasıl-çalıştığını-daha-net-görebilirsiniz">Kubernetes konular (Konuları sırayla takip ederseniz, verdiğim görevlerin birbiriyle bağlantılı olduğunu ve sistemin pratikte nasıl çalıştığını daha net görebilirsiniz.)</a>
       <ul>
         <li><a href="#temeller">Temeller</a></li>
-        <li><a href="#secretlar-ve-batch-işleri">Secret&rsquo;lar ve Batch İşleri</a></li>
-        <li><a href="#ağ-services--gateway">Ağ (Services &amp; Gateway)</a></li>
+        <li><a href="#secretlar-rbac-ve-batch-işleri">Secret&rsquo;lar, RBAC ve Batch İşleri</a></li>
+        <li><a href="#ağ-services-ingress--gateway">Ağ (Services, Ingress &amp; Gateway)</a></li>
         <li><a href="#ölçeklendirme">Ölçeklendirme</a></li>
         <li><a href="#depolama">Depolama</a></li>
         <li><a href="#prode-geçiş">Prod&rsquo;e Geçiş</a></li>
@@ -1139,7 +1279,8 @@ For example, you could install Docker on a single server, and route traffic dire
 <ul>
 <li>Orchestrate containers across single-node (Minikube) and multi-node aws(WORK IN PROGRESS) clusters</li>
 <li>Declare the desired state with YAML manifests and let controllers reconcile it</li>
-<li>Load balance and expose services through Services and Gateways</li>
+<li>Load balance and expose services through Services, Ingress and Gateways</li>
+<li>Control who can do what with RBAC</li>
 <li>Scale workloads vertically and horizontally (HPA)</li>
 <li>Persist state with volumes, PVCs and persistent storage</li>
 <li>Run stateful workloads like databases with StatefulSets</li>
@@ -1152,16 +1293,21 @@ For example, you could install Docker on a single server, and route traffic dire
 <li><a href="kubernetes-pods-minikube/">kubernetes-pods-minikube</a></li>
 <li><a href="kubernetes-deployments-minikube/">kubernetes-deployments-minikube</a></li>
 <li><a href="kubernetes-probes/">kubernetes-probes</a></li>
+<li><a href="kubernetes-deployment-rollouts/">kubernetes-deployment-rollouts</a></li>
 <li><a href="kubernetes-yaml-configurations/">kubernetes-yaml-configurations</a></li>
 <li><a href="kubernetes-secrets/">kubernetes-secrets</a></li>
+<li><a href="kubernetes-rbac/">kubernetes-rbac</a></li>
 <li><a href="kubernetes-jobs-cronjobs/">kubernetes-jobs-cronjobs</a></li>
 <li><a href="kubernetes-services/">kubernetes-services</a></li>
+<li><a href="kubernetes-ingress/">kubernetes-ingress</a></li>
 <li><a href="kubernetes-gateway-minikube/">kubernetes-gateway-minikube</a></li>
 <li><a href="kubernetes-namespaces/">kubernetes-namespaces</a></li>
+<li><a href="kubernetes-dns-coredns/">kubernetes-dns-coredns</a></li>
 <li><a href="kubernetes-scaling-vertical/">kubernetes-scaling-vertical</a></li>
 <li><a href="kubernetes-scaling-horizontal/">kubernetes-scaling-horizontal</a></li>
 <li><a href="kubernetes-storage/">kubernetes-storage</a></li>
 <li><a href="kubernetes-persistent-volumes/">kubernetes-persistent-volumes</a></li>
+<li><a href="kubernetes-storage-classes/">kubernetes-storage-classes</a></li>
 <li><a href="kubernetes-statefulsets/">kubernetes-statefulsets</a></li>
 <li><a href="kubernetes-nodes-basic/">kubernetes-nodes-basic</a></li>
 </ol>
@@ -1171,28 +1317,33 @@ For example, you could install Docker on a single server, and route traffic dire
 <li><a href="kubernetes-pods-minikube/">kubernetes-pods-minikube</a> = Pod kavramı, ephemeral doğası, <code>kubectl logs/delete pod</code>, pod&rsquo;ların unique IP adresleri</li>
 <li><a href="kubernetes-deployments-minikube/">kubernetes-deployments-minikube</a> = Deployment ve ReplicaSet, desired vs current state, <code>kubectl get/edit deployment</code></li>
 <li><a href="kubernetes-probes/">kubernetes-probes</a> = Liveness/Readiness/Startup probes, <code>httpGet</code>/<code>tcpSocket</code>/<code>exec</code>, rolling update&rsquo;lerde probes&rsquo;un rolü</li>
+<li><a href="kubernetes-deployment-rollouts/">kubernetes-deployment-rollouts</a> = Rolling update (<code>maxSurge</code>/<code>maxUnavailable</code>), <code>kubectl set image</code>, <code>rollout status/history/undo</code>, bozuk imajdan kurtarma</li>
 <li><a href="kubernetes-yaml-configurations/">kubernetes-yaml-configurations</a> = YAML manifest yapısı (<code>apiVersion</code>, <code>kind</code>, <code>spec</code>), ConfigMap, <code>env</code>/<code>envFrom</code>, Secrets</li>
 </ul>
-<h3 id="secretlar-ve-batch-işleri">Secret&rsquo;lar ve Batch İşleri<a class="anchor" href="#secretlar-ve-batch-i%c5%9fleri">#</a></h3>
+<h3 id="secretlar-rbac-ve-batch-işleri">Secret&rsquo;lar, RBAC ve Batch İşleri<a class="anchor" href="#secretlar-rbac-ve-batch-i%c5%9fleri">#</a></h3>
 <ul>
 <li><a href="kubernetes-secrets/">kubernetes-secrets</a> = <code>kubectl create secret</code>, <code>secretKeyRef</code>/<code>envFrom</code>/volume mount, base64 ≠ şifreleme, Sealed Secrets/External Secrets</li>
+<li><a href="kubernetes-rbac/">kubernetes-rbac</a> = ServiceAccount (token mount), Role/ClusterRole, RoleBinding/ClusterRoleBinding, <code>kubectl auth can-i --as</code></li>
 <li><a href="kubernetes-jobs-cronjobs/">kubernetes-jobs-cronjobs</a> = Job (<code>completions</code>/<code>parallelism</code>/<code>backoffLimit</code>), CronJob (<code>schedule</code>/<code>concurrencyPolicy</code>), db.json yedekleme pipeline&rsquo;ı</li>
 </ul>
-<h3 id="ağ-services--gateway">Ağ (Services &amp; Gateway)<a class="anchor" href="#a%c4%9f-services--gateway">#</a></h3>
+<h3 id="ağ-services-ingress--gateway">Ağ (Services, Ingress &amp; Gateway)<a class="anchor" href="#a%c4%9f-services-ingress--gateway">#</a></h3>
 <ul>
 <li><a href="kubernetes-services/">kubernetes-services</a> = <code>ClusterIP</code>, <code>NodePort</code>, <code>LoadBalancer</code>, <code>ExternalName</code>, stable endpoint ve load balancing</li>
+<li><a href="kubernetes-ingress/">kubernetes-ingress</a> = Ingress controller (nginx) vs Ingress resource, host/path kuralları, <code>ingressClassName</code>, TLS + Secret</li>
 <li><a href="kubernetes-gateway-minikube/">kubernetes-gateway-minikube</a> = Gateway API (Envoy), <code>HTTPRoute</code>, <code>/etc/hosts</code> + <code>minikube tunnel</code>, annotations</li>
 <li><a href="kubernetes-namespaces/">kubernetes-namespaces</a> = <code>kubectl create ns</code>, <code>-n</code> flag, intra-cluster DNS (<code>svc.cluster.local</code>)</li>
+<li><a href="kubernetes-dns-coredns/">kubernetes-dns-coredns</a> = CoreDNS + Corefile ConfigMap, <code>dnsPolicy</code>/<code>ndots</code>, <code>nslookup</code> ile DNS troubleshooting, kube-dns servisi</li>
 </ul>
 <h3 id="ölçeklendirme">Ölçeklendirme<a class="anchor" href="#%c3%b6l%c3%a7eklendirme">#</a></h3>
 <ul>
-<li><a href="kubernetes-scaling-vertical/">kubernetes-scaling-vertical</a> = <code>metrics-server</code>, <code>kubectl top</code>, resource limits (<code>50m</code> CPU, <code>256Mi</code> RAM), CrashLoopBackOff</li>
+<li><a href="kubernetes-scaling-vertical/">kubernetes-scaling-vertical</a> = <code>metrics-server</code>, <code>kubectl top</code> (pod + node), resource limits (<code>50m</code> CPU, <code>256Mi</code> RAM), CrashLoopBackOff</li>
 <li><a href="kubernetes-scaling-horizontal/">kubernetes-scaling-horizontal</a> = <code>HorizontalPodAutoscaler</code> (HPA), <code>minReplicas</code>/<code>maxReplicas</code>, CPU hedefli otomatik ölçekleme</li>
 </ul>
 <h3 id="depolama">Depolama<a class="anchor" href="#depolama">#</a></h3>
 <ul>
 <li><a href="kubernetes-storage/">kubernetes-storage</a> = Ephemeral filesystem, <code>emptyDir</code> volumes, multi-container pod&rsquo;lar (sidecar), veritabanları</li>
 <li><a href="kubernetes-persistent-volumes/">kubernetes-persistent-volumes</a> = <code>PersistentVolume</code> (PV), <code>PersistentVolumeClaim</code> (PVC), dynamic provisioning, volumeMounts</li>
+<li><a href="kubernetes-storage-classes/">kubernetes-storage-classes</a> = StorageClass (<code>provisioner</code>/<code>volumeBindingMode</code>/<code>allowVolumeExpansion</code>), access modes (RWO/ROX/RWX), <code>reclaimPolicy</code> Retain/Delete, static PV</li>
 <li><a href="kubernetes-statefulsets/">kubernetes-statefulsets</a> = Stable identity, <code>volumeClaimTemplates</code> ile pod başına PVC, headless services, PostgreSQL örneği</li>
 </ul>
 <h3 id="prode-geçiş">Prod&rsquo;e Geçiş<a class="anchor" href="#prode-ge%c3%a7i%c5%9f">#</a></h3>
@@ -1269,8 +1420,8 @@ For example, you could install Docker on a single server, and route traffic dire
     <li><a href="#kubernetes-konular-konuları-sırayla-takip-ederseniz-verdiğim-görevlerin-birbiriyle-bağlantılı-olduğunu-ve-sistemin-pratikte-nasıl-çalıştığını-daha-net-görebilirsiniz">Kubernetes konular (Konuları sırayla takip ederseniz, verdiğim görevlerin birbiriyle bağlantılı olduğunu ve sistemin pratikte nasıl çalıştığını daha net görebilirsiniz.)</a>
       <ul>
         <li><a href="#temeller">Temeller</a></li>
-        <li><a href="#secretlar-ve-batch-işleri">Secret&rsquo;lar ve Batch İşleri</a></li>
-        <li><a href="#ağ-services--gateway">Ağ (Services &amp; Gateway)</a></li>
+        <li><a href="#secretlar-rbac-ve-batch-işleri">Secret&rsquo;lar, RBAC ve Batch İşleri</a></li>
+        <li><a href="#ağ-services-ingress--gateway">Ağ (Services, Ingress &amp; Gateway)</a></li>
         <li><a href="#ölçeklendirme">Ölçeklendirme</a></li>
         <li><a href="#depolama">Depolama</a></li>
         <li><a href="#prode-geçiş">Prod&rsquo;e Geçiş</a></li>

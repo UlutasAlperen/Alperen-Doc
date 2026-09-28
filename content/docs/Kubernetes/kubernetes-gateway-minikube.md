@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-gateway-minikube"
-weight: 9
+weight: 12
 ---
 # Gateway
 
@@ -12,7 +12,7 @@ A [Gateway](https://kubernetes.io/docs/concepts/services-networking/gateway/) re
 
 In the diagram above, the "client" can be anything. It doesn't live inside k8s. It might just be a web browser or a mobile app. The "Gateway-managed load balancer" can be a bit confusing, we'll talk about it more later. For now, just know that it's a load balancer that lives outside the cluster and routes traffic through the Gateway to a service.
 
-Gateway is the newer alternative to [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) which you might still come across in production systems.
+Gateway is the newer alternative to [Ingress](../kubernetes-ingress/) which you might still come across in production systems - the classic `Ingress` object and its controllers are in the previous chapter.
 
 ## Assignment
 

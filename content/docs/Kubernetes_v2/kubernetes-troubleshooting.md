@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-troubleshooting"
-weight: 5
+weight: 6
 ---
 # Troubleshooting
 
@@ -182,4 +182,4 @@ kubectl set resources deployment/synergychat-testram --limits=memory=256Mi --req
 kubectl get pods
 ```
 
-for more [gitops-argocd](../gitops-argocd/)
+for more [control-plane-troubleshooting](../control-plane-troubleshooting/)
