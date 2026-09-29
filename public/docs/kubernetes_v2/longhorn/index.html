@@ -26,7 +26,7 @@ Longhorn fixes that: it’s a distributed block storage system built as a CSI dr
 	<meta itemprop="name" content="longhorn">
 	<meta itemprop="description" content="Longhorn# Everything we’ve done with storage so far lived on one node. In the v1 notes a PVC was a local disk on (the only) Minikube node, and in the multi-node notes our workers each keep their own local directories. That means the day kworker1 dies, every PVC hosted on it dies with it - block storage was the last single point of failure in our homelab.
 Longhorn fixes that: it’s a distributed block storage system built as a CSI driver, purpose-made for Kubernetes. Every volume it serves is split into an engine plus N replicas (default 3) that live on different nodes - scheduled exactly like pods are.">
-	<meta itemprop="wordCount" content="1055">
+	<meta itemprop="wordCount" content="1054">
 
 <title>longhorn • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ Longhorn fixes that: it’s a distributed block storage system built as a CSI dr
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.4571ec42d20ffab98655d0c8f9795e6390a1730dcdd4bd6ccf872a2c0c7550ac.js" integrity="sha256-RXHsQtIP&#43;rmGVdDI&#43;XleY5Chcw3N1L1sz4cqLAx1UKw=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.8d199b5de941f83ff337ef5b2796b20ab573b0838ba6712097bed4c18f805f99.js" integrity="sha256-jRmbXelB&#43;D/zN&#43;9bJ5ayCrVzsIOLpnEgl77UwY&#43;AX5k=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1316,7 +1316,7 @@ Longhorn fixes that: it’s a distributed block storage system built as a CSI dr
 			</tr>
 	</tbody>
 </table>
-<p><strong>Türkçe özet:</strong> snapshot&rsquo;lar cluster ile birlikte yaşar - cluster yanarsa snapshot da yanar. Gerçek backup her zaman S3/NFS&rsquo;e. Homelab&rsquo;da en azından snapshot + offsite backup kombinasyonunu düşün.</p>
+<p><strong>özetle:</strong> snapshot&rsquo;lar cluster ile birlikte yaşar - cluster yanarsa snapshot da yanar. Gerçek backup her zaman S3/NFS&rsquo;e. Homelab&rsquo;da en azından snapshot + offsite backup kombinasyonunu düşün.</p>
 <h2 id="the-honest-requirements">The Honest Requirements<a class="anchor" href="#the-honest-requirements">#</a></h2>
 <ul>
 <li><strong>iscsid</strong> on every node - the CSI attachment path is iSCSI-based. Missing <code>iscsid</code> is the #1 &ldquo;volumes stuck in attaching&rdquo; cause</li>

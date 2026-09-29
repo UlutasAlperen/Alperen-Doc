@@ -26,7 +26,7 @@ The split that every real org lands on eventually:">
 	<meta itemprop="name" content="devops-control-plane">
 	<meta itemprop="description" content="Who Owns the Control Plane# Everything until now assumed we own the cluster: we built it on multi-node VMs, we SSH’d into it when it broke, we joined control-plane nodes by hand. That’s the homelab model. The moment a second team shows up, the question changes from “how do I run this” to “who is allowed to do what” - and that’s a platform engineering question, not a kubectl one.
 The split that every real org lands on eventually:">
-	<meta itemprop="wordCount" content="2174">
+	<meta itemprop="wordCount" content="2173">
 
 <title>devops-control-plane • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ The split that every real org lands on eventually:">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.4571ec42d20ffab98655d0c8f9795e6390a1730dcdd4bd6ccf872a2c0c7550ac.js" integrity="sha256-RXHsQtIP&#43;rmGVdDI&#43;XleY5Chcw3N1L1sz4cqLAx1UKw=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.8d199b5de941f83ff337ef5b2796b20ab573b0838ba6712097bed4c18f805f99.js" integrity="sha256-jRmbXelB&#43;D/zN&#43;9bJ5ayCrVzsIOLpnEgl77UwY&#43;AX5k=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1272,7 +1272,7 @@ The split that every real org lands on eventually:">
 <li><strong>Application teams</strong>: own workloads inside their namespaces. Deploy, scale, debug - but not the cluster</li>
 </ul>
 <p>The control plane stops being &ldquo;a server I log into&rdquo; and becomes <strong>an API with policies around it</strong>. Nobody SSH&rsquo;s to <code>kmaster</code> to deploy a feature. The platform team&rsquo;s job is to make sure nobody needs to.</p>
-<p><strong>Küçük model:</strong> cluster bir bina; platform ekibi bina sahibi (asansör, elektrik, yangın merdiveni), uygulama ekipleri kiracılar (kendi dairelerinde serbest, ama duvarı yıkmak yok). İyi bir platform, kiracıya &ldquo;istek at&rdquo; der - &ldquo;ticket aç&rdquo; değil.</p>
+<p><strong>Özetlersek:</strong> cluster bir bina; platform ekibi bina sahibi (asansör, elektrik, yangın merdiveni), uygulama ekipleri kiracılar (kendi dairelerinde serbest, ama duvarı yıkmak yok). İyi bir platform, kiracıya &ldquo;istek at&rdquo; der - &ldquo;ticket aç&rdquo; değil.</p>
 <h1 id="kubeconfig-and-identity">Kubeconfig and Identity<a class="anchor" href="#kubeconfig-and-identity">#</a></h1>
 <p>Access starts with identity. On our kubeadm cluster the first thing <code>kubeadm init</code> hands you is <code>admin.conf</code> - a kubeconfig with cluster-admin baked in. That file is the cluster&rsquo;s master key. Handing it to everyone &ldquo;just for now&rdquo; is how clusters end up with no audit trail and no boundaries.</p>
 <p>A user&rsquo;s access is a kubeconfig of their own:</p>

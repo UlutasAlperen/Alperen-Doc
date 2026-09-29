@@ -13,7 +13,7 @@ The split that every real org lands on eventually:
 
 The control plane stops being "a server I log into" and becomes **an API with policies around it**. Nobody SSH's to `kmaster` to deploy a feature. The platform team's job is to make sure nobody needs to.
 
-**Küçük model:** cluster bir bina; platform ekibi bina sahibi (asansör, elektrik, yangın merdiveni), uygulama ekipleri kiracılar (kendi dairelerinde serbest, ama duvarı yıkmak yok). İyi bir platform, kiracıya "istek at" der - "ticket aç" değil.
+**Özetlersek:** cluster bir bina; platform ekibi bina sahibi (asansör, elektrik, yangın merdiveni), uygulama ekipleri kiracılar (kendi dairelerinde serbest, ama duvarı yıkmak yok). İyi bir platform, kiracıya "istek at" der - "ticket aç" değil.
 
 # Kubeconfig and Identity
 

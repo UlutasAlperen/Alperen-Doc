@@ -36,7 +36,7 @@ The distinction that saves you from a false sense of safety:
 | Ne korur | Yanlış silme, bad upgrade sonrası geri dönüş | Tüm cluster'ın kaybı |
 | Nasıl | CoW anlık görüntü | Tarayıcı (sync agent) ile uzun süreli dosya |
 
-**Türkçe özet:** snapshot'lar cluster ile birlikte yaşar - cluster yanarsa snapshot da yanar. Gerçek backup her zaman S3/NFS'e. Homelab'da en azından snapshot + offsite backup kombinasyonunu düşün.
+**özetle:** snapshot'lar cluster ile birlikte yaşar - cluster yanarsa snapshot da yanar. Gerçek backup her zaman S3/NFS'e. Homelab'da en azından snapshot + offsite backup kombinasyonunu düşün.
 
 ## The Honest Requirements
 
