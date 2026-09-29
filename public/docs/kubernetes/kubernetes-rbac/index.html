@@ -26,7 +26,7 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
 	<meta itemprop="name" content="kubernetes-rbac">
 	<meta itemprop="description" content="RBAC# In the secrets chapter we said that secret data “can be restricted with RBAC”. That was a promise we haven’t paid off yet. Let’s pay it off.
 RBAC - Role Based Access Control - answers one question: who is allowed to do what to which objects. It’s the bouncer at the club door. Everyone with a kubeconfig on your laptop is a cluster-admin, which is why it never came up until now. But the moment you hand a namespace to a team, or give an app a token, the bouncer starts working.">
-	<meta itemprop="wordCount" content="729">
+	<meta itemprop="wordCount" content="2305">
 
 <title>kubernetes-rbac • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.8d199b5de941f83ff337ef5b2796b20ab573b0838ba6712097bed4c18f805f99.js" integrity="sha256-jRmbXelB&#43;D/zN&#43;9bJ5ayCrVzsIOLpnEgl77UwY&#43;AX5k=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.99e3375e1badb4ecddbb5a258167abc6fa0f29033fce3d1ccfb95f449ced56aa.js" integrity="sha256-meM3XhuttOzdu1olgWerxvoPKQM/zj0cz7lfRJztVqo=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -805,6 +805,20 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
   
 
   
+    <a href="/docs/kubernetes/kubernetes-cert-manager/" class="">
+      kubernetes-cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
       kubernetes-namespaces</a>
   
@@ -1253,7 +1267,20 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
   <aside class="hidden">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#apigroups-and-subresources">apiGroups and subresources</a></li>
+    <li><a href="#resourcenames">resourceNames</a></li>
+    <li><a href="#clusterrole">ClusterRole</a></li>
+    <li><a href="#nonresourceurls">nonResourceURLs</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#subjects-user-group-serviceaccount">Subjects: User, Group, ServiceAccount</a></li>
+    <li><a href="#clusterrolebinding">ClusterRoleBinding</a></li>
+    <li><a href="#the-four-combinations">The Four Combinations</a></li>
+  </ul>
+</nav>
 
 
 
@@ -1273,7 +1300,9 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
 <li><strong>RoleBinding</strong>: attaches that role to a user, group, or ServiceAccount (&ldquo;and <em>this</em> app gets those permissions&rdquo;)</li>
 </ul>
 <p><em>özetlersek</em> Role = yetki listesi, RoleBinding = &ldquo;kim&rdquo; ile &ldquo;yetkisi nedir&rdquo; desek daha dogru olur. <em>Rol</em> tek başına kimseye yetki vermez, RoleBinding&rsquo;i olmayan bir Role&rsquo;de bir şey yaptıramazsin.</p>
-<h1 id="serviceaccounts">ServiceAccounts<a class="anchor" href="#serviceaccounts">#</a></h1>
+<blockquote class='book-hint '>
+<p>RBAC is <strong>additive and default-deny</strong>. There are no <code>deny</code> rules at all - if no rule allows an action, it&rsquo;s denied. And when several rules apply, the answers are unioned: one &ldquo;yes&rdquo; anywhere wins. That&rsquo;s why giving someone <code>cluster-admin</code> &ldquo;just to debug&rdquo; is so hard to walk back - you can&rsquo;t subtract, you can only edit the rules.</p>
+</blockquote><h1 id="serviceaccounts">ServiceAccounts<a class="anchor" href="#serviceaccounts">#</a></h1>
 <p>Every request to the API server runs as <em>some</em> identity. Humans use certificates; pods use <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/">ServiceAccounts</a>. If you don&rsquo;t name one, the pod gets <code>default</code> in its namespace - which is one more reason not to leave the <code>default</code> namespace full of half-finished experiments.</p>
 <p>Create one the imperative way:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create serviceaccount crawler-sa</span></span></code></pre></div><p>Or in YAML:</p>
@@ -1284,7 +1313,11 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">serviceAccountName</span>: <span style="color:#ae81ff">crawler-sa</span></span></span></code></pre></div><blockquote class='book-hint '>
 <p>Modern Kubernetes mounts the token as a <em>projected</em> volume at <code>/var/run/secrets/kubernetes.io/serviceaccount/</code> - <code>token</code>, <code>ca.crt</code>, and <code>namespace</code> files. The <code>automountServiceAccountToken: false</code> option on a pod spec turns that off entirely, which is the right move for pods that never talk to the API.</p>
-</blockquote><h1 id="roles-and-clusterroles">Roles and ClusterRoles<a class="anchor" href="#roles-and-clusterroles">#</a></h1>
+</blockquote><p>Need to authenticate as that ServiceAccount outside the pod - to test, or to hand a CI job a credential? Mint a short-lived token:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create token crawler-sa -n crawler</span></span></code></pre></div><blockquote class='book-hint '>
+<p>Older docs will tell you to read the token out of a <code>Secret</code> of type <code>kubernetes.io/serviceaccount-token</code>. That still works, but the projected volume plus <code>kubectl create token</code> is the modern path - the token rotates, and you never have to copy a long-lived secret around.</p>
+</blockquote><p><strong>Özetlersek:</strong> ServiceAccount = pod&rsquo;un kimliği. İnsalar sertifika ile, podlar SA token ile konuşur. Her namespace&rsquo;te bir <code>default</code> SA var ama ona yetki yüklemek, o namespace&rsquo;teki <em>her</em> pod&rsquo;un aynı yetkiye sahip olması demek - her uygulamaya kendi SA&rsquo;sini ver.</p>
+<h1 id="roles-and-clusterroles">Roles and ClusterRoles<a class="anchor" href="#roles-and-clusterroles">#</a></h1>
 <p>A <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole">Role</a> is namespaced - it grants permissions inside one namespace. A <code>ClusterRole</code> grants cluster-wide, and is also what you need for non-namespaced things (nodes, persistent volumes).</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Role</span>
@@ -1302,7 +1335,69 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
 </ul>
 <blockquote class='book-hint '>
 <p>Verbs are exactly what they say on the tin: <code>list</code> without <code>get</code> means &ldquo;you may see the names, but not the contents&rdquo;. <code>watch</code> is what <code>kubectl get -w</code> needs. <code>create</code> without <code>delete</code> is a fun one to hand out.</p>
-</blockquote><h1 id="bindings">Bindings<a class="anchor" href="#bindings">#</a></h1>
+</blockquote><h2 id="apigroups-and-subresources">apiGroups and subresources<a class="anchor" href="#apigroups-and-subresources">#</a></h2>
+<p>The two you&rsquo;ll type most are <code>&quot;&quot;</code> (core) and <code>apps</code>. But the exam likes to trip people on the rest:</p>
+<table>
+	<thead>
+			<tr>
+					<th><code>apiGroups</code></th>
+					<th><code>resources</code></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>&quot;&quot;</code></td>
+					<td><code>pods</code>, <code>services</code>, <code>configmaps</code>, <code>secrets</code>, <code>events</code>, <code>namespaces</code></td>
+			</tr>
+			<tr>
+					<td><code>apps</code></td>
+					<td><code>deployments</code>, <code>statefulsets</code>, <code>daemonsets</code>, <code>replicasets</code></td>
+			</tr>
+			<tr>
+					<td><code>batch</code></td>
+					<td><code>jobs</code>, <code>cronjobs</code></td>
+			</tr>
+			<tr>
+					<td><code>networking.k8s.io</code></td>
+					<td><code>ingresses</code>, <code>networkpolicies</code></td>
+			</tr>
+			<tr>
+					<td><code>rbac.authorization.k8s.io</code></td>
+					<td><code>roles</code>, <code>rolebindings</code>, <code>clusterroles</code></td>
+			</tr>
+	</tbody>
+</table>
+<p>Subresources are written as <code>parent/child</code> and need their own entry in <code>resources</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">resources</span>: [<span style="color:#e6db74">&#34;pods&#34;</span>, <span style="color:#e6db74">&#34;pods/log&#34;</span>, <span style="color:#e6db74">&#34;pods/exec&#34;</span>]</span></span></code></pre></div><p><code>pods/log</code> is the &ldquo;read the output&rdquo; permission. <code>pods/exec</code> is <code>kubectl exec</code> - that one is a shell inside the container, so hand it out like you&rsquo;d hand out a root password.</p>
+<h2 id="resourcenames">resourceNames<a class="anchor" href="#resourcenames">#</a></h2>
+<p>Rules can be narrowed to specific objects by name:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">apiGroups</span>: [<span style="color:#e6db74">&#34;&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">resources</span>: [<span style="color:#e6db74">&#34;configmaps&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">resourceNames</span>: [<span style="color:#e6db74">&#34;app-config&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">verbs</span>: [<span style="color:#e6db74">&#34;get&#34;</span>]</span></span></code></pre></div><blockquote class='book-hint '>
+<p><code>resourceNames</code> only restricts requests that name a single object: <code>get</code>, <code>update</code>, <code>patch</code>, <code>delete</code>. <code>list</code> and <code>watch</code> don&rsquo;t take a name, and <code>create</code> doesn&rsquo;t have one yet - so a rule with <code>resourceNames</code> and <code>verbs: [&quot;list&quot;]</code> or <code>[&quot;create&quot;]</code> silently matches nothing. If you need &ldquo;read these three configmaps&rdquo;, use <code>resourceNames</code> with <code>get</code>, not with <code>list</code>.</p>
+</blockquote><h2 id="clusterrole">ClusterRole<a class="anchor" href="#clusterrole">#</a></h2>
+<p>A <code>ClusterRole</code> looks identical to a <code>Role</code>, minus <code>metadata.namespace</code> - and it&rsquo;s the <em>only</em> way to grant permissions on cluster-scoped resources: <code>nodes</code>, <code>persistentvolumes</code>, <code>namespaces</code>, <code>storageclasses</code>, <code>certificatesigningrequests</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterRole</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">node-reader</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">apiGroups</span>: [<span style="color:#e6db74">&#34;&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">resources</span>: [<span style="color:#e6db74">&#34;nodes&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">verbs</span>: [<span style="color:#e6db74">&#34;get&#34;</span>, <span style="color:#e6db74">&#34;list&#34;</span>]</span></span></code></pre></div><blockquote class='book-hint '>
+<p><strong>Dikkat:</strong> &ldquo;Role ile node yetkisi ver&rdquo; bir sınav klasiğidir ve doğru cevabı yoktur. Node, PV, Namespace gibi cluster-scoped nesneler hiçbir namespace&rsquo;e ait değildir; <code>Role</code> yalnızca tek namespace içinde çalışır. Bu yüzden bu tür bir görevde <code>ClusterRole</code> yazman gerekir - Role yazarsan görevi kaybedersin.</p>
+</blockquote><p>A <code>ClusterRole</code> is also handy as a <em>reusable template</em> even for namespaced resources - more on that in the combinations table below.</p>
+<h2 id="nonresourceurls">nonResourceURLs<a class="anchor" href="#nonresourceurls">#</a></h2>
+<p>RBAC also covers things that aren&rsquo;t Kubernetes objects at all - HTTP paths on the API server like <code>/healthz</code>, <code>/metrics</code>, <code>/version</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">nonResourceURLs</span>: [<span style="color:#e6db74">&#34;/healthz&#34;</span>, <span style="color:#e6db74">&#34;/metrics&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">verbs</span>: [<span style="color:#e6db74">&#34;get&#34;</span>]</span></span></code></pre></div><p>Note there is no <code>apiGroups</code> and no <code>resources</code> here - <code>nonResourceURLs</code> is a different rule shape.</p>
+<blockquote class='book-hint '>
+<p><strong>Dikkat:</strong> nonResourceURLs kuralının çalışması için <code>ClusterRole</code> + <code>ClusterRoleBinding</code> gerekir. <code>Role</code> içine yazarsan obje belki <code>apply</code> olur ama hiçbir zaman eşleşmez - bu yollar namespace&rsquo;e ait değildir. Sınavda &ldquo;monitoring&rsquo;e <code>/metrics</code> okuma yetkisi ver&rdquo; tarzı bir görevde <code>RoleBinding</code> yazmak klasik kaybedilen puandır.</p>
+</blockquote><p>Where do these rules live in a real cluster? Kubernetes ships a few of them already: <code>system:public-info-viewer</code> grants <code>get</code> on <code>/healthz</code>, <code>/livez</code>, <code>/readyz</code>, <code>/version</code> to <strong>everyone including anonymous</strong>, <code>system:discovery</code> grants the API discovery paths to authenticated users, and <code>system:monitoring</code> grants <code>/metrics</code> plus health endpoints to the <code>system:monitoring</code> group. Knowing that <code>system:public-info-viewer</code> exists explains why <code>curl /healthz</code> works before you&rsquo;ve configured any RBAC at all.</p>
+<h1 id="bindings">Bindings<a class="anchor" href="#bindings">#</a></h1>
 <p>A <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding">RoleBinding</a> sticks a role to a subject:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">RoleBinding</span>
@@ -1318,11 +1413,114 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">crawler-sa</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">crawler</span></span></span></code></pre></div><p>Note the <code>roleRef</code> is not a reference you can edit in place - changing which role a binding points at means deleting and recreating the binding. That&rsquo;s a Kubernetes quirk, not a bug in your YAML.</p>
 <p>A <code>ClusterRoleBinding</code> does the same with cluster-wide reach. Watch out: a <code>ClusterRoleBinding</code> to <code>cluster-admin</code> is how people accidentally give every pod in the cluster full control. Bind narrowly.</p>
+<h2 id="subjects-user-group-serviceaccount">Subjects: User, Group, ServiceAccount<a class="anchor" href="#subjects-user-group-serviceaccount">#</a></h2>
+<p><code>subjects</code> is a list, and it has three kinds. This is where most RBAC YAML goes wrong:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">subjects</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ServiceAccount</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">crawler-sa</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">crawler</span> <span style="color:#75715e"># REQUIRED - the SA lives somewhere specific</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">User</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">alice</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span> <span style="color:#75715e"># REQUIRED for User</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Group</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">dev-team</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span> <span style="color:#75715e"># REQUIRED for Group</span></span></span></code></pre></div><p>The rules:</p>
+<ul>
+<li><strong>ServiceAccount</strong> — the identity of a pod. <code>namespace</code> is <strong>not</strong> taken from the binding, you must write it out. A binding in <code>crawler</code> pointing at <code>crawler-sa</code> without a <code>namespace</code> field is a broken binding.</li>
+<li><strong>User</strong> — a human. Kubernetes has no <code>User</code> object; the name is whatever the authentication layer said it was. With client certs it&rsquo;s the certificate&rsquo;s <code>CN</code> field.</li>
+<li><strong>Group</strong> — a set of users, coming from a certificate&rsquo;s <code>O</code> field or a token claim. Some are built in, like <code>system:masters</code> and <code>system:serviceaccounts:&lt;ns&gt;</code>.</li>
+</ul>
+<p>And the <code>apiGroup</code> swap that trips everyone: ServiceAccount takes <code>apiGroup: &quot;&quot;</code> (or nothing at all), while <code>User</code> and <code>Group</code> take <code>rbac.authorization.k8s.io</code>. Get this wrong and the binding is rejected at apply time - which is at least loud about it.</p>
+<blockquote class='book-hint '>
+<p>The string <code>system:serviceaccount:&lt;namespace&gt;:&lt;name&gt;</code> is the ServiceAccount&rsquo;s internal username. That&rsquo;s why <code>kubectl auth can-i --as=system:serviceaccount:crawler:crawler-sa</code> works - you&rsquo;re impersonating it by its full internal name.</p>
+</blockquote><h2 id="clusterrolebinding">ClusterRoleBinding<a class="anchor" href="#clusterrolebinding">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterRoleBinding</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">alice-node-reader</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">roleRef</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterRole</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">node-reader</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">subjects</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">User</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">alice</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">apiGroup</span>: <span style="color:#ae81ff">rbac.authorization.k8s.io</span></span></span></code></pre></div><p>Cluster-wide reach, no <code>metadata.namespace</code> - a <code>ClusterRoleBinding</code> is not in any namespace.</p>
+<h2 id="the-four-combinations">The Four Combinations<a class="anchor" href="#the-four-combinations">#</a></h2>
+<p>This table is the single highest-value thing to memorize. The permission <em>bundle</em> (Role / ClusterRole) and the <em>binding</em> (RoleBinding / ClusterRoleBinding) can be mixed - and the mix decides how far the permissions reach:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Bundle</th>
+					<th>Binding</th>
+					<th>What the subject can do</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>Role</code></td>
+					<td><code>RoleBinding</code></td>
+					<td>the Role&rsquo;s rules, inside the binding&rsquo;s namespace only</td>
+			</tr>
+			<tr>
+					<td><code>ClusterRole</code></td>
+					<td><code>RoleBinding</code></td>
+					<td>the ClusterRole&rsquo;s rules, but <strong>only inside the binding&rsquo;s namespace</strong></td>
+			</tr>
+			<tr>
+					<td><code>ClusterRole</code></td>
+					<td><code>ClusterRoleBinding</code></td>
+					<td>the ClusterRole&rsquo;s rules, everywhere (all namespaces + cluster-scoped)</td>
+			</tr>
+			<tr>
+					<td><code>Role</code></td>
+					<td><code>ClusterRoleBinding</code></td>
+					<td><strong>not possible</strong> - a Role is namespace-bound and can&rsquo;t be granted cluster-wide</td>
+			</tr>
+	</tbody>
+</table>
+<p>Row two is the one that pays for itself. Write the ClusterRole once (&ldquo;can read deployments&rdquo;), then give every team a <code>RoleBinding</code> to it in their own namespace. One permission definition, N teams, zero overlap. That&rsquo;s namespace isolation without copy-pasting roles.</p>
+<p>Row four is not a mistake you can make quietly - the API server rejects the object.</p>
+<p><strong>Özetlersek:</strong> Rol + RoleBinding = &ldquo;tek namespace&rsquo;te şu yetkiler&rdquo;. ClusterRole + RoleBinding = &ldquo;aynı yetkiler ama sadece bu namespace&rsquo;te&rdquo; (yeniden kullanım, sınırlı erişim). ClusterRole + ClusterRoleBinding = &ldquo;tüm cluster&rsquo;da&rdquo;. Role + ClusterRoleBinding = imkansız.</p>
+<h1 id="imperative-generators">Imperative Generators<a class="anchor" href="#imperative-generators">#</a></h1>
+<p>The exam is timed. YAML is clearer, but the generators get the skeleton down in seconds - and every one of them takes <code>--dry-run=client -o yaml</code>, so you can generate and then edit:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Roles</span>
+</span></span><span style="display:flex;"><span>kubectl create role pod-reader --verb<span style="color:#f92672">=</span>get,list,watch --resource<span style="color:#f92672">=</span>pods -n crawler
+</span></span><span style="display:flex;"><span>kubectl create role config-reader --verb<span style="color:#f92672">=</span>get --resource<span style="color:#f92672">=</span>configmaps --resource-name<span style="color:#f92672">=</span>app-config -n crawler
+</span></span><span style="display:flex;"><span>kubectl create clusterrole node-reader --verb<span style="color:#f92672">=</span>get,list --resource<span style="color:#f92672">=</span>nodes
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Bindings</span>
+</span></span><span style="display:flex;"><span>kubectl create rolebinding crawler-pod-reader <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --role<span style="color:#f92672">=</span>pod-reader <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --serviceaccount<span style="color:#f92672">=</span>crawler:crawler-sa -n crawler
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubectl create rolebinding alice-can-view <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --clusterrole<span style="color:#f92672">=</span>view --user<span style="color:#f92672">=</span>alice -n crawler
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubectl create clusterrolebinding alice-node-reader <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --clusterrole<span style="color:#f92672">=</span>node-reader --user<span style="color:#f92672">=</span>alice</span></span></code></pre></div><p>Note the two subject spellings - <code>--serviceaccount=namespace:name</code> for generators, versus <code>--as=system:serviceaccount:namespace:name</code> for impersonation. Same identity, different syntax. Mixing them up is the fastest way to waste five minutes.</p>
 <h1 id="checking-permissions">Checking Permissions<a class="anchor" href="#checking-permissions">#</a></h1>
 <p>You never have to guess who can do what:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl auth can-i create deployments --namespace crawler
-</span></span><span style="display:flex;"><span>kubectl auth can-i list secrets --as<span style="color:#f92672">=</span>system:serviceaccount:crawler:crawler-sa
-</span></span><span style="display:flex;"><span>kubectl auth can-i <span style="color:#e6db74">&#39;*&#39;</span> <span style="color:#e6db74">&#39;*&#39;</span> --as<span style="color:#f92672">=</span>system:serviceaccount:crawler:crawler-sa</span></span></code></pre></div><p>You want <code>no</code> on that last one. <code>kubectl auth can-i --list</code> dumps the full effective rule set for the current user.</p>
+</span></span><span style="display:flex;"><span>kubectl auth can-i list secrets --namespace crawler --as<span style="color:#f92672">=</span>system:serviceaccount:crawler:crawler-sa
+</span></span><span style="display:flex;"><span>kubectl auth can-i <span style="color:#e6db74">&#39;*&#39;</span> <span style="color:#e6db74">&#39;*&#39;</span> --as<span style="color:#f92672">=</span>system:serviceaccount:crawler:crawler-sa</span></span></code></pre></div><p>You want <code>no</code> on that last one. <code>kubectl auth can-i --list</code> dumps the full effective rule set for the current user; add <code>--as=...</code> to see the whole rulebook for someone else, and <code>--namespace</code> to scope it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl auth can-i --list --as<span style="color:#f92672">=</span>system:serviceaccount:crawler:crawler-sa -n crawler</span></span></code></pre></div><blockquote class='book-hint '>
+<p>Always pass <code>--namespace</code> explicitly. Without it, <code>can-i</code> checks against whatever namespace your kubeconfig context happens to be pointing at - and you&rsquo;ll &ldquo;prove&rdquo; the wrong thing.</p>
+</blockquote><p>There is also <code>--as-group</code> when you want to impersonate a group rather than a user:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl auth can-i list pods -n crawler --as<span style="color:#f92672">=</span>alice --as-group<span style="color:#f92672">=</span>dev-team</span></span></code></pre></div><p><strong>Özetlersek:</strong> RBAC&rsquo;i test etmek tahmin işi değildir. <code>kubectl auth can-i --as=&lt;kimlik&gt; --namespace=&lt;ns&gt;</code> her zaman yanındadır - ve <code>--list</code> ile o kimliğin tüm yetki defterini tek seferde görebilirsin.</p>
+<h1 id="troubleshooting-rbac">Troubleshooting RBAC<a class="anchor" href="#troubleshooting-rbac">#</a></h1>
+<p>RBAC shows up as a symptom, rarely as an error message that says &ldquo;your YAML is wrong&rdquo;. The usual shapes:</p>
+<p><strong>Pod logunda <code>forbidden: User &quot;system:serviceaccount:x:y&quot; cannot get resource &quot;secrets&quot;</code></strong> — the app is missing a permission. Don&rsquo;t edit the app; find the gap:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl auth can-i --list --as<span style="color:#f92672">=</span>system:serviceaccount:x:y -n x</span></span></code></pre></div><p><strong>Yazdın, <code>apply</code> oldu ama hâlâ izin yok</strong> — in order of how often it bites:</p>
+<ol>
+<li>You created the <code>Role</code> but never the <code>RoleBinding</code>. A Role alone grants nothing.</li>
+<li><code>subjects[].namespace</code> is missing or wrong for a ServiceAccount. The binding&rsquo;s namespace does <strong>not</strong> substitute for it.</li>
+<li>You bound the right role to the wrong subject - the pod is running as <code>default</code>, not the SA you wired up. Check <code>kubectl get pod &lt;name&gt; -o jsonpath='{.spec.serviceAccountName}'</code>.</li>
+<li>You&rsquo;re missing <code>watch</code>. A controller that lists-and-watches works for <code>list</code> and then hangs forever on <code>watch</code>.</li>
+<li>You tested it with <code>kubectl auth can-i</code> without <code>--as</code>, so you tested your own admin identity instead.</li>
+</ol>
+<p><strong>Bir anda herkes her şeyi yapabiliyor</strong> — look for a <code>ClusterRoleBinding</code> to <code>cluster-admin</code> or <code>edit</code>. <code>kubectl get clusterrolebindings</code> and grep for it. This is why <code>ClusterRole + RoleBinding</code> is the safer default: same role, blast radius of one namespace.</p>
+<p><strong>Bir şeyi değiştirmeye çalışıyorsun ama olmadı</strong> — <code>roleRef</code> is immutable. Delete and recreate the binding.</p>
 <h1 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h1>
 <p>Our crawler team at SynergyChat should be able to watch their own pods and read their logs - and absolutely nothing else.</p>
 <ol>
@@ -1342,7 +1540,7 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
 <li><code>kind</code>: <code>RoleBinding</code></li>
 <li><code>metadata/namespace</code>: <code>crawler</code></li>
 <li><code>roleRef</code>: <code>Role</code> named <code>crawler-pod-reader</code></li>
-<li><code>subjects</code>: the <code>crawler-sa</code> ServiceAccount</li>
+<li><code>subjects</code>: the <code>crawler-sa</code> ServiceAccount (remember the <code>namespace</code> field)</li>
 </ul>
 <ol start="3">
 <li>Create the ServiceAccount if you haven&rsquo;t already, and wire the crawler deployment to it:</li>
@@ -1355,8 +1553,15 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
 </span></span><span style="display:flex;"><span>kubectl auth can-i list pods -n crawler --as<span style="color:#f92672">=</span>system:serviceaccount:crawler:crawler-sa
 </span></span><span style="display:flex;"><span>kubectl auth can-i delete pods -n crawler --as<span style="color:#f92672">=</span>system:serviceaccount:crawler:crawler-sa
 </span></span><span style="display:flex;"><span>kubectl auth can-i get secrets -n crawler --as<span style="color:#f92672">=</span>system:serviceaccount:crawler:crawler-sa</span></span></code></pre></div><p>You want <code>yes</code>, <code>no</code>, <code>no</code>. That asymmetry is the entire point of RBAC - the crawler can see itself, but can&rsquo;t touch its neighbors or read the secrets it doesn&rsquo;t need.</p>
+<ol start="5">
+<li>Now for the part exams actually ask. The ops team (user <code>alice</code>) needs to <code>get</code> and <code>list</code> nodes - cluster-wide, because nodes aren&rsquo;t in a namespace. Write <code>node-reader</code> as a <code>ClusterRole</code>, bind it to <code>alice</code> with a <code>ClusterRoleBinding</code>, and prove it:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl auth can-i list nodes --as<span style="color:#f92672">=</span>alice           <span style="color:#75715e"># yes</span>
+</span></span><span style="display:flex;"><span>kubectl auth can-i delete nodes --as<span style="color:#f92672">=</span>alice          <span style="color:#75715e"># no</span></span></span></code></pre></div><ol start="6">
+<li>Bonus, and the pattern worth keeping: the crawler team wants to read <code>configmaps</code> in their own namespace using a <code>ClusterRole</code> as a template. Create a <code>ClusterRole</code> named <code>cm-reader</code> that allows <code>get</code>/<code>list</code> on <code>configmaps</code>, then bind it to <code>crawler-sa</code> with a <strong><code>RoleBinding</code></strong> (not a <code>ClusterRoleBinding</code>) in <code>crawler</code>. Prove that the same SA still cannot read configmaps in <code>kube-system</code>. That gap is exactly what makes row two of the combinations table worth knowing.</li>
+</ol>
 <blockquote class='book-hint '>
-<p><strong>Dikkat:</strong> <code>kubectl auth can-i</code> ile test ettiğin kimlik, <code>--as</code> vermezsen kendi kimliğin oldugundan &ldquo;ben görebiliyorum ama pod göremiyor&rdquo; probleminin ana sebebidir  - her zaman pod&rsquo;un ServiceAccount&rsquo;ı ile test et.</p>
+<p><strong>Dikkat:</strong> <code>kubectl auth can-i</code> ile test ettiğin kimlik, <code>--as</code> vermezsen kendi kimliğin oldugundan &ldquo;ben görebiliyorum ama pod göremiyor&rdquo; probleminin ana sebebidir - her zaman pod&rsquo;un ServiceAccount&rsquo;ı ile test et.</p>
 </blockquote><p>for more <a href="../kubernetes-jobs-cronjobs/">jobs-cronjobs</a></p>
 </article>
  
@@ -1423,7 +1628,20 @@ RBAC - Role Based Access Control - answers one question: who is allowed to do wh
     <div class="book-toc-content">
       
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#apigroups-and-subresources">apiGroups and subresources</a></li>
+    <li><a href="#resourcenames">resourceNames</a></li>
+    <li><a href="#clusterrole">ClusterRole</a></li>
+    <li><a href="#nonresourceurls">nonResourceURLs</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#subjects-user-group-serviceaccount">Subjects: User, Group, ServiceAccount</a></li>
+    <li><a href="#clusterrolebinding">ClusterRoleBinding</a></li>
+    <li><a href="#the-four-combinations">The Four Combinations</a></li>
+  </ul>
+</nav>
 
 
 

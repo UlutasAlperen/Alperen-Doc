@@ -77,7 +77,7 @@ spec:
       secretName: synchat-tls
 ```
 
-The `secretName` points at a Secret holding `tls.crt` and `tls.key` - exactly the format we saw in [secrets](../kubernetes-secrets/). Real clusters usually get this issued automatically by cert-manager instead of hand-rolling it.
+The `secretName` points at a Secret holding `tls.crt` and `tls.key` - exactly the format we saw in [secrets](../kubernetes-secrets/). Real clusters usually get this issued automatically by [cert-manager](../kubernetes-cert-manager/) instead of hand-rolling it - that's two chapters ahead.
 
 # Ingress vs LoadBalancer
 

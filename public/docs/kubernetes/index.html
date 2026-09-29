@@ -31,7 +31,7 @@ For example, you could install Docker on a single server, and route traffic dire
 – The Kubernetes team
 Kubernetes orchestrates and manages collections of containers (often using container runtimes like containerd). It takes care of scaling, distribution, and connectivity among these containers. Think of it as a system to manage many containers and the infrastructure they run on.
 For example, you could install Docker on a single server, and route traffic directly to it. That’s fairly simple to set up, but what if you want 10 instances of that server? What about 1000 instances? What if you want to deploy many different services, each scaling up with more instances depending on load? Those are the problems that Kubernetes solves.">
-	<meta itemprop="wordCount" content="520">
+	<meta itemprop="wordCount" content="535">
 
 <title>Kubernetes • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -40,7 +40,7 @@ For example, you could install Docker on a single server, and route traffic dire
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.8d199b5de941f83ff337ef5b2796b20ab573b0838ba6712097bed4c18f805f99.js" integrity="sha256-jRmbXelB&#43;D/zN&#43;9bJ5ayCrVzsIOLpnEgl77UwY&#43;AX5k=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.99e3375e1badb4ecddbb5a258167abc6fa0f29033fce3d1ccfb95f449ced56aa.js" integrity="sha256-meM3XhuttOzdu1olgWerxvoPKQM/zj0cz7lfRJztVqo=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/kubernetes/index.xml" title="Kubernetes" />
 
   
@@ -811,6 +811,20 @@ For example, you could install Docker on a single server, and route traffic dire
   
 
   
+    <a href="/docs/kubernetes/kubernetes-cert-manager/" class="">
+      kubernetes-cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
       kubernetes-namespaces</a>
   
@@ -1265,7 +1279,7 @@ For example, you could install Docker on a single server, and route traffic dire
       <ul>
         <li><a href="#temeller">Temeller</a></li>
         <li><a href="#secretlar-rbac-ve-batch-işleri">Secret&rsquo;lar, RBAC ve Batch İşleri</a></li>
-        <li><a href="#ağ-services-ingress--gateway">Ağ (Services, Ingress &amp; Gateway)</a></li>
+        <li><a href="#ağ-services-ingress-gateway--tls">Ağ (Services, Ingress, Gateway &amp; TLS)</a></li>
         <li><a href="#ölçeklendirme">Ölçeklendirme</a></li>
         <li><a href="#depolama">Depolama</a></li>
         <li><a href="#prode-geçiş">Prod&rsquo;e Geçiş</a></li>
@@ -1315,6 +1329,7 @@ For example, you could install Docker on a single server, and route traffic dire
 <li><a href="kubernetes-services/">kubernetes-services</a></li>
 <li><a href="kubernetes-ingress/">kubernetes-ingress</a></li>
 <li><a href="kubernetes-gateway-minikube/">kubernetes-gateway-minikube</a></li>
+<li><a href="kubernetes-cert-manager/">kubernetes-cert-manager</a></li>
 <li><a href="kubernetes-namespaces/">kubernetes-namespaces</a></li>
 <li><a href="kubernetes-dns-coredns/">kubernetes-dns-coredns</a></li>
 <li><a href="kubernetes-scaling-vertical/">kubernetes-scaling-vertical</a></li>
@@ -1340,11 +1355,12 @@ For example, you could install Docker on a single server, and route traffic dire
 <li><a href="kubernetes-rbac/">kubernetes-rbac</a> = ServiceAccount (token mount), Role/ClusterRole, RoleBinding/ClusterRoleBinding, <code>kubectl auth can-i --as</code></li>
 <li><a href="kubernetes-jobs-cronjobs/">kubernetes-jobs-cronjobs</a> = Job (<code>completions</code>/<code>parallelism</code>/<code>backoffLimit</code>), CronJob (<code>schedule</code>/<code>concurrencyPolicy</code>), db.json yedekleme pipeline&rsquo;ı</li>
 </ul>
-<h3 id="ağ-services-ingress--gateway">Ağ (Services, Ingress &amp; Gateway)<a class="anchor" href="#a%c4%9f-services-ingress--gateway">#</a></h3>
+<h3 id="ağ-services-ingress-gateway--tls">Ağ (Services, Ingress, Gateway &amp; TLS)<a class="anchor" href="#a%c4%9f-services-ingress-gateway--tls">#</a></h3>
 <ul>
 <li><a href="kubernetes-services/">kubernetes-services</a> = <code>ClusterIP</code>, <code>NodePort</code>, <code>LoadBalancer</code>, <code>ExternalName</code>, stable endpoint ve load balancing</li>
 <li><a href="kubernetes-ingress/">kubernetes-ingress</a> = Ingress controller (nginx) vs Ingress resource, host/path kuralları, <code>ingressClassName</code>, TLS + Secret</li>
 <li><a href="kubernetes-gateway-minikube/">kubernetes-gateway-minikube</a> = Gateway API (Envoy), <code>HTTPRoute</code>, <code>/etc/hosts</code> + <code>minikube tunnel</code>, annotations</li>
+<li><a href="kubernetes-cert-manager/">kubernetes-cert-manager</a> = <code>Issuer</code>/<code>ClusterIssuer</code>/<code>Certificate</code>, SelfSigned vs <code>isCA</code>+<code>CA</code> zinciri, Gateway <code>certificateRefs</code> + <code>cert-manager.io/cluster-issuer</code>, ACME HTTP-01</li>
 <li><a href="kubernetes-namespaces/">kubernetes-namespaces</a> = <code>kubectl create ns</code>, <code>-n</code> flag, intra-cluster DNS (<code>svc.cluster.local</code>)</li>
 <li><a href="kubernetes-dns-coredns/">kubernetes-dns-coredns</a> = CoreDNS + Corefile ConfigMap, <code>dnsPolicy</code>/<code>ndots</code>, <code>nslookup</code> ile DNS troubleshooting, kube-dns servisi</li>
 </ul>
@@ -1435,7 +1451,7 @@ For example, you could install Docker on a single server, and route traffic dire
       <ul>
         <li><a href="#temeller">Temeller</a></li>
         <li><a href="#secretlar-rbac-ve-batch-işleri">Secret&rsquo;lar, RBAC ve Batch İşleri</a></li>
-        <li><a href="#ağ-services-ingress--gateway">Ağ (Services, Ingress &amp; Gateway)</a></li>
+        <li><a href="#ağ-services-ingress-gateway--tls">Ağ (Services, Ingress, Gateway &amp; TLS)</a></li>
         <li><a href="#ölçeklendirme">Ölçeklendirme</a></li>
         <li><a href="#depolama">Depolama</a></li>
         <li><a href="#prode-geçiş">Prod&rsquo;e Geçiş</a></li>

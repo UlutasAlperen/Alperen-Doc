@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-dns-coredns"
-weight: 14
+weight: 15
 ---
 # Cluster DNS
 

@@ -39,15 +39,16 @@ For example, you _could_ install Docker on a single server, and route traffic di
 10. [kubernetes-services](kubernetes-services/)
 11. [kubernetes-ingress](kubernetes-ingress/)
 12. [kubernetes-gateway-minikube](kubernetes-gateway-minikube/)
-13. [kubernetes-namespaces](kubernetes-namespaces/)
-14. [kubernetes-dns-coredns](kubernetes-dns-coredns/)
-15. [kubernetes-scaling-vertical](kubernetes-scaling-vertical/)
-16. [kubernetes-scaling-horizontal](kubernetes-scaling-horizontal/)
-17. [kubernetes-storage](kubernetes-storage/)
-18. [kubernetes-persistent-volumes](kubernetes-persistent-volumes/)
-19. [kubernetes-storage-classes](kubernetes-storage-classes/)
-20. [kubernetes-statefulsets](kubernetes-statefulsets/)
-21. [kubernetes-nodes-basic](kubernetes-nodes-basic/)
+13. [kubernetes-cert-manager](kubernetes-cert-manager/)
+14. [kubernetes-namespaces](kubernetes-namespaces/)
+15. [kubernetes-dns-coredns](kubernetes-dns-coredns/)
+16. [kubernetes-scaling-vertical](kubernetes-scaling-vertical/)
+17. [kubernetes-scaling-horizontal](kubernetes-scaling-horizontal/)
+18. [kubernetes-storage](kubernetes-storage/)
+19. [kubernetes-persistent-volumes](kubernetes-persistent-volumes/)
+20. [kubernetes-storage-classes](kubernetes-storage-classes/)
+21. [kubernetes-statefulsets](kubernetes-statefulsets/)
+22. [kubernetes-nodes-basic](kubernetes-nodes-basic/)
 
 ### Temeller
 
@@ -64,11 +65,12 @@ For example, you _could_ install Docker on a single server, and route traffic di
 - [kubernetes-rbac](kubernetes-rbac/) = ServiceAccount (token mount), Role/ClusterRole, RoleBinding/ClusterRoleBinding, `kubectl auth can-i --as`
 - [kubernetes-jobs-cronjobs](kubernetes-jobs-cronjobs/) = Job (`completions`/`parallelism`/`backoffLimit`), CronJob (`schedule`/`concurrencyPolicy`), db.json yedekleme pipeline'ı
 
-### Ağ (Services, Ingress & Gateway)
+### Ağ (Services, Ingress, Gateway & TLS)
 
 - [kubernetes-services](kubernetes-services/) = `ClusterIP`, `NodePort`, `LoadBalancer`, `ExternalName`, stable endpoint ve load balancing
 - [kubernetes-ingress](kubernetes-ingress/) = Ingress controller (nginx) vs Ingress resource, host/path kuralları, `ingressClassName`, TLS + Secret
 - [kubernetes-gateway-minikube](kubernetes-gateway-minikube/) = Gateway API (Envoy), `HTTPRoute`, `/etc/hosts` + `minikube tunnel`, annotations
+- [kubernetes-cert-manager](kubernetes-cert-manager/) = `Issuer`/`ClusterIssuer`/`Certificate`, SelfSigned vs `isCA`+`CA` zinciri, Gateway `certificateRefs` + `cert-manager.io/cluster-issuer`, ACME HTTP-01
 - [kubernetes-namespaces](kubernetes-namespaces/) = `kubectl create ns`, `-n` flag, intra-cluster DNS (`svc.cluster.local`)
 - [kubernetes-dns-coredns](kubernetes-dns-coredns/) = CoreDNS + Corefile ConfigMap, `dnsPolicy`/`ndots`, `nslookup` ile DNS troubleshooting, kube-dns servisi
 

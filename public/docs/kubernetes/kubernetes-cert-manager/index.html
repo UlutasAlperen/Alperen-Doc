@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TLS Without Hand-Rolling Secrets# In the ingress chapter we said that real clusters “get this issued automatically by cert-manager instead of hand-rolling it”. That was a promise we haven’t paid off yet. Let’s pay it off.
+Here is what a TLS certificate actually requires, every single time:
+a private key a certificate signing request built from that key someone - a Certificate Authority - to sign it a renewal before it expires (Let’s Encrypt certs last 90 days) the result copied into a Secret in the right namespace, in the right format Do that by hand for two hostnames and you have already lost an afternoon. cert-manager is a controller that does all five as a Kubernetes reconciliation loop: you declare what you want, it keeps it true forever - including the renewal.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-cert-manager/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="kubernetes-cert-manager">
+	<meta property="og:description" content="TLS Without Hand-Rolling Secrets# In the ingress chapter we said that real clusters “get this issued automatically by cert-manager instead of hand-rolling it”. That was a promise we haven’t paid off yet. Let’s pay it off.
+Here is what a TLS certificate actually requires, every single time:
+a private key a certificate signing request built from that key someone - a Certificate Authority - to sign it a renewal before it expires (Let’s Encrypt certs last 90 days) the result copied into a Secret in the right namespace, in the right format Do that by hand for two hostnames and you have already lost an afternoon. cert-manager is a controller that does all five as a Kubernetes reconciliation loop: you declare what you want, it keeps it true forever - including the renewal.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="kubernetes-cert-manager">
+	<meta itemprop="description" content="TLS Without Hand-Rolling Secrets# In the ingress chapter we said that real clusters “get this issued automatically by cert-manager instead of hand-rolling it”. That was a promise we haven’t paid off yet. Let’s pay it off.
+Here is what a TLS certificate actually requires, every single time:
+a private key a certificate signing request built from that key someone - a Certificate Authority - to sign it a renewal before it expires (Let’s Encrypt certs last 90 days) the result copied into a Secret in the right namespace, in the right format Do that by hand for two hostnames and you have already lost an afternoon. cert-manager is a controller that does all five as a Kubernetes reconciliation loop: you declare what you want, it keeps it true forever - including the renewal.">
+	<meta itemprop="wordCount" content="1889">
+
+<title>kubernetes-cert-manager • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-cert-manager/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.99e3375e1badb4ecddbb5a258167abc6fa0f29033fce3d1ccfb95f449ced56aa.js" integrity="sha256-meM3XhuttOzdu1olgWerxvoPKQM/zj0cz7lfRJztVqo=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic-git-conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic-git-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github-workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous-integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous-deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git-status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git-add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git-commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git-push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git-branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git-pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git-log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git-merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git-rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git-reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git-remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git-switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle" checked />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-cert-manager/" class="active">
+      kubernetes-cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>kubernetes-cert-manager</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-selfsigned-issuer">The SelfSigned issuer</a></li>
+    <li><a href="#the-certificate">The Certificate</a></li>
+    <li><a href="#wiring-it-into-the-gateway">Wiring it into the Gateway</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#which-listeners-get-a-certificate">Which listeners get a Certificate?</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="tls-without-hand-rolling-secrets">TLS Without Hand-Rolling Secrets<a class="anchor" href="#tls-without-hand-rolling-secrets">#</a></h1>
+<p>In the <a href="../kubernetes-ingress/">ingress</a> chapter we said that real clusters &ldquo;get this issued automatically by cert-manager instead of hand-rolling it&rdquo;. That was a promise we haven&rsquo;t paid off yet. Let&rsquo;s pay it off.</p>
+<p>Here is what a TLS certificate actually requires, every single time:</p>
+<ol>
+<li>a private key</li>
+<li>a certificate signing request built from that key</li>
+<li>someone - a Certificate Authority - to sign it</li>
+<li>a renewal before it expires (Let&rsquo;s Encrypt certs last 90 days)</li>
+<li>the result copied into a <code>Secret</code> in the right namespace, in the right format</li>
+</ol>
+<p>Do that by hand for two hostnames and you have already lost an afternoon. <a href="https://cert-manager.io/">cert-manager</a> is a controller that does all five as a Kubernetes reconciliation loop: you declare <em>what</em> you want, it keeps it true forever - including the renewal.</p>
+<p><strong>Özetlersek:</strong> elle sertifika = tek seferlik iş ama süresi dolunca yine sen sorumlusun. cert-manager = &ldquo;bu isimlerde, şu imzalayıcıdan, şu süreyle sertifika istiyorum&rdquo; deyip arkana yaslanmak.</p>
+<h1 id="the-three-objects">The Three Objects<a class="anchor" href="#the-three-objects">#</a></h1>
+<p>cert-manager&rsquo;ın tamamı üç nesne etrafında döner:</p>
+<ul>
+<li><strong><code>Issuer</code> / <code>ClusterIssuer</code></strong> — <em>kim</em> imzalar. <code>Issuer</code> tek namespace&rsquo;te geçerli, <code>ClusterIssuer</code> tüm cluster&rsquo;da. İkisinin spec&rsquo;i aynı; tek fark kapsamı.</li>
+<li><strong><code>Certificate</code></strong> — <em>ne</em> isteriz: hangi isimler (<code>dnsNames</code>), hangi imzalayıcıdan (<code>issuerRef</code>), hangi <code>Secret</code>&lsquo;a yazılsın (<code>secretName</code>).</li>
+<li><strong><code>Secret</code></strong> — sonuç. <code>tls.crt</code>, <code>tls.key</code>, genelde <code>ca.crt</code>. Gateway&rsquo;in ve Ingress&rsquo;in gerçekten tükettiği tek şey bu.</li>
+</ul>
+<p>Rol dağılımı net: Issuer politika, Certificate istek, Secret sonuç. Gateway araya girip o Secret&rsquo;ı son kullanıcıya TLS olarak sunar.</p>
+<h1 id="installing-cert-manager">Installing cert-manager<a class="anchor" href="#installing-cert-manager">#</a></h1>
+<p>Kurs boyunca her şeyi <code>kubectl apply</code> ile kuruyoruz - Helm&rsquo;i <a href="../../kubernetes_v2/helm/">ileride</a> konuşacağız. Aynı yaklaşım burada da geçerli:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.21.0/cert-manager.yaml</span></span></code></pre></div><p>Kurulum üç parçadan oluşur: CRD&rsquo;lar (<code>Certificate</code>, <code>Issuer</code>, <code>CertificateRequest</code>&hellip;), <code>cert-manager</code> namespace&rsquo;i, ve controller&rsquo;ın kendisi. Birkaç saniye sonra hazır olduğunu doğrula:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -n cert-manager
+</span></span><span style="display:flex;"><span>kubectl get crds | grep cert-manager</span></span></code></pre></div><p>Üç pod görmelisin: <code>cert-manager</code>, <code>cert-manager-cainjector</code>, <code>cert-manager-webhook</code>. Hepsi <code>Running</code> olana kadar <code>Certificate</code> oluşturma - webhook hazır değilse isteklerin reddedilir.</p>
+<blockquote class='book-hint '>
+<p><strong>Dikkat:</strong> Gateway API CRD&rsquo;ları cert-manager&rsquo;dan <strong>önce</strong> kurulmuş olmalı, ya da cert-manager&rsquo;ı restart etmelisin. Bazı bileşenler bu kontrolü sadece startup&rsquo;ta yapar. Önceki bölümde Envoy Gateway&rsquo;i kurduğumuz için CRD&rsquo;lar zaten orada - ama sıralamayı bil. Çözümü tek satır: <code>kubectl rollout restart deployment cert-manager -n cert-manager</code></p>
+</blockquote><h1 id="path-a-explicit-certificate">Path A: Explicit Certificate<a class="anchor" href="#path-a-explicit-certificate">#</a></h1>
+<p>Önce mekanizmayı elle gösterelim - bu yol hiçbir ek flag istemez.</p>
+<h2 id="the-selfsigned-issuer">The SelfSigned issuer<a class="anchor" href="#the-selfsigned-issuer">#</a></h2>
+<p>Local&rsquo;de <code>synchat.internal</code> gibi bir domain gerçek değildir; Let&rsquo;s Encrypt&rsquo;e imzalatamazsın. Bu yüzden kendi kendini imzalayan bir imzalayıcı kullanırız:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">selfsigned</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selfSigned</span>: {}</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get clusterissuer selfsigned</span></span></code></pre></div><p><code>READY</code> kolonu <code>True</code> olmalı. <code>SelfSigned</code> imzalayıcısının hiçbir dış bağımlılığı yoktur - sertifika kendi private key&rsquo;iyle kendini imzalar, ortada ayrı bir CA yoktur.</p>
+<h2 id="the-certificate">The Certificate<a class="anchor" href="#the-certificate">#</a></h2>
+<p>Şimdi ne istediğimizi yazıyoruz:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Certificate</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-tls</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">synchat-tls</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dnsNames</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">synchat.internal</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">synchatapi.internal</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">subject</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">organizations</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">SynergyChat</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">issuerRef</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">selfsigned</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">group</span>: <span style="color:#ae81ff">cert-manager.io</span></span></span></code></pre></div><p><code>subject</code> satırı süs değil. SelfSigned sertifikalarda Subject DN = Issuer DN olduğundan, subject&rsquo;i boş bırakırsan Issuer DN&rsquo;i de boş kalır ve X.509 spesifikasyonu bunu teknik olarak geçersiz sayar. cert-manager bu durumda <code>BadConfig</code> diye bir event basar. Bir satırla kurtuluyorsun, ekle.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get certificate synchat-tls
+</span></span><span style="display:flex;"><span>kubectl describe certificate synchat-tls</span></span></code></pre></div><p><code>READY</code> <code>True</code> olduğunda <code>Secret</code> da oluşmuştur:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get secret synchat-tls
+</span></span><span style="display:flex;"><span>kubectl get secret synchat-tls -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.data.tls\.crt}&#39;</span> | base64 -d | openssl x509 -noout -text</span></span></code></pre></div><p><code>Subject:</code> ve <code>X509v3 Subject Alternative Name</code> satırlarında iki domain&rsquo;i de görmelisin.</p>
+<h2 id="wiring-it-into-the-gateway">Wiring it into the Gateway<a class="anchor" href="#wiring-it-into-the-gateway">#</a></h2>
+<p>Şimdi <a href="../kubernetes-gateway-minikube/">gateway</a> bölümündeki <code>app-gateway</code>&lsquo;i HTTPS&rsquo;e çevirelim. Listener&rsquo;lara <code>tls</code> bloğu ekliyoruz:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">gateway.networking.k8s.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Gateway</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-gateway</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">gatewayClassName</span>: <span style="color:#ae81ff">app-gatewayclass</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">listeners</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">http</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">HTTP</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">web-https</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">HTTPS</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">port</span>: <span style="color:#ae81ff">443</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">hostname</span>: <span style="color:#e6db74">&#34;synchat.internal&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">tls</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">mode</span>: <span style="color:#ae81ff">Terminate</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">certificateRefs</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-tls</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">api-https</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">HTTPS</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">port</span>: <span style="color:#ae81ff">443</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">hostname</span>: <span style="color:#e6db74">&#34;synchatapi.internal&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">tls</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">mode</span>: <span style="color:#ae81ff">Terminate</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">certificateRefs</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-tls</span></span></span></code></pre></div><p>İki listener, <strong>aynı</strong> <code>certificateRefs[].name</code>. Bu bilerek yapıldı: cert-manager isimleri birleştirip tek <code>Certificate</code> üretir ve <code>dnsNames</code> içinde tekrarları ezer. İki hostname, tek sertifika, tek Secret. Hostname&rsquo;leri ayrı ayrı sertifikalamak da mümkün ama neden?</p>
+<blockquote class='book-hint '>
+<p><code>tls.mode: Terminate</code> trafikte TLS&rsquo;i sonlandırır - sertifika burada, Envoy&rsquo;un içinde açılır. <code>Passthrough</code> sertifikayı sonlandırmaz, kriptoyu doğrudan backend&rsquo;e iletir ve bu modelde desteklenmez.</p>
+</blockquote><p><code>certificateRefs</code> yalnızca bir isimdir; Secret&rsquo;ın nerede olduğunu Gateway&rsquo;in <strong>kendi namespace&rsquo;i</strong> varsayar (<code>app-gateway</code> için <code>default</code>). Certificate&rsquo;ı da oraya yazdık.</p>
+<p>HTTPRoute&rsquo;ların hangi listener&rsquo;a takılacağını <code>sectionName</code> ile açıkça söylemek iyi bir alışkanlıktır:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">parentRefs</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-gateway</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">sectionName</span>: <span style="color:#ae81ff">web-https</span></span></span></code></pre></div><h1 id="path-b-the-annotation">Path B: The Annotation<a class="anchor" href="#path-b-the-annotation">#</a></h1>
+<p>Path A&rsquo;da <code>Certificate</code>&lsquo;ı elle yazdık. Asıl üretkenlik, onu Gateway&rsquo;in kendisinden türetmekte:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-gateway</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cert-manager.io/cluster-issuer</span>: <span style="color:#ae81ff">selfsigned</span></span></span></code></pre></div><p>Bu annotation&rsquo;ı ekleyince cert-manager Gateway&rsquo;i izlemeye başlar, HTTPS listener&rsquo;larından <code>Certificate</code>&lsquo;ları kendisi üretir. Elle <code>Certificate</code> yazmayı tamamen bırakabilirsin.</p>
+<p>Ama bu yolun bir bedeli var: Gateway desteğini <strong>açman</strong> gerekir. Raw manifest ile kurduysan (ki öyle yaptık) bu bir flag&rsquo;dir:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl patch deployment cert-manager -n cert-manager --type<span style="color:#f92672">=</span>json <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -p<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/spec/template/spec/containers/0/args/-&#34;,&#34;value&#34;:&#34;--enable-gateway-api&#34;}]&#39;</span>
+</span></span><span style="display:flex;"><span>kubectl rollout restart deployment cert-manager -n cert-manager</span></span></code></pre></div><blockquote class='book-hint '>
+<p>Helm kullanıyorsan karşılığı <code>--set config.gatewayAPI.enabled=true</code>. Raw manifest&rsquo;in values.yaml&rsquo;ı olmadığı için flag doğru araç.</p>
+</blockquote><h2 id="which-listeners-get-a-certificate">Which listeners get a Certificate?<a class="anchor" href="#which-listeners-get-a-certificate">#</a></h2>
+<p>cert-manager her listener&rsquo;ı tek tek değerlendirir ve işe yaramayanları <strong>sessizce atlar</strong>. Certificate bir türlü oluşmuyorsa sebebi neredeyse her zaman bu tablodur:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Alan</th>
+					<th>Gereksinim</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>hostname</code></td>
+					<td>boş olamaz</td>
+			</tr>
+			<tr>
+					<td><code>tls.mode</code></td>
+					<td><code>Terminate</code> yazılmalı; <code>Passthrough</code> desteklenmiyor</td>
+			</tr>
+			<tr>
+					<td><code>tls.certificateRefs[].name</code></td>
+					<td>zorunlu</td>
+			</tr>
+			<tr>
+					<td><code>tls.certificateRefs[].kind</code></td>
+					<td>yazılacaksa <code>Secret</code></td>
+			</tr>
+			<tr>
+					<td><code>tls.certificateRefs[].group</code></td>
+					<td>yazılacaksa <code>&quot;&quot;</code></td>
+			</tr>
+			<tr>
+					<td><code>tls.certificateRefs[].namespace</code></td>
+					<td>yazılacaksa Gateway&rsquo;inkiyle <strong>aynı</strong> olmalı</td>
+			</tr>
+	</tbody>
+</table>
+<blockquote class='book-hint '>
+<p><strong>Dikkat:</strong> <code>dnsNames</code> HTTPRoute&rsquo;un <code>hostnames</code> alanından <strong>değil</strong>, listener&rsquo;ın <code>hostname</code> alanından gelir. HTTPRoute&rsquo;ta yazdığın isimler yönlendirme içindir; TLS isimleri listener&rsquo;da yaşar. İkisini karıştırmak, &ldquo;Certificate oluştu ama yanlış isimlere&rdquo; probleminin bir numaralı sebebi.</p>
+</blockquote><p><strong>Özetlersek:</strong> Path A = her şeyi sen yaz, her yerde çalışır. Path B = annotation yaz, cert-manager üretir, ama <code>--enable-gateway-api</code> ve listener kısıtları gerekir. İkisi aynı sonucu verir; fark YAML&rsquo;ı kimin yazdığı.</p>
+<h1 id="trust-a-real-ca-instead">Trust: A Real CA Instead<a class="anchor" href="#trust-a-real-ca-instead">#</a></h1>
+<p>Şu ana kadar <code>SelfSigned</code> kullandık ve çalıştık - ama tarayıcıya <code>https://synchat.internal</code> yazdığında &ldquo;Your connection is not private&rdquo; ikazını görürsün. Sebebi önemli: her self-signed sertifika <strong>kendi root&rsquo;udur</strong>. Güvenmek istersen o sertifikayı tek tek trust store&rsquo;a eklemen gerekir. İki hostname, iki ayrı güven problemi.</p>
+<p>Gerçek dünyada böyle çalışmaz. Let&rsquo;s Encrypt ve kurumsal PKI&rsquo;lerde bir <strong>root CA</strong> vardır, tüm yaprak sertifikalar ondan imzalanır ve o root&rsquo;a bir kez güvenilir. Aynı kalıbı local&rsquo;de kurabiliriz - cert-manager&rsquo;ın da <code>SelfSigned</code>&lsquo;ı tam olarak bunun için önerdiği şey budur:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">selfsigned</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selfSigned</span>: {}
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Certificate</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-root-ca</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">cert-manager</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">isCA</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">commonName</span>: <span style="color:#ae81ff">synchat-root-ca</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">synchat-root-ca-secret</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">privateKey</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">algorithm</span>: <span style="color:#ae81ff">ECDSA</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">size</span>: <span style="color:#ae81ff">256</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">issuerRef</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">selfsigned</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">group</span>: <span style="color:#ae81ff">cert-manager.io</span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-ca</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ca</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">synchat-root-ca-secret</span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Certificate</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-tls</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">synchat-tls</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dnsNames</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">synchat.internal</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">synchatapi.internal</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">issuerRef</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-ca</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">group</span>: <span style="color:#ae81ff">cert-manager.io</span></span></span></code></pre></div><p>Zinciri okumak önemli, çünkü her satırın bir sebebi var:</p>
+<ol>
+<li><code>selfsigned</code> yalnızca <strong>ilk adımı</strong> atar - tek işi root&rsquo;u bootstrap etmek</li>
+<li><code>synchat-root-ca</code> bir sertifika ama <code>isCA: true</code> ile işaretli; kendi kendine imzalanır ve <code>cert-manager</code> namespace&rsquo;indeki bir <code>Secret</code>&lsquo;a yazılır</li>
+<li><code>synchat-ca</code> adında yeni bir <code>ClusterIssuer</code> o <code>Secret</code>&lsquo;ı CA olarak kullanır</li>
+<li><code>synchat-tls</code> artık <code>selfsigned</code>&lsquo;dan değil <code>synchat-ca</code>&lsquo;dan ister - yani root tarafından <strong>imzalanır</strong></li>
+</ol>
+<p><code>namespace: cert-manager</code> satırı tesadüf değil: <code>ClusterIssuer</code> namespace&rsquo;e ait değildir, o yüzden <code>ca.secretName</code>&lsquo;in <code>cert-manager</code> namespace&rsquo;ine bakacağı varsayılır. Root CA&rsquo;yı oraya koy.</p>
+<p>Sonucu görmek için:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get secret synchat-tls -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.data.tls\.crt}&#39;</span> | base64 -d | openssl x509 -noout -issuer -subject</span></span></code></pre></div><p>Artık <code>issuer=</code> ve <code>subject=</code> <strong>farklı</strong> olmalı. Farklıysa zincir çalışıyor demektir.</p>
+<p>Kök CA&rsquo;yı bir kez trust store&rsquo;a eklediğinde (macOS Keychain, Linux&rsquo;ta <code>/usr/local/share/ca-certificates/</code>) iki hostname de ikazsız açılır. <code>ca.crt</code> zaten Secret&rsquo;ın içinde:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get secret synchat-root-ca-secret -n cert-manager -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.data.ca\.crt}&#39;</span> | base64 -d &gt; synchat-root-ca.pem</span></span></code></pre></div><table>
+	<thead>
+			<tr>
+					<th></th>
+					<th><code>SelfSigned</code> tek başına</th>
+					<th><code>isCA</code> + <code>CA</code> zinciri</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Obje sayısı</td>
+					<td>2</td>
+					<td>4</td>
+			</tr>
+			<tr>
+					<td>Trust anchor</td>
+					<td>her sertifika ayrı</td>
+					<td>tek root, bir kez</td>
+			</tr>
+			<tr>
+					<td>İki hostname</td>
+					<td>iki kez güven</td>
+					<td>root&rsquo;a bir güven</td>
+			</tr>
+			<tr>
+					<td>Issuer zinciri</td>
+					<td>yok</td>
+					<td>gerçek</td>
+			</tr>
+			<tr>
+					<td>Tarayıcı</td>
+					<td>ikaz</td>
+					<td>ikazsız</td>
+			</tr>
+	</tbody>
+</table>
+<h1 id="ingress-vs-gateway">Ingress vs Gateway<a class="anchor" href="#ingress-vs-gateway">#</a></h1>
+<p>cert-manager her iki API&rsquo;de de çalışır, ama TLS&rsquo;in <strong>nereye yazıldığı</strong> değişir. Ingress&rsquo;ten geliyorsan en çok burada takılırsın:</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Ingress</th>
+					<th>Gateway</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Annotation</td>
+					<td><code>Ingress</code>&lsquo;in üstünde</td>
+					<td><code>Gateway</code>&lsquo;in üstünde</td>
+			</tr>
+			<tr>
+					<td>TLS nerede</td>
+					<td><code>spec.tls[].secretName</code></td>
+					<td>listener <code>tls.certificateRefs[].name</code></td>
+			</tr>
+			<tr>
+					<td>İsimler nereden</td>
+					<td><code>spec.tls[].hosts</code></td>
+					<td>listener <code>hostname</code></td>
+			</tr>
+			<tr>
+					<td>Kim yönetir</td>
+					<td>uygulama ekibi (kendi Ingress&rsquo;i)</td>
+					<td>platform ekibi (ortak Gateway)</td>
+			</tr>
+			<tr>
+					<td>Alt nesne</td>
+					<td>yok</td>
+					<td><code>sectionName</code> ile listener&rsquo;a bağlanır</td>
+			</tr>
+	</tbody>
+</table>
+<p>Annotation&rsquo;lar aynıdır - <code>cert-manager.io/issuer</code>, <code>cert-manager.io/cluster-issuer</code>, <code>cert-manager.io/duration</code>, <code>cert-manager.io/renew-before</code>. Sadece girdikleri nesne değişir.</p>
+<blockquote class='book-hint '>
+<p>2026&rsquo;nın başından beri <code>ingress-nginx</code> resmi olarak EOL. Yeni kurulumda Gateway API doğru hedef; Ingress&rsquo;i bil ama üzerine yeni bir şey inşa etme.</p>
+</blockquote><p><strong>Özetlersek:</strong> Ingress&rsquo;te TLS&rsquo;i <em>sen</em> Ingress&rsquo;in içinde tarif edersin, app ekibi kendi başına yönetir. Gateway&rsquo;de TLS <em>Gateway</em>&lsquo;in içinde yaşar ve genelde platform ekibinin kontrolündedir - ki bu yüzden <code>ListenerSet</code> diye bir kaynak geliştiriliyor.</p>
+<h1 id="in-production-lets-encrypt">In Production: Let&rsquo;s Encrypt<a class="anchor" href="#in-production-lets-encrypt">#</a></h1>
+<p>Local&rsquo;de <code>synchat.internal</code> hiçbir işe yaramaz çünkü gerçek bir domain değildir. Production&rsquo;da ise Let&rsquo;s Encrypt bedava sertifika verir - ama kim olduğunu <strong>kanıtlamanı</strong> ister. Buna ACME challenge denir ve iki yolu vardır: HTTP-01 (domain&rsquo;in 80 portunda seni doğrular) veya DNS-01 (DNS kaydını değiştirirsin).</p>
+<p>Gateway API ile HTTP-01&rsquo;in kurulumu şöyledir:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">letsencrypt</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">acme</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">server</span>: <span style="color:#ae81ff">https://acme-v02.api.letsencrypt.org/directory</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">email</span>: <span style="color:#ae81ff">you@example.com</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">privateKeySecretRef</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">letsencrypt-account-key</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">solvers</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">http01</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">gatewayHTTPRoute</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">parentRefs</span>:
+</span></span><span style="display:flex;"><span>              - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-gateway</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Gateway</span></span></span></code></pre></div><p><code>gatewayHTTPRoute</code> solver&rsquo;ı challenge süresince geçici <code>HTTPRoute</code>&lsquo;lar üretir; bunun için Gateway&rsquo;inde bir <strong>HTTP:80 listener</strong> yaşamalıdır. Sonrasında sadece <code>cert-manager.io/cluster-issuer: letsencrypt</code> annotation&rsquo;ını ekle, gerisini cert-manager halleder.</p>
+<p>Bu kursun kapsamında değil, çünkü iki şartı birden istiyor: <strong>herkese açık bir domain</strong> ve <strong>o domain&rsquo;in 80 portuna dışarıdan erişilebilmesi</strong>. İkisi de minikube&rsquo;ta yok. Buraya yazmamızın sebebi gerçek kurulumun neye benzediğini görmek.</p>
+<blockquote class='book-hint '>
+<p><strong>Dikkat:</strong> Certificate bir namespace&rsquo;te, Gateway başka bir namespace&rsquo;te ise <code>certificateRefs</code> cross-namespace olur ve Gateway API bunu varsayılan olarak reddeder. Çözüm <code>ReferenceGrant</code>:</p>
+</blockquote><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">gateway.networking.k8s.io/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ReferenceGrant</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">allow-gateway-tls</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">apps</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">from</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">group</span>: <span style="color:#ae81ff">gateway.networking.k8s.io</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Gateway</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">default</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">to</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">group</span>: <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Secret</span></span></span></code></pre></div><h1 id="troubleshooting">Troubleshooting<a class="anchor" href="#troubleshooting">#</a></h1>
+<p>TLS&rsquo;in çalışmaması bir hata mesajıyla gelmez, sessizce gelir. Sıra:</p>
+<p><strong><code>Certificate</code> <code>Ready: False</code></strong> — her zaman detayı oradadır:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl describe certificate synchat-tls
+</span></span><span style="display:flex;"><span>kubectl get certificaterequest
+</span></span><span style="display:flex;"><span>kubectl describe certificaterequest &lt;isim&gt;</span></span></code></pre></div><p>Conditions altındaki <code>message</code> alanı gerçek sebebi söyler (<code>referenced signer resource does not exist</code>, <code>secret &quot;...&quot; not found</code>&hellip;).</p>
+<p><strong><code>Secret</code> hiç oluşmuyor</strong> — Certificate <code>Ready</code> mi? <code>certificateRefs[].namespace</code> Gateway&rsquo;in namespace&rsquo;iyle aynı mı? Cross-namespace yazdıysan sessizce atlanır.</p>
+<p><strong>Certificate hiç türemiyor (Path B)</strong> — üç şeyi sırayla kontrol et: <code>--enable-gateway-api</code> açık mı (<code>kubectl get deployment cert-manager -n cert-manager -o jsonpath='{.spec.template.spec.containers[0].args}'</code>), annotation ismi doğru mu, listener kısıtlar tablosuna uyuyor mu. <code>hostname</code> boşsa listener atlanır.</p>
+<p><strong>HTTPS çalışıyor ama isim yanlış</strong> — <code>dnsNames</code>&lsquo;e bak. Yanlışsa <code>hostname</code>&lsquo;i <strong>listener&rsquo;da</strong> düzelt, HTTPRoute&rsquo;ta değil.</p>
+<p><strong>Tarayıcı hâlâ ikaz ediyor</strong> — bu bir cert-manager sorunu değil, trust sorunudur. <code>SelfSigned</code> kullanıyorsan CA zincirine geç ya da kökü trust store&rsquo;a ekle. <code>openssl x509 -noout -issuer -subject</code> ile zincirin gerçekten var olup olmadığını ayırt et.</p>
+<p><strong>Eski sertifika hâlâ sunuluyor</strong> — Secret güncellenmiş ama Envoy yeniden okumamıştır. Gateway&rsquo;i restart etmek yerine beklemek genelde yeterli; controller&rsquo;lar Secret değişikliğini yakalar.</p>
+<h1 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h1>
+<p>Gateway bölümünde kurduğumuz <code>app-gateway</code>&lsquo;i gerçekten HTTPS yapalım - ikaz almadan.</p>
+<ol>
+<li>
+<p>CA zincirini kur: <code>selfsigned</code> ClusterIssuer, <code>isCA: true</code> ile <code>synchat-root-ca</code> (<code>cert-manager</code> namespace&rsquo;inde), <code>synchat-ca</code> ClusterIssuer. Hepsi tek dosyada olabilir.</p>
+</li>
+<li>
+<p><code>synchat-tls</code> Certificate&rsquo;ını yaz. <code>secretName: synchat-tls</code>, <code>dnsNames</code> olarak <code>synchat.internal</code> <strong>ve</strong> <code>synchatapi.internal</code>, <code>issuerRef</code> → <code>synchat-ca</code>.</p>
+</li>
+<li>
+<p><code>app-gateway</code>&lsquo;e <code>cert-manager.io/cluster-issuer: synchat-ca</code> annotation&rsquo;ını ekle. Path B&rsquo;yi kullanıyorsan <code>--enable-gateway-api</code>&lsquo;ın açık olduğunu doğrula, sonra Certificate&rsquo;ı elle yazdığın dosyayı sil - cert-manager üretecek. Hangi yolu seçersen seç, listener&rsquo;ları <code>web-https</code> ve <code>api-https</code> olarak yeniden yaz, ikisi de <code>tls.mode: Terminate</code> ve aynı <code>certificateRefs[].name</code>&lsquo;i kullansın.</p>
+</li>
+<li>
+<p>HTTPRoute&rsquo;lara <code>sectionName</code> eklemeyi unutma: web için <code>web-https</code>, api için <code>api-https</code>.</p>
+</li>
+<li>
+<p>Doğrula:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get certificate
+</span></span><span style="display:flex;"><span>kubectl get secret synchat-tls -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.data.tls\.crt}&#39;</span> | base64 -d | openssl x509 -noout -issuer -subject -ext subjectAltName
+</span></span><span style="display:flex;"><span>curl -kv https://synchat.internal 2&gt;&amp;<span style="color:#ae81ff">1</span> | grep -E <span style="color:#e6db74">&#34;subject:|issuer:|SSL certificate&#34;</span></span></span></code></pre></div><p>İstediğin sonuç: <code>certificate</code> <code>READY</code> <code>True</code>, issuer ile subject <strong>farklı</strong>, <code>subjectAltName</code> iki ismi de içeriyor, ve <code>curl</code> çıktısında ikisi de görünüyor.</p>
+<ol start="6">
+<li>Son adım - asıl ödül. Kök CA&rsquo;yı trust store&rsquo;una ekle ve tarayıcıda <code>https://synchat.internal</code>&lsquo;ı aç:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get secret synchat-root-ca-secret -n cert-manager -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.data.tls\.crt}&#39;</span> | base64 -d &gt; synchat-root-ca.pem</span></span></code></pre></div><p>İkazsız açıldığında TLS&rsquo;in aslında <strong>çalıştığını</strong> görmüş olursun. Bir sertifikayı elle hazırlayıp Gateway&rsquo;e takmak kolay kısmıydı; asıl iş onu güvenilir ve kendini yenileyen hale getirmekti.</p>
+<blockquote class='book-hint '>
+<p><strong>Dikkat:</strong> <code>Certificate</code>&lsquo;ı Gateway&rsquo;in namespace&rsquo;i dışında yazarsan sonuç sessizce bozulur. <code>Certificate</code> namespace&rsquo;i, <code>certificateRefs</code>&lsquo;un bakacağı namespace ile <strong>aynı</strong> olmalı - <code>app-gateway</code> için bu <code>default</code>.</p>
+</blockquote><p>for more <a href="../kubernetes-namespaces/">namespaces</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>kubernetes-gateway-minikube</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes/kubernetes-namespaces/" class="flex align-center">
+        <span>kubernetes-namespaces</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-selfsigned-issuer">The SelfSigned issuer</a></li>
+    <li><a href="#the-certificate">The Certificate</a></li>
+    <li><a href="#wiring-it-into-the-gateway">Wiring it into the Gateway</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#which-listeners-get-a-certificate">Which listeners get a Certificate?</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
