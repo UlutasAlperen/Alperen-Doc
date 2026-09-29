@@ -20,40 +20,40 @@ Do that by hand for two hostnames and you have already lost an afternoon. [cert-
 
 # The Three Objects
 
-cert-manager'ın tamamı üç nesne etrafında döner:
+Everything cert-manager does circles three objects:
 
-- **`Issuer` / `ClusterIssuer`** - _kim_ imzalar. `Issuer` tek namespace'te geçerli, `ClusterIssuer` tüm cluster'da. İkisinin spec'i aynı; tek fark kapsamı.
-- **`Certificate`** - _ne_ isteriz: hangi isimler (`dnsNames`), hangi imzalayıcıdan (`issuerRef`), hangi `Secret`'a yazılsın (`secretName`).
-- **`Secret`** - sonuç. `tls.crt`, `tls.key`, genelde `ca.crt`. Gateway'in ve Ingress'in gerçekten tükettiği tek şey bu.
+- **`Issuer` / `ClusterIssuer`** — _who_ signs. An `Issuer` is valid in one namespace, a `ClusterIssuer` across the whole cluster. The spec is identical; only the reach differs.
+- **`Certificate`** — _what_ we want: which names (`dnsNames`), from which signer (`issuerRef`), written to which `Secret` (`secretName`).
+- **`Secret`** — the result. `tls.crt`, `tls.key`, usually `ca.crt`. This is the only thing the Gateway and the Ingress actually consume.
 
-Rol dağılımı net: Issuer politika, Certificate istek, Secret sonuç. Gateway araya girip o Secret'ı son kullanıcıya TLS olarak sunar.
+The division of labour is clean: the Issuer is policy, the Certificate is the request, the Secret is the outcome. The Gateway steps in at the end and serves that Secret to your users as TLS.
 
 # Installing cert-manager
 
-Kurs boyunca her şeyi `kubectl apply` ile kuruyoruz - Helm'i [ileride](../../kubernetes_v2/helm/) konuşacağız. Aynı yaklaşım burada da geçerli:
+Throughout this course we install everything with `kubectl apply` - we'll get to [Helm](../../kubernetes_v2/helm/) later. Same approach here:
 
 ```bash
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.21.0/cert-manager.yaml
 ```
 
-Kurulum üç parçadan oluşur: CRD'lar (`Certificate`, `Issuer`, `CertificateRequest`...), `cert-manager` namespace'i, ve controller'ın kendisi. Birkaç saniye sonra hazır olduğunu doğrula:
+The install is three parts: the CRDs (`Certificate`, `Issuer`, `CertificateRequest`...), the `cert-manager` namespace, and the controllers themselves. Give it a few seconds and check:
 
 ```bash
 kubectl get pods -n cert-manager
 kubectl get crds | grep cert-manager
 ```
 
-Üç pod görmelisin: `cert-manager`, `cert-manager-cainjector`, `cert-manager-webhook`. Hepsi `Running` olana kadar `Certificate` oluşturma - webhook hazır değilse isteklerin reddedilir.
+You want three pods: `cert-manager`, `cert-manager-cainjector`, `cert-manager-webhook`. Don't create any `Certificate` until all three are `Running` - if the webhook isn't up, requests get rejected.
 
 > **Dikkat:** Gateway API CRD'ları cert-manager'dan **önce** kurulmuş olmalı, ya da cert-manager'ı restart etmelisin. Bazı bileşenler bu kontrolü sadece startup'ta yapar. Önceki bölümde Envoy Gateway'i kurduğumuz için CRD'lar zaten orada - ama sıralamayı bil. Çözümü tek satır: `kubectl rollout restart deployment cert-manager -n cert-manager`
 
 # Path A: Explicit Certificate
 
-Önce mekanizmayı elle gösterelim - bu yol hiçbir ek flag istemez.
+Let's start with the mechanism spelled out - this path needs no extra flags.
 
 ## The SelfSigned issuer
 
-Local'de `synchat.internal` gibi bir domain gerçek değildir; Let's Encrypt'e imzalatamazsın. Bu yüzden kendi kendini imzalayan bir imzalayıcı kullanırız:
+`synchat.internal` is not a real domain; no public CA will sign it. So we use an issuer that signs with itself:
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -68,11 +68,11 @@ spec:
 kubectl get clusterissuer selfsigned
 ```
 
-`READY` kolonu `True` olmalı. `SelfSigned` imzalayıcısının hiçbir dış bağımlılığı yoktur - sertifika kendi private key'iyle kendini imzalar, ortada ayrı bir CA yoktur.
+The `READY` column should say `True`. A `SelfSigned` issuer has no external dependency at all - the certificate is signed with its own private key and there is no separate CA involved.
 
 ## The Certificate
 
-Şimdi ne istediğimizi yazıyoruz:
+Now we say what we want:
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -93,25 +93,25 @@ spec:
     group: cert-manager.io
 ```
 
-`subject` satırı süs değil. SelfSigned sertifikalarda Subject DN = Issuer DN olduğundan, subject'i boş bırakırsan Issuer DN'i de boş kalır ve X.509 spesifikasyonu bunu teknik olarak geçersiz sayar. cert-manager bu durumda `BadConfig` diye bir event basar. Bir satırla kurtuluyorsun, ekle.
+That `subject` line is not decoration. On a self-signed certificate Subject DN equals Issuer DN, so leaving the subject empty leaves the Issuer DN empty too - and the X.509 spec technically calls that invalid. cert-manager emits a `BadConfig` event when it sees it. One line to avoid the whole problem.
 
 ```bash
 kubectl get certificate synchat-tls
 kubectl describe certificate synchat-tls
 ```
 
-`READY` `True` olduğunda `Secret` da oluşmuştur:
+Once `READY` is `True` the `Secret` exists too:
 
 ```bash
 kubectl get secret synchat-tls
 kubectl get secret synchat-tls -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -text
 ```
 
-`Subject:` ve `X509v3 Subject Alternative Name` satırlarında iki domain'i de görmelisin.
+Both domains should show up under `Subject:` and `X509v3 Subject Alternative Name`.
 
 ## Wiring it into the Gateway
 
-Şimdi [gateway](../kubernetes-gateway-minikube/) bölümündeki `app-gateway`'i HTTPS'e çevirelim. Listener'lara `tls` bloğu ekliyoruz:
+Now let's turn the `app-gateway` from the [gateway](../kubernetes-gateway-minikube/) chapter into real HTTPS. It's a `tls` block on the listeners:
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -142,13 +142,13 @@ spec:
           - name: synchat-tls
 ```
 
-İki listener, **aynı** `certificateRefs[].name`. Bu bilerek yapıldı: cert-manager isimleri birleştirip tek `Certificate` üretir ve `dnsNames` içinde tekrarları ezer. İki hostname, tek sertifika, tek Secret. Hostname'leri ayrı ayrı sertifikalamak da mümkün ama neden?
+Two listeners, the **same** `certificateRefs[].name`. That's deliberate: cert-manager merges the names and produces a single `Certificate`, de-duplicating `dnsNames`. Two hostnames, one certificate, one Secret. You _can_ certify them separately, but why?
 
-> `tls.mode: Terminate` trafikte TLS'i sonlandırır - sertifika burada, Envoy'un içinde açılır. `Passthrough` sertifikayı sonlandırmaz, kriptoyu doğrudan backend'e iletir ve bu modelde desteklenmez.
+> `tls.mode: Terminate` ends TLS at the gateway - the certificate is opened inside Envoy. `Passthrough` does not terminate and forwards the crypto to the backend, which this model does not support.
 
-`certificateRefs` yalnızca bir isimdir; Secret'ın nerede olduğunu Gateway'in **kendi namespace'i** varsayar (`app-gateway` için `default`). Certificate'ı da oraya yazdık.
+`certificateRefs` is only a name; where the Secret lives is assumed to be the Gateway's **own namespace** (`default` for `app-gateway`). That's why the Certificate went there too.
 
-HTTPRoute'ların hangi listener'a takılacağını `sectionName` ile açıkça söylemek iyi bir alışkanlıktır:
+It's good practice to say which listener an HTTPRoute attaches to with `sectionName`:
 
 ```yaml
 spec:
@@ -159,7 +159,7 @@ spec:
 
 # Path B: The Annotation
 
-Path A'da `Certificate`'ı elle yazdık. Asıl üretkenlik, onu Gateway'in kendisinden türetmekte:
+In Path A we wrote the `Certificate` by hand. The real productivity gain is deriving it from the Gateway itself:
 
 ```yaml
 metadata:
@@ -168,9 +168,9 @@ metadata:
     cert-manager.io/cluster-issuer: selfsigned
 ```
 
-Bu annotation'ı ekleyince cert-manager Gateway'i izlemeye başlar, HTTPS listener'larından `Certificate`'ları kendisi üretir. Elle `Certificate` yazmayı tamamen bırakabilirsin.
+With that annotation cert-manager starts watching the Gateway and generates the `Certificate` objects from its HTTPS listeners. You can stop writing `Certificate` YAML entirely.
 
-Ama bu yolun bir bedeli var: Gateway desteğini **açman** gerekir. Raw manifest ile kurduysan (ki öyle yaptık) bu bir flag'dir:
+There is a cost: you have to **turn on** Gateway support. Installed with raw manifests (which is what we did), that's a flag:
 
 ```bash
 kubectl patch deployment cert-manager -n cert-manager --type=json \
@@ -178,20 +178,20 @@ kubectl patch deployment cert-manager -n cert-manager --type=json \
 kubectl rollout restart deployment cert-manager -n cert-manager
 ```
 
-> Helm kullanıyorsan karşılığı `--set config.gatewayAPI.enabled=true`. Raw manifest'in values.yaml'ı olmadığı için flag doğru araç.
+> On Helm the equivalent is `--set config.gatewayAPI.enabled=true`. Raw manifests have no values.yaml, so the flag is the right tool.
 
 ## Which listeners get a Certificate?
 
-cert-manager her listener'ı tek tek değerlendirir ve işe yaramayanları **sessizce atlar**. Certificate bir türlü oluşmuyorsa sebebi neredeyse her zaman bu tablodur:
+cert-manager evaluates each listener individually and **silently skips** the ones that don't qualify. If a Certificate refuses to appear, this table is almost always why:
 
-| Alan | Gereksinim |
+| Field | Requirement |
 |---|---|
-| `hostname` | boş olamaz |
-| `tls.mode` | `Terminate` yazılmalı; `Passthrough` desteklenmiyor |
-| `tls.certificateRefs[].name` | zorunlu |
-| `tls.certificateRefs[].kind` | yazılacaksa `Secret` |
-| `tls.certificateRefs[].group` | yazılacaksa `""` |
-| `tls.certificateRefs[].namespace` | yazılacaksa Gateway'inkiyle **aynı** olmalı |
+| `hostname` | must not be empty |
+| `tls.mode` | must be `Terminate`; `Passthrough` is unsupported |
+| `tls.certificateRefs[].name` | required |
+| `tls.certificateRefs[].kind` | if set, must be `Secret` |
+| `tls.certificateRefs[].group` | if set, must be `""` |
+| `tls.certificateRefs[].namespace` | if set, must match the Gateway's |
 
 > **Dikkat:** `dnsNames` HTTPRoute'un `hostnames` alanından **değil**, listener'ın `hostname` alanından gelir. HTTPRoute'ta yazdığın isimler yönlendirme içindir; TLS isimleri listener'da yaşar. İkisini karıştırmak, "Certificate oluştu ama yanlış isimlere" probleminin bir numaralı sebebi.
 
@@ -199,9 +199,9 @@ cert-manager her listener'ı tek tek değerlendirir ve işe yaramayanları **ses
 
 # Trust: A Real CA Instead
 
-Şu ana kadar `SelfSigned` kullandık ve çalıştık - ama tarayıcıya `https://synchat.internal` yazdığında "Your connection is not private" ikazını görürsün. Sebebi önemli: her self-signed sertifika **kendi root'udur**. Güvenmek istersen o sertifikayı tek tek trust store'a eklemen gerekir. İki hostname, iki ayrı güven problemi.
+Everything so far worked - but open `https://synchat.internal` in a browser and you get "Your connection is not private". The reason matters: every self-signed certificate **is its own root**. To trust it you have to add that specific certificate to your trust store. Two hostnames, two separate trust problems.
 
-Gerçek dünyada böyle çalışmaz. Let's Encrypt ve kurumsal PKI'lerde bir **root CA** vardır, tüm yaprak sertifikalar ondan imzalanır ve o root'a bir kez güvenilir. Aynı kalıbı local'de kurabiliriz - cert-manager'ın da `SelfSigned`'ı tam olarak bunun için önerdiği şey budur:
+The real world doesn't work like that. Let's Encrypt and corporate PKIs have a **root CA**; every leaf is signed by it and that one root is trusted once. You can build the same shape locally - and it is exactly what cert-manager recommends `SelfSigned` for:
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -251,139 +251,92 @@ spec:
     group: cert-manager.io
 ```
 
-Zinciri okumak önemli, çünkü her satırın bir sebebi var:
+Reading the chain matters, because every line has a reason:
 
-1. `selfsigned` yalnızca **ilk adımı** atar - tek işi root'u bootstrap etmek
-2. `synchat-root-ca` bir sertifika ama `isCA: true` ile işaretli; kendi kendine imzalanır ve `cert-manager` namespace'indeki bir `Secret`'a yazılır
-3. `synchat-ca` adında yeni bir `ClusterIssuer` o `Secret`'ı CA olarak kullanır
-4. `synchat-tls` artık `selfsigned`'dan değil `synchat-ca`'dan ister - yani root tarafından **imzalanır**
+1. `selfsigned` only performs the **first step** - its whole job is bootstrapping the root
+2. `synchat-root-ca` is a certificate but flagged `isCA: true`; it self-signs and is written to a `Secret` in the `cert-manager` namespace
+3. a second `ClusterIssuer` called `synchat-ca` uses that `Secret` as its CA
+4. `synchat-tls` now asks `synchat-ca`, not `selfsigned` - so it is **signed by the root**
 
-`namespace: cert-manager` satırı tesadüf değil: `ClusterIssuer` namespace'e ait değildir, o yüzden `ca.secretName`'in `cert-manager` namespace'ine bakacağı varsayılır. Root CA'yı oraya koy.
+The `namespace: cert-manager` line is not arbitrary: a `ClusterIssuer` is not namespaced, so `ca.secretName` is assumed to live in the `cert-manager` namespace. That's where the root goes.
 
-Sonucu görmek için:
+See the difference for yourself:
 
 ```bash
 kubectl get secret synchat-tls -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -issuer -subject
 ```
 
-Artık `issuer=` ve `subject=` **farklı** olmalı. Farklıysa zincir çalışıyor demektir.
+Now `issuer=` and `subject=` must be **different**. Different means the chain is real.
 
-Kök CA'yı bir kez trust store'a eklediğinde (macOS Keychain, Linux'ta `/usr/local/share/ca-certificates/`) iki hostname de ikazsız açılır. `ca.crt` zaten Secret'ın içinde:
+Add the root to your trust store once (macOS Keychain, or `/usr/local/share/ca-certificates/` on Linux) and both hostnames open without warnings. `ca.crt` is already in the Secret:
 
 ```bash
 kubectl get secret synchat-root-ca-secret -n cert-manager -o jsonpath='{.data.ca\.crt}' | base64 -d > synchat-root-ca.pem
 ```
 
-| | `SelfSigned` tek başına | `isCA` + `CA` zinciri |
+| | `SelfSigned` alone | `isCA` + `CA` chain |
 |---|---|---|
-| Obje sayısı | 2 | 4 |
-| Trust anchor | her sertifika ayrı | tek root, bir kez |
-| İki hostname | iki kez güven | root'a bir güven |
-| Issuer zinciri | yok | gerçek |
-| Tarayıcı | ikaz | ikazsız |
+| Objects | 2 | 4 |
+| Trust anchor | each certificate separately | one root, once |
+| Two hostnames | trust twice | trust the root once |
+| Issuer chain | none | real |
+| Browser | warns | clean |
 
 # Ingress vs Gateway
 
-cert-manager her iki API'de de çalışır, ama TLS'in **nereye yazıldığı** değişir. Ingress'ten geliyorsan en çok burada takılırsın:
+cert-manager works with both APIs, but where TLS is **declared** changes. This is where Ingress users get stuck:
 
 | | Ingress | Gateway |
 |---|---|---|
-| Annotation | `Ingress`'in üstünde | `Gateway`'in üstünde |
-| TLS nerede | `spec.tls[].secretName` | listener `tls.certificateRefs[].name` |
-| İsimler nereden | `spec.tls[].hosts` | listener `hostname` |
-| Kim yönetir | uygulama ekibi (kendi Ingress'i) | platform ekibi (ortak Gateway) |
-| Alt nesne | yok | `sectionName` ile listener'a bağlanır |
+| Annotation | on the `Ingress` | on the `Gateway` |
+| TLS lives in | `spec.tls[].secretName` | listener `tls.certificateRefs[].name` |
+| Names come from | `spec.tls[].hosts` | listener `hostname` |
+| Who owns it | app team (their own Ingress) | platform team (shared Gateway) |
+| Sub-resources | none | `sectionName` to pick a listener |
 
-Annotation'lar aynıdır - `cert-manager.io/issuer`, `cert-manager.io/cluster-issuer`, `cert-manager.io/duration`, `cert-manager.io/renew-before`. Sadece girdikleri nesne değişir.
+The annotations themselves are identical - `cert-manager.io/issuer`, `cert-manager.io/cluster-issuer`, `cert-manager.io/duration`, `cert-manager.io/renew-before`. Only the object they sit on changes.
 
-> 2026'nın başından beri `ingress-nginx` resmi olarak EOL. Yeni kurulumda Gateway API doğru hedef; Ingress'i bil ama üzerine yeni bir şey inşa etme.
+> `ingress-nginx` has been officially EOL since early 2026. For anything new, Gateway API is the destination. Know Ingress, but don't build on it.
 
 **Özetlersek:** Ingress'te TLS'i *sen* Ingress'in içinde tarif edersin, app ekibi kendi başına yönetir. Gateway'de TLS *Gateway*'in içinde yaşar ve genelde platform ekibinin kontrolündedir - ki bu yüzden `ListenerSet` diye bir kaynak geliştiriliyor.
 
-# In Production: Let's Encrypt
-
-Local'de `synchat.internal` hiçbir işe yaramaz çünkü gerçek bir domain değildir. Production'da ise Let's Encrypt bedava sertifika verir - ama kim olduğunu **kanıtlamanı** ister. Buna ACME challenge denir ve iki yolu vardır: HTTP-01 (domain'in 80 portunda seni doğrular) veya DNS-01 (DNS kaydını değiştirirsin).
-
-Gateway API ile HTTP-01'in kurulumu şöyledir:
-
-```yaml
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
-metadata:
-  name: letsencrypt
-spec:
-  acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    email: you@example.com
-    privateKeySecretRef:
-      name: letsencrypt-account-key
-    solvers:
-      - http01:
-          gatewayHTTPRoute:
-            parentRefs:
-              - name: app-gateway
-                kind: Gateway
-```
-
-`gatewayHTTPRoute` solver'ı challenge süresince geçici `HTTPRoute`'lar üretir; bunun için Gateway'inde bir **HTTP:80 listener** yaşamalıdır. Sonrasında sadece `cert-manager.io/cluster-issuer: letsencrypt` annotation'ını ekle, gerisini cert-manager halleder.
-
-Bu kursun kapsamında değil, çünkü iki şartı birden istiyor: **herkese açık bir domain** ve **o domain'in 80 portuna dışarıdan erişilebilmesi**. İkisi de minikube'ta yok. Buraya yazmamızın sebebi gerçek kurulumun neye benzediğini görmek.
-
-> **Dikkat:** Certificate bir namespace'te, Gateway başka bir namespace'te ise `certificateRefs` cross-namespace olur ve Gateway API bunu varsayılan olarak reddeder. Çözüm `ReferenceGrant`:
-
-```yaml
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: ReferenceGrant
-metadata:
-  name: allow-gateway-tls
-  namespace: apps
-spec:
-  from:
-    - group: gateway.networking.k8s.io
-      kind: Gateway
-      namespace: default
-  to:
-    - group: ""
-      kind: Secret
-```
-
 # Troubleshooting
 
-TLS'in çalışmaması bir hata mesajıyla gelmez, sessizce gelir. Sıra:
+TLS that doesn't work doesn't come with an error message, it comes with silence. In order:
 
-**`Certificate` `Ready: False`** — her zaman detayı oradadır:
+**`Certificate` is `Ready: False`** — the detail is always there:
 
 ```bash
 kubectl describe certificate synchat-tls
 kubectl get certificaterequest
-kubectl describe certificaterequest <isim>
+kubectl describe certificaterequest <name>
 ```
 
-Conditions altındaki `message` alanı gerçek sebebi söyler (`referenced signer resource does not exist`, `secret "..." not found`...).
+The `message` under Conditions is the real reason (`referenced signer resource does not exist`, `secret "..." not found`...).
 
-**`Secret` hiç oluşmuyor** — Certificate `Ready` mi? `certificateRefs[].namespace` Gateway'in namespace'iyle aynı mı? Cross-namespace yazdıysan sessizce atlanır.
+**The `Secret` never appears** — is the `Certificate` `Ready`? Does `certificateRefs[].namespace` match the Gateway's? A cross-namespace reference is skipped silently.
 
-**Certificate hiç türemiyor (Path B)** — üç şeyi sırayla kontrol et: `--enable-gateway-api` açık mı (`kubectl get deployment cert-manager -n cert-manager -o jsonpath='{.spec.template.spec.containers[0].args}'`), annotation ismi doğru mu, listener kısıtlar tablosuna uyuyor mu. `hostname` boşsa listener atlanır.
+**No Certificate is generated (Path B)** — three checks in order: is `--enable-gateway-api` on (`kubectl get deployment cert-manager -n cert-manager -o jsonpath='{.spec.template.spec.containers[0].args}'`), is the annotation spelled right, does the listener satisfy the constraints table. An empty `hostname` skips the listener.
 
-**HTTPS çalışıyor ama isim yanlış** — `dnsNames`'e bak. Yanlışsa `hostname`'i **listener'da** düzelt, HTTPRoute'ta değil.
+**HTTPS works but the name is wrong** — look at `dnsNames`. If it's wrong, fix `hostname` on the **listener**, not on the HTTPRoute.
 
-**Tarayıcı hâlâ ikaz ediyor** — bu bir cert-manager sorunu değil, trust sorunudur. `SelfSigned` kullanıyorsan CA zincirine geç ya da kökü trust store'a ekle. `openssl x509 -noout -issuer -subject` ile zincirin gerçekten var olup olmadığını ayırt et.
+**The browser still warns** — that's not a cert-manager problem, that's a trust problem. If you're on `SelfSigned`, switch to the CA chain or add the root to your trust store. Use `openssl x509 -noout -issuer -subject` to tell whether a chain exists at all.
 
-**Eski sertifika hâlâ sunuluyor** — Secret güncellenmiş ama Envoy yeniden okumamıştır. Gateway'i restart etmek yerine beklemek genelde yeterli; controller'lar Secret değişikliğini yakalar.
+**The old certificate is still being served** — the Secret updated but Envoy hasn't reloaded it. Usually just waiting works; controllers pick up Secret changes.
 
 # Assignment
 
-Gateway bölümünde kurduğumuz `app-gateway`'i gerçekten HTTPS yapalım - ikaz almadan.
+Let's make the `app-gateway` from the gateway chapter into real HTTPS - without warnings.
 
-1. CA zincirini kur: `selfsigned` ClusterIssuer, `isCA: true` ile `synchat-root-ca` (`cert-manager` namespace'inde), `synchat-ca` ClusterIssuer. Hepsi tek dosyada olabilir.
+1. Build the CA chain: a `selfsigned` ClusterIssuer, a `synchat-root-ca` with `isCA: true` (in the `cert-manager` namespace), and a `synchat-ca` ClusterIssuer. One file is fine.
 
-2. `synchat-tls` Certificate'ını yaz. `secretName: synchat-tls`, `dnsNames` olarak `synchat.internal` **ve** `synchatapi.internal`, `issuerRef` → `synchat-ca`.
+2. Write the `synchat-tls` Certificate. `secretName: synchat-tls`, `dnsNames` with `synchat.internal` **and** `synchatapi.internal`, `issuerRef` → `synchat-ca`.
 
-3. `app-gateway`'e `cert-manager.io/cluster-issuer: synchat-ca` annotation'ını ekle. Path B'yi kullanıyorsan `--enable-gateway-api`'ın açık olduğunu doğrula, sonra Certificate'ı elle yazdığın dosyayı sil - cert-manager üretecek. Hangi yolu seçersen seç, listener'ları `web-https` ve `api-https` olarak yeniden yaz, ikisi de `tls.mode: Terminate` ve aynı `certificateRefs[].name`'i kullansın.
+3. Add the `cert-manager.io/cluster-issuer: synchat-ca` annotation to `app-gateway`. If you take Path B, confirm `--enable-gateway-api` is on and then delete the hand-written Certificate - cert-manager will generate it. Either way, rewrite the listeners as `web-https` and `api-https`, both with `tls.mode: Terminate` and the same `certificateRefs[].name`.
 
-4. HTTPRoute'lara `sectionName` eklemeyi unutma: web için `web-https`, api için `api-https`.
+4. Don't forget `sectionName` on the HTTPRoutes: `web-https` for web, `api-https` for api.
 
-5. Doğrula:
+5. Verify:
 
 ```bash
 kubectl get certificate
@@ -391,16 +344,18 @@ kubectl get secret synchat-tls -o jsonpath='{.data.tls\.crt}' | base64 -d | open
 curl -kv https://synchat.internal 2>&1 | grep -E "subject:|issuer:|SSL certificate"
 ```
 
-İstediğin sonuç: `certificate` `READY` `True`, issuer ile subject **farklı**, `subjectAltName` iki ismi de içeriyor, ve `curl` çıktısında ikisi de görünüyor.
+What you want: `certificate` `READY` `True`, issuer and subject **different**, `subjectAltName` containing both names, and both visible in the `curl` output.
 
-6. Son adım - asıl ödül. Kök CA'yı trust store'una ekle ve tarayıcıda `https://synchat.internal`'ı aç:
+6. The last step is the actual payoff. Add the root CA to your trust store and open `https://synchat.internal` in a browser:
 
 ```bash
 kubectl get secret synchat-root-ca-secret -n cert-manager -o jsonpath='{.data.tls\.crt}' | base64 -d > synchat-root-ca.pem
 ```
 
-İkazsız açıldığında TLS'in aslında **çalıştığını** görmüş olursun. Bir sertifikayı elle hazırlayıp Gateway'e takmak kolay kısmıydı; asıl iş onu güvenilir ve kendini yenileyen hale getirmekti.
+When it opens with no warning, you've seen TLS actually **work**. Getting a certificate and plugging it into a Gateway was the easy half; making it trusted and self-renewing was the real job.
 
 > **Dikkat:** `Certificate`'ı Gateway'in namespace'i dışında yazarsan sonuç sessizce bozulur. `Certificate` namespace'i, `certificateRefs`'un bakacağı namespace ile **aynı** olmalı - `app-gateway` için bu `default`.
 
-for more [namespaces](../kubernetes-namespaces/)
+The next chapter takes this to a real cluster: ACME, Let's Encrypt, wildcards, renewal windows, trust distribution and monitoring.
+
+for more [cert-manager-production](../kubernetes-cert-manager-production/)

@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-storage"
-weight: 18
+weight: 19
 ---
 # Storage in Kubernetes
 

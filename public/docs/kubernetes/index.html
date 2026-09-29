@@ -31,7 +31,7 @@ For example, you could install Docker on a single server, and route traffic dire
 – The Kubernetes team
 Kubernetes orchestrates and manages collections of containers (often using container runtimes like containerd). It takes care of scaling, distribution, and connectivity among these containers. Think of it as a system to manage many containers and the infrastructure they run on.
 For example, you could install Docker on a single server, and route traffic directly to it. That’s fairly simple to set up, but what if you want 10 instances of that server? What about 1000 instances? What if you want to deploy many different services, each scaling up with more instances depending on load? Those are the problems that Kubernetes solves.">
-	<meta itemprop="wordCount" content="535">
+	<meta itemprop="wordCount" content="550">
 
 <title>Kubernetes • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -40,7 +40,7 @@ For example, you could install Docker on a single server, and route traffic dire
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.ed249f736547701020a191e115971a36cf53fa58cfb5cc20906c92bf9f618b3f.js" integrity="sha256-7SSfc2VHcBAgoZHhFZcaNs9T&#43;ljPtcwgkGySv59hiz8=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.b3b67f3998eeec3ba80293adc22a5bab03b992bd223eadc63d33fb3a692419a2.js" integrity="sha256-s7Z/OZju7DuoApOtwipbqwO5kr0iPq3GPTP7OmkkGaI=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/kubernetes/index.xml" title="Kubernetes" />
 
   
@@ -825,6 +825,20 @@ For example, you could install Docker on a single server, and route traffic dire
   
 
   
+    <a href="/docs/kubernetes/kubernetes-cert-manager-production/" class="">
+      kubernetes-cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
       kubernetes-namespaces</a>
   
@@ -1330,6 +1344,7 @@ For example, you could install Docker on a single server, and route traffic dire
 <li><a href="kubernetes-ingress/">kubernetes-ingress</a></li>
 <li><a href="kubernetes-gateway-minikube/">kubernetes-gateway-minikube</a></li>
 <li><a href="kubernetes-cert-manager/">kubernetes-cert-manager</a></li>
+<li><a href="kubernetes-cert-manager-production/">kubernetes-cert-manager-production</a></li>
 <li><a href="kubernetes-namespaces/">kubernetes-namespaces</a></li>
 <li><a href="kubernetes-dns-coredns/">kubernetes-dns-coredns</a></li>
 <li><a href="kubernetes-scaling-vertical/">kubernetes-scaling-vertical</a></li>
@@ -1360,7 +1375,8 @@ For example, you could install Docker on a single server, and route traffic dire
 <li><a href="kubernetes-services/">kubernetes-services</a> = <code>ClusterIP</code>, <code>NodePort</code>, <code>LoadBalancer</code>, <code>ExternalName</code>, stable endpoint ve load balancing</li>
 <li><a href="kubernetes-ingress/">kubernetes-ingress</a> = Ingress controller (nginx) vs Ingress resource, host/path kuralları, <code>ingressClassName</code>, TLS + Secret</li>
 <li><a href="kubernetes-gateway-minikube/">kubernetes-gateway-minikube</a> = Gateway API (Envoy), <code>HTTPRoute</code>, <code>/etc/hosts</code> + <code>minikube tunnel</code>, annotations</li>
-<li><a href="kubernetes-cert-manager/">kubernetes-cert-manager</a> = <code>Issuer</code>/<code>ClusterIssuer</code>/<code>Certificate</code>, SelfSigned vs <code>isCA</code>+<code>CA</code> zinciri, Gateway <code>certificateRefs</code> + <code>cert-manager.io/cluster-issuer</code>, ACME HTTP-01</li>
+<li><a href="kubernetes-cert-manager/">kubernetes-cert-manager</a> = <code>Issuer</code>/<code>ClusterIssuer</code>/<code>Certificate</code>, SelfSigned vs <code>isCA</code>+<code>CA</code> zinciri, Gateway <code>certificateRefs</code> + <code>cert-manager.io/cluster-issuer</code></li>
+<li><a href="kubernetes-cert-manager-production/">kubernetes-cert-manager-production</a> = ACME (staging/prod, rate limits), HTTP-01 vs DNS-01, wildcard, renewal/ARI, trust-manager <code>Bundle</code>, Prometheus alert, hardening/HA</li>
 <li><a href="kubernetes-namespaces/">kubernetes-namespaces</a> = <code>kubectl create ns</code>, <code>-n</code> flag, intra-cluster DNS (<code>svc.cluster.local</code>)</li>
 <li><a href="kubernetes-dns-coredns/">kubernetes-dns-coredns</a> = CoreDNS + Corefile ConfigMap, <code>dnsPolicy</code>/<code>ndots</code>, <code>nslookup</code> ile DNS troubleshooting, kube-dns servisi</li>
 </ul>

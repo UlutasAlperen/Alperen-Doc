@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-storage-classes"
-weight: 20
+weight: 21
 ---
 # StorageClasses
 
