@@ -32,7 +32,7 @@ Look at that toleration - `operator: Exists` tolerates _everything_, which is ex
 
 A DaemonSet uses the same scheduling machinery as everything else from the [taints and affinity](../taints-affinity-quotas/) notes - you can pin it with node affinity and evict it with taints. What's different is the controller: it watches _nodes_ instead of replicas.
 
-**Küçük model:** Deployment = "3 tane çalışsın, nerede olduğu fark etmez"; DaemonSet = "her node'da tam 1 tane çalışsın". Birincisi iş yükü, ikincisi altyapı.
+**Ozetle:** Deployment = "3 tane çalışsın, nerede olduğu fark etmez(ayarlanmamissa)"; DaemonSet = "her node'da tam 1 tane çalışsın". Birincisi genel kullanim, ikincisi ozel-altyapi-monitoring etc...
 
 # PriorityClass
 
@@ -77,9 +77,9 @@ The sharp edge: a PDB that says `minAvailable: 2` on a 2-replica Deployment make
 
 > The [VPA](../vpa-cluster-autoscaler/) notes mentioned PDB in passing because VPA's updater evicts pods the same way `drain` does - both go through the eviction API, both respect the budget. One budget per app, not per tool.
 
-**Türkçe özet - üçlü ilişki:**
+**özet:**
 - **DaemonSet** = her node'da 1 pod (altyapı ajanları)
-- **PriorityClass** = yer yokken kim yaşar, kim ölür
+- **PriorityClass** = duruma gore (pod etc..) kim yaşar, kim ölür
 - **PDB** = bakım/drain sırasında en az kaç pod ayakta kalır
 
 # How to Run One Agent Per Node with a DaemonSet
@@ -137,6 +137,6 @@ kubectl get pdb synergychat-api-pdb -o yaml | sed -n '/status/,$p'
 
 4. Tighten the budget to `minAvailable: 3` and drain again. The drain now refuses to move anything. Delete the PDB and the drain proceeds - proof the budget, not the drain command, is in charge.
 
-> **Dikkat:** `minAvailable` replica sayısına eşit veya büyükse drain **asla** bitemez. Node bakımına çıkarken bütçeyi (ya da replica sayısını) bunu bilerek ayarla - aksi hâlde "node drain takıldı" diye 2 saat debug edersin.
+> **Dikkat:** `minAvailable` replica sayısına eşit veya büyükse drain **asla** bitmez. Node bakımına çıkarken resource (ya da replica sayısını) gore bunu bilerek ayarla - aksi halde "node drain takılir" diye 2 saat debug edersin.
 
 for more [multi-node-kubeadm](../multi-node-kubeadm/)

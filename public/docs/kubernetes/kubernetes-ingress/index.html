@@ -35,7 +35,7 @@ A LoadBalancer service gives every app its own cloud load balancer and its own p
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.e812e6d786249c95095edc1ae1698018944c5e8313d4214f4401aa33baa9bfb5.js" integrity="sha256-6BLm14YknJUJXtwa4WmAGJRMXoMT1CFPRAGqM7qpv7U=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.4571ec42d20ffab98655d0c8f9795e6390a1730dcdd4bd6ccf872a2c0c7550ac.js" integrity="sha256-RXHsQtIP&#43;rmGVdDI&#43;XleY5Chcw3N1L1sz4cqLAx1UKw=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1268,7 +1268,7 @@ A LoadBalancer service gives every app its own cloud load balancer and its own p
 <p>In the <a href="../kubernetes-services/">services</a> chapter we promised to talk more about exposing things to the outside world. Time to pay that off too.</p>
 <p>A <code>LoadBalancer</code> service gives every app its own cloud load balancer and its own public IP. That&rsquo;s fine when you have one app. With three apps, three IPs, three DNS records, three TLS certificates, three bills. What we actually want is one entry point that routes <code>chat.example.com</code> to the web app and <code>api.example.com</code> to the API - and gives us HTTPS while it&rsquo;s at it.</p>
 <p><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> is that entry point. It&rsquo;s a set of <em>rules</em> for routing HTTP traffic by hostname and path to services inside the cluster. It&rsquo;s the front door with a very organized mailroom.</p>
-<p><strong>:Özetle</strong> Service = uygulamanın dengelenmiş/atanmis(rastgele veya degil) adresi; Ingress = &ldquo;hangi URL, hangi servise gider&rdquo;. Ingress kendisi trafiğini taşımaz, sadece talimat yazar.</p>
+<p><strong>Özetlersek</strong> Service = uygulamanın dengelenmiş/atanmis(rastgele veya degil) adresi; Ingress = &ldquo;hangi URL, hangi servise gider&rdquo;. Ingress kendisi trafiğini taşımaz, sadece talimat yazar.</p>
 <h1 id="ingress-controller">Ingress Controller<a class="anchor" href="#ingress-controller">#</a></h1>
 <p>Here&rsquo;s the rub: an Ingress object is just YAML. Somebody has to <em>read</em> those rules and actually proxy the packets. That somebody is an <a href="https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/">Ingress controller</a> - nginx, traefik, Envoy, HAProxy, and friends. Install one and it watches for Ingress objects; don&rsquo;t install one and your Ingress sits there doing literally nothing.</p>
 <p>Minikube ships with the nginx controller as an addon:</p>

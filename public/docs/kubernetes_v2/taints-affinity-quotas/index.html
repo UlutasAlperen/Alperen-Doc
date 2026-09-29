@@ -29,7 +29,7 @@ NoSchedule: new pods without a matching toleration can’t be scheduled here (ru
 	<meta itemprop="description" content="Taints and Tolerations# On a single-node Minikube cluster scheduling is trivial - there’s nowhere else to put a pod. The moment you add nodes (multi-node notes are coming), scheduling decisions become real. Taints mark a node as “keep away”, and tolerations let specific pods opt in anyway:
 kubectl taint nodes &lt;node-name&gt; workload=ai:NoScheduleThe three effects behave differently:
 NoSchedule: new pods without a matching toleration can’t be scheduled here (running pods are left alone) PreferNoSchedule: soft version - scheduler tries to avoid, but won’t reject NoExecute: also evicts pods already running there that lack the toleration - the aggressive one The matching toleration in a pod spec:">
-	<meta itemprop="wordCount" content="1005">
+	<meta itemprop="wordCount" content="1104">
 
 <title>taints-affinity-quotas • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ NoSchedule: new pods without a matching toleration can’t be scheduled here (ru
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.e812e6d786249c95095edc1ae1698018944c5e8313d4214f4401aa33baa9bfb5.js" integrity="sha256-6BLm14YknJUJXtwa4WmAGJRMXoMT1CFPRAGqM7qpv7U=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.4571ec42d20ffab98655d0c8f9795e6390a1730dcdd4bd6ccf872a2c0c7550ac.js" integrity="sha256-RXHsQtIP&#43;rmGVdDI&#43;XleY5Chcw3N1L1sz4cqLAx1UKw=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1258,6 +1258,10 @@ NoSchedule: new pods without a matching toleration can’t be scheduled here (ru
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#özetlersek"><strong>Özetlersek</strong></a></li>
+  </ul>
+
+  <ul>
     <li><a href="#how-to-reserve-a-node-for-special-workloads">How to Reserve a Node for Special Workloads</a></li>
     <li><a href="#how-to-spread-replicas-across-nodes">How to Spread Replicas Across Nodes</a></li>
     <li><a href="#how-to-cap-a-namespace-with-resourcequota">How to Cap a Namespace with ResourceQuota</a></li>
@@ -1287,7 +1291,23 @@ NoSchedule: new pods without a matching toleration can’t be scheduled here (ru
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">operator</span>: <span style="color:#e6db74">&#34;Equal&#34;</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;ai&#34;</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">effect</span>: <span style="color:#e6db74">&#34;NoSchedule&#34;</span></span></span></code></pre></div><p><code>operator: &quot;Exists&quot;</code> (no value) matches any value for that key. And some taints are <em>well-known</em> - k8s itself taints nodes when things go wrong (<code>node.kubernetes.io/not-ready</code>, <code>.../unreachable</code>, <code>memory-pressure</code>); these auto-expire when the condition clears, which is why pods can&rsquo;t schedule onto an unhealthy node even though you never taint it.</p>
-<p><strong>Küçük model:</strong> taint node&rsquo;a &ldquo;yasak&rdquo; tabelası asar, toleration o tabelanın geçiş iznidir. Yaygın kullanım: GPU node&rsquo;ları (sadece AI job&rsquo;lar girsin), control-plane node&rsquo;ları (kubeadm bunu zaten yapar), spot instance&rsquo;lar (<code>PreferNoSchedule</code> + toleration ile &ldquo;tercihen kaçın, ama gerektiğinde kullan&rdquo;).</p>
+<h2 id="özetlersek"><strong>Özetlersek</strong><a class="anchor" href="#%c3%b6zetlersek">#</a></h2>
+<p><strong>Taint</strong>, node&rsquo;un kapısına <strong>&ldquo;her pod giremez&rdquo;</strong> tabelası asar.<br>
+<strong>Toleration</strong> ise pod&rsquo;un elindeki <strong>&ldquo;bu yasağı geçebilirim&rdquo;</strong> iznidir.</p>
+<p>Örneğin bir GPU node&rsquo;una taint koyarsan, normal pod&rsquo;lar oraya schedule edilmez.<br>
+Sadece gerekli toleration&rsquo;a sahip AI / ML workload&rsquo;ları bu node&rsquo;u kullanabilir.</p>
+<p>Yaygın kullanım alanları:</p>
+<ul>
+<li><strong>GPU node&rsquo;ları</strong> → normal workload&rsquo;lar gelmesin, sadece GPU kullanan job&rsquo;lar çalışsın.</li>
+<li><strong>Control-plane node&rsquo;ları</strong> → uygulama pod&rsquo;ları yanlışlıkla control-plane üzerinde çalışmasın. <code>kubeadm</code> bunu varsayılan olarak taint ile yapar.</li>
+<li><strong>Spot / preemptible node&rsquo;lar</strong> → mümkünse normal node&rsquo;ları kullan, ama gerekirse spot node&rsquo;a da geç.</li>
+</ul>
+<p>Özellikle <code>PreferNoSchedule</code> şu anlama gelir:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&#34;Mümkünse buraya pod koyma,
+</span></span><span style="display:flex;"><span>ama başka uygun yer yoksa koyabilirsin.&#34;</span></span></code></pre></div><p>Kısaca:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Taint      = node&#39;un koyduğu kısıtlama
+</span></span><span style="display:flex;"><span>Toleration = pod&#39;un o kısıtlamayı tolere edebilmesi</span></span></code></pre></div><p>Ama önemli nokta:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>toleration != &#34;beni bu node&#39;a gönder&#34;</span></span></code></pre></div><p>Toleration sadece kapıdaki engeli kaldırır. Pod&rsquo;un gerçekten o node&rsquo;a gitmesini istiyorsan ayrıca <code>nodeSelector</code>, <code>nodeAffinity</code> gibi scheduling kuralları kullanırsın.</p>
 <h1 id="affinity">Affinity<a class="anchor" href="#affinity">#</a></h1>
 <p>Taints push pods <em>away</em> from nodes. <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/">Affinity</a> pulls them <em>toward</em> - or away from - each other. Three flavors:</p>
 <p><strong>nodeSelector</strong> - the simple label match:</p>
@@ -1484,6 +1504,10 @@ NoSchedule: new pods without a matching toleration can’t be scheduled here (ru
       
   
 <nav id="TableOfContents">
+  <ul>
+    <li><a href="#özetlersek"><strong>Özetlersek</strong></a></li>
+  </ul>
+
   <ul>
     <li><a href="#how-to-reserve-a-node-for-special-workloads">How to Reserve a Node for Special Workloads</a></li>
     <li><a href="#how-to-spread-replicas-across-nodes">How to Spread Replicas Across Nodes</a></li>

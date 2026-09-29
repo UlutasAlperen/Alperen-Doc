@@ -26,7 +26,7 @@ Autoscaler Katman Soru Ne yapar HPA Pod sayısı “Kaç pod?” Metriğe göre 
 	<meta itemprop="name" content="vpa-cluster-autoscaler">
 	<meta itemprop="description" content="The Three Autoscalers# In the scaling notes we built an HPA. But HPA is one of three autoscalers, and they operate at different layers - mixing them up is a classic design mistake:
 Autoscaler Katman Soru Ne yapar HPA Pod sayısı “Kaç pod?” Metriğe göre replica sayısını değiştirir VPA Pod kaynakları “Bir pod ne kadar ister?” requests/limits‘i otomatik ayarlar (restart ile) Cluster Autoscaler Node sayısı “Kaç node?” Pending pod’lar için node ekler, boş node’u çıkarır The layering matters because they solve different problems: HPA handles variable load for a fixed-per-pod footprint; VPA fixes wrong resource estimates; CA fixes fleet capacity.">
-	<meta itemprop="wordCount" content="837">
+	<meta itemprop="wordCount" content="838">
 
 <title>vpa-cluster-autoscaler • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ Autoscaler Katman Soru Ne yapar HPA Pod sayısı “Kaç pod?” Metriğe göre 
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.e812e6d786249c95095edc1ae1698018944c5e8313d4214f4401aa33baa9bfb5.js" integrity="sha256-6BLm14YknJUJXtwa4WmAGJRMXoMT1CFPRAGqM7qpv7U=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.4571ec42d20ffab98655d0c8f9795e6390a1730dcdd4bd6ccf872a2c0c7550ac.js" integrity="sha256-RXHsQtIP&#43;rmGVdDI&#43;XleY5Chcw3N1L1sz4cqLAx1UKw=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1336,9 +1336,9 @@ Autoscaler Katman Soru Ne yapar HPA Pod sayısı “Kaç pod?” Metriğe göre 
 </ul>
 <blockquote class='book-hint '>
 <p>Cluster Autoscaler + HPA is the pairing that <em>does</em> compose cleanly: HPA grows pod count → pods go <code>Pending</code> → CA adds nodes → pods land. VPA in <code>Auto</code> is the one that plays badly, because its tool is eviction - and eviction is also what PodDisruptionBudgets try to guard against, so the updater respects PDBs (<code>minAvailable</code>) when evicting. Put a sane PDB in front of anything VPA <code>Auto</code> touches - how to write one (and why <code>minAvailable</code> equal to the replica count makes <code>drain</code> hang forever) is in <a href="../pod-priority-disruption/">pod-priority-disruption</a>.</p>
-</blockquote><p>Minikube&rsquo;da Cluster Autoscaler&rsquo;ın gerçek bir karşılığı yok (tek node zaten); davranışı elle taklit edebilirsin:</p>
+</blockquote><p>Minikube&rsquo;da Cluster Autoscaler&rsquo;ın gerçek bir karşılığı yok (tek node zaten). Davranışı taklit edebilirsin:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>minikube node add
-</span></span><span style="display:flex;"><span>minikube node list</span></span></code></pre></div><p>Üretimde bu managed service&rsquo;in işidir (GKE Autopilot node autoscaling&rsquo;i varsayılan olarak yönetir; <a href="../../kubernetes/kubernetes-nodes-basic/">nodes-basic</a> notlarındaki &ldquo;managed offering node-level autoscaling&rdquo; sözünün ta kendisi).</p>
+</span></span><span style="display:flex;"><span>minikube node list</span></span></code></pre></div><p>Prod&rsquo;da bu managed service&rsquo;in işidir (GKE Autopilot node veya AWS EKS - autoscaling&rsquo;i varsayılan olarak yönetir; <a href="../../kubernetes/kubernetes-nodes-basic/">nodes-basic</a> notlarındaki &ldquo;managed offering node-level autoscaling&rdquo;&lsquo;de bahsetmistim&rsquo;).</p>
 <h2 id="how-to-read-a-vpa-recommendation">How to Read a VPA Recommendation<a class="anchor" href="#how-to-read-a-vpa-recommendation">#</a></h2>
 <ol>
 <li>Install the minimum for recommendation mode (CRDs + recommender):</li>

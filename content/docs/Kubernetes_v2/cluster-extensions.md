@@ -16,7 +16,37 @@ Those sockets are the extension interfaces, and knowing them turns "the cluster 
 
 The contract matters more than the vendor. CNI says "here's a pod, give it an IP and a veth"; every plugin answers that the same _way of thinking_, differently in the details. Same for CSI (`CreateVolume`/`Attach`/`Mount` are verbs every driver must know) and CRI (`RunPodSandbox`/`CreateContainer`/`StopContainer`).
 
-> kubelet, CRI konuşan runtime'ı doğrudan konuşur - `crictl` o konuşmanın CLI hâli. Docker varlığında `docker ps` ile kafanın karışmaması için: `crictl ps` o pod'un container'larını, `docker ps` (varsa) host'ta koşan başka bir şeyi gösterir.
+### Özetlersek
+`kubelet`, container runtime ile **CRI (Container Runtime Interface)** üzerinden konuşur.  
+`crictl` ise bu CRI arayüzüyle konuşmak için kullanılan CLI aracıdır.
+
+Bu yüzden Kubernetes node'unda container'ları incelerken:
+
+```bash
+crictl pods
+crictl ps
+```
+
+kullanmak, `docker ps` kullanmaktan daha doğru bir yaklaşımdır.
+
+Çünkü:
+
+- `crictl pods` → kubelet tarafından yönetilen **Pod sandbox'larını**
+- `crictl ps` → CRI runtime tarafından yönetilen **container'ları**
+- `docker ps` → yalnızca **Docker daemon** tarafından yönetilen container'ları gösterir.
+
+Modern Kubernetes kurulumlarında runtime çoğunlukla `containerd` veya `CRI-O` olduğu için, `docker ps` çıktısı Kubernetes container'larını göstermeyebilir.
+
+Kısaca:
+
+```text
+kubelet ──CRI──> containerd / CRI-O
+                  ▲
+                  │
+                crictl
+```
+
+Yani `crictl`, kubelet'in container runtime ile konuştuğu dünyaya bakmak için kullanılan araçtır.
 
 A quick taste of the CRI side when a pod is stuck in `ContainerCreating` and you want to see what the runtime thinks:
 
@@ -26,9 +56,21 @@ crictl pods
 crictl inspect <container-id> | head -n 20
 ```
 
-**Küçük model:** CNI = "ağ kablosu takılan yer", CSI = "disk takılan yer", CRI = "container motoru takılan yer". Kubernetes bunların hiçbirini kendisi yapmaz; sadece hepsinin oturacağı standardı belirler.
+### Özetlersek
 
-# CRDs
+- **CNI** → Kubernetes'in **ağa** bağlandığı standart arayüzdür.
+- **CSI** → Kubernetes'in **depolamaya** bağlandığı standart arayüzdür.
+- **CRI** → Kubernetes'in **container runtime'a** bağlandığı standart arayüzdür.
+
+Basit bir benzetmeyle:
+
+```text
+CNI = ağ kablosunun takıldığı yer
+CSI = diskin takıldığı yer
+CRI = container motorunun takıldığı yer
+```
+
+Kubernetes bu işleri doğrudan kendisi yapmaz. Bunun yerine **standart arayüzleri tanımlar**; gerçek işi CNI eklentileri, CSI sürücüleri ve container runtime'lar gerçekleştirir. CRDs
 
 So far every object we've touched - `Deployment`, `Service`, `NetworkPolicy` - is built into Kubernetes. [CustomResourceDefinitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) are how _you_ add new object types to the API:
 
@@ -118,3 +160,6 @@ kubectl logs -n monitoring -l app.kubernetes.io/name=prometheus-operator --tail=
 > **Dikkat:** Helm ile kurulan operatörlerin çoğu CRD'leri `crds/` klasöründen bir kez apply eder ve **asla** upgrade/rollback ile değiştirmez ([helm](../helm/) notlarındaki o tuhaf kural). CRD sürümünü yükseltmen gerekiyorsa bu ayrı bir, elle yapılan bir işlemdir.
 
 for more [network-policy](../network-policy/)
+
+
+

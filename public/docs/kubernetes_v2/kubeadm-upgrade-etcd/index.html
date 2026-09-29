@@ -29,7 +29,7 @@ One minor version at a time. 1.30 → 1.31, never 1.30 → 1.32. The version ske
 	<meta itemprop="description" content="Cluster Upgrades# The multi-node notes ended with a one-liner: “upgrade the control plane first, one minor version at a time”. That’s the policy - this is the practice.
 Upgrading a cluster is the most common maintenance task you will ever run, and the most common way to break one. The rules that keep it boring:
 One minor version at a time. 1.30 → 1.31, never 1.30 → 1.32. The version skew policy allows the apiserver to lead kubelets by one minor; anything more is unsupported and the upgrade will refuse Control plane first, workers after. The new apiserver must understand old kubelets, not the reverse One node at a time. Drain → upgrade → uncordon → next Read the output. kubeadm upgrade plan exists precisely because upgrades are not a single command The apt packages are version-pinned with apt-mark hold from the install notes. Every upgrade starts with apt-mark unhold and ends with apt-mark hold again - forgetting the re-hold is how a future apt upgrade silently moves your cluster a minor version.">
-	<meta itemprop="wordCount" content="945">
+	<meta itemprop="wordCount" content="1003">
 
 <title>kubeadm-upgrade-etcd • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ One minor version at a time. 1.30 → 1.31, never 1.30 → 1.32. The version ske
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.e812e6d786249c95095edc1ae1698018944c5e8313d4214f4401aa33baa9bfb5.js" integrity="sha256-6BLm14YknJUJXtwa4WmAGJRMXoMT1CFPRAGqM7qpv7U=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.4571ec42d20ffab98655d0c8f9795e6390a1730dcdd4bd6ccf872a2c0c7550ac.js" integrity="sha256-RXHsQtIP&#43;rmGVdDI&#43;XleY5Chcw3N1L1sz4cqLAx1UKw=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1285,7 +1285,20 @@ One minor version at a time. 1.30 → 1.31, never 1.30 → 1.32. The version ske
 </span></span></span><span style="display:flex;"><span>  --cert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/healthcheck-client.crt <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>  --key<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/healthcheck-client.key <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>  snapshot save /var/backups/etcd-<span style="color:#66d9ef">$(</span>date +%F<span style="color:#66d9ef">)</span>.db</span></span></code></pre></div><p>Verify the snapshot is usable <em>now</em>, not on the day you need it:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>etcdctl snapshot status /var/backups/etcd-2025-01-01.db -w table</span></span></code></pre></div><p><strong>Dikkat:</strong> <code>snapshot restore</code> mevcut bir cluster&rsquo;ın üstüne yazılmaz. Restore, <strong>yeni bir data dir</strong> ile yeni bir etcd ayağa demektir; eski data dir&rsquo;i silmeden restore etmeye kalkarsan ne yaptığını bilen bir insan olmak yerine felaket tatbikatı yapmış olursun. Prosedür aşağıda adım adım var.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>etcdctl snapshot status /var/backups/etcd-2025-01-01.db -w table</span></span></code></pre></div><hr>
+<p><strong>Dikkat:</strong> <code>snapshot restore</code>, çalışan etcd&rsquo;nin mevcut verisinin üstüne backup&rsquo;ı kopyalamak değildir.</p>
+<p>Restore işlemi snapshot&rsquo;tan <strong>yeni bir etcd data dir</strong> oluşturur; ardından etcd bu yeni dizin kullanılarak ayağa kaldırılır.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>snapshot.db
+</span></span><span style="display:flex;"><span>     ↓
+</span></span><span style="display:flex;"><span>restore
+</span></span><span style="display:flex;"><span>     ↓
+</span></span><span style="display:flex;"><span>yeni data dir
+</span></span><span style="display:flex;"><span>     ↓
+</span></span><span style="display:flex;"><span>etcd bu dizinden başlar</span></span></code></pre></div><p>Yani mevcut <code>/var/lib/etcd</code> dizininin içine restore yapmaya çalışma. Önce eski data dir&rsquo;i güvenli şekilde kenara al, restore&rsquo;u ayrı ve temiz bir dizine yap, ardından etcd&rsquo;yi restore edilen dizine yönlendir.</p>
+<p>Kısacası:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>snapshot restore != mevcut etcd&#39;nin üstüne yazmak
+</span></span><span style="display:flex;"><span>snapshot restore  = snapshot&#39;tan yeni bir etcd data dir üretmek</span></span></code></pre></div><p>Eski data dir&rsquo;i korumadan doğrudan restore işlemine girişmek, recovery yapmak yerine recovery senaryosunun kendisine dönüşebilir.</p>
+<hr>
 <h1 id="certificate-management">Certificate Management<a class="anchor" href="#certificate-management">#</a></h1>
 <p>kubeadm clusters issue their own certificates with a one-year expiry. Nobody remembers this until the cluster stops serving traffic at 9am on a random Tuesday.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeadm certs check-expiration
@@ -1379,7 +1392,7 @@ One minor version at a time. 1.30 → 1.31, never 1.30 → 1.32. The version ske
 </span></span><span style="display:flex;"><span>kubeadm certs check-expiration</span></span></code></pre></div><ol start="4">
 <li>Distribute the updated <code>admin.conf</code> to anyone holding an old kubeconfig, and update workers&rsquo; kubelet certs if you use the client cert flow. A renewed CA cert (only on <code>kubeadm certs renew ca</code>, which you should almost never do) invalidates every cert in the cluster - treat that as a disaster recovery scenario, not maintenance.</li>
 </ol>
-<p><strong>Türkçe özet - sıralama:</strong> backup → <code>upgrade plan</code> → <code>upgrade apply</code> (CP) → node&rsquo;ları tek tek drain+upgrade+uncordon → <code>certs check-expiration</code> takvime not et. Bu sırayı bozmadığın sürece upgrade bir bakım işlemidir, bir kumar değil.</p>
+<p><strong>özetle - sıralama:</strong> backup → <code>upgrade plan</code> → <code>upgrade apply</code> (CP) → node&rsquo;ları tek tek drain+upgrade+uncordon → <code>certs check-expiration</code> takvime not et. Bu sırayı bozmadığın sürece upgrade bir bakım işlemidir, zar atmak değil.</p>
 <p>for more <a href="../ha-control-plane/">ha-control-plane</a></p>
 </article>
  

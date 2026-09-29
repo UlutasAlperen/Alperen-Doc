@@ -28,7 +28,41 @@ tolerations:
 
 `operator: "Exists"` (no value) matches any value for that key. And some taints are _well-known_ - k8s itself taints nodes when things go wrong (`node.kubernetes.io/not-ready`, `.../unreachable`, `memory-pressure`); these auto-expire when the condition clears, which is why pods can't schedule onto an unhealthy node even though you never taint it.
 
-**Küçük model:** taint node'a "yasak" tabelası asar, toleration o tabelanın geçiş iznidir. Yaygın kullanım: GPU node'ları (sadece AI job'lar girsin), control-plane node'ları (kubeadm bunu zaten yapar), spot instance'lar (`PreferNoSchedule` + toleration ile "tercihen kaçın, ama gerektiğinde kullan").
+## **Özetlersek**
+
+**Taint**, node'un kapısına **"her pod giremez"** tabelası asar.  
+**Toleration** ise pod'un elindeki **"bu yasağı geçebilirim"** iznidir.
+
+Örneğin bir GPU node'una taint koyarsan, normal pod'lar oraya schedule edilmez.  
+Sadece gerekli toleration'a sahip AI / ML workload'ları bu node'u kullanabilir.
+
+Yaygın kullanım alanları:
+
+- **GPU node'ları** → normal workload'lar gelmesin, sadece GPU kullanan job'lar çalışsın.
+- **Control-plane node'ları** → uygulama pod'ları yanlışlıkla control-plane üzerinde çalışmasın. `kubeadm` bunu varsayılan olarak taint ile yapar.
+- **Spot / preemptible node'lar** → mümkünse normal node'ları kullan, ama gerekirse spot node'a da geç.
+
+Özellikle `PreferNoSchedule` şu anlama gelir:
+
+```text
+"Mümkünse buraya pod koyma,
+ama başka uygun yer yoksa koyabilirsin."
+```
+
+Kısaca:
+
+```text
+Taint      = node'un koyduğu kısıtlama
+Toleration = pod'un o kısıtlamayı tolere edebilmesi
+```
+
+Ama önemli nokta:
+
+```text
+toleration != "beni bu node'a gönder"
+```
+
+Toleration sadece kapıdaki engeli kaldırır. Pod'un gerçekten o node'a gitmesini istiyorsan ayrıca `nodeSelector`, `nodeAffinity` gibi scheduling kuralları kullanırsın.
 
 # Affinity
 

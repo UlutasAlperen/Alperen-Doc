@@ -18,7 +18,7 @@ web-service                             # same namespace only
 
 Pods get a record too, but only with a headless service (see [statefulsets](../kubernetes-statefulsets/)) - normally you reach pods through Services anyway.
 
-**Küçük model:** cluster DNS'i bir telefon rehberi gibi düşün. Servis = kayıtlı numara, isim = kayıt adı. Pod'un kendi numarası da var ama rehberde "özel" kategoride - headless servis istemedikçe oraya bakmazsın.
+**Özetlersek:** cluster DNS'i bir telefon rehberi gibi düşün. Servis = kayıtlı numara, isim = kayıt adı. Pod'un kendi numarası da var ancak rehberde "özel" kategoride bulunuyorsa "headless servis" istemedikçe oraya bakmazsın.
 
 # CoreDNS
 
@@ -88,7 +88,7 @@ kubectl exec <pod-name> -- nslookup kubernetes.default.svc.cluster.local
 
 A pod that can't resolve `kubernetes.default` has no working DNS at all - look at the CoreDNS pods before blaming the app.
 
-> **Dikkat:** `nslookup` her imajda yok. Olan bir debug imajı ile ayrı bir pod açmak (v2 [troubleshooting](../../kubernetes_v2/kubernetes-troubleshooting/) notlarında `kubectl debug` ile ephemeral container da var) çoğu zaman en hızlı yol. Netshoot imajı bu iş için özel olarak yapılmış bir favorim.
+> **Dikkat:** `nslookup` her imajda bulunmaz (hele ki distroless olanlarda). Olan bir debug imajı ile ayrı bir pod açmak (v2 [troubleshooting](../../kubernetes_v2/kubernetes-troubleshooting/) notlarda `kubectl debug` ile ephemeral container anlattim) çoğu zaman en hızlı yol. Netshoot imajı bu iş için yapılmış ideal bir imaj.
 
 # Assignment
 

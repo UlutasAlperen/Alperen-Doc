@@ -26,7 +26,7 @@ Kubernetes runs a DNS server inside the cluster and automatically creates a reco
 	<meta itemprop="name" content="kubernetes-dns-coredns">
 	<meta itemprop="description" content="Cluster DNS# In the namespaces chapter we casually dropped the magic formula &lt;service&gt;.&lt;namespace&gt;.svc.cluster.local and told you to wire CRAWLER_BASE_URL with it. It worked, which means something in the cluster is doing name resolution for us. What is it?
 Kubernetes runs a DNS server inside the cluster and automatically creates a record for every Service. That’s why pods can find each other by name instead of by IP - and why pod IPs (which are ephemeral and worthless to hardcode) don’t scare anyone.">
-	<meta itemprop="wordCount" content="769">
+	<meta itemprop="wordCount" content="770">
 
 <title>kubernetes-dns-coredns • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ Kubernetes runs a DNS server inside the cluster and automatically creates a reco
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.e812e6d786249c95095edc1ae1698018944c5e8313d4214f4401aa33baa9bfb5.js" integrity="sha256-6BLm14YknJUJXtwa4WmAGJRMXoMT1CFPRAGqM7qpv7U=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.4571ec42d20ffab98655d0c8f9795e6390a1730dcdd4bd6ccf872a2c0c7550ac.js" integrity="sha256-RXHsQtIP&#43;rmGVdDI&#43;XleY5Chcw3N1L1sz4cqLAx1UKw=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1271,7 +1271,7 @@ Kubernetes runs a DNS server inside the cluster and automatically creates a reco
 <pre tabindex="0"><code>web-service.crawler.svc.cluster.local   # service, fully qualified
 web-service.crawler                     # service + namespace
 web-service                             # same namespace only</code></pre><p>Pods get a record too, but only with a headless service (see <a href="../kubernetes-statefulsets/">statefulsets</a>) - normally you reach pods through Services anyway.</p>
-<p><strong>Küçük model:</strong> cluster DNS&rsquo;i bir telefon rehberi gibi düşün. Servis = kayıtlı numara, isim = kayıt adı. Pod&rsquo;un kendi numarası da var ama rehberde &ldquo;özel&rdquo; kategoride - headless servis istemedikçe oraya bakmazsın.</p>
+<p><strong>Özetlersek:</strong> cluster DNS&rsquo;i bir telefon rehberi gibi düşün. Servis = kayıtlı numara, isim = kayıt adı. Pod&rsquo;un kendi numarası da var ancak rehberde &ldquo;özel&rdquo; kategoride bulunuyorsa &ldquo;headless servis&rdquo; istemedikçe oraya bakmazsın.</p>
 <h1 id="coredns">CoreDNS<a class="anchor" href="#coredns">#</a></h1>
 <p>The server is <a href="https://coredns.io/">CoreDNS</a>, running as a Deployment in <code>kube-system</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get deploy,pods -n kube-system -l k8s-app<span style="color:#f92672">=</span>kube-dns</span></span></code></pre></div><p>Your cluster may label it <code>k8s-app=kube-dns</code> - that&rsquo;s the historical name; the implementation is CoreDNS. Its configuration lives in a ConfigMap called <code>coredns</code>:</p>
@@ -1311,7 +1311,7 @@ web-service                             # same namespace only</code></pre><p>Pod
 </span></span><span style="display:flex;"><span>kubectl logs -n kube-system -l k8s-app<span style="color:#f92672">=</span>kube-dns
 </span></span><span style="display:flex;"><span>kubectl exec &lt;pod-name&gt; -- nslookup kubernetes.default.svc.cluster.local</span></span></code></pre></div><p>A pod that can&rsquo;t resolve <code>kubernetes.default</code> has no working DNS at all - look at the CoreDNS pods before blaming the app.</p>
 <blockquote class='book-hint '>
-<p><strong>Dikkat:</strong> <code>nslookup</code> her imajda yok. Olan bir debug imajı ile ayrı bir pod açmak (v2 <a href="../../kubernetes_v2/kubernetes-troubleshooting/">troubleshooting</a> notlarında <code>kubectl debug</code> ile ephemeral container da var) çoğu zaman en hızlı yol. Netshoot imajı bu iş için özel olarak yapılmış bir favorim.</p>
+<p><strong>Dikkat:</strong> <code>nslookup</code> her imajda bulunmaz (hele ki distroless olanlarda). Olan bir debug imajı ile ayrı bir pod açmak (v2 <a href="../../kubernetes_v2/kubernetes-troubleshooting/">troubleshooting</a> notlarda <code>kubectl debug</code> ile ephemeral container anlattim) çoğu zaman en hızlı yol. Netshoot imajı bu iş için yapılmış ideal bir imaj.</p>
 </blockquote><h1 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h1>
 <p>Let&rsquo;s prove the phone book works - and then break it.</p>
 <ol>

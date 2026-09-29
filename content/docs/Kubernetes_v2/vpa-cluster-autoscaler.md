@@ -54,14 +54,14 @@ The trap: VPA `Auto` and CPU-based HPA fight over the same pods. VPA changes eac
 
 > Cluster Autoscaler + HPA is the pairing that _does_ compose cleanly: HPA grows pod count → pods go `Pending` → CA adds nodes → pods land. VPA in `Auto` is the one that plays badly, because its tool is eviction - and eviction is also what PodDisruptionBudgets try to guard against, so the updater respects PDBs (`minAvailable`) when evicting. Put a sane PDB in front of anything VPA `Auto` touches - how to write one (and why `minAvailable` equal to the replica count makes `drain` hang forever) is in [pod-priority-disruption](../pod-priority-disruption/).
 
-Minikube'da Cluster Autoscaler'ın gerçek bir karşılığı yok (tek node zaten); davranışı elle taklit edebilirsin:
+Minikube'da Cluster Autoscaler'ın gerçek bir karşılığı yok (tek node zaten). Davranışı taklit edebilirsin:
 
 ```bash
 minikube node add
 minikube node list
 ```
 
-Üretimde bu managed service'in işidir (GKE Autopilot node autoscaling'i varsayılan olarak yönetir; [nodes-basic](../../kubernetes/kubernetes-nodes-basic/) notlarındaki "managed offering node-level autoscaling" sözünün ta kendisi).
+Prod'da bu managed service'in işidir (GKE Autopilot node veya AWS EKS - autoscaling'i varsayılan olarak yönetir; [nodes-basic](../../kubernetes/kubernetes-nodes-basic/) notlarındaki "managed offering node-level autoscaling"'de bahsetmistim').
 
 ## How to Read a VPA Recommendation
 

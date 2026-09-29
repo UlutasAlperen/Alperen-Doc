@@ -26,7 +26,7 @@ apiVersion: apps/v1 kind: DaemonSet metadata: name: node-agent spec: selector: m
 	<meta itemprop="name" content="pod-priority-disruption">
 	<meta itemprop="description" content="DaemonSet# Deployments spread replicas wherever there’s room. Sometimes “wherever there’s room” is the wrong answer - a log shipper, a CSI node agent, or a CNI plugin needs exactly one pod per node, no more, no less. That’s a DaemonSet:
 apiVersion: apps/v1 kind: DaemonSet metadata: name: node-agent spec: selector: matchLabels: app: node-agent template: metadata: labels: app: node-agent spec: tolerations: - operator: Exists containers: - name: agent image: busybox:1.36 command: [&#34;sh&#34;, &#34;-c&#34;, &#34;sleep infinity&#34;]Look at that toleration - operator: Exists tolerates everything, which is exactly what you want when the DaemonSet must land on control-plane nodes too. Most system DaemonSets (kube-proxy, Longhorn managers, Calico’s node agents) ship with this, because a plugin that avoids the control plane is a plugin that half-works.">
-	<meta itemprop="wordCount" content="798">
+	<meta itemprop="wordCount" content="797">
 
 <title>pod-priority-disruption • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ apiVersion: apps/v1 kind: DaemonSet metadata: name: node-agent spec: selector: m
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.e812e6d786249c95095edc1ae1698018944c5e8313d4214f4401aa33baa9bfb5.js" integrity="sha256-6BLm14YknJUJXtwa4WmAGJRMXoMT1CFPRAGqM7qpv7U=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.4571ec42d20ffab98655d0c8f9795e6390a1730dcdd4bd6ccf872a2c0c7550ac.js" integrity="sha256-RXHsQtIP&#43;rmGVdDI&#43;XleY5Chcw3N1L1sz4cqLAx1UKw=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1286,7 +1286,7 @@ apiVersion: apps/v1 kind: DaemonSet metadata: name: node-agent spec: selector: m
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">image</span>: <span style="color:#ae81ff">busybox:1.36</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;sh&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;sleep infinity&#34;</span>]</span></span></code></pre></div><p>Look at that toleration - <code>operator: Exists</code> tolerates <em>everything</em>, which is exactly what you want when the DaemonSet must land on control-plane nodes too. Most system DaemonSets (kube-proxy, Longhorn managers, Calico&rsquo;s node agents) ship with this, because a plugin that avoids the control plane is a plugin that half-works.</p>
 <p>A DaemonSet uses the same scheduling machinery as everything else from the <a href="../taints-affinity-quotas/">taints and affinity</a> notes - you can pin it with node affinity and evict it with taints. What&rsquo;s different is the controller: it watches <em>nodes</em> instead of replicas.</p>
-<p><strong>Küçük model:</strong> Deployment = &ldquo;3 tane çalışsın, nerede olduğu fark etmez&rdquo;; DaemonSet = &ldquo;her node&rsquo;da tam 1 tane çalışsın&rdquo;. Birincisi iş yükü, ikincisi altyapı.</p>
+<p><strong>Ozetle:</strong> Deployment = &ldquo;3 tane çalışsın, nerede olduğu fark etmez(ayarlanmamissa)&rdquo;; DaemonSet = &ldquo;her node&rsquo;da tam 1 tane çalışsın&rdquo;. Birincisi genel kullanim, ikincisi ozel-altyapi-monitoring etc&hellip;</p>
 <h1 id="priorityclass">PriorityClass<a class="anchor" href="#priorityclass">#</a></h1>
 <p>When the cluster runs out of room, somebody doesn&rsquo;t get scheduled. <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/">PriorityClass</a> decides who loses:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">scheduling.k8s.io/v1</span>
@@ -1314,10 +1314,10 @@ apiVersion: apps/v1 kind: DaemonSet metadata: name: node-agent spec: selector: m
 <p>The sharp edge: a PDB that says <code>minAvailable: 2</code> on a 2-replica Deployment makes <code>kubectl drain</code> hang forever. The drain is respecting your budget - it simply cannot evict anything without violating it. That&rsquo;s the constraint working, not a bug, and it&rsquo;s why &ldquo;drain never finishes&rdquo; is almost always a PDB.</p>
 <blockquote class='book-hint '>
 <p>The <a href="../vpa-cluster-autoscaler/">VPA</a> notes mentioned PDB in passing because VPA&rsquo;s updater evicts pods the same way <code>drain</code> does - both go through the eviction API, both respect the budget. One budget per app, not per tool.</p>
-</blockquote><p><strong>Türkçe özet - üçlü ilişki:</strong></p>
+</blockquote><p><strong>özet:</strong></p>
 <ul>
 <li><strong>DaemonSet</strong> = her node&rsquo;da 1 pod (altyapı ajanları)</li>
-<li><strong>PriorityClass</strong> = yer yokken kim yaşar, kim ölür</li>
+<li><strong>PriorityClass</strong> = duruma gore (pod etc..) kim yaşar, kim ölür</li>
 <li><strong>PDB</strong> = bakım/drain sırasında en az kaç pod ayakta kalır</li>
 </ul>
 <h1 id="how-to-run-one-agent-per-node-with-a-daemonset">How to Run One Agent Per Node with a DaemonSet<a class="anchor" href="#how-to-run-one-agent-per-node-with-a-daemonset">#</a></h1>
@@ -1357,7 +1357,7 @@ apiVersion: apps/v1 kind: DaemonSet metadata: name: node-agent spec: selector: m
 <li>Tighten the budget to <code>minAvailable: 3</code> and drain again. The drain now refuses to move anything. Delete the PDB and the drain proceeds - proof the budget, not the drain command, is in charge.</li>
 </ol>
 <blockquote class='book-hint '>
-<p><strong>Dikkat:</strong> <code>minAvailable</code> replica sayısına eşit veya büyükse drain <strong>asla</strong> bitemez. Node bakımına çıkarken bütçeyi (ya da replica sayısını) bunu bilerek ayarla - aksi hâlde &ldquo;node drain takıldı&rdquo; diye 2 saat debug edersin.</p>
+<p><strong>Dikkat:</strong> <code>minAvailable</code> replica sayısına eşit veya büyükse drain <strong>asla</strong> bitmez. Node bakımına çıkarken resource (ya da replica sayısını) gore bunu bilerek ayarla - aksi halde &ldquo;node drain takılir&rdquo; diye 2 saat debug edersin.</p>
 </blockquote><p>for more <a href="../multi-node-kubeadm/">multi-node-kubeadm</a></p>
 </article>
  

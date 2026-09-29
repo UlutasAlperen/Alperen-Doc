@@ -29,7 +29,7 @@ Arayüz Ne işe yarar Kim implement eder CNI Pod’lara IP ve network connectivi
 	<meta itemprop="description" content="Extension Interfaces# Everything we’ve installed so far - the CNI plugin that gives pods their network, the Longhorn CSI driver that gives them disks, the containerd runtime that runs them - shares one thing in common: none of them are “Kubernetes”. They’re plugins, and Kubernetes just provides the sockets they plug into.
 Those sockets are the extension interfaces, and knowing them turns “the cluster is broken” into “the network plugin is broken”:
 Arayüz Ne işe yarar Kim implement eder CNI Pod’lara IP ve network connectivity Calico, Flannel, Cilium, Weave CSI Volume provisioning, attach, mount Longhorn, cloud disk drivers, Ceph CRI Container’ları gerçekten çalıştırmak containerd, CRI-O, (dockershim gitti) The contract matters more than the vendor. CNI says “here’s a pod, give it an IP and a veth”; every plugin answers that the same way of thinking, differently in the details. Same for CSI (CreateVolume/Attach/Mount are verbs every driver must know) and CRI (RunPodSandbox/CreateContainer/StopContainer).">
-	<meta itemprop="wordCount" content="860">
+	<meta itemprop="wordCount" content="961">
 
 <title>cluster-extensions • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ Arayüz Ne işe yarar Kim implement eder CNI Pod’lara IP ve network connectivi
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.e812e6d786249c95095edc1ae1698018944c5e8313d4214f4401aa33baa9bfb5.js" integrity="sha256-6BLm14YknJUJXtwa4WmAGJRMXoMT1CFPRAGqM7qpv7U=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.4571ec42d20ffab98655d0c8f9795e6390a1730dcdd4bd6ccf872a2c0c7550ac.js" integrity="sha256-RXHsQtIP&#43;rmGVdDI&#43;XleY5Chcw3N1L1sz4cqLAx1UKw=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1256,7 +1256,16 @@ Arayüz Ne işe yarar Kim implement eder CNI Pod’lara IP ve network connectivi
   <aside class="hidden">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#özetlersek">Özetlersek</a></li>
+        <li><a href="#özetlersek-1">Özetlersek</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -1297,13 +1306,37 @@ Arayüz Ne işe yarar Kim implement eder CNI Pod’lara IP ve network connectivi
 	</tbody>
 </table>
 <p>The contract matters more than the vendor. CNI says &ldquo;here&rsquo;s a pod, give it an IP and a veth&rdquo;; every plugin answers that the same <em>way of thinking</em>, differently in the details. Same for CSI (<code>CreateVolume</code>/<code>Attach</code>/<code>Mount</code> are verbs every driver must know) and CRI (<code>RunPodSandbox</code>/<code>CreateContainer</code>/<code>StopContainer</code>).</p>
-<blockquote class='book-hint '>
-<p>kubelet, CRI konuşan runtime&rsquo;ı doğrudan konuşur - <code>crictl</code> o konuşmanın CLI hâli. Docker varlığında <code>docker ps</code> ile kafanın karışmaması için: <code>crictl ps</code> o pod&rsquo;un container&rsquo;larını, <code>docker ps</code> (varsa) host&rsquo;ta koşan başka bir şeyi gösterir.</p>
-</blockquote><p>A quick taste of the CRI side when a pod is stuck in <code>ContainerCreating</code> and you want to see what the runtime thinks:</p>
+<h3 id="özetlersek">Özetlersek<a class="anchor" href="#%c3%b6zetlersek">#</a></h3>
+<p><code>kubelet</code>, container runtime ile <strong>CRI (Container Runtime Interface)</strong> üzerinden konuşur.<br>
+<code>crictl</code> ise bu CRI arayüzüyle konuşmak için kullanılan CLI aracıdır.</p>
+<p>Bu yüzden Kubernetes node&rsquo;unda container&rsquo;ları incelerken:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>crictl pods
+</span></span><span style="display:flex;"><span>crictl ps</span></span></code></pre></div><p>kullanmak, <code>docker ps</code> kullanmaktan daha doğru bir yaklaşımdır.</p>
+<p>Çünkü:</p>
+<ul>
+<li><code>crictl pods</code> → kubelet tarafından yönetilen <strong>Pod sandbox&rsquo;larını</strong></li>
+<li><code>crictl ps</code> → CRI runtime tarafından yönetilen <strong>container&rsquo;ları</strong></li>
+<li><code>docker ps</code> → yalnızca <strong>Docker daemon</strong> tarafından yönetilen container&rsquo;ları gösterir.</li>
+</ul>
+<p>Modern Kubernetes kurulumlarında runtime çoğunlukla <code>containerd</code> veya <code>CRI-O</code> olduğu için, <code>docker ps</code> çıktısı Kubernetes container&rsquo;larını göstermeyebilir.</p>
+<p>Kısaca:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>kubelet ──CRI──&gt; containerd / CRI-O
+</span></span><span style="display:flex;"><span>                  ▲
+</span></span><span style="display:flex;"><span>                  │
+</span></span><span style="display:flex;"><span>                crictl</span></span></code></pre></div><p>Yani <code>crictl</code>, kubelet&rsquo;in container runtime ile konuştuğu dünyaya bakmak için kullanılan araçtır.</p>
+<p>A quick taste of the CRI side when a pod is stuck in <code>ContainerCreating</code> and you want to see what the runtime thinks:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>crictl ps -a
 </span></span><span style="display:flex;"><span>crictl pods
-</span></span><span style="display:flex;"><span>crictl inspect &lt;container-id&gt; | head -n <span style="color:#ae81ff">20</span></span></span></code></pre></div><p><strong>Küçük model:</strong> CNI = &ldquo;ağ kablosu takılan yer&rdquo;, CSI = &ldquo;disk takılan yer&rdquo;, CRI = &ldquo;container motoru takılan yer&rdquo;. Kubernetes bunların hiçbirini kendisi yapmaz; sadece hepsinin oturacağı standardı belirler.</p>
-<h1 id="crds">CRDs<a class="anchor" href="#crds">#</a></h1>
+</span></span><span style="display:flex;"><span>crictl inspect &lt;container-id&gt; | head -n <span style="color:#ae81ff">20</span></span></span></code></pre></div><h3 id="özetlersek-1">Özetlersek<a class="anchor" href="#%c3%b6zetlersek-1">#</a></h3>
+<ul>
+<li><strong>CNI</strong> → Kubernetes&rsquo;in <strong>ağa</strong> bağlandığı standart arayüzdür.</li>
+<li><strong>CSI</strong> → Kubernetes&rsquo;in <strong>depolamaya</strong> bağlandığı standart arayüzdür.</li>
+<li><strong>CRI</strong> → Kubernetes&rsquo;in <strong>container runtime&rsquo;a</strong> bağlandığı standart arayüzdür.</li>
+</ul>
+<p>Basit bir benzetmeyle:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>CNI = ağ kablosunun takıldığı yer
+</span></span><span style="display:flex;"><span>CSI = diskin takıldığı yer
+</span></span><span style="display:flex;"><span>CRI = container motorunun takıldığı yer</span></span></code></pre></div><p>Kubernetes bu işleri doğrudan kendisi yapmaz. Bunun yerine <strong>standart arayüzleri tanımlar</strong>; gerçek işi CNI eklentileri, CSI sürücüleri ve container runtime&rsquo;lar gerçekleştirir. CRDs</p>
 <p>So far every object we&rsquo;ve touched - <code>Deployment</code>, <code>Service</code>, <code>NetworkPolicy</code> - is built into Kubernetes. <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">CustomResourceDefinitions</a> are how <em>you</em> add new object types to the API:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get crd</span></span></code></pre></div><p>On a cluster with <a href="../longhorn/">Longhorn</a> and <a href="../gitops-argocd/">ArgoCD</a> installed, this list is long. Each CRD is a schema: a <code>kind</code>, an <code>apiGroup</code>, a spec. Once applied, the API server accepts objects of that kind and stores them in etcd next to <code>Pod</code> and <code>Service</code> - <code>kubectl get &lt;your-kind&gt;</code> just works.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get crd | grep -E <span style="color:#e6db74">&#39;argoproj|longhorn|postgresql&#39;</span>
@@ -1426,7 +1459,16 @@ Arayüz Ne işe yarar Kim implement eder CNI Pod’lara IP ve network connectivi
     <div class="book-toc-content">
       
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#özetlersek">Özetlersek</a></li>
+        <li><a href="#özetlersek-1">Özetlersek</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 

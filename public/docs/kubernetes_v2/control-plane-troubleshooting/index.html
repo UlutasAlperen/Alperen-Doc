@@ -10,7 +10,7 @@ https://github.com/alex-shpak/hugo-book
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Control Plane Components# In the namespaces notes we listed what lives in kube-system and said “you don’t want to mess with it”. Good advice - but understanding it is non-negotiable, because when the control plane misbehaves every debugging tool you own stops working. kubectl get pods that returns the connection to the server was refused is not a pod problem.
 The four components, and what they own:
-Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl buraya gider static pod etcd Tüm cluster state’inin tek kaynağı static pod kube-scheduler Pod’ları node’lara yerleştirir static pod kube-controller-manager Reconcile döngüleri (deployment, rs, node…) static pod On a kubeadm cluster these run as static pods - not Deployments, not systemd units. The kubelet reads YAML files from /etc/kubernetes/manifests/ and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.
+Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl buraya gider static pod etcd Tüm cluster state’inin tek kaynağı(key-value storage) static pod kube-scheduler Pod’ları node’lara (birden fazla kube-scheduler olusturulabilir) yerleştirir static pod kube-controller-manager Reconcile döngüleri (deployment, rs, node…) static pod On a kubeadm cluster these run as static pods - not Deployments, not systemd units. The kubelet reads YAML files from /etc/kubernetes/manifests/ and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
@@ -19,7 +19,7 @@ Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl bura
 	<meta property="og:title" content="control-plane-troubleshooting">
 	<meta property="og:description" content="Control Plane Components# In the namespaces notes we listed what lives in kube-system and said “you don’t want to mess with it”. Good advice - but understanding it is non-negotiable, because when the control plane misbehaves every debugging tool you own stops working. kubectl get pods that returns the connection to the server was refused is not a pod problem.
 The four components, and what they own:
-Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl buraya gider static pod etcd Tüm cluster state’inin tek kaynağı static pod kube-scheduler Pod’ları node’lara yerleştirir static pod kube-controller-manager Reconcile döngüleri (deployment, rs, node…) static pod On a kubeadm cluster these run as static pods - not Deployments, not systemd units. The kubelet reads YAML files from /etc/kubernetes/manifests/ and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.">
+Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl buraya gider static pod etcd Tüm cluster state’inin tek kaynağı(key-value storage) static pod kube-scheduler Pod’ları node’lara (birden fazla kube-scheduler olusturulabilir) yerleştirir static pod kube-controller-manager Reconcile döngüleri (deployment, rs, node…) static pod On a kubeadm cluster these run as static pods - not Deployments, not systemd units. The kubelet reads YAML files from /etc/kubernetes/manifests/ and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
@@ -28,8 +28,8 @@ Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl bura
 	<meta itemprop="name" content="control-plane-troubleshooting">
 	<meta itemprop="description" content="Control Plane Components# In the namespaces notes we listed what lives in kube-system and said “you don’t want to mess with it”. Good advice - but understanding it is non-negotiable, because when the control plane misbehaves every debugging tool you own stops working. kubectl get pods that returns the connection to the server was refused is not a pod problem.
 The four components, and what they own:
-Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl buraya gider static pod etcd Tüm cluster state’inin tek kaynağı static pod kube-scheduler Pod’ları node’lara yerleştirir static pod kube-controller-manager Reconcile döngüleri (deployment, rs, node…) static pod On a kubeadm cluster these run as static pods - not Deployments, not systemd units. The kubelet reads YAML files from /etc/kubernetes/manifests/ and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.">
-	<meta itemprop="wordCount" content="1137">
+Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl buraya gider static pod etcd Tüm cluster state’inin tek kaynağı(key-value storage) static pod kube-scheduler Pod’ları node’lara (birden fazla kube-scheduler olusturulabilir) yerleştirir static pod kube-controller-manager Reconcile döngüleri (deployment, rs, node…) static pod On a kubeadm cluster these run as static pods - not Deployments, not systemd units. The kubelet reads YAML files from /etc/kubernetes/manifests/ and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.">
+	<meta itemprop="wordCount" content="1140">
 
 <title>control-plane-troubleshooting • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl bura
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.e812e6d786249c95095edc1ae1698018944c5e8313d4214f4401aa33baa9bfb5.js" integrity="sha256-6BLm14YknJUJXtwa4WmAGJRMXoMT1CFPRAGqM7qpv7U=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.4571ec42d20ffab98655d0c8f9795e6390a1730dcdd4bd6ccf872a2c0c7550ac.js" integrity="sha256-RXHsQtIP&#43;rmGVdDI&#43;XleY5Chcw3N1L1sz4cqLAx1UKw=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1286,12 +1286,12 @@ Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl bura
 			</tr>
 			<tr>
 					<td>etcd</td>
-					<td>Tüm cluster state&rsquo;inin tek kaynağı</td>
+					<td>Tüm cluster state&rsquo;inin tek kaynağı(key-value storage)</td>
 					<td>static pod</td>
 			</tr>
 			<tr>
 					<td>kube-scheduler</td>
-					<td>Pod&rsquo;ları node&rsquo;lara yerleştirir</td>
+					<td>Pod&rsquo;ları node&rsquo;lara (birden fazla kube-scheduler olusturulabilir) yerleştirir</td>
 					<td>static pod</td>
 			</tr>
 			<tr>
@@ -1348,7 +1348,7 @@ Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl bura
 			</tr>
 	</tbody>
 </table>
-<p><strong>Küçük model:</strong> kubectl -&gt; apiserver -&gt; etcd. Zincirin her halkası koparsa kullanıcıya aynı &ldquo;bozuk cluster&rdquo; görünür, ama sebebi tamamen farklıdır. Sırayla test et: apiserver&rsquo;a <code>curl</code>, etcd&rsquo;ye <code>etcdctl</code>, scheduler&rsquo;a log.</p>
+<p><strong>Ozetlersek:</strong> kubectl -&gt; apiserver -&gt; etcd. Zincirin her halkası koparsa kullanıcıya aynı &ldquo;bozuk cluster&rdquo; görünür, ama sebebi tamamen farklıdır. Sırayla test et: apiserver&rsquo;a <code>curl</code>, etcd&rsquo;ye <code>etcdctl</code>, scheduler&rsquo;a log.</p>
 <h1 id="etcd">etcd<a class="anchor" href="#etcd">#</a></h1>
 <p>etcd is the database behind everything. If it&rsquo;s unhappy, the whole cluster is unhappy - slow writes, lost leader elections, API errors that look random.</p>
 <p>Health, from the control-plane node (cert paths are kubeadm defaults):</p>
@@ -1359,7 +1359,7 @@ Bileşen Ne yapar Nasıl koşar kube-apiserver Tek API yüzeyi; her kubectl bura
 </span></span></span><span style="display:flex;"><span>  endpoint health</span></span></code></pre></div><p>You want <code>is healthy: true</code>. <code>endpoint status</code> shows who the leader is and how much data is in there. When the DB grows unboundedly (big ConfigMaps, chatty CRDs), <code>defrag</code> reclaims space:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>etcdctl ... defrag
 </span></span><span style="display:flex;"><span>etcdctl ... endpoint status -w table</span></span></code></pre></div><blockquote class='book-hint '>
-<p><strong>Dikkat:</strong> defrag etcd&rsquo;yi bir süreliğine yavaşlatır - uzun süredir defrag edilmemiş, dolu bir etcd&rsquo;yi prime time&rsquo;da defrag etmek &ldquo;hızlandırma&rdquo; değil, kendine DoS yapmaktır. Bunun yedeğini almadan da restore senaryosu denemeye kalkma - backup/restore prosedürü <a href="../kubeadm-upgrade-etcd/">kubeadm-upgrade-etcd</a> notlarında.</p>
+<p><strong>Dikkat:</strong> defrag etcd&rsquo;yi bir süreliğine yavaşlatır - uzun süredir defrag edilmemiş, dolu bir etcd&rsquo;yi prime time&rsquo;da defrag etmek &ldquo;hızlandırma&rdquo; değil, kendine DoS yapmaktır. Bunun yedeğini almadan da restore senaryosu deneme - backup/restore doc&rsquo;u <a href="../kubeadm-upgrade-etcd/">kubeadm-upgrade-etcd</a> notlarında.</p>
 </blockquote><h1 id="kubelet-and-nodes">kubelet and Nodes<a class="anchor" href="#kubelet-and-nodes">#</a></h1>
 <p>A node that shows <code>NotReady</code> is reporting &ldquo;the kubelet on me is not healthy&rdquo; - the kubelet is the node&rsquo;s local babysitter. The decision tree is short:</p>
 <ol>

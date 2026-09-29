@@ -32,9 +32,33 @@ Verify the snapshot is usable _now_, not on the day you need it:
 ```bash
 etcdctl snapshot status /var/backups/etcd-2025-01-01.db -w table
 ```
+---
+**Dikkat:** `snapshot restore`, çalışan etcd'nin mevcut verisinin üstüne backup'ı kopyalamak değildir.
 
-**Dikkat:** `snapshot restore` mevcut bir cluster'ın üstüne yazılmaz. Restore, **yeni bir data dir** ile yeni bir etcd ayağa demektir; eski data dir'i silmeden restore etmeye kalkarsan ne yaptığını bilen bir insan olmak yerine felaket tatbikatı yapmış olursun. Prosedür aşağıda adım adım var.
+Restore işlemi snapshot'tan **yeni bir etcd data dir** oluşturur; ardından etcd bu yeni dizin kullanılarak ayağa kaldırılır.
 
+```text
+snapshot.db
+     ↓
+restore
+     ↓
+yeni data dir
+     ↓
+etcd bu dizinden başlar
+```
+
+Yani mevcut `/var/lib/etcd` dizininin içine restore yapmaya çalışma. Önce eski data dir'i güvenli şekilde kenara al, restore'u ayrı ve temiz bir dizine yap, ardından etcd'yi restore edilen dizine yönlendir.
+
+Kısacası:
+
+```text
+snapshot restore != mevcut etcd'nin üstüne yazmak
+snapshot restore  = snapshot'tan yeni bir etcd data dir üretmek
+```
+
+Eski data dir'i korumadan doğrudan restore işlemine girişmek, recovery yapmak yerine recovery senaryosunun kendisine dönüşebilir.
+
+---
 # Certificate Management
 
 kubeadm clusters issue their own certificates with a one-year expiry. Nobody remembers this until the cluster stops serving traffic at 9am on a random Tuesday.
@@ -190,6 +214,11 @@ kubeadm certs check-expiration
 
 4. Distribute the updated `admin.conf` to anyone holding an old kubeconfig, and update workers' kubelet certs if you use the client cert flow. A renewed CA cert (only on `kubeadm certs renew ca`, which you should almost never do) invalidates every cert in the cluster - treat that as a disaster recovery scenario, not maintenance.
 
-**Türkçe özet - sıralama:** backup → `upgrade plan` → `upgrade apply` (CP) → node'ları tek tek drain+upgrade+uncordon → `certs check-expiration` takvime not et. Bu sırayı bozmadığın sürece upgrade bir bakım işlemidir, bir kumar değil.
+**özetle - sıralama:** backup → `upgrade plan` → `upgrade apply` (CP) → node'ları tek tek drain+upgrade+uncordon → `certs check-expiration` takvime not et. Bu sırayı bozmadığın sürece upgrade bir bakım işlemidir, zar atmak değil.
 
 for more [ha-control-plane](../ha-control-plane/)
+
+
+
+
+

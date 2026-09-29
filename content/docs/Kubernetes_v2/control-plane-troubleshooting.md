@@ -11,8 +11,8 @@ The four components, and what they own:
 | Bileşen | Ne yapar | Nasıl koşar |
 |---|---|---|
 | kube-apiserver | Tek API yüzeyi; her `kubectl` buraya gider | static pod |
-| etcd | Tüm cluster state'inin tek kaynağı | static pod |
-| kube-scheduler | Pod'ları node'lara yerleştirir | static pod |
+| etcd | Tüm cluster state'inin tek kaynağı(key-value storage)| static pod |
+| kube-scheduler | Pod'ları node'lara (birden fazla kube-scheduler olusturulabilir) yerleştirir | static pod |
 | kube-controller-manager | Reconcile döngüleri (deployment, rs, node...) | static pod |
 
 On a [kubeadm](../multi-node-kubeadm/) cluster these run as **static pods** - not Deployments, not systemd units. The kubelet reads YAML files from `/etc/kubernetes/manifests/` and keeps whatever is in there alive, forever. Delete a manifest and the component dies; restore the file and it comes back. That directory is the single most important path on a control-plane node.
@@ -37,7 +37,7 @@ Before blaming components, classify the failure. The message tells you where to 
 | pods stuck `Pending` | scheduler | scheduler log, node resources |
 | changes revert themselves | controller-manager | CM log, leader election |
 
-**Küçük model:** kubectl -> apiserver -> etcd. Zincirin her halkası koparsa kullanıcıya aynı "bozuk cluster" görünür, ama sebebi tamamen farklıdır. Sırayla test et: apiserver'a `curl`, etcd'ye `etcdctl`, scheduler'a log.
+**Ozetlersek:** kubectl -> apiserver -> etcd. Zincirin her halkası koparsa kullanıcıya aynı "bozuk cluster" görünür, ama sebebi tamamen farklıdır. Sırayla test et: apiserver'a `curl`, etcd'ye `etcdctl`, scheduler'a log.
 
 # etcd
 
@@ -60,7 +60,7 @@ etcdctl ... defrag
 etcdctl ... endpoint status -w table
 ```
 
-> **Dikkat:** defrag etcd'yi bir süreliğine yavaşlatır - uzun süredir defrag edilmemiş, dolu bir etcd'yi prime time'da defrag etmek "hızlandırma" değil, kendine DoS yapmaktır. Bunun yedeğini almadan da restore senaryosu denemeye kalkma - backup/restore prosedürü [kubeadm-upgrade-etcd](../kubeadm-upgrade-etcd/) notlarında.
+> **Dikkat:** defrag etcd'yi bir süreliğine yavaşlatır - uzun süredir defrag edilmemiş, dolu bir etcd'yi prime time'da defrag etmek "hızlandırma" değil, kendine DoS yapmaktır. Bunun yedeğini almadan da restore senaryosu deneme - backup/restore doc'u [kubeadm-upgrade-etcd](../kubeadm-upgrade-etcd/) notlarında.
 
 # kubelet and Nodes
 
