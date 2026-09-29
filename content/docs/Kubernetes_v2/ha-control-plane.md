@@ -10,8 +10,6 @@ A cluster with one control-plane node has one single point of failure: kill that
 
 High availability means removing that single point of failure: multiple control-plane members, an etcd that tolerates member loss, and one stable endpoint clients can always reach.
 
-**Küçük model:** tek kontrollü node = tek ışık anahtarı; 3 kontrollü node = 3 anahtar ve oybirliği. Işık yanık kalır çünkü biri düşse bile diğer ikisi kararı verir.
-
 # Topologies
 
 Two ways to arrange an HA control plane, and the only difference is _where etcd lives_:
