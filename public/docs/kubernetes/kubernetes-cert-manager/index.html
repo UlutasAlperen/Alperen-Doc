@@ -38,7 +38,7 @@ a private key a certificate signing request built from that key someone - a Cert
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.99e3375e1badb4ecddbb5a258167abc6fa0f29033fce3d1ccfb95f449ced56aa.js" integrity="sha256-meM3XhuttOzdu1olgWerxvoPKQM/zj0cz7lfRJztVqo=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.ed249f736547701020a191e115971a36cf53fa58cfb5cc20906c92bf9f618b3f.js" integrity="sha256-7SSfc2VHcBAgoZHhFZcaNs9T&#43;ljPtcwgkGySv59hiz8=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1306,9 +1306,9 @@ a private key a certificate signing request built from that key someone - a Cert
 <h1 id="the-three-objects">The Three Objects<a class="anchor" href="#the-three-objects">#</a></h1>
 <p>cert-manager&rsquo;ın tamamı üç nesne etrafında döner:</p>
 <ul>
-<li><strong><code>Issuer</code> / <code>ClusterIssuer</code></strong> — <em>kim</em> imzalar. <code>Issuer</code> tek namespace&rsquo;te geçerli, <code>ClusterIssuer</code> tüm cluster&rsquo;da. İkisinin spec&rsquo;i aynı; tek fark kapsamı.</li>
-<li><strong><code>Certificate</code></strong> — <em>ne</em> isteriz: hangi isimler (<code>dnsNames</code>), hangi imzalayıcıdan (<code>issuerRef</code>), hangi <code>Secret</code>&lsquo;a yazılsın (<code>secretName</code>).</li>
-<li><strong><code>Secret</code></strong> — sonuç. <code>tls.crt</code>, <code>tls.key</code>, genelde <code>ca.crt</code>. Gateway&rsquo;in ve Ingress&rsquo;in gerçekten tükettiği tek şey bu.</li>
+<li><strong><code>Issuer</code> / <code>ClusterIssuer</code></strong> - <em>kim</em> imzalar. <code>Issuer</code> tek namespace&rsquo;te geçerli, <code>ClusterIssuer</code> tüm cluster&rsquo;da. İkisinin spec&rsquo;i aynı; tek fark kapsamı.</li>
+<li><strong><code>Certificate</code></strong> - <em>ne</em> isteriz: hangi isimler (<code>dnsNames</code>), hangi imzalayıcıdan (<code>issuerRef</code>), hangi <code>Secret</code>&lsquo;a yazılsın (<code>secretName</code>).</li>
+<li><strong><code>Secret</code></strong> - sonuç. <code>tls.crt</code>, <code>tls.key</code>, genelde <code>ca.crt</code>. Gateway&rsquo;in ve Ingress&rsquo;in gerçekten tükettiği tek şey bu.</li>
 </ul>
 <p>Rol dağılımı net: Issuer politika, Certificate istek, Secret sonuç. Gateway araya girip o Secret&rsquo;ı son kullanıcıya TLS olarak sunar.</p>
 <h1 id="installing-cert-manager">Installing cert-manager<a class="anchor" href="#installing-cert-manager">#</a></h1>

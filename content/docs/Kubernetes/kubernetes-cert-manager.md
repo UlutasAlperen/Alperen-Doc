@@ -22,9 +22,9 @@ Do that by hand for two hostnames and you have already lost an afternoon. [cert-
 
 cert-manager'ın tamamı üç nesne etrafında döner:
 
-- **`Issuer` / `ClusterIssuer`** — _kim_ imzalar. `Issuer` tek namespace'te geçerli, `ClusterIssuer` tüm cluster'da. İkisinin spec'i aynı; tek fark kapsamı.
-- **`Certificate`** — _ne_ isteriz: hangi isimler (`dnsNames`), hangi imzalayıcıdan (`issuerRef`), hangi `Secret`'a yazılsın (`secretName`).
-- **`Secret`** — sonuç. `tls.crt`, `tls.key`, genelde `ca.crt`. Gateway'in ve Ingress'in gerçekten tükettiği tek şey bu.
+- **`Issuer` / `ClusterIssuer`** - _kim_ imzalar. `Issuer` tek namespace'te geçerli, `ClusterIssuer` tüm cluster'da. İkisinin spec'i aynı; tek fark kapsamı.
+- **`Certificate`** - _ne_ isteriz: hangi isimler (`dnsNames`), hangi imzalayıcıdan (`issuerRef`), hangi `Secret`'a yazılsın (`secretName`).
+- **`Secret`** - sonuç. `tls.crt`, `tls.key`, genelde `ca.crt`. Gateway'in ve Ingress'in gerçekten tükettiği tek şey bu.
 
 Rol dağılımı net: Issuer politika, Certificate istek, Secret sonuç. Gateway araya girip o Secret'ı son kullanıcıya TLS olarak sunar.
 
