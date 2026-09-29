@@ -8,34 +8,34 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Why Production Is Different# The previous chapter taught the mechanism: Issuer, Certificate, Secret, and a Gateway that serves it. Everything worked because we controlled every variable - a fake domain, a self-signed root, a laptop that trusts whatever we tell it to.
+<meta name="description" content="cert-manager in Production# The previous chapter taught the mechanism: Issuer, Certificate, Secret, and a Gateway that serves it. Everything worked because we controlled every variable - a fake domain, a self-signed root, a laptop that trusts whatever we tell it to.
 Production removes that control. The domain is public and someone else owns the DNS. The certificate has to be trusted by browsers you don’t administer. It expires on a schedule you don’t choose. And when the automation silently stops working, the outage looks like “the website is down” rather than “a controller is in a crash loop”.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-cert-manager-production/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/cert-manager-production/">
 	<meta property="og:site_name" content="Alperen Doc">
-	<meta property="og:title" content="kubernetes-cert-manager-production">
-	<meta property="og:description" content="Why Production Is Different# The previous chapter taught the mechanism: Issuer, Certificate, Secret, and a Gateway that serves it. Everything worked because we controlled every variable - a fake domain, a self-signed root, a laptop that trusts whatever we tell it to.
+	<meta property="og:title" content="cert-manager-production">
+	<meta property="og:description" content="cert-manager in Production# The previous chapter taught the mechanism: Issuer, Certificate, Secret, and a Gateway that serves it. Everything worked because we controlled every variable - a fake domain, a self-signed root, a laptop that trusts whatever we tell it to.
 Production removes that control. The domain is public and someone else owns the DNS. The certificate has to be trusted by browsers you don’t administer. It expires on a schedule you don’t choose. And when the automation silently stops working, the outage looks like “the website is down” rather than “a controller is in a crash loop”.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
-	<meta itemprop="name" content="kubernetes-cert-manager-production">
-	<meta itemprop="description" content="Why Production Is Different# The previous chapter taught the mechanism: Issuer, Certificate, Secret, and a Gateway that serves it. Everything worked because we controlled every variable - a fake domain, a self-signed root, a laptop that trusts whatever we tell it to.
+	<meta itemprop="name" content="cert-manager-production">
+	<meta itemprop="description" content="cert-manager in Production# The previous chapter taught the mechanism: Issuer, Certificate, Secret, and a Gateway that serves it. Everything worked because we controlled every variable - a fake domain, a self-signed root, a laptop that trusts whatever we tell it to.
 Production removes that control. The domain is public and someone else owns the DNS. The certificate has to be trusted by browsers you don’t administer. It expires on a schedule you don’t choose. And when the automation silently stops working, the outage looks like “the website is down” rather than “a controller is in a crash loop”.">
-	<meta itemprop="wordCount" content="2413">
+	<meta itemprop="wordCount" content="2479">
 
-<title>kubernetes-cert-manager-production • Alperen Doc</title>
+<title>cert-manager-production • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-cert-manager-production/">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/cert-manager-production/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.b3b67f3998eeec3ba80293adc22a5bab03b992bd223eadc63d33fb3a692419a2.js" integrity="sha256-s7Z/OZju7DuoApOtwipbqwO5kr0iPq3GPTP7OmkkGaI=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.cd823bdd5e16ccbf637a963a4680fc925a30a299c11038aa2b7d58d4848dac56.js" integrity="sha256-zYI73V4WzL9jepY6RoD8klowopnBEDiqK31Y1ISNrFY=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -619,7 +619,7 @@ Production removes that control. The domain is public and someone else owns the 
   
 
   
-    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle" checked />
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
     <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
       <a href="/docs/kubernetes/" class="">
         Kubernetes</a>
@@ -805,34 +805,6 @@ Production removes that control. The domain is public and someone else owns the 
   
 
   
-    <a href="/docs/kubernetes/kubernetes-cert-manager/" class="">
-      kubernetes-cert-manager</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/kubernetes/kubernetes-cert-manager-production/" class="active">
-      kubernetes-cert-manager-production</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
     <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
       kubernetes-namespaces</a>
   
@@ -964,7 +936,7 @@ Production removes that control. The domain is public and someone else owns the 
   
 
   
-    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
     <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
       <a href="/docs/kubernetes_v2/" class="">
         Kubernetes v2</a>
@@ -1192,6 +1164,62 @@ Production removes that control. The domain is public and someone else owns the 
   
 
   
+    <a href="/docs/kubernetes_v2/cert-manager/" class="">
+      cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager-production/" class="active">
+      cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/prometheus-stack/" class="">
+      prometheus-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/victoriametrics/" class="">
+      victoriametrics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes_v2/longhorn/" class="">
       longhorn</a>
   
@@ -1267,7 +1295,7 @@ Production removes that control. The domain is public and someone else owns the 
     <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>kubernetes-cert-manager-production</h3>
+  <h3>cert-manager-production</h3>
 
   <label for="toc-control">
     
@@ -1283,25 +1311,37 @@ Production removes that control. The domain is public and someone else owns the 
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#staging-first-always">Staging first, always</a></li>
-    <li><a href="#the-issuer-pair">The issuer pair</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#http-01-on-gateway-api">HTTP-01 on Gateway API</a></li>
-    <li><a href="#dns-01-with-a-real-provider">DNS-01 with a real provider</a></li>
-    <li><a href="#wildcards">Wildcards</a></li>
-    <li><a href="#mixing-solvers">Mixing solvers</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#ari">ARI</a></li>
-    <li><a href="#why-the-cadence-is-tightening">Why the cadence is tightening</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#cacrt-vs-tlscrt"><code>ca.crt</code> vs <code>tls.crt</code></a></li>
-    <li><a href="#the-rotation-trap">The rotation trap</a></li>
+    <li><a href="#the-honest-requirements">The Honest Requirements</a></li>
+    <li><a href="#acme-and-lets-encrypt">ACME and Let&rsquo;s Encrypt</a>
+      <ul>
+        <li><a href="#staging-first-always">Staging first, always</a></li>
+        <li><a href="#the-issuer-pair">The issuer pair</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-to-choose-http-01-or-dns-01">How to Choose HTTP-01 or DNS-01</a>
+      <ul>
+        <li><a href="#http-01-on-gateway-api">HTTP-01 on Gateway API</a></li>
+        <li><a href="#dns-01-with-a-real-provider">DNS-01 with a real provider</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-to-get-a-wildcard-certificate">How to Get a Wildcard Certificate</a></li>
+    <li><a href="#how-to-mix-solvers-on-one-issuer">How to Mix Solvers on One Issuer</a></li>
+    <li><a href="#how-to-control-renewal">How to Control Renewal</a>
+      <ul>
+        <li><a href="#ari">ARI</a></li>
+        <li><a href="#why-the-cadence-is-tightening">Why the cadence is tightening</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-to-distribute-trust-with-trust-manager">How to Distribute Trust with trust-manager</a>
+      <ul>
+        <li><a href="#cacrt-vs-tlscrt"><code>ca.crt</code> vs <code>tls.crt</code></a></li>
+        <li><a href="#the-rotation-trap">The rotation trap</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-to-monitor-and-alert">How to Monitor and Alert</a></li>
+    <li><a href="#how-to-harden-and-run-it-ha">How to Harden and Run It HA</a></li>
+    <li><a href="#production-checklist">Production Checklist</a></li>
+    <li><a href="#how-to-test-the-whole-thing">How to Test the Whole Thing</a></li>
   </ul>
 </nav>
 
@@ -1314,12 +1354,19 @@ Production removes that control. The domain is public and someone else owns the 
 
       
       
-  <article class="markdown book-article"><h1 id="why-production-is-different">Why Production Is Different<a class="anchor" href="#why-production-is-different">#</a></h1>
+  <article class="markdown book-article"><h1 id="cert-manager-in-production">cert-manager in Production<a class="anchor" href="#cert-manager-in-production">#</a></h1>
 <p>The previous chapter taught the mechanism: <code>Issuer</code>, <code>Certificate</code>, <code>Secret</code>, and a Gateway that serves it. Everything worked because we controlled every variable - a fake domain, a self-signed root, a laptop that trusts whatever we tell it to.</p>
 <p>Production removes that control. The domain is public and someone else owns the DNS. The certificate has to be trusted by browsers you don&rsquo;t administer. It expires on a schedule you don&rsquo;t choose. And when the automation silently stops working, the outage looks like &ldquo;the website is down&rdquo; rather than &ldquo;a controller is in a crash loop&rdquo;.</p>
 <p>So the topic changes. Not <em>how do I get a certificate</em> but <em>how do I keep certificates flowing for years without anyone thinking about them</em>.</p>
-<p><strong>Özetlersek:</strong> local mekanizmayı öğretir, production ise hata modlarını. İkinci bölümde öğrendiğin her obje aynı kalır; değişen, onların yıllarca ayakta nasıl tutulacağı.</p>
-<h1 id="acme-and-lets-encrypt">ACME and Let&rsquo;s Encrypt<a class="anchor" href="#acme-and-lets-encrypt">#</a></h1>
+<p><strong>Özetlersek:</strong> local mekanizmayı öğretir, production ise hata modlarını. Önceki bölümde öğrendiğin her obje aynı kalır; değişen, onların yıllarca ayakta nasıl tutulacağı.</p>
+<h2 id="the-honest-requirements">The Honest Requirements<a class="anchor" href="#the-honest-requirements">#</a></h2>
+<ul>
+<li><strong>A domain you actually control</strong> and a cluster the internet can reach. The &ldquo;no global DNS&rdquo; rule of the v1 notes stops applying here</li>
+<li><strong>A DNS provider API credential</strong>, if you want wildcards or your cluster is behind NAT. This is the single most common failure point later</li>
+<li><strong>A monitoring stack.</strong> Renewal that fails quietly is worse than no automation at all - see the <a href="../prometheus-stack/">prometheus-stack</a> chapter for the alerting half</li>
+<li><strong>Somewhere to keep the ACME account key.</strong> It&rsquo;s a Secret like any other; deleting it is not a reinstall, it&rsquo;s a new identity at the CA</li>
+</ul>
+<h2 id="acme-and-lets-encrypt">ACME and Let&rsquo;s Encrypt<a class="anchor" href="#acme-and-lets-encrypt">#</a></h2>
 <p><a href="https://cert-manager.io/docs/configuration/acme/">ACME</a> is the protocol behind Let&rsquo;s Encrypt, ZeroSSL, Google Trust Services and friends. The shape is always the same:</p>
 <ol>
 <li>you create an <strong>account</strong> with the CA (one key pair, stored by cert-manager in <code>privateKeySecretRef</code>)</li>
@@ -1328,7 +1375,7 @@ Production removes that control. The domain is public and someone else owns the 
 <li>you answer it, the CA validates, and you get the certificate</li>
 </ol>
 <p>The account key is your identity at the CA. Delete that Secret and cert-manager registers a new account - you keep issuing certificates, but you lose the ability to revoke anything issued by the old one.</p>
-<h2 id="staging-first-always">Staging first, always<a class="anchor" href="#staging-first-always">#</a></h2>
+<h3 id="staging-first-always">Staging first, always<a class="anchor" href="#staging-first-always">#</a></h3>
 <p>Let&rsquo;s Encrypt runs two environments and they behave very differently:</p>
 <table>
 	<thead>
@@ -1387,7 +1434,7 @@ Production removes that control. The domain is public and someone else owns the 
 <p>Hit these in production and you are locked out for a week. Hit them in staging and nothing happens.</p>
 <blockquote class='book-hint '>
 <p><strong>Dikkat:</strong> staging ile test etmeden production&rsquo;a geçme. Rate limit&rsquo;e takılmak bir haftalık outage demektir - ve bunu genelde ilk kez canlıya çıkarken, en kötü anda öğrenirsin.</p>
-</blockquote><h2 id="the-issuer-pair">The issuer pair<a class="anchor" href="#the-issuer-pair">#</a></h2>
+</blockquote><h3 id="the-issuer-pair">The issuer pair<a class="anchor" href="#the-issuer-pair">#</a></h3>
 <p>Always ship both, and point workloads at staging until you&rsquo;ve proven the pipeline:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
@@ -1416,7 +1463,7 @@ Production removes that control. The domain is public and someone else owns the 
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">solvers</span>:
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">http01</span>:
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">gatewayHTTPRoute</span>: {}</span></span></code></pre></div><p><code>email</code> goes to a <strong>team distribution list</strong>, not an individual. It&rsquo;s how the CA tells you a certificate is about to be revoked - and the person who set this up will have left by then.</p>
-<h1 id="http-01-vs-dns-01">HTTP-01 vs DNS-01<a class="anchor" href="#http-01-vs-dns-01">#</a></h1>
+<h2 id="how-to-choose-http-01-or-dns-01">How to Choose HTTP-01 or DNS-01<a class="anchor" href="#how-to-choose-http-01-or-dns-01">#</a></h2>
 <p>Two ways to prove you own a domain, and the choice has real consequences:</p>
 <table>
 	<thead>
@@ -1459,7 +1506,7 @@ Production removes that control. The domain is public and someone else owns the 
 			</tr>
 	</tbody>
 </table>
-<h2 id="http-01-on-gateway-api">HTTP-01 on Gateway API<a class="anchor" href="#http-01-on-gateway-api">#</a></h2>
+<h3 id="http-01-on-gateway-api">HTTP-01 on Gateway API<a class="anchor" href="#http-01-on-gateway-api">#</a></h3>
 <p>The solver spins up a temporary <code>acmesolver</code> pod and an <code>HTTPRoute</code> for the duration of the challenge:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">solvers</span>:
 </span></span><span style="display:flex;"><span>  - <span style="color:#f92672">http01</span>:
@@ -1469,7 +1516,7 @@ Production removes that control. The domain is public and someone else owns the 
 </span></span><span style="display:flex;"><span>            <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Gateway</span>
 </span></span><span style="display:flex;"><span>            <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">envoy-gateway-system</span>
 </span></span><span style="display:flex;"><span>            <span style="color:#f92672">sectionName</span>: <span style="color:#ae81ff">http</span></span></span></code></pre></div><p>That <code>sectionName: http</code> matters: the challenge is answered over plain HTTP, so the Gateway needs a live <strong>HTTP:80</strong> listener that the internet can reach. If your cluster is behind NAT or only exposes 443, HTTP-01 will hang in <code>Pending</code> forever.</p>
-<h2 id="dns-01-with-a-real-provider">DNS-01 with a real provider<a class="anchor" href="#dns-01-with-a-real-provider">#</a></h2>
+<h3 id="dns-01-with-a-real-provider">DNS-01 with a real provider<a class="anchor" href="#dns-01-with-a-real-provider">#</a></h3>
 <p>DNS-01 proves control by writing a TXT record. cert-manager needs an API credential for your DNS provider. Cloudflare, using an API <strong>token</strong> (scoped, not the global key):</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Secret</span>
@@ -1505,12 +1552,12 @@ Production removes that control. The domain is public and someone else owns the 
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">region</span>: <span style="color:#ae81ff">eu-central-1</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">hostedZoneID</span>: <span style="color:#ae81ff">Z1234567890ABC</span></span></span></code></pre></div><blockquote class='book-hint '>
 <p><strong>Dikkat:</strong> <code>ClusterIssuer</code> namespace&rsquo;e ait değildir, bu yüzden <code>secretName</code>&lsquo;lerin <code>cert-manager</code> namespace&rsquo;ine bakacağı varsayılır (<code>--cluster-resource-namespace</code> ile değiştirilebilir). <code>Issuer</code> kullanıyorsan Secret aynı namespace&rsquo;te olmalı. AWS tarafında ambient credential&rsquo;lar yalnızca <code>ClusterIssuer</code> için geçerlidir - bunun sebebi, <code>Issuer</code> oluşturma yetkisi olan birinin senin IAM rolünü kullanamaması.</p>
-</blockquote><h2 id="wildcards">Wildcards<a class="anchor" href="#wildcards">#</a></h2>
+</blockquote><h2 id="how-to-get-a-wildcard-certificate">How to Get a Wildcard Certificate<a class="anchor" href="#how-to-get-a-wildcard-certificate">#</a></h2>
 <p><code>*.example.com</code> can <strong>only</strong> be obtained with DNS-01. HTTP-01 proves one hostname at a time and cannot validate a wildcard:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">dnsNames</span>:
 </span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;example.com&#34;</span>
-</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;*.example.com&#34;</span></span></span></code></pre></div><p>Not the limits: <code>*.example.com</code> covers <code>api.example.com</code> but <strong>not</strong> <code>api.staging.example.com</code>. Each level needs its own wildcard, and Let&rsquo;s Encrypt won&rsquo;t nest them.</p>
-<h2 id="mixing-solvers">Mixing solvers<a class="anchor" href="#mixing-solvers">#</a></h2>
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;*.example.com&#34;</span></span></span></code></pre></div><p>Note the limits: <code>*.example.com</code> covers <code>api.example.com</code> but <strong>not</strong> <code>api.staging.example.com</code>. Each level needs its own wildcard, and Let&rsquo;s Encrypt won&rsquo;t nest them.</p>
+<h2 id="how-to-mix-solvers-on-one-issuer">How to Mix Solvers on One Issuer<a class="anchor" href="#how-to-mix-solvers-on-one-issuer">#</a></h2>
 <p>One issuer can carry several solvers, each gated by a <code>selector</code>. Wildcards on DNS-01, everything else on HTTP-01:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">solvers</span>:
 </span></span><span style="display:flex;"><span>  - <span style="color:#f92672">dns01</span>:
@@ -1523,25 +1570,25 @@ Production removes that control. The domain is public and someone else owns the 
 </span></span><span style="display:flex;"><span>        - <span style="color:#e6db74">&#34;example.com&#34;</span>
 </span></span><span style="display:flex;"><span>  - <span style="color:#f92672">http01</span>:
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">gatewayHTTPRoute</span>: {}</span></span></code></pre></div><p>Selectors are <code>dnsZones</code> (prefix match, covers subdomains), <code>dnsNames</code> (exact match, does <strong>not</strong> resolve wildcards) and <code>matchLabels</code> (on the <code>Certificate</code>). First match wins, so put the specific ones first.</p>
-<h1 id="renewal">Renewal<a class="anchor" href="#renewal">#</a></h1>
+<h2 id="how-to-control-renewal">How to Control Renewal<a class="anchor" href="#how-to-control-renewal">#</a></h2>
 <p>A certificate you cannot renew is an outage with a calendar entry. cert-manager renews when <strong>either</strong> two-thirds of the lifetime has passed <strong>or</strong> <code>renewBefore</code> is reached, whichever comes first.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">duration</span>: <span style="color:#ae81ff">2160h  </span> <span style="color:#75715e"># 90 days</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">renewBefore</span>: <span style="color:#ae81ff">720h</span> <span style="color:#75715e"># renew 30 days before expiry</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">privateKey</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">rotationPolicy</span>: <span style="color:#ae81ff">Always</span></span></span></code></pre></div><p><code>rotationPolicy: Always</code> issues a <strong>new private key</strong> on every renewal. The default (<code>Never</code>) reuses the key forever, which means a stolen key stays valid across renewals. Unless something explicitly pins the key, use <code>Always</code>.</p>
-<h2 id="ari">ARI<a class="anchor" href="#ari">#</a></h2>
+<h3 id="ari">ARI<a class="anchor" href="#ari">#</a></h3>
 <p><a href="https://cert-manager.io/docs/configuration/acme/">ARI</a> (Automatic Renewal Information) lets the CA push its own renewal window instead of you guessing. With <code>ExperimentalOptions</code> enabled, cert-manager polls the CA&rsquo;s <code>renewalInfo</code> endpoint and schedules inside the window the CA suggests. This is what saves you during mass revocation events: the CA says &ldquo;renew now&rdquo; and you respond without a human.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">config</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">featureGates</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ExperimentalOptions</span>: <span style="color:#66d9ef">true</span></span></span></code></pre></div><h2 id="why-the-cadence-is-tightening">Why the cadence is tightening<a class="anchor" href="#why-the-cadence-is-tightening">#</a></h2>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ExperimentalOptions</span>: <span style="color:#66d9ef">true</span></span></span></code></pre></div><h3 id="why-the-cadence-is-tightening">Why the cadence is tightening<a class="anchor" href="#why-the-cadence-is-tightening">#</a></h3>
 <p>The CA/Browser Forum is shortening public certificate lifetimes on a published schedule: 200 days from March 2026, 100 days in 2027, 47 days in 2029.</p>
-<p>That is not a footnote. At 47-day lifetimes, the default renewal point is around day 31 - so you reissue roughly <strong>every two weeks</strong>. Every link in the chain (solver, DNS API, Secret write, workload reload) has to work reliably at that cadence. Which is the next problem.</p>
+<p>That is not a footnote. At 47-day lifetimes, the default renewal point is around day 31 - so you reissue roughly <strong>every two weeks</strong>. Every link in the chain (solver, DNS API, Secret write, workload reload) has to work reliably at that cadence.</p>
 <blockquote class='book-hint '>
 <p><strong>Dikkat:</strong> <code>subPath</code> ile mount edilen Secret&rsquo;lar rotate edildiğini <strong>görmez</strong>. Pod, eski sertifikayı süresi dolana kadar okumaya devam eder. Ya <code>subPath</code> kullanma ya da yanına bir reload sidecar koy.</p>
 </blockquote><p><strong>Özetlersek:</strong> renewal&rsquo;ı <code>duration</code>/<code>renewBefore</code> ile tanımla, ARI&rsquo;yi aç, private key&rsquo;i döndür. Sertifika yaşam döngüsü 90 günden 47 güne inerken otomasyon &ldquo;iyi olur&rdquo; olmaktan çıkar, tek hatanın outage olduğu tek nokta olur.</p>
-<h1 id="distributing-trust-with-trust-manager">Distributing Trust with trust-manager<a class="anchor" href="#distributing-trust-with-trust-manager">#</a></h1>
-<p>Locally we added the root to our laptop&rsquo;s trust store. In production nobody is going to hand-edit trust stores across a fleet. <a href="https://cert-manager.io/docs/trust/trust-manager/">trust-manager</a> is the answer: a small operator that assembles X.509 trust <strong>bundles</strong> and syncs them into every namespace that needs them.</p>
+<h2 id="how-to-distribute-trust-with-trust-manager">How to Distribute Trust with trust-manager<a class="anchor" href="#how-to-distribute-trust-with-trust-manager">#</a></h2>
+<p>Locally we added the root to a laptop&rsquo;s trust store. In production nobody is going to hand-edit trust stores across a fleet. <a href="https://cert-manager.io/docs/trust/trust-manager/">trust-manager</a> is the answer: a small operator that assembles X.509 trust <strong>bundles</strong> and syncs them into every namespace that needs them.</p>
 <p>It adds a <code>Bundle</code> resource: a list of <code>sources</code>, and a <code>target</code> saying where the result goes.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">trust.cert-manager.io/v1alpha1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Bundle</span>
@@ -1558,14 +1605,14 @@ Production removes that control. The domain is public and someone else owns the 
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">namespaceSelector</span>:
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">matchLabels</span>:
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">trust</span>: <span style="color:#ae81ff">synchat</span></span></span></code></pre></div><p>Any namespace labelled <code>trust: synchat</code> gets a <code>ConfigMap</code> named <code>synchat-trust</code> holding the PEM bundle. You can also write JKS and PKCS#12 for the JVM crowd with <code>additionalFormats</code>, and target <code>Secret</code>s instead of <code>ConfigMap</code>s if you enable it at startup.</p>
-<h2 id="cacrt-vs-tlscrt"><code>ca.crt</code> vs <code>tls.crt</code><a class="anchor" href="#cacrt-vs-tlscrt">#</a></h2>
+<h3 id="cacrt-vs-tlscrt"><code>ca.crt</code> vs <code>tls.crt</code><a class="anchor" href="#cacrt-vs-tlscrt">#</a></h3>
 <p>Two fields in a cert-manager Secret look relevant and they are not interchangeable:</p>
 <ul>
 <li><code>tls.crt</code> often contains a <strong>chain</strong> - leaf plus intermediates. Don&rsquo;t use it as a trust source.</li>
 <li><code>ca.crt</code> is the issuer&rsquo;s certificate, populated on a best-effort basis and only correct if the issuer is configured for it.</li>
 </ul>
 <p>Prefer bundles built from <strong>root certificates</strong>, and pick whichever field holds exactly one root.</p>
-<h2 id="the-rotation-trap">The rotation trap<a class="anchor" href="#the-rotation-trap">#</a></h2>
+<h3 id="the-rotation-trap">The rotation trap<a class="anchor" href="#the-rotation-trap">#</a></h3>
 <p>This is the mistake that causes real outages, and the docs call it out explicitly: <strong>do not point a <code>Bundle</code> directly at the Secret cert-manager writes the CA into.</strong></p>
 <p>Why: rotate the issuer and cert-manager rewrites that Secret. trust-manager sees the change and immediately swaps the bundle - instantly distrusting the old root. Anything still holding a certificate from the old root breaks at that exact moment.</p>
 <p>The safe workflow is a deliberate rollover:</p>
@@ -1577,7 +1624,7 @@ Production removes that control. The domain is public and someone else owns the 
 <li>only then remove the old root from the copy</li>
 </ol>
 <p>That extra copy is what gives you control over when trust propagates. It feels redundant right up until the first rotation.</p>
-<h1 id="monitoring-and-alerting">Monitoring and Alerting<a class="anchor" href="#monitoring-and-alerting">#</a></h1>
+<h2 id="how-to-monitor-and-alert">How to Monitor and Alert<a class="anchor" href="#how-to-monitor-and-alert">#</a></h2>
 <p>cert-manager exposes Prometheus metrics on port <code>9402</code>. Three of them matter:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-promql" data-lang="promql"><span style="display:flex;"><span><span style="color:#75715e"># when does it expire (unix seconds)</span>
 </span></span><span style="display:flex;"><span>certmanager_certificate_expiration_timestamp_seconds
@@ -1634,7 +1681,7 @@ Production removes that control. The domain is public and someone else owns the 
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">annotations</span>:
 </span></span><span style="display:flex;"><span>            <span style="color:#f92672">summary</span>: <span style="color:#e6db74">&#34;Certificate {{ $labels.name }} renewal is overdue&#34;</span></span></span></code></pre></div><p><code>CertificateRenewalOverdue</code> is the important one. It fires when cert-manager <strong>should</strong> have renewed and didn&rsquo;t - the automation is broken while the certificate still looks fine. That&rsquo;s your warning window.</p>
 <p>For a quick manual sweep there&rsquo;s <code>cmctl</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cmctl check certificate --all-namespaces</span></span></code></pre></div><h1 id="hardening-and-ha">Hardening and HA<a class="anchor" href="#hardening-and-ha">#</a></h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cmctl check certificate --all-namespaces</span></span></code></pre></div><h2 id="how-to-harden-and-run-it-ha">How to Harden and Run It HA<a class="anchor" href="#how-to-harden-and-run-it-ha">#</a></h2>
 <p>cert-manager holds private keys for everything in the cluster. Treat it accordingly.</p>
 <p><strong>The root key does not belong in the cluster.</strong> If you run your own PKI, keep the root offline and issue an <strong>intermediate</strong> CA into the cluster. Give that intermediate <code>pathLen: 0</code> (so anything it signs cannot itself be a CA) and <strong>name constraints</strong> restricting issuance to the hostnames you control. Then a compromise of the cluster cannot mint certificates for your other domains.</p>
 <p><strong>Encrypt Secrets at rest.</strong> etcd encryption is what protects <code>tls.key</code> from someone with disk access. Without it, a backup leak is a key leak.</p>
@@ -1642,9 +1689,9 @@ Production removes that control. The domain is public and someone else owns the 
 <p><strong>Least privilege on the CA Secrets.</strong> Only cert-manager&rsquo;s service account should read them. Everything else in the cluster reading those Secrets is a standing risk.</p>
 <p><strong>Gate who can request certificates.</strong> <code>approver-policy</code> lets you define which <code>CertificateRequest</code>s are allowed to be approved and by whom. Without it, anyone who can create a <code>Certificate</code> can get one signed.</p>
 <p><strong>Rotate DNS credentials on a calendar.</strong> An expired DNS API token is the single most common cause of DNS-01 renewal failure - and it fails silently, at 3am, months after whoever configured it moved on.</p>
-<p><strong>One ACME account per cluster.</strong> Sharing an account key across clusters causes order races and makes rate-limit attribution impossible. Yes, it means more accounts; that&rsquo;s cheaper than debugging an interleaved order queue.</p>
+<p><strong>One ACME account per cluster.</strong> Sharing an account key across clusters causes order races and makes rate-limit attribution impossible.</p>
 <p><strong>Özetlersek:</strong> kök anahtarı cluster dışında tut, etcd&rsquo;yi şifrele, üç controller&rsquo;ı da yedekli çalıştır, CA Secret&rsquo;larına RBAC kısı, DNS credential&rsquo;ını takvimle döndür. Bunlar &ldquo;sonra bakarım&rdquo; listesi değil; sertifika otomasyonu tek başına çalışırken bunlar olmadan sessizce bozulur.</p>
-<h1 id="production-checklist">Production Checklist<a class="anchor" href="#production-checklist">#</a></h1>
+<h2 id="production-checklist">Production Checklist<a class="anchor" href="#production-checklist">#</a></h2>
 <ul>
 <li><input disabled="" type="checkbox"> Staging issuer tested end to end before touching production</li>
 <li><input disabled="" type="checkbox"> <code>email</code> is a team list, not a person</li>
@@ -1661,11 +1708,11 @@ Production removes that control. The domain is public and someone else owns the 
 <li><input disabled="" type="checkbox"> CA Secrets readable only by cert-manager</li>
 <li><input disabled="" type="checkbox"> Controller, webhook and cainjector have replicas + PDB</li>
 </ul>
-<h1 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h1>
-<p>Everything below needs a domain you actually control and a cluster the internet can reach - this is the part of the course where the &ldquo;no global DNS&rdquo; rule stops applying. If you don&rsquo;t have one, still write the YAML and reason through where it would fail.</p>
+<h2 id="how-to-test-the-whole-thing">How to Test the Whole Thing<a class="anchor" href="#how-to-test-the-whole-thing">#</a></h2>
+<p>This needs a domain you control and a cluster the internet can reach. If you don&rsquo;t have one, still write the YAML and reason through where it would fail.</p>
 <ol>
 <li>
-<p>Write the staging/prod <code>ClusterIssuer</code> pair. Use your own domain, your own email, and pick <strong>either</strong> HTTP-01 or DNS-01 based on whether your cluster exposes port 80 publicly.</p>
+<p>Write the staging/prod <code>ClusterIssuer</code> pair. Pick <strong>either</strong> HTTP-01 or DNS-01 based on whether your cluster exposes port 80 publicly.</p>
 </li>
 <li>
 <p>Point a <code>Certificate</code> at the <strong>staging</strong> issuer first. Watch it, then read the failure if it fails:</p>
@@ -1675,22 +1722,22 @@ Production removes that control. The domain is public and someone else owns the 
 </span></span><span style="display:flex;"><span>kubectl describe certificaterequest &lt;name&gt;
 </span></span><span style="display:flex;"><span>kubectl logs -n cert-manager deploy/cert-manager --tail<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span></span></span></code></pre></div><ol start="3">
 <li>
-<p>Once staging is <code>Ready: True</code>, switch <code>issuerRef</code> to the production issuer and confirm the certificate is trusted by a browser. Note the difference in the <code>issuer=</code> field from <code>openssl x509 -noout -issuer</code> - the staging intermediate is obvious.</p>
+<p>Once staging is <code>Ready: True</code>, switch <code>issuerRef</code> to the production issuer and confirm a browser trusts it. <code>openssl x509 -noout -issuer</code> makes the staging intermediate obvious.</p>
 </li>
 <li>
 <p>If you went DNS-01, request a wildcard too: <code>*.yourdomain.com</code>. Watch cert-manager create the <code>_acme-challenge</code> TXT record and clean it up after.</p>
 </li>
 <li>
-<p>Write the <code>PrometheusRule</code> above. If you don&rsquo;t run Prometheus, keep the <code>expr</code> blocks and evaluate them by hand against the metrics endpoint:</p>
+<p>Ship the <code>PrometheusRule</code> above. Without Prometheus, port-forward the metrics endpoint and evaluate the expressions by hand:</p>
 </li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl port-forward -n cert-manager deploy/cert-manager 9402:9402 &amp;
 </span></span><span style="display:flex;"><span>curl -s localhost:9402/metrics | grep certmanager_certificate_</span></span></code></pre></div><ol start="6">
-<li>The exercise that actually teaches: delete the DNS API token Secret and wait. Watch the renewal fail <strong>quietly</strong>, then look at which alert would have caught it and at what time. That gap between &ldquo;it broke&rdquo; and &ldquo;you found out&rdquo; is the thing this chapter is really about.</li>
+<li>The exercise that actually teaches: delete the DNS API token Secret and wait. Watch the renewal fail <strong>quietly</strong>, then work out which alert would have caught it and at what time. That gap between &ldquo;it broke&rdquo; and &ldquo;you found out&rdquo; is the thing this chapter is really about.</li>
 </ol>
 <blockquote class='book-hint '>
 <p><strong>Dikkat:</strong> production&rsquo;a geçerken ilk yaptığın şey production issuer&rsquo;ı yaratmak olmasın. Staging&rsquo;de tüm zinciri - DNS, routing, challenge, Secret yazımı - görmeden production issuer&rsquo;a geçersen, hata ayıklamayı rate limit&rsquo;lerle yarışarak yaparsın.</p>
-</blockquote><p>for more <a href="../kubernetes-namespaces/">namespaces</a></p>
+</blockquote><p>for more <a href="../prometheus-stack/">prometheus-stack</a></p>
 </article>
  
       
@@ -1712,16 +1759,16 @@ Production removes that control. The domain is public and someone else owns the 
 <div class="flex flex-wrap justify-between">
     <span>
     
-      <a href="/docs/kubernetes/kubernetes-cert-manager/" class="flex align-center">
+      <a href="/docs/kubernetes_v2/cert-manager/" class="flex align-center">
         <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
-        <span>kubernetes-cert-manager</span>
+        <span>cert-manager</span>
       </a>
     
     </span>
     <span>
     
-      <a href="/docs/kubernetes/kubernetes-namespaces/" class="flex align-center">
-        <span>kubernetes-namespaces</span>
+      <a href="/docs/kubernetes_v2/prometheus-stack/" class="flex align-center">
+        <span>prometheus-stack</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     
@@ -1758,25 +1805,37 @@ Production removes that control. The domain is public and someone else owns the 
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#staging-first-always">Staging first, always</a></li>
-    <li><a href="#the-issuer-pair">The issuer pair</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#http-01-on-gateway-api">HTTP-01 on Gateway API</a></li>
-    <li><a href="#dns-01-with-a-real-provider">DNS-01 with a real provider</a></li>
-    <li><a href="#wildcards">Wildcards</a></li>
-    <li><a href="#mixing-solvers">Mixing solvers</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#ari">ARI</a></li>
-    <li><a href="#why-the-cadence-is-tightening">Why the cadence is tightening</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#cacrt-vs-tlscrt"><code>ca.crt</code> vs <code>tls.crt</code></a></li>
-    <li><a href="#the-rotation-trap">The rotation trap</a></li>
+    <li><a href="#the-honest-requirements">The Honest Requirements</a></li>
+    <li><a href="#acme-and-lets-encrypt">ACME and Let&rsquo;s Encrypt</a>
+      <ul>
+        <li><a href="#staging-first-always">Staging first, always</a></li>
+        <li><a href="#the-issuer-pair">The issuer pair</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-to-choose-http-01-or-dns-01">How to Choose HTTP-01 or DNS-01</a>
+      <ul>
+        <li><a href="#http-01-on-gateway-api">HTTP-01 on Gateway API</a></li>
+        <li><a href="#dns-01-with-a-real-provider">DNS-01 with a real provider</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-to-get-a-wildcard-certificate">How to Get a Wildcard Certificate</a></li>
+    <li><a href="#how-to-mix-solvers-on-one-issuer">How to Mix Solvers on One Issuer</a></li>
+    <li><a href="#how-to-control-renewal">How to Control Renewal</a>
+      <ul>
+        <li><a href="#ari">ARI</a></li>
+        <li><a href="#why-the-cadence-is-tightening">Why the cadence is tightening</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-to-distribute-trust-with-trust-manager">How to Distribute Trust with trust-manager</a>
+      <ul>
+        <li><a href="#cacrt-vs-tlscrt"><code>ca.crt</code> vs <code>tls.crt</code></a></li>
+        <li><a href="#the-rotation-trap">The rotation trap</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-to-monitor-and-alert">How to Monitor and Alert</a></li>
+    <li><a href="#how-to-harden-and-run-it-ha">How to Harden and Run It HA</a></li>
+    <li><a href="#production-checklist">Production Checklist</a></li>
+    <li><a href="#how-to-test-the-whole-thing">How to Test the Whole Thing</a></li>
   </ul>
 </nav>
 

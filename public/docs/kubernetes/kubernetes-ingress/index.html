@@ -26,7 +26,7 @@ A LoadBalancer service gives every app its own cloud load balancer and its own p
 	<meta itemprop="name" content="kubernetes-ingress">
 	<meta itemprop="description" content="Ingress# In the services chapter we promised to talk more about exposing things to the outside world. Time to pay that off too.
 A LoadBalancer service gives every app its own cloud load balancer and its own public IP. That’s fine when you have one app. With three apps, three IPs, three DNS records, three TLS certificates, three bills. What we actually want is one entry point that routes chat.example.com to the web app and api.example.com to the API - and gives us HTTPS while it’s at it.">
-	<meta itemprop="wordCount" content="721">
+	<meta itemprop="wordCount" content="716">
 
 <title>kubernetes-ingress • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ A LoadBalancer service gives every app its own cloud load balancer and its own p
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.b3b67f3998eeec3ba80293adc22a5bab03b992bd223eadc63d33fb3a692419a2.js" integrity="sha256-s7Z/OZju7DuoApOtwipbqwO5kr0iPq3GPTP7OmkkGaI=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.cd823bdd5e16ccbf637a963a4680fc925a30a299c11038aa2b7d58d4848dac56.js" integrity="sha256-zYI73V4WzL9jepY6RoD8klowopnBEDiqK31Y1ISNrFY=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -805,34 +805,6 @@ A LoadBalancer service gives every app its own cloud load balancer and its own p
   
 
   
-    <a href="/docs/kubernetes/kubernetes-cert-manager/" class="">
-      kubernetes-cert-manager</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/kubernetes/kubernetes-cert-manager-production/" class="">
-      kubernetes-cert-manager-production</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
     <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
       kubernetes-namespaces</a>
   
@@ -1192,6 +1164,62 @@ A LoadBalancer service gives every app its own cloud load balancer and its own p
   
 
   
+    <a href="/docs/kubernetes_v2/cert-manager/" class="">
+      cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager-production/" class="">
+      cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/prometheus-stack/" class="">
+      prometheus-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/victoriametrics/" class="">
+      victoriametrics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes_v2/longhorn/" class="">
       longhorn</a>
   
@@ -1342,7 +1370,7 @@ A LoadBalancer service gives every app its own cloud load balancer and its own p
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">tls</span>:
 </span></span><span style="display:flex;"><span>    - <span style="color:#f92672">hosts</span>:
 </span></span><span style="display:flex;"><span>        - <span style="color:#ae81ff">synchat.local</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">synchat-tls</span></span></span></code></pre></div><p>The <code>secretName</code> points at a Secret holding <code>tls.crt</code> and <code>tls.key</code> - exactly the format we saw in <a href="../kubernetes-secrets/">secrets</a>. Real clusters usually get this issued automatically by <a href="../kubernetes-cert-manager/">cert-manager</a> instead of hand-rolling it - that&rsquo;s two chapters ahead.</p>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">synchat-tls</span></span></span></code></pre></div><p>The <code>secretName</code> points at a Secret holding <code>tls.crt</code> and <code>tls.key</code> - exactly the format we saw in <a href="../kubernetes-secrets/">secrets</a>. Real clusters usually get this issued automatically by <a href="../../kubernetes_v2/cert-manager/">cert-manager</a> instead of hand-rolling it.</p>
 <h1 id="ingress-vs-loadbalancer">Ingress vs LoadBalancer<a class="anchor" href="#ingress-vs-loadbalancer">#</a></h1>
 <table>
 	<thead>

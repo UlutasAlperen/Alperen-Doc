@@ -207,6 +207,8 @@ If you're curious about the specifics, the [docs are here](https://cloud.google.
 
 Now that you understand the basic concepts of Gateway, in the future, it's just a matter of following the documentation for your cloud provider to get it set up.
 
+> TLS is the one thing deliberately left off this HTTP-only Gateway. Making it real - a `Certificate`, a CA chain, `certificateRefs` on the listeners - is the [cert-manager](../../kubernetes_v2/cert-manager/) chapter in the v2 notes.
+
 # Chat
 
 Now that everything is accessible via Gateway (at least while the tunnel is open), let's connect the web application front-end to the API.
@@ -233,4 +235,4 @@ To see what I mean, try the following:
 3. The messages should still be there because they're saved in the server's memory.
 4. Now, delete the `api` pod
 5. Once k8s replaces the deleted pod with a new one, refresh the page again.
-for more [cert-manager](../kubernetes-cert-manager/)
+for more [namespaces](../kubernetes-namespaces/)

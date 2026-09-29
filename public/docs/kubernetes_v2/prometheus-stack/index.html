@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Monitoring with kube-prometheus-stack# We’ve touched monitoring twice and never actually ran it. The helm notes installed the plain prometheus chart to teach values precedence, and cluster-extensions installed kube-prometheus-stack to show what an operator looks like. Neither taught you to operate a monitoring stack.
+That’s this chapter. By the end you’ll have Prometheus scraping the cluster, Grafana showing it, Alertmanager paging you when it matters, and - the part people skip - a ServiceMonitor for your own application so its metrics land next to the system ones.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/prometheus-stack/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="prometheus-stack">
+	<meta property="og:description" content="Monitoring with kube-prometheus-stack# We’ve touched monitoring twice and never actually ran it. The helm notes installed the plain prometheus chart to teach values precedence, and cluster-extensions installed kube-prometheus-stack to show what an operator looks like. Neither taught you to operate a monitoring stack.
+That’s this chapter. By the end you’ll have Prometheus scraping the cluster, Grafana showing it, Alertmanager paging you when it matters, and - the part people skip - a ServiceMonitor for your own application so its metrics land next to the system ones.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="prometheus-stack">
+	<meta itemprop="description" content="Monitoring with kube-prometheus-stack# We’ve touched monitoring twice and never actually ran it. The helm notes installed the plain prometheus chart to teach values precedence, and cluster-extensions installed kube-prometheus-stack to show what an operator looks like. Neither taught you to operate a monitoring stack.
+That’s this chapter. By the end you’ll have Prometheus scraping the cluster, Grafana showing it, Alertmanager paging you when it matters, and - the part people skip - a ServiceMonitor for your own application so its metrics land next to the system ones.">
+	<meta itemprop="wordCount" content="1480">
+
+<title>prometheus-stack • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/prometheus-stack/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.cd823bdd5e16ccbf637a963a4680fc925a30a299c11038aa2b7d58d4848dac56.js" integrity="sha256-zYI73V4WzL9jepY6RoD8klowopnBEDiqK31Y1ISNrFY=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic-git-conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic-git-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github-workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous-integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous-deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git-status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git-add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git-commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git-push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git-branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git-pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git-log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git-merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git-rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git-reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git-remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git-switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager/" class="">
+      cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager-production/" class="">
+      cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/prometheus-stack/" class="active">
+      prometheus-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/victoriametrics/" class="">
+      victoriametrics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>prometheus-stack</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#whats-actually-in-the-stack">What&rsquo;s Actually In the Stack</a>
+      <ul>
+        <li><a href="#vs-the-plain-prometheus-chart">vs the plain <code>prometheus</code> chart</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-honest-requirements">The Honest Requirements</a></li>
+    <li><a href="#how-to-install-kube-prometheus-stack-with-helm">How to Install kube-prometheus-stack with Helm</a></li>
+    <li><a href="#how-to-monitor-your-own-application">How to Monitor Your Own Application</a></li>
+    <li><a href="#how-to-alert">How to Alert</a></li>
+    <li><a href="#how-to-reach-grafana">How to Reach Grafana</a></li>
+    <li><a href="#how-to-upgrade-without-breaking-crds">How to Upgrade Without Breaking CRDs</a></li>
+    <li><a href="#how-to-test-it-end-to-end">How to Test It End to End</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="monitoring-with-kube-prometheus-stack">Monitoring with kube-prometheus-stack<a class="anchor" href="#monitoring-with-kube-prometheus-stack">#</a></h1>
+<p>We&rsquo;ve touched monitoring twice and never actually <em>ran</em> it. The <a href="../helm/">helm</a> notes installed the plain <code>prometheus</code> chart to teach values precedence, and <a href="../cluster-extensions/">cluster-extensions</a> installed <code>kube-prometheus-stack</code> to show what an operator looks like. Neither taught you to operate a monitoring stack.</p>
+<p>That&rsquo;s this chapter. By the end you&rsquo;ll have Prometheus scraping the cluster, Grafana showing it, Alertmanager paging you when it matters, and - the part people skip - a <code>ServiceMonitor</code> for your own application so its metrics land next to the system ones.</p>
+<p><a href="https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack">kube-prometheus-stack</a> is the prometheus-community chart that packages the whole <a href="https://github.com/prometheus-operator/kube-prometheus">kube-prometheus</a> project: manifests, dashboards and alerting rules as one Helm release.</p>
+<h2 id="whats-actually-in-the-stack">What&rsquo;s Actually In the Stack<a class="anchor" href="#whats-actually-in-the-stack">#</a></h2>
+<p>One <code>helm install</code> pulls in six moving parts, and knowing which is which saves you an hour of staring at pod names:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Component</th>
+					<th>What it does</th>
+					<th>Why you care</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>prometheus-operator</strong></td>
+					<td>reconciles <code>Prometheus</code>, <code>ServiceMonitor</code>, <code>PrometheusRule</code> CRs</td>
+					<td>this is the operator; everything else is a CR it acts on</td>
+			</tr>
+			<tr>
+					<td><strong>prometheus</strong></td>
+					<td>scrapes targets, stores time series, evaluates rules</td>
+					<td>the TSDB. It&rsquo;s a <code>Prometheus</code> CR, not a Deployment you edit</td>
+			</tr>
+			<tr>
+					<td><strong>alertmanager</strong></td>
+					<td>deduplicates, groups and routes alerts</td>
+					<td>silence/ inhibition live here, not in Prometheus</td>
+			</tr>
+			<tr>
+					<td><strong>grafana</strong></td>
+					<td>dashboards</td>
+					<td>ships with a large library of them pre-wired</td>
+			</tr>
+			<tr>
+					<td><strong>node-exporter</strong></td>
+					<td>per-node hardware/OS metrics</td>
+					<td>a DaemonSet; one per node is normal</td>
+			</tr>
+			<tr>
+					<td><strong>kube-state-metrics</strong></td>
+					<td>object-state metrics (pod phases, restarts, owners)</td>
+					<td>this is where <code>kube_pod_status_phase</code> comes from</td>
+			</tr>
+	</tbody>
+</table>
+<p>The first two are the important relationship: <strong>prometheus-operator owns Prometheus</strong>. You don&rsquo;t <code>kubectl scale</code> the Prometheus deployment; you edit <code>spec.replicas</code> on the <code>Prometheus</code> CR and the operator does the rest. Same reconcile pattern as the <a href="../postgresql-longhorn-read-replicas/">CloudNativePG</a> <code>Cluster</code> and the <a href="../gitops-argocd/">ArgoCD</a> <code>Application</code>.</p>
+<h3 id="vs-the-plain-prometheus-chart">vs the plain <code>prometheus</code> chart<a class="anchor" href="#vs-the-plain-prometheus-chart">#</a></h3>
+<p>The <code>prometheus-community/prometheus</code> chart from the helm notes is a single-statefulset Prometheus with a config file. <code>kube-prometheus-stack</code> is the operator model with CRDs. The difference that matters day to day: with the plain chart you edit a <code>ConfigMap</code> and restart; with the stack you apply a <code>ServiceMonitor</code> and it just works.</p>
+<h2 id="the-honest-requirements">The Honest Requirements<a class="anchor" href="#the-honest-requirements">#</a></h2>
+<ul>
+<li><strong>Roughly 2–3Gi of memory headroom.</strong> Prometheus defaults to no retention limits and will happily use what it&rsquo;s given; Grafana and the operator add a few hundred Mi on top</li>
+<li><strong>A StorageClass if you want retention to survive a restart.</strong> The chart defaults to ephemeral storage - a pod restart wipes your history. Longhorn in the <a href="../longhorn/">next chapter</a> is the durable option</li>
+<li><strong>CRD lifecycle awareness.</strong> Helm installs the <code>monitoring.coreos.com</code> CRDs once and <strong>never upgrades them</strong>. That&rsquo;s the <a href="../helm/">helm</a> <code>crds/</code> rule, and it&rsquo;s the #1 cause of ugly upgrades here</li>
+<li><strong>The <code>release:</code> label.</strong> <code>ServiceMonitor</code> objects must carry a label matching <code>prometheus.prometheusSpec.serviceMonitorSelector</code> or Prometheus <strong>silently ignores</strong> them. Default is the Helm release name</li>
+<li><strong>Namespace discipline.</strong> The default install only discovers monitors in its own namespace unless you widen the selectors</li>
+</ul>
+<h2 id="how-to-install-kube-prometheus-stack-with-helm">How to Install kube-prometheus-stack with Helm<a class="anchor" href="#how-to-install-kube-prometheus-stack-with-helm">#</a></h2>
+<ol>
+<li>Add the repo and read the defaults before you inherit them - this chart&rsquo;s <code>values.yaml</code> is thousands of lines:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+</span></span><span style="display:flex;"><span>helm repo update
+</span></span><span style="display:flex;"><span>helm show values prometheus-community/kube-prometheus-stack &gt; default-values.yaml</span></span></code></pre></div><p>Search <code>default-values.yaml</code> for <code>retention</code>, <code>storageSpec</code>, <code>resources</code>, <code>serviceMonitorSelector</code> - the four knobs you&rsquo;ll almost certainly touch.</p>
+<ol start="2">
+<li>Write your overrides in a file (the <a href="../helm/">helm</a> notes&rsquo; rule: everything reproducible goes in a values file):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># monitoring-values.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">prometheus</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">prometheusSpec</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">retention</span>: <span style="color:#ae81ff">15d</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">250m</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">1Gi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">storageSpec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">volumeClaimTemplate</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">accessModes</span>: [<span style="color:#e6db74">&#34;ReadWriteOnce&#34;</span>]
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">10Gi</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">grafana</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">adminPassword</span>: <span style="color:#e6db74">&#34;changeme&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">defaultDashboardsEnabled</span>: <span style="color:#66d9ef">true</span></span></span></code></pre></div><blockquote class='book-hint '>
+<p>Note the nesting: <code>prometheus.prometheusSpec.retention</code> mirrors the chart&rsquo;s <code>values.yaml</code> hierarchy. A flat <code>retention: 15d</code> at the top silently does nothing.</p>
+</blockquote><ol start="3">
+<li>Install into a dedicated namespace and watch it come up:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install kps prometheus-community/kube-prometheus-stack <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -n monitoring --create-namespace <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -f monitoring-values.yaml
+</span></span><span style="display:flex;"><span>kubectl -n monitoring get pods --watch</span></span></code></pre></div><ol start="4">
+<li>Verify the operator is actually reconciling, not just running:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n monitoring get prometheus
+</span></span><span style="display:flex;"><span>kubectl -n monitoring get crd | grep monitoring
+</span></span><span style="display:flex;"><span>kubectl -n monitoring logs -l app.kubernetes.io/name<span style="color:#f92672">=</span>prometheus-operator --tail<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span></span></span></code></pre></div><p><code>kubectl get prometheus</code> should show a <code>Prometheus</code> CR with <code>READY</code> replicas. That CR is the source of truth for the deployment below it.</p>
+<h2 id="how-to-monitor-your-own-application">How to Monitor Your Own Application<a class="anchor" href="#how-to-monitor-your-own-application">#</a></h2>
+<p>The system components get scraped out of the box. Your app has to opt in, and this is where almost everyone gets stuck.</p>
+<ol>
+<li>
+<p>Deploy something that exposes <code>/metrics</code>. Any Prometheus client library works; the shape is a normal Service pointing at a container port that serves Prometheus text format.</p>
+</li>
+<li>
+<p>Tell Prometheus to scrape it - a <code>ServiceMonitor</code>:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">monitoring.coreos.com/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ServiceMonitor</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-api</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">monitoring</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">release</span>: <span style="color:#ae81ff">kps</span> <span style="color:#75715e"># MUST match the Helm release name</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">synchat-api</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespaceSelector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchNames</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">default</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">endpoints</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">http</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/metrics</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">interval</span>: <span style="color:#ae81ff">30s</span></span></span></code></pre></div><p>The <code>release: kps</code> label is the whole ballgame. Without it Prometheus will not look at this object and will not tell you why.</p>
+<ol start="3">
+<li>
+<p>If you&rsquo;d rather not label everything, widen the selector instead - the opt-out is <code>serviceMonitorSelectorNilUsesHelmValues: false</code> in <code>prometheus.prometheusSpec</code>. Convenient in a lab, loose in production.</p>
+</li>
+<li>
+<p>Verify from the target&rsquo;s side, not the YAML&rsquo;s:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n monitoring port-forward svc/kps-prometheus 9090:9090</span></span></code></pre></div><p>Open <code>http://localhost:9090/targets</code>. Your job should be <code>UP</code>. If the ServiceMonitor isn&rsquo;t in the list at all, it&rsquo;s the label. If it&rsquo;s there but <code>DOWN</code>, it&rsquo;s your port or path.</p>
+<h2 id="how-to-alert">How to Alert<a class="anchor" href="#how-to-alert">#</a></h2>
+<p>Scraping without alerting is a museum exhibit. Alerts live in <code>PrometheusRule</code> CRs - same shape as the ones the chart ships, just yours.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">monitoring.coreos.com/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PrometheusRule</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-alerts</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">monitoring</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">release</span>: <span style="color:#ae81ff">kps</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">groups</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">alert</span>: <span style="color:#ae81ff">SynchatApiDown</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">expr</span>: <span style="color:#ae81ff">up{job=&#34;synchat-api&#34;} == 0</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">for</span>: <span style="color:#ae81ff">2m</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">severity</span>: <span style="color:#ae81ff">critical</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">summary</span>: <span style="color:#e6db74">&#34;synchat-api target is down&#34;</span>
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">alert</span>: <span style="color:#ae81ff">SynchatHighErrorRate</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">expr</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            sum(rate(http_requests_total{job=&#34;synchat-api&#34;,status=~&#34;5..&#34;}[5m]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">              / sum(rate(http_requests_total{job=&#34;synchat-api&#34;}[5m])) &gt; 0.05</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">for</span>: <span style="color:#ae81ff">10m</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">severity</span>: <span style="color:#ae81ff">warning</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">summary</span>: <span style="color:#e6db74">&#34;synchat-api 5xx rate above 5%&#34;</span></span></span></code></pre></div><p>Two rules that matter more than anything you can invent: <strong>target down</strong> and <strong>cert-manager renewal overdue</strong> (the one from the <a href="../cert-manager-production/">cert-manager-production</a> chapter). Both detect the automation failing rather than the symptom arriving.</p>
+<p>Alertmanager is where the alert goes next. Its config is a <code>Secret</code> named <code>alertmanager-&lt;release&gt;</code> holding <code>alertmanager.yml</code> - routing, receivers (Slack, email, PagerDuty) and inhibitions. Test the whole path by firing a rule that can&rsquo;t not fire:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># a rule that fires immediately, then delete it</span>
+</span></span><span style="display:flex;"><span>kubectl -n monitoring apply -f - <span style="color:#e6db74">&lt;&lt;&#39;EOF&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">apiVersion: monitoring.coreos.com/v1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">kind: PrometheusRule
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">metadata:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  name: fire-drill
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  namespace: monitoring
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  labels: {release: kps}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">spec:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  groups:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    - name: fire-drill
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      rules:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        - alert: FireDrill
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          expr: vector(1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          labels: {severity: warning}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          annotations: {summary: &#34;fire drill&#34;}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span></span></span></code></pre></div><p>Watch it appear in Alertmanager at <code>http://localhost:9093</code> (port-forward the same way), then delete the rule. Seeing the full path once is worth more than reading the docs twice.</p>
+<h2 id="how-to-reach-grafana">How to Reach Grafana<a class="anchor" href="#how-to-reach-grafana">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n monitoring port-forward svc/kps-grafana 3000:80</span></span></code></pre></div><p><code>http://localhost:3000</code>, credentials from <code>grafana.adminPassword</code> in your values. The dashboards worth opening first: <code>Kubernetes / Compute Resources / Namespace (Pods)</code>, <code>Kubernetes / Networking / Pod</code>, and the node-exporter ones.</p>
+<p>For anything beyond your laptop, front Grafana with the <a href="../../kubernetes/kubernetes-gateway-minikube/">Gateway</a> from the v1 notes - a <code>HTTPRoute</code> to <code>kps-grafana</code>, and cert-manager handing it TLS from the previous two chapters. That&rsquo;s the moment the add-ons stop being separate toys and become one platform.</p>
+<h2 id="how-to-upgrade-without-breaking-crds">How to Upgrade Without Breaking CRDs<a class="anchor" href="#how-to-upgrade-without-breaking-crds">#</a></h2>
+<p>This is the part everyone learns the hard way. <code>helm upgrade</code> <strong>does not touch CRDs</strong> - they were applied once from <code>crds/</code> and that&rsquo;s it.</p>
+<ol>
+<li>When a new chart version changes CRD schemas, apply them by hand first:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm show crds prometheus-community/kube-prometheus-stack &gt; crds.yaml
+</span></span><span style="display:flex;"><span>kubectl apply --server-side -f crds.yaml</span></span></code></pre></div><ol start="2">
+<li>Then upgrade the release:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm upgrade kps prometheus-community/kube-prometheus-stack <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -n monitoring -f monitoring-values.yaml --version &lt;chart-version&gt;</span></span></code></pre></div><ol start="3">
+<li>Check <code>helm history kps</code> and the operator logs. A failed upgrade here usually means the operator can&rsquo;t parse a CR that the new CRD changed - roll back the release (<code>helm rollback</code>) but know that the CRD is now the new one and won&rsquo;t roll back with it.</li>
+</ol>
+<blockquote class='book-hint '>
+<p><strong>Dikkat:</strong> CRD&rsquo;ları silmek de Helm&rsquo;e ait değil. <code>helm uninstall</code> sildiğinde <code>monitoring.coreos.com</code> CRD&rsquo;ları kalır - ki kalsın, çünkü <code>Prometheus</code>/<code>ServiceMonitor</code> objelerin hâlâ oradadır. Temizlemek istersen <code>kubectl delete crd ...</code> ile elle yap.</p>
+</blockquote><h2 id="how-to-test-it-end-to-end">How to Test It End to End<a class="anchor" href="#how-to-test-it-end-to-end">#</a></h2>
+<p>The only test that proves monitoring works is breaking something and getting told.</p>
+<ol>
+<li>
+<p>Confirm the loop is live: <code>kubectl -n monitoring get prometheus</code> is <code>READY</code>, <code>/targets</code> shows your app <code>UP</code>.</p>
+</li>
+<li>
+<p>Break your app on purpose - scale the deployment to zero:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl scale deploy synchat-api --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span></span></span></code></pre></div><ol start="3">
+<li>
+<p>Within a scrape interval the target goes <code>DOWN</code>, within <code>for: 2m</code> the <code>SynchatApiDown</code> alert fires, and Alertmanager routes it. Time it. If the gap is longer than you&rsquo;d tolerate in an incident, your <code>interval</code>/<code>for</code> values are wrong, not your luck.</p>
+</li>
+<li>
+<p>Break it the other way - a config change that makes the app 5xx - and watch the error-rate alert. This is the one that catches real outages.</p>
+</li>
+<li>
+<p>Now the silent failure: <code>kubectl -n monitoring scale deploy kps-prometheus-operator --replicas=0</code>. Nothing alerts, because nothing is reconciling. That&rsquo;s why <code>CertificateNotReady</code>-style &ldquo;the automation stopped&rdquo; alerts (from the <a href="../cert-manager-production/">cert-manager-production</a> notes) matter more than &ldquo;the app is down&rdquo; alerts - they catch the layer everyone forgets to watch.</p>
+</li>
+</ol>
+<p><strong>Özetlersek:</strong> kurulum bir <code>helm install</code>, asıl iş <code>ServiceMonitor</code> + <code>release:</code> label&rsquo;ında. Alert&rsquo;i &ldquo;uygulama çöktü&quot;ye değil &ldquo;otomasyon durdu&quot;ya kur. CRD&rsquo;lar Helm&rsquo;in sorumluluğunda değil - upgrade öncesi elle apply et.</p>
+<p>for more <a href="../victoriametrics/">victoriametrics</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes_v2/cert-manager-production/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>cert-manager-production</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes_v2/victoriametrics/" class="flex align-center">
+        <span>victoriametrics</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#whats-actually-in-the-stack">What&rsquo;s Actually In the Stack</a>
+      <ul>
+        <li><a href="#vs-the-plain-prometheus-chart">vs the plain <code>prometheus</code> chart</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-honest-requirements">The Honest Requirements</a></li>
+    <li><a href="#how-to-install-kube-prometheus-stack-with-helm">How to Install kube-prometheus-stack with Helm</a></li>
+    <li><a href="#how-to-monitor-your-own-application">How to Monitor Your Own Application</a></li>
+    <li><a href="#how-to-alert">How to Alert</a></li>
+    <li><a href="#how-to-reach-grafana">How to Reach Grafana</a></li>
+    <li><a href="#how-to-upgrade-without-breaking-crds">How to Upgrade Without Breaking CRDs</a></li>
+    <li><a href="#how-to-test-it-end-to-end">How to Test It End to End</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -104,7 +104,7 @@
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/kubeadm-upgrade-etcd/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-cert-manager/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-namespaces/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-distroless-container-images/</loc>
   </url><url>
@@ -112,51 +112,55 @@
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/ha-control-plane/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-cert-manager-production/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-dns-coredns/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/devops-control-plane/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-pull/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-namespaces/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-scaling-vertical/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/cert-manager/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-log/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-dns-coredns/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-scaling-horizontal/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/longhorn/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/cert-manager-production/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-merge/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-scaling-vertical/</loc>
-  </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-statefulset-replication/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-storage/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-rebase/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-scaling-horizontal/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-persistent-volumes/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-longhorn-read-replicas/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/prometheus-stack/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-reset/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-storage/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-storage-classes/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/victoriametrics/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-remote/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-persistent-volumes/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-statefulsets/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/longhorn/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-fetch/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-storage-classes/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-nodes-basic/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-statefulset-replication/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-switch/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-statefulsets/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-longhorn-read-replicas/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-config/</loc>
-  </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-nodes-basic/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/gitignore/</loc>
   </url><url>

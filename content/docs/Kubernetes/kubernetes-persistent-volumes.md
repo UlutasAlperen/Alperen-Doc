@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-persistent-volumes"
-weight: 20
+weight: 18
 ---
 ## Persistent Volumes (PV)
 

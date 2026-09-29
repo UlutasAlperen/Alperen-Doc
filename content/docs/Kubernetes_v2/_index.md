@@ -15,6 +15,7 @@ These are the follow-up notes to my [Kubernetes](../kubernetes/) section - same 
 - Schedule pods with taints, tolerations, spread constraints and priorities on multi-node clusters
 - Upgrade clusters, restore etcd from snapshots and run a highly-available control plane
 - Operate the control plane like a platform team: identity, RBAC tiers, break-glass, Helm add-ons, GitOps self-service
+- Automate TLS with cert-manager and run a real monitoring stack (Prometheus or VictoriaMetrics)
 - Run distributed block storage with Longhorn and build real PostgreSQL HA with read replicas
 - And much more
 
@@ -35,9 +36,13 @@ These are the follow-up notes to my [Kubernetes](../kubernetes/) section - same 
 13. [kubeadm-upgrade-etcd](kubeadm-upgrade-etcd/)
 14. [ha-control-plane](ha-control-plane/)
 15. [devops-control-plane](devops-control-plane/)
-16. [longhorn](longhorn/)
-17. [postgresql-statefulset-replication](postgresql-statefulset-replication/)
-18. [postgresql-longhorn-read-replicas](postgresql-longhorn-read-replicas/)
+16. [cert-manager](cert-manager/)
+17. [cert-manager-production](cert-manager-production/)
+18. [prometheus-stack](prometheus-stack/)
+19. [victoriametrics](victoriametrics/)
+20. [longhorn](longhorn/)
+21. [postgresql-statefulset-replication](postgresql-statefulset-replication/)
+22. [postgresql-longhorn-read-replicas](postgresql-longhorn-read-replicas/)
 
 ### Araçlar ve Genişletmeler
 
@@ -71,6 +76,13 @@ These are the follow-up notes to my [Kubernetes](../kubernetes/) section - same 
 ### Platform Mühendisliği
 
 - [devops-control-plane](devops-control-plane/) = kubeconfig/identity (cert, SA token, OIDC), platform vs app RBAC katmanları, break-glass + audit, Helm ile add-on yönetimi, GitOps self-service, managed control plane karşılaştırması, Kyverno/OPA admission; How-to: scoped kubeconfig, add-on kurulumu, break-glass, namespace-as-a-service
+
+### TLS ve Gözlemlenebilirlik
+
+- [cert-manager](cert-manager/) = `Issuer`/`ClusterIssuer`/`Certificate`, SelfSigned vs `isCA`+`CA` zinciri, Gateway `certificateRefs` + `cert-manager.io/cluster-issuer`, Ingress vs Gateway TLS; How-to: kurulum, elle sertifika, Gateway'den üretme, CA zinciri, stuck certificate teşhisi
+- [cert-manager-production](cert-manager-production/) = ACME (staging/prod, rate limitler), HTTP-01 vs DNS-01, wildcard, solver selector, renewal/`duration`/`renewBefore`/ARI, trust-manager `Bundle` + rotasyon tuzağı, Prometheus alert, hardening/HA; How-to: issuer çifti, wildcard, alert, token-silme testi
+- [prometheus-stack](prometheus-stack/) = kube-prometheus-stack bileşenleri (operator, prometheus, alertmanager, grafana, node-exporter, kube-state-metrics), `ServiceMonitor`/`PrometheusRule` CRD'ları, `release:` label kuralı, CRD upgrade kuralı; How-to: helm kurulumu, kendi app'ini scrape etme, alert yazma, e2e kırma testi
+- [victoriametrics](victoriametrics/) = VMSingle/VMCluster + VMAgent/VMAlert mimarisi, VM CRD'ları (`VMServiceScrape`/`VMRule`), Prometheus vs VM karşılaştırması, MetricsQL; How-to: helm kurulumu, Prometheus objelerini çevirme, single vs cluster seçimi, VMUI doğrulama
 
 ### Depolama ve HA
 

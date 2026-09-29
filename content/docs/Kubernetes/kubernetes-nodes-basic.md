@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-nodes-basic"
-weight: 23
+weight: 21
 ---
 # Nodes
 

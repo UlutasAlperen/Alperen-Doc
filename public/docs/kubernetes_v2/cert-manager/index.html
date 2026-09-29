@@ -8,16 +8,16 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="TLS Without Hand-Rolling Secrets# In the ingress chapter we said that real clusters “get this issued automatically by cert-manager instead of hand-rolling it”. That was a promise we haven’t paid off yet. Let’s pay it off.
+<meta name="description" content="cert-manager# In the v1 ingress notes we said that real clusters “get this issued automatically by cert-manager instead of hand-rolling it”. That was a promise we haven’t paid off yet. Let’s pay it off.
 Here is what a TLS certificate actually requires, every single time:
 a private key a certificate signing request built from that key someone - a Certificate Authority - to sign it a renewal before it expires (Let’s Encrypt certs last 90 days) the result copied into a Secret in the right namespace, in the right format Do that by hand for two hostnames and you have already lost an afternoon. cert-manager is a controller that does all five as a Kubernetes reconciliation loop: you declare what you want, it keeps it true forever - including the renewal.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-cert-manager/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/cert-manager/">
 	<meta property="og:site_name" content="Alperen Doc">
-	<meta property="og:title" content="kubernetes-cert-manager">
-	<meta property="og:description" content="TLS Without Hand-Rolling Secrets# In the ingress chapter we said that real clusters “get this issued automatically by cert-manager instead of hand-rolling it”. That was a promise we haven’t paid off yet. Let’s pay it off.
+	<meta property="og:title" content="cert-manager">
+	<meta property="og:description" content="cert-manager# In the v1 ingress notes we said that real clusters “get this issued automatically by cert-manager instead of hand-rolling it”. That was a promise we haven’t paid off yet. Let’s pay it off.
 Here is what a TLS certificate actually requires, every single time:
 a private key a certificate signing request built from that key someone - a Certificate Authority - to sign it a renewal before it expires (Let’s Encrypt certs last 90 days) the result copied into a Secret in the right namespace, in the right format Do that by hand for two hostnames and you have already lost an afternoon. cert-manager is a controller that does all five as a Kubernetes reconciliation loop: you declare what you want, it keeps it true forever - including the renewal.">
 	<meta property="og:locale" content="en">
@@ -25,20 +25,20 @@ a private key a certificate signing request built from that key someone - a Cert
 		<meta property="article:section" content="docs">
 
 
-	<meta itemprop="name" content="kubernetes-cert-manager">
-	<meta itemprop="description" content="TLS Without Hand-Rolling Secrets# In the ingress chapter we said that real clusters “get this issued automatically by cert-manager instead of hand-rolling it”. That was a promise we haven’t paid off yet. Let’s pay it off.
+	<meta itemprop="name" content="cert-manager">
+	<meta itemprop="description" content="cert-manager# In the v1 ingress notes we said that real clusters “get this issued automatically by cert-manager instead of hand-rolling it”. That was a promise we haven’t paid off yet. Let’s pay it off.
 Here is what a TLS certificate actually requires, every single time:
 a private key a certificate signing request built from that key someone - a Certificate Authority - to sign it a renewal before it expires (Let’s Encrypt certs last 90 days) the result copied into a Secret in the right namespace, in the right format Do that by hand for two hostnames and you have already lost an afternoon. cert-manager is a controller that does all five as a Kubernetes reconciliation loop: you declare what you want, it keeps it true forever - including the renewal.">
-	<meta itemprop="wordCount" content="2008">
+	<meta itemprop="wordCount" content="1958">
 
-<title>kubernetes-cert-manager • Alperen Doc</title>
+<title>cert-manager • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-cert-manager/">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/cert-manager/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.b3b67f3998eeec3ba80293adc22a5bab03b992bd223eadc63d33fb3a692419a2.js" integrity="sha256-s7Z/OZju7DuoApOtwipbqwO5kr0iPq3GPTP7OmkkGaI=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.cd823bdd5e16ccbf637a963a4680fc925a30a299c11038aa2b7d58d4848dac56.js" integrity="sha256-zYI73V4WzL9jepY6RoD8klowopnBEDiqK31Y1ISNrFY=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -622,7 +622,7 @@ a private key a certificate signing request built from that key someone - a Cert
   
 
   
-    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle" checked />
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
     <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
       <a href="/docs/kubernetes/" class="">
         Kubernetes</a>
@@ -808,34 +808,6 @@ a private key a certificate signing request built from that key someone - a Cert
   
 
   
-    <a href="/docs/kubernetes/kubernetes-cert-manager/" class="active">
-      kubernetes-cert-manager</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/kubernetes/kubernetes-cert-manager-production/" class="">
-      kubernetes-cert-manager-production</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
     <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
       kubernetes-namespaces</a>
   
@@ -967,7 +939,7 @@ a private key a certificate signing request built from that key someone - a Cert
   
 
   
-    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
     <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
       <a href="/docs/kubernetes_v2/" class="">
         Kubernetes v2</a>
@@ -1195,6 +1167,62 @@ a private key a certificate signing request built from that key someone - a Cert
   
 
   
+    <a href="/docs/kubernetes_v2/cert-manager/" class="active">
+      cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager-production/" class="">
+      cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/prometheus-stack/" class="">
+      prometheus-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/victoriametrics/" class="">
+      victoriametrics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes_v2/longhorn/" class="">
       longhorn</a>
   
@@ -1270,7 +1298,7 @@ a private key a certificate signing request built from that key someone - a Cert
     <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>kubernetes-cert-manager</h3>
+  <h3>cert-manager</h3>
 
   <label for="toc-control">
     
@@ -1286,13 +1314,19 @@ a private key a certificate signing request built from that key someone - a Cert
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#the-selfsigned-issuer">The SelfSigned issuer</a></li>
-    <li><a href="#the-certificate">The Certificate</a></li>
-    <li><a href="#wiring-it-into-the-gateway">Wiring it into the Gateway</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#which-listeners-get-a-certificate">Which listeners get a Certificate?</a></li>
+    <li><a href="#the-three-objects">The Three Objects</a></li>
+    <li><a href="#the-honest-requirements">The Honest Requirements</a></li>
+    <li><a href="#how-to-install-cert-manager">How to Install cert-manager</a></li>
+    <li><a href="#how-to-issue-a-certificate-by-hand">How to Issue a Certificate by Hand</a></li>
+    <li><a href="#how-to-derive-certificates-from-the-gateway">How to Derive Certificates from the Gateway</a>
+      <ul>
+        <li><a href="#which-listeners-get-a-certificate">Which listeners get a Certificate?</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-to-build-a-real-ca-chain">How to Build a Real CA Chain</a></li>
+    <li><a href="#ingress-vs-gateway">Ingress vs Gateway</a></li>
+    <li><a href="#how-to-troubleshoot-a-stuck-certificate">How to Troubleshoot a Stuck Certificate</a></li>
+    <li><a href="#how-to-verify-tls-actually-works">How to Verify TLS Actually Works</a></li>
   </ul>
 </nav>
 
@@ -1305,8 +1339,8 @@ a private key a certificate signing request built from that key someone - a Cert
 
       
       
-  <article class="markdown book-article"><h1 id="tls-without-hand-rolling-secrets">TLS Without Hand-Rolling Secrets<a class="anchor" href="#tls-without-hand-rolling-secrets">#</a></h1>
-<p>In the <a href="../kubernetes-ingress/">ingress</a> chapter we said that real clusters &ldquo;get this issued automatically by cert-manager instead of hand-rolling it&rdquo;. That was a promise we haven&rsquo;t paid off yet. Let&rsquo;s pay it off.</p>
+  <article class="markdown book-article"><h1 id="cert-manager">cert-manager<a class="anchor" href="#cert-manager">#</a></h1>
+<p>In the v1 <a href="../../kubernetes/kubernetes-ingress/">ingress</a> notes we said that real clusters &ldquo;get this issued automatically by cert-manager instead of hand-rolling it&rdquo;. That was a promise we haven&rsquo;t paid off yet. Let&rsquo;s pay it off.</p>
 <p>Here is what a TLS certificate actually requires, every single time:</p>
 <ol>
 <li>a private key</li>
@@ -1317,33 +1351,54 @@ a private key a certificate signing request built from that key someone - a Cert
 </ol>
 <p>Do that by hand for two hostnames and you have already lost an afternoon. <a href="https://cert-manager.io/">cert-manager</a> is a controller that does all five as a Kubernetes reconciliation loop: you declare <em>what</em> you want, it keeps it true forever - including the renewal.</p>
 <p><strong>Özetlersek:</strong> elle sertifika = tek seferlik iş ama süresi dolunca yine sen sorumlusun. cert-manager = &ldquo;bu isimlerde, şu imzalayıcıdan, şu süreyle sertifika istiyorum&rdquo; deyip arkana yaslanmak.</p>
-<h1 id="the-three-objects">The Three Objects<a class="anchor" href="#the-three-objects">#</a></h1>
-<p>Everything cert-manager does circles three objects:</p>
+<h2 id="the-three-objects">The Three Objects<a class="anchor" href="#the-three-objects">#</a></h2>
+<p>Everything cert-manager does circles three objects - and they map exactly onto the CRD / Custom Resource / operator split from the <a href="../cluster-extensions/">cluster-extensions</a> notes:</p>
 <ul>
 <li><strong><code>Issuer</code> / <code>ClusterIssuer</code></strong> — <em>who</em> signs. An <code>Issuer</code> is valid in one namespace, a <code>ClusterIssuer</code> across the whole cluster. The spec is identical; only the reach differs.</li>
 <li><strong><code>Certificate</code></strong> — <em>what</em> we want: which names (<code>dnsNames</code>), from which signer (<code>issuerRef</code>), written to which <code>Secret</code> (<code>secretName</code>).</li>
 <li><strong><code>Secret</code></strong> — the result. <code>tls.crt</code>, <code>tls.key</code>, usually <code>ca.crt</code>. This is the only thing the Gateway and the Ingress actually consume.</li>
 </ul>
 <p>The division of labour is clean: the Issuer is policy, the Certificate is the request, the Secret is the outcome. The Gateway steps in at the end and serves that Secret to your users as TLS.</p>
-<h1 id="installing-cert-manager">Installing cert-manager<a class="anchor" href="#installing-cert-manager">#</a></h1>
-<p>Throughout this course we install everything with <code>kubectl apply</code> - we&rsquo;ll get to <a href="../../kubernetes_v2/helm/">Helm</a> later. Same approach here:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.21.0/cert-manager.yaml</span></span></code></pre></div><p>The install is three parts: the CRDs (<code>Certificate</code>, <code>Issuer</code>, <code>CertificateRequest</code>&hellip;), the <code>cert-manager</code> namespace, and the controllers themselves. Give it a few seconds and check:</p>
+<h2 id="the-honest-requirements">The Honest Requirements<a class="anchor" href="#the-honest-requirements">#</a></h2>
+<ul>
+<li><strong>A cluster where you can <code>kubectl apply</code> CRDs.</strong> cert-manager ships about a dozen of them (<code>Certificate</code>, <code>Issuer</code>, <code>CertificateRequest</code>, <code>Order</code>, <code>Challenge</code>)</li>
+<li><strong>Three pods&rsquo; worth of headroom.</strong> The controller, the cainjector and the webhook together want roughly 200Mi; the webhook is the one that blocks everything if it&rsquo;s down</li>
+<li><strong>Gateway API CRDs installed before cert-manager starts</strong> - or restart cert-manager afterwards. Some components only check at startup</li>
+<li><strong>Patience for the first <code>Certificate</code>.</strong> The webhook has to be <code>Ready</code> before anything else is accepted; applying a <code>Certificate</code> in the first ten seconds is the classic false negative</li>
+</ul>
+<h2 id="how-to-install-cert-manager">How to Install cert-manager<a class="anchor" href="#how-to-install-cert-manager">#</a></h2>
+<p>Throughout the v1 notes we installed with <code>kubectl apply</code>; <a href="../helm/">helm</a> is the platform-team&rsquo;s tool and the <a href="../devops-control-plane/">devops-control-plane</a> notes use it for add-ons. Either works - the static manifest is one command:</p>
+<ol>
+<li>Install and let it settle:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.21.0/cert-manager.yaml</span></span></code></pre></div><ol start="2">
+<li>Confirm the three pods and the CRDs:</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -n cert-manager
-</span></span><span style="display:flex;"><span>kubectl get crds | grep cert-manager</span></span></code></pre></div><p>You want three pods: <code>cert-manager</code>, <code>cert-manager-cainjector</code>, <code>cert-manager-webhook</code>. Don&rsquo;t create any <code>Certificate</code> until all three are <code>Running</code> - if the webhook isn&rsquo;t up, requests get rejected.</p>
-<blockquote class='book-hint '>
-<p><strong>Dikkat:</strong> Gateway API CRD&rsquo;ları cert-manager&rsquo;dan <strong>önce</strong> kurulmuş olmalı, ya da cert-manager&rsquo;ı restart etmelisin. Bazı bileşenler bu kontrolü sadece startup&rsquo;ta yapar. Önceki bölümde Envoy Gateway&rsquo;i kurduğumuz için CRD&rsquo;lar zaten orada - ama sıralamayı bil. Çözümü tek satır: <code>kubectl rollout restart deployment cert-manager -n cert-manager</code></p>
-</blockquote><h1 id="path-a-explicit-certificate">Path A: Explicit Certificate<a class="anchor" href="#path-a-explicit-certificate">#</a></h1>
-<p>Let&rsquo;s start with the mechanism spelled out - this path needs no extra flags.</p>
-<h2 id="the-selfsigned-issuer">The SelfSigned issuer<a class="anchor" href="#the-selfsigned-issuer">#</a></h2>
-<p><code>synchat.internal</code> is not a real domain; no public CA will sign it. So we use an issuer that signs with itself:</p>
+</span></span><span style="display:flex;"><span>kubectl get crds | grep cert-manager</span></span></code></pre></div><p>You want <code>cert-manager</code>, <code>cert-manager-cainjector</code>, <code>cert-manager-webhook</code> all <code>Running</code>. Don&rsquo;t create any <code>Certificate</code> until they are - if the webhook isn&rsquo;t up, requests get rejected and it looks like your YAML is wrong.</p>
+<ol start="3">
+<li>Or, the Helm way (the same three components, one release):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add jetstack https://charts.jetstack.io
+</span></span><span style="display:flex;"><span>helm repo update
+</span></span><span style="display:flex;"><span>helm install cert-manager jetstack/cert-manager <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --namespace cert-manager --create-namespace <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --set crds.enabled<span style="color:#f92672">=</span>true</span></span></code></pre></div><blockquote class='book-hint '>
+<p><strong>Dikkat:</strong> Helm ile kurarsan CRD&rsquo;lar <code>crds/</code> klasöründen bir kez apply edilir ve <code>helm upgrade</code> ile <strong>asla</strong> güncellenmez - <a href="../helm/">helm</a> notlarındaki o tuhaf kural burada da geçerli. Sürüm yükseltirken CRD&rsquo;ları elle uygulamak ayrı bir adımdır.</p>
+</blockquote><h2 id="how-to-issue-a-certificate-by-hand">How to Issue a Certificate by Hand<a class="anchor" href="#how-to-issue-a-certificate-by-hand">#</a></h2>
+<p>Let&rsquo;s start with the mechanism spelled out - this path needs no extra flags and works the same on any Gateway controller.</p>
+<ol>
+<li>Create a <code>SelfSigned</code> issuer. <code>synchat.internal</code> is not a real domain; no public CA will sign it:</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">selfsigned</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">selfSigned</span>: {}</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get clusterissuer selfsigned</span></span></code></pre></div><p>The <code>READY</code> column should say <code>True</code>. A <code>SelfSigned</code> issuer has no external dependency at all - the certificate is signed with its own private key and there is no separate CA involved.</p>
-<h2 id="the-certificate">The Certificate<a class="anchor" href="#the-certificate">#</a></h2>
-<p>Now we say what we want:</p>
+<ol start="2">
+<li>Say what you want:</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Certificate</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
@@ -1360,12 +1415,15 @@ a private key a certificate signing request built from that key someone - a Cert
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">selfsigned</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">group</span>: <span style="color:#ae81ff">cert-manager.io</span></span></span></code></pre></div><p>That <code>subject</code> line is not decoration. On a self-signed certificate Subject DN equals Issuer DN, so leaving the subject empty leaves the Issuer DN empty too - and the X.509 spec technically calls that invalid. cert-manager emits a <code>BadConfig</code> event when it sees it. One line to avoid the whole problem.</p>
+<ol start="3">
+<li>Watch it land:</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get certificate synchat-tls
-</span></span><span style="display:flex;"><span>kubectl describe certificate synchat-tls</span></span></code></pre></div><p>Once <code>READY</code> is <code>True</code> the <code>Secret</code> exists too:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get secret synchat-tls
+</span></span><span style="display:flex;"><span>kubectl describe certificate synchat-tls
 </span></span><span style="display:flex;"><span>kubectl get secret synchat-tls -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.data.tls\.crt}&#39;</span> | base64 -d | openssl x509 -noout -text</span></span></code></pre></div><p>Both domains should show up under <code>Subject:</code> and <code>X509v3 Subject Alternative Name</code>.</p>
-<h2 id="wiring-it-into-the-gateway">Wiring it into the Gateway<a class="anchor" href="#wiring-it-into-the-gateway">#</a></h2>
-<p>Now let&rsquo;s turn the <code>app-gateway</code> from the <a href="../kubernetes-gateway-minikube/">gateway</a> chapter into real HTTPS. It&rsquo;s a <code>tls</code> block on the listeners:</p>
+<ol start="4">
+<li>Wire it into the <code>app-gateway</code> from the v1 <a href="../../kubernetes/kubernetes-gateway-minikube/">gateway</a> notes. It&rsquo;s a <code>tls</code> block on the listeners:</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">gateway.networking.k8s.io/v1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Gateway</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
@@ -1391,26 +1449,28 @@ a private key a certificate signing request built from that key someone - a Cert
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">tls</span>:
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">mode</span>: <span style="color:#ae81ff">Terminate</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">certificateRefs</span>:
-</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-tls</span></span></span></code></pre></div><p>Two listeners, the <strong>same</strong> <code>certificateRefs[].name</code>. That&rsquo;s deliberate: cert-manager merges the names and produces a single <code>Certificate</code>, de-duplicating <code>dnsNames</code>. Two hostnames, one certificate, one Secret. You <em>can</em> certify them separately, but why?</p>
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-tls</span></span></span></code></pre></div><p>Two listeners, the <strong>same</strong> <code>certificateRefs[].name</code>. That&rsquo;s deliberate: cert-manager merges the names and produces a single <code>Certificate</code>, de-duplicating <code>dnsNames</code>. Two hostnames, one certificate, one Secret.</p>
 <blockquote class='book-hint '>
 <p><code>tls.mode: Terminate</code> ends TLS at the gateway - the certificate is opened inside Envoy. <code>Passthrough</code> does not terminate and forwards the crypto to the backend, which this model does not support.</p>
 </blockquote><p><code>certificateRefs</code> is only a name; where the Secret lives is assumed to be the Gateway&rsquo;s <strong>own namespace</strong> (<code>default</code> for <code>app-gateway</code>). That&rsquo;s why the Certificate went there too.</p>
-<p>It&rsquo;s good practice to say which listener an HTTPRoute attaches to with <code>sectionName</code>:</p>
+<ol start="5">
+<li>Pin the HTTPRoutes to their listeners with <code>sectionName</code>:</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">parentRefs</span>:
 </span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-gateway</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">sectionName</span>: <span style="color:#ae81ff">web-https</span></span></span></code></pre></div><h1 id="path-b-the-annotation">Path B: The Annotation<a class="anchor" href="#path-b-the-annotation">#</a></h1>
-<p>In Path A we wrote the <code>Certificate</code> by hand. The real productivity gain is deriving it from the Gateway itself:</p>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">sectionName</span>: <span style="color:#ae81ff">web-https</span></span></span></code></pre></div><h2 id="how-to-derive-certificates-from-the-gateway">How to Derive Certificates from the Gateway<a class="anchor" href="#how-to-derive-certificates-from-the-gateway">#</a></h2>
+<p>Writing <code>Certificate</code> YAML by hand gets old. The productivity gain is letting cert-manager read the Gateway and generate them:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">app-gateway</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">annotations</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cert-manager.io/cluster-issuer</span>: <span style="color:#ae81ff">selfsigned</span></span></span></code></pre></div><p>With that annotation cert-manager starts watching the Gateway and generates the <code>Certificate</code> objects from its HTTPS listeners. You can stop writing <code>Certificate</code> YAML entirely.</p>
-<p>There is a cost: you have to <strong>turn on</strong> Gateway support. Installed with raw manifests (which is what we did), that&rsquo;s a flag:</p>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cert-manager.io/cluster-issuer</span>: <span style="color:#ae81ff">selfsigned</span></span></span></code></pre></div><p>With that annotation cert-manager starts watching the Gateway and creates the <code>Certificate</code> objects from its HTTPS listeners.</p>
+<p>There is a cost: you have to <strong>turn on</strong> Gateway support. With the static manifest install that&rsquo;s a flag on the controller:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl patch deployment cert-manager -n cert-manager --type<span style="color:#f92672">=</span>json <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>  -p<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;[{&#34;op&#34;:&#34;add&#34;,&#34;path&#34;:&#34;/spec/template/spec/containers/0/args/-&#34;,&#34;value&#34;:&#34;--enable-gateway-api&#34;}]&#39;</span>
 </span></span><span style="display:flex;"><span>kubectl rollout restart deployment cert-manager -n cert-manager</span></span></code></pre></div><blockquote class='book-hint '>
-<p>On Helm the equivalent is <code>--set config.gatewayAPI.enabled=true</code>. Raw manifests have no values.yaml, so the flag is the right tool.</p>
-</blockquote><h2 id="which-listeners-get-a-certificate">Which listeners get a Certificate?<a class="anchor" href="#which-listeners-get-a-certificate">#</a></h2>
+<p>On Helm the equivalent is <code>--set config.gatewayAPI.enabled=true</code>. The static manifest has no values.yaml, so the flag is the right tool.</p>
+</blockquote><h3 id="which-listeners-get-a-certificate">Which listeners get a Certificate?<a class="anchor" href="#which-listeners-get-a-certificate">#</a></h3>
 <p>cert-manager evaluates each listener individually and <strong>silently skips</strong> the ones that don&rsquo;t qualify. If a Certificate refuses to appear, this table is almost always why:</p>
 <table>
 	<thead>
@@ -1448,18 +1508,14 @@ a private key a certificate signing request built from that key someone - a Cert
 </table>
 <blockquote class='book-hint '>
 <p><strong>Dikkat:</strong> <code>dnsNames</code> HTTPRoute&rsquo;un <code>hostnames</code> alanından <strong>değil</strong>, listener&rsquo;ın <code>hostname</code> alanından gelir. HTTPRoute&rsquo;ta yazdığın isimler yönlendirme içindir; TLS isimleri listener&rsquo;da yaşar. İkisini karıştırmak, &ldquo;Certificate oluştu ama yanlış isimlere&rdquo; probleminin bir numaralı sebebi.</p>
-</blockquote><p><strong>Özetlersek:</strong> Path A = her şeyi sen yaz, her yerde çalışır. Path B = annotation yaz, cert-manager üretir, ama <code>--enable-gateway-api</code> ve listener kısıtları gerekir. İkisi aynı sonucu verir; fark YAML&rsquo;ı kimin yazdığı.</p>
-<h1 id="trust-a-real-ca-instead">Trust: A Real CA Instead<a class="anchor" href="#trust-a-real-ca-instead">#</a></h1>
+</blockquote><p><strong>Özetlersek:</strong> elle yaz = her yerde çalışır. annotation = cert-manager üretir ama <code>--enable-gateway-api</code> ve listener kısıtları gerekir. İkisi aynı sonucu verir; fark YAML&rsquo;ı kimin yazdığı.</p>
+<h2 id="how-to-build-a-real-ca-chain">How to Build a Real CA Chain<a class="anchor" href="#how-to-build-a-real-ca-chain">#</a></h2>
 <p>Everything so far worked - but open <code>https://synchat.internal</code> in a browser and you get &ldquo;Your connection is not private&rdquo;. The reason matters: every self-signed certificate <strong>is its own root</strong>. To trust it you have to add that specific certificate to your trust store. Two hostnames, two separate trust problems.</p>
-<p>The real world doesn&rsquo;t work like that. Let&rsquo;s Encrypt and corporate PKIs have a <strong>root CA</strong>; every leaf is signed by it and that one root is trusted once. You can build the same shape locally - and it is exactly what cert-manager recommends <code>SelfSigned</code> for:</p>
+<p>The real world doesn&rsquo;t work like that. Let&rsquo;s Encrypt and corporate PKIs have a <strong>root CA</strong>; every leaf is signed by it and that one root is trusted once. You can build the same shape locally - and it is exactly what cert-manager recommends <code>SelfSigned</code> for.</p>
+<ol>
+<li>Keep the <code>selfsigned</code> issuer, but use it only to bootstrap a root. Note <code>namespace: cert-manager</code>: a <code>ClusterIssuer</code> is not namespaced, so <code>ca.secretName</code> is assumed to live in the <code>cert-manager</code> namespace.</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">selfsigned</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selfSigned</span>: {}
-</span></span><span style="display:flex;"><span>---
-</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Certificate</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-root-ca</span>
@@ -1474,39 +1530,29 @@ a private key a certificate signing request built from that key someone - a Cert
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">issuerRef</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">selfsigned</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">group</span>: <span style="color:#ae81ff">cert-manager.io</span>
-</span></span><span style="display:flex;"><span>---
-</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">group</span>: <span style="color:#ae81ff">cert-manager.io</span></span></span></code></pre></div><ol start="2">
+<li>Point a second <code>ClusterIssuer</code> at that Secret:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-ca</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">ca</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">synchat-root-ca-secret</span>
-</span></span><span style="display:flex;"><span>---
-</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">cert-manager.io/v1</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Certificate</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-tls</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">synchat-tls</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dnsNames</span>:
-</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">synchat.internal</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">synchatapi.internal</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">secretName</span>: <span style="color:#ae81ff">synchat-root-ca-secret</span></span></span></code></pre></div><ol start="3">
+<li>Re-issue the leaf from the new issuer - <code>issuerRef</code> changes from <code>selfsigned</code> to <code>synchat-ca</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">issuerRef</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-ca</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ClusterIssuer</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">group</span>: <span style="color:#ae81ff">cert-manager.io</span></span></span></code></pre></div><p>Reading the chain matters, because every line has a reason:</p>
-<ol>
-<li><code>selfsigned</code> only performs the <strong>first step</strong> - its whole job is bootstrapping the root</li>
-<li><code>synchat-root-ca</code> is a certificate but flagged <code>isCA: true</code>; it self-signs and is written to a <code>Secret</code> in the <code>cert-manager</code> namespace</li>
-<li>a second <code>ClusterIssuer</code> called <code>synchat-ca</code> uses that <code>Secret</code> as its CA</li>
-<li><code>synchat-tls</code> now asks <code>synchat-ca</code>, not <code>selfsigned</code> - so it is <strong>signed by the root</strong></li>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">group</span>: <span style="color:#ae81ff">cert-manager.io</span></span></span></code></pre></div><ol start="4">
+<li>Prove the chain is real:</li>
 </ol>
-<p>The <code>namespace: cert-manager</code> line is not arbitrary: a <code>ClusterIssuer</code> is not namespaced, so <code>ca.secretName</code> is assumed to live in the <code>cert-manager</code> namespace. That&rsquo;s where the root goes.</p>
-<p>See the difference for yourself:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get secret synchat-tls -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.data.tls\.crt}&#39;</span> | base64 -d | openssl x509 -noout -issuer -subject</span></span></code></pre></div><p>Now <code>issuer=</code> and <code>subject=</code> must be <strong>different</strong>. Different means the chain is real.</p>
-<p>Add the root to your trust store once (macOS Keychain, or <code>/usr/local/share/ca-certificates/</code> on Linux) and both hostnames open without warnings. <code>ca.crt</code> is already in the Secret:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get secret synchat-tls -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.data.tls\.crt}&#39;</span> | base64 -d | openssl x509 -noout -issuer -subject</span></span></code></pre></div><p>Now <code>issuer=</code> and <code>subject=</code> must be <strong>different</strong>. Different means something signed it.</p>
+<ol start="5">
+<li>Add the root to your trust store once (macOS Keychain, or <code>/usr/local/share/ca-certificates/</code> on Linux) and both hostnames open without warnings:</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get secret synchat-root-ca-secret -n cert-manager -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.data.ca\.crt}&#39;</span> | base64 -d &gt; synchat-root-ca.pem</span></span></code></pre></div><table>
 	<thead>
 			<tr>
@@ -1543,7 +1589,9 @@ a private key a certificate signing request built from that key someone - a Cert
 			</tr>
 	</tbody>
 </table>
-<h1 id="ingress-vs-gateway">Ingress vs Gateway<a class="anchor" href="#ingress-vs-gateway">#</a></h1>
+<blockquote class='book-hint '>
+<p>Distributing that root across a real fleet is not a <code>cp</code> command - that&rsquo;s what <a href="./cert-manager-production/">trust-manager</a> is for, and it has its own trap around CA rotation.</p>
+</blockquote><h2 id="ingress-vs-gateway">Ingress vs Gateway<a class="anchor" href="#ingress-vs-gateway">#</a></h2>
 <p>cert-manager works with both APIs, but where TLS is <strong>declared</strong> changes. This is where Ingress users get stuck:</p>
 <table>
 	<thead>
@@ -1585,47 +1633,40 @@ a private key a certificate signing request built from that key someone - a Cert
 <blockquote class='book-hint '>
 <p><code>ingress-nginx</code> has been officially EOL since early 2026. For anything new, Gateway API is the destination. Know Ingress, but don&rsquo;t build on it.</p>
 </blockquote><p><strong>Özetlersek:</strong> Ingress&rsquo;te TLS&rsquo;i <em>sen</em> Ingress&rsquo;in içinde tarif edersin, app ekibi kendi başına yönetir. Gateway&rsquo;de TLS <em>Gateway</em>&lsquo;in içinde yaşar ve genelde platform ekibinin kontrolündedir - ki bu yüzden <code>ListenerSet</code> diye bir kaynak geliştiriliyor.</p>
-<h1 id="troubleshooting">Troubleshooting<a class="anchor" href="#troubleshooting">#</a></h1>
+<h2 id="how-to-troubleshoot-a-stuck-certificate">How to Troubleshoot a Stuck Certificate<a class="anchor" href="#how-to-troubleshoot-a-stuck-certificate">#</a></h2>
 <p>TLS that doesn&rsquo;t work doesn&rsquo;t come with an error message, it comes with silence. In order:</p>
 <p><strong><code>Certificate</code> is <code>Ready: False</code></strong> — the detail is always there:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl describe certificate synchat-tls
 </span></span><span style="display:flex;"><span>kubectl get certificaterequest
 </span></span><span style="display:flex;"><span>kubectl describe certificaterequest &lt;name&gt;</span></span></code></pre></div><p>The <code>message</code> under Conditions is the real reason (<code>referenced signer resource does not exist</code>, <code>secret &quot;...&quot; not found</code>&hellip;).</p>
 <p><strong>The <code>Secret</code> never appears</strong> — is the <code>Certificate</code> <code>Ready</code>? Does <code>certificateRefs[].namespace</code> match the Gateway&rsquo;s? A cross-namespace reference is skipped silently.</p>
-<p><strong>No Certificate is generated (Path B)</strong> — three checks in order: is <code>--enable-gateway-api</code> on (<code>kubectl get deployment cert-manager -n cert-manager -o jsonpath='{.spec.template.spec.containers[0].args}'</code>), is the annotation spelled right, does the listener satisfy the constraints table. An empty <code>hostname</code> skips the listener.</p>
+<p><strong>No Certificate is generated</strong> — three checks in order: is <code>--enable-gateway-api</code> on (<code>kubectl get deployment cert-manager -n cert-manager -o jsonpath='{.spec.template.spec.containers[0].args}'</code>), is the annotation spelled right, does the listener satisfy the constraints table. An empty <code>hostname</code> skips the listener.</p>
 <p><strong>HTTPS works but the name is wrong</strong> — look at <code>dnsNames</code>. If it&rsquo;s wrong, fix <code>hostname</code> on the <strong>listener</strong>, not on the HTTPRoute.</p>
-<p><strong>The browser still warns</strong> — that&rsquo;s not a cert-manager problem, that&rsquo;s a trust problem. If you&rsquo;re on <code>SelfSigned</code>, switch to the CA chain or add the root to your trust store. Use <code>openssl x509 -noout -issuer -subject</code> to tell whether a chain exists at all.</p>
-<p><strong>The old certificate is still being served</strong> — the Secret updated but Envoy hasn&rsquo;t reloaded it. Usually just waiting works; controllers pick up Secret changes.</p>
-<h1 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h1>
-<p>Let&rsquo;s make the <code>app-gateway</code> from the gateway chapter into real HTTPS - without warnings.</p>
+<p><strong>The browser still warns</strong> — that&rsquo;s not a cert-manager problem, that&rsquo;s a trust problem. Use <code>openssl x509 -noout -issuer -subject</code> to tell whether a chain exists at all.</p>
+<p><strong>The old certificate is still being served</strong> — the Secret updated but Envoy hasn&rsquo;t reloaded it. Usually just waiting works.</p>
+<h2 id="how-to-verify-tls-actually-works">How to Verify TLS Actually Works<a class="anchor" href="#how-to-verify-tls-actually-works">#</a></h2>
+<p>The full loop, end to end:</p>
 <ol>
 <li>
-<p>Build the CA chain: a <code>selfsigned</code> ClusterIssuer, a <code>synchat-root-ca</code> with <code>isCA: true</code> (in the <code>cert-manager</code> namespace), and a <code>synchat-ca</code> ClusterIssuer. One file is fine.</p>
+<p>Build the CA chain (<code>selfsigned</code> → <code>synchat-root-ca</code> with <code>isCA: true</code> → <code>synchat-ca</code>), then ask <code>synchat-ca</code> for <code>synchat-tls</code> covering both hostnames.</p>
 </li>
 <li>
-<p>Write the <code>synchat-tls</code> Certificate. <code>secretName: synchat-tls</code>, <code>dnsNames</code> with <code>synchat.internal</code> <strong>and</strong> <code>synchatapi.internal</code>, <code>issuerRef</code> → <code>synchat-ca</code>.</p>
+<p>Add <code>cert-manager.io/cluster-issuer: synchat-ca</code> to <code>app-gateway</code>, rewrite the listeners as <code>web-https</code> and <code>api-https</code> (both <code>tls.mode: Terminate</code>, same <code>certificateRefs[].name</code>), and pin the HTTPRoutes with <code>sectionName</code>.</p>
 </li>
 <li>
-<p>Add the <code>cert-manager.io/cluster-issuer: synchat-ca</code> annotation to <code>app-gateway</code>. If you take Path B, confirm <code>--enable-gateway-api</code> is on and then delete the hand-written Certificate - cert-manager will generate it. Either way, rewrite the listeners as <code>web-https</code> and <code>api-https</code>, both with <code>tls.mode: Terminate</code> and the same <code>certificateRefs[].name</code>.</p>
-</li>
-<li>
-<p>Don&rsquo;t forget <code>sectionName</code> on the HTTPRoutes: <code>web-https</code> for web, <code>api-https</code> for api.</p>
-</li>
-<li>
-<p>Verify:</p>
+<p>Check the artifact, not the controller:</p>
 </li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get certificate
 </span></span><span style="display:flex;"><span>kubectl get secret synchat-tls -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.data.tls\.crt}&#39;</span> | base64 -d | openssl x509 -noout -issuer -subject -ext subjectAltName
-</span></span><span style="display:flex;"><span>curl -kv https://synchat.internal 2&gt;&amp;<span style="color:#ae81ff">1</span> | grep -E <span style="color:#e6db74">&#34;subject:|issuer:|SSL certificate&#34;</span></span></span></code></pre></div><p>What you want: <code>certificate</code> <code>READY</code> <code>True</code>, issuer and subject <strong>different</strong>, <code>subjectAltName</code> containing both names, and both visible in the <code>curl</code> output.</p>
-<ol start="6">
-<li>The last step is the actual payoff. Add the root CA to your trust store and open <code>https://synchat.internal</code> in a browser:</li>
+</span></span><span style="display:flex;"><span>curl -kv https://synchat.internal 2&gt;&amp;<span style="color:#ae81ff">1</span> | grep -E <span style="color:#e6db74">&#34;subject:|issuer:|SSL certificate&#34;</span></span></span></code></pre></div><p>What you want: <code>READY</code> <code>True</code>, issuer and subject <strong>different</strong>, <code>subjectAltName</code> containing both names.</p>
+<ol start="4">
+<li>The payoff. Add the root to your trust store and open <code>https://synchat.internal</code> in a browser. When it opens with no warning, TLS is actually <strong>working</strong>.</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get secret synchat-root-ca-secret -n cert-manager -o jsonpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{.data.tls\.crt}&#39;</span> | base64 -d &gt; synchat-root-ca.pem</span></span></code></pre></div><p>When it opens with no warning, you&rsquo;ve seen TLS actually <strong>work</strong>. Getting a certificate and plugging it into a Gateway was the easy half; making it trusted and self-renewing was the real job.</p>
 <blockquote class='book-hint '>
 <p><strong>Dikkat:</strong> <code>Certificate</code>&lsquo;ı Gateway&rsquo;in namespace&rsquo;i dışında yazarsan sonuç sessizce bozulur. <code>Certificate</code> namespace&rsquo;i, <code>certificateRefs</code>&lsquo;un bakacağı namespace ile <strong>aynı</strong> olmalı - <code>app-gateway</code> için bu <code>default</code>.</p>
-</blockquote><p>The next chapter takes this to a real cluster: ACME, Let&rsquo;s Encrypt, wildcards, renewal windows, trust distribution and monitoring.</p>
-<p>for more <a href="../kubernetes-cert-manager-production/">cert-manager-production</a></p>
+</blockquote><p>Getting a certificate and plugging it into a Gateway was the easy half. The next chapter takes this to a real cluster: ACME, Let&rsquo;s Encrypt, wildcards, renewal windows, trust distribution and monitoring.</p>
+<p>for more <a href="../cert-manager-production/">cert-manager-production</a></p>
 </article>
  
       
@@ -1647,16 +1688,16 @@ a private key a certificate signing request built from that key someone - a Cert
 <div class="flex flex-wrap justify-between">
     <span>
     
-      <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="flex align-center">
+      <a href="/docs/kubernetes_v2/devops-control-plane/" class="flex align-center">
         <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
-        <span>kubernetes-gateway-minikube</span>
+        <span>devops-control-plane</span>
       </a>
     
     </span>
     <span>
     
-      <a href="/docs/kubernetes/kubernetes-cert-manager-production/" class="flex align-center">
-        <span>kubernetes-cert-manager-production</span>
+      <a href="/docs/kubernetes_v2/cert-manager-production/" class="flex align-center">
+        <span>cert-manager-production</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     
@@ -1693,13 +1734,19 @@ a private key a certificate signing request built from that key someone - a Cert
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#the-selfsigned-issuer">The SelfSigned issuer</a></li>
-    <li><a href="#the-certificate">The Certificate</a></li>
-    <li><a href="#wiring-it-into-the-gateway">Wiring it into the Gateway</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#which-listeners-get-a-certificate">Which listeners get a Certificate?</a></li>
+    <li><a href="#the-three-objects">The Three Objects</a></li>
+    <li><a href="#the-honest-requirements">The Honest Requirements</a></li>
+    <li><a href="#how-to-install-cert-manager">How to Install cert-manager</a></li>
+    <li><a href="#how-to-issue-a-certificate-by-hand">How to Issue a Certificate by Hand</a></li>
+    <li><a href="#how-to-derive-certificates-from-the-gateway">How to Derive Certificates from the Gateway</a>
+      <ul>
+        <li><a href="#which-listeners-get-a-certificate">Which listeners get a Certificate?</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-to-build-a-real-ca-chain">How to Build a Real CA Chain</a></li>
+    <li><a href="#ingress-vs-gateway">Ingress vs Gateway</a></li>
+    <li><a href="#how-to-troubleshoot-a-stuck-certificate">How to Troubleshoot a Stuck Certificate</a></li>
+    <li><a href="#how-to-verify-tls-actually-works">How to Verify TLS Actually Works</a></li>
   </ul>
 </nav>
 

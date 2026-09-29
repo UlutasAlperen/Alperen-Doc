@@ -39,17 +39,15 @@ For example, you _could_ install Docker on a single server, and route traffic di
 10. [kubernetes-services](kubernetes-services/)
 11. [kubernetes-ingress](kubernetes-ingress/)
 12. [kubernetes-gateway-minikube](kubernetes-gateway-minikube/)
-13. [kubernetes-cert-manager](kubernetes-cert-manager/)
-14. [kubernetes-cert-manager-production](kubernetes-cert-manager-production/)
-15. [kubernetes-namespaces](kubernetes-namespaces/)
-16. [kubernetes-dns-coredns](kubernetes-dns-coredns/)
-17. [kubernetes-scaling-vertical](kubernetes-scaling-vertical/)
-18. [kubernetes-scaling-horizontal](kubernetes-scaling-horizontal/)
-19. [kubernetes-storage](kubernetes-storage/)
-20. [kubernetes-persistent-volumes](kubernetes-persistent-volumes/)
-21. [kubernetes-storage-classes](kubernetes-storage-classes/)
-22. [kubernetes-statefulsets](kubernetes-statefulsets/)
-23. [kubernetes-nodes-basic](kubernetes-nodes-basic/)
+13. [kubernetes-namespaces](kubernetes-namespaces/)
+14. [kubernetes-dns-coredns](kubernetes-dns-coredns/)
+15. [kubernetes-scaling-vertical](kubernetes-scaling-vertical/)
+16. [kubernetes-scaling-horizontal](kubernetes-scaling-horizontal/)
+17. [kubernetes-storage](kubernetes-storage/)
+18. [kubernetes-persistent-volumes](kubernetes-persistent-volumes/)
+19. [kubernetes-storage-classes](kubernetes-storage-classes/)
+20. [kubernetes-statefulsets](kubernetes-statefulsets/)
+21. [kubernetes-nodes-basic](kubernetes-nodes-basic/)
 
 ### Temeller
 
@@ -71,8 +69,6 @@ For example, you _could_ install Docker on a single server, and route traffic di
 - [kubernetes-services](kubernetes-services/) = `ClusterIP`, `NodePort`, `LoadBalancer`, `ExternalName`, stable endpoint ve load balancing
 - [kubernetes-ingress](kubernetes-ingress/) = Ingress controller (nginx) vs Ingress resource, host/path kuralları, `ingressClassName`, TLS + Secret
 - [kubernetes-gateway-minikube](kubernetes-gateway-minikube/) = Gateway API (Envoy), `HTTPRoute`, `/etc/hosts` + `minikube tunnel`, annotations
-- [kubernetes-cert-manager](kubernetes-cert-manager/) = `Issuer`/`ClusterIssuer`/`Certificate`, SelfSigned vs `isCA`+`CA` zinciri, Gateway `certificateRefs` + `cert-manager.io/cluster-issuer`
-- [kubernetes-cert-manager-production](kubernetes-cert-manager-production/) = ACME (staging/prod, rate limits), HTTP-01 vs DNS-01, wildcard, renewal/ARI, trust-manager `Bundle`, Prometheus alert, hardening/HA
 - [kubernetes-namespaces](kubernetes-namespaces/) = `kubectl create ns`, `-n` flag, intra-cluster DNS (`svc.cluster.local`)
 - [kubernetes-dns-coredns](kubernetes-dns-coredns/) = CoreDNS + Corefile ConfigMap, `dnsPolicy`/`ndots`, `nslookup` ile DNS troubleshooting, kube-dns servisi
 

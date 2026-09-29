@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-namespaces"
-weight: 15
+weight: 13
 ---
 # Namespaces
 

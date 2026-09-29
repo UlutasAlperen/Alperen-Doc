@@ -26,7 +26,7 @@ A Gateway describes an instance of traffic handling infrastructure. It defines a
 	<meta itemprop="name" content="kubernetes-gateway-minikube">
 	<meta itemprop="description" content="Gateway# A Gateway resource exposes services to the outside world and is used often in production environments. From the docs:
 A Gateway describes an instance of traffic handling infrastructure. It defines a network endpoint that can be used for processing traffic, i.e. filtering, balancing, splitting, etc. for backends such as a Service. For example, a Gateway may represent a cloud load balancer or an in-cluster proxy server that is configured to accept HTTP traffic.">
-	<meta itemprop="wordCount" content="1330">
+	<meta itemprop="wordCount" content="1363">
 
 <title>kubernetes-gateway-minikube • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ A Gateway describes an instance of traffic handling infrastructure. It defines a
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.b3b67f3998eeec3ba80293adc22a5bab03b992bd223eadc63d33fb3a692419a2.js" integrity="sha256-s7Z/OZju7DuoApOtwipbqwO5kr0iPq3GPTP7OmkkGaI=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.cd823bdd5e16ccbf637a963a4680fc925a30a299c11038aa2b7d58d4848dac56.js" integrity="sha256-zYI73V4WzL9jepY6RoD8klowopnBEDiqK31Y1ISNrFY=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -805,34 +805,6 @@ A Gateway describes an instance of traffic handling infrastructure. It defines a
   
 
   
-    <a href="/docs/kubernetes/kubernetes-cert-manager/" class="">
-      kubernetes-cert-manager</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/kubernetes/kubernetes-cert-manager-production/" class="">
-      kubernetes-cert-manager-production</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
     <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
       kubernetes-namespaces</a>
   
@@ -1192,6 +1164,62 @@ A Gateway describes an instance of traffic handling infrastructure. It defines a
   
 
   
+    <a href="/docs/kubernetes_v2/cert-manager/" class="">
+      cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager-production/" class="">
+      cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/prometheus-stack/" class="">
+      prometheus-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/victoriametrics/" class="">
+      victoriametrics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/kubernetes_v2/longhorn/" class="">
       longhorn</a>
   
@@ -1421,7 +1449,9 @@ A Gateway describes an instance of traffic handling infrastructure. It defines a
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">annotations</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">networking.gke.io/certmap</span>: <span style="color:#ae81ff">certmap-name-here</span></span></span></code></pre></div><p>If you&rsquo;re curious about the specifics, the <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/deploying-gateways">docs are here</a>. In a nutshell, however, the important take-away is that in most production deployments you&rsquo;ll be using annotations specific to the cloud provider you&rsquo;re using. Each major cloud provider has their own products, so you need to use k8s annotations and extensions specific to that cloud provider.</p>
 <p>Now that you understand the basic concepts of Gateway, in the future, it&rsquo;s just a matter of following the documentation for your cloud provider to get it set up.</p>
-<h1 id="chat">Chat<a class="anchor" href="#chat">#</a></h1>
+<blockquote class='book-hint '>
+<p>TLS is the one thing deliberately left off this HTTP-only Gateway. Making it real - a <code>Certificate</code>, a CA chain, <code>certificateRefs</code> on the listeners - is the <a href="../../kubernetes_v2/cert-manager/">cert-manager</a> chapter in the v2 notes.</p>
+</blockquote><h1 id="chat">Chat<a class="anchor" href="#chat">#</a></h1>
 <p>Now that everything is accessible via Gateway (at least while the tunnel is open), let&rsquo;s connect the web application front-end to the API.</p>
 <h2 id="example-1">example<a class="anchor" href="#example-1">#</a></h2>
 <ol>
@@ -1442,7 +1472,7 @@ A Gateway describes an instance of traffic handling infrastructure. It defines a
 <li>The messages should still be there because they&rsquo;re saved in the server&rsquo;s memory.</li>
 <li>Now, delete the <code>api</code> pod</li>
 <li>Once k8s replaces the deleted pod with a new one, refresh the page again.
-for more <a href="../kubernetes-cert-manager/">cert-manager</a></li>
+for more <a href="../kubernetes-namespaces/">namespaces</a></li>
 </ol>
 </article>
  
@@ -1473,8 +1503,8 @@ for more <a href="../kubernetes-cert-manager/">cert-manager</a></li>
     </span>
     <span>
     
-      <a href="/docs/kubernetes/kubernetes-cert-manager/" class="flex align-center">
-        <span>kubernetes-cert-manager</span>
+      <a href="/docs/kubernetes/kubernetes-namespaces/" class="flex align-center">
+        <span>kubernetes-namespaces</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     

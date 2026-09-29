@@ -315,4 +315,4 @@ Türkçe homelab→platform geçiş checklist:
 7. Uygulama değişiklikleri PR + ArgoCD ile mi (laptop'tan apply yok)
 8. Quota/LimitRange her namespace'de, admission policy repo'da mı
 
-for more [longhorn](../longhorn/)
+for more [cert-manager](../cert-manager/)

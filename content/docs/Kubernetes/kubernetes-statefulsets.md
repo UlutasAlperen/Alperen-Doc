@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-statefulsets"
-weight: 22
+weight: 20
 ---
 # StatefulSets
 

@@ -96,20 +96,6 @@
 				<description>&lt;h1 id=&#34;gateway&#34;&gt;Gateway&lt;a class=&#34;anchor&#34; href=&#34;#gateway&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;A &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/gateway/&#34;&gt;Gateway&lt;/a&gt; resource exposes services to the outside world and is used often in production environments. From the docs:&lt;/p&gt;&#xA;&lt;blockquote class=&#39;book-hint &#39;&gt;&#xA;&lt;p&gt;A Gateway describes an instance of traffic handling infrastructure. It defines a network endpoint that can be used for processing traffic, i.e. filtering, balancing, splitting, etc. for backends such as a Service. For example, a Gateway may represent a cloud load balancer or an in-cluster proxy server that is configured to accept HTTP traffic.&lt;/p&gt;</description>
 			</item>
 			<item>
-				<title>kubernetes-cert-manager</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-cert-manager/</link>
-				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-cert-manager/</guid>
-				<description>&lt;h1 id=&#34;tls-without-hand-rolling-secrets&#34;&gt;TLS Without Hand-Rolling Secrets&lt;a class=&#34;anchor&#34; href=&#34;#tls-without-hand-rolling-secrets&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;In the &lt;a href=&#34;../kubernetes-ingress/&#34;&gt;ingress&lt;/a&gt; chapter we said that real clusters &amp;ldquo;get this issued automatically by cert-manager instead of hand-rolling it&amp;rdquo;. That was a promise we haven&amp;rsquo;t paid off yet. Let&amp;rsquo;s pay it off.&lt;/p&gt;&#xA;&lt;p&gt;Here is what a TLS certificate actually requires, every single time:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;a private key&lt;/li&gt;&#xA;&lt;li&gt;a certificate signing request built from that key&lt;/li&gt;&#xA;&lt;li&gt;someone - a Certificate Authority - to sign it&lt;/li&gt;&#xA;&lt;li&gt;a renewal before it expires (Let&amp;rsquo;s Encrypt certs last 90 days)&lt;/li&gt;&#xA;&lt;li&gt;the result copied into a &lt;code&gt;Secret&lt;/code&gt; in the right namespace, in the right format&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Do that by hand for two hostnames and you have already lost an afternoon. &lt;a href=&#34;https://cert-manager.io/&#34;&gt;cert-manager&lt;/a&gt; is a controller that does all five as a Kubernetes reconciliation loop: you declare &lt;em&gt;what&lt;/em&gt; you want, it keeps it true forever - including the renewal.&lt;/p&gt;</description>
-			</item>
-			<item>
-				<title>kubernetes-cert-manager-production</title>
-				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-cert-manager-production/</link>
-				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-cert-manager-production/</guid>
-				<description>&lt;h1 id=&#34;why-production-is-different&#34;&gt;Why Production Is Different&lt;a class=&#34;anchor&#34; href=&#34;#why-production-is-different&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;The previous chapter taught the mechanism: &lt;code&gt;Issuer&lt;/code&gt;, &lt;code&gt;Certificate&lt;/code&gt;, &lt;code&gt;Secret&lt;/code&gt;, and a Gateway that serves it. Everything worked because we controlled every variable - a fake domain, a self-signed root, a laptop that trusts whatever we tell it to.&lt;/p&gt;&#xA;&lt;p&gt;Production removes that control. The domain is public and someone else owns the DNS. The certificate has to be trusted by browsers you don&amp;rsquo;t administer. It expires on a schedule you don&amp;rsquo;t choose. And when the automation silently stops working, the outage looks like &amp;ldquo;the website is down&amp;rdquo; rather than &amp;ldquo;a controller is in a crash loop&amp;rdquo;.&lt;/p&gt;</description>
-			</item>
-			<item>
 				<title>kubernetes-namespaces</title>
 				<link>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-namespaces/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

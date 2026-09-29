@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="VictoriaMetrics# The prometheus-stack chapter gave you a working monitoring stack. This one asks a different question: if you were starting over, would you still pick Prometheus as the storage engine?
+VictoriaMetrics is a metrics database that speaks the same scrape protocol and mostly the same query language, but is built differently underneath - columnar storage, aggressive compression, no local TSDB churn. The usual reasons people move: less memory per series, longer retention on the same disk, and cardinality explosions that don’t take the database down with them.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/victoriametrics/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="victoriametrics">
+	<meta property="og:description" content="VictoriaMetrics# The prometheus-stack chapter gave you a working monitoring stack. This one asks a different question: if you were starting over, would you still pick Prometheus as the storage engine?
+VictoriaMetrics is a metrics database that speaks the same scrape protocol and mostly the same query language, but is built differently underneath - columnar storage, aggressive compression, no local TSDB churn. The usual reasons people move: less memory per series, longer retention on the same disk, and cardinality explosions that don’t take the database down with them.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="victoriametrics">
+	<meta itemprop="description" content="VictoriaMetrics# The prometheus-stack chapter gave you a working monitoring stack. This one asks a different question: if you were starting over, would you still pick Prometheus as the storage engine?
+VictoriaMetrics is a metrics database that speaks the same scrape protocol and mostly the same query language, but is built differently underneath - columnar storage, aggressive compression, no local TSDB churn. The usual reasons people move: less memory per series, longer retention on the same disk, and cardinality explosions that don’t take the database down with them.">
+	<meta itemprop="wordCount" content="1194">
+
+<title>victoriametrics • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/kubernetes_v2/victoriametrics/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.cd823bdd5e16ccbf637a963a4680fc925a30a299c11038aa2b7d58d4848dac56.js" integrity="sha256-zYI73V4WzL9jepY6RoD8klowopnBEDiqK31Y1ISNrFY=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic-git-conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic-git-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github-workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous-integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous-deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git-status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git-add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git-commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git-push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git-branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git-pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git-log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git-merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git-rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git-reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git-remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git-switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle" checked />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager/" class="">
+      cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager-production/" class="">
+      cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/prometheus-stack/" class="">
+      prometheus-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/victoriametrics/" class="active">
+      victoriametrics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>victoriametrics</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#why-not-just-prometheus">Why Not Just Prometheus</a></li>
+    <li><a href="#the-architecture">The Architecture</a></li>
+    <li><a href="#the-honest-requirements">The Honest Requirements</a></li>
+    <li><a href="#how-to-install-victoria-metrics-k8s-stack-with-helm">How to Install victoria-metrics-k8s-stack with Helm</a></li>
+    <li><a href="#how-to-translate-prometheus-objects-to-vm-ones">How to Translate Prometheus Objects to VM Ones</a></li>
+    <li><a href="#how-to-choose-single-vs-cluster">How to Choose Single vs Cluster</a></li>
+    <li><a href="#how-to-verify-it-actually-works">How to Verify It Actually Works</a></li>
+    <li><a href="#when-to-pick-which">When to Pick Which</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="victoriametrics">VictoriaMetrics<a class="anchor" href="#victoriametrics">#</a></h1>
+<p>The <a href="../prometheus-stack/">prometheus-stack</a> chapter gave you a working monitoring stack. This one asks a different question: if you were starting over, would you still pick Prometheus as the storage engine?</p>
+<p><a href="https://docs.victoriametrics.com/">VictoriaMetrics</a> is a metrics database that speaks the same scrape protocol and mostly the same query language, but is built differently underneath - columnar storage, aggressive compression, no local TSDB churn. The usual reasons people move: less memory per series, longer retention on the same disk, and cardinality explosions that don&rsquo;t take the database down with them.</p>
+<p>It is <strong>not</strong> a drop-in replacement for everything Prometheus does. Alert evaluation, scraping and the operator model all still exist - but they come from VictoriaMetrics&rsquo; own operator and CRDs, which is the part that trips people up.</p>
+<p><strong>Özetlersek:</strong> Prometheus ekosistemi (scrape, PromQL, alert) aynen kalır; değişen şey verinin nerede durduğu. &ldquo;Daha az kaynak, daha uzun retansiyon&rdquo; için geçilir - ama CRD isimleri değiştiği için her objeyi yeniden yazman gerekir.</p>
+<h2 id="why-not-just-prometheus">Why Not Just Prometheus<a class="anchor" href="#why-not-just-prometheus">#</a></h2>
+<p>An honest comparison, because neither wins outright:</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Prometheus</th>
+					<th>VictoriaMetrics</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Storage</td>
+					<td>local TSDB, per-scrape head churn</td>
+					<td>columnar, better compression</td>
+			</tr>
+			<tr>
+					<td>Memory per series</td>
+					<td>higher</td>
+					<td>noticeably lower</td>
+			</tr>
+			<tr>
+					<td>Long retention</td>
+					<td>painful on disk</td>
+					<td>cheap</td>
+			</tr>
+			<tr>
+					<td>High cardinality</td>
+					<td>degrades, then hurts</td>
+					<td>handles it much better</td>
+			</tr>
+			<tr>
+					<td>Query language</td>
+					<td>PromQL</td>
+					<td>MetricsQL (PromQL superset)</td>
+			</tr>
+			<tr>
+					<td>Ecosystem / docs</td>
+					<td>enormous</td>
+					<td>smaller but good</td>
+			</tr>
+			<tr>
+					<td>Maturity of the operator</td>
+					<td>very mature</td>
+					<td>catching up fast</td>
+			</tr>
+			<tr>
+					<td>Downsampling / tiering</td>
+					<td>needs Thanos/Mimir</td>
+					<td>built in</td>
+			</tr>
+	</tbody>
+</table>
+<p>Where Prometheus still wins: community answers, Stack Overflow, the sheer number of dashboards and blog posts. Where VictoriaMetrics wins: the same hardware stores several times more history, and your <code>topk</code> queries stop timing out.</p>
+<h2 id="the-architecture">The Architecture<a class="anchor" href="#the-architecture">#</a></h2>
+<p>The pieces map onto the Prometheus ones almost one-for-one:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Prometheus concept</th>
+					<th>VictoriaMetrics equivalent</th>
+					<th>Notes</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>prometheus-operator</td>
+					<td><strong>victoria-metrics-operator</strong></td>
+					<td>reconciles VM CRDs</td>
+			</tr>
+			<tr>
+					<td>Prometheus</td>
+					<td><strong>VMSingle</strong> (one node) / <strong>VMCluster</strong> (distributed)</td>
+					<td>the TSDB</td>
+			</tr>
+			<tr>
+					<td>-</td>
+					<td><strong>VMAgent</strong></td>
+					<td>scraping + remote write (replaces Prometheus&rsquo; scrape role)</td>
+			</tr>
+			<tr>
+					<td>-</td>
+					<td><strong>VMAlert</strong></td>
+					<td>rule/alert evaluation</td>
+			</tr>
+			<tr>
+					<td>PrometheusRule</td>
+					<td><strong>VMRule</strong></td>
+					<td>same rule syntax, different kind</td>
+			</tr>
+			<tr>
+					<td>ServiceMonitor / PodMonitor</td>
+					<td><strong>VMServiceScrape</strong> / <strong>VMPodScrape</strong></td>
+					<td>same spec shape, different kind</td>
+			</tr>
+			<tr>
+					<td>Alertmanager</td>
+					<td><strong>VMAlertmanager</strong></td>
+					<td>usually the same Alertmanager</td>
+			</tr>
+	</tbody>
+</table>
+<p>Two architectural notes that matter:</p>
+<ul>
+<li><strong>VMAgent does the scraping</strong>, not the database. In clustered mode <code>vminsert</code> receives from VMAgent, <code>vmstorage</code> keeps the data, <code>vmselect</code> answers queries. That split is what lets it scale write and read independently.</li>
+<li><strong>VMAlert evaluates rules</strong>, so alerting keeps working even if the query path is busy. Don&rsquo;t assume &ldquo;Prometheus evaluates&rdquo; - check where your rules actually landed.</li>
+</ul>
+<h2 id="the-honest-requirements">The Honest Requirements<a class="anchor" href="#the-honest-requirements">#</a></h2>
+<ul>
+<li><strong>Same as the Prometheus stack</strong>: memory headroom, a StorageClass for retention, namespace discipline</li>
+<li><strong>The VM operator CRDs.</strong> These are <code>victoriametrics.com</code> not <code>monitoring.coreos.com</code>, so nothing you wrote for Prometheus is reusable as-is</li>
+<li><strong>A decision on single vs cluster before you install.</strong> Changing later means a data migration, not a values change</li>
+<li><strong>Grafana still comes along.</strong> The chart bundles it; you don&rsquo;t need to add a separate Grafana install</li>
+</ul>
+<h2 id="how-to-install-victoria-metrics-k8s-stack-with-helm">How to Install victoria-metrics-k8s-stack with Helm<a class="anchor" href="#how-to-install-victoria-metrics-k8s-stack-with-helm">#</a></h2>
+<ol>
+<li>Three repos - the VM chart pulls Grafana and kube-state-metrics from elsewhere:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add vm https://victoriametrics.github.io/helm-charts/
+</span></span><span style="display:flex;"><span>helm repo add grafana https://grafana.github.io/helm-charts
+</span></span><span style="display:flex;"><span>helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+</span></span><span style="display:flex;"><span>helm repo update
+</span></span><span style="display:flex;"><span>helm show values vm/victoria-metrics-k8s-stack &gt; vm-defaults.yaml</span></span></code></pre></div><ol start="2">
+<li>Write your values. Note that the scrape config block is named <code>serviceMonitors</code> in the values even though it generates <code>VMServiceScrape</code> objects - a naming leftover that confuses everyone once:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># vm-values.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">victoria-metrics-operator</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># what gets deployed as the TSDB</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">vmsingle</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">retentionPeriod</span>: <span style="color:#e6db74">&#34;30d&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">storage</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">accessModes</span>: [<span style="color:#e6db74">&#34;ReadWriteOnce&#34;</span>]
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">20Gi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># what scrapes</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">vmagent</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># what evaluates rules</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">vmalert</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">evaluationInterval</span>: <span style="color:#ae81ff">30s</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">grafana</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">adminPassword</span>: <span style="color:#e6db74">&#34;changeme&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">defaultDashboardsEnabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kube-state-metrics</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">prometheus-node-exporter</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">true</span></span></span></code></pre></div><ol start="3">
+<li>Dry-run first (the chart&rsquo;s own docs recommend it - the values surface is large):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install vmks vm/victoria-metrics-k8s-stack <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -n monitoring --create-namespace <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -f vm-values.yaml --debug --dry-run</span></span></code></pre></div><ol start="4">
+<li>Install and watch the CRs land:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm install vmks vm/victoria-metrics-k8s-stack <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  -n monitoring --create-namespace -f vm-values.yaml
+</span></span><span style="display:flex;"><span>kubectl -n monitoring get pods --watch
+</span></span><span style="display:flex;"><span>kubectl -n monitoring get vmsingle,vmagent,vmalert</span></span></code></pre></div><ol start="5">
+<li>Confirm the operator is reconciling rather than just running:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n monitoring logs -l app.kubernetes.io/name<span style="color:#f92672">=</span>victoria-metrics-operator --tail<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>kubectl -n monitoring get crd | grep victoriametrics</span></span></code></pre></div><h2 id="how-to-translate-prometheus-objects-to-vm-ones">How to Translate Prometheus Objects to VM Ones<a class="anchor" href="#how-to-translate-prometheus-objects-to-vm-ones">#</a></h2>
+<p>This is the whole migration, condensed. Same intent, different <code>kind</code> and different <code>apiVersion</code>:</p>
+<table>
+	<thead>
+			<tr>
+					<th>You have</th>
+					<th>You write</th>
+					<th>Field differences</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>ServiceMonitor</code> (<code>monitoring.coreos.com/v1</code>)</td>
+					<td><code>VMServiceScrape</code> (<code>operator.victoriametrics.com/v1beta1</code>)</td>
+					<td><code>spec.endpoints[].port</code> → <code>spec.endpoints[].port</code>; most fields carry over</td>
+			</tr>
+			<tr>
+					<td><code>PodMonitor</code></td>
+					<td><code>VMPodScrape</code></td>
+					<td>same</td>
+			</tr>
+			<tr>
+					<td><code>PrometheusRule</code></td>
+					<td><code>VMRule</code></td>
+					<td>rule <code>expr</code> syntax is MetricsQL, which accepts PromQL</td>
+			</tr>
+			<tr>
+					<td><code>Prometheus</code> CR</td>
+					<td><code>VMSingle</code> or <code>VMCluster</code></td>
+					<td><code>retention</code> → <code>retentionPeriod</code></td>
+			</tr>
+			<tr>
+					<td>-</td>
+					<td><code>VMAgent</code></td>
+					<td>scraping config lives here</td>
+			</tr>
+	</tbody>
+</table>
+<p>A concrete one - the <code>synchat-api</code> monitor from the Prometheus chapter becomes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">operator.victoriametrics.com/v1beta1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">VMServiceScrape</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">synchat-api</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">monitoring</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">synchat-api</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">namespaceSelector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchNames</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">default</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">endpoints</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">http</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/metrics</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">interval</span>: <span style="color:#ae81ff">30s</span></span></span></code></pre></div><p>Note what <strong>disappeared</strong>: the <code>release: kps</code> label. VM&rsquo;s operator doesn&rsquo;t gate discovery on a Helm release label the way Prometheus does. Fewer silent failures.</p>
+<blockquote class='book-hint '>
+<p><strong>Dikkat:</strong> Prometheus&rsquo;tan VM&rsquo;e geçerken &ldquo;CRD&rsquo;ları değiştir, spec&rsquo;i koru&rdquo; beklentisi tuzağı. <code>VMRule</code> içindeki <code>expr</code> MetricsQL&rsquo;dir - PrometheusQL&rsquo;in üst kümesi olduğu için çoğu sorgu birebir çalışır ama <code>rate()</code>/<code>histogram_quantilaround</code> davranışları ve bazı fonksiyon isimleri farklıdır. Kuralları tek tek test et, toplu taşıma.</p>
+</blockquote><h2 id="how-to-choose-single-vs-cluster">How to Choose Single vs Cluster<a class="anchor" href="#how-to-choose-single-vs-cluster">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th><code>VMSingle</code></th>
+					<th><code>VMCluster</code></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Topology</td>
+					<td>one pod, one disk</td>
+					<td><code>vminsert</code> / <code>vmstorage</code> / <code>vmselect</code></td>
+			</tr>
+			<tr>
+					<td>Scale</td>
+					<td>up (bigger box)</td>
+					<td>out (more nodes)</td>
+			</tr>
+			<tr>
+					<td>HA</td>
+					<td>restart, lose in-flight writes</td>
+					<td>replicated storage</td>
+			</tr>
+			<tr>
+					<td>Complexity</td>
+					<td>low</td>
+					<td>three Deployments + services</td>
+			</tr>
+			<tr>
+					<td>Right for</td>
+					<td>homelab, one team, one cluster</td>
+					<td>many teams, long retention, real QPS</td>
+			</tr>
+	</tbody>
+</table>
+<p>Start on <code>VMSingle</code>. It&rsquo;s the <a href="../longhorn/">longhorn</a> lesson applied to metrics: don&rsquo;t buy the distributed system before you have the distributed problem. When <code>vmstorage</code> needs its own nodes, you&rsquo;ll know.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">vmcluster</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">false</span>   <span style="color:#75715e"># flip to true and disable vmsingle</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">retentionPeriod</span>: <span style="color:#e6db74">&#34;12&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">vmstorage</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">replicaCount</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">storage</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">storage</span>: <span style="color:#ae81ff">100Gi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">vminsert</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">replicaCount</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">vmselect</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">replicaCount</span>: <span style="color:#ae81ff">2</span></span></span></code></pre></div><h2 id="how-to-verify-it-actually-works">How to Verify It Actually Works<a class="anchor" href="#how-to-verify-it-actually-works">#</a></h2>
+<ol>
+<li>Open the VMUI - VictoriaMetrics&rsquo; own query interface, no Grafana required:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n monitoring port-forward svc/vmks-vmsingle 8428:8428</span></span></code></pre></div><p><code>http://localhost:8428/vmui</code>. Run <code>up</code> and then something from your own app. If <code>up</code> returns nothing, the scrape path is broken; if your app&rsquo;s metric is missing but <code>up</code> works, it&rsquo;s the <code>VMServiceScrape</code> selector.</p>
+<ol start="2">
+<li>Check the targets the same way you would in Prometheus - VMAgent has its own <code>/targets</code>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n monitoring port-forward svc/vmks-vmagent 8429:8429</span></span></code></pre></div><ol start="3">
+<li>
+<p>Compare against the Prometheus stack if you have both running. Same query, same window, <code>vm_memory_*</code> on each. The difference in resident memory is the argument for the migration, measured rather than blogged about.</p>
+</li>
+<li>
+<p>Break an app and confirm <code>VMAlert</code> fires - the alerting path is separate from the query path here, so it&rsquo;s worth proving explicitly.</p>
+</li>
+</ol>
+<h2 id="when-to-pick-which">When to Pick Which<a class="anchor" href="#when-to-pick-which">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>Situation</th>
+					<th>Pick</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Learning monitoring for the first time</td>
+					<td><strong>Prometheus</strong> - the docs and answers are everywhere</td>
+			</tr>
+			<tr>
+					<td>Homelab / one cluster / modest retention</td>
+					<td>either; <code>VMSingle</code> is lighter</td>
+			</tr>
+			<tr>
+					<td>Long retention, high cardinality, many teams</td>
+					<td><strong>VictoriaMetrics</strong></td>
+			</tr>
+			<tr>
+					<td>Already invested in <code>PrometheusRule</code>/<code>ServiceMonitor</code> + dashboards</td>
+					<td><strong>Prometheus</strong>, unless you&rsquo;ll actually do the translation</td>
+			</tr>
+			<tr>
+					<td>Need Thanos-style global view across clusters</td>
+					<td>VictoriaMetrics cluster mode, or Thanos on Prometheus</td>
+			</tr>
+			<tr>
+					<td>Team knows PromQL but nothing else</td>
+					<td>VictoriaMetrics (MetricsQL is a superset)</td>
+			</tr>
+	</tbody>
+</table>
+<p>The honest summary: Prometheus is the safer default and the better ecosystem; VictoriaMetrics is the better engine. Most organisations pick Prometheus and regret the disk bill two years later.</p>
+<p><strong>Özetlersek:</strong> engine değişir, ekosistem kalır. Prometheus&rsquo;u öğren, VictoriaMetrics&rsquo;i kaynak/retansiyon sıkıştığında seç. İkisini birden çalıştırıp ölçmek, blog yazısı okumaktan daha ikna edicidir.</p>
+<p>for more <a href="../longhorn/">longhorn</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/kubernetes_v2/prometheus-stack/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>prometheus-stack</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/kubernetes_v2/longhorn/" class="flex align-center">
+        <span>longhorn</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#why-not-just-prometheus">Why Not Just Prometheus</a></li>
+    <li><a href="#the-architecture">The Architecture</a></li>
+    <li><a href="#the-honest-requirements">The Honest Requirements</a></li>
+    <li><a href="#how-to-install-victoria-metrics-k8s-stack-with-helm">How to Install victoria-metrics-k8s-stack with Helm</a></li>
+    <li><a href="#how-to-translate-prometheus-objects-to-vm-ones">How to Translate Prometheus Objects to VM Ones</a></li>
+    <li><a href="#how-to-choose-single-vs-cluster">How to Choose Single vs Cluster</a></li>
+    <li><a href="#how-to-verify-it-actually-works">How to Verify It Actually Works</a></li>
+    <li><a href="#when-to-pick-which">When to Pick Which</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

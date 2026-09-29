@@ -1,8 +1,8 @@
 ---
-title: "kubernetes-cert-manager-production"
-weight: 14
+title: "cert-manager-production"
+weight: 17
 ---
-# Why Production Is Different
+# cert-manager in Production
 
 The previous chapter taught the mechanism: `Issuer`, `Certificate`, `Secret`, and a Gateway that serves it. Everything worked because we controlled every variable - a fake domain, a self-signed root, a laptop that trusts whatever we tell it to.
 
@@ -10,9 +10,16 @@ Production removes that control. The domain is public and someone else owns the 
 
 So the topic changes. Not _how do I get a certificate_ but _how do I keep certificates flowing for years without anyone thinking about them_.
 
-**Özetlersek:** local mekanizmayı öğretir, production ise hata modlarını. İkinci bölümde öğrendiğin her obje aynı kalır; değişen, onların yıllarca ayakta nasıl tutulacağı.
+**Özetlersek:** local mekanizmayı öğretir, production ise hata modlarını. Önceki bölümde öğrendiğin her obje aynı kalır; değişen, onların yıllarca ayakta nasıl tutulacağı.
 
-# ACME and Let's Encrypt
+## The Honest Requirements
+
+- **A domain you actually control** and a cluster the internet can reach. The "no global DNS" rule of the v1 notes stops applying here
+- **A DNS provider API credential**, if you want wildcards or your cluster is behind NAT. This is the single most common failure point later
+- **A monitoring stack.** Renewal that fails quietly is worse than no automation at all - see the [prometheus-stack](../prometheus-stack/) chapter for the alerting half
+- **Somewhere to keep the ACME account key.** It's a Secret like any other; deleting it is not a reinstall, it's a new identity at the CA
+
+## ACME and Let's Encrypt
 
 [ACME](https://cert-manager.io/docs/configuration/acme/) is the protocol behind Let's Encrypt, ZeroSSL, Google Trust Services and friends. The shape is always the same:
 
@@ -23,7 +30,7 @@ So the topic changes. Not _how do I get a certificate_ but _how do I keep certif
 
 The account key is your identity at the CA. Delete that Secret and cert-manager registers a new account - you keep issuing certificates, but you lose the ability to revoke anything issued by the old one.
 
-## Staging first, always
+### Staging first, always
 
 Let's Encrypt runs two environments and they behave very differently:
 
@@ -48,7 +55,7 @@ Hit these in production and you are locked out for a week. Hit them in staging a
 
 > **Dikkat:** staging ile test etmeden production'a geçme. Rate limit'e takılmak bir haftalık outage demektir - ve bunu genelde ilk kez canlıya çıkarken, en kötü anda öğrenirsin.
 
-## The issuer pair
+### The issuer pair
 
 Always ship both, and point workloads at staging until you've proven the pipeline:
 
@@ -84,7 +91,7 @@ spec:
 
 `email` goes to a **team distribution list**, not an individual. It's how the CA tells you a certificate is about to be revoked - and the person who set this up will have left by then.
 
-# HTTP-01 vs DNS-01
+## How to Choose HTTP-01 or DNS-01
 
 Two ways to prove you own a domain, and the choice has real consequences:
 
@@ -97,7 +104,7 @@ Two ways to prove you own a domain, and the choice has real consequences:
 | Failure mode | firewall, wrong ingress path | DNS propagation, expired API token |
 | Dependency | your ingress | your DNS provider's API |
 
-## HTTP-01 on Gateway API
+### HTTP-01 on Gateway API
 
 The solver spins up a temporary `acmesolver` pod and an `HTTPRoute` for the duration of the challenge:
 
@@ -114,7 +121,7 @@ solvers:
 
 That `sectionName: http` matters: the challenge is answered over plain HTTP, so the Gateway needs a live **HTTP:80** listener that the internet can reach. If your cluster is behind NAT or only exposes 443, HTTP-01 will hang in `Pending` forever.
 
-## DNS-01 with a real provider
+### DNS-01 with a real provider
 
 DNS-01 proves control by writing a TXT record. cert-manager needs an API credential for your DNS provider. Cloudflare, using an API **token** (scoped, not the global key):
 
@@ -161,7 +168,7 @@ solvers:
 
 > **Dikkat:** `ClusterIssuer` namespace'e ait değildir, bu yüzden `secretName`'lerin `cert-manager` namespace'ine bakacağı varsayılır (`--cluster-resource-namespace` ile değiştirilebilir). `Issuer` kullanıyorsan Secret aynı namespace'te olmalı. AWS tarafında ambient credential'lar yalnızca `ClusterIssuer` için geçerlidir - bunun sebebi, `Issuer` oluşturma yetkisi olan birinin senin IAM rolünü kullanamaması.
 
-## Wildcards
+## How to Get a Wildcard Certificate
 
 `*.example.com` can **only** be obtained with DNS-01. HTTP-01 proves one hostname at a time and cannot validate a wildcard:
 
@@ -171,9 +178,9 @@ dnsNames:
   - "*.example.com"
 ```
 
-Not the limits: `*.example.com` covers `api.example.com` but **not** `api.staging.example.com`. Each level needs its own wildcard, and Let's Encrypt won't nest them.
+Note the limits: `*.example.com` covers `api.example.com` but **not** `api.staging.example.com`. Each level needs its own wildcard, and Let's Encrypt won't nest them.
 
-## Mixing solvers
+## How to Mix Solvers on One Issuer
 
 One issuer can carry several solvers, each gated by a `selector`. Wildcards on DNS-01, everything else on HTTP-01:
 
@@ -193,7 +200,7 @@ solvers:
 
 Selectors are `dnsZones` (prefix match, covers subdomains), `dnsNames` (exact match, does **not** resolve wildcards) and `matchLabels` (on the `Certificate`). First match wins, so put the specific ones first.
 
-# Renewal
+## How to Control Renewal
 
 A certificate you cannot renew is an outage with a calendar entry. cert-manager renews when **either** two-thirds of the lifetime has passed **or** `renewBefore` is reached, whichever comes first.
 
@@ -207,7 +214,7 @@ spec:
 
 `rotationPolicy: Always` issues a **new private key** on every renewal. The default (`Never`) reuses the key forever, which means a stolen key stays valid across renewals. Unless something explicitly pins the key, use `Always`.
 
-## ARI
+### ARI
 
 [ARI](https://cert-manager.io/docs/configuration/acme/) (Automatic Renewal Information) lets the CA push its own renewal window instead of you guessing. With `ExperimentalOptions` enabled, cert-manager polls the CA's `renewalInfo` endpoint and schedules inside the window the CA suggests. This is what saves you during mass revocation events: the CA says "renew now" and you respond without a human.
 
@@ -217,19 +224,19 @@ config:
     ExperimentalOptions: true
 ```
 
-## Why the cadence is tightening
+### Why the cadence is tightening
 
 The CA/Browser Forum is shortening public certificate lifetimes on a published schedule: 200 days from March 2026, 100 days in 2027, 47 days in 2029.
 
-That is not a footnote. At 47-day lifetimes, the default renewal point is around day 31 - so you reissue roughly **every two weeks**. Every link in the chain (solver, DNS API, Secret write, workload reload) has to work reliably at that cadence. Which is the next problem.
+That is not a footnote. At 47-day lifetimes, the default renewal point is around day 31 - so you reissue roughly **every two weeks**. Every link in the chain (solver, DNS API, Secret write, workload reload) has to work reliably at that cadence.
 
 > **Dikkat:** `subPath` ile mount edilen Secret'lar rotate edildiğini **görmez**. Pod, eski sertifikayı süresi dolana kadar okumaya devam eder. Ya `subPath` kullanma ya da yanına bir reload sidecar koy.
 
 **Özetlersek:** renewal'ı `duration`/`renewBefore` ile tanımla, ARI'yi aç, private key'i döndür. Sertifika yaşam döngüsü 90 günden 47 güne inerken otomasyon "iyi olur" olmaktan çıkar, tek hatanın outage olduğu tek nokta olur.
 
-# Distributing Trust with trust-manager
+## How to Distribute Trust with trust-manager
 
-Locally we added the root to our laptop's trust store. In production nobody is going to hand-edit trust stores across a fleet. [trust-manager](https://cert-manager.io/docs/trust/trust-manager/) is the answer: a small operator that assembles X.509 trust **bundles** and syncs them into every namespace that needs them.
+Locally we added the root to a laptop's trust store. In production nobody is going to hand-edit trust stores across a fleet. [trust-manager](https://cert-manager.io/docs/trust/trust-manager/) is the answer: a small operator that assembles X.509 trust **bundles** and syncs them into every namespace that needs them.
 
 It adds a `Bundle` resource: a list of `sources`, and a `target` saying where the result goes.
 
@@ -253,7 +260,7 @@ spec:
 
 Any namespace labelled `trust: synchat` gets a `ConfigMap` named `synchat-trust` holding the PEM bundle. You can also write JKS and PKCS#12 for the JVM crowd with `additionalFormats`, and target `Secret`s instead of `ConfigMap`s if you enable it at startup.
 
-## `ca.crt` vs `tls.crt`
+### `ca.crt` vs `tls.crt`
 
 Two fields in a cert-manager Secret look relevant and they are not interchangeable:
 
@@ -262,7 +269,7 @@ Two fields in a cert-manager Secret look relevant and they are not interchangeab
 
 Prefer bundles built from **root certificates**, and pick whichever field holds exactly one root.
 
-## The rotation trap
+### The rotation trap
 
 This is the mistake that causes real outages, and the docs call it out explicitly: **do not point a `Bundle` directly at the Secret cert-manager writes the CA into.**
 
@@ -278,7 +285,7 @@ The safe workflow is a deliberate rollover:
 
 That extra copy is what gives you control over when trust propagates. It feels redundant right up until the first rotation.
 
-# Monitoring and Alerting
+## How to Monitor and Alert
 
 cert-manager exposes Prometheus metrics on port `9402`. Three of them matter:
 
@@ -352,7 +359,7 @@ For a quick manual sweep there's `cmctl`:
 cmctl check certificate --all-namespaces
 ```
 
-# Hardening and HA
+## How to Harden and Run It HA
 
 cert-manager holds private keys for everything in the cluster. Treat it accordingly.
 
@@ -368,11 +375,11 @@ cert-manager holds private keys for everything in the cluster. Treat it accordin
 
 **Rotate DNS credentials on a calendar.** An expired DNS API token is the single most common cause of DNS-01 renewal failure - and it fails silently, at 3am, months after whoever configured it moved on.
 
-**One ACME account per cluster.** Sharing an account key across clusters causes order races and makes rate-limit attribution impossible. Yes, it means more accounts; that's cheaper than debugging an interleaved order queue.
+**One ACME account per cluster.** Sharing an account key across clusters causes order races and makes rate-limit attribution impossible.
 
 **Özetlersek:** kök anahtarı cluster dışında tut, etcd'yi şifrele, üç controller'ı da yedekli çalıştır, CA Secret'larına RBAC kısı, DNS credential'ını takvimle döndür. Bunlar "sonra bakarım" listesi değil; sertifika otomasyonu tek başına çalışırken bunlar olmadan sessizce bozulur.
 
-# Production Checklist
+## Production Checklist
 
 - [ ] Staging issuer tested end to end before touching production
 - [ ] `email` is a team list, not a person
@@ -389,11 +396,11 @@ cert-manager holds private keys for everything in the cluster. Treat it accordin
 - [ ] CA Secrets readable only by cert-manager
 - [ ] Controller, webhook and cainjector have replicas + PDB
 
-# Assignment
+## How to Test the Whole Thing
 
-Everything below needs a domain you actually control and a cluster the internet can reach - this is the part of the course where the "no global DNS" rule stops applying. If you don't have one, still write the YAML and reason through where it would fail.
+This needs a domain you control and a cluster the internet can reach. If you don't have one, still write the YAML and reason through where it would fail.
 
-1. Write the staging/prod `ClusterIssuer` pair. Use your own domain, your own email, and pick **either** HTTP-01 or DNS-01 based on whether your cluster exposes port 80 publicly.
+1. Write the staging/prod `ClusterIssuer` pair. Pick **either** HTTP-01 or DNS-01 based on whether your cluster exposes port 80 publicly.
 
 2. Point a `Certificate` at the **staging** issuer first. Watch it, then read the failure if it fails:
 
@@ -403,19 +410,19 @@ kubectl describe certificaterequest <name>
 kubectl logs -n cert-manager deploy/cert-manager --tail=100
 ```
 
-3. Once staging is `Ready: True`, switch `issuerRef` to the production issuer and confirm the certificate is trusted by a browser. Note the difference in the `issuer=` field from `openssl x509 -noout -issuer` - the staging intermediate is obvious.
+3. Once staging is `Ready: True`, switch `issuerRef` to the production issuer and confirm a browser trusts it. `openssl x509 -noout -issuer` makes the staging intermediate obvious.
 
 4. If you went DNS-01, request a wildcard too: `*.yourdomain.com`. Watch cert-manager create the `_acme-challenge` TXT record and clean it up after.
 
-5. Write the `PrometheusRule` above. If you don't run Prometheus, keep the `expr` blocks and evaluate them by hand against the metrics endpoint:
+5. Ship the `PrometheusRule` above. Without Prometheus, port-forward the metrics endpoint and evaluate the expressions by hand:
 
 ```bash
 kubectl port-forward -n cert-manager deploy/cert-manager 9402:9402 &
 curl -s localhost:9402/metrics | grep certmanager_certificate_
 ```
 
-6. The exercise that actually teaches: delete the DNS API token Secret and wait. Watch the renewal fail **quietly**, then look at which alert would have caught it and at what time. That gap between "it broke" and "you found out" is the thing this chapter is really about.
+6. The exercise that actually teaches: delete the DNS API token Secret and wait. Watch the renewal fail **quietly**, then work out which alert would have caught it and at what time. That gap between "it broke" and "you found out" is the thing this chapter is really about.
 
 > **Dikkat:** production'a geçerken ilk yaptığın şey production issuer'ı yaratmak olmasın. Staging'de tüm zinciri - DNS, routing, challenge, Secret yazımı - görmeden production issuer'a geçersen, hata ayıklamayı rate limit'lerle yarışarak yaparsın.
 
-for more [namespaces](../kubernetes-namespaces/)
+for more [prometheus-stack](../prometheus-stack/)

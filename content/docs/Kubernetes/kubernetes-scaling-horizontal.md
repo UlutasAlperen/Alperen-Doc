@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-scaling-horizontal"
-weight: 18
+weight: 16
 ---
 # Horizontal Pod Autoscaling (HPA)
 

@@ -1,6 +1,6 @@
 ---
 title: "kubernetes-scaling-vertical"
-weight: 17
+weight: 15
 ---
 # Top
 
