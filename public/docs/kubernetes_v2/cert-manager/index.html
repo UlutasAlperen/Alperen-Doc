@@ -29,7 +29,7 @@ a private key a certificate signing request built from that key someone - a Cert
 	<meta itemprop="description" content="cert-manager# In the v1 ingress notes we said that real clusters “get this issued automatically by cert-manager instead of hand-rolling it”. That was a promise we haven’t paid off yet. Let’s pay it off.
 Here is what a TLS certificate actually requires, every single time:
 a private key a certificate signing request built from that key someone - a Certificate Authority - to sign it a renewal before it expires (Let’s Encrypt certs last 90 days) the result copied into a Secret in the right namespace, in the right format Do that by hand for two hostnames and you have already lost an afternoon. cert-manager is a controller that does all five as a Kubernetes reconciliation loop: you declare what you want, it keeps it true forever - including the renewal.">
-	<meta itemprop="wordCount" content="1958">
+	<meta itemprop="wordCount" content="1964">
 
 <title>cert-manager • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ a private key a certificate signing request built from that key someone - a Cert
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.b0206b2ff88cb62558083a164911f4bbd19cb4f5400bb093d49a117acce34b78.js" integrity="sha256-sCBrL/iMtiVYCDoWSRH0u9GctPVAC7CT1JoReszjS3g=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.4c16edd67f4e6557dfa1a564fdd7c73bb2063fd0ffc73e3325b80b8736757784.js" integrity="sha256-TBbt1n9OZVffoaVk/dfHO7IGP9D/xz4zJbgLhzZ1d4Q=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1350,13 +1350,13 @@ a private key a certificate signing request built from that key someone - a Cert
 <li>the result copied into a <code>Secret</code> in the right namespace, in the right format</li>
 </ol>
 <p>Do that by hand for two hostnames and you have already lost an afternoon. <a href="https://cert-manager.io/">cert-manager</a> is a controller that does all five as a Kubernetes reconciliation loop: you declare <em>what</em> you want, it keeps it true forever - including the renewal.</p>
-<p><strong>Özetlersek:</strong> elle sertifika = tek seferlik iş ama süresi dolunca yine sen sorumlusun. cert-manager = &ldquo;bu isimlerde, şu imzalayıcıdan, şu süreyle sertifika istiyorum&rdquo; deyip arkana yaslanmak.</p>
+<p><strong>Özetlersek:</strong> elle sertifikalama = tek seferlik iş ama süresi dolunca yine elle serfialama durumunda sen sorumlusun. cert-manager = &ldquo;bu isimlerde, şu imzalayıcıdan, şu süreyle sertifika istiyorum&rdquo; otomasyona baglayim rahatla yatmak desem daha dogru olur.</p>
 <h2 id="the-three-objects">The Three Objects<a class="anchor" href="#the-three-objects">#</a></h2>
 <p>Everything cert-manager does circles three objects - and they map exactly onto the CRD / Custom Resource / operator split from the <a href="../cluster-extensions/">cluster-extensions</a> notes:</p>
 <ul>
-<li><strong><code>Issuer</code> / <code>ClusterIssuer</code></strong> — <em>who</em> signs. An <code>Issuer</code> is valid in one namespace, a <code>ClusterIssuer</code> across the whole cluster. The spec is identical; only the reach differs.</li>
-<li><strong><code>Certificate</code></strong> — <em>what</em> we want: which names (<code>dnsNames</code>), from which signer (<code>issuerRef</code>), written to which <code>Secret</code> (<code>secretName</code>).</li>
-<li><strong><code>Secret</code></strong> — the result. <code>tls.crt</code>, <code>tls.key</code>, usually <code>ca.crt</code>. This is the only thing the Gateway and the Ingress actually consume.</li>
+<li><strong><code>Issuer</code> / <code>ClusterIssuer</code></strong> : <em>who</em> signs. An <code>Issuer</code> is valid in one namespace, a <code>ClusterIssuer</code> across the whole cluster. The spec is identical; only the reach differs.</li>
+<li><strong><code>Certificate</code></strong> : <em>what</em> we want: which names (<code>dnsNames</code>), from which signer (<code>issuerRef</code>), written to which <code>Secret</code> (<code>secretName</code>).</li>
+<li><strong><code>Secret</code></strong> : the result. <code>tls.crt</code>, <code>tls.key</code>, usually <code>ca.crt</code>. This is the only thing the Gateway and the Ingress actually consume.</li>
 </ul>
 <p>The division of labour is clean: the Issuer is policy, the Certificate is the request, the Secret is the outcome. The Gateway steps in at the end and serves that Secret to your users as TLS.</p>
 <h2 id="the-honest-requirements">The Honest Requirements<a class="anchor" href="#the-honest-requirements">#</a></h2>
@@ -1664,7 +1664,7 @@ a private key a certificate signing request built from that key someone - a Cert
 <li>The payoff. Add the root to your trust store and open <code>https://synchat.internal</code> in a browser. When it opens with no warning, TLS is actually <strong>working</strong>.</li>
 </ol>
 <blockquote class='book-hint '>
-<p><strong>Dikkat:</strong> <code>Certificate</code>&lsquo;ı Gateway&rsquo;in namespace&rsquo;i dışında yazarsan sonuç sessizce bozulur. <code>Certificate</code> namespace&rsquo;i, <code>certificateRefs</code>&lsquo;un bakacağı namespace ile <strong>aynı</strong> olmalı - <code>app-gateway</code> için bu <code>default</code>.</p>
+<p><strong>Dikkat:</strong> <code>Certificate</code>&lsquo;ı Gateway&rsquo;in namespace&rsquo;i dışında yazarsan bozulur. <code>Certificate</code> namespace&rsquo;i, <code>certificateRefs</code>&lsquo;un bakacağı namespace ile <strong>aynı</strong> olmalı - <code>app-gateway</code> için bu <code>default</code>.</p>
 </blockquote><p>Getting a certificate and plugging it into a Gateway was the easy half. The next chapter takes this to a real cluster: ACME, Let&rsquo;s Encrypt, wildcards, renewal windows, trust distribution and monitoring.</p>
 <p>for more <a href="../cert-manager-production/">cert-manager-production</a></p>
 </article>

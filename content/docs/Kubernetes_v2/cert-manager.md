@@ -16,15 +16,15 @@ Here is what a TLS certificate actually requires, every single time:
 
 Do that by hand for two hostnames and you have already lost an afternoon. [cert-manager](https://cert-manager.io/) is a controller that does all five as a Kubernetes reconciliation loop: you declare _what_ you want, it keeps it true forever - including the renewal.
 
-**Özetlersek:** elle sertifika = tek seferlik iş ama süresi dolunca yine sen sorumlusun. cert-manager = "bu isimlerde, şu imzalayıcıdan, şu süreyle sertifika istiyorum" deyip arkana yaslanmak.
+**Özetlersek:** elle sertifikalama = tek seferlik iş ama süresi dolunca yine elle serfialama durumunda sen sorumlusun. cert-manager = "bu isimlerde, şu imzalayıcıdan, şu süreyle sertifika istiyorum" otomasyona baglayim rahatla yatmak desem daha dogru olur.
 
 ## The Three Objects
 
 Everything cert-manager does circles three objects - and they map exactly onto the CRD / Custom Resource / operator split from the [cluster-extensions](../cluster-extensions/) notes:
 
-- **`Issuer` / `ClusterIssuer`** — _who_ signs. An `Issuer` is valid in one namespace, a `ClusterIssuer` across the whole cluster. The spec is identical; only the reach differs.
-- **`Certificate`** — _what_ we want: which names (`dnsNames`), from which signer (`issuerRef`), written to which `Secret` (`secretName`).
-- **`Secret`** — the result. `tls.crt`, `tls.key`, usually `ca.crt`. This is the only thing the Gateway and the Ingress actually consume.
+- **`Issuer` / `ClusterIssuer`** : _who_ signs. An `Issuer` is valid in one namespace, a `ClusterIssuer` across the whole cluster. The spec is identical; only the reach differs.
+- **`Certificate`** : _what_ we want: which names (`dnsNames`), from which signer (`issuerRef`), written to which `Secret` (`secretName`).
+- **`Secret`** : the result. `tls.crt`, `tls.key`, usually `ca.crt`. This is the only thing the Gateway and the Ingress actually consume.
 
 The division of labour is clean: the Issuer is policy, the Certificate is the request, the Secret is the outcome. The Gateway steps in at the end and serves that Secret to your users as TLS.
 
@@ -341,7 +341,7 @@ What you want: `READY` `True`, issuer and subject **different**, `subjectAltName
 
 4. The payoff. Add the root to your trust store and open `https://synchat.internal` in a browser. When it opens with no warning, TLS is actually **working**.
 
-> **Dikkat:** `Certificate`'ı Gateway'in namespace'i dışında yazarsan sonuç sessizce bozulur. `Certificate` namespace'i, `certificateRefs`'un bakacağı namespace ile **aynı** olmalı - `app-gateway` için bu `default`.
+> **Dikkat:** `Certificate`'ı Gateway'in namespace'i dışında yazarsan bozulur. `Certificate` namespace'i, `certificateRefs`'un bakacağı namespace ile **aynı** olmalı - `app-gateway` için bu `default`.
 
 Getting a certificate and plugging it into a Gateway was the easy half. The next chapter takes this to a real cluster: ACME, Let's Encrypt, wildcards, renewal windows, trust distribution and monitoring.
 

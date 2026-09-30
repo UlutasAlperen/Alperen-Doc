@@ -112,8 +112,6 @@ rules:
 
 Add `--audit-policy-file` and `--audit-log-path` to the static apiserver manifest and restart it - the [control-plane notes](../control-plane-troubleshooting/) cover the mechanics of editing and restarting static pods.
 
-> **Dikkat:** break-glass bir _prosedürdür_, bir dosya değildir. Mühürlü bir kasa, yazılı bir sıra (kim, ne zaman, neden), ve sonrasında otomatik bir "break-glass kullanıldı" alarmı yoksa; o dosya 3 ay sonra herkesin laptop'unda duruyordur. Yılda en az bir kez gerçekten kullanarak test et.
-
 Two other pieces of the "who did what" toolkit:
 
 ```bash
@@ -308,7 +306,7 @@ Türkçe homelab→platform geçiş checklist:
 
 1. `admin.conf` sadece control-plane node'da mı? Laptop'ta değil
 2. Her ekibin kendi `Role` + `RoleBinding`'i var mı (ClusterRoleBinding yok mu)
-3. CI'lar ServiceAccount token ile mi çalışıyor (insan kubeconfig'si değil)
+3. CI'lar ServiceAccount token ile mi çalışıyor (kullanici kubeconfig'i değil)
 4. `kubectl auth whoami` ile kimlikler doğrulanabiliyor mu
 5. Break-glass prosedürü yazılı, mühürlü ve test edilmiş mi
 6. Cluster add-on'ları Helm listesinde + git'te mi

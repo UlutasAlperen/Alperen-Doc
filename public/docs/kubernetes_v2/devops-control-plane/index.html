@@ -26,7 +26,7 @@ The split that every real org lands on eventually:">
 	<meta itemprop="name" content="devops-control-plane">
 	<meta itemprop="description" content="Who Owns the Control Plane# Everything until now assumed we own the cluster: we built it on multi-node VMs, we SSH’d into it when it broke, we joined control-plane nodes by hand. That’s the homelab model. The moment a second team shows up, the question changes from “how do I run this” to “who is allowed to do what” - and that’s a platform engineering question, not a kubectl one.
 The split that every real org lands on eventually:">
-	<meta itemprop="wordCount" content="2173">
+	<meta itemprop="wordCount" content="2131">
 
 <title>devops-control-plane • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ The split that every real org lands on eventually:">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.b0206b2ff88cb62558083a164911f4bbd19cb4f5400bb093d49a117acce34b78.js" integrity="sha256-sCBrL/iMtiVYCDoWSRH0u9GctPVAC7CT1JoReszjS3g=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.4c16edd67f4e6557dfa1a564fdd7c73bb2063fd0ffc73e3325b80b8736757784.js" integrity="sha256-TBbt1n9OZVffoaVk/dfHO7IGP9D/xz4zJbgLhzZ1d4Q=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1418,9 +1418,7 @@ The split that every real org lands on eventually:">
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">resources</span>:
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">group</span>: <span style="color:#e6db74">&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">resources</span>: [<span style="color:#e6db74">&#34;secrets&#34;</span>, <span style="color:#e6db74">&#34;namespaces&#34;</span>]</span></span></code></pre></div><p>Add <code>--audit-policy-file</code> and <code>--audit-log-path</code> to the static apiserver manifest and restart it - the <a href="../control-plane-troubleshooting/">control-plane notes</a> cover the mechanics of editing and restarting static pods.</p>
-<blockquote class='book-hint '>
-<p><strong>Dikkat:</strong> break-glass bir <em>prosedürdür</em>, bir dosya değildir. Mühürlü bir kasa, yazılı bir sıra (kim, ne zaman, neden), ve sonrasında otomatik bir &ldquo;break-glass kullanıldı&rdquo; alarmı yoksa; o dosya 3 ay sonra herkesin laptop&rsquo;unda duruyordur. Yılda en az bir kez gerçekten kullanarak test et.</p>
-</blockquote><p>Two other pieces of the &ldquo;who did what&rdquo; toolkit:</p>
+<p>Two other pieces of the &ldquo;who did what&rdquo; toolkit:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl auth whoami
 </span></span><span style="display:flex;"><span>kubectl get events -A --sort-by<span style="color:#f92672">=</span>.lastTimestamp | tail -20</span></span></code></pre></div><p><code>kubectl auth whoami</code> (with the <code>SelfSubjectReview</code> API) tells you which identity your kubeconfig actually maps to - the first command to run when &ldquo;why am I forbidden?&rdquo; shows up.</p>
 <h1 id="helm-as-the-platforms-delivery-tool">Helm as the Platform&rsquo;s Delivery Tool<a class="anchor" href="#helm-as-the-platforms-delivery-tool">#</a></h1>
@@ -1598,7 +1596,7 @@ The split that every real org lands on eventually:">
 <ol>
 <li><code>admin.conf</code> sadece control-plane node&rsquo;da mı? Laptop&rsquo;ta değil</li>
 <li>Her ekibin kendi <code>Role</code> + <code>RoleBinding</code>&lsquo;i var mı (ClusterRoleBinding yok mu)</li>
-<li>CI&rsquo;lar ServiceAccount token ile mi çalışıyor (insan kubeconfig&rsquo;si değil)</li>
+<li>CI&rsquo;lar ServiceAccount token ile mi çalışıyor (kullanici kubeconfig&rsquo;i değil)</li>
 <li><code>kubectl auth whoami</code> ile kimlikler doğrulanabiliyor mu</li>
 <li>Break-glass prosedürü yazılı, mühürlü ve test edilmiş mi</li>
 <li>Cluster add-on&rsquo;ları Helm listesinde + git&rsquo;te mi</li>
