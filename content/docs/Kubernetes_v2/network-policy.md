@@ -67,7 +67,7 @@ ports:
     protocol: TCP
 ```
 
-Renaming a numeric port later breaks policies silently; named ports keep the policy meaningful. But check your CNI supports named ports (calico does; some older ones don't).
+Renaming a numeric port later breaks policies silently; named ports keep the policy meaningful. But check your CNI supports named ports (calico and cilium do; some older ones don't).
 
 ## The CNI Reality Check
 
@@ -77,10 +77,11 @@ NetworkPolicy is just an API. **Enforcement happens in the CNI plugin**, and tha
 - calico: full enforcement, its own iptables programs
 - kube-router, cilium: enforce as well (cilium adds richer eBPF-based policies beyond the standard API)
 
-Minikube's default CNI doesn't enforce policies. To test anything here, start the cluster policy-aware:
+Our [multi-node](../multi-node-kubeadm/) cluster runs **Cilium** - everything in this note is actually enforced there, no asterisks. On Minikube's default CNI nothing is enforced; to test anything here, start the cluster policy-aware:
 
 ```bash
 minikube start --cni=calico
+# or: minikube start --cni=cilium
 # or: minikube addons enable network-policy
 ```
 

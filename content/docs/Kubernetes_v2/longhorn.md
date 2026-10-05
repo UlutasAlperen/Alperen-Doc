@@ -44,11 +44,11 @@ The distinction that saves you from a false sense of safety:
 - Enough free disk under `/var/lib/longhorn` on each node (the default data location)
 - A Linux kernel ≥ 4.18 (5.8+ recommended)
 - NFS client only if you want RWX volumes (the NFS-server-based sharing layer)
-- **A real multi-node cluster.** On Minikube's single node Longhorn installs and runs, but replicas collapse onto one node: zero redundancy. Test it there only to see the UI; this chapter assumes the 3-node cluster from the [multi-node notes](../multi-node-kubeadm/)
+- **A real multi-node cluster.** On Minikube's single node Longhorn installs and runs, but replicas collapse onto one node: zero redundancy. Test it there only to see the UI; this chapter assumes the 4-node cluster from the [multi-node notes](../multi-node-kubeadm/)
 
 ## How to Prepare the Nodes
 
-1. On _every_ node (all three), install the iSCSI pieces:
+1. On _every_ node (all four), install the iSCSI pieces:
 
 ```bash
 sudo apt-get install -y open-iscsi
@@ -96,7 +96,7 @@ kubectl get sc
 kubectl -n longhorn-system port-forward svc/longhorn-frontend 8085:80
 ```
 
-Open `http://localhost:8085` - the UI shows nodes, disks, volumes and their replica placement. Seeing the 3 replicas of a volume spread across your 3 nodes is the "aha" moment of this chapter.
+Open `http://localhost:8085` - the UI shows nodes, disks, volumes and their replica placement. Seeing the 3 replicas of a volume spread across your nodes is the "aha" moment of this chapter.
 
 ## How to Make Longhorn the Default StorageClass
 

@@ -26,7 +26,7 @@ Longhorn fixes that: it’s a distributed block storage system built as a CSI dr
 	<meta itemprop="name" content="longhorn">
 	<meta itemprop="description" content="Longhorn# Everything we’ve done with storage so far lived on one node. In the v1 notes a PVC was a local disk on (the only) Minikube node, and in the multi-node notes our workers each keep their own local directories. That means the day kworker1 dies, every PVC hosted on it dies with it - block storage was the last single point of failure in our homelab.
 Longhorn fixes that: it’s a distributed block storage system built as a CSI driver, purpose-made for Kubernetes. Every volume it serves is split into an engine plus N replicas (default 3) that live on different nodes - scheduled exactly like pods are.">
-	<meta itemprop="wordCount" content="1054">
+	<meta itemprop="wordCount" content="1053">
 
 <title>longhorn • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ Longhorn fixes that: it’s a distributed block storage system built as a CSI dr
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.4c16edd67f4e6557dfa1a564fdd7c73bb2063fd0ffc73e3325b80b8736757784.js" integrity="sha256-TBbt1n9OZVffoaVk/dfHO7IGP9D/xz4zJbgLhzZ1d4Q=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.0cf802c4b9a52925a1f9e3271ec552fcd557cc27db5877a4bcdf50d009afe073.js" integrity="sha256-DPgCxLmlKSWh&#43;eMnHsVS/NVXzCfbWHekvN9Q0Amv4HM=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1379,11 +1379,11 @@ Longhorn fixes that: it’s a distributed block storage system built as a CSI dr
 <li>Enough free disk under <code>/var/lib/longhorn</code> on each node (the default data location)</li>
 <li>A Linux kernel ≥ 4.18 (5.8+ recommended)</li>
 <li>NFS client only if you want RWX volumes (the NFS-server-based sharing layer)</li>
-<li><strong>A real multi-node cluster.</strong> On Minikube&rsquo;s single node Longhorn installs and runs, but replicas collapse onto one node: zero redundancy. Test it there only to see the UI; this chapter assumes the 3-node cluster from the <a href="../multi-node-kubeadm/">multi-node notes</a></li>
+<li><strong>A real multi-node cluster.</strong> On Minikube&rsquo;s single node Longhorn installs and runs, but replicas collapse onto one node: zero redundancy. Test it there only to see the UI; this chapter assumes the 4-node cluster from the <a href="../multi-node-kubeadm/">multi-node notes</a></li>
 </ul>
 <h2 id="how-to-prepare-the-nodes">How to Prepare the Nodes<a class="anchor" href="#how-to-prepare-the-nodes">#</a></h2>
 <ol>
-<li>On <em>every</em> node (all three), install the iSCSI pieces:</li>
+<li>On <em>every</em> node (all four), install the iSCSI pieces:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get install -y open-iscsi
 </span></span><span style="display:flex;"><span>sudo systemctl enable --now iscsid
@@ -1410,7 +1410,7 @@ Longhorn fixes that: it’s a distributed block storage system built as a CSI dr
 <li>Verify the StorageClass was created and check the UI:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get sc
-</span></span><span style="display:flex;"><span>kubectl -n longhorn-system port-forward svc/longhorn-frontend 8085:80</span></span></code></pre></div><p>Open <code>http://localhost:8085</code> - the UI shows nodes, disks, volumes and their replica placement. Seeing the 3 replicas of a volume spread across your 3 nodes is the &ldquo;aha&rdquo; moment of this chapter.</p>
+</span></span><span style="display:flex;"><span>kubectl -n longhorn-system port-forward svc/longhorn-frontend 8085:80</span></span></code></pre></div><p>Open <code>http://localhost:8085</code> - the UI shows nodes, disks, volumes and their replica placement. Seeing the 3 replicas of a volume spread across your nodes is the &ldquo;aha&rdquo; moment of this chapter.</p>
 <h2 id="how-to-make-longhorn-the-default-storageclass">How to Make Longhorn the Default StorageClass<a class="anchor" href="#how-to-make-longhorn-the-default-storageclass">#</a></h2>
 <p>Minikube already ships a default SC (<code>standard</code>); the kubeadm cluster from the <a href="../multi-node-kubeadm/">multi-node notes</a> starts with none until a driver claims the title. If some other class is already marked default, two defaults = new PVCs silently going to the wrong backend.</p>
 <ol>

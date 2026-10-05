@@ -4,7 +4,7 @@ weight: 22
 ---
 # PostgreSQL Read Replicas with CloudNativePG
 
-The [manual setup](../postgresql-statefulset-replication/) taught us the mechanics: WAL, basebackup, standby. It also showed the catch - failover is a human job, and humans don't get paged at 3am for fun. [CloudNativePG](https://cloudnative-pg.io/) (CNPG) is the operator that automates the whole lifecycle: primary election, failover, replica management, backups - as a declarative `Cluster` CRD. On top of [Longhorn](../longhorn/) it turns our 3-node homelab into a genuinely production-shaped database platform.
+The [manual setup](../postgresql-statefulset-replication/) taught us the mechanics: WAL, basebackup, standby. It also showed the catch - failover is a human job, and humans don't get paged at 3am for fun. [CloudNativePG](https://cloudnative-pg.io/) (CNPG) is the operator that automates the whole lifecycle: primary election, failover, replica management, backups - as a declarative `Cluster` CRD. On top of [Longhorn](../longhorn/) it turns our 4-node homelab into a genuinely production-shaped database platform.
 
 ## What the Operator Buys You
 

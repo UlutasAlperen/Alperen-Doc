@@ -8,25 +8,22 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work the standard path to real multi-node Kubernetes is kubeadm - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster.
-The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:
+<meta name="description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work the standard path to real multi-node Kubernetes is kubeadm - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster, with Cilium as the CNI - eBPF datapath, working NetworkPolicy enforcement and no kube-proxy.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/multi-node-kubeadm/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="multi-node-kubeadm">
-	<meta property="og:description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work the standard path to real multi-node Kubernetes is kubeadm - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster.
-The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
+	<meta property="og:description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work the standard path to real multi-node Kubernetes is kubeadm - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster, with Cilium as the CNI - eBPF datapath, working NetworkPolicy enforcement and no kube-proxy.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="multi-node-kubeadm">
-	<meta itemprop="description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work the standard path to real multi-node Kubernetes is kubeadm - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster.
-The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
-	<meta itemprop="wordCount" content="1171">
+	<meta itemprop="description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work the standard path to real multi-node Kubernetes is kubeadm - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster, with Cilium as the CNI - eBPF datapath, working NetworkPolicy enforcement and no kube-proxy.">
+	<meta itemprop="wordCount" content="1802">
 
 <title>multi-node-kubeadm • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +32,7 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.4c16edd67f4e6557dfa1a564fdd7c73bb2063fd0ffc73e3325b80b8736757784.js" integrity="sha256-TBbt1n9OZVffoaVk/dfHO7IGP9D/xz4zJbgLhzZ1d4Q=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.0cf802c4b9a52925a1f9e3271ec552fcd557cc27db5877a4bcdf50d009afe073.js" integrity="sha256-DPgCxLmlKSWh&#43;eMnHsVS/NVXzCfbWHekvN9Q0Amv4HM=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1316,10 +1313,11 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
     <li><a href="#containerd">Containerd</a></li>
     <li><a href="#k8s-packages-apt-the-careful-way">K8s Packages (apt, the careful way)</a></li>
     <li><a href="#control-plane">Control Plane</a></li>
+    <li><a href="#cni-cilium">CNI: Cilium</a></li>
     <li><a href="#workers-join">Workers Join</a></li>
     <li><a href="#node-lifecycle">Node Lifecycle</a></li>
     <li><a href="#backups-and-upgrades">Backups and Upgrades</a></li>
-    <li><a href="#how-to-bootstrap-a-3-node-cluster-with-kubeadm">How to Bootstrap a 3-Node Cluster with kubeadm</a></li>
+    <li><a href="#how-to-bootstrap-a-4-node-cluster-with-kubeadm">How to Bootstrap a 4-Node Cluster with kubeadm</a></li>
     <li><a href="#how-to-join-workers-and-verify-the-cluster">How to Join Workers and Verify the Cluster</a></li>
     <li><a href="#how-to-remove-and-re-add-a-node-safely">How to Remove and Re-add a Node Safely</a></li>
   </ul>
@@ -1335,12 +1333,13 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
       
       
   <article class="markdown book-article"><h1 id="multi-node-from-minikube-to-a-real-cluster">Multi-Node: From Minikube to a Real Cluster<a class="anchor" href="#multi-node-from-minikube-to-a-real-cluster">#</a></h1>
-<p>Minikube is a single-node cluster - we&rsquo;ve repeated that warning since the very first <a href="../../kubernetes/kubernetes-nodes-basic/">v1 notes</a>. For homelab work the standard path to <em>real</em> multi-node Kubernetes is <code>kubeadm</code> - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster.</p>
+<p>Minikube is a single-node cluster - we&rsquo;ve repeated that warning since the very first <a href="../../kubernetes/kubernetes-nodes-basic/">v1 notes</a>. For homelab work the standard path to <em>real</em> multi-node Kubernetes is <code>kubeadm</code> - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster, with <a href="https://cilium.io/">Cilium</a> as the CNI - eBPF datapath, working <a href="../network-policy/">NetworkPolicy</a> enforcement and no kube-proxy.</p>
 <h2 id="the-plan">The Plan<a class="anchor" href="#the-plan">#</a></h2>
-<p>On my Proxmox box I spin up 3 Debian 12 VMs, <code>2 vCPU / 4GB</code> each:</p>
+<p>On my Proxmox box I spin up 4 Debian 12 VMs, <code>2 vCPU / 4GB</code> each:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>kmaster   192.168.1.200   control plane
 </span></span><span style="display:flex;"><span>kworker1  192.168.1.201   worker
-</span></span><span style="display:flex;"><span>kworker2  192.168.1.202   worker</span></span></code></pre></div><p>Add them to <code>/etc/hosts</code> on all nodes and on your laptop, make sure SSH with key auth works, and keep the k8s minor version pinned identically everywhere - mixed minor versions within one cluster are supported only one step ahead and are a support nightmare.</p>
+</span></span><span style="display:flex;"><span>kworker2  192.168.1.202   worker
+</span></span><span style="display:flex;"><span>kworker3  192.168.1.203   worker</span></span></code></pre></div><p>Add them to <code>/etc/hosts</code> on all nodes and on your laptop, make sure SSH with key auth works, and keep the k8s minor version pinned identically everywhere - mixed minor versions within one cluster are supported only one step ahead and are a support nightmare.</p>
 <h2 id="prep-on-all-nodes">Prep on All Nodes<a class="anchor" href="#prep-on-all-nodes">#</a></h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Disable swap - kubelet refuses to work with it</span>
 </span></span><span style="display:flex;"><span>sudo swapoff -a
@@ -1360,7 +1359,7 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">net.ipv4.ip_forward                 = 1
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
 </span></span><span style="display:flex;"><span>sudo sysctl --system</span></span></code></pre></div><blockquote class='book-hint '>
-<p><code>net.bridge.bridge-nf-call-iptables = 1</code> looks arcane but matters: without it, traffic through the bridge is not processed by iptables - which breaks Service NAT rules and makes <a href="../network-policy/">NetworkPolicy</a> enforcement silently unreliable.</p>
+<p><code>net.bridge.bridge-nf-call-iptables = 1</code> looks arcane but matters: without it, traffic through the bridge is not processed by iptables - which breaks Service NAT rules and makes <a href="../network-policy/">NetworkPolicy</a> enforcement silently unreliable. Cilium&rsquo;s eBPF datapath needs <code>ip_forward</code> regardless, and even with kube-proxy gone the same prep keeps non-BPF paths (and every other doc in this series) honest. Debian 12&rsquo;s kernel (6.x) is comfortably above Cilium&rsquo;s minimum - no kernel surgery needed.</p>
 </blockquote><h2 id="containerd">Containerd<a class="anchor" href="#containerd">#</a></h2>
 <p>Kubernetes ships its own <a href="https://github.com/containerd/containerd">containerd</a> expectations; the important detail is the cgroup driver:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get install -y containerd
@@ -1384,18 +1383,42 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
 <p><code>apt-mark hold</code> is the part everyone skips and then regrets: unattended-upgrades bumping kubelet on one node only is a textbook way to end up with version-skew symptoms that look like random network failures.</p>
 </blockquote><h2 id="control-plane">Control Plane<a class="anchor" href="#control-plane">#</a></h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo kubeadm init --pod-network-cidr<span style="color:#f92672">=</span>10.244.0.0/16</span></span></code></pre></div><ul>
-<li><code>--pod-network-cidr</code> must match what your CNI expects (flannel&rsquo;s default is exactly <code>10.244.0.0/16</code>; calico defaults elsewhere - check first, this is painful to change later)</li>
+<li><code>--pod-network-cidr</code> is where kubeadm carves out per-node pod CIDRs from - Cilium reads those from <code>node.spec.podCIDR</code> (its default <code>ipam.mode=kubernetes</code>), so pick this <strong>before</strong> <code>init</code>, it&rsquo;s painful to change later</li>
 <li>The output prints a <code>kubeadm join ...</code> command - <strong>save it</strong></li>
 <li>For anything beyond a lab, add <code>--control-plane-endpoint=&lt;stable-DNS-or-VIP&gt;</code> - this is what makes a later control-plane HA setup possible without rebuilding everything</li>
 </ul>
-<p>Set up kubeconfig, then install a CNI. Flannel is the no-frills homelab choice:</p>
+<p>Set up kubeconfig:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir -p $HOME/.kube
 </span></span><span style="display:flex;"><span>sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-</span></span><span style="display:flex;"><span>sudo chown <span style="color:#66d9ef">$(</span>id -u<span style="color:#66d9ef">)</span>:<span style="color:#66d9ef">$(</span>id -g<span style="color:#66d9ef">)</span> $HOME/.kube/config
-</span></span><span style="display:flex;"><span>kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml</span></span></code></pre></div><p>(Ben policy enforcement&rsquo;i de denemek istiyorsam <a href="https://docs.tigera.io/calico/latest/about/about-kubernetes">calico</a> kuruyorum - <a href="../network-policy/">NetworkPolicy</a> notundaki CNI konusunun ta kendisi.)</p>
+</span></span><span style="display:flex;"><span>sudo chown <span style="color:#66d9ef">$(</span>id -u<span style="color:#66d9ef">)</span>:<span style="color:#66d9ef">$(</span>id -g<span style="color:#66d9ef">)</span> $HOME/.kube/config</span></span></code></pre></div><h2 id="cni-cilium">CNI: Cilium<a class="anchor" href="#cni-cilium">#</a></h2>
+<p>Flannel is the no-frills homelab CNI - and it implements <em>zero</em> NetworkPolicies, which is the one thing this series kept promising. <a href="https://cilium.io/docs/">Cilium</a> is the modern answer: an eBPF-based CNI that enforces <a href="../network-policy/">NetworkPolicy</a>, replaces kube-proxy entirely (Service load-balancing in eBPF), and throws in Hubble for network observability. The <a href="../cluster-extensions/">cluster-extensions</a> notes called CNI &ldquo;the socket&rdquo; - Cilium is the plugin we now plug into it.</p>
+<p>Installed with <a href="../helm/">Helm</a>, the same way we&rsquo;ll treat every cluster add-on later:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add cilium https://helm.cilium.io/
+</span></span><span style="display:flex;"><span>helm repo update
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>helm install cilium cilium/cilium --version 1.16.5 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --namespace kube-system <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --set kubeProxyReplacement<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --set k8sServiceHost<span style="color:#f92672">=</span>192.168.1.200 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --set k8sServicePort<span style="color:#f92672">=</span><span style="color:#ae81ff">6443</span></span></span></code></pre></div><p>Three flags worth understanding, because each one is a different way to install a broken cluster:</p>
+<ul>
+<li><code>kubeProxyReplacement=true</code> - Cilium programs Service VIPs in eBPF; kube-proxy becomes redundant</li>
+<li><code>k8sServiceHost</code> / <code>k8sServicePort</code> - with kube-proxy gone, Cilium is the thing that has to find the API server; point it at <code>kmaster</code>&rsquo;s IP (or your <code>controlPlaneEndpoint</code> if you set one). Forgetting these leaves every Service unroutable with no error anywhere</li>
+<li><code>--version</code> - pin it, same philosophy as <code>apt-mark hold</code>. <code>helm install cilium cilium/cilium</code> with no version grabs the latest chart, which is how clusters get surprise minor upgrades</li>
+</ul>
+<p>Then remove the now-dead kube-proxy DaemonSet - leaving it running is confusing at best and fighting for iptables at worst:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n kube-system scale daemonset kube-proxy --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>kubectl -n kube-system get daemonset kube-proxy   <span style="color:#75715e"># 0 desired, confirm nothing breaks</span>
+</span></span><span style="display:flex;"><span>kubectl -n kube-system delete daemonset kube-proxy</span></span></code></pre></div><p>Verify before joining anything:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cilium status --wait          <span style="color:#75715e"># or: kubectl -n kube-system get pods -l k8s-app=cilium</span>
+</span></span><span style="display:flex;"><span>kubectl get nodes             <span style="color:#75715e"># kmaster flips to Ready</span></span></span></code></pre></div><blockquote class='book-hint '>
+<p>Cilium pods are a DaemonSet (<code>--ignore-daemonsets</code> in every drain below), and the agent needs <code>CAP_BPF</code>-level access to the kernel - on a plain Debian VM with the prep above that just works. If <code>cilium status</code> shows <code>Controller: ... Failing</code>, check <code>k8sServiceHost</code> first, <code>dmesg | grep -i bpf</code> second. For a deeper look: <code>cilium sysdump</code> bundles everything worth reading.</p>
+</blockquote><blockquote class='book-hint '>
+<p>Hubble (Cilium&rsquo;s network observability layer) is a flag away - <code>--set hubble.enabled=true --set hubble.relay.enabled=true --set hubble.ui.enabled=true</code> - and turns &ldquo;which pod is talking to which&rdquo; from a guessing game into <code>hubble observe</code>. Off by default here to keep the install lean; it&rsquo;s a per-node sidecar-free design so it costs almost nothing.</p>
+</blockquote><p>(Ben policy enforcement&rsquo;i artık her yerde deneyebilirim - Cilium varsayılan olarak standardı uygular. eBPF tabanlı ekstra <code>CiliumNetworkPolicy</code>&lsquo;ler için <a href="../network-policy/">NetworkPolicy</a> notuna bak; o nottaki CNI gerçekliği tablosunda flannel&rsquo;in &ldquo;policies exist, are ignored&rdquo; satırının neden bizi Cilium&rsquo;a getirdiğini göreceksin.)</p>
 <h2 id="workers-join">Workers Join<a class="anchor" href="#workers-join">#</a></h2>
 <p>On each worker, run the saved join command. If you lost it:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeadm token create --print-join-command   <span style="color:#75715e"># on the control plane</span></span></span></code></pre></div><p>Verification - both nodes join, then everything flips to <code>Ready</code> (CNI first, then nodes):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeadm token create --print-join-command   <span style="color:#75715e"># on the control plane</span></span></span></code></pre></div><p>Verification - three nodes join, then everything flips to <code>Ready</code> (Cilium first, then nodes):</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get nodes -o wide
 </span></span><span style="display:flex;"><span>kubectl get pods -n kube-system</span></span></code></pre></div><p>Note: control-plane nodes carry the taint <code>node-role.kubernetes.io/control-plane:NoSchedule</code> by default - workloads land on workers only. The v1 notes&rsquo; <a href="../../kubernetes/kubernetes-nodes-basic/">control plane vs workers</a> distinction is now something you can literally <code>kubectl describe</code>.</p>
 <h2 id="node-lifecycle">Node Lifecycle<a class="anchor" href="#node-lifecycle">#</a></h2>
@@ -1413,10 +1436,11 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
 </span></span></span><span style="display:flex;"><span>  --key<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.key <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>  snapshot save /backup/etcd-snapshot-<span style="color:#66d9ef">$(</span>date +%F<span style="color:#66d9ef">)</span>.db</span></span></code></pre></div><p>Proxmox tarafında ayrıca VM-level snapshot almak bedava sigortadır - ama etcd snapshot&rsquo;ı deployment&rsquo;ları da kurtarırken, VM snapshot&rsquo;ı tüm control-plane&rsquo;i olduğu geri alır; ikisinin yerini tutmaz.</p>
 <p>Upgrades: control plane first, one minor at a time, <code>apt-mark unhold</code> before, hold again after, drain per node in between. Never skip minors on kubeadm clusters. The full command-by-command walkthrough - including etcd restore and cert renewal - is in <a href="../kubeadm-upgrade-etcd/">kubeadm-upgrade-etcd</a>; HA topologies that make an upgrade survivable are in <a href="../ha-control-plane/">ha-control-plane</a>.</p>
-<h2 id="how-to-bootstrap-a-3-node-cluster-with-kubeadm">How to Bootstrap a 3-Node Cluster with kubeadm<a class="anchor" href="#how-to-bootstrap-a-3-node-cluster-with-kubeadm">#</a></h2>
+<p><strong>Özetle:</strong> kubeadm upgrade&rsquo;i ve Cilium upgrade&rsquo;i ayrı track&rsquo;lerdir. <code>apt-get upgrade</code> cluster&rsquo;ı hareket ettirir; <code>helm upgrade cilium ...</code> datapath&rsquo;i. İkisini aynı anda yapma - biri bozulursa hangisinin suçlu olduğunu bilemezsin.</p>
+<h2 id="how-to-bootstrap-a-4-node-cluster-with-kubeadm">How to Bootstrap a 4-Node Cluster with kubeadm<a class="anchor" href="#how-to-bootstrap-a-4-node-cluster-with-kubeadm">#</a></h2>
 <ol>
 <li>
-<p>Prep all three VMs (swap, modules, sysctl, containerd, packages) - identical commands everywhere, and verify each step&rsquo;s output rather than assuming.</p>
+<p>Prep all four VMs (swap, modules, sysctl, containerd, packages) - identical commands everywhere, and verify each step&rsquo;s output rather than assuming.</p>
 </li>
 <li>
 <p>On <code>kmaster</code>, initialize and capture the join command:</p>
@@ -1424,15 +1448,22 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo kubeadm init --pod-network-cidr<span style="color:#f92672">=</span>10.244.0.0/16</span></span></code></pre></div><p>Copy kubeconfig, verify <code>kubectl get nodes</code> shows one <code>NotReady</code> control plane (no CNI yet - that&rsquo;s expected).</p>
 <ol start="3">
-<li>Apply flannel and watch the control plane flip to <code>Ready</code>:</li>
+<li>Install Cilium and watch the control plane flip to <code>Ready</code>:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>helm repo add cilium https://helm.cilium.io/ <span style="color:#f92672">&amp;&amp;</span> helm repo update
+</span></span><span style="display:flex;"><span>helm install cilium cilium/cilium --version 1.16.5 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --namespace kube-system <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --set kubeProxyReplacement<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --set k8sServiceHost<span style="color:#f92672">=</span>192.168.1.200 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --set k8sServicePort<span style="color:#f92672">=</span><span style="color:#ae81ff">6443</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cilium status --wait
 </span></span><span style="display:flex;"><span>kubectl get nodes --watch</span></span></code></pre></div><blockquote class='book-hint '>
-<p>If nodes stay <code>NotReady</code> after flannel, check <code>kubectl get pods -n kube-system</code> - flannel pods should be Running on every node. NotReady + flannel Running is usually a CIDR mismatch from step 2; there&rsquo;s no clean fix for a wrong <code>--pod-network-cidr</code>, plan the CIDR before <code>init</code>.</p>
+<p>If the node stays <code>NotReady</code> after the install, check <code>kubectl get pods -n kube-system</code> - <code>cilium</code> pods should be <code>Running</code> on every node and <code>cilium-operator</code> at least once. CrashLooping cilium pods with no obvious error is almost always <code>k8sServiceHost</code> pointing at the wrong address; <code>NotReady</code> + cilium Running is usually a CIDR mismatch from step 2 - there&rsquo;s no clean fix for a wrong <code>--pod-network-cidr</code>, plan the CIDR before <code>init</code>.</p>
 </blockquote><h2 id="how-to-join-workers-and-verify-the-cluster">How to Join Workers and Verify the Cluster<a class="anchor" href="#how-to-join-workers-and-verify-the-cluster">#</a></h2>
 <ol>
 <li>
-<p>On each worker, paste the join command. A successful join ends with <code>This node has joined the cluster</code>.</p>
+<p>On each worker, paste the join command. A successful join ends with <code>This node has joined the cluster</code>. Three times - <code>kworker1</code>, <code>kworker2</code>, <code>kworker3</code>.</p>
 </li>
 <li>
 <p>From the control plane, confirm the fleet and that the worker role reads as <code>&lt;none&gt;</code>:</p>
@@ -1440,10 +1471,15 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get nodes -o wide</span></span></code></pre></div><p>Check <code>INTERNAL-IP</code>, <code>OS-IMAGE</code>, <code>VERSION</code> columns - and confirm all nodes run the <em>same</em> k8s minor version (the <code>hold</code> pins should guarantee it).</p>
 <ol start="3">
+<li>Confirm the datapath claim: kube-proxy is gone and Services still work:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n kube-system get daemonset kube-proxy   <span style="color:#75715e"># NotFound = success</span>
+</span></span><span style="display:flex;"><span>kubectl get svc kubernetes -o wide</span></span></code></pre></div><p>If <code>kubernetes</code> ClusterIP answers on <code>:443</code> from a worker, eBPF is load-balancing - the flag did what it promised.</p>
+<ol start="4">
 <li>Deploy the web app with 3 replicas and watch placement:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -o wide</span></span></code></pre></div><p>Pods landing on <em>different</em> worker nodes is the v1 <a href="../../kubernetes/kubernetes-minikube/">minikube limits</a> table happening for real.</p>
-<ol start="4">
+<ol start="5">
 <li>Sanity-check the control-plane taint keeps pods off the master:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl describe node kmaster | grep -iA3 taints</span></span></code></pre></div><h2 id="how-to-remove-and-re-add-a-node-safely">How to Remove and Re-add a Node Safely<a class="anchor" href="#how-to-remove-and-re-add-a-node-safely">#</a></h2>
@@ -1451,23 +1487,24 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
 <li>Evacuate first - drain moves the workloads away before you touch anything:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl drain kworker1 --ignore-daemonsets
-</span></span><span style="display:flex;"><span>kubectl get pods -o wide --watch</span></span></code></pre></div><p>Watch the web pods reschedule onto remaining nodes (this is also the moment you notice if you lack a <a href="../taints-affinity-quotas/">spread constraint</a> - everything may pile onto one node).</p>
+</span></span><span style="display:flex;"><span>kubectl get pods -o wide --watch</span></span></code></pre></div><p>Watch the web pods reschedule onto remaining nodes (this is also the moment you notice if you lack a <a href="../taints-affinity-quotas/">spread constraint</a> - everything may pile onto one node). Cilium agents stay - they&rsquo;re a DaemonSet and per-node by design.</p>
 <ol start="2">
 <li>From the cluster&rsquo;s view, remove the node object:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl delete node kworker1</span></span></code></pre></div><ol start="3">
-<li>On the node itself, clean k8s state:</li>
+<li>On the node itself, clean k8s + Cilium state:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo kubeadm reset -f
 </span></span><span style="display:flex;"><span>sudo iptables -F <span style="color:#f92672">&amp;&amp;</span> sudo iptables -t nat -F <span style="color:#f92672">&amp;&amp;</span> sudo iptables -t mangle -F
-</span></span><span style="display:flex;"><span>sudo rm -rf /etc/cni /var/lib/cni/ /var/lib/kubelet/*</span></span></code></pre></div><blockquote class='book-hint '>
-<p>The iptables flush and kubelet cleanup are what make a <em>re</em>-join work cleanly; skipping them produces join failures that look like token problems but are actually stale state.</p>
+</span></span><span style="display:flex;"><span>sudo rm -rf /etc/cni /var/lib/cni/ /var/lib/kubelet/* /var/run/cilium /var/lib/cilium</span></span></code></pre></div><blockquote class='book-hint '>
+<p>The iptables flush, kubelet cleanup and Cilium state removal are what make a <em>re</em>-join work cleanly; skipping them produces join failures that look like token problems but are actually stale state. Stale Cilium state is especially nasty - the node rejoins, the agent starts, and the datapath silently keeps programming old identities.</p>
 </blockquote><ol start="4">
 <li>Re-join with a fresh token from the control plane and verify it returns to <code>Ready</code>:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubeadm token create --print-join-command   <span style="color:#75715e"># on kmaster</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># paste on kworker1</span>
-</span></span><span style="display:flex;"><span>kubectl get nodes --watch</span></span></code></pre></div><p>for more <a href="../kubeadm-upgrade-etcd/">kubeadm-upgrade-etcd</a></p>
+</span></span><span style="display:flex;"><span>kubectl get nodes --watch
+</span></span><span style="display:flex;"><span>kubectl -n kube-system get pods -l k8s-app<span style="color:#f92672">=</span>cilium -o wide   <span style="color:#75715e"># a cilium pod for the new node</span></span></span></code></pre></div><p>for more <a href="../kubeadm-upgrade-etcd/">kubeadm-upgrade-etcd</a> and <a href="../ha-control-plane/">ha-control-plane</a></p>
 </article>
  
       
@@ -1540,10 +1577,11 @@ The Plan# On my Proxmox box I spin up 3 Debian 12 VMs, 2 vCPU / 4GB each:">
     <li><a href="#containerd">Containerd</a></li>
     <li><a href="#k8s-packages-apt-the-careful-way">K8s Packages (apt, the careful way)</a></li>
     <li><a href="#control-plane">Control Plane</a></li>
+    <li><a href="#cni-cilium">CNI: Cilium</a></li>
     <li><a href="#workers-join">Workers Join</a></li>
     <li><a href="#node-lifecycle">Node Lifecycle</a></li>
     <li><a href="#backups-and-upgrades">Backups and Upgrades</a></li>
-    <li><a href="#how-to-bootstrap-a-3-node-cluster-with-kubeadm">How to Bootstrap a 3-Node Cluster with kubeadm</a></li>
+    <li><a href="#how-to-bootstrap-a-4-node-cluster-with-kubeadm">How to Bootstrap a 4-Node Cluster with kubeadm</a></li>
     <li><a href="#how-to-join-workers-and-verify-the-cluster">How to Join Workers and Verify the Cluster</a></li>
     <li><a href="#how-to-remove-and-re-add-a-node-safely">How to Remove and Re-add a Node Safely</a></li>
   </ul>

@@ -8,7 +8,7 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="PostgreSQL Streaming Replication (The Manual Way)# In the StatefulSet notes we ran a single-replica PostgreSQL: pod dies, new pod mounts the same PVC, data survives. But there’s still exactly one copy of the data, and if the primary goes down, your database is down until it comes back. On a 3-node cluster with Longhorn underneath, we can finally do the real thing: a primary plus streaming replicas.
+<meta name="description" content="PostgreSQL Streaming Replication (The Manual Way)# In the StatefulSet notes we ran a single-replica PostgreSQL: pod dies, new pod mounts the same PVC, data survives. But there’s still exactly one copy of the data, and if the primary goes down, your database is down until it comes back. On a 4-node cluster with Longhorn underneath, we can finally do the real thing: a primary plus streaming replicas.
 Two Different Layers of Protection# This is the concept to get straight before touching YAML, because people conflate them constantly:
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
@@ -16,7 +16,7 @@ Two Different Layers of Protection# This is the concept to get straight before t
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-statefulset-replication/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="postgresql-statefulset-replication">
-	<meta property="og:description" content="PostgreSQL Streaming Replication (The Manual Way)# In the StatefulSet notes we ran a single-replica PostgreSQL: pod dies, new pod mounts the same PVC, data survives. But there’s still exactly one copy of the data, and if the primary goes down, your database is down until it comes back. On a 3-node cluster with Longhorn underneath, we can finally do the real thing: a primary plus streaming replicas.
+	<meta property="og:description" content="PostgreSQL Streaming Replication (The Manual Way)# In the StatefulSet notes we ran a single-replica PostgreSQL: pod dies, new pod mounts the same PVC, data survives. But there’s still exactly one copy of the data, and if the primary goes down, your database is down until it comes back. On a 4-node cluster with Longhorn underneath, we can finally do the real thing: a primary plus streaming replicas.
 Two Different Layers of Protection# This is the concept to get straight before touching YAML, because people conflate them constantly:">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
@@ -24,7 +24,7 @@ Two Different Layers of Protection# This is the concept to get straight before t
 
 
 	<meta itemprop="name" content="postgresql-statefulset-replication">
-	<meta itemprop="description" content="PostgreSQL Streaming Replication (The Manual Way)# In the StatefulSet notes we ran a single-replica PostgreSQL: pod dies, new pod mounts the same PVC, data survives. But there’s still exactly one copy of the data, and if the primary goes down, your database is down until it comes back. On a 3-node cluster with Longhorn underneath, we can finally do the real thing: a primary plus streaming replicas.
+	<meta itemprop="description" content="PostgreSQL Streaming Replication (The Manual Way)# In the StatefulSet notes we ran a single-replica PostgreSQL: pod dies, new pod mounts the same PVC, data survives. But there’s still exactly one copy of the data, and if the primary goes down, your database is down until it comes back. On a 4-node cluster with Longhorn underneath, we can finally do the real thing: a primary plus streaming replicas.
 Two Different Layers of Protection# This is the concept to get straight before touching YAML, because people conflate them constantly:">
 	<meta itemprop="wordCount" content="1148">
 
@@ -35,7 +35,7 @@ Two Different Layers of Protection# This is the concept to get straight before t
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.4c16edd67f4e6557dfa1a564fdd7c73bb2063fd0ffc73e3325b80b8736757784.js" integrity="sha256-TBbt1n9OZVffoaVk/dfHO7IGP9D/xz4zJbgLhzZ1d4Q=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.0cf802c4b9a52925a1f9e3271ec552fcd557cc27db5877a4bcdf50d009afe073.js" integrity="sha256-DPgCxLmlKSWh&#43;eMnHsVS/NVXzCfbWHekvN9Q0Amv4HM=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1330,7 +1330,7 @@ Two Different Layers of Protection# This is the concept to get straight before t
       
       
   <article class="markdown book-article"><h1 id="postgresql-streaming-replication-the-manual-way">PostgreSQL Streaming Replication (The Manual Way)<a class="anchor" href="#postgresql-streaming-replication-the-manual-way">#</a></h1>
-<p>In the <a href="../../kubernetes/kubernetes-statefulsets/">StatefulSet notes</a> we ran a single-replica PostgreSQL: pod dies, new pod mounts the same PVC, data survives. But there&rsquo;s still exactly <em>one</em> copy of the data, and if the primary goes down, your database is down until it comes back. On a 3-node cluster with <a href="../longhorn/">Longhorn</a> underneath, we can finally do the real thing: a primary plus streaming replicas.</p>
+<p>In the <a href="../../kubernetes/kubernetes-statefulsets/">StatefulSet notes</a> we ran a single-replica PostgreSQL: pod dies, new pod mounts the same PVC, data survives. But there&rsquo;s still exactly <em>one</em> copy of the data, and if the primary goes down, your database is down until it comes back. On a 4-node cluster with <a href="../longhorn/">Longhorn</a> underneath, we can finally do the real thing: a primary plus streaming replicas.</p>
 <h2 id="two-different-layers-of-protection">Two Different Layers of Protection<a class="anchor" href="#two-different-layers-of-protection">#</a></h2>
 <p>This is the concept to get straight before touching YAML, because people conflate them constantly:</p>
 <table>

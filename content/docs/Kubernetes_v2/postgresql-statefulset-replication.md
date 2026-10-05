@@ -4,7 +4,7 @@ weight: 21
 ---
 # PostgreSQL Streaming Replication (The Manual Way)
 
-In the [StatefulSet notes](../../kubernetes/kubernetes-statefulsets/) we ran a single-replica PostgreSQL: pod dies, new pod mounts the same PVC, data survives. But there's still exactly _one_ copy of the data, and if the primary goes down, your database is down until it comes back. On a 3-node cluster with [Longhorn](../longhorn/) underneath, we can finally do the real thing: a primary plus streaming replicas.
+In the [StatefulSet notes](../../kubernetes/kubernetes-statefulsets/) we ran a single-replica PostgreSQL: pod dies, new pod mounts the same PVC, data survives. But there's still exactly _one_ copy of the data, and if the primary goes down, your database is down until it comes back. On a 4-node cluster with [Longhorn](../longhorn/) underneath, we can finally do the real thing: a primary plus streaming replicas.
 
 ## Two Different Layers of Protection
 

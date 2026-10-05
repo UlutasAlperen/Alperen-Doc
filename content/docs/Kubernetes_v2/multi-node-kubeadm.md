@@ -4,16 +4,17 @@ weight: 12
 ---
 # Multi-Node: From Minikube to a Real Cluster
 
-Minikube is a single-node cluster - we've repeated that warning since the very first [v1 notes](../../kubernetes/kubernetes-nodes-basic/). For homelab work the standard path to _real_ multi-node Kubernetes is `kubeadm` - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster.
+Minikube is a single-node cluster - we've repeated that warning since the very first [v1 notes](../../kubernetes/kubernetes-nodes-basic/). For homelab work the standard path to _real_ multi-node Kubernetes is `kubeadm` - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster, with [Cilium](https://cilium.io/) as the CNI - eBPF datapath, working [NetworkPolicy](../network-policy/) enforcement and no kube-proxy.
 
 ## The Plan
 
-On my Proxmox box I spin up 3 Debian 12 VMs, `2 vCPU / 4GB` each:
+On my Proxmox box I spin up 4 Debian 12 VMs, `2 vCPU / 4GB` each:
 
 ```text
 kmaster   192.168.1.200   control plane
 kworker1  192.168.1.201   worker
 kworker2  192.168.1.202   worker
+kworker3  192.168.1.203   worker
 ```
 
 Add them to `/etc/hosts` on all nodes and on your laptop, make sure SSH with key auth works, and keep the k8s minor version pinned identically everywhere - mixed minor versions within one cluster are supported only one step ahead and are a support nightmare.
@@ -41,7 +42,7 @@ EOF
 sudo sysctl --system
 ```
 
-> `net.bridge.bridge-nf-call-iptables = 1` looks arcane but matters: without it, traffic through the bridge is not processed by iptables - which breaks Service NAT rules and makes [NetworkPolicy](../network-policy/) enforcement silently unreliable.
+> `net.bridge.bridge-nf-call-iptables = 1` looks arcane but matters: without it, traffic through the bridge is not processed by iptables - which breaks Service NAT rules and makes [NetworkPolicy](../network-policy/) enforcement silently unreliable. Cilium's eBPF datapath needs `ip_forward` regardless, and even with kube-proxy gone the same prep keeps non-BPF paths (and every other doc in this series) honest. Debian 12's kernel (6.x) is comfortably above Cilium's minimum - no kernel surgery needed.
 
 ## Containerd
 
@@ -82,20 +83,61 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 ```
 
-- `--pod-network-cidr` must match what your CNI expects (flannel's default is exactly `10.244.0.0/16`; calico defaults elsewhere - check first, this is painful to change later)
+- `--pod-network-cidr` is where kubeadm carves out per-node pod CIDRs from - Cilium reads those from `node.spec.podCIDR` (its default `ipam.mode=kubernetes`), so pick this **before** `init`, it's painful to change later
 - The output prints a `kubeadm join ...` command - **save it**
 - For anything beyond a lab, add `--control-plane-endpoint=<stable-DNS-or-VIP>` - this is what makes a later control-plane HA setup possible without rebuilding everything
 
-Set up kubeconfig, then install a CNI. Flannel is the no-frills homelab choice:
+Set up kubeconfig:
 
 ```bash
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
-kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 ```
 
-(Ben policy enforcement'i de denemek istiyorsam [calico](https://docs.tigera.io/calico/latest/about/about-kubernetes) kuruyorum - [NetworkPolicy](../network-policy/) notundaki CNI konusunun ta kendisi.)
+## CNI: Cilium
+
+Flannel is the no-frills homelab CNI - and it implements _zero_ NetworkPolicies, which is the one thing this series kept promising. [Cilium](https://cilium.io/docs/) is the modern answer: an eBPF-based CNI that enforces [NetworkPolicy](../network-policy/), replaces kube-proxy entirely (Service load-balancing in eBPF), and throws in Hubble for network observability. The [cluster-extensions](../cluster-extensions/) notes called CNI "the socket" - Cilium is the plugin we now plug into it.
+
+Installed with [Helm](../helm/), the same way we'll treat every cluster add-on later:
+
+```bash
+helm repo add cilium https://helm.cilium.io/
+helm repo update
+
+helm install cilium cilium/cilium --version 1.16.5 \
+  --namespace kube-system \
+  --set kubeProxyReplacement=true \
+  --set k8sServiceHost=192.168.1.200 \
+  --set k8sServicePort=6443
+```
+
+Three flags worth understanding, because each one is a different way to install a broken cluster:
+
+- `kubeProxyReplacement=true` - Cilium programs Service VIPs in eBPF; kube-proxy becomes redundant
+- `k8sServiceHost` / `k8sServicePort` - with kube-proxy gone, Cilium is the thing that has to find the API server; point it at `kmaster`'s IP (or your `controlPlaneEndpoint` if you set one). Forgetting these leaves every Service unroutable with no error anywhere
+- `--version` - pin it, same philosophy as `apt-mark hold`. `helm install cilium cilium/cilium` with no version grabs the latest chart, which is how clusters get surprise minor upgrades
+
+Then remove the now-dead kube-proxy DaemonSet - leaving it running is confusing at best and fighting for iptables at worst:
+
+```bash
+kubectl -n kube-system scale daemonset kube-proxy --replicas=0
+kubectl -n kube-system get daemonset kube-proxy   # 0 desired, confirm nothing breaks
+kubectl -n kube-system delete daemonset kube-proxy
+```
+
+Verify before joining anything:
+
+```bash
+cilium status --wait          # or: kubectl -n kube-system get pods -l k8s-app=cilium
+kubectl get nodes             # kmaster flips to Ready
+```
+
+> Cilium pods are a DaemonSet (`--ignore-daemonsets` in every drain below), and the agent needs `CAP_BPF`-level access to the kernel - on a plain Debian VM with the prep above that just works. If `cilium status` shows `Controller: ... Failing`, check `k8sServiceHost` first, `dmesg | grep -i bpf` second. For a deeper look: `cilium sysdump` bundles everything worth reading.
+
+> Hubble (Cilium's network observability layer) is a flag away - `--set hubble.enabled=true --set hubble.relay.enabled=true --set hubble.ui.enabled=true` - and turns "which pod is talking to which" from a guessing game into `hubble observe`. Off by default here to keep the install lean; it's a per-node sidecar-free design so it costs almost nothing.
+
+(Ben policy enforcement'i artık her yerde deneyebilirim - Cilium varsayılan olarak standardı uygular. eBPF tabanlı ekstra `CiliumNetworkPolicy`'ler için [NetworkPolicy](../network-policy/) notuna bak; o nottaki CNI gerçekliği tablosunda flannel'in "policies exist, are ignored" satırının neden bizi Cilium'a getirdiğini göreceksin.)
 
 ## Workers Join
 
@@ -105,7 +147,7 @@ On each worker, run the saved join command. If you lost it:
 kubeadm token create --print-join-command   # on the control plane
 ```
 
-Verification - both nodes join, then everything flips to `Ready` (CNI first, then nodes):
+Verification - three nodes join, then everything flips to `Ready` (Cilium first, then nodes):
 
 ```bash
 kubectl get nodes -o wide
@@ -137,9 +179,11 @@ Proxmox tarafında ayrıca VM-level snapshot almak bedava sigortadır - ama etcd
 
 Upgrades: control plane first, one minor at a time, `apt-mark unhold` before, hold again after, drain per node in between. Never skip minors on kubeadm clusters. The full command-by-command walkthrough - including etcd restore and cert renewal - is in [kubeadm-upgrade-etcd](../kubeadm-upgrade-etcd/); HA topologies that make an upgrade survivable are in [ha-control-plane](../ha-control-plane/).
 
-## How to Bootstrap a 3-Node Cluster with kubeadm
+**Özetle:** kubeadm upgrade'i ve Cilium upgrade'i ayrı track'lerdir. `apt-get upgrade` cluster'ı hareket ettirir; `helm upgrade cilium ...` datapath'i. İkisini aynı anda yapma - biri bozulursa hangisinin suçlu olduğunu bilemezsin.
 
-1. Prep all three VMs (swap, modules, sysctl, containerd, packages) - identical commands everywhere, and verify each step's output rather than assuming.
+## How to Bootstrap a 4-Node Cluster with kubeadm
+
+1. Prep all four VMs (swap, modules, sysctl, containerd, packages) - identical commands everywhere, and verify each step's output rather than assuming.
 
 2. On `kmaster`, initialize and capture the join command:
 
@@ -149,18 +193,25 @@ sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 
 Copy kubeconfig, verify `kubectl get nodes` shows one `NotReady` control plane (no CNI yet - that's expected).
 
-3. Apply flannel and watch the control plane flip to `Ready`:
+3. Install Cilium and watch the control plane flip to `Ready`:
 
 ```bash
-kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+helm repo add cilium https://helm.cilium.io/ && helm repo update
+helm install cilium cilium/cilium --version 1.16.5 \
+  --namespace kube-system \
+  --set kubeProxyReplacement=true \
+  --set k8sServiceHost=192.168.1.200 \
+  --set k8sServicePort=6443
+
+cilium status --wait
 kubectl get nodes --watch
 ```
 
-> If nodes stay `NotReady` after flannel, check `kubectl get pods -n kube-system` - flannel pods should be Running on every node. NotReady + flannel Running is usually a CIDR mismatch from step 2; there's no clean fix for a wrong `--pod-network-cidr`, plan the CIDR before `init`.
+> If the node stays `NotReady` after the install, check `kubectl get pods -n kube-system` - `cilium` pods should be `Running` on every node and `cilium-operator` at least once. CrashLooping cilium pods with no obvious error is almost always `k8sServiceHost` pointing at the wrong address; `NotReady` + cilium Running is usually a CIDR mismatch from step 2 - there's no clean fix for a wrong `--pod-network-cidr`, plan the CIDR before `init`.
 
 ## How to Join Workers and Verify the Cluster
 
-1. On each worker, paste the join command. A successful join ends with `This node has joined the cluster`.
+1. On each worker, paste the join command. A successful join ends with `This node has joined the cluster`. Three times - `kworker1`, `kworker2`, `kworker3`.
 
 2. From the control plane, confirm the fleet and that the worker role reads as `<none>`:
 
@@ -170,7 +221,16 @@ kubectl get nodes -o wide
 
 Check `INTERNAL-IP`, `OS-IMAGE`, `VERSION` columns - and confirm all nodes run the _same_ k8s minor version (the `hold` pins should guarantee it).
 
-3. Deploy the web app with 3 replicas and watch placement:
+3. Confirm the datapath claim: kube-proxy is gone and Services still work:
+
+```bash
+kubectl -n kube-system get daemonset kube-proxy   # NotFound = success
+kubectl get svc kubernetes -o wide
+```
+
+If `kubernetes` ClusterIP answers on `:443` from a worker, eBPF is load-balancing - the flag did what it promised.
+
+4. Deploy the web app with 3 replicas and watch placement:
 
 ```bash
 kubectl get pods -o wide
@@ -178,7 +238,7 @@ kubectl get pods -o wide
 
 Pods landing on _different_ worker nodes is the v1 [minikube limits](../../kubernetes/kubernetes-minikube/) table happening for real.
 
-4. Sanity-check the control-plane taint keeps pods off the master:
+5. Sanity-check the control-plane taint keeps pods off the master:
 
 ```bash
 kubectl describe node kmaster | grep -iA3 taints
@@ -193,7 +253,7 @@ kubectl drain kworker1 --ignore-daemonsets
 kubectl get pods -o wide --watch
 ```
 
-Watch the web pods reschedule onto remaining nodes (this is also the moment you notice if you lack a [spread constraint](../taints-affinity-quotas/) - everything may pile onto one node).
+Watch the web pods reschedule onto remaining nodes (this is also the moment you notice if you lack a [spread constraint](../taints-affinity-quotas/) - everything may pile onto one node). Cilium agents stay - they're a DaemonSet and per-node by design.
 
 2. From the cluster's view, remove the node object:
 
@@ -201,15 +261,15 @@ Watch the web pods reschedule onto remaining nodes (this is also the moment you 
 kubectl delete node kworker1
 ```
 
-3. On the node itself, clean k8s state:
+3. On the node itself, clean k8s + Cilium state:
 
 ```bash
 sudo kubeadm reset -f
 sudo iptables -F && sudo iptables -t nat -F && sudo iptables -t mangle -F
-sudo rm -rf /etc/cni /var/lib/cni/ /var/lib/kubelet/*
+sudo rm -rf /etc/cni /var/lib/cni/ /var/lib/kubelet/* /var/run/cilium /var/lib/cilium
 ```
 
-> The iptables flush and kubelet cleanup are what make a _re_-join work cleanly; skipping them produces join failures that look like token problems but are actually stale state.
+> The iptables flush, kubelet cleanup and Cilium state removal are what make a _re_-join work cleanly; skipping them produces join failures that look like token problems but are actually stale state. Stale Cilium state is especially nasty - the node rejoins, the agent starts, and the datapath silently keeps programming old identities.
 
 4. Re-join with a fresh token from the control plane and verify it returns to `Ready`:
 
@@ -217,6 +277,7 @@ sudo rm -rf /etc/cni /var/lib/cni/ /var/lib/kubelet/*
 kubeadm token create --print-join-command   # on kmaster
 # paste on kworker1
 kubectl get nodes --watch
+kubectl -n kube-system get pods -l k8s-app=cilium -o wide   # a cilium pod for the new node
 ```
 
-for more [kubeadm-upgrade-etcd](../kubeadm-upgrade-etcd/)
+for more [kubeadm-upgrade-etcd](../kubeadm-upgrade-etcd/) and [ha-control-plane](../ha-control-plane/)

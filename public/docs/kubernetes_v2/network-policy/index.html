@@ -26,7 +26,7 @@ The default is “allow everything”. No policy = every pod can talk to every p
 	<meta itemprop="name" content="network-policy">
 	<meta itemprop="description" content="NetworkPolicy# When we built custom bridge networks in Docker, the goal was isolation: containers on network A can’t see containers on network B. NetworkPolicy is the cluster-level equivalent - with a twist that trips everyone up at first.
 The default is “allow everything”. No policy = every pod can talk to every pod, everywhere. But the moment a pod is selected by any NetworkPolicy (Ingress or Egress, even an empty one), that flips: all traffic to/from that pod is denied unless another policy explicitly allows it. Policies are additive: the union of all rules selecting a pod defines its allowed traffic. There is no “deny” rule - you deny by omission.">
-	<meta itemprop="wordCount" content="802">
+	<meta itemprop="wordCount" content="826">
 
 <title>network-policy • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ The default is “allow everything”. No policy = every pod can talk to every p
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.4c16edd67f4e6557dfa1a564fdd7c73bb2063fd0ffc73e3325b80b8736757784.js" integrity="sha256-TBbt1n9OZVffoaVk/dfHO7IGP9D/xz4zJbgLhzZ1d4Q=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.0cf802c4b9a52925a1f9e3271ec552fcd557cc27db5877a4bcdf50d009afe073.js" integrity="sha256-DPgCxLmlKSWh&#43;eMnHsVS/NVXzCfbWHekvN9Q0Amv4HM=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1369,7 +1369,7 @@ The default is “allow everything”. No policy = every pod can talk to every p
 </blockquote><p>Ports can be numeric or - better - <strong>named</strong>, matching the service/container port names:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ports</span>:
 </span></span><span style="display:flex;"><span>  - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">http</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span></span></span></code></pre></div><p>Renaming a numeric port later breaks policies silently; named ports keep the policy meaningful. But check your CNI supports named ports (calico does; some older ones don&rsquo;t).</p>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span></span></span></code></pre></div><p>Renaming a numeric port later breaks policies silently; named ports keep the policy meaningful. But check your CNI supports named ports (calico and cilium do; some older ones don&rsquo;t).</p>
 <h2 id="the-cni-reality-check">The CNI Reality Check<a class="anchor" href="#the-cni-reality-check">#</a></h2>
 <p>NetworkPolicy is just an API. <strong>Enforcement happens in the CNI plugin</strong>, and that&rsquo;s where most homelab confusion lives:</p>
 <ul>
@@ -1377,8 +1377,9 @@ The default is “allow everything”. No policy = every pod can talk to every p
 <li>calico: full enforcement, its own iptables programs</li>
 <li>kube-router, cilium: enforce as well (cilium adds richer eBPF-based policies beyond the standard API)</li>
 </ul>
-<p>Minikube&rsquo;s default CNI doesn&rsquo;t enforce policies. To test anything here, start the cluster policy-aware:</p>
+<p>Our <a href="../multi-node-kubeadm/">multi-node</a> cluster runs <strong>Cilium</strong> - everything in this note is actually enforced there, no asterisks. On Minikube&rsquo;s default CNI nothing is enforced; to test anything here, start the cluster policy-aware:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>minikube start --cni<span style="color:#f92672">=</span>calico
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># or: minikube start --cni=cilium</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># or: minikube addons enable network-policy</span></span></span></code></pre></div><h2 id="how-to-build-a-default-deny-zone">How to Build a Default-Deny Zone<a class="anchor" href="#how-to-build-a-default-deny-zone">#</a></h2>
 <ol>
 <li>
