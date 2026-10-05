@@ -175,11 +175,11 @@ sudo etcdctl --endpoints=https://127.0.0.1:2379 \
   snapshot save /backup/etcd-snapshot-$(date +%F).db
 ```
 
-Proxmox tarafında ayrıca VM-level snapshot almak bedava sigortadır - ama etcd snapshot'ı deployment'ları da kurtarırken, VM snapshot'ı tüm control-plane'i olduğu geri alır; ikisinin yerini tutmaz.
+Proxmox tarafında ayrıca VM-level snapshot almak olabilecek en kolay sigortadır - tabi etcd snapshot'ı deployment'ları da kurtarırken, VM snapshot'ı tüm control-plane'i hepten geri alır; ikisinin yerini tutmaz.
 
 Upgrades: control plane first, one minor at a time, `apt-mark unhold` before, hold again after, drain per node in between. Never skip minors on kubeadm clusters. The full command-by-command walkthrough - including etcd restore and cert renewal - is in [kubeadm-upgrade-etcd](../kubeadm-upgrade-etcd/); HA topologies that make an upgrade survivable are in [ha-control-plane](../ha-control-plane/).
 
-**Özetle:** kubeadm upgrade'i ve Cilium upgrade'i ayrı track'lerdir. `apt-get upgrade` cluster'ı hareket ettirir; `helm upgrade cilium ...` datapath'i. İkisini aynı anda yapma - biri bozulursa hangisinin suçlu olduğunu bilemezsin.
+**Özetle:** kubeadm upgrade'i ve Cilium upgrade'i ayrı islerdir. `apt-get upgrade` cluster'ı hareket ettirir; `helm upgrade cilium ...` datapath'i. İkisini aynı anda yapma - biri bozulursa hangisinde problem olduğunu bilemezsin.
 
 ## How to Bootstrap a 4-Node Cluster with kubeadm
 

@@ -23,7 +23,7 @@ https://github.com/alex-shpak/hugo-book
 
 	<meta itemprop="name" content="multi-node-kubeadm">
 	<meta itemprop="description" content="Multi-Node: From Minikube to a Real Cluster# Minikube is a single-node cluster - we’ve repeated that warning since the very first v1 notes. For homelab work the standard path to real multi-node Kubernetes is kubeadm - vanilla k8s, everything in your hands, the same tool the managed distros are built on. This note walks through a kubeadm install on VMs, from node prep to a joined, working cluster, with Cilium as the CNI - eBPF datapath, working NetworkPolicy enforcement and no kube-proxy.">
-	<meta itemprop="wordCount" content="1802">
+	<meta itemprop="wordCount" content="1804">
 
 <title>multi-node-kubeadm • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -32,7 +32,7 @@ https://github.com/alex-shpak/hugo-book
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.0cf802c4b9a52925a1f9e3271ec552fcd557cc27db5877a4bcdf50d009afe073.js" integrity="sha256-DPgCxLmlKSWh&#43;eMnHsVS/NVXzCfbWHekvN9Q0Amv4HM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.ddf1eed9de1f183cb2c87942e8d7f574d31f01896f7682f7396e3e2e9fdaf344.js" integrity="sha256-3fHu2d4fGDyyyHlC6Nf1dNMfAYlvdoL3OW4&#43;Lp/a80Q=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1434,9 +1434,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span></span><span style="display:flex;"><span>  --cacert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/ca.crt <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>  --cert<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.crt <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>  --key<span style="color:#f92672">=</span>/etc/kubernetes/pki/etcd/server.key <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span>  snapshot save /backup/etcd-snapshot-<span style="color:#66d9ef">$(</span>date +%F<span style="color:#66d9ef">)</span>.db</span></span></code></pre></div><p>Proxmox tarafında ayrıca VM-level snapshot almak bedava sigortadır - ama etcd snapshot&rsquo;ı deployment&rsquo;ları da kurtarırken, VM snapshot&rsquo;ı tüm control-plane&rsquo;i olduğu geri alır; ikisinin yerini tutmaz.</p>
+</span></span></span><span style="display:flex;"><span>  snapshot save /backup/etcd-snapshot-<span style="color:#66d9ef">$(</span>date +%F<span style="color:#66d9ef">)</span>.db</span></span></code></pre></div><p>Proxmox tarafında ayrıca VM-level snapshot almak olabilecek en kolay sigortadır - tabi etcd snapshot&rsquo;ı deployment&rsquo;ları da kurtarırken, VM snapshot&rsquo;ı tüm control-plane&rsquo;i hepten geri alır; ikisinin yerini tutmaz.</p>
 <p>Upgrades: control plane first, one minor at a time, <code>apt-mark unhold</code> before, hold again after, drain per node in between. Never skip minors on kubeadm clusters. The full command-by-command walkthrough - including etcd restore and cert renewal - is in <a href="../kubeadm-upgrade-etcd/">kubeadm-upgrade-etcd</a>; HA topologies that make an upgrade survivable are in <a href="../ha-control-plane/">ha-control-plane</a>.</p>
-<p><strong>Özetle:</strong> kubeadm upgrade&rsquo;i ve Cilium upgrade&rsquo;i ayrı track&rsquo;lerdir. <code>apt-get upgrade</code> cluster&rsquo;ı hareket ettirir; <code>helm upgrade cilium ...</code> datapath&rsquo;i. İkisini aynı anda yapma - biri bozulursa hangisinin suçlu olduğunu bilemezsin.</p>
+<p><strong>Özetle:</strong> kubeadm upgrade&rsquo;i ve Cilium upgrade&rsquo;i ayrı islerdir. <code>apt-get upgrade</code> cluster&rsquo;ı hareket ettirir; <code>helm upgrade cilium ...</code> datapath&rsquo;i. İkisini aynı anda yapma - biri bozulursa hangisinde problem olduğunu bilemezsin.</p>
 <h2 id="how-to-bootstrap-a-4-node-cluster-with-kubeadm">How to Bootstrap a 4-Node Cluster with kubeadm<a class="anchor" href="#how-to-bootstrap-a-4-node-cluster-with-kubeadm">#</a></h2>
 <ol>
 <li>
