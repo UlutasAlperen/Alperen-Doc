@@ -118,7 +118,7 @@ Three flags worth understanding, because each one is a different way to install 
 - `k8sServiceHost` / `k8sServicePort` - with kube-proxy gone, Cilium is the thing that has to find the API server; point it at `kmaster`'s IP (or your `controlPlaneEndpoint` if you set one). Forgetting these leaves every Service unroutable with no error anywhere
 - `--version` - pin it, same philosophy as `apt-mark hold`. `helm install cilium cilium/cilium` with no version grabs the latest chart, which is how clusters get surprise minor upgrades
 
-Then remove the now-dead kube-proxy DaemonSet - leaving it running is confusing at best and fighting for iptables at worst:
+Then remove the now-dead kube-proxy DaemonSet - leaving it running is confusing at best and fighting for iptables at worst. If you're bootstrapping from scratch, [the direct path](#the-direct-path-init-without-kube-proxy) below skips this whole dance:
 
 ```bash
 kubectl -n kube-system scale daemonset kube-proxy --replicas=0
@@ -138,6 +138,39 @@ kubectl get nodes             # kmaster flips to Ready
 > Hubble (Cilium's network observability layer) is a flag away - `--set hubble.enabled=true --set hubble.relay.enabled=true --set hubble.ui.enabled=true` - and turns "which pod is talking to which" from a guessing game into `hubble observe`. Off by default here to keep the install lean; it's a per-node sidecar-free design so it costs almost nothing.
 
 (Ben policy enforcement'i artık her yerde deneyebilirim - Cilium varsayılan olarak standardı uygular. eBPF tabanlı ekstra `CiliumNetworkPolicy`'ler için [NetworkPolicy](../network-policy/) notuna bak; o nottaki CNI gerçekliği tablosunda flannel'in "policies exist, are ignored" satırının neden bizi Cilium'a getirdiğini göreceksin.)
+
+## The Direct Path: init without kube-proxy
+
+The flow above installs kube-proxy only to kill it a minute later - it works, but it's a dance. If the cluster doesn't exist yet, skip the `addon/kube-proxy` phase of `kubeadm init` entirely: kube-proxy never appears, Cilium owns Service load-balancing from the first second, and there is nothing to clean up.
+
+```bash
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --skip-phases=addon/kube-proxy
+```
+
+Everything else is identical - kubeconfig, then the same Helm install with the same flags:
+
+```bash
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+helm repo add cilium https://helm.cilium.io/ && helm repo update
+helm install cilium cilium/cilium --version 1.16.5 \
+  --namespace kube-system \
+  --set kubeProxyReplacement=true \
+  --set k8sServiceHost=192.168.1.200 \
+  --set k8sServicePort=6443
+```
+
+What changes and what doesn't:
+
+- Worker joins are **unchanged** - kube-proxy is an init-time cluster addon (a DaemonSet in `kube-system`), not a per-node join phase; workers never run it themselves
+- Verification is simpler: `kubectl -n kube-system get daemonset kube-proxy` returns `NotFound` immediately, no "scale to 0, wait, delete" sequence
+- `cilium status --wait`, `kubectl get nodes`, Service reachability - same checks as the main path
+
+> **Dikkat:** `kubeadm upgrade apply` addon phase'lerini yeniden çalıştırır - yani atladığın kube-proxy DaemonSet'ini upgrade **geri getirir**. Upgrade'lerde `--skip-phases=addon/kube-proxy` kullan ya da beliren DS'i tekrar sil. Bu, upgrade dokümanının [kubeadm-upgrade-etcd](../kubeadm-upgrade-etcd/) notlarındaki "read the output" kuralının özel bir hali: çıktıyı okursan kube-proxy'nin geri geldiğini zaten görürsün.
+
+**Özetle:** sıfırdan bootstrap'ta bu varyant tercih edilir; zaten ayakta olan bir cluster'da birinci yol (kur + sil) doğrudur. İkisi de aynı yere çıkar: kube-proxy'suz, eBPF servis yük dengelemeli bir cluster.
 
 ## Workers Join
 

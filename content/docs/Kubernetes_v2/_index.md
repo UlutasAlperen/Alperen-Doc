@@ -69,7 +69,7 @@ These are the follow-up notes to my [Kubernetes](../kubernetes/) section - same 
 
 ### Multi-Node (Homelab)
 
-- [multi-node-kubeadm](multi-node-kubeadm/) = kubeadm ile 4 node'lu k8s (1 CP + 3 worker; GPG'li apt, containerd, Cilium + kube-proxy replacement), etcd backup; How-to: bootstrap, worker join, node remove/re-add
+- [multi-node-kubeadm](multi-node-kubeadm/) = kubeadm ile 4 node'lu k8s (1 CP + 3 worker; GPG'li apt, containerd, Cilium + kube-proxy replacement, skip-phases varyantı), etcd backup; How-to: bootstrap, worker join, node remove/re-add
 - [kubeadm-upgrade-etcd](kubeadm-upgrade-etcd/) = `kubeadm upgrade plan/apply`, drain sırası, `etcdctl snapshot save/restore`, `kubeadm certs check-expiration/renew`; How-to: CP upgrade, worker upgrade, etcd restore, cert renew
 - [ha-control-plane](ha-control-plane/) = stacked vs external etcd, quorum, `controlPlaneEndpoint` + API LB, `kubeadm join --control-plane`; How-to: 2. CP node, external etcd, failover testi
 
