@@ -9,7 +9,7 @@ weight: 10
 
 1. Navigate to the [IAM dashboard](https://console.aws.amazon.com/iam). You can also use the search bar at the top of the console to find it.
 2. Click on "Users" under "Access Management" in the menu on the left, then click "Create user."
-3. Give the IAM user a name like `zach-admin` (using your own name).
+3. Give the IAM user a name like `alperen-admin` (using your own name).
 4. Check the box "Provide user access to the AWS Management Console."
 5. Have AWS auto-generate an initial password, and leave the box checked to require a password reset on first login.
 6. Create a new group for this user, called `Administrators`. Attach the `AdministratorAccess` policy to the group. Only the one policy is needed.

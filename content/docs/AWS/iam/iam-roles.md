@@ -40,6 +40,8 @@ A **trust policy** looks a lot like a "regular" policy, with a couple of tweaks:
 
 When you select "EC2" as the use case, AWS automatically creates this trust policy for you. The trust policy tells AWS which services can assume this role (in this case, EC2 instances). You can view it later in the role's "Trust relationships" tab.
 
+![IAM roles diagram](/images/aws/iam-roles-diagram.png)
+
 ## Assignment
 
 **Create an IAM role `patientping-ec2-readonly-role` for EC2 with the `patientping-ec2-readonly` policy, then attach the role to your EC2 instance.**

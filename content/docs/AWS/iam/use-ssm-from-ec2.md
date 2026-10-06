@@ -24,29 +24,28 @@ It may seem like a lot of ceremony, but this system allows _fine-grained, audita
 
 If you're having connection issues, double-check that you stored the **full connection string** in SSM (including the `postgresql://` prefix, username, password, and database name) - not just the RDS endpoint hostname. The `DATABASE_URL` value should look like: `postgresql://postgres:PASSWORD@hostname:5432/patientping`
 
-1. [ ] SSH into your `patientping-web-v2` EC2 instance.
-2. [ ] Start the app server. If it was already running, stop it and restart it.
+1.  SSH into your `patientping-web-v2` EC2 instance.
+2.  Start the app server. If it was already running, stop it and restart it.
     
     ```sh
     cd ~/patientping-web
     uv run patientping.py
     ```
     
-3. [ ] On startup, if the SSM params were fetched successfully, the following text should be printed to the console. Otherwise you'll see an error message.
+3.  On startup, if the SSM params were fetched successfully, the following text should be printed to the console. Otherwise you'll see an error message.
     
     ```text
     Loaded DATABASE_URL and CMO_NAME from SSM (us-east-1)
     ```
     
-4. [ ] Open the Pinger web app (`http://EC2.PUBLIC.IP.ADDR:8080`) in a browser. You should also now see the following line in the header:
+4.  Open the Pinger web app (`http://EC2.PUBLIC.IP.ADDR:8080`) in a browser. You should also now see the following line in the header:
     
     ```text
     PatientPing Chief Medical Officer: Dr. Strangelove
     ```
     
-5. [ ] Back in your SSH session on the EC2 instance, delete the `.env` file from the `patientping-web` directory; it isn't needed anymore.
+5.  Back in your SSH session on the EC2 instance, delete the `.env` file from the `patientping-web` directory; it isn't needed anymore.
 
-**Run and submit** the CLI tests.
 
 ## Tip
 

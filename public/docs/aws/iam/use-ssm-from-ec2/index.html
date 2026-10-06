@@ -26,7 +26,7 @@ We created the params /DATABASE_URL and /CMO_NAME in the SSM Parameter Store. We
 	<meta itemprop="name" content="use-ssm-from-ec2">
 	<meta itemprop="description" content="Use SSM from EC2# At this point, everything should be in place for our Pinger server to pull its config values from SSM:
 We created the params /DATABASE_URL and /CMO_NAME in the SSM Parameter Store. We added an IAM policy patientping-ssm-access, allowing those params to be read. That IAM policy is attached to the role patientping-ec2-readonly-role. Our EC2 instance that runs the Pinger app is authorized to assume that IAM role. And the Pinger app code is already configured to try to pull config from SSM before falling back to a .env file. So once we restart the app, it should “just work.”">
-	<meta itemprop="wordCount" content="480">
+	<meta itemprop="wordCount" content="474">
 
 <title>use-ssm-from-ec2 • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ We created the params /DATABASE_URL and /CMO_NAME in the SSM Parameter Store. We
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.ca333e486a75380b7e40afe485f315007ec5e135cb08875092112e833bd04ad4.js" integrity="sha256-yjM&#43;SGp1OAt&#43;QK/khfMVAH7F4TXLCIdQkhEugzvQStQ=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.487020fc990cd37c3754c0136955272e7dfbeb424a2b882b2164c7f9ada24900.js" integrity="sha256-SHAg/JkM03w3VMATaVUnLn3760JKK4grIWTH&#43;a2iSQA=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2648,23 +2648,22 @@ We created the params /DATABASE_URL and /CMO_NAME in the SSM Parameter Store. We
 <p>If you&rsquo;re having connection issues, double-check that you stored the <strong>full connection string</strong> in SSM (including the <code>postgresql://</code> prefix, username, password, and database name) - not just the RDS endpoint hostname. The <code>DATABASE_URL</code> value should look like: <code>postgresql://postgres:PASSWORD@hostname:5432/patientping</code></p>
 <ol>
 <li>
-<p><input disabled="" type="checkbox"> SSH into your <code>patientping-web-v2</code> EC2 instance.</p>
+<p>SSH into your <code>patientping-web-v2</code> EC2 instance.</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"> Start the app server. If it was already running, stop it and restart it.</p>
+<p>Start the app server. If it was already running, stop it and restart it.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd ~/patientping-web
 </span></span><span style="display:flex;"><span>uv run patientping.py</span></span></code></pre></div></li>
 <li>
-<p><input disabled="" type="checkbox"> On startup, if the SSM params were fetched successfully, the following text should be printed to the console. Otherwise you&rsquo;ll see an error message.</p>
+<p>On startup, if the SSM params were fetched successfully, the following text should be printed to the console. Otherwise you&rsquo;ll see an error message.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Loaded DATABASE_URL and CMO_NAME from SSM (us-east-1)</span></span></code></pre></div></li>
 <li>
-<p><input disabled="" type="checkbox"> Open the Pinger web app (<code>http://EC2.PUBLIC.IP.ADDR:8080</code>) in a browser. You should also now see the following line in the header:</p>
+<p>Open the Pinger web app (<code>http://EC2.PUBLIC.IP.ADDR:8080</code>) in a browser. You should also now see the following line in the header:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>PatientPing Chief Medical Officer: Dr. Strangelove</span></span></code></pre></div></li>
 <li>
-<p><input disabled="" type="checkbox"> Back in your SSH session on the EC2 instance, delete the <code>.env</code> file from the <code>patientping-web</code> directory; it isn&rsquo;t needed anymore.</p>
+<p>Back in your SSH session on the EC2 instance, delete the <code>.env</code> file from the <code>patientping-web</code> directory; it isn&rsquo;t needed anymore.</p>
 </li>
 </ol>
-<p><strong>Run and submit</strong> the CLI tests.</p>
 <h2 id="tip">Tip<a class="anchor" href="#tip">#</a></h2>
 <p>If you want to verify the SSM params and the IAM role and policy via CLI, here are some commands to get you started:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># From your computer, logged into the AWS CLI as an admin user on your account,</span>

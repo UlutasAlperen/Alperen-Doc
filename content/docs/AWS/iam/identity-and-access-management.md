@@ -9,7 +9,6 @@ At some stage in building a project on AWS, you'll need to give other people (or
 
 - Who are you? (**I**dentity)
 - What are you allowed to do? (**A**ccess)
-![IAM identity and access overview](/images/aws/iam-overview.png)
 
 ![IAM users, groups and roles](/images/aws/iam-users-groups-roles.png)
 

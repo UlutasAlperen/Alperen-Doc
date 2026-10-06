@@ -13,8 +13,6 @@ A VPC's address space is split into smaller networks called **subnets**. Each su
 
 ![VPC subnet layout with private and public subnets](/images/aws/vpc-subnetting-overview.png)
 
-![Subnetting diagram](/images/aws/subnetting-diagram.png)
-
 # aws-Subnetting
 
 To do anything useful with our VPC, we need to divide it into smaller networks called **subnets**. This lets us create things like:

@@ -59,9 +59,9 @@ The PatientPing ops team wants more detailed info on how app servers are behavin
   ]
 }
 ```
-    5. [ ] Click "Next."
-    6. [ ] Name the policy `patientping-cloudwatch-logs-access`, then click "Create policy."
-    7. [ ] Add one more inline policy on `patientping-monitoring-role` so the instance can still read `/DATABASE_URL` and `/CMO_NAME` from SSM Parameter Store:
+ 5.  Click "Next."
+ 6.  Name the policy `patientping-cloudwatch-logs-access`, then click "Create policy."
+ 7.  Add one more inline policy on `patientping-monitoring-role` so the instance can still read `/DATABASE_URL` and `/CMO_NAME` from SSM Parameter Store:
  ```json
  {
    "Version": "2012-10-17",
