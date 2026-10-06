@@ -10,6 +10,8 @@ bookCollapseSection: true
 
 > full diagram (without ecs i will update soon)
 
+Here is the link to view the diagram I drew on Excalidraw: [Diagram link(excalidraw)](https://excalidraw.com/#json=R8A21JFry9HFb3Ypjmy5V,MtI6udd_9j8RKWi9BWEZlw) 
+
 [Amazon Web Services](https://aws.amazon.com/) is _the_ cloud platform. Nearly every DevOps workflow runs on top of it in production. I use AWS to:
 
 - Build isolated networks with VPCs, subnets, route tables and internet gateways
