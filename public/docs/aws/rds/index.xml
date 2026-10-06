@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>rds on Alperen Doc</title>
+		<link>https://blog.ulutasalperen.com/docs/aws/rds/</link>
+		<description>Recent content in rds on Alperen Doc</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<atom:link href="https://blog.ulutasalperen.com/docs/aws/rds/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>relational-database-service</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/rds/relational-database-service/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/rds/relational-database-service/</guid>
+				<description>&lt;h1 id=&#34;rds-relational-database-service&#34;&gt;RDS: Relational Database Service&lt;a class=&#34;anchor&#34; href=&#34;#rds-relational-database-service&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/rds/&#34;&gt;Amazon RDS&lt;/a&gt; (Relational Database Service) is AWS&amp;rsquo; &lt;em&gt;managed database service&lt;/em&gt;. If you don&amp;rsquo;t want to manage/host a database server yourself, you can let AWS handle provisioning, backups, patching, and monitoring. You get a database you can connect to with (nearly) zero operational overhead.&lt;/p&gt;&#xA;&lt;p&gt;That said, RDS can get &lt;strong&gt;very&lt;/strong&gt; expensive, especially if you have lots of data or need to operate in multiple AZs. But for many applications, the cost of a managed service is reasonable, and far outweighed by its benefits.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>create-a-postgresql-database-in-aws</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/rds/create-a-postgresql-database-in-aws/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/rds/create-a-postgresql-database-in-aws/</guid>
+				<description>&lt;h1 id=&#34;create-a-postgresql-database&#34;&gt;Create a PostgreSQL Database&lt;a class=&#34;anchor&#34; href=&#34;#create-a-postgresql-database&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Alright, let&amp;rsquo;s get a database set up and ready to use.&lt;/p&gt;&#xA;&lt;h2 id=&#34;assignment&#34;&gt;Assignment&lt;a class=&#34;anchor&#34; href=&#34;#assignment&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;PatientPing&amp;rsquo;s data needs a proper home. Everyone is in constant fear that the next time Zach reboots things, we&amp;rsquo;re going to lose data.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Create a PostgreSQL RDS instance&lt;/strong&gt; (&lt;code&gt;patientping-db&lt;/code&gt;) in your &lt;code&gt;patientping&lt;/code&gt; VPC&amp;rsquo;s private subnets (no public access!).&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Cost check:&lt;/strong&gt; A &lt;code&gt;db.t3.micro&lt;/code&gt; instance costs about $0.018 per hour (~$13/month). &lt;strong&gt;Be sure to delete this&lt;/strong&gt; when you&amp;rsquo;re done. AWS only allows you to &amp;ldquo;pause&amp;rdquo; an RDS instance for a time, then it starts it up again.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>aws-connect-to-your-database</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/rds/aws-connect-to-your-database/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/rds/aws-connect-to-your-database/</guid>
+				<description>&lt;h1 id=&#34;connect-to-your-database&#34;&gt;Connect to Your Database&lt;a class=&#34;anchor&#34; href=&#34;#connect-to-your-database&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Now that you have a database, we need our application server to connect to it. After all, they&amp;rsquo;re in different subnets (public vs. private) in the same VPC. AWS adds a &lt;strong&gt;local route&lt;/strong&gt; for your VPC CIDR by default, so subnets in that VPC can route to one another.&lt;/p&gt;&#xA;&lt;p&gt;The key is &lt;strong&gt;security groups&lt;/strong&gt;. Remember, security groups are like stateful firewalls that control traffic to and from your resources.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>aws-connect-app-to-database</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/rds/aws-connect-app-to-database/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/rds/aws-connect-app-to-database/</guid>
+				<description>&lt;h1 id=&#34;connect-app-to-database&#34;&gt;Connect App to Database&lt;a class=&#34;anchor&#34; href=&#34;#connect-app-to-database&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;We&amp;rsquo;ve seen that we can use &lt;code&gt;psql&lt;/code&gt; from our EC2 instance to connect to the Postgres DB running in RDS. That&amp;rsquo;s no small feat; a bunch of things had to be configured &lt;em&gt;just right&lt;/em&gt; for it to work.&lt;/p&gt;&#xA;&lt;p&gt;The good news is that it will take only one more small step to get the PatientPing app communicating with the database &lt;em&gt;automatically&lt;/em&gt;. Instead of using &lt;code&gt;psql&lt;/code&gt; manually, we&amp;rsquo;ll set a &lt;code&gt;DATABASE_URL&lt;/code&gt; environment variable that the Python app can read when it starts up!&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>rds-backups</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/rds/rds-backups/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/rds/rds-backups/</guid>
+				<description>&lt;h1 id=&#34;rds-backups&#34;&gt;RDS Backups&lt;a class=&#34;anchor&#34; href=&#34;#rds-backups&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;blockquote class=&#39;book-hint &#39;&gt;&#xA;&lt;p&gt;One is none, two is one.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&lt;p&gt;Backups are important. We&amp;rsquo;re going to break things in creative, irreparable ways from time to time, and RDS can automatically back up your database.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Daily backups:&lt;/strong&gt; Taken during your preferred backup window (you can set this)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Transaction logs:&lt;/strong&gt; Continuously backed up (enables point-in-time recovery)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Retention period:&lt;/strong&gt; Configurable (1-35 days for most engines)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Storage:&lt;/strong&gt; Backups stored in S3, separate from your database instance&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Cost:&lt;/strong&gt; Storage for backups is charged separately (about &lt;code&gt;$0.095&lt;/code&gt; per GB per month)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;Cost check:&lt;/strong&gt; Backups cost money. A 7-day retention period means you&amp;rsquo;re storing 7 days of backups (at ~&lt;code&gt;$0.095/GB/month&lt;/code&gt;). For a 20 GB database that can be ~140 GB of backup storage. Monitor backup costs, and reduce retention or delete snapshots when done.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>create-read-replicas-for-scalability</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/rds/create-read-replicas-for-scalability/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/rds/create-read-replicas-for-scalability/</guid>
+				<description>&lt;h1 id=&#34;read-replicas&#34;&gt;Read Replicas&lt;a class=&#34;anchor&#34; href=&#34;#read-replicas&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Think about how &lt;strong&gt;Discord&lt;/strong&gt; or &lt;strong&gt;Slack&lt;/strong&gt; works for a moment. There are chat channels filled with tons of users. Do you, as a user, &lt;em&gt;read&lt;/em&gt; more or &lt;em&gt;write&lt;/em&gt; more to the server?&lt;/p&gt;&#xA;&lt;p&gt;Unless you&amp;rsquo;re an incredibly chatty person, you&amp;rsquo;re going to read waaaaaay more messages than you send. Wouldn&amp;rsquo;t it be nice to offload those reads from an expensive primary database to a cheaper server?&lt;/p&gt;&#xA;&lt;p&gt;Enter &lt;strong&gt;read replicas&lt;/strong&gt;.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>rds-general-knowledge</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/rds/rds-general-knowledge/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/rds/rds-general-knowledge/</guid>
+				<description>&lt;h1 id=&#34;rds-storage-and-iops&#34;&gt;RDS Storage and IOPS&lt;a class=&#34;anchor&#34; href=&#34;#rds-storage-and-iops&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;When you create an RDS instance, you choose a type and amount of storage. AWS offers different storage types optimized for different workloads. Let&amp;rsquo;s go over them.&lt;/p&gt;&#xA;&lt;h2 id=&#34;general-purpose-ssd-gp3&#34;&gt;General Purpose SSD (&lt;code&gt;gp3&lt;/code&gt;)&lt;a class=&#34;anchor&#34; href=&#34;#general-purpose-ssd-gp3&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;This is the &lt;strong&gt;recommended default&lt;/strong&gt; for most production workloads. It&amp;rsquo;s a good balance of performance and cost:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Baseline performance:&lt;/strong&gt; 3,000 IOPS (Input/Output Operations Per Second)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Scalable:&lt;/strong&gt; Can provision up to 16,000 IOPS if needed&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Cost-effective:&lt;/strong&gt; Lower cost than provisioned IOPS&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Use case:&lt;/strong&gt; Most applications, up to moderate I/O requirements&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;provisioned-iops-ssd-io1io2&#34;&gt;Provisioned IOPS SSD (&lt;code&gt;io1&lt;/code&gt;/&lt;code&gt;io2&lt;/code&gt;)&lt;a class=&#34;anchor&#34; href=&#34;#provisioned-iops-ssd-io1io2&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;This is for &lt;strong&gt;demanding workloads&lt;/strong&gt; that need guaranteed performance:&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

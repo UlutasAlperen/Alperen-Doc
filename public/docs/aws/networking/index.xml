@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>networking on Alperen Doc</title>
+		<link>https://blog.ulutasalperen.com/docs/aws/networking/</link>
+		<description>Recent content in networking on Alperen Doc</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<atom:link href="https://blog.ulutasalperen.com/docs/aws/networking/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>virtual-private-cloud-vpc</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/networking/virtual-private-cloud-vpc/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/networking/virtual-private-cloud-vpc/</guid>
+				<description>&lt;h1 id=&#34;virtual-private-cloud-vpc&#34;&gt;Virtual Private Cloud (VPC)&lt;a class=&#34;anchor&#34; href=&#34;#virtual-private-cloud-vpc&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;we need a network &amp;ldquo;box&amp;rdquo; to put cloud resources into. AWS calls this box a &lt;strong&gt;VPC&lt;/strong&gt;, or &lt;a href=&#34;https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html&#34;&gt;Virtual Private Cloud&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;We choose what &lt;em&gt;region&lt;/em&gt; this virtual network will be in.&lt;/li&gt;&#xA;&lt;li&gt;We choose &lt;em&gt;how many things&lt;/em&gt; we plan to put into it, i.e., the size of the address space.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;This box (the VPC) is really just a group of IP addresses within a region we choose.&lt;/p&gt;&#xA;&lt;p&gt;Sometimes we want multiple VPCs, for example to separate production resources from development servers. Or we might want some servers in a primary location and others in a backup region.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>aws-subnetting</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/networking/aws-subnetting/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/networking/aws-subnetting/</guid>
+				<description>&lt;h1 id=&#34;subnetting&#34;&gt;Subnetting&lt;a class=&#34;anchor&#34; href=&#34;#subnetting&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;A VPC&amp;rsquo;s address space is split into smaller networks called &lt;strong&gt;subnets&lt;/strong&gt;. Each subnet lives in exactly one Availability Zone and gets its own CIDR block inside the VPC CIDR.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Public subnets&lt;/strong&gt; have a route to an &lt;a href=&#34;internet-gateways-igw/&#34;&gt;Internet Gateway&lt;/a&gt; - resources here can be reached from (and reach out to) the internet.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Private subnets&lt;/strong&gt; have no direct route to the internet - good for databases and internal services.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://blog.ulutasalperen.com/images/aws/vpc-subnetting-overview.png&#34; alt=&#34;VPC subnet layout with private and public subnets&#34; /&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>internet-gateways-igw</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/networking/internet-gateways-igw/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/networking/internet-gateways-igw/</guid>
+				<description>&lt;h1 id=&#34;internet-gateways-igw&#34;&gt;Internet Gateways (IGW)&lt;a class=&#34;anchor&#34; href=&#34;#internet-gateways-igw&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;The eagle-eyed among you may have noticed that there is currently no difference between our &amp;ldquo;public&amp;rdquo; and &amp;ldquo;private&amp;rdquo; subnets.&lt;/p&gt;&#xA;&lt;p&gt;Anything we put in &lt;em&gt;either&lt;/em&gt; type of subnet &lt;strong&gt;cannot&lt;/strong&gt; access the internet, and nothing on the internet can access &lt;em&gt;it&lt;/em&gt;. Our environment looks like this:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/rJrDW3Z-921x650.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&#xA;&lt;p&gt;There is a gap between our network and the internet. Usually when folks refer to a subnet as &lt;em&gt;public&lt;/em&gt;, they mean the servers inside can access the internet (egress), and with limitations, the internet can access them (ingress).&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>route-tables</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/networking/route-tables/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/networking/route-tables/</guid>
+				<description>&lt;h1 id=&#34;route-tables&#34;&gt;Route Tables&lt;a class=&#34;anchor&#34; href=&#34;#route-tables&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;We&amp;rsquo;ve attached an internet gateway to our VPC, but nothing tells the subnets it exists or when to use it.&lt;/p&gt;&#xA;&lt;p&gt;To do that we need a &lt;strong&gt;route&lt;/strong&gt;, and routes live in the creatively named &lt;strong&gt;route table&lt;/strong&gt;. It is literally just a list of routes.&lt;/p&gt;&#xA;&lt;p&gt;We can add a special kind of route, a &amp;ldquo;default route,&amp;rdquo; to our table. It is a catch-all rule that says:&lt;/p&gt;&#xA;&lt;blockquote class=&#39;book-hint &#39;&gt;&#xA;&lt;p&gt;&amp;ldquo;If you don&amp;rsquo;t have a specific address for something, look here.&amp;rdquo;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>private-subnets</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/networking/private-subnets/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/networking/private-subnets/</guid>
+				<description>&lt;h1 id=&#34;private-subnets&#34;&gt;Private Subnets&lt;a class=&#34;anchor&#34; href=&#34;#private-subnets&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;A subnet becomes &lt;em&gt;public&lt;/em&gt; by connecting it to a route table and an internet gateway, but what about our &lt;em&gt;private subnets&lt;/em&gt;?&lt;/p&gt;&#xA;&lt;p&gt;An IGW would make the subnet non-private and expose it to the internet. That is too risky for some resources.&lt;/p&gt;&#xA;&lt;p&gt;On the other hand, we don&amp;rsquo;t want to &lt;em&gt;completely&lt;/em&gt; cut off private infrastructure from internet access. Using a floppy disk to download updates is not exactly an option in the cloud.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

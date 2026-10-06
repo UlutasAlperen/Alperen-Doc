@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>lambda on Alperen Doc</title>
+		<link>https://blog.ulutasalperen.com/docs/aws/lambda/</link>
+		<description>Recent content in lambda on Alperen Doc</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<atom:link href="https://blog.ulutasalperen.com/docs/aws/lambda/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>aws-lambda</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/lambda/aws-lambda/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/lambda/aws-lambda/</guid>
+				<description>&lt;h1 id=&#34;aws-lambda&#34;&gt;AWS Lambda&lt;a class=&#34;anchor&#34; href=&#34;#aws-lambda&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;So you&amp;rsquo;ve got a simple application you want to run in the cloud. Maybe it&amp;rsquo;s an API endpoint, a scheduled task, or a function that processes files uploaded to &lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html&#34;&gt;Amazon S3&lt;/a&gt;. You could spin up an &lt;a href=&#34;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html&#34;&gt;EC2 instance&lt;/a&gt;, set up an &lt;a href=&#34;https://docs.aws.amazon.com/AmazonECS/latest/developerguide/clusters.html&#34;&gt;ECS cluster&lt;/a&gt;, or run code directly on a server.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://docs.aws.amazon.com/lambda/latest/dg/welcome.html&#34;&gt;AWS Lambda&lt;/a&gt; is a serverless compute service. You write your code and upload it, and AWS handles the rest: provisioning servers, scaling, patching, and monitoring. You only pay for the compute time you actually use.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>deploy-lambda</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/lambda/deploy-lambda/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/lambda/deploy-lambda/</guid>
+				<description>&lt;h1 id=&#34;deploy-lambda&#34;&gt;Deploy Lambda&lt;a class=&#34;anchor&#34; href=&#34;#deploy-lambda&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html&#34;&gt;AWS Lambda handlers in Python&lt;/a&gt; are just functions that:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Accept an &lt;code&gt;event&lt;/code&gt; (input data)&lt;/li&gt;&#xA;&lt;li&gt;Return a response object&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;In other words, we don&amp;rsquo;t worry about the runtime, the server, or even any sort of HTTP library. We just write a function that accepts an event object and returns a response object.&lt;/p&gt;&#xA;&lt;p&gt;The process to create a new Lambda function is simple:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Create an &lt;a href=&#34;https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html&#34;&gt;IAM role&lt;/a&gt; that gives Lambda permission to write logs to &lt;a href=&#34;https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html&#34;&gt;CloudWatch&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Create the Lambda function itself&lt;/li&gt;&#xA;&lt;li&gt;Paste the handler code and deploy&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;assignment&#34;&gt;Assignment&lt;a class=&#34;anchor&#34; href=&#34;#assignment&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Create and deploy &lt;code&gt;patientping-ip-function&lt;/code&gt; with role &lt;code&gt;patientping-lambda-role&lt;/code&gt; by pasting Python code in the AWS Console.&lt;/strong&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>testing-lambda-function</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/lambda/testing-lambda-function/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/lambda/testing-lambda-function/</guid>
+				<description>&lt;h1 id=&#34;testing-lambda-functions&#34;&gt;Testing Lambda Functions&lt;a class=&#34;anchor&#34; href=&#34;#testing-lambda-functions&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Your Lambda function is deployed, now let&amp;rsquo;s test it. Lambda provides several ways to &lt;a href=&#34;https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html&#34;&gt;invoke functions&lt;/a&gt;, and we&amp;rsquo;ll explore a few.&lt;/p&gt;&#xA;&lt;p&gt;When you test a Lambda function directly (via the CLI or AWS Console), you&amp;rsquo;re &lt;em&gt;not&lt;/em&gt; making an HTTP request to it. You&amp;rsquo;re telling AWS to execute your code with a specific payload. Take a look at this diagram:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/WvQZMrd-527x720.png&#34; alt=&#34;Lambda cli invocation&#34; /&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;invoke-from-the-cli&#34;&gt;Invoke from the CLI&lt;a class=&#34;anchor&#34; href=&#34;#invoke-from-the-cli&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;For our function, we need to simulate what &lt;a href=&#34;https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html&#34;&gt;API Gateway&lt;/a&gt; &lt;em&gt;would&lt;/em&gt; send. When you invoke the function directly via the console, you&amp;rsquo;re providing mock data. The IP address in your test event is not your real IP address; it&amp;rsquo;s example data you&amp;rsquo;re feeding to the function.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>lambda-api-gateway</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/lambda/lambda-api-gateway/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/lambda/lambda-api-gateway/</guid>
+				<description>&lt;h1 id=&#34;api-gateway&#34;&gt;API Gateway&lt;a class=&#34;anchor&#34; href=&#34;#api-gateway&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Your Lambda function works, but it can only be invoked from the AWS CLI or AWS Console. To make it accessible over HTTP (so you can call it from a browser, mobile app, or any HTTP client), we need &lt;a href=&#34;https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html&#34;&gt;&lt;strong&gt;Amazon API Gateway&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-api-gateway&#34;&gt;What Is API Gateway?&lt;a class=&#34;anchor&#34; href=&#34;#what-is-api-gateway&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;API Gateway&lt;/strong&gt; is a managed service that creates, publishes, and manages APIs. It sits in front of your Lambda function and handles much of what a web server or proxy would do. Have a look at this diagram:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>cloudwatch-log-groups-and-viewing-lambda-logs</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/lambda/cloudwatch-log-groups-and-viewing-lambda-logs/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/lambda/cloudwatch-log-groups-and-viewing-lambda-logs/</guid>
+				<description>&lt;h1 id=&#34;cloudwatch-log-groups-and-viewing-lambda-logs&#34;&gt;CloudWatch Log Groups and Viewing Lambda Logs&lt;a class=&#34;anchor&#34; href=&#34;#cloudwatch-log-groups-and-viewing-lambda-logs&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;When something goes wrong with your Lambda, how do you see what&amp;rsquo;s happening inside the function? Debugging Lambda is trickier than a local app: you can&amp;rsquo;t just attach a debugger to a process. There are &lt;a href=&#34;https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-debugging.html&#34;&gt;ways to run Lambda locally&lt;/a&gt; (e.g., SAM CLI) for breakpoints, or &lt;a href=&#34;https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/lambda-remote-debug.html&#34;&gt;AWS Toolkit for VSCode&lt;/a&gt; for IDE integration. For day-to-day debugging, though, you&amp;rsquo;ll rely on &lt;strong&gt;logs&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Lambda automatically sends everything your function writes to &lt;a href=&#34;https://en.wikipedia.org/wiki/Standard_streams&#34;&gt;&lt;code&gt;stdout&lt;/code&gt;&lt;/a&gt; and &lt;a href=&#34;https://en.wikipedia.org/wiki/Standard_streams&#34;&gt;&lt;code&gt;stderr&lt;/code&gt;&lt;/a&gt; (including &lt;code&gt;print()&lt;/code&gt; in Python) to &lt;strong&gt;Amazon CloudWatch Logs&lt;/strong&gt;. As long as your Lambda has the basic execution role (which we attached in the deploy lesson), it can write logs. AWS creates a &lt;strong&gt;log group&lt;/strong&gt; for your function and streams each run&amp;rsquo;s output there.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>other-lambda-use-cases</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/lambda/other-lambda-use-cases/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/lambda/other-lambda-use-cases/</guid>
+				<description>&lt;h1 id=&#34;other-lambda-use-cases&#34;&gt;Other Lambda Use Cases&lt;a class=&#34;anchor&#34; href=&#34;#other-lambda-use-cases&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;We built a simple HTTP API with Lambda, but that&amp;rsquo;s just scratching the surface. Lambda&amp;rsquo;s real power comes from its ability to automatically trigger handlers based on events from across AWS and beyond.&lt;/p&gt;&#xA;&lt;h2 id=&#34;s3-triggers-automatic-image-processing&#34;&gt;S3 Triggers: Automatic Image Processing&lt;a class=&#34;anchor&#34; href=&#34;#s3-triggers-automatic-image-processing&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;One popular Lambda use case is processing files when they&amp;rsquo;re uploaded to &lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html&#34;&gt;Amazon S3&lt;/a&gt;. For example:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;A user uploads an image to S3 bucket &lt;code&gt;user-uploads&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;S3 sends an event to Lambda: &amp;ldquo;A new file was uploaded&amp;rdquo;&lt;/li&gt;&#xA;&lt;li&gt;A Lambda function runs that:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Downloads the image from S3&lt;/li&gt;&#xA;&lt;li&gt;Resizes it to thumbnail size (using an image processing library)&lt;/li&gt;&#xA;&lt;li&gt;Uploads the thumbnail to another S3 bucket &lt;code&gt;user-thumbnails&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Done!&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;No servers to maintain, and you only pay when images are actually uploaded. If you get 1,000 uploads one day and 10 the next, Lambda automatically scales up and down.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

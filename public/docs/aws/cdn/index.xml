@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>cdn on Alperen Doc</title>
+		<link>https://blog.ulutasalperen.com/docs/aws/cdn/</link>
+		<description>Recent content in cdn on Alperen Doc</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<atom:link href="https://blog.ulutasalperen.com/docs/aws/cdn/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>cloudfront-cdn</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/cdn/cloudfront-cdn/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/cdn/cloudfront-cdn/</guid>
+				<description>&lt;h1 id=&#34;cloudfront-cdn&#34;&gt;CloudFront CDN&lt;a class=&#34;anchor&#34; href=&#34;#cloudfront-cdn&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;How does Netflix serve a 14 GB 4K video file to a user &lt;em&gt;on demand&lt;/em&gt;? Two options include:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;They can compress the video data as much as possible (&lt;em&gt;compression&lt;/em&gt;).&lt;/li&gt;&#xA;&lt;li&gt;They can chunk the video into smaller pieces and send it piece by piece (&lt;em&gt;chunking/streaming&lt;/em&gt;).&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;But neither of those solves the problem of &lt;em&gt;initial load time&lt;/em&gt; (how long until the first frame starts after hitting &amp;ldquo;play&amp;rdquo;). To get fast initial loads, we also need a quick &lt;strong&gt;&lt;a href=&#34;https://www.cloudflare.com/learning/cdn/glossary/round-trip-time-rtt/&#34;&gt;round-trip time&lt;/a&gt;&lt;/strong&gt; (RTT). If you&amp;rsquo;re a gamer, it&amp;rsquo;s basically the same as server ping: the time it takes for a request to go from your computer to the server and back.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>cloudfront-distributions</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/cdn/cloudfront-distributions/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/cdn/cloudfront-distributions/</guid>
+				<description>&lt;h1 id=&#34;cloudfront-distributions&#34;&gt;CloudFront Distributions&lt;a class=&#34;anchor&#34; href=&#34;#cloudfront-distributions&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;A &lt;a href=&#34;https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-working-with.html&#34;&gt;&lt;strong&gt;CloudFront distribution&lt;/strong&gt;&lt;/a&gt; is the configuration that tells CloudFront:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Where your content is (the origin, like your S3 bucket)&lt;/li&gt;&#xA;&lt;li&gt;How to deliver it (caching behavior, compression, etc.)&lt;/li&gt;&#xA;&lt;li&gt;Who can access it (security settings)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;When you create a distribution, CloudFront assigns it a domain name, like &lt;code&gt;d1234567890.cloudfront.net&lt;/code&gt;, which you can use to access your content through the CDN.&lt;/p&gt;&#xA;&lt;h2 id=&#34;key-configuration-options&#34;&gt;Key Configuration Options&lt;a class=&#34;anchor&#34; href=&#34;#key-configuration-options&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Origin:&lt;/strong&gt; The source of your content (S3 bucket, EC2 instance, load balancer, etc.)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Default root object:&lt;/strong&gt; What file to serve for the root URL (e.g. &lt;code&gt;index.html&lt;/code&gt;)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Distribution settings:&lt;/strong&gt; Caching behavior, compression, HTTPS, etc.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Price class:&lt;/strong&gt; Which edge locations to use (affects cost and coverage)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;CDNs are typically used to serve static content, like images, videos, and documents. You may have heard of &lt;a href=&#34;https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-at-the-edge.html&#34;&gt;Lambda@Edge&lt;/a&gt; for actual computational request/response logic close to users&amp;hellip; more on that later.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>cloudfront-invalidation</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/cdn/cloudfront-invalidation/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/cdn/cloudfront-invalidation/</guid>
+				<description>&lt;h1 id=&#34;cloudfront-invalidation&#34;&gt;CloudFront Invalidation&lt;a class=&#34;anchor&#34; href=&#34;#cloudfront-invalidation&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;A CDN is a geographically distributed &lt;a href=&#34;https://en.wikipedia.org/wiki/Cache_%5c%28computing%5c%29&#34;&gt;cache&lt;/a&gt;, which means it&amp;rsquo;s one of the hardest things to deal with&amp;hellip;&lt;/p&gt;&#xA;&lt;blockquote class=&#39;book-hint &#39;&gt;&#xA;&lt;p&gt;&amp;ldquo;There are 2 hard problems in computer science: cache invalidation, naming things, and off-by-1 errors.&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;– Leon Bambrick&lt;/p&gt;&#xA;&lt;/blockquote&gt;&lt;p&gt;If you update the favicon in your S3 bucket, it won&amp;rsquo;t immediately update for users accessing it through CloudFront.&lt;/p&gt;&#xA;&lt;p&gt;Similarly, if you use CloudFront to serve content like HTML, CSS, or JavaScript files for a website, users might not see the latest version of your site immediately after you make changes.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>presigned-urls</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/cdn/presigned-urls/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/cdn/presigned-urls/</guid>
+				<description>&lt;h1 id=&#34;presigned-urls&#34;&gt;Presigned URLs&lt;a class=&#34;anchor&#34; href=&#34;#presigned-urls&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Serving files is nice, but we often want CDN speed while still limiting access to specific users. To do that, we can use &lt;strong&gt;presigned URLs&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html&#34;&gt;&lt;strong&gt;Presigned URLs&lt;/strong&gt;&lt;/a&gt; are temporary, time-limited URLs that grant access to private S3 objects or CloudFront content. They&amp;rsquo;re like tickets that expire:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Time-limited:&lt;/strong&gt; The URL expires after a set duration (e.g., 1 hour, or 24 hours).&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Secure:&lt;/strong&gt; The content itself remains private; only those with the presigned URL can access it.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Controlled:&lt;/strong&gt; You control who gets the URL and when it expires.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Here&amp;rsquo;s what a presigned URL looks like:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>why-use-presigned-urls</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/cdn/why-use-presigned-urls/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/cdn/why-use-presigned-urls/</guid>
+				<description>&lt;h1 id=&#34;why-use-presigned-urls&#34;&gt;Why Use Presigned URLs?&lt;a class=&#34;anchor&#34; href=&#34;#why-use-presigned-urls&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;You just learned how to create presigned URLs, but you might be wondering: &lt;em&gt;why go through all this trouble&lt;/em&gt;? Well, imagine you&amp;rsquo;re building a course platform where students can download PDFs of their course materials. If you make the PDFs public in S3 then &lt;em&gt;all the content would be accessible for free&lt;/em&gt;!&lt;/p&gt;&#xA;&lt;p&gt;&amp;hellip;and unless you&amp;rsquo;re as cool as Boot.dev, you probably don&amp;rsquo;t want that.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Anyone with the URL can access the files (even people who aren&amp;rsquo;t enrolled)&lt;/li&gt;&#xA;&lt;li&gt;Search engines and bots can crawl and index your content&lt;/li&gt;&#xA;&lt;li&gt;You have no control over who downloads what&lt;/li&gt;&#xA;&lt;li&gt;Once someone has the URL, they can share it forever&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;This is where &lt;strong&gt;presigned URLs&lt;/strong&gt; shine. Instead of making your S3 bucket or CloudFront content publicly accessible, you can use presigned URLs to get the best of both worlds: CDN speed with a private-content access control. You dish out presigned URLs to paying users, they download the content before the URL expires, and once it does, their URL becomes useless. By setting &lt;em&gt;extremely short&lt;/em&gt; expiry times, and generating a new URL when a paying user requests it, they can effectively keep access forever, but will only be able to get the content if they&amp;rsquo;re going through your link generator.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>cloudfront-with-dns</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/cdn/cloudfront-with-dns/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/cdn/cloudfront-with-dns/</guid>
+				<description>&lt;h1 id=&#34;cloudfront-with-dns&#34;&gt;CloudFront With DNS&lt;a class=&#34;anchor&#34; href=&#34;#cloudfront-with-dns&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Your CloudFront distribution has a domain name like &lt;code&gt;d1234567890abcdef.cloudfront.net&lt;/code&gt;, but that&amp;rsquo;s a long, hard-to-remember address.&lt;/p&gt;&#xA;&lt;p&gt;To make it easier for users to find your content, you can create &lt;em&gt;your own&lt;/em&gt; DNS record that points a friendly domain name to your CloudFront distribution. Instead of typing that long CloudFront URL, users can type something like &lt;code&gt;cdn.yourcoolsite.com&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;If you&amp;rsquo;re using &lt;a href=&#34;https://docs.aws.amazon.com/route53/&#34;&gt;Route 53&lt;/a&gt;, you can use an &lt;a href=&#34;https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html&#34;&gt;ALIAS (A) record&lt;/a&gt; instead of a &lt;a href=&#34;https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html&#34;&gt;CNAME&lt;/a&gt;. ALIAS records work better at the zone apex and are free. They also are a bit more plug-and-play within AWS if you&amp;rsquo;re using CloudFront, but CNAME also works just fine.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

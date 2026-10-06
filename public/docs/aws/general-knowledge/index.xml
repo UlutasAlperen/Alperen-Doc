@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>general-knowledge on Alperen Doc</title>
+		<link>https://blog.ulutasalperen.com/docs/aws/general-knowledge/</link>
+		<description>Recent content in general-knowledge on Alperen Doc</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<atom:link href="https://blog.ulutasalperen.com/docs/aws/general-knowledge/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>reserved-instances-savings-plans</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/general-knowledge/reserved-instances-savings-plans/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/general-knowledge/reserved-instances-savings-plans/</guid>
+				<description>&lt;h1 id=&#34;reserved-instances-and-savings-plans&#34;&gt;Reserved Instances and Savings Plans&lt;a class=&#34;anchor&#34; href=&#34;#reserved-instances-and-savings-plans&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Companies can spend a &lt;em&gt;lot&lt;/em&gt; of money on cloud servers, and part of building on AWS is optimizing your spend and getting the most out of it.&lt;/p&gt;&#xA;&lt;p&gt;Initially, AWS allowed you to &lt;a href=&#34;https://aws.amazon.com/ec2/pricing/reserved-instances/&#34;&gt;&amp;ldquo;reserve&amp;rdquo; an instance&lt;/a&gt;. This meant:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;You commit to paying for at least a certain amount of compute on a specific EC2 instance type, for a period of 1-3 years.&lt;/li&gt;&#xA;&lt;li&gt;In return for your commitment, AWS gives you a significant discount on that compute.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;It&amp;rsquo;s like buying in bulk, but it comes with constraints. The reservation is tied to a specific instance type and region (sometimes even a specific availability zone, or AZ).&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>spot-instances</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/general-knowledge/spot-instances/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/general-knowledge/spot-instances/</guid>
+				<description>&lt;h1 id=&#34;spot-instances&#34;&gt;Spot Instances&lt;a class=&#34;anchor&#34; href=&#34;#spot-instances&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Savings plans are great, but what if you want to save &lt;em&gt;even more money&lt;/em&gt;? Allow me to introduce you to &lt;a href=&#34;https://aws.amazon.com/ec2/spot/&#34;&gt;spot instances&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Imagine you&amp;rsquo;re in AWS&amp;rsquo; shoes. You have to build out new racks of servers to keep up with demand, and you want to streamline things, so you install not just what you need &lt;em&gt;today&lt;/em&gt; but what you think you&amp;rsquo;ll need for the &lt;em&gt;next few years&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;p&gt;This leads to a problem: what to do with all the new capacity that&amp;rsquo;s not being used yet?&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>auto-scaling-groups</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/general-knowledge/auto-scaling-groups/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/general-knowledge/auto-scaling-groups/</guid>
+				<description>&lt;h1 id=&#34;auto-scaling-groups&#34;&gt;Auto Scaling Groups&lt;a class=&#34;anchor&#34; href=&#34;#auto-scaling-groups&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;The process works fine for one server, but  if we needed &lt;em&gt;hundreds&lt;/em&gt; of servers?&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html&#34;&gt;Auto Scaling Groups&lt;/a&gt; (ASGs) help with this. We can give AWS an AMI and tell it how many instances we want.&lt;/p&gt;&#xA;&lt;p&gt;This gets even more powerful as we &lt;em&gt;instrument&lt;/em&gt; our servers. If a server starts to get &lt;strong&gt;busy&lt;/strong&gt;, AWS can automatically provision more. If servers are sitting &lt;strong&gt;idle&lt;/strong&gt;, we can reduce the server count.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>for-start on Alperen Doc</title>
+		<link>https://blog.ulutasalperen.com/docs/aws/for-start/</link>
+		<description>Recent content in for-start on Alperen Doc</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<atom:link href="https://blog.ulutasalperen.com/docs/aws/for-start/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>create-iam-user-and-group</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/for-start/create-iam-user-and-group/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/for-start/create-iam-user-and-group/</guid>
+				<description>&lt;h1 id=&#34;create-iam-user-and-group&#34;&gt;Create IAM User and Group&lt;a class=&#34;anchor&#34; href=&#34;#create-iam-user-and-group&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;create-an-admin-level-iam-user-for-day-to-day-account-management-_this-will-be-primary-aws-login-management-user-&#34;&gt;Create an admin-level IAM user for day-to-day account management. _This will be primary AWS login management user .&lt;a class=&#34;anchor&#34; href=&#34;#create-an-admin-level-iam-user-for-day-to-day-account-management-_this-will-be-primary-aws-login-management-user-&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Navigate to the &lt;a href=&#34;https://console.aws.amazon.com/iam&#34;&gt;IAM dashboard&lt;/a&gt;. You can also use the search bar at the top of the console to find it.&lt;/li&gt;&#xA;&lt;li&gt;Click on &amp;ldquo;Users&amp;rdquo; under &amp;ldquo;Access Management&amp;rdquo; in the menu on the left, then click &amp;ldquo;Create user.&amp;rdquo;&lt;/li&gt;&#xA;&lt;li&gt;Give the IAM user a name like &lt;code&gt;zach-admin&lt;/code&gt; (using your own name).&lt;/li&gt;&#xA;&lt;li&gt;Check the box &amp;ldquo;Provide user access to the AWS Management Console.&amp;rdquo;&lt;/li&gt;&#xA;&lt;li&gt;Have AWS auto-generate an initial password, and leave the box checked to require a password reset on first login.&lt;/li&gt;&#xA;&lt;li&gt;Create a new group for this user, called &lt;code&gt;Administrators&lt;/code&gt;. Attach the &lt;code&gt;AdministratorAccess&lt;/code&gt; policy to the group. Only the one policy is needed.&lt;/li&gt;&#xA;&lt;li&gt;Assign the IAM user that you&amp;rsquo;re creating to the new group.&lt;/li&gt;&#xA;&lt;li&gt;On the &amp;ldquo;Review and create&amp;rdquo; step, if everything looks right, click &amp;ldquo;Create user.&amp;rdquo;&lt;/li&gt;&#xA;&lt;li&gt;Download the credentials CSV file. Note that AWS gives you a sign-in URL, the IAM username, and the initial password. &lt;em&gt;The sign-in URL has your AWS account ID in it.&lt;/em&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;in-the-web-console-log-out-of-your-root-user-then-log-in-as-the-new-iam-admin-user&#34;&gt;In the web console, log out of your root user, then log in as the new IAM admin user.&lt;a class=&#34;anchor&#34; href=&#34;#in-the-web-console-log-out-of-your-root-user-then-log-in-as-the-new-iam-admin-user&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Use the sign-in URL from the credentials CSV.&lt;/li&gt;&#xA;&lt;li&gt;The account ID should be pre-populated on the sign-in page, but save the ID number in case you need it for any future logins.&lt;/li&gt;&#xA;&lt;li&gt;Enter the username you created and the auto-generated initial password.&lt;/li&gt;&#xA;&lt;li&gt;You&amp;rsquo;ll be prompted to set a new password for the IAM user. Create one and save it.&lt;/li&gt;&#xA;&lt;li&gt;If prompted, set up MFA for the IAM user as well (not as critical as with the root user, but still recommended).&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;From this point on, use the IAM admin user unless a root user login is absolutely necessary. We&amp;rsquo;ll be learning a lot more about IAM and scoped security throughout this document.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>regions-and-availability-zones</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/for-start/regions-and-availability-zones/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/for-start/regions-and-availability-zones/</guid>
+				<description>&lt;h1 id=&#34;regions-and-availability-zones&#34;&gt;Regions and Availability Zones&lt;a class=&#34;anchor&#34; href=&#34;#regions-and-availability-zones&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;AWS has many regions to choose from. Each region is where your services are &lt;strong&gt;geographically located&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;An outage in one region will (&lt;em&gt;usually&lt;/em&gt;) not affect another region.&lt;/li&gt;&#xA;&lt;li&gt;The farther a server is from the user, the higher the latency. Choose a region close to the folks using your service.&lt;/li&gt;&#xA;&lt;li&gt;Some services are available only in certain places, or are significantly more expensive in some regions. So we need to make sure a region meets our needs.&lt;/li&gt;&#xA;&lt;li&gt;As a service grows, we may want to host in more than one region. We also pay a toll for transferring data between regions.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/U9stnq2-1224x606.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

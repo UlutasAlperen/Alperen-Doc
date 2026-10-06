@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>monitoring on Alperen Doc</title>
+		<link>https://blog.ulutasalperen.com/docs/aws/monitoring/</link>
+		<description>Recent content in monitoring on Alperen Doc</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<atom:link href="https://blog.ulutasalperen.com/docs/aws/monitoring/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>aws-external-monitoring</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/monitoring/aws-external-monitoring/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/monitoring/aws-external-monitoring/</guid>
+				<description>&lt;h1 id=&#34;external-monitoring&#34;&gt;External Monitoring&lt;a class=&#34;anchor&#34; href=&#34;#external-monitoring&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;With an &lt;a href=&#34;https://aws.amazon.com/ec2/&#34;&gt;EC2&lt;/a&gt; instance running, we get some monitoring data &lt;em&gt;automatically&lt;/em&gt; and at no extra charge.&lt;/p&gt;&#xA;&lt;p&gt;There are certain things that a running instance &lt;em&gt;must&lt;/em&gt; communicate to the hardware/system that hosts it. AWS needs to track this information &amp;ldquo;from the outside&amp;rdquo; in order to manage its infrastructure. For example:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How much CPU is the instance using?&lt;/li&gt;&#xA;&lt;li&gt;How much network bandwidth is it taking up?&lt;/li&gt;&#xA;&lt;li&gt;How much data is it reading from and/or writing to disk?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;All these things can be monitored externally by AWS, and they package it into a service called &lt;a href=&#34;https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html&#34;&gt;CloudWatch Metrics&lt;/a&gt;. The metrics allow us to answer questions like:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>aws-internal-monitoring</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/monitoring/aws-internal-monitoring/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/monitoring/aws-internal-monitoring/</guid>
+				<description>&lt;h1 id=&#34;internal-monitoring&#34;&gt;Internal Monitoring&lt;a class=&#34;anchor&#34; href=&#34;#internal-monitoring&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Beyond what is easily observable from the outside, there are useful things to monitor that live &lt;em&gt;inside&lt;/em&gt; the domain of the server&amp;rsquo;s operating system. Things like:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Disk usage (i.e., how much data is on disk and how much space is free)&lt;/li&gt;&#xA;&lt;li&gt;Memory used vs. available memory&lt;/li&gt;&#xA;&lt;li&gt;Application logs&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;AWS doesn&amp;rsquo;t provide these metrics out of the box. To solve this, there are hundreds of options: &lt;a href=&#34;https://grafana.com/&#34;&gt;Grafana&lt;/a&gt;, &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt;, &lt;a href=&#34;https://www.datadoghq.com/&#34;&gt;Datadog&lt;/a&gt;, &lt;a href=&#34;https://www.splunk.com/&#34;&gt;Splunk&lt;/a&gt;, etc. AWS also provides a simple option with the &lt;a href=&#34;https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html&#34;&gt;CloudWatch Agent&lt;/a&gt;.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>cloud-watch-alarms</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/monitoring/cloud-watch-alarms/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/monitoring/cloud-watch-alarms/</guid>
+				<description>&lt;h1 id=&#34;cloudwatch-alarms&#34;&gt;CloudWatch Alarms&lt;a class=&#34;anchor&#34; href=&#34;#cloudwatch-alarms&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Our metrics and logs are being sent to AWS, but we have to check them manually to find out if something is wrong. Not ideal&amp;hellip;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html&#34;&gt;CloudWatch Alarms&lt;/a&gt; lets us set up automatic &amp;ldquo;actions&amp;rdquo; to be taken when certain criteria are met. For example:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Our service is in an &lt;a href=&#34;https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html&#34;&gt;Auto Scaling Group&lt;/a&gt; of 1-10 servers based on CPU usage, and we just hit 10!&lt;/li&gt;&#xA;&lt;li&gt;We have a service emitting a high number of &lt;code&gt;5XX&lt;/code&gt; errors!&lt;/li&gt;&#xA;&lt;li&gt;One of our servers is at 95% disk usage!&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Let&amp;rsquo;s create a simple alarm that triggers when our server goes above &lt;strong&gt;20% CPU usage&lt;/strong&gt;. When triggered, it will send a notification via SNS (&lt;a href=&#34;https://aws.amazon.com/sns/&#34;&gt;Simple Notification Service&lt;/a&gt;) to a given email address.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>cloudtrail</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/monitoring/cloudtrail/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/monitoring/cloudtrail/</guid>
+				<description>&lt;h1 id=&#34;cloudtrail&#34;&gt;CloudTrail&lt;a class=&#34;anchor&#34; href=&#34;#cloudtrail&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/cloudwatch/&#34;&gt;CloudWatch&lt;/a&gt; is great for monitoring &lt;em&gt;our&lt;/em&gt; systems, but how do we get logs for the AWS account itself? Think about this:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Our CloudWatch agent is happily writing logs to CloudWatch, but what if they&amp;rsquo;re being &lt;em&gt;rejected by the API&lt;/em&gt;?&lt;/li&gt;&#xA;&lt;li&gt;What if the intern we fired last month changed our &lt;a href=&#34;https://aws.amazon.com/vpc/&#34;&gt;VPC&lt;/a&gt; settings? How would we know what they did?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/cloudtrail/&#34;&gt;CloudTrail&lt;/a&gt; is the answer. It logs the AWS API calls that we make.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

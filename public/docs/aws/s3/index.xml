@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>s3 on Alperen Doc</title>
+		<link>https://blog.ulutasalperen.com/docs/aws/s3/</link>
+		<description>Recent content in s3 on Alperen Doc</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<atom:link href="https://blog.ulutasalperen.com/docs/aws/s3/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>aws-s3</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/s3/aws-s3/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/s3/aws-s3/</guid>
+				<description>&lt;h1 id=&#34;aws-s3&#34;&gt;AWS S3&lt;a class=&#34;anchor&#34; href=&#34;#aws-s3&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/s3/&#34;&gt;Amazon S3&lt;/a&gt; (&lt;strong&gt;Simple Storage Service&lt;/strong&gt;) is AWS&amp;rsquo; &lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html&#34;&gt;object storage&lt;/a&gt; service. Think of it as slower, but &lt;em&gt;very&lt;/em&gt; scalable storage for files (&lt;em&gt;objects&lt;/em&gt;) in containers (&lt;em&gt;buckets&lt;/em&gt;). It&amp;rsquo;s relatively cheap and very reliable at huge scales.&lt;/p&gt;&#xA;&lt;p&gt;By &amp;ldquo;slow,&amp;rdquo; I mean it&amp;rsquo;s not designed for low-latency access like a database, and it&amp;rsquo;s not designed to be easily searchable. It&amp;rsquo;s designed for storing and retrieving files by their key (filename).&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://blog.ulutasalperen.com/images/aws/s3-overview.png&#34; alt=&#34;S3 object storage overview&#34; /&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>aws-s3-bucket</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/s3/aws-s3-bucket/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/s3/aws-s3-bucket/</guid>
+				<description>&lt;h1 id=&#34;s3-buckets&#34;&gt;S3 Buckets&lt;a class=&#34;anchor&#34; href=&#34;#s3-buckets&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;The &lt;em&gt;bucket&lt;/em&gt; is the highest level of organization in S3; it&amp;rsquo;s a &lt;em&gt;container for storing objects&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Some projects put everything in a single bucket, organizing objects by &lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html&#34;&gt;prefix&lt;/a&gt; (like folders). Other projects use multiple buckets for different purposes (for example, one for user uploads and another for static assets). There&amp;rsquo;s no single right answer; it depends on your needs.&lt;/p&gt;&#xA;&lt;p&gt;That said, you don&amp;rsquo;t want to find yourself &lt;em&gt;searching across multiple buckets&lt;/em&gt; for a file, so try to keep any collection of related files in the same bucket.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>aws-s3-objects</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/s3/aws-s3-objects/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/s3/aws-s3-objects/</guid>
+				<description>&lt;h1 id=&#34;s3-objects&#34;&gt;S3 Objects&lt;a class=&#34;anchor&#34; href=&#34;#s3-objects&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;You can think of &amp;ldquo;&lt;a href=&#34;https://aws.amazon.com/what-is/object-storage/&#34;&gt;object storage&lt;/a&gt;&amp;rdquo; and &amp;ldquo;file storage&amp;rdquo; as almost the same thing, and &amp;ldquo;objects&amp;rdquo; as &amp;ldquo;files.&amp;rdquo; The big &lt;em&gt;technical&lt;/em&gt; difference is that objects are stored in a way that allows more efficient distribution across many machines (which is why S3 is so scalable and durable), but from a practical user&amp;rsquo;s standpoint, they&amp;rsquo;re very similar.&lt;/p&gt;&#xA;&lt;p&gt;Storing stuff in buckets is simple: file &lt;code&gt;A&lt;/code&gt; goes in bucket &lt;code&gt;B&lt;/code&gt; at key &lt;code&gt;C&lt;/code&gt;. You only need two things to access an object in S3:&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>
