@@ -1,6 +1,6 @@
 ---
 title: "ec2"
-weight: 30
+weight: 20
 bookCollapseSection: true
 ---
 

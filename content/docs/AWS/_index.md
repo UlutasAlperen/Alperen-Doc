@@ -24,20 +24,21 @@ Here is the link to view the diagram I drew on Excalidraw: [Diagram link(excalid
 - Monitor everything with CloudWatch and CloudTrail
 - And much more
 
+**Başlamadan önce:**
+
+- [create-iam-user-and-group](iam/create-iam-user-and-group/) = ilk admin IAM kullanıcını oluştur
+- [regions-and-availability-zones](networking/regions-and-availability-zones/) = region ve AZ kavramlarını öğren
+
 ## AWS konular
-
-### [For start](for-start/)
-
-1. [create-iam-user-and-group](for-start/create-iam-user-and-group/)
-2. [regions-and-availability-zones](for-start/regions-and-availability-zones/)
 
 ### [Networking - VPC's](networking/)
 
-1. [virtual-private-cloud-vpc](networking/virtual-private-cloud-vpc/)
-2. [aws-subnetting](networking/aws-subnetting/)
-3. [internet-gateways-igw](networking/internet-gateways-igw/)
-4. [route-tables](networking/route-tables/)
-5. [private-subnets](networking/private-subnets/)
+1. [regions-and-availability-zones](networking/regions-and-availability-zones/)
+2. [virtual-private-cloud-vpc](networking/virtual-private-cloud-vpc/)
+3. [aws-subnetting](networking/aws-subnetting/)
+4. [internet-gateways-igw](networking/internet-gateways-igw/)
+5. [route-tables](networking/route-tables/)
+6. [private-subnets](networking/private-subnets/)
 
 ### [EC2 (Elastic Compute Cloud)](ec2/)
 
@@ -64,15 +65,16 @@ Here is the link to view the diagram I drew on Excalidraw: [Diagram link(excalid
 
 ### [Identity and Access Management (IAM)](iam/)
 
-1. [identity-and-access-management](iam/identity-and-access-management/)
-2. [create-iam-user](iam/create-iam-user/)
-3. [inline-policies-iam-user](iam/inline-policies-iam-user/)
-4. [iam-groups](iam/iam-groups/)
-5. [iam-roles](iam/iam-roles/)
-6. [aws-iam-deny-policies](iam/aws-iam-deny-policies/)
-7. [aws-ssm-parameter-store](iam/aws-ssm-parameter-store/)
-8. [accessing-ssm-parameters-from-ec2](iam/accessing-ssm-parameters-from-ec2/)
-9. [use-ssm-from-ec2](iam/use-ssm-from-ec2/)
+1. [create-iam-user-and-group](iam/create-iam-user-and-group/)
+2. [identity-and-access-management](iam/identity-and-access-management/)
+3. [create-iam-user](iam/create-iam-user/)
+4. [inline-policies-iam-user](iam/inline-policies-iam-user/)
+5. [iam-groups](iam/iam-groups/)
+6. [iam-roles](iam/iam-roles/)
+7. [aws-iam-deny-policies](iam/aws-iam-deny-policies/)
+8. [aws-ssm-parameter-store](iam/aws-ssm-parameter-store/)
+9. [accessing-ssm-parameters-from-ec2](iam/accessing-ssm-parameters-from-ec2/)
+10. [use-ssm-from-ec2](iam/use-ssm-from-ec2/)
 
 ### [Monitoring - AWS](monitoring/)
 

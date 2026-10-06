@@ -1,6 +1,6 @@
 ---
 title: "monitoring"
-weight: 60
+weight: 50
 bookCollapseSection: true
 ---
 

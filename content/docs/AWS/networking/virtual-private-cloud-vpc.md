@@ -1,6 +1,6 @@
 ---
 title: "virtual-private-cloud-vpc"
-weight: 10
+weight: 20
 ---
 
 # Virtual Private Cloud (VPC)

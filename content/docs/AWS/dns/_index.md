@@ -1,6 +1,6 @@
 ---
 title: "dns"
-weight: 80
+weight: 70
 bookCollapseSection: true
 ---
 

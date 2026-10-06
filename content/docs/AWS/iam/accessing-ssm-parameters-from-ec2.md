@@ -1,6 +1,6 @@
 ---
 title: "accessing-ssm-parameters-from-ec2"
-weight: 80
+weight: 90
 ---
 
 # Accessing SSM Parameters from EC2

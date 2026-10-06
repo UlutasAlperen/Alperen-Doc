@@ -1,6 +1,6 @@
 ---
 title: "regions-and-availability-zones"
-weight: 20
+weight: 10
 ---
 
 # Regions and Availability Zones

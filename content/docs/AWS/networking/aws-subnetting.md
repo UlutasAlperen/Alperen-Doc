@@ -1,6 +1,6 @@
 ---
 title: "aws-subnetting"
-weight: 20
+weight: 30
 ---
 
 # Subnetting

@@ -1,6 +1,6 @@
 ---
 title: "create-iam-user"
-weight: 20
+weight: 30
 ---
 
 # IAM Users

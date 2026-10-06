@@ -1,6 +1,6 @@
 ---
 title: "general-knowledge"
-weight: 120
+weight: 110
 bookCollapseSection: true
 ---
 

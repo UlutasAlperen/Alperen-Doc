@@ -1,6 +1,6 @@
 ---
 title: "aws-iam-deny-policies"
-weight: 60
+weight: 70
 ---
 
 # Deny Policies

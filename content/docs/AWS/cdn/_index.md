@@ -1,6 +1,6 @@
 ---
 title: "cdn"
-weight: 90
+weight: 80
 bookCollapseSection: true
 ---
 

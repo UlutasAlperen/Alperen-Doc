@@ -8,20 +8,20 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Networking - VPC’s# 001 - virtual-private-cloud-vpc = izole sanal ağ (VPC) ve CIDR blokları 002 - aws-subnetting = VPC adres alanını private/public subnet’lere bölme 003 - internet-gateways-igw = public subnet’leri internet’e bağlayan IGW 004 - route-tables = trafiğin nereye gideceğini belirleyen route tabloları 005 - private-subnets = internet’e doğrudan erişimi olmayan subnet’ler ">
+<meta name="description" content="Networking - VPC’s# 001 - regions-and-availability-zones = region ve AZ kavramları 002 - virtual-private-cloud-vpc = izole sanal ağ (VPC) ve CIDR blokları 003 - aws-subnetting = VPC adres alanını private/public subnet’lere bölme 004 - internet-gateways-igw = public subnet’leri internet’e bağlayan IGW 005 - route-tables = trafiğin nereye gideceğini belirleyen route tabloları 006 - private-subnets = internet’e doğrudan erişimi olmayan subnet’ler ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws/networking/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="networking">
-	<meta property="og:description" content="Networking - VPC’s# 001 - virtual-private-cloud-vpc = izole sanal ağ (VPC) ve CIDR blokları 002 - aws-subnetting = VPC adres alanını private/public subnet’lere bölme 003 - internet-gateways-igw = public subnet’leri internet’e bağlayan IGW 004 - route-tables = trafiğin nereye gideceğini belirleyen route tabloları 005 - private-subnets = internet’e doğrudan erişimi olmayan subnet’ler">
+	<meta property="og:description" content="Networking - VPC’s# 001 - regions-and-availability-zones = region ve AZ kavramları 002 - virtual-private-cloud-vpc = izole sanal ağ (VPC) ve CIDR blokları 003 - aws-subnetting = VPC adres alanını private/public subnet’lere bölme 004 - internet-gateways-igw = public subnet’leri internet’e bağlayan IGW 005 - route-tables = trafiğin nereye gideceğini belirleyen route tabloları 006 - private-subnets = internet’e doğrudan erişimi olmayan subnet’ler">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="website">
 
 
 	<meta itemprop="name" content="networking">
-	<meta itemprop="description" content="Networking - VPC’s# 001 - virtual-private-cloud-vpc = izole sanal ağ (VPC) ve CIDR blokları 002 - aws-subnetting = VPC adres alanını private/public subnet’lere bölme 003 - internet-gateways-igw = public subnet’leri internet’e bağlayan IGW 004 - route-tables = trafiğin nereye gideceğini belirleyen route tabloları 005 - private-subnets = internet’e doğrudan erişimi olmayan subnet’ler">
-	<meta itemprop="wordCount" content="52">
+	<meta itemprop="description" content="Networking - VPC’s# 001 - regions-and-availability-zones = region ve AZ kavramları 002 - virtual-private-cloud-vpc = izole sanal ağ (VPC) ve CIDR blokları 003 - aws-subnetting = VPC adres alanını private/public subnet’lere bölme 004 - internet-gateways-igw = public subnet’leri internet’e bağlayan IGW 005 - route-tables = trafiğin nereye gideceğini belirleyen route tabloları 006 - private-subnets = internet’e doğrudan erişimi olmayan subnet’ler">
+	<meta itemprop="wordCount" content="60">
 
 <title>networking • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -30,7 +30,7 @@ https://github.com/alex-shpak/hugo-book
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.803cd5de0f69be512a9abc2b4007432f461dab788f1788649e56ce3ad28b1a8e.js" integrity="sha256-gDzV3g9pvlEqmrwrQAdDL0Ydq3iPF4hknlbOOtKLGo4=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.3ecdcddcf26107d9b4c2709a0cbc01627c2ddb86741e79b5270b58e357621402.js" integrity="sha256-Ps3N3PJhB9m0wnCaDLwBYnwt24Z0Hnm1JwtY41diFAI=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/aws/networking/index.xml" title="networking" />
 
   
@@ -1281,57 +1281,6 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3b9f89d01b8925e5a181088e04057c53" class="toggle"  />
-    <label for="section-3b9f89d01b8925e5a181088e04057c53" class="flex">
-      <a href="/docs/aws/for-start/" class="">
-        for-start</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
-    </label>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/aws/for-start/create-iam-user-and-group/" class="">
-      create-iam-user-and-group</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/aws/for-start/regions-and-availability-zones/" class="">
-      regions-and-availability-zones</a>
-  
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
     <input type="checkbox" id="section-7ac94fcac7ebb60d389835a7fcb83889" class="toggle" checked />
     <label for="section-7ac94fcac7ebb60d389835a7fcb83889" class="flex">
       <a href="/docs/aws/networking/" class="active">
@@ -1342,6 +1291,20 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/regions-and-availability-zones/" class="">
+      regions-and-availability-zones</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -1719,6 +1682,20 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user-and-group/" class="">
+      create-iam-user-and-group</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -2625,24 +2602,25 @@ https://github.com/alex-shpak/hugo-book
       
   <article class="markdown book-article"><h1 id="networking---vpcs">Networking - VPC&rsquo;s<a class="anchor" href="#networking---vpcs">#</a></h1>
 <ul>
-<li>001 - <a href="virtual-private-cloud-vpc/">virtual-private-cloud-vpc</a> = izole sanal ağ (VPC) ve CIDR blokları</li>
+<li>001 - <a href="regions-and-availability-zones/">regions-and-availability-zones</a> = region ve AZ kavramları</li>
+<li>002 - <a href="virtual-private-cloud-vpc/">virtual-private-cloud-vpc</a> = izole sanal ağ (VPC) ve CIDR blokları</li>
 </ul>
 <p><img src="/images/aws/vpc-diagram.png" alt="VPC diagram" /></p>
 <ul>
-<li>002 - <a href="aws-subnetting/">aws-subnetting</a> = VPC adres alanını private/public subnet&rsquo;lere bölme</li>
+<li>003 - <a href="aws-subnetting/">aws-subnetting</a> = VPC adres alanını private/public subnet&rsquo;lere bölme</li>
 </ul>
 <p><img src="/images/aws/subnetting-diagram.png" alt="Subnetting diagram" /></p>
 <ul>
-<li>003 - <a href="internet-gateways-igw/">internet-gateways-igw</a> = public subnet&rsquo;leri internet&rsquo;e bağlayan IGW</li>
+<li>004 - <a href="internet-gateways-igw/">internet-gateways-igw</a> = public subnet&rsquo;leri internet&rsquo;e bağlayan IGW</li>
 </ul>
 <p><img src="/images/aws/internet-gateway-diagram.png" alt="Internet gateway diagram" /></p>
 <ul>
-<li>004 - <a href="route-tables/">route-tables</a> = trafiğin nereye gideceğini belirleyen route tabloları</li>
+<li>005 - <a href="route-tables/">route-tables</a> = trafiğin nereye gideceğini belirleyen route tabloları</li>
 </ul>
 <p><img src="/images/aws/route-tables-diagram.png" alt="Route tables diagram" /></p>
 <p><img src="/images/aws/route-tables-diagram-2.png" alt="Route tables diagram 2" /></p>
 <ul>
-<li>005 - <a href="private-subnets/">private-subnets</a> = internet&rsquo;e doğrudan erişimi olmayan subnet&rsquo;ler</li>
+<li>006 - <a href="private-subnets/">private-subnets</a> = internet&rsquo;e doğrudan erişimi olmayan subnet&rsquo;ler</li>
 </ul>
 <p><img src="/images/aws/private-subnets-diagram.png" alt="Private subnets diagram" /></p>
 </article>
@@ -2666,16 +2644,16 @@ https://github.com/alex-shpak/hugo-book
 <div class="flex flex-wrap justify-between">
     <span>
     
-      <a href="/docs/aws/for-start/regions-and-availability-zones/" class="flex align-center">
+      <a href="/docs/aws/" class="flex align-center">
         <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
-        <span>regions-and-availability-zones</span>
+        <span>AWS</span>
       </a>
     
     </span>
     <span>
     
-      <a href="/docs/aws/networking/virtual-private-cloud-vpc/" class="flex align-center">
-        <span>virtual-private-cloud-vpc</span>
+      <a href="/docs/aws/networking/regions-and-availability-zones/" class="flex align-center">
+        <span>regions-and-availability-zones</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     

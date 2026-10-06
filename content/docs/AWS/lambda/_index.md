@@ -1,6 +1,6 @@
 ---
 title: "lambda"
-weight: 110
+weight: 100
 bookCollapseSection: true
 ---
 

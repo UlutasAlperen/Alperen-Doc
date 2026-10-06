@@ -1,6 +1,6 @@
 ---
 title: "inline-policies-iam-user"
-weight: 30
+weight: 40
 ---
 
 # Inline Policies

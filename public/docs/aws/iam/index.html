@@ -8,23 +8,23 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Identity and Access Management (IAM)# 001 - identity-and-access-management At some stage in building a project on AWS, you’ll need to give other people (or perhaps automated systems) access to your cloud resources as well. IAM is how AWS controls access to resources: who can log in, and what they can do once they’re in.
-002 - create-iam-user = Each user gets a username/password or API keys to access AWS. Users are long-lived identities: they stick around until you delete them. Once you create a user and give them credentials, those credentials will work until they expire or you revoke them. 003 - inline-policies-iam-user = Policies allow or deny actions on specific resources. 004 - iam-groups = While inline policies are attached directly to a single user, the preferred way to manage permissions in AWS is to create groups and give them the policies (sometimes called customer-managed policies). 005 - iam-roles = IAM has roles. A role is a temporary identity that can be used or assumed by trusted parties. ">
+<meta name="description" content="Identity and Access Management (IAM)# 001 - create-iam-user-and-group = ilk admin IAM kullanıcısı ve grubunu oluşturma 002 - identity-and-access-management At some stage in building a project on AWS, you’ll need to give other people (or perhaps automated systems) access to your cloud resources as well. IAM is how AWS controls access to resources: who can log in, and what they can do once they’re in.
+003 - create-iam-user = Each user gets a username/password or API keys to access AWS. Users are long-lived identities: they stick around until you delete them. Once you create a user and give them credentials, those credentials will work until they expire or you revoke them. 004 - inline-policies-iam-user = Policies allow or deny actions on specific resources. 005 - iam-groups = While inline policies are attached directly to a single user, the preferred way to manage permissions in AWS is to create groups and give them the policies (sometimes called customer-managed policies). 006 - iam-roles = IAM has roles. A role is a temporary identity that can be used or assumed by trusted parties. ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws/iam/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="iam">
-	<meta property="og:description" content="Identity and Access Management (IAM)# 001 - identity-and-access-management At some stage in building a project on AWS, you’ll need to give other people (or perhaps automated systems) access to your cloud resources as well. IAM is how AWS controls access to resources: who can log in, and what they can do once they’re in.
-002 - create-iam-user = Each user gets a username/password or API keys to access AWS. Users are long-lived identities: they stick around until you delete them. Once you create a user and give them credentials, those credentials will work until they expire or you revoke them. 003 - inline-policies-iam-user = Policies allow or deny actions on specific resources. 004 - iam-groups = While inline policies are attached directly to a single user, the preferred way to manage permissions in AWS is to create groups and give them the policies (sometimes called customer-managed policies). 005 - iam-roles = IAM has roles. A role is a temporary identity that can be used or assumed by trusted parties.">
+	<meta property="og:description" content="Identity and Access Management (IAM)# 001 - create-iam-user-and-group = ilk admin IAM kullanıcısı ve grubunu oluşturma 002 - identity-and-access-management At some stage in building a project on AWS, you’ll need to give other people (or perhaps automated systems) access to your cloud resources as well. IAM is how AWS controls access to resources: who can log in, and what they can do once they’re in.
+003 - create-iam-user = Each user gets a username/password or API keys to access AWS. Users are long-lived identities: they stick around until you delete them. Once you create a user and give them credentials, those credentials will work until they expire or you revoke them. 004 - inline-policies-iam-user = Policies allow or deny actions on specific resources. 005 - iam-groups = While inline policies are attached directly to a single user, the preferred way to manage permissions in AWS is to create groups and give them the policies (sometimes called customer-managed policies). 006 - iam-roles = IAM has roles. A role is a temporary identity that can be used or assumed by trusted parties.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="website">
 
 
 	<meta itemprop="name" content="iam">
-	<meta itemprop="description" content="Identity and Access Management (IAM)# 001 - identity-and-access-management At some stage in building a project on AWS, you’ll need to give other people (or perhaps automated systems) access to your cloud resources as well. IAM is how AWS controls access to resources: who can log in, and what they can do once they’re in.
-002 - create-iam-user = Each user gets a username/password or API keys to access AWS. Users are long-lived identities: they stick around until you delete them. Once you create a user and give them credentials, those credentials will work until they expire or you revoke them. 003 - inline-policies-iam-user = Policies allow or deny actions on specific resources. 004 - iam-groups = While inline policies are attached directly to a single user, the preferred way to manage permissions in AWS is to create groups and give them the policies (sometimes called customer-managed policies). 005 - iam-roles = IAM has roles. A role is a temporary identity that can be used or assumed by trusted parties.">
-	<meta itemprop="wordCount" content="210">
+	<meta itemprop="description" content="Identity and Access Management (IAM)# 001 - create-iam-user-and-group = ilk admin IAM kullanıcısı ve grubunu oluşturma 002 - identity-and-access-management At some stage in building a project on AWS, you’ll need to give other people (or perhaps automated systems) access to your cloud resources as well. IAM is how AWS controls access to resources: who can log in, and what they can do once they’re in.
+003 - create-iam-user = Each user gets a username/password or API keys to access AWS. Users are long-lived identities: they stick around until you delete them. Once you create a user and give them credentials, those credentials will work until they expire or you revoke them. 004 - inline-policies-iam-user = Policies allow or deny actions on specific resources. 005 - iam-groups = While inline policies are attached directly to a single user, the preferred way to manage permissions in AWS is to create groups and give them the policies (sometimes called customer-managed policies). 006 - iam-roles = IAM has roles. A role is a temporary identity that can be used or assumed by trusted parties.">
+	<meta itemprop="wordCount" content="221">
 
 <title>iam • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -33,7 +33,7 @@ https://github.com/alex-shpak/hugo-book
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.803cd5de0f69be512a9abc2b4007432f461dab788f1788649e56ce3ad28b1a8e.js" integrity="sha256-gDzV3g9pvlEqmrwrQAdDL0Ydq3iPF4hknlbOOtKLGo4=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.3ecdcddcf26107d9b4c2709a0cbc01627c2ddb86741e79b5270b58e357621402.js" integrity="sha256-Ps3N3PJhB9m0wnCaDLwBYnwt24Z0Hnm1JwtY41diFAI=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/aws/iam/index.xml" title="iam" />
 
   
@@ -1284,57 +1284,6 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3b9f89d01b8925e5a181088e04057c53" class="toggle"  />
-    <label for="section-3b9f89d01b8925e5a181088e04057c53" class="flex">
-      <a href="/docs/aws/for-start/" class="">
-        for-start</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
-    </label>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/aws/for-start/create-iam-user-and-group/" class="">
-      create-iam-user-and-group</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/aws/for-start/regions-and-availability-zones/" class="">
-      regions-and-availability-zones</a>
-  
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
     <input type="checkbox" id="section-7ac94fcac7ebb60d389835a7fcb83889" class="toggle"  />
     <label for="section-7ac94fcac7ebb60d389835a7fcb83889" class="flex">
       <a href="/docs/aws/networking/" class="">
@@ -1345,6 +1294,20 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/regions-and-availability-zones/" class="">
+      regions-and-availability-zones</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -1722,6 +1685,20 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user-and-group/" class="">
+      create-iam-user-and-group</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -2628,22 +2605,23 @@ https://github.com/alex-shpak/hugo-book
       
   <article class="markdown book-article"><h1 id="identity-and-access-management-iam">Identity and Access Management (IAM)<a class="anchor" href="#identity-and-access-management-iam">#</a></h1>
 <ul>
-<li>001 - <a href="identity-and-access-management/">identity-and-access-management</a></li>
+<li>001 - <a href="create-iam-user-and-group/">create-iam-user-and-group</a> = ilk admin IAM kullanıcısı ve grubunu oluşturma</li>
+<li>002 - <a href="identity-and-access-management/">identity-and-access-management</a></li>
 </ul>
 <p>At some stage in building a project on AWS, you&rsquo;ll need to give other people (or perhaps automated systems) access to your cloud resources as well. <a href="https://aws.amazon.com/iam/">IAM</a> is how AWS controls access to resources: who can log in, and what they can do once they&rsquo;re in.</p>
 <p><img src="/images/aws/iam-diagram.png" alt="IAM diagram" /></p>
 <ul>
-<li>002 - <a href="create-iam-user/">create-iam-user</a> = Each user gets a <strong>username</strong>/<strong>password</strong> or <strong>API keys</strong> to access AWS. Users are <strong>long-lived identities</strong>: they stick around until you delete them. Once you create a user and give them credentials, those credentials will work until they expire or you revoke them.</li>
-<li>003 - <a href="inline-policies-iam-user/">inline-policies-iam-user</a> = <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html">Policies</a> <strong>allow</strong> or <strong>deny</strong> actions on specific resources.</li>
-<li>004 - <a href="iam-groups/">iam-groups</a> = While inline policies are attached directly to a single user, the <em>preferred</em> way to manage permissions in AWS is to create <strong>groups</strong> and give <em>them</em> the policies (sometimes called <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#customer-managed-policies">customer-managed policies</a>).</li>
-<li>005 - <a href="iam-roles/">iam-roles</a> = IAM has <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">roles</a>. A role is a <strong>temporary identity</strong> that can be used or <strong>assumed</strong> by trusted parties.</li>
+<li>003 - <a href="create-iam-user/">create-iam-user</a> = Each user gets a <strong>username</strong>/<strong>password</strong> or <strong>API keys</strong> to access AWS. Users are <strong>long-lived identities</strong>: they stick around until you delete them. Once you create a user and give them credentials, those credentials will work until they expire or you revoke them.</li>
+<li>004 - <a href="inline-policies-iam-user/">inline-policies-iam-user</a> = <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html">Policies</a> <strong>allow</strong> or <strong>deny</strong> actions on specific resources.</li>
+<li>005 - <a href="iam-groups/">iam-groups</a> = While inline policies are attached directly to a single user, the <em>preferred</em> way to manage permissions in AWS is to create <strong>groups</strong> and give <em>them</em> the policies (sometimes called <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#customer-managed-policies">customer-managed policies</a>).</li>
+<li>006 - <a href="iam-roles/">iam-roles</a> = IAM has <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">roles</a>. A role is a <strong>temporary identity</strong> that can be used or <strong>assumed</strong> by trusted parties.</li>
 </ul>
 <p><img src="/images/aws/iam-roles-diagram.png" alt="IAM roles diagram" /></p>
 <ul>
-<li>006 - <a href="aws-iam-deny-policies/">aws-iam-deny-policies</a> = explicit Deny her zaman kazanır</li>
-<li>007 - <a href="aws-ssm-parameter-store/">aws-ssm-parameter-store</a> = centralized safe where you can keep configuration data, secrets, and parameters that your applications need</li>
-<li>008 - <a href="accessing-ssm-parameters-from-ec2/">accessing-ssm-parameters-from-ec2</a> = uzak sunucumun ssm parametlerine iznini vermek</li>
-<li>009 - <a href="use-ssm-from-ec2/">use-ssm-from-ec2</a></li>
+<li>007 - <a href="aws-iam-deny-policies/">aws-iam-deny-policies</a> = explicit Deny her zaman kazanır</li>
+<li>008 - <a href="aws-ssm-parameter-store/">aws-ssm-parameter-store</a> = centralized safe where you can keep configuration data, secrets, and parameters that your applications need</li>
+<li>009 - <a href="accessing-ssm-parameters-from-ec2/">accessing-ssm-parameters-from-ec2</a> = uzak sunucumun ssm parametlerine iznini vermek</li>
+<li>010 - <a href="use-ssm-from-ec2/">use-ssm-from-ec2</a></li>
 </ul>
 </article>
  
@@ -2674,8 +2652,8 @@ https://github.com/alex-shpak/hugo-book
     </span>
     <span>
     
-      <a href="/docs/aws/iam/identity-and-access-management/" class="flex align-center">
-        <span>identity-and-access-management</span>
+      <a href="/docs/aws/iam/create-iam-user-and-group/" class="flex align-center">
+        <span>create-iam-user-and-group</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     

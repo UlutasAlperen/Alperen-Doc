@@ -1,6 +1,6 @@
 ---
 title: "identity-and-access-management"
-weight: 10
+weight: 20
 ---
 
 # Identity and Access Management (IAM)

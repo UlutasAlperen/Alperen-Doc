@@ -1,6 +1,6 @@
 ---
 title: "aws-ssm-parameter-store"
-weight: 70
+weight: 80
 ---
 
 # SSM Parameters

@@ -12,7 +12,8 @@ https://github.com/alex-shpak/hugo-book
 full diagram (without ecs i will update soon)
 Here is the link to view the diagram I drew on Excalidraw: Diagram link(excalidraw)
 Amazon Web Services is the cloud platform. Nearly every DevOps workflow runs on top of it in production. I use AWS to:
-Build isolated networks with VPCs, subnets, route tables and internet gateways Run virtual servers (EC2) with security groups, AMIs and launch templates Store data in managed databases (RDS) with backups and read replicas Control access with IAM users, groups, roles and policies Store files in S3 and serve them worldwide with CloudFront Route traffic with Route 53 DNS records Run containers with ECS and serverless functions with Lambda Monitor everything with CloudWatch and CloudTrail And much more AWS konular# For start# create-iam-user-and-group regions-and-availability-zones Networking - VPC’s# virtual-private-cloud-vpc aws-subnetting internet-gateways-igw route-tables private-subnets EC2 (Elastic Compute Cloud)# ec2-instance-configuration-keys ec2-instances elastic-ips aws-security-groups ssh-to-aws-server deploy-site-to-aws-server open-web-traffic creating-and-using-your-own-ami aws-launch-template launch-from-template-aws RDS: Relational Database Service# relational-database-service create-a-postgresql-database-in-aws aws-connect-to-your-database aws-connect-app-to-database rds-backups create-read-replicas-for-scalability rds-general-knowledge Identity and Access Management (IAM)# identity-and-access-management create-iam-user inline-policies-iam-user iam-groups iam-roles aws-iam-deny-policies aws-ssm-parameter-store accessing-ssm-parameters-from-ec2 use-ssm-from-ec2 Monitoring - AWS# aws-external-monitoring aws-internal-monitoring cloud-watch-alarms cloudtrail Amazon S3 - Simple Storage Service# aws-s3 aws-s3-bucket aws-s3-objects AWS - DNS - Route 53# route-53-hosted-zones aws-a-records dns-ttl-and-caching aws-verifying-dns aws-cname-records AWS - CDN - CloudFront# cloudfront-cdn cloudfront-distributions cloudfront-invalidation presigned-urls why-use-presigned-urls cloudfront-with-dns AWS - ECS - Elastic Container Service# vpc-and-networking-setup-for-ecs why-ecs elastic-container-registry ecr-repo ecs-clusters ecs-permissions ecs-task-definitions ecs-security-groups application-load-balancer ecs-target-groups cloudwatch-log-groups ecs-services AWS Lambda# aws-lambda deploy-lambda testing-lambda-function lambda-api-gateway cloudwatch-log-groups-and-viewing-lambda-logs other-lambda-use-cases General knowledge# reserved-instances-savings-plans spot-instances auto-scaling-groups ">
+Build isolated networks with VPCs, subnets, route tables and internet gateways Run virtual servers (EC2) with security groups, AMIs and launch templates Store data in managed databases (RDS) with backups and read replicas Control access with IAM users, groups, roles and policies Store files in S3 and serve them worldwide with CloudFront Route traffic with Route 53 DNS records Run containers with ECS and serverless functions with Lambda Monitor everything with CloudWatch and CloudTrail And much more Başlamadan önce:
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws/">
@@ -22,7 +23,7 @@ Build isolated networks with VPCs, subnets, route tables and internet gateways R
 full diagram (without ecs i will update soon)
 Here is the link to view the diagram I drew on Excalidraw: Diagram link(excalidraw)
 Amazon Web Services is the cloud platform. Nearly every DevOps workflow runs on top of it in production. I use AWS to:
-Build isolated networks with VPCs, subnets, route tables and internet gateways Run virtual servers (EC2) with security groups, AMIs and launch templates Store data in managed databases (RDS) with backups and read replicas Control access with IAM users, groups, roles and policies Store files in S3 and serve them worldwide with CloudFront Route traffic with Route 53 DNS records Run containers with ECS and serverless functions with Lambda Monitor everything with CloudWatch and CloudTrail And much more AWS konular# For start# create-iam-user-and-group regions-and-availability-zones Networking - VPC’s# virtual-private-cloud-vpc aws-subnetting internet-gateways-igw route-tables private-subnets EC2 (Elastic Compute Cloud)# ec2-instance-configuration-keys ec2-instances elastic-ips aws-security-groups ssh-to-aws-server deploy-site-to-aws-server open-web-traffic creating-and-using-your-own-ami aws-launch-template launch-from-template-aws RDS: Relational Database Service# relational-database-service create-a-postgresql-database-in-aws aws-connect-to-your-database aws-connect-app-to-database rds-backups create-read-replicas-for-scalability rds-general-knowledge Identity and Access Management (IAM)# identity-and-access-management create-iam-user inline-policies-iam-user iam-groups iam-roles aws-iam-deny-policies aws-ssm-parameter-store accessing-ssm-parameters-from-ec2 use-ssm-from-ec2 Monitoring - AWS# aws-external-monitoring aws-internal-monitoring cloud-watch-alarms cloudtrail Amazon S3 - Simple Storage Service# aws-s3 aws-s3-bucket aws-s3-objects AWS - DNS - Route 53# route-53-hosted-zones aws-a-records dns-ttl-and-caching aws-verifying-dns aws-cname-records AWS - CDN - CloudFront# cloudfront-cdn cloudfront-distributions cloudfront-invalidation presigned-urls why-use-presigned-urls cloudfront-with-dns AWS - ECS - Elastic Container Service# vpc-and-networking-setup-for-ecs why-ecs elastic-container-registry ecr-repo ecs-clusters ecs-permissions ecs-task-definitions ecs-security-groups application-load-balancer ecs-target-groups cloudwatch-log-groups ecs-services AWS Lambda# aws-lambda deploy-lambda testing-lambda-function lambda-api-gateway cloudwatch-log-groups-and-viewing-lambda-logs other-lambda-use-cases General knowledge# reserved-instances-savings-plans spot-instances auto-scaling-groups">
+Build isolated networks with VPCs, subnets, route tables and internet gateways Run virtual servers (EC2) with security groups, AMIs and launch templates Store data in managed databases (RDS) with backups and read replicas Control access with IAM users, groups, roles and policies Store files in S3 and serve them worldwide with CloudFront Route traffic with Route 53 DNS records Run containers with ECS and serverless functions with Lambda Monitor everything with CloudWatch and CloudTrail And much more Başlamadan önce:">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="website">
 
@@ -32,8 +33,8 @@ Build isolated networks with VPCs, subnets, route tables and internet gateways R
 full diagram (without ecs i will update soon)
 Here is the link to view the diagram I drew on Excalidraw: Diagram link(excalidraw)
 Amazon Web Services is the cloud platform. Nearly every DevOps workflow runs on top of it in production. I use AWS to:
-Build isolated networks with VPCs, subnets, route tables and internet gateways Run virtual servers (EC2) with security groups, AMIs and launch templates Store data in managed databases (RDS) with backups and read replicas Control access with IAM users, groups, roles and policies Store files in S3 and serve them worldwide with CloudFront Route traffic with Route 53 DNS records Run containers with ECS and serverless functions with Lambda Monitor everything with CloudWatch and CloudTrail And much more AWS konular# For start# create-iam-user-and-group regions-and-availability-zones Networking - VPC’s# virtual-private-cloud-vpc aws-subnetting internet-gateways-igw route-tables private-subnets EC2 (Elastic Compute Cloud)# ec2-instance-configuration-keys ec2-instances elastic-ips aws-security-groups ssh-to-aws-server deploy-site-to-aws-server open-web-traffic creating-and-using-your-own-ami aws-launch-template launch-from-template-aws RDS: Relational Database Service# relational-database-service create-a-postgresql-database-in-aws aws-connect-to-your-database aws-connect-app-to-database rds-backups create-read-replicas-for-scalability rds-general-knowledge Identity and Access Management (IAM)# identity-and-access-management create-iam-user inline-policies-iam-user iam-groups iam-roles aws-iam-deny-policies aws-ssm-parameter-store accessing-ssm-parameters-from-ec2 use-ssm-from-ec2 Monitoring - AWS# aws-external-monitoring aws-internal-monitoring cloud-watch-alarms cloudtrail Amazon S3 - Simple Storage Service# aws-s3 aws-s3-bucket aws-s3-objects AWS - DNS - Route 53# route-53-hosted-zones aws-a-records dns-ttl-and-caching aws-verifying-dns aws-cname-records AWS - CDN - CloudFront# cloudfront-cdn cloudfront-distributions cloudfront-invalidation presigned-urls why-use-presigned-urls cloudfront-with-dns AWS - ECS - Elastic Container Service# vpc-and-networking-setup-for-ecs why-ecs elastic-container-registry ecr-repo ecs-clusters ecs-permissions ecs-task-definitions ecs-security-groups application-load-balancer ecs-target-groups cloudwatch-log-groups ecs-services AWS Lambda# aws-lambda deploy-lambda testing-lambda-function lambda-api-gateway cloudwatch-log-groups-and-viewing-lambda-logs other-lambda-use-cases General knowledge# reserved-instances-savings-plans spot-instances auto-scaling-groups">
-	<meta itemprop="wordCount" content="257">
+Build isolated networks with VPCs, subnets, route tables and internet gateways Run virtual servers (EC2) with security groups, AMIs and launch templates Store data in managed databases (RDS) with backups and read replicas Control access with IAM users, groups, roles and policies Store files in S3 and serve them worldwide with CloudFront Route traffic with Route 53 DNS records Run containers with ECS and serverless functions with Lambda Monitor everything with CloudWatch and CloudTrail And much more Başlamadan önce:">
+	<meta itemprop="wordCount" content="271">
 
 <title>AWS • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -42,7 +43,7 @@ Build isolated networks with VPCs, subnets, route tables and internet gateways R
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.803cd5de0f69be512a9abc2b4007432f461dab788f1788649e56ce3ad28b1a8e.js" integrity="sha256-gDzV3g9pvlEqmrwrQAdDL0Ydq3iPF4hknlbOOtKLGo4=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.3ecdcddcf26107d9b4c2709a0cbc01627c2ddb86741e79b5270b58e357621402.js" integrity="sha256-Ps3N3PJhB9m0wnCaDLwBYnwt24Z0Hnm1JwtY41diFAI=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/aws/index.xml" title="AWS" />
 
   
@@ -1293,57 +1294,6 @@ Build isolated networks with VPCs, subnets, route tables and internet gateways R
   
 
   
-    <input type="checkbox" id="section-3b9f89d01b8925e5a181088e04057c53" class="toggle"  />
-    <label for="section-3b9f89d01b8925e5a181088e04057c53" class="flex">
-      <a href="/docs/aws/for-start/" class="">
-        for-start</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
-    </label>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/aws/for-start/create-iam-user-and-group/" class="">
-      create-iam-user-and-group</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/aws/for-start/regions-and-availability-zones/" class="">
-      regions-and-availability-zones</a>
-  
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
     <input type="checkbox" id="section-7ac94fcac7ebb60d389835a7fcb83889" class="toggle"  />
     <label for="section-7ac94fcac7ebb60d389835a7fcb83889" class="flex">
       <a href="/docs/aws/networking/" class="">
@@ -1354,6 +1304,20 @@ Build isolated networks with VPCs, subnets, route tables and internet gateways R
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/regions-and-availability-zones/" class="">
+      regions-and-availability-zones</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -1731,6 +1695,20 @@ Build isolated networks with VPCs, subnets, route tables and internet gateways R
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user-and-group/" class="">
+      create-iam-user-and-group</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -2628,7 +2606,6 @@ Build isolated networks with VPCs, subnets, route tables and internet gateways R
   <ul>
     <li><a href="#aws-konular">AWS konular</a>
       <ul>
-        <li><a href="#for-start">For start</a></li>
         <li><a href="#networking---vpc">Networking - VPC’s</a></li>
         <li><a href="#ec2-elastic-compute-cloud">EC2 (Elastic Compute Cloud)</a></li>
         <li><a href="#rds-relational-database-service">RDS: Relational Database Service</a></li>
@@ -2672,14 +2649,15 @@ Build isolated networks with VPCs, subnets, route tables and internet gateways R
 <li>Monitor everything with CloudWatch and CloudTrail</li>
 <li>And much more</li>
 </ul>
+<p><strong>Başlamadan önce:</strong></p>
+<ul>
+<li><a href="iam/create-iam-user-and-group/">create-iam-user-and-group</a> = ilk admin IAM kullanıcını oluştur</li>
+<li><a href="networking/regions-and-availability-zones/">regions-and-availability-zones</a> = region ve AZ kavramlarını öğren</li>
+</ul>
 <h2 id="aws-konular">AWS konular<a class="anchor" href="#aws-konular">#</a></h2>
-<h3 id="for-start"><a href="for-start/">For start</a><a class="anchor" href="#for-start">#</a></h3>
-<ol>
-<li><a href="for-start/create-iam-user-and-group/">create-iam-user-and-group</a></li>
-<li><a href="for-start/regions-and-availability-zones/">regions-and-availability-zones</a></li>
-</ol>
 <h3 id="networking---vpc"><a href="networking/">Networking - VPC&rsquo;s</a><a class="anchor" href="#networking---vpc">#</a></h3>
 <ol>
+<li><a href="networking/regions-and-availability-zones/">regions-and-availability-zones</a></li>
 <li><a href="networking/virtual-private-cloud-vpc/">virtual-private-cloud-vpc</a></li>
 <li><a href="networking/aws-subnetting/">aws-subnetting</a></li>
 <li><a href="networking/internet-gateways-igw/">internet-gateways-igw</a></li>
@@ -2711,6 +2689,7 @@ Build isolated networks with VPCs, subnets, route tables and internet gateways R
 </ol>
 <h3 id="identity-and-access-management-iam"><a href="iam/">Identity and Access Management (IAM)</a><a class="anchor" href="#identity-and-access-management-iam">#</a></h3>
 <ol>
+<li><a href="iam/create-iam-user-and-group/">create-iam-user-and-group</a></li>
 <li><a href="iam/identity-and-access-management/">identity-and-access-management</a></li>
 <li><a href="iam/create-iam-user/">create-iam-user</a></li>
 <li><a href="iam/inline-policies-iam-user/">inline-policies-iam-user</a></li>
@@ -2810,8 +2789,8 @@ Build isolated networks with VPCs, subnets, route tables and internet gateways R
     </span>
     <span>
     
-      <a href="/docs/aws/for-start/" class="flex align-center">
-        <span>for-start</span>
+      <a href="/docs/aws/networking/" class="flex align-center">
+        <span>networking</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     
@@ -2850,7 +2829,6 @@ Build isolated networks with VPCs, subnets, route tables and internet gateways R
   <ul>
     <li><a href="#aws-konular">AWS konular</a>
       <ul>
-        <li><a href="#for-start">For start</a></li>
         <li><a href="#networking---vpc">Networking - VPC’s</a></li>
         <li><a href="#ec2-elastic-compute-cloud">EC2 (Elastic Compute Cloud)</a></li>
         <li><a href="#rds-relational-database-service">RDS: Relational Database Service</a></li>

@@ -1,6 +1,6 @@
 ---
 title: "use-ssm-from-ec2"
-weight: 90
+weight: 100
 ---
 
 # Use SSM from EC2

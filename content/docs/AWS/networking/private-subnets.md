@@ -1,6 +1,6 @@
 ---
 title: "private-subnets"
-weight: 50
+weight: 60
 ---
 
 # Private Subnets

@@ -12,6 +12,13 @@
 		
 			<atom:link href="https://blog.ulutasalperen.com/docs/aws/networking/index.xml" rel="self" type="application/rss+xml" />
 			<item>
+				<title>regions-and-availability-zones</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/networking/regions-and-availability-zones/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/networking/regions-and-availability-zones/</guid>
+				<description>&lt;h1 id=&#34;regions-and-availability-zones&#34;&gt;Regions and Availability Zones&lt;a class=&#34;anchor&#34; href=&#34;#regions-and-availability-zones&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;AWS has many regions to choose from. Each region is where your services are &lt;strong&gt;geographically located&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;An outage in one region will (&lt;em&gt;usually&lt;/em&gt;) not affect another region.&lt;/li&gt;&#xA;&lt;li&gt;The farther a server is from the user, the higher the latency. Choose a region close to the folks using your service.&lt;/li&gt;&#xA;&lt;li&gt;Some services are available only in certain places, or are significantly more expensive in some regions. So we need to make sure a region meets our needs.&lt;/li&gt;&#xA;&lt;li&gt;As a service grows, we may want to host in more than one region. We also pay a toll for transferring data between regions.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/U9stnq2-1224x606.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
 				<title>virtual-private-cloud-vpc</title>
 				<link>https://blog.ulutasalperen.com/docs/aws/networking/virtual-private-cloud-vpc/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

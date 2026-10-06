@@ -1,6 +1,6 @@
 ---
 title: "internet-gateways-igw"
-weight: 30
+weight: 40
 ---
 
 # Internet Gateways (IGW)
