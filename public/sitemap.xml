@@ -42,6 +42,8 @@
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/network-policy/</loc>
   </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/</loc>
+  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/continuous_deployment/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-build/</loc>
@@ -73,6 +75,8 @@
     <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-jobs-cronjobs/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/vpa-cluster-autoscaler/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/create-iam-user-and-group/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-compose-basic/</loc>
   </url><url>
@@ -150,6 +154,8 @@
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/longhorn/</loc>
   </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/regions-and-availability-zones/</loc>
+  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-fetch/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-nodes-basic/</loc>
@@ -165,6 +171,148 @@
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/gitignore/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/plumbing/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/virtual-private-cloud-vpc/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-subnetting/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/internet-gateways-igw/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/route-tables/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/private-subnets/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/ec2-instance-configuration-keys/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/ec2-instances/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/elastic-ips/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-security-groups/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/ssh-to-aws-server/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/deploy-site-to-aws-server/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/open-web-traffic/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/creating-and-using-your-own-ami/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-launch-template/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/launch-from-template-aws/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/relational-database-service/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/create-a-postgresql-database-in-aws/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-connect-to-your-database/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-connect-app-to-database/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/rds-backups/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/create-read-replicas-for-scalability/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/rds-general-knowledge/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/identity-and-access-management/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/create-iam-user/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/inline-policies-iam-user/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/iam-groups/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/iam-roles/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-iam-deny-policies/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-ssm-parameter-store/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/accessing-ssm-parameters-from-ec2/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/use-ssm-from-ec2/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-external-monitoring/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-internal-monitoring/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/cloud-watch-alarms/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/cloudtrail/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-s3/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-s3-bucket/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-s3-objects/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/route-53-hosted-zones/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-a-records/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/dns-ttl-and-caching/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-verifying-dns/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-cname-records/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/cloudfront-cdn/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/cloudfront-distributions/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/cloudfront-invalidation/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/presigned-urls/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/why-use-presigned-urls/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/cloudfront-with-dns/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/vpc-and-networking-setup-for-ecs/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/why-ecs/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/elastic-container-registry/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/ecr-repo/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/ecs-clusters/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/ecs-permissions/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/ecs-task-definitions/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/ecs-security-groups/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/application-load-balancer/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/ecs-target-groups/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/cloudwatch-log-groups/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/ecs-services/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/aws-lambda/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/deploy-lambda/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/testing-lambda-function/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/lambda-api-gateway/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/cloudwatch-log-groups-and-viewing-lambda-logs/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/other-lambda-use-cases/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/reserved-instances-savings-plans/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/spot-instances/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/auto-scaling-groups/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/genel-temizlik/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/</loc>
   </url><url>
