@@ -8,7 +8,7 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Connect S3 to EKS# The PatientPing app serves a favicon and will store user uploads in S3. Our pods need to call the S3 API — but how do they get AWS credentials?
+<meta name="description" content="Connect S3 to EKS# The PatientPing app serves a favicon and will store user uploads in S3. Our pods need to call the S3 API - but how do they get AWS credentials?
 The lazy way is to bake an access key into the container image or paste it into a Deployment env var. Don’t. Long-lived keys in a pod spec end up in git, in kubectl describe output, and in your terminal history. And giving the worker nodes a broad S3 role is also wrong: any pod on the node (including one you didn’t write) inherits it.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
@@ -16,7 +16,7 @@ The lazy way is to bake an access key into the container image or paste it into 
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws/eks/eks-connect-s3/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="eks-connect-s3">
-	<meta property="og:description" content="Connect S3 to EKS# The PatientPing app serves a favicon and will store user uploads in S3. Our pods need to call the S3 API — but how do they get AWS credentials?
+	<meta property="og:description" content="Connect S3 to EKS# The PatientPing app serves a favicon and will store user uploads in S3. Our pods need to call the S3 API - but how do they get AWS credentials?
 The lazy way is to bake an access key into the container image or paste it into a Deployment env var. Don’t. Long-lived keys in a pod spec end up in git, in kubectl describe output, and in your terminal history. And giving the worker nodes a broad S3 role is also wrong: any pod on the node (including one you didn’t write) inherits it.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
@@ -24,7 +24,7 @@ The lazy way is to bake an access key into the container image or paste it into 
 
 
 	<meta itemprop="name" content="eks-connect-s3">
-	<meta itemprop="description" content="Connect S3 to EKS# The PatientPing app serves a favicon and will store user uploads in S3. Our pods need to call the S3 API — but how do they get AWS credentials?
+	<meta itemprop="description" content="Connect S3 to EKS# The PatientPing app serves a favicon and will store user uploads in S3. Our pods need to call the S3 API - but how do they get AWS credentials?
 The lazy way is to bake an access key into the container image or paste it into a Deployment env var. Don’t. Long-lived keys in a pod spec end up in git, in kubectl describe output, and in your terminal history. And giving the worker nodes a broad S3 role is also wrong: any pod on the node (including one you didn’t write) inherits it.">
 	<meta itemprop="wordCount" content="451">
 
@@ -35,7 +35,7 @@ The lazy way is to bake an access key into the container image or paste it into 
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.073e18ecafc34b4141dbadea430fa9ca7480486a6096d7565210c7a4747d840b.js" integrity="sha256-Bz4Y7K/DS0FB263qQw&#43;pynSASGpgltdWUhDHpHR9hAs=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.8d157199754ab0f92b486265d7d397ae08ff1d1d0760d9b9630e132ee06d58bd.js" integrity="sha256-jRVxmXVKsPkrSGJl19OXrgj/HR0HYNm5Yw4TLuBtWL0=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2744,13 +2744,13 @@ The lazy way is to bake an access key into the container image or paste it into 
       
       
   <article class="markdown book-article"><h1 id="connect-s3-to-eks">Connect S3 to EKS<a class="anchor" href="#connect-s3-to-eks">#</a></h1>
-<p>The PatientPing app serves a favicon and will store user uploads in S3. Our pods need to call the S3 API — but how do they get AWS credentials?</p>
+<p>The PatientPing app serves a favicon and will store user uploads in S3. Our pods need to call the S3 API - but how do they get AWS credentials?</p>
 <p>The lazy way is to bake an access key into the container image or paste it into a <code>Deployment</code> env var. <strong>Don&rsquo;t.</strong> Long-lived keys in a pod spec end up in git, in <code>kubectl describe</code> output, and in your terminal history. And giving the <strong>worker nodes</strong> a broad S3 role is also wrong: any pod on the node (including one you didn&rsquo;t write) inherits it.</p>
 <p>The right tool is <a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html"><strong>IRSA</strong></a> (<strong>IAM Roles for Service Accounts</strong>). It ties an IAM role to a Kubernetes <code>ServiceAccount</code>:</p>
 <ol>
 <li>The EKS control plane runs an <strong>OIDC identity provider</strong> for your cluster.</li>
 <li>You create an IAM role whose trust policy says &ldquo;only this cluster&rsquo;s <code>ServiceAccount</code> named X may assume me&rdquo;.</li>
-<li>The pods using that <code>ServiceAccount</code> get short-lived credentials via the <a href="https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html">STS</a> <code>AssumeRoleWithWebIdentity</code> API — no keys stored anywhere.</li>
+<li>The pods using that <code>ServiceAccount</code> get short-lived credentials via the <a href="https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html">STS</a> <code>AssumeRoleWithWebIdentity</code> API - no keys stored anywhere.</li>
 </ol>
 <pre class="mermaid">sequenceDiagram
     participant Pod
@@ -2767,7 +2767,7 @@ The lazy way is to bake an access key into the container image or paste it into 
 <p><strong>Give the <code>patientping-web</code> pods read/write access to the <code>patientping-favicon-bucket</code> S3 bucket using IRSA.</strong></p>
 <p><strong>Cost check:</strong> IAM roles, service accounts, and STS calls are all free. S3 itself costs a fraction of a penny for a favicon-sized object.</p>
 <ol>
-<li>Create an IAM policy that allows access to only our bucket (least privilege — not <code>s3:*</code> on <code>*</code>):</li>
+<li>Create an IAM policy that allows access to only our bucket (least privilege - not <code>s3:*</code> on <code>*</code>):</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws iam create-policy <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>  --policy-name patientping-s3-access <span style="color:#ae81ff">\
@@ -2798,8 +2798,8 @@ The lazy way is to bake an access key into the container image or paste it into 
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl exec deploy/patientping-web -- <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>  aws s3 ls s3://patientping-favicon-bucket/</span></span></code></pre></div><blockquote class='book-hint '>
-<p>If <code>aws</code> isn&rsquo;t installed in the container, any S3 API call your app makes is the real test — load the app in a browser and check the favicon appears.</p>
-</blockquote><p><strong>That&rsquo;s it — pods now have scoped, short-lived S3 access.</strong> No keys in images, no node-wide role, and you can revoke everything by deleting one IAM role.</p>
+<p>If <code>aws</code> isn&rsquo;t installed in the container, any S3 API call your app makes is the real test - load the app in a browser and check the favicon appears.</p>
+</blockquote><p><strong>That&rsquo;s it - pods now have scoped, short-lived S3 access.</strong> No keys in images, no node-wide role, and you can revoke everything by deleting one IAM role.</p>
 <blockquote class='book-hint '>
 <p>Not: <code>eksctl create iamserviceaccount</code> ServiceAccount&rsquo;a <code>eks.amazonaws.com/role-arn</code> annotation&rsquo;ı ekler. Pod başladığında AWS SDK bu annotation&rsquo;ı görür ve token&rsquo;ı STS&rsquo;e yollar. Eski pod&rsquo;ları <code>kubectl rollout restart deployment patientping-web</code> ile yeniden başlatmayı unutmayın.</p>
 </blockquote></article>

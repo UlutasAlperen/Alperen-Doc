@@ -8,7 +8,7 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="High Availability on EKS# In the HA notes for the kubeadm cluster, HA was a project: stacked etcd members, an external etcd option, a keepalived VIP in front of the apiserver, and a failover test where you pull the power on a VM. On EKS, most of that project is already done for you — but “done for you” is not the same as “you have no homework”.
+<meta name="description" content="High Availability on EKS# In the HA notes for the kubeadm cluster, HA was a project: stacked etcd members, an external etcd option, a keepalived VIP in front of the apiserver, and a failover test where you pull the power on a VM. On EKS, most of that project is already done for you - but “done for you” is not the same as “you have no homework”.
 The control plane: AWS’s job# When you create patientping-eks, AWS runs the control plane across three Availability Zones, with an etcd cluster that tolerates member loss and a regional API endpoint your kubeconfig already points at. There is no VIP to keep alive, no --control-plane-endpoint to design, no etcd quorum to babysit.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
@@ -16,7 +16,7 @@ The control plane: AWS’s job# When you create patientping-eks, AWS runs the co
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws/eks/eks-ha-cluster/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="eks-ha-cluster">
-	<meta property="og:description" content="High Availability on EKS# In the HA notes for the kubeadm cluster, HA was a project: stacked etcd members, an external etcd option, a keepalived VIP in front of the apiserver, and a failover test where you pull the power on a VM. On EKS, most of that project is already done for you — but “done for you” is not the same as “you have no homework”.
+	<meta property="og:description" content="High Availability on EKS# In the HA notes for the kubeadm cluster, HA was a project: stacked etcd members, an external etcd option, a keepalived VIP in front of the apiserver, and a failover test where you pull the power on a VM. On EKS, most of that project is already done for you - but “done for you” is not the same as “you have no homework”.
 The control plane: AWS’s job# When you create patientping-eks, AWS runs the control plane across three Availability Zones, with an etcd cluster that tolerates member loss and a regional API endpoint your kubeconfig already points at. There is no VIP to keep alive, no --control-plane-endpoint to design, no etcd quorum to babysit.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
@@ -24,7 +24,7 @@ The control plane: AWS’s job# When you create patientping-eks, AWS runs the co
 
 
 	<meta itemprop="name" content="eks-ha-cluster">
-	<meta itemprop="description" content="High Availability on EKS# In the HA notes for the kubeadm cluster, HA was a project: stacked etcd members, an external etcd option, a keepalived VIP in front of the apiserver, and a failover test where you pull the power on a VM. On EKS, most of that project is already done for you — but “done for you” is not the same as “you have no homework”.
+	<meta itemprop="description" content="High Availability on EKS# In the HA notes for the kubeadm cluster, HA was a project: stacked etcd members, an external etcd option, a keepalived VIP in front of the apiserver, and a failover test where you pull the power on a VM. On EKS, most of that project is already done for you - but “done for you” is not the same as “you have no homework”.
 The control plane: AWS’s job# When you create patientping-eks, AWS runs the control plane across three Availability Zones, with an etcd cluster that tolerates member loss and a regional API endpoint your kubeconfig already points at. There is no VIP to keep alive, no --control-plane-endpoint to design, no etcd quorum to babysit.">
 	<meta itemprop="wordCount" content="639">
 
@@ -35,7 +35,7 @@ The control plane: AWS’s job# When you create patientping-eks, AWS runs the co
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.073e18ecafc34b4141dbadea430fa9ca7480486a6096d7565210c7a4747d840b.js" integrity="sha256-Bz4Y7K/DS0FB263qQw&#43;pynSASGpgltdWUhDHpHR9hAs=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.8d157199754ab0f92b486265d7d397ae08ff1d1d0760d9b9630e132ee06d58bd.js" integrity="sha256-jRVxmXVKsPkrSGJl19OXrgj/HR0HYNm5Yw4TLuBtWL0=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2747,17 +2747,17 @@ The control plane: AWS’s job# When you create patientping-eks, AWS runs the co
       
       
   <article class="markdown book-article"><h1 id="high-availability-on-eks">High Availability on EKS<a class="anchor" href="#high-availability-on-eks">#</a></h1>
-<p>In the <a href="../../../kubernetes_v2/ha-control-plane/">HA notes</a> for the kubeadm cluster, HA was a project: stacked etcd members, an external etcd option, a keepalived VIP in front of the apiserver, and a failover test where you pull the power on a VM. On EKS, most of that project is <strong>already done for you</strong> — but &ldquo;done for you&rdquo; is not the same as &ldquo;you have no homework&rdquo;.</p>
+<p>In the <a href="../../../kubernetes_v2/ha-control-plane/">HA notes</a> for the kubeadm cluster, HA was a project: stacked etcd members, an external etcd option, a keepalived VIP in front of the apiserver, and a failover test where you pull the power on a VM. On EKS, most of that project is <strong>already done for you</strong> - but &ldquo;done for you&rdquo; is not the same as &ldquo;you have no homework&rdquo;.</p>
 <h2 id="the-control-plane-awss-job">The control plane: AWS&rsquo;s job<a class="anchor" href="#the-control-plane-awss-job">#</a></h2>
 <p>When you create <code>patientping-eks</code>, AWS runs the control plane across <strong>three Availability Zones</strong>, with an etcd cluster that tolerates member loss and a regional API endpoint your <code>kubeconfig</code> already points at. There is no VIP to keep alive, no <code>--control-plane-endpoint</code> to design, no etcd quorum to babysit.</p>
-<p>What you give up in exchange: <strong>no access</strong>. No <code>etcdctl snapshot save</code>, no manual defrag, no <code>kubectl exec</code> into the apiserver. Backups and restores of the control plane are AWS&rsquo;s responsibility (they exist — you just can&rsquo;t take them). For most teams that trade is a bargain; if you need etcd-level forensics, you&rsquo;re on kubeadm for a reason.</p>
+<p>What you give up in exchange: <strong>no access</strong>. No <code>etcdctl snapshot save</code>, no manual defrag, no <code>kubectl exec</code> into the apiserver. Backups and restores of the control plane are AWS&rsquo;s responsibility (they exist - you just can&rsquo;t take them). For most teams that trade is a bargain; if you need etcd-level forensics, you&rsquo;re on kubeadm for a reason.</p>
 <blockquote class='book-hint '>
-<p>Not: <a href="../../../kubernetes_v2/ha-control-plane/">ha-control-plane</a> notundaki &ldquo;stable endpoint&rdquo; ve &ldquo;external etcd&rdquo; bölümleri EKS&rsquo;te anlamsız — endpoint regional DNS, etcd AWS&rsquo;in kontrolünde. Senin HA sorumluluğun sadece <strong>worker katmanı</strong>.</p>
+<p>Not: <a href="../../../kubernetes_v2/ha-control-plane/">ha-control-plane</a> notundaki &ldquo;stable endpoint&rdquo; ve &ldquo;external etcd&rdquo; bölümleri EKS&rsquo;te anlamsız - endpoint regional DNS, etcd AWS&rsquo;in kontrolünde. Senin HA sorumluluğun sadece <strong>worker katmanı</strong>.</p>
 </blockquote><h2 id="the-worker-layer-your-job">The worker layer: your job<a class="anchor" href="#the-worker-layer-your-job">#</a></h2>
 <p>Control plane HA without worker HA is a fancy car with one wheel. Three things make the worker layer survive an AZ loss:</p>
 <ol>
 <li><strong>Spread the node group across AZs.</strong> A managed node group created with multiple subnets (like the two private subnets in our <a href="../eks-cluster/">cluster config</a>) places nodes in each. For real AZ coverage, give it all the private subnets in the VPC.</li>
-<li><strong>Topology spread constraints</strong> — the same tool from your <a href="../../../kubernetes_v2/taints-affinity-quotas/">scheduling notes</a>:</li>
+<li><strong>Topology spread constraints</strong> - the same tool from your <a href="../../../kubernetes_v2/taints-affinity-quotas/">scheduling notes</a>:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>      <span style="color:#f92672">topologySpreadConstraints</span>:
 </span></span><span style="display:flex;"><span>        - <span style="color:#f92672">maxSkew</span>: <span style="color:#ae81ff">1</span>
@@ -2765,7 +2765,7 @@ The control plane: AWS’s job# When you create patientping-eks, AWS runs the co
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">whenUnsatisfiable</span>: <span style="color:#ae81ff">ScheduleAnyway</span>
 </span></span><span style="display:flex;"><span>          <span style="color:#f92672">labelSelector</span>:
 </span></span><span style="display:flex;"><span>            <span style="color:#f92672">matchLabels</span>: { <span style="color:#f92672">app</span>: <span style="color:#ae81ff">patientping-web }</span></span></span></code></pre></div><ol start="3">
-<li><strong>Pod Disruption Budgets</strong> — from the <a href="../../../kubernetes_v2/pod-priority-disruption/">pod priority and disruption</a> notes. A PDB is what keeps a node drain (or a node group upgrade) from killing every replica at once:</li>
+<li><strong>Pod Disruption Budgets</strong> - from the <a href="../../../kubernetes_v2/pod-priority-disruption/">pod priority and disruption</a> notes. A PDB is what keeps a node drain (or a node group upgrade) from killing every replica at once:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">policy/v1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PodDisruptionBudget</span>
@@ -2775,9 +2775,9 @@ The control plane: AWS’s job# When you create patientping-eks, AWS runs the co
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">minAvailable</span>: <span style="color:#ae81ff">1</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>: { <span style="color:#f92672">app</span>: <span style="color:#ae81ff">patientping-web }</span></span></span></code></pre></div><h2 id="node-replacement">Node replacement<a class="anchor" href="#node-replacement">#</a></h2>
-<p>On kubeadm, replacing a dead node means a new VM and <code>kubeadm join</code>. On EKS, delete the instance (or let the node group&rsquo;s instance refresh do it) and the group launches a replacement that joins automatically — labels and taints included (see <a href="../eks-node-affinity-taints/">eks-node-affinity-taints</a>). For unplanned node loss, <a href="../../../kubernetes_v2/vpa-cluster-autoscaler/">Cluster Autoscaler</a> (or Karpenter) keeps a buffer of capacity so the replacement is fast.</p>
+<p>On kubeadm, replacing a dead node means a new VM and <code>kubeadm join</code>. On EKS, delete the instance (or let the node group&rsquo;s instance refresh do it) and the group launches a replacement that joins automatically - labels and taints included (see <a href="../eks-node-affinity-taints/">eks-node-affinity-taints</a>). For unplanned node loss, <a href="../../../kubernetes_v2/vpa-cluster-autoscaler/">Cluster Autoscaler</a> (or Karpenter) keeps a buffer of capacity so the replacement is fast.</p>
 <h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
-<p><strong>Make the PatientPing deployment survive losing an entire node — and prove it.</strong></p>
+<p><strong>Make the PatientPing deployment survive losing an entire node - and prove it.</strong></p>
 <p><strong>Cost check:</strong> Spreading nodes across AZs doesn&rsquo;t cost extra; you&rsquo;re already paying for the nodes. The drain test below is free, just disruptive.</p>
 <ol>
 <li>Patch the deployment with the topology spread constraint above and make sure the PDB exists:</li>
@@ -2789,18 +2789,18 @@ The control plane: AWS’s job# When you create patientping-eks, AWS runs the co
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -o wide
 </span></span><span style="display:flex;"><span>kubectl get nodes --show-labels | grep zone</span></span></code></pre></div><ol start="3">
-<li>Simulate losing a node — the EKS version of the &ldquo;pull the power&rdquo; failover test from your HA notes:</li>
+<li>Simulate losing a node - the EKS version of the &ldquo;pull the power&rdquo; failover test from your HA notes:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>NODE<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>kubectl get pods -l app<span style="color:#f92672">=</span>patientping-web -o wide | awk <span style="color:#e6db74">&#39;NR==2{print $7}&#39;</span><span style="color:#66d9ef">)</span>
 </span></span><span style="display:flex;"><span>kubectl drain $NODE --ignore-daemonsets --delete-emptydir-data</span></span></code></pre></div><ol start="4">
 <li>Watch the PDB and the pods do their job:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -w</span></span></code></pre></div><p>The evicted replica should be recreated on the surviving node/zone. <code>kubectl get pdb</code> shows <code>ALLOWED DISRUPTIONS: 1</code> before the drain — that&rsquo;s the budget letting exactly one replica go down at a time.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -w</span></span></code></pre></div><p>The evicted replica should be recreated on the surviving node/zone. <code>kubectl get pdb</code> shows <code>ALLOWED DISRUPTIONS: 1</code> before the drain - that&rsquo;s the budget letting exactly one replica go down at a time.</p>
 <ol start="5">
-<li>Bring the node back (uncordon it) and check the node group in the console — or simply delete the drained node&rsquo;s instance and watch a fresh one join.</li>
+<li>Bring the node back (uncordon it) and check the node group in the console - or simply delete the drained node&rsquo;s instance and watch a fresh one join.</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl uncordon $NODE</span></span></code></pre></div><blockquote class='book-hint '>
-<p>Sanity check: tek node&rsquo;a <code>kill -9</code> atmak yerine <code>kubectl drain</code> kullanın — drain, PDB&rsquo;ye saygılı ve kontrollü bir tahliyedir. Gerçek AZ kaybını test etmek isterseniz node&rsquo;un instance&rsquo;ını console&rsquo;dan terminate edin; node group otomatik yenisini açar.</p>
+<p>Sanity check: tek node&rsquo;a <code>kill -9</code> atmak yerine <code>kubectl drain</code> kullanın - drain, PDB&rsquo;ye saygılı ve kontrollü bir tahliyedir. Gerçek AZ kaybını test etmek isterseniz node&rsquo;un instance&rsquo;ını console&rsquo;dan terminate edin; node group otomatik yenisini açar.</p>
 </blockquote></article>
  
       

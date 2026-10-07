@@ -5,7 +5,7 @@ weight: 40
 
 # Connect S3 to EKS
 
-The PatientPing app serves a favicon and will store user uploads in S3. Our pods need to call the S3 API — but how do they get AWS credentials?
+The PatientPing app serves a favicon and will store user uploads in S3. Our pods need to call the S3 API - but how do they get AWS credentials?
 
 The lazy way is to bake an access key into the container image or paste it into a `Deployment` env var. **Don't.** Long-lived keys in a pod spec end up in git, in `kubectl describe` output, and in your terminal history. And giving the **worker nodes** a broad S3 role is also wrong: any pod on the node (including one you didn't write) inherits it.
 
@@ -13,7 +13,7 @@ The right tool is [**IRSA**](https://docs.aws.amazon.com/eks/latest/userguide/ia
 
 1. The EKS control plane runs an **OIDC identity provider** for your cluster.
 2. You create an IAM role whose trust policy says "only this cluster's `ServiceAccount` named X may assume me".
-3. The pods using that `ServiceAccount` get short-lived credentials via the [STS](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html) `AssumeRoleWithWebIdentity` API — no keys stored anywhere.
+3. The pods using that `ServiceAccount` get short-lived credentials via the [STS](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html) `AssumeRoleWithWebIdentity` API - no keys stored anywhere.
 
 ```mermaid
 sequenceDiagram
@@ -36,7 +36,7 @@ sequenceDiagram
 
 **Cost check:** IAM roles, service accounts, and STS calls are all free. S3 itself costs a fraction of a penny for a favicon-sized object.
 
-1.  Create an IAM policy that allows access to only our bucket (least privilege — not `s3:*` on `*`):
+1.  Create an IAM policy that allows access to only our bucket (least privilege - not `s3:*` on `*`):
 
 ```bash
 aws iam create-policy \
@@ -84,8 +84,8 @@ kubectl exec deploy/patientping-web -- \
   aws s3 ls s3://patientping-favicon-bucket/
 ```
 
-> If `aws` isn't installed in the container, any S3 API call your app makes is the real test — load the app in a browser and check the favicon appears.
+> If `aws` isn't installed in the container, any S3 API call your app makes is the real test - load the app in a browser and check the favicon appears.
 
-**That's it — pods now have scoped, short-lived S3 access.** No keys in images, no node-wide role, and you can revoke everything by deleting one IAM role.
+**That's it - pods now have scoped, short-lived S3 access.** No keys in images, no node-wide role, and you can revoke everything by deleting one IAM role.
 
 > Not: `eksctl create iamserviceaccount` ServiceAccount'a `eks.amazonaws.com/role-arn` annotation'ı ekler. Pod başladığında AWS SDK bu annotation'ı görür ve token'ı STS'e yollar. Eski pod'ları `kubectl rollout restart deployment patientping-web` ile yeniden başlatmayı unutmayın.

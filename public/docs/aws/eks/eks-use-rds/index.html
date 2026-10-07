@@ -9,7 +9,7 @@ https://github.com/alex-shpak/hugo-book
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Use RDS from EKS# Our patientping-db Postgres instance is sitting in a private subnet, exactly where it belongs. Now the pods need to reach it. Two things have to be right:
-Network path — the RDS security group must allow traffic from the worker nodes on port 5432. Credentials — the app needs DATABASE_URL, and that password shouldn’t live in the Deployment YAML (anything in a manifest ends up in git and in kubectl get deploy -o yaml). Kubernetes Secrets are the second half of the answer, and security groups are the first.
+Network path - the RDS security group must allow traffic from the worker nodes on port 5432. Credentials - the app needs DATABASE_URL, and that password shouldn’t live in the Deployment YAML (anything in a manifest ends up in git and in kubectl get deploy -o yaml). Kubernetes Secrets are the second half of the answer, and security groups are the first.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
@@ -17,7 +17,7 @@ Network path — the RDS security group must allow traffic from the worker nodes
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="eks-use-rds">
 	<meta property="og:description" content="Use RDS from EKS# Our patientping-db Postgres instance is sitting in a private subnet, exactly where it belongs. Now the pods need to reach it. Two things have to be right:
-Network path — the RDS security group must allow traffic from the worker nodes on port 5432. Credentials — the app needs DATABASE_URL, and that password shouldn’t live in the Deployment YAML (anything in a manifest ends up in git and in kubectl get deploy -o yaml). Kubernetes Secrets are the second half of the answer, and security groups are the first.">
+Network path - the RDS security group must allow traffic from the worker nodes on port 5432. Credentials - the app needs DATABASE_URL, and that password shouldn’t live in the Deployment YAML (anything in a manifest ends up in git and in kubectl get deploy -o yaml). Kubernetes Secrets are the second half of the answer, and security groups are the first.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
@@ -25,7 +25,7 @@ Network path — the RDS security group must allow traffic from the worker nodes
 
 	<meta itemprop="name" content="eks-use-rds">
 	<meta itemprop="description" content="Use RDS from EKS# Our patientping-db Postgres instance is sitting in a private subnet, exactly where it belongs. Now the pods need to reach it. Two things have to be right:
-Network path — the RDS security group must allow traffic from the worker nodes on port 5432. Credentials — the app needs DATABASE_URL, and that password shouldn’t live in the Deployment YAML (anything in a manifest ends up in git and in kubectl get deploy -o yaml). Kubernetes Secrets are the second half of the answer, and security groups are the first.">
+Network path - the RDS security group must allow traffic from the worker nodes on port 5432. Credentials - the app needs DATABASE_URL, and that password shouldn’t live in the Deployment YAML (anything in a manifest ends up in git and in kubectl get deploy -o yaml). Kubernetes Secrets are the second half of the answer, and security groups are the first.">
 	<meta itemprop="wordCount" content="415">
 
 <title>eks-use-rds • Alperen Doc</title>
@@ -35,7 +35,7 @@ Network path — the RDS security group must allow traffic from the worker nodes
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.073e18ecafc34b4141dbadea430fa9ca7480486a6096d7565210c7a4747d840b.js" integrity="sha256-Bz4Y7K/DS0FB263qQw&#43;pynSASGpgltdWUhDHpHR9hAs=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.8d157199754ab0f92b486265d7d397ae08ff1d1d0760d9b9630e132ee06d58bd.js" integrity="sha256-jRVxmXVKsPkrSGJl19OXrgj/HR0HYNm5Yw4TLuBtWL0=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2752,15 +2752,15 @@ Network path — the RDS security group must allow traffic from the worker nodes
   <article class="markdown book-article"><h1 id="use-rds-from-eks">Use RDS from EKS<a class="anchor" href="#use-rds-from-eks">#</a></h1>
 <p>Our <code>patientping-db</code> Postgres instance is sitting in a <strong>private subnet</strong>, exactly where it belongs. Now the pods need to reach it. Two things have to be right:</p>
 <ol>
-<li><strong>Network path</strong> — the RDS security group must allow traffic from the worker nodes on port <code>5432</code>.</li>
-<li><strong>Credentials</strong> — the app needs <code>DATABASE_URL</code>, and that password shouldn&rsquo;t live in the <code>Deployment</code> YAML (anything in a manifest ends up in git and in <code>kubectl get deploy -o yaml</code>).</li>
+<li><strong>Network path</strong> - the RDS security group must allow traffic from the worker nodes on port <code>5432</code>.</li>
+<li><strong>Credentials</strong> - the app needs <code>DATABASE_URL</code>, and that password shouldn&rsquo;t live in the <code>Deployment</code> YAML (anything in a manifest ends up in git and in <code>kubectl get deploy -o yaml</code>).</li>
 </ol>
 <p>Kubernetes <a href="https://kubernetes.io/docs/concepts/configuration/secret/">Secrets</a> are the second half of the answer, and security groups are the first.</p>
 <h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
 <p><strong>Connect the PatientPing app on EKS to the RDS database and verify the connection.</strong></p>
-<p><strong>Cost check:</strong> The RDS instance is already running and billing — this lesson adds <strong>no new AWS charges</strong>. (If you deleted it after the RDS section, <a href="../../rds/create-a-postgresql-database-in-aws/">re-create it</a> first.)</p>
+<p><strong>Cost check:</strong> The RDS instance is already running and billing - this lesson adds <strong>no new AWS charges</strong>. (If you deleted it after the RDS section, <a href="../../rds/create-a-postgresql-database-in-aws/">re-create it</a> first.)</p>
 <h3 id="1-open-the-network-path">1. Open the network path<a class="anchor" href="#1-open-the-network-path">#</a></h3>
-<p>The worker nodes got a security group when <code>eksctl</code> created the cluster. We add <em>that</em> group as an inbound source on the RDS security group — not the pods&rsquo; IPs (which churn), and not <code>0.0.0.0/0</code> (which is how databases end up in breach reports).</p>
+<p>The worker nodes got a security group when <code>eksctl</code> created the cluster. We add <em>that</em> group as an inbound source on the RDS security group - not the pods&rsquo; IPs (which churn), and not <code>0.0.0.0/0</code> (which is how databases end up in breach reports).</p>
 <ol>
 <li>Find the node security group:</li>
 </ol>
@@ -2801,7 +2801,7 @@ Network path — the RDS security group must allow traffic from the worker nodes
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl exec -it deploy/patientping-web -- <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span>  psql <span style="color:#e6db74">&#34;</span>$DATABASE_URL<span style="color:#e6db74">&#34;</span> -c <span style="color:#e6db74">&#34;SELECT now();&#34;</span></span></span></code></pre></div><p>If you get a timestamp back, the pod is talking to RDS. That&rsquo;s the whole pipeline running on EKS: pods on private subnets, scoped S3 access via IRSA, and the database wired up through a Secret.</p>
 <blockquote class='book-hint '>
-<p>Not: Secret&rsquo;lar base64 encode edilir ama şifrelenmez. Prod ortamlarda <a href="https://github.com/bitnami-labs/sealed-secrets">Sealed Secrets</a> veya <a href="https://external-secrets.io/">External Secrets Operator</a> kullanın — secret&rsquo;ları AWS Secrets Manager&rsquo;dan çeker.</p>
+<p>Not: Secret&rsquo;lar base64 encode edilir ama şifrelenmez. Prod ortamlarda <a href="https://github.com/bitnami-labs/sealed-secrets">Sealed Secrets</a> veya <a href="https://external-secrets.io/">External Secrets Operator</a> kullanın - secret&rsquo;ları AWS Secrets Manager&rsquo;dan çeker.</p>
 </blockquote><blockquote class='book-hint '>
 <p>Classic mistake: <code>DATABASE_URL</code>&lsquo;i <code>Deployment</code>&lsquo;a düz <code>value:</code> olarak yazmak. Manifest&rsquo;i commit eden herkes artık production veritabanının şifresine sahip. Secret + <code>secretKeyRef</code> bunun için var.</p>
 </blockquote></article>

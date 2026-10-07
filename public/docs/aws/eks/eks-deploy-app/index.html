@@ -8,27 +8,27 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Deploy App to EKS# The cluster is up; now we run the PatientPing app on it. Nothing about this part is AWS-specific — it’s plain Kubernetes — but we’ll use AWS to expose the app to the internet at the end.
+<meta name="description" content="Deploy App to EKS# The cluster is up; now we run the PatientPing app on it. Nothing about this part is AWS-specific - it’s plain Kubernetes - but we’ll use AWS to expose the app to the internet at the end.
 We need two objects:
-A Deployment: tells Kubernetes “keep 2 replicas of the patientping-web container running”. A Service: gives those pods a stable address. With type: LoadBalancer on EKS, Kubernetes asks AWS to create an Application Load Balancer for us — the same kind we built by hand in the ECS section. Assignment# Deploy patientping-web to the patientping-eks cluster and reach it through a load balancer.
+A Deployment: tells Kubernetes “keep 2 replicas of the patientping-web container running”. A Service: gives those pods a stable address. With type: LoadBalancer on EKS, Kubernetes asks AWS to create an Application Load Balancer for us - the same kind we built by hand in the ECS section. Assignment# Deploy patientping-web to the patientping-eks cluster and reach it through a load balancer.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws/eks/eks-deploy-app/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="eks-deploy-app">
-	<meta property="og:description" content="Deploy App to EKS# The cluster is up; now we run the PatientPing app on it. Nothing about this part is AWS-specific — it’s plain Kubernetes — but we’ll use AWS to expose the app to the internet at the end.
+	<meta property="og:description" content="Deploy App to EKS# The cluster is up; now we run the PatientPing app on it. Nothing about this part is AWS-specific - it’s plain Kubernetes - but we’ll use AWS to expose the app to the internet at the end.
 We need two objects:
-A Deployment: tells Kubernetes “keep 2 replicas of the patientping-web container running”. A Service: gives those pods a stable address. With type: LoadBalancer on EKS, Kubernetes asks AWS to create an Application Load Balancer for us — the same kind we built by hand in the ECS section. Assignment# Deploy patientping-web to the patientping-eks cluster and reach it through a load balancer.">
+A Deployment: tells Kubernetes “keep 2 replicas of the patientping-web container running”. A Service: gives those pods a stable address. With type: LoadBalancer on EKS, Kubernetes asks AWS to create an Application Load Balancer for us - the same kind we built by hand in the ECS section. Assignment# Deploy patientping-web to the patientping-eks cluster and reach it through a load balancer.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="eks-deploy-app">
-	<meta itemprop="description" content="Deploy App to EKS# The cluster is up; now we run the PatientPing app on it. Nothing about this part is AWS-specific — it’s plain Kubernetes — but we’ll use AWS to expose the app to the internet at the end.
+	<meta itemprop="description" content="Deploy App to EKS# The cluster is up; now we run the PatientPing app on it. Nothing about this part is AWS-specific - it’s plain Kubernetes - but we’ll use AWS to expose the app to the internet at the end.
 We need two objects:
-A Deployment: tells Kubernetes “keep 2 replicas of the patientping-web container running”. A Service: gives those pods a stable address. With type: LoadBalancer on EKS, Kubernetes asks AWS to create an Application Load Balancer for us — the same kind we built by hand in the ECS section. Assignment# Deploy patientping-web to the patientping-eks cluster and reach it through a load balancer.">
+A Deployment: tells Kubernetes “keep 2 replicas of the patientping-web container running”. A Service: gives those pods a stable address. With type: LoadBalancer on EKS, Kubernetes asks AWS to create an Application Load Balancer for us - the same kind we built by hand in the ECS section. Assignment# Deploy patientping-web to the patientping-eks cluster and reach it through a load balancer.">
 	<meta itemprop="wordCount" content="344">
 
 <title>eks-deploy-app • Alperen Doc</title>
@@ -38,7 +38,7 @@ A Deployment: tells Kubernetes “keep 2 replicas of the patientping-web contain
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.073e18ecafc34b4141dbadea430fa9ca7480486a6096d7565210c7a4747d840b.js" integrity="sha256-Bz4Y7K/DS0FB263qQw&#43;pynSASGpgltdWUhDHpHR9hAs=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.8d157199754ab0f92b486265d7d397ae08ff1d1d0760d9b9630e132ee06d58bd.js" integrity="sha256-jRVxmXVKsPkrSGJl19OXrgj/HR0HYNm5Yw4TLuBtWL0=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2748,11 +2748,11 @@ A Deployment: tells Kubernetes “keep 2 replicas of the patientping-web contain
       
       
   <article class="markdown book-article"><h1 id="deploy-app-to-eks">Deploy App to EKS<a class="anchor" href="#deploy-app-to-eks">#</a></h1>
-<p>The cluster is up; now we run the PatientPing app on it. Nothing about this part is AWS-specific — it&rsquo;s plain Kubernetes — but we&rsquo;ll use AWS to expose the app to the internet at the end.</p>
+<p>The cluster is up; now we run the PatientPing app on it. Nothing about this part is AWS-specific - it&rsquo;s plain Kubernetes - but we&rsquo;ll use AWS to expose the app to the internet at the end.</p>
 <p>We need two objects:</p>
 <ul>
 <li>A <strong>Deployment</strong>: tells Kubernetes &ldquo;keep 2 replicas of the <code>patientping-web</code> container running&rdquo;.</li>
-<li>A <strong>Service</strong>: gives those pods a stable address. With <code>type: LoadBalancer</code> on EKS, Kubernetes asks AWS to create an <a href="../../ecs/application-load-balancer/">Application Load Balancer</a> for us — the same kind we built by hand in the ECS section.</li>
+<li>A <strong>Service</strong>: gives those pods a stable address. With <code>type: LoadBalancer</code> on EKS, Kubernetes asks AWS to create an <a href="../../ecs/application-load-balancer/">Application Load Balancer</a> for us - the same kind we built by hand in the ECS section.</li>
 </ul>
 <h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
 <p><strong>Deploy <code>patientping-web</code> to the <code>patientping-eks</code> cluster and reach it through a load balancer.</strong></p>
@@ -2790,7 +2790,7 @@ A Deployment: tells Kubernetes “keep 2 replicas of the patientping-web contain
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">ports</span>:
 </span></span><span style="display:flex;"><span>    - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">80</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">8080</span></span></span></code></pre></div><blockquote class='book-hint '>
-<p>If you don&rsquo;t have a pushed image yet, build and push <code>patientping-web</code> to ECR first (same steps as the <a href="../../ecs/ecr-repo/">ECR lesson</a>) — EKS pulls images the same way ECS does.</p>
+<p>If you don&rsquo;t have a pushed image yet, build and push <code>patientping-web</code> to ECR first (same steps as the <a href="../../ecs/ecr-repo/">ECR lesson</a>) - EKS pulls images the same way ECS does.</p>
 </blockquote><ol start="2">
 <li>Apply it:</li>
 </ol>
@@ -2805,7 +2805,7 @@ A Deployment: tells Kubernetes “keep 2 replicas of the patientping-web contain
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl http://EXTERNAL-IP</span></span></code></pre></div><p>You should get the PatientPing app&rsquo;s response.</p>
 <p><strong>Cost check:</strong> The load balancer that Kubernetes created for you costs roughly <strong>$0.025 per hour</strong> plus data transfer, same as the ECS ALB. Two <code>t3.small</code> pods don&rsquo;t cost anything extra beyond the worker nodes you&rsquo;re already paying for.</p>
 <blockquote class='book-hint '>
-<p>Not: <code>kubectl get svc</code>&lsquo;deki EXTERNAL-IP bazen <code>&lt;pending&gt;</code> görünür — AWS ALB&rsquo;yi arka planda oluşturuyordur, 2-3 dakika verin.</p>
+<p>Not: <code>kubectl get svc</code>&lsquo;deki EXTERNAL-IP bazen <code>&lt;pending&gt;</code> görünür - AWS ALB&rsquo;yi arka planda oluşturuyordur, 2-3 dakika verin.</p>
 </blockquote><h2 id="cleanup-later">Cleanup later<a class="anchor" href="#cleanup-later">#</a></h2>
 <p>When you&rsquo;re done with this section, <code>kubectl delete -f patientping-web.yaml</code> removes the deployment <em>and</em> the load balancer. Leaving an orphaned ALB around is a classic way to wake up to a surprise bill.</p>
 </article>

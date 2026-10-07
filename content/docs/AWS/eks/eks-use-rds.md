@@ -7,8 +7,8 @@ weight: 50
 
 Our `patientping-db` Postgres instance is sitting in a **private subnet**, exactly where it belongs. Now the pods need to reach it. Two things have to be right:
 
-1. **Network path** — the RDS security group must allow traffic from the worker nodes on port `5432`.
-2. **Credentials** — the app needs `DATABASE_URL`, and that password shouldn't live in the `Deployment` YAML (anything in a manifest ends up in git and in `kubectl get deploy -o yaml`).
+1. **Network path** - the RDS security group must allow traffic from the worker nodes on port `5432`.
+2. **Credentials** - the app needs `DATABASE_URL`, and that password shouldn't live in the `Deployment` YAML (anything in a manifest ends up in git and in `kubectl get deploy -o yaml`).
 
 Kubernetes [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) are the second half of the answer, and security groups are the first.
 
@@ -16,11 +16,11 @@ Kubernetes [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) 
 
 **Connect the PatientPing app on EKS to the RDS database and verify the connection.**
 
-**Cost check:** The RDS instance is already running and billing — this lesson adds **no new AWS charges**. (If you deleted it after the RDS section, [re-create it](../../rds/create-a-postgresql-database-in-aws/) first.)
+**Cost check:** The RDS instance is already running and billing - this lesson adds **no new AWS charges**. (If you deleted it after the RDS section, [re-create it](../../rds/create-a-postgresql-database-in-aws/) first.)
 
 ### 1. Open the network path
 
-The worker nodes got a security group when `eksctl` created the cluster. We add _that_ group as an inbound source on the RDS security group — not the pods' IPs (which churn), and not `0.0.0.0/0` (which is how databases end up in breach reports).
+The worker nodes got a security group when `eksctl` created the cluster. We add _that_ group as an inbound source on the RDS security group - not the pods' IPs (which churn), and not `0.0.0.0/0` (which is how databases end up in breach reports).
 
 1.  Find the node security group:
 
@@ -78,6 +78,6 @@ kubectl exec -it deploy/patientping-web -- \
 
 If you get a timestamp back, the pod is talking to RDS. That's the whole pipeline running on EKS: pods on private subnets, scoped S3 access via IRSA, and the database wired up through a Secret.
 
-> Not: Secret'lar base64 encode edilir ama şifrelenmez. Prod ortamlarda [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) veya [External Secrets Operator](https://external-secrets.io/) kullanın — secret'ları AWS Secrets Manager'dan çeker.
+> Not: Secret'lar base64 encode edilir ama şifrelenmez. Prod ortamlarda [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) veya [External Secrets Operator](https://external-secrets.io/) kullanın - secret'ları AWS Secrets Manager'dan çeker.
 
 > Classic mistake: `DATABASE_URL`'i `Deployment`'a düz `value:` olarak yazmak. Manifest'i commit eden herkes artık production veritabanının şifresine sahip. Secret + `secretKeyRef` bunun için var.

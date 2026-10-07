@@ -8,7 +8,7 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Spot Instances on EKS# You already know spot instances from the EC2 lessons: unused AWS capacity at a ~90% discount, with one small caveat — “at any time I may literally delete your server” with a 2-minute heads-up.
+<meta name="description" content="Spot Instances on EKS# You already know spot instances from the EC2 lessons: unused AWS capacity at a ~90% discount, with one small caveat - “at any time I may literally delete your server” with a 2-minute heads-up.
 EKS doesn’t change the deal; it just changes how you consume it. Instead of bidding on individual instances, you declare one line in a managed node group and Kubernetes schedules onto the cheap cattle:
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
@@ -16,7 +16,7 @@ EKS doesn’t change the deal; it just changes how you consume it. Instead of bi
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws/eks/eks-spot-instances/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="eks-spot-instances">
-	<meta property="og:description" content="Spot Instances on EKS# You already know spot instances from the EC2 lessons: unused AWS capacity at a ~90% discount, with one small caveat — “at any time I may literally delete your server” with a 2-minute heads-up.
+	<meta property="og:description" content="Spot Instances on EKS# You already know spot instances from the EC2 lessons: unused AWS capacity at a ~90% discount, with one small caveat - “at any time I may literally delete your server” with a 2-minute heads-up.
 EKS doesn’t change the deal; it just changes how you consume it. Instead of bidding on individual instances, you declare one line in a managed node group and Kubernetes schedules onto the cheap cattle:">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
@@ -24,7 +24,7 @@ EKS doesn’t change the deal; it just changes how you consume it. Instead of bi
 
 
 	<meta itemprop="name" content="eks-spot-instances">
-	<meta itemprop="description" content="Spot Instances on EKS# You already know spot instances from the EC2 lessons: unused AWS capacity at a ~90% discount, with one small caveat — “at any time I may literally delete your server” with a 2-minute heads-up.
+	<meta itemprop="description" content="Spot Instances on EKS# You already know spot instances from the EC2 lessons: unused AWS capacity at a ~90% discount, with one small caveat - “at any time I may literally delete your server” with a 2-minute heads-up.
 EKS doesn’t change the deal; it just changes how you consume it. Instead of bidding on individual instances, you declare one line in a managed node group and Kubernetes schedules onto the cheap cattle:">
 	<meta itemprop="wordCount" content="767">
 
@@ -35,7 +35,7 @@ EKS doesn’t change the deal; it just changes how you consume it. Instead of bi
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.073e18ecafc34b4141dbadea430fa9ca7480486a6096d7565210c7a4747d840b.js" integrity="sha256-Bz4Y7K/DS0FB263qQw&#43;pynSASGpgltdWUhDHpHR9hAs=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.8d157199754ab0f92b486265d7d397ae08ff1d1d0760d9b9630e132ee06d58bd.js" integrity="sha256-jRVxmXVKsPkrSGJl19OXrgj/HR0HYNm5Yw4TLuBtWL0=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2748,10 +2748,10 @@ EKS doesn’t change the deal; it just changes how you consume it. Instead of bi
       
       
   <article class="markdown book-article"><h1 id="spot-instances-on-eks">Spot Instances on EKS<a class="anchor" href="#spot-instances-on-eks">#</a></h1>
-<p>You already know <a href="../../general-knowledge/spot-instances/">spot instances</a> from the EC2 lessons: unused AWS capacity at a <strong>~90% discount</strong>, with one small caveat — &ldquo;at any time I may literally delete your server&rdquo; with a <strong>2-minute heads-up</strong>.</p>
+<p>You already know <a href="../../general-knowledge/spot-instances/">spot instances</a> from the EC2 lessons: unused AWS capacity at a <strong>~90% discount</strong>, with one small caveat - &ldquo;at any time I may literally delete your server&rdquo; with a <strong>2-minute heads-up</strong>.</p>
 <p>EKS doesn&rsquo;t change the deal; it just changes how you consume it. Instead of bidding on individual instances, you declare one line in a managed node group and Kubernetes schedules onto the cheap cattle:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">capacityType</span>: <span style="color:#ae81ff">SPOT</span></span></span></code></pre></div><h2 id="why-this-pairs-perfectly-with-stateless-apps">Why this pairs perfectly with stateless apps<a class="anchor" href="#why-this-pairs-perfectly-with-stateless-apps">#</a></h2>
-<p>From the <a href="../../general-knowledge/auto-scaling-groups/">cattle-not-pets</a> notes: a <strong>stateless</strong> app stores no critical data on its compute nodes — the data lives in a stateful database (RDS), and the HTTP servers can be destroyed and replaced at will. A spot interruption is exactly that: the node vanishes, the pods are rescheduled somewhere else, and the app never knew it had a &ldquo;server&rdquo;.</p>
+<p>From the <a href="../../general-knowledge/auto-scaling-groups/">cattle-not-pets</a> notes: a <strong>stateless</strong> app stores no critical data on its compute nodes - the data lives in a stateful database (RDS), and the HTTP servers can be destroyed and replaced at will. A spot interruption is exactly that: the node vanishes, the pods are rescheduled somewhere else, and the app never knew it had a &ldquo;server&rdquo;.</p>
 <p><code>patientping-web</code> is the textbook case: stateless HTTP/REST, state in <a href="../eks-use-rds/">RDS</a>, files in <a href="../eks-connect-s3/">S3</a>. If a spot node gets reclaimed, <code>Deployment</code> recreates the pods on the survivors.</p>
 <blockquote class='book-hint '>
 <p>Spot + stateless = cattle&rsquo;ın en ucuz hali. Ama dikkat: local disk&rsquo;e yazan, sticky session tutan ya da &ldquo;asla ölmemeli&rdquo; diyen işler spot&rsquo;a girmez. O işler zaten stateful ve <a href="../../general-knowledge/auto-scaling-groups/">RDS</a> gibi yönetilen servislere ait.</p>
@@ -2769,8 +2769,8 @@ EKS doesn’t change the deal; it just changes how you consume it. Instead of bi
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">value</span>: <span style="color:#ae81ff">spot</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">effect</span>: <span style="color:#ae81ff">NoSchedule</span></span></span></code></pre></div><p>Two details matter more than the <code>capacityType</code> line:</p>
 <ul>
-<li><strong>Instance diversification.</strong> Spot capacity is a pool per instance type per AZ. Listing several types (<code>t3</code>/<code>t3a</code>/<code>t2</code> family) lets AWS draw from the deepest pools — fewer interruptions, better prices. A single instance type is a single pool: when it dries up, your nodes go away.</li>
-<li><strong>Taint + label</strong> — the same mechanism from <a href="../eks-node-affinity-taints/">eks-node-affinity-taints</a>. The taint keeps everything that doesn&rsquo;t explicitly opt in off the interruptible nodes; the label lets opted-in pods say &ldquo;yes, here please&rdquo;.</li>
+<li><strong>Instance diversification.</strong> Spot capacity is a pool per instance type per AZ. Listing several types (<code>t3</code>/<code>t3a</code>/<code>t2</code> family) lets AWS draw from the deepest pools - fewer interruptions, better prices. A single instance type is a single pool: when it dries up, your nodes go away.</li>
+<li><strong>Taint + label</strong> - the same mechanism from <a href="../eks-node-affinity-taints/">eks-node-affinity-taints</a>. The taint keeps everything that doesn&rsquo;t explicitly opt in off the interruptible nodes; the label lets opted-in pods say &ldquo;yes, here please&rdquo;.</li>
 </ul>
 <h2 id="handling-the-2-minute-warning">Handling the 2-minute warning<a class="anchor" href="#handling-the-2-minute-warning">#</a></h2>
 <p>When AWS reclaims capacity it sends an interruption notice. The <a href="https://github.com/aws/aws-node-termination-handler">aws-node-termination-handler</a> DaemonSet watches for those notices and:</p>
@@ -2790,12 +2790,12 @@ EKS doesn’t change the deal; it just changes how you consume it. Instead of bi
     K8s-&gt;&gt;Pods: replica&#39;lar diğer node&#39;lara taşındı
     Note over AWS: node geri alındı, node group yenisi açar</pre><script src="/mermaid.min.js"></script><script>mermaid.initialize({"flowchart":{"useMaxWidth":true},"theme":"default"})</script><p>Without the handler, you get the vanilla Kubernetes experience: nodes flip to <code>NotReady</code> after they die and pods just sit <code>Terminating</code> until the grace period expires. With it, the evacuation starts <em>before</em> the eviction.</p>
 <h2 id="mixed-mode-optional-but-honest">Mixed mode (optional but honest)<a class="anchor" href="#mixed-mode-optional-but-honest">#</a></h2>
-<p>If the app needs to stay up even through a bad spot week, run <strong>both</strong> node groups — a small on-demand group for the guaranteed floor and a spot group for cheap extra capacity. Same taints idea: mark each group, and use <code>preferredDuringScheduling</code> node affinity to say &ldquo;prefer spot, fall back to on-demand&rdquo;.</p>
+<p>If the app needs to stay up even through a bad spot week, run <strong>both</strong> node groups - a small on-demand group for the guaranteed floor and a spot group for cheap extra capacity. Same taints idea: mark each group, and use <code>preferredDuringScheduling</code> node affinity to say &ldquo;prefer spot, fall back to on-demand&rdquo;.</p>
 <blockquote class='book-hint '>
-<p>Fargate&rsquo;te spot yok. Fargate sadece on-demand fiyatıyla çalışır — spot istiyorsanız EC2 tabanlı node group&rsquo;lar şart. Karpenter spot için daha modern bir alternatif (interruption handling içinde gelir) ama managed node group + NTH ikilisi çoğu iş için fazlasıyla yeterli.</p>
+<p>Fargate&rsquo;te spot yok. Fargate sadece on-demand fiyatıyla çalışır - spot istiyorsanız EC2 tabanlı node group&rsquo;lar şart. Karpenter spot için daha modern bir alternatif (interruption handling içinde gelir) ama managed node group + NTH ikilisi çoğu iş için fazlasıyla yeterli.</p>
 </blockquote><h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
-<p><strong>Give the stateless <code>patientping-web</code> app its own cheap, interruptible node group — and watch it survive a node going away.</strong></p>
-<p><strong>Cost check:</strong> A <code>t3.small</code> on-demand is about <strong>$0.02/hour</strong>; the same on spot is typically <strong>$0.005-0.007/hour</strong> — roughly 60-70% off. Two nodes for a day costs a couple of cents. Still: <strong>delete the spot group when you&rsquo;re done</strong> (<code>eksctl delete nodegroup --cluster patientping-eks --name patientping-spot</code>).</p>
+<p><strong>Give the stateless <code>patientping-web</code> app its own cheap, interruptible node group - and watch it survive a node going away.</strong></p>
+<p><strong>Cost check:</strong> A <code>t3.small</code> on-demand is about <strong>$0.02/hour</strong>; the same on spot is typically <strong>$0.005-0.007/hour</strong> - roughly 60-70% off. Two nodes for a day costs a couple of cents. Still: <strong>delete the spot group when you&rsquo;re done</strong> (<code>eksctl delete nodegroup --cluster patientping-eks --name patientping-spot</code>).</p>
 <ol>
 <li>Add the <code>patientping-spot</code> group to <code>patientping-eks.yaml</code> and create it:</li>
 </ol>
@@ -2827,7 +2827,7 @@ EKS doesn’t change the deal; it just changes how you consume it. Instead of bi
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -o wide
 </span></span><span style="display:flex;"><span>kubectl get nodes -l capacity<span style="color:#f92672">=</span>spot</span></span></code></pre></div><p>Both replicas should now show a <code>patientping-spot</code> node in the <code>NODE</code> column.</p>
 <ol start="5">
-<li>(Chaos, optional) Kill one spot node the way AWS would — terminate its instance in the console — and watch the recovery:</li>
+<li>(Chaos, optional) Kill one spot node the way AWS would - terminate its instance in the console - and watch the recovery:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -w</span></span></code></pre></div><p>The pods on the dead node are recreated on the surviving node(s), the PDB keeps at least one replica serving, and the node group launches a replacement. That is the entire promise of spot: <strong>cattle that is 90% cheaper to feed.</strong></p>
 </article>

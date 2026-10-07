@@ -5,7 +5,7 @@ weight: 80
 
 # Spot Instances on EKS
 
-You already know [spot instances](../../general-knowledge/spot-instances/) from the EC2 lessons: unused AWS capacity at a **~90% discount**, with one small caveat — "at any time I may literally delete your server" with a **2-minute heads-up**.
+You already know [spot instances](../../general-knowledge/spot-instances/) from the EC2 lessons: unused AWS capacity at a **~90% discount**, with one small caveat - "at any time I may literally delete your server" with a **2-minute heads-up**.
 
 EKS doesn't change the deal; it just changes how you consume it. Instead of bidding on individual instances, you declare one line in a managed node group and Kubernetes schedules onto the cheap cattle:
 
@@ -15,7 +15,7 @@ capacityType: SPOT
 
 ## Why this pairs perfectly with stateless apps
 
-From the [cattle-not-pets](../../general-knowledge/auto-scaling-groups/) notes: a **stateless** app stores no critical data on its compute nodes — the data lives in a stateful database (RDS), and the HTTP servers can be destroyed and replaced at will. A spot interruption is exactly that: the node vanishes, the pods are rescheduled somewhere else, and the app never knew it had a "server".
+From the [cattle-not-pets](../../general-knowledge/auto-scaling-groups/) notes: a **stateless** app stores no critical data on its compute nodes - the data lives in a stateful database (RDS), and the HTTP servers can be destroyed and replaced at will. A spot interruption is exactly that: the node vanishes, the pods are rescheduled somewhere else, and the app never knew it had a "server".
 
 `patientping-web` is the textbook case: stateless HTTP/REST, state in [RDS](../eks-use-rds/), files in [S3](../eks-connect-s3/). If a spot node gets reclaimed, `Deployment` recreates the pods on the survivors.
 
@@ -40,8 +40,8 @@ managedNodeGroups:
 
 Two details matter more than the `capacityType` line:
 
-- **Instance diversification.** Spot capacity is a pool per instance type per AZ. Listing several types (`t3`/`t3a`/`t2` family) lets AWS draw from the deepest pools — fewer interruptions, better prices. A single instance type is a single pool: when it dries up, your nodes go away.
-- **Taint + label** — the same mechanism from [eks-node-affinity-taints](../eks-node-affinity-taints/). The taint keeps everything that doesn't explicitly opt in off the interruptible nodes; the label lets opted-in pods say "yes, here please".
+- **Instance diversification.** Spot capacity is a pool per instance type per AZ. Listing several types (`t3`/`t3a`/`t2` family) lets AWS draw from the deepest pools - fewer interruptions, better prices. A single instance type is a single pool: when it dries up, your nodes go away.
+- **Taint + label** - the same mechanism from [eks-node-affinity-taints](../eks-node-affinity-taints/). The taint keeps everything that doesn't explicitly opt in off the interruptible nodes; the label lets opted-in pods say "yes, here please".
 
 ## Handling the 2-minute warning
 
@@ -68,15 +68,15 @@ Without the handler, you get the vanilla Kubernetes experience: nodes flip to `N
 
 ## Mixed mode (optional but honest)
 
-If the app needs to stay up even through a bad spot week, run **both** node groups — a small on-demand group for the guaranteed floor and a spot group for cheap extra capacity. Same taints idea: mark each group, and use `preferredDuringScheduling` node affinity to say "prefer spot, fall back to on-demand".
+If the app needs to stay up even through a bad spot week, run **both** node groups - a small on-demand group for the guaranteed floor and a spot group for cheap extra capacity. Same taints idea: mark each group, and use `preferredDuringScheduling` node affinity to say "prefer spot, fall back to on-demand".
 
-> Fargate'te spot yok. Fargate sadece on-demand fiyatıyla çalışır — spot istiyorsanız EC2 tabanlı node group'lar şart. Karpenter spot için daha modern bir alternatif (interruption handling içinde gelir) ama managed node group + NTH ikilisi çoğu iş için fazlasıyla yeterli.
+> Fargate'te spot yok. Fargate sadece on-demand fiyatıyla çalışır - spot istiyorsanız EC2 tabanlı node group'lar şart. Karpenter spot için daha modern bir alternatif (interruption handling içinde gelir) ama managed node group + NTH ikilisi çoğu iş için fazlasıyla yeterli.
 
 ## Assignment
 
-**Give the stateless `patientping-web` app its own cheap, interruptible node group — and watch it survive a node going away.**
+**Give the stateless `patientping-web` app its own cheap, interruptible node group - and watch it survive a node going away.**
 
-**Cost check:** A `t3.small` on-demand is about **$0.02/hour**; the same on spot is typically **$0.005-0.007/hour** — roughly 60-70% off. Two nodes for a day costs a couple of cents. Still: **delete the spot group when you're done** (`eksctl delete nodegroup --cluster patientping-eks --name patientping-spot`).
+**Cost check:** A `t3.small` on-demand is about **$0.02/hour**; the same on spot is typically **$0.005-0.007/hour** - roughly 60-70% off. Two nodes for a day costs a couple of cents. Still: **delete the spot group when you're done** (`eksctl delete nodegroup --cluster patientping-eks --name patientping-spot`).
 
 1.  Add the `patientping-spot` group to `patientping-eks.yaml` and create it:
 
@@ -125,7 +125,7 @@ kubectl get nodes -l capacity=spot
 
 Both replicas should now show a `patientping-spot` node in the `NODE` column.
 
-5.  (Chaos, optional) Kill one spot node the way AWS would — terminate its instance in the console — and watch the recovery:
+5.  (Chaos, optional) Kill one spot node the way AWS would - terminate its instance in the console - and watch the recovery:
 
 ```bash
 kubectl get pods -w
