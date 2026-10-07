@@ -8,7 +8,7 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="EKS vs Your Own kubeadm Cluster# If you’ve been through my multi-node kubeadm notes, you’ve done it the hard way: Debian VMs on Proxmox, containerd, kubeadm init/join, Cilium as the CNI, and every package upgrade lands on your desk. That cluster is yours — you know every screw.
+<meta name="description" content="EKS vs Your Own kubeadm Cluster# If you’ve been through my multi-node kubeadm notes, you’ve done it the hard way: Debian VMs on Proxmox, containerd, kubeadm init/join, Cilium as the CNI, and every package upgrade lands on your desk. That cluster is yours - you know every screw.
 EKS is the same Kubernetes API with most of the screws hidden. The point of this note is exactly what to compare: what disappears, what changes, and what stays stubbornly identical.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
@@ -16,7 +16,7 @@ EKS is the same Kubernetes API with most of the screws hidden. The point of this
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws/eks/eks-vs-kubeadm/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="eks-vs-kubeadm">
-	<meta property="og:description" content="EKS vs Your Own kubeadm Cluster# If you’ve been through my multi-node kubeadm notes, you’ve done it the hard way: Debian VMs on Proxmox, containerd, kubeadm init/join, Cilium as the CNI, and every package upgrade lands on your desk. That cluster is yours — you know every screw.
+	<meta property="og:description" content="EKS vs Your Own kubeadm Cluster# If you’ve been through my multi-node kubeadm notes, you’ve done it the hard way: Debian VMs on Proxmox, containerd, kubeadm init/join, Cilium as the CNI, and every package upgrade lands on your desk. That cluster is yours - you know every screw.
 EKS is the same Kubernetes API with most of the screws hidden. The point of this note is exactly what to compare: what disappears, what changes, and what stays stubbornly identical.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
@@ -24,7 +24,7 @@ EKS is the same Kubernetes API with most of the screws hidden. The point of this
 
 
 	<meta itemprop="name" content="eks-vs-kubeadm">
-	<meta itemprop="description" content="EKS vs Your Own kubeadm Cluster# If you’ve been through my multi-node kubeadm notes, you’ve done it the hard way: Debian VMs on Proxmox, containerd, kubeadm init/join, Cilium as the CNI, and every package upgrade lands on your desk. That cluster is yours — you know every screw.
+	<meta itemprop="description" content="EKS vs Your Own kubeadm Cluster# If you’ve been through my multi-node kubeadm notes, you’ve done it the hard way: Debian VMs on Proxmox, containerd, kubeadm init/join, Cilium as the CNI, and every package upgrade lands on your desk. That cluster is yours - you know every screw.
 EKS is the same Kubernetes API with most of the screws hidden. The point of this note is exactly what to compare: what disappears, what changes, and what stays stubbornly identical.">
 	<meta itemprop="wordCount" content="597">
 
@@ -35,7 +35,7 @@ EKS is the same Kubernetes API with most of the screws hidden. The point of this
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.2589e5ffdfcbbe53847c2c88d266fa762f1153a56b69343abf237baa7f025694.js" integrity="sha256-JYnl/9/LvlOEfCyI0mb6di8RU6VraTQ6vyN7qn8CVpQ=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.073e18ecafc34b4141dbadea430fa9ca7480486a6096d7565210c7a4747d840b.js" integrity="sha256-Bz4Y7K/DS0FB263qQw&#43;pynSASGpgltdWUhDHpHR9hAs=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2747,7 +2747,7 @@ EKS is the same Kubernetes API with most of the screws hidden. The point of this
       
       
   <article class="markdown book-article"><h1 id="eks-vs-your-own-kubeadm-cluster">EKS vs Your Own kubeadm Cluster<a class="anchor" href="#eks-vs-your-own-kubeadm-cluster">#</a></h1>
-<p>If you&rsquo;ve been through my <a href="../../../kubernetes_v2/multi-node-kubeadm/">multi-node kubeadm</a> notes, you&rsquo;ve done it the hard way: Debian VMs on Proxmox, <code>containerd</code>, <code>kubeadm init</code>/<code>join</code>, Cilium as the CNI, and every package upgrade lands on your desk. That cluster is <em>yours</em> — you know every screw.</p>
+<p>If you&rsquo;ve been through my <a href="../../../kubernetes_v2/multi-node-kubeadm/">multi-node kubeadm</a> notes, you&rsquo;ve done it the hard way: Debian VMs on Proxmox, <code>containerd</code>, <code>kubeadm init</code>/<code>join</code>, Cilium as the CNI, and every package upgrade lands on your desk. That cluster is <em>yours</em> - you know every screw.</p>
 <p>EKS is the same Kubernetes API with most of the screws hidden. The point of this note is exactly what to compare: what disappears, what changes, and what stays stubbornly identical.</p>
 <h2 id="what-aws-takes-off-your-plate">What AWS takes off your plate<a class="anchor" href="#what-aws-takes-off-your-plate">#</a></h2>
 <table>
@@ -2767,7 +2767,7 @@ EKS is the same Kubernetes API with most of the screws hidden. The point of this
 			<tr>
 					<td>etcd</td>
 					<td>You run it (stacked or <a href="../../../kubernetes_v2/ha-control-plane/">external</a>), you snapshot it, you defrag it</td>
-					<td>AWS runs it; you never touch it. No <code>etcdctl</code>, no snapshots — AWS backs it up</td>
+					<td>AWS runs it; you never touch it. No <code>etcdctl</code>, no snapshots - AWS backs it up</td>
 			</tr>
 			<tr>
 					<td>Node bootstrap</td>
@@ -2792,25 +2792,25 @@ EKS is the same Kubernetes API with most of the screws hidden. The point of this
 	</tbody>
 </table>
 <blockquote class='book-hint '>
-<p>Not: kubeadm&rsquo;de <code>--control-plane-endpoint</code> VIP&rsquo;i ve failover&rsquo;ı sen kuruyordun. EKS&rsquo;te o iş bitti — endpoint regional DNS, arkasında AWS&rsquo;in çok-AZ&rsquo;li control plane&rsquo;i var. <a href="../../../kubernetes_v2/ha-control-plane/">ha-control-plane</a> notundaki &ldquo;stable endpoint&rdquo; bölümünün tamamı AWS&rsquo;e devredilmiş durumda.</p>
+<p>Not: kubeadm&rsquo;de <code>--control-plane-endpoint</code> VIP&rsquo;i ve failover&rsquo;ı sen kuruyordun. EKS&rsquo;te o iş bitti - endpoint regional DNS, arkasında AWS&rsquo;in çok-AZ&rsquo;li control plane&rsquo;i var. <a href="../../../kubernetes_v2/ha-control-plane/">ha-control-plane</a> notundaki &ldquo;stable endpoint&rdquo; bölümünün tamamı AWS&rsquo;e devredilmiş durumda.</p>
 </blockquote><h2 id="what-changes-but-is-still-yours">What changes but is still yours<a class="anchor" href="#what-changes-but-is-still-yours">#</a></h2>
 <ul>
-<li><strong>CNI:</strong> kubeadm&rsquo;de Cilium kurmuştuk (<a href="../../../kubernetes_v2/multi-node-kubeadm/">notlar</a>). EKS varsayılan olarak <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-networking.html">VPC CNI</a> kullanır — pod IP&rsquo;leri <strong>VPC&rsquo;nin</strong> IP havuzundan gelir. Bu, pod&rsquo;ların VPC&rsquo;de &ldquo;gerçek&rdquo; IP&rsquo;lerle dolaşması demek (güzel: VPC SG&rsquo;leri pod&rsquo;ları da korur), ama dikkat: private subnet IP&rsquo;leri hızla tükenir. Büyük kümelerde <code>--max-pods</code>, prefix delegation veya Cilium&rsquo;a geçiş gerekir.</li>
+<li><strong>CNI:</strong> kubeadm&rsquo;de Cilium kurmuştuk (<a href="../../../kubernetes_v2/multi-node-kubeadm/">notlar</a>). EKS varsayılan olarak <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-networking.html">VPC CNI</a> kullanır - pod IP&rsquo;leri <strong>VPC&rsquo;nin</strong> IP havuzundan gelir. Bu, pod&rsquo;ların VPC&rsquo;de &ldquo;gerçek&rdquo; IP&rsquo;lerle dolaşması demek (güzel: VPC SG&rsquo;leri pod&rsquo;ları da korur), ama dikkat: private subnet IP&rsquo;leri hızla tükenir. Büyük kümelerde <code>--max-pods</code>, prefix delegation veya Cilium&rsquo;a geçiş gerekir.</li>
 <li><strong>IAM ↔ Kubernetes RBAC:</strong> kubeadm&rsquo;de olmayan bir katman. EKS&rsquo;te AWS IAM ile Kubernetes kimlikleri köprülenir: <a href="../eks-connect-s3/">IRSA</a> (pod bazlı roller) ve EKS Access Entries (<code>aws-auth</code> ConfigMap&rsquo;inin modern hali). Biz bunu <a href="../eks-connect-s3/">S3</a> ve <a href="../eks-use-rds/">RDS</a> derslerinde kullandık.</li>
-<li><strong>Node lifecycle:</strong> <code>kubectl delete node</code> + VM&rsquo;yi yakmak yerine managed node group&rsquo;ları <code>eksctl scale</code> / console ile büyütürsün. Node group bir launch template gibidir — yenisini eklersin, eskisini kapatırsın.</li>
+<li><strong>Node lifecycle:</strong> <code>kubectl delete node</code> + VM&rsquo;yi yakmak yerine managed node group&rsquo;ları <code>eksctl scale</code> / console ile büyütürsün. Node group bir launch template gibidir - yenisini eklersin, eskisini kapatırsın.</li>
 <li><strong>Addon&rsquo;lar:</strong> kubeadm&rsquo;de Cilium/<code>metrics-server</code>&lsquo;ı elle kurdun; EKS&rsquo;te <code>eksctl utils associate-iam-oidc-provider</code> + addon katalogu (VPC CNI, CoreDNS, kube-proxy, eks-pod-identity-agent) tek yerden.</li>
 </ul>
 <h2 id="what-is-literally-the-same">What is literally the same<a class="anchor" href="#what-is-literally-the-same">#</a></h2>
 <p>This is the part people underestimate. Once your <code>kubeconfig</code> points at EKS:</p>
 <ul>
-<li><code>kubectl apply</code>, <code>Deployment</code>, <code>Service</code>, <code>StatefulSet</code>, <code>Job</code> — aynı</li>
-<li>Taints, tolerations, affinity, topology spread — aynı (EKS&rsquo;e özgü detaylar için <a href="../eks-node-affinity-taints/">eks-node-affinity-taints</a>)</li>
-<li>RBAC (<code>Role</code>, <code>ClusterRole</code>, <code>RoleBinding</code>) — aynı</li>
-<li>CRD&rsquo;ler, operator&rsquo;lar, Helm chart&rsquo;ları — aynı</li>
+<li><code>kubectl apply</code>, <code>Deployment</code>, <code>Service</code>, <code>StatefulSet</code>, <code>Job</code> - aynı</li>
+<li>Taints, tolerations, affinity, topology spread - aynı (EKS&rsquo;e özgü detaylar için <a href="../eks-node-affinity-taints/">eks-node-affinity-taints</a>)</li>
+<li>RBAC (<code>Role</code>, <code>ClusterRole</code>, <code>RoleBinding</code>) - aynı</li>
+<li>CRD&rsquo;ler, operator&rsquo;lar, Helm chart&rsquo;ları - aynı</li>
 </ul>
 <p>Kısacası: kubeadm notlarında öğrendiğin Kubernetes bilgisi EKS&rsquo;te birebir geçerli. Kaybedilen şey <em>operasyonel yük</em>, kazanılan şey <em>AWS faturası</em>.</p>
 <h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
-<p><strong>Compare your own cluster against EKS — and prove the API really is the same.</strong></p>
+<p><strong>Compare your own cluster against EKS - and prove the API really is the same.</strong></p>
 <ol>
 <li>Point <code>kubectl</code> at the EKS cluster (<code>eksctl utils write-kubeconfig --cluster patientping-eks</code>), then run the same three commands you run on your homelab cluster:</li>
 </ol>
@@ -2818,10 +2818,10 @@ EKS is the same Kubernetes API with most of the screws hidden. The point of this
 </span></span><span style="display:flex;"><span>kubectl get pods -A
 </span></span><span style="display:flex;"><span>kubectl api-resources | wc -l</span></span></code></pre></div><ol start="2">
 <li>On your kubeadm cluster, run <code>kubectl get nodes -o wide</code> too. Note the differences: <code>INTERNAL-IP</code>&lsquo;ler EKS&rsquo;te VPC IP&rsquo;leri, <code>VERSION</code>&lsquo;lar AWS&rsquo;in yönettiği AMI&rsquo;lerden geliyor, <code>ROLES</code> sütununda <code>control-plane</code> node&rsquo;u <strong>yok</strong> (control plane görünür değil).</li>
-<li>List what you&rsquo;d have to do on kubeadm to get what EKS gave you for free (HA control plane, etcd backups, upgrades) — that list is the real price of &ldquo;free&rdquo; Kubernetes.</li>
+<li>List what you&rsquo;d have to do on kubeadm to get what EKS gave you for free (HA control plane, etcd backups, upgrades) - that list is the real price of &ldquo;free&rdquo; Kubernetes.</li>
 </ol>
 <blockquote class='book-hint '>
-<p>Sanity check: <code>kubectl version</code> — her iki tarafta da aynı komut, aynı çıktı formatı. API sunucusu kim olursa olsun Kubernetes Kubernetes&rsquo;tir.</p>
+<p>Sanity check: <code>kubectl version</code> - her iki tarafta da aynı komut, aynı çıktı formatı. API sunucusu kim olursa olsun Kubernetes Kubernetes&rsquo;tir.</p>
 </blockquote></article>
  
       

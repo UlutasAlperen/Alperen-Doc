@@ -10,7 +10,7 @@ An EKS cluster has two halves:
 - The **control plane**: the Kubernetes API server, etcd, scheduler, and controllers. AWS runs these for you, patches them, and keeps them highly available. You never SSH into it; you just get an API endpoint and a `kubeconfig`.
 - The **data plane**: the worker nodes (EC2 instances) or Fargate tasks that actually run your pods. These live in _your_ VPC, in the subnets you choose.
 
-For the worker nodes we'll use a **managed node group**: AWS creates the EC2 instances from a launch template, joins them to the cluster, and can roll updates for us. ([Fargate](https://docs.aws.amazon.com/eks/latest/userguide/fargate.html) is the serverless alternative — no nodes to think about, but less control and a different cost model.)
+For the worker nodes we'll use a **managed node group**: AWS creates the EC2 instances from a launch template, joins them to the cluster, and can roll updates for us. ([Fargate](https://docs.aws.amazon.com/eks/latest/userguide/fargate.html) is the serverless alternative - no nodes to think about, but less control and a different cost model.)
 
 We'll build the cluster with [`eksctl`](https://eksctl.io/), the official CLI from the EKS team. Doing the same thing by clicking through the console takes about forty steps; `eksctl` takes one command.
 
@@ -18,7 +18,7 @@ We'll build the cluster with [`eksctl`](https://eksctl.io/), the official CLI fr
 
 **Create an EKS cluster named `patientping-eks` with a small managed node group in the `patientping` VPC's private subnets.**
 
-**Cost check:** The EKS **control plane** costs about **$0.10 per hour** (~$73/month) from the moment the cluster is `Active`. The `t3.small` worker node adds a few dollars per month on top. This is the most expensive lesson in the whole document — **delete the cluster when you're done.**
+**Cost check:** The EKS **control plane** costs about **$0.10 per hour** (~$73/month) from the moment the cluster is `Active`. The `t3.small` worker node adds a few dollars per month on top. This is the most expensive lesson in the whole document - **delete the cluster when you're done.**
 
 1.  Install `eksctl` if you don't have it (see the [official instructions](https://eksctl.io/installation/)), and make sure your AWS CLI credentials are the `alperen-admin` user, not the root user.
 
@@ -49,7 +49,7 @@ managedNodeGroups:
     privateNetworking: true
 ```
 
-> The VPC and subnet IDs are the ones from the Networking section — the same `patientping` VPC where `patientping-db` (RDS) lives. Keeping the nodes in **private** subnets means they don't get public IPs; they reach the internet through the NAT gateway.
+> The VPC and subnet IDs are the ones from the Networking section - the same `patientping` VPC where `patientping-db` (RDS) lives. Keeping the nodes in **private** subnets means they don't get public IPs; they reach the internet through the NAT gateway.
 
 3.  Create the cluster:
 
@@ -75,4 +75,4 @@ The `kubernetes` service in `default` should point at your new API endpoint.
 
 > Trouble? `eksctl utils write-kubeconfig --cluster patientping-eks` refreshes your `kubeconfig`, and `aws eks update-kubeconfig --name patientping-eks` does the same thing with the AWS CLI.
 
-**That's it — you now have a real Kubernetes cluster.** The rest of this section is just Kubernetes: manifests, secrets, and wiring up AWS services to it.
+**That's it - you now have a real Kubernetes cluster.** The rest of this section is just Kubernetes: manifests, secrets, and wiring up AWS services to it.

@@ -8,24 +8,24 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Node Affinity and Taints on EKS# Everything in my taints, affinity and quotas notes works on EKS verbatim. kubectl taint, tolerations, nodeAffinity, topologySpreadConstraints — the API doesn’t know or care that AWS is underneath. What is different is how nodes appear, how they get their labels and taints, and what happens to all of it when the autoscaler is involved.
-Kısa hatırlatma: taint node’un kapıdaki tabelası (“her pod giremez”), toleration pod’un geçiş izni, nodeAffinity ise “şu node’a git” talebi. İkisini karıştırmayın — toleration sizi oraya göndermez, sadece engeli kaldırır.
+<meta name="description" content="Node Affinity and Taints on EKS# Everything in my taints, affinity and quotas notes works on EKS verbatim. kubectl taint, tolerations, nodeAffinity, topologySpreadConstraints - the API doesn’t know or care that AWS is underneath. What is different is how nodes appear, how they get their labels and taints, and what happens to all of it when the autoscaler is involved.
+Kısa hatırlatma: taint node’un kapıdaki tabelası (“her pod giremez”), toleration pod’un geçiş izni, nodeAffinity ise “şu node’a git” talebi. İkisini karıştırmayın - toleration sizi oraya göndermez, sadece engeli kaldırır.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws/eks/eks-node-affinity-taints/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="eks-node-affinity-taints">
-	<meta property="og:description" content="Node Affinity and Taints on EKS# Everything in my taints, affinity and quotas notes works on EKS verbatim. kubectl taint, tolerations, nodeAffinity, topologySpreadConstraints — the API doesn’t know or care that AWS is underneath. What is different is how nodes appear, how they get their labels and taints, and what happens to all of it when the autoscaler is involved.
-Kısa hatırlatma: taint node’un kapıdaki tabelası (“her pod giremez”), toleration pod’un geçiş izni, nodeAffinity ise “şu node’a git” talebi. İkisini karıştırmayın — toleration sizi oraya göndermez, sadece engeli kaldırır.">
+	<meta property="og:description" content="Node Affinity and Taints on EKS# Everything in my taints, affinity and quotas notes works on EKS verbatim. kubectl taint, tolerations, nodeAffinity, topologySpreadConstraints - the API doesn’t know or care that AWS is underneath. What is different is how nodes appear, how they get their labels and taints, and what happens to all of it when the autoscaler is involved.
+Kısa hatırlatma: taint node’un kapıdaki tabelası (“her pod giremez”), toleration pod’un geçiş izni, nodeAffinity ise “şu node’a git” talebi. İkisini karıştırmayın - toleration sizi oraya göndermez, sadece engeli kaldırır.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="eks-node-affinity-taints">
-	<meta itemprop="description" content="Node Affinity and Taints on EKS# Everything in my taints, affinity and quotas notes works on EKS verbatim. kubectl taint, tolerations, nodeAffinity, topologySpreadConstraints — the API doesn’t know or care that AWS is underneath. What is different is how nodes appear, how they get their labels and taints, and what happens to all of it when the autoscaler is involved.
-Kısa hatırlatma: taint node’un kapıdaki tabelası (“her pod giremez”), toleration pod’un geçiş izni, nodeAffinity ise “şu node’a git” talebi. İkisini karıştırmayın — toleration sizi oraya göndermez, sadece engeli kaldırır.">
+	<meta itemprop="description" content="Node Affinity and Taints on EKS# Everything in my taints, affinity and quotas notes works on EKS verbatim. kubectl taint, tolerations, nodeAffinity, topologySpreadConstraints - the API doesn’t know or care that AWS is underneath. What is different is how nodes appear, how they get their labels and taints, and what happens to all of it when the autoscaler is involved.
+Kısa hatırlatma: taint node’un kapıdaki tabelası (“her pod giremez”), toleration pod’un geçiş izni, nodeAffinity ise “şu node’a git” talebi. İkisini karıştırmayın - toleration sizi oraya göndermez, sadece engeli kaldırır.">
 	<meta itemprop="wordCount" content="618">
 
 <title>eks-node-affinity-taints • Alperen Doc</title>
@@ -35,7 +35,7 @@ Kısa hatırlatma: taint node’un kapıdaki tabelası (“her pod giremez”), 
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.2589e5ffdfcbbe53847c2c88d266fa762f1153a56b69343abf237baa7f025694.js" integrity="sha256-JYnl/9/LvlOEfCyI0mb6di8RU6VraTQ6vyN7qn8CVpQ=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.073e18ecafc34b4141dbadea430fa9ca7480486a6096d7565210c7a4747d840b.js" integrity="sha256-Bz4Y7K/DS0FB263qQw&#43;pynSASGpgltdWUhDHpHR9hAs=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2748,11 +2748,11 @@ Kısa hatırlatma: taint node’un kapıdaki tabelası (“her pod giremez”), 
       
       
   <article class="markdown book-article"><h1 id="node-affinity-and-taints-on-eks">Node Affinity and Taints on EKS<a class="anchor" href="#node-affinity-and-taints-on-eks">#</a></h1>
-<p>Everything in my <a href="../../../kubernetes_v2/taints-affinity-quotas/">taints, affinity and quotas</a> notes works on EKS <strong>verbatim</strong>. <code>kubectl taint</code>, tolerations, <code>nodeAffinity</code>, <code>topologySpreadConstraints</code> — the API doesn&rsquo;t know or care that AWS is underneath. What <em>is</em> different is how nodes appear, how they get their labels and taints, and what happens to all of it when the autoscaler is involved.</p>
+<p>Everything in my <a href="../../../kubernetes_v2/taints-affinity-quotas/">taints, affinity and quotas</a> notes works on EKS <strong>verbatim</strong>. <code>kubectl taint</code>, tolerations, <code>nodeAffinity</code>, <code>topologySpreadConstraints</code> - the API doesn&rsquo;t know or care that AWS is underneath. What <em>is</em> different is how nodes appear, how they get their labels and taints, and what happens to all of it when the autoscaler is involved.</p>
 <blockquote class='book-hint '>
-<p>Kısa hatırlatma: <strong>taint</strong> node&rsquo;un kapıdaki tabelası (&ldquo;her pod giremez&rdquo;), <strong>toleration</strong> pod&rsquo;un geçiş izni, <strong>nodeAffinity</strong> ise &ldquo;şu node&rsquo;a git&rdquo; talebi. İkisini karıştırmayın — toleration sizi oraya göndermez, sadece engeli kaldırır.</p>
+<p>Kısa hatırlatma: <strong>taint</strong> node&rsquo;un kapıdaki tabelası (&ldquo;her pod giremez&rdquo;), <strong>toleration</strong> pod&rsquo;un geçiş izni, <strong>nodeAffinity</strong> ise &ldquo;şu node&rsquo;a git&rdquo; talebi. İkisini karıştırmayın - toleration sizi oraya göndermez, sadece engeli kaldırır.</p>
 </blockquote><h2 id="how-nodes-get-labels-and-taints-on-eks">How nodes get labels and taints on EKS<a class="anchor" href="#how-nodes-get-labels-and-taints-on-eks">#</a></h2>
-<p>On kubeadm you <code>kubectl taint nodes ...</code> after joining. On EKS, worker nodes are cattle owned by a <strong>managed node group</strong>, and the right place to declare labels and taints is <strong>when the group is created</strong> — in the <code>eksctl</code> config:</p>
+<p>On kubeadm you <code>kubectl taint nodes ...</code> after joining. On EKS, worker nodes are cattle owned by a <strong>managed node group</strong>, and the right place to declare labels and taints is <strong>when the group is created</strong> - in the <code>eksctl</code> config:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">managedNodeGroups</span>:
 </span></span><span style="display:flex;"><span>  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">patientping-workers</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">instanceType</span>: <span style="color:#ae81ff">t3.small</span>
@@ -2767,13 +2767,13 @@ Kısa hatırlatma: taint node’un kapıdaki tabelası (“her pod giremez”), 
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">taints</span>:
 </span></span><span style="display:flex;"><span>      - <span style="color:#f92672">key</span>: <span style="color:#ae81ff">workload</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">value</span>: <span style="color:#ae81ff">ai</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">effect</span>: <span style="color:#ae81ff">NoSchedule</span></span></span></code></pre></div><p>Why not just <code>kubectl taint</code> after the fact? You can — it works — but the next <a href="../eks-ha-cluster/">node group scale-up</a> or instance refresh creates brand new nodes from the group&rsquo;s template. A taint applied by hand to an old node vanishes with that node; a taint in the group config comes back on every replacement.</p>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">effect</span>: <span style="color:#ae81ff">NoSchedule</span></span></span></code></pre></div><p>Why not just <code>kubectl taint</code> after the fact? You can - it works - but the next <a href="../eks-ha-cluster/">node group scale-up</a> or instance refresh creates brand new nodes from the group&rsquo;s template. A taint applied by hand to an old node vanishes with that node; a taint in the group config comes back on every replacement.</p>
 <blockquote class='book-hint '>
-<p>Not: node group&rsquo;taki <code>labels</code>/<code>taints</code> node&rsquo;lara <strong>join anında</strong> basılır. Elle <code>kubectl label</code> ile eklenenler node ölünce gider. &ldquo;Cattle, not pets&rdquo; — EKS bunu node&rsquo;larda da zorunlu kılıyor.</p>
+<p>Not: node group&rsquo;taki <code>labels</code>/<code>taints</code> node&rsquo;lara <strong>join anında</strong> basılır. Elle <code>kubectl label</code> ile eklenenler node ölünce gider. &ldquo;Cattle, not pets&rdquo; - EKS bunu node&rsquo;larda da zorunlu kılıyor.</p>
 </blockquote><h2 id="ekss-automatic-labels">EKS&rsquo;s automatic labels<a class="anchor" href="#ekss-automatic-labels">#</a></h2>
 <p>You don&rsquo;t label zone or instance type yourself; the <a href="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#nodelabelselector">node admission controller</a> (via the AWS cloud provider and the AMI) stamps them on join:</p>
 <ul>
-<li><code>eks.amazonaws.com/nodegroup</code> — node group adı</li>
+<li><code>eks.amazonaws.com/nodegroup</code> - node group adı</li>
 <li><code>topology.kubernetes.io/zone</code>, <code>topology.kubernetes.io/region</code></li>
 <li><code>node.kubernetes.io/instance-type</code></li>
 <li>AMI ailesine göre <code>eks.amazonaws.com/compute-type</code> (<code>ec2</code> veya <code>fargate</code>)</li>
@@ -2789,9 +2789,9 @@ Kısa hatırlatma: taint node’un kapıdaki tabelası (“her pod giremez”), 
 </span></span><span style="display:flex;"><span>                    <span style="color:#f92672">values</span>: [<span style="color:#e6db74">&#34;us-east-1a&#34;</span>]</span></span></code></pre></div><h2 id="fargate-is-a-different-animal">Fargate is a different animal<a class="anchor" href="#fargate-is-a-different-animal">#</a></h2>
 <p>With <a href="https://docs.aws.amazon.com/eks/latest/userguide/fargate.html">Fargate</a> there are <strong>no nodes at all</strong>, so taints and node affinity have nothing to bite on. Instead, a <strong>Fargate profile</strong> selects pods by namespace + labels and decides &ldquo;these run serverless&rdquo;. Same idea (isolate workloads), different mechanism.</p>
 <h2 id="the-autoscaler-interaction">The autoscaler interaction<a class="anchor" href="#the-autoscaler-interaction">#</a></h2>
-<p>If a pod can&rsquo;t schedule because of a taint, the <a href="../../../kubernetes_v2/vpa-cluster-autoscaler/">Cluster Autoscaler</a> may respond by scaling up <em>another</em> node group — or doing nothing, if no group can satisfy the pod. Taints and affinity are therefore not just scheduling rules; they&rsquo;re <strong>capacity rules</strong>. A misconfigured toleration can silently double your node count (and your bill).</p>
+<p>If a pod can&rsquo;t schedule because of a taint, the <a href="../../../kubernetes_v2/vpa-cluster-autoscaler/">Cluster Autoscaler</a> may respond by scaling up <em>another</em> node group - or doing nothing, if no group can satisfy the pod. Taints and affinity are therefore not just scheduling rules; they&rsquo;re <strong>capacity rules</strong>. A misconfigured toleration can silently double your node count (and your bill).</p>
 <h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
-<p><strong>Prove that a taint from the node group config keeps a normal pod off the tainted nodes — and that a toleration lets a special pod in.</strong></p>
+<p><strong>Prove that a taint from the node group config keeps a normal pod off the tainted nodes - and that a toleration lets a special pod in.</strong></p>
 <p><strong>Cost check:</strong> An extra <code>t3.small</code> node group of 1 node adds a few dollars per month. Delete the <code>gpu-workers</code>-style group when you&rsquo;re done (<code>eksctl delete nodegroup</code>).</p>
 <ol>
 <li>Add the <code>gpu-workers</code>-style node group from the config above to <code>patientping-eks.yaml</code> and apply it:</li>
@@ -2824,7 +2824,7 @@ Kısa hatırlatma: taint node’un kapıdaki tabelası (“her pod giremez”), 
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get pods -o wide
 </span></span><span style="display:flex;"><span>kubectl describe pod normal-pod | grep -A3 Events</span></span></code></pre></div><p>Expected: <code>ai-pod</code> runs on the tainted node (it has both the toleration <em>and</em> the nodeAffinity via <code>nodeSelector</code>), <code>normal-pod</code> sits <code>Pending</code> with <code>0/3 nodes are available: 1 node(s) had untolerated taint...</code> in its events.</p>
 <blockquote class='book-hint '>
-<p>Hatırlatma: <code>Pending</code> + &ldquo;untolerated taint&rdquo; mesajı taint&rsquo;in <strong>çalıştığını</strong> gösterir — hata değil, doğrulamadır. Pod&rsquo;u temizlemek için <code>kubectl delete pod normal-pod</code>.</p>
+<p>Hatırlatma: <code>Pending</code> + &ldquo;untolerated taint&rdquo; mesajı taint&rsquo;in <strong>çalıştığını</strong> gösterir - hata değil, doğrulamadır. Pod&rsquo;u temizlemek için <code>kubectl delete pod normal-pod</code>.</p>
 </blockquote></article>
  
       

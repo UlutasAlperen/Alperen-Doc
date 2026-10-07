@@ -17,7 +17,7 @@ bookCollapseSection: true
 
 [EKS](https://aws.amazon.com/eks/) (**Elastic Kubernetes Service**) is AWS' _managed_ Kubernetes offering. If you've been through my [Kubernetes](../../kubernetes/) notes with Minikube, this is the production version of the same thing: the **control plane** (API server, etcd, scheduler) is run and patched by AWS, and you manage the **worker nodes** (or let Fargate run pods without nodes at all).
 
-You already know why we might want [ECS](../ecs/why-ecs/) instead: it trades flexibility for simplicity. But if you want the full Kubernetes API — `Deployment`, `Service`, `Ingress`, `Helm`, operators, and everything else — EKS is how you get it without babysitting etcd.
+You already know why we might want [ECS](../ecs/why-ecs/) instead: it trades flexibility for simplicity. But if you want the full Kubernetes API - `Deployment`, `Service`, `Ingress`, `Helm`, operators, and everything else - EKS is how you get it without babysitting etcd.
 
 In this section we take the PatientPing app from the earlier lessons and run it on EKS:
 
@@ -52,6 +52,6 @@ flowchart TB
     pod1 & pod2 --> s3
 ```
 
-> Not: EKS cluster'ı VPC'mizin private subnet'lerinde durur, dışarıdan trafik Load Balancer üzerinden gelir. RDS zaten private subnet'te — pod'larla aynı VPC içinde oldukları için yerel rota üzerinden konuşurlar.
+> Not: EKS cluster'ı VPC'mizin private subnet'lerinde durur, dışarıdan trafik Load Balancer üzerinden gelir. RDS zaten private subnet'te - pod'larla aynı VPC içinde oldukları için yerel rota üzerinden konuşurlar.
 
 **Cost check:** EKS isn't free-tier friendly. The control plane alone costs about **$0.10 per hour** (~$73/month) whether or not you run any pods, _plus_ the EC2 instances (or Fargate vCPUs) for your worker nodes. **Delete the cluster when you're done with this section.**

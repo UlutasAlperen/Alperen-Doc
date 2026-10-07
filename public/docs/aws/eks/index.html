@@ -31,7 +31,7 @@ https://github.com/alex-shpak/hugo-book
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.2589e5ffdfcbbe53847c2c88d266fa762f1153a56b69343abf237baa7f025694.js" integrity="sha256-JYnl/9/LvlOEfCyI0mb6di8RU6VraTQ6vyN7qn8CVpQ=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.073e18ecafc34b4141dbadea430fa9ca7480486a6096d7565210c7a4747d840b.js" integrity="sha256-Bz4Y7K/DS0FB263qQw&#43;pynSASGpgltdWUhDHpHR9hAs=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/aws/eks/index.xml" title="eks" />
 
   
@@ -2752,7 +2752,7 @@ https://github.com/alex-shpak/hugo-book
 <li>008 - <a href="eks-spot-instances/">eks-spot-instances</a> = spot node group + stateless app (ucuz cattle)</li>
 </ul>
 <p><a href="https://aws.amazon.com/eks/">EKS</a> (<strong>Elastic Kubernetes Service</strong>) is AWS&rsquo; <em>managed</em> Kubernetes offering. If you&rsquo;ve been through my <a href="../../kubernetes/">Kubernetes</a> notes with Minikube, this is the production version of the same thing: the <strong>control plane</strong> (API server, etcd, scheduler) is run and patched by AWS, and you manage the <strong>worker nodes</strong> (or let Fargate run pods without nodes at all).</p>
-<p>You already know why we might want <a href="../ecs/why-ecs/">ECS</a> instead: it trades flexibility for simplicity. But if you want the full Kubernetes API — <code>Deployment</code>, <code>Service</code>, <code>Ingress</code>, <code>Helm</code>, operators, and everything else — EKS is how you get it without babysitting etcd.</p>
+<p>You already know why we might want <a href="../ecs/why-ecs/">ECS</a> instead: it trades flexibility for simplicity. But if you want the full Kubernetes API - <code>Deployment</code>, <code>Service</code>, <code>Ingress</code>, <code>Helm</code>, operators, and everything else - EKS is how you get it without babysitting etcd.</p>
 <p>In this section we take the PatientPing app from the earlier lessons and run it on EKS:</p>
 <ol>
 <li>We create a cluster in our VPC.</li>
@@ -2782,7 +2782,7 @@ https://github.com/alex-shpak/hugo-book
     internet((internet)) --&gt; alb --&gt; pod1 &amp; pod2
     pod1 &amp; pod2 --&gt; rds
     pod1 &amp; pod2 --&gt; s3</pre><script src="/mermaid.min.js"></script><script>mermaid.initialize({"flowchart":{"useMaxWidth":true},"theme":"default"})</script><blockquote class='book-hint '>
-<p>Not: EKS cluster&rsquo;ı VPC&rsquo;mizin private subnet&rsquo;lerinde durur, dışarıdan trafik Load Balancer üzerinden gelir. RDS zaten private subnet&rsquo;te — pod&rsquo;larla aynı VPC içinde oldukları için yerel rota üzerinden konuşurlar.</p>
+<p>Not: EKS cluster&rsquo;ı VPC&rsquo;mizin private subnet&rsquo;lerinde durur, dışarıdan trafik Load Balancer üzerinden gelir. RDS zaten private subnet&rsquo;te - pod&rsquo;larla aynı VPC içinde oldukları için yerel rota üzerinden konuşurlar.</p>
 </blockquote><p><strong>Cost check:</strong> EKS isn&rsquo;t free-tier friendly. The control plane alone costs about <strong>$0.10 per hour</strong> (~$73/month) whether or not you run any pods, <em>plus</em> the EC2 instances (or Fargate vCPUs) for your worker nodes. <strong>Delete the cluster when you&rsquo;re done with this section.</strong></p>
 </article>
  

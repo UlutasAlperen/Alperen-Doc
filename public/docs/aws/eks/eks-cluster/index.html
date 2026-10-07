@@ -9,7 +9,7 @@ https://github.com/alex-shpak/hugo-book
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="EKS Cluster# An EKS cluster has two halves:
-The control plane: the Kubernetes API server, etcd, scheduler, and controllers. AWS runs these for you, patches them, and keeps them highly available. You never SSH into it; you just get an API endpoint and a kubeconfig. The data plane: the worker nodes (EC2 instances) or Fargate tasks that actually run your pods. These live in your VPC, in the subnets you choose. For the worker nodes we’ll use a managed node group: AWS creates the EC2 instances from a launch template, joins them to the cluster, and can roll updates for us. (Fargate is the serverless alternative — no nodes to think about, but less control and a different cost model.)
+The control plane: the Kubernetes API server, etcd, scheduler, and controllers. AWS runs these for you, patches them, and keeps them highly available. You never SSH into it; you just get an API endpoint and a kubeconfig. The data plane: the worker nodes (EC2 instances) or Fargate tasks that actually run your pods. These live in your VPC, in the subnets you choose. For the worker nodes we’ll use a managed node group: AWS creates the EC2 instances from a launch template, joins them to the cluster, and can roll updates for us. (Fargate is the serverless alternative - no nodes to think about, but less control and a different cost model.)
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
@@ -17,7 +17,7 @@ The control plane: the Kubernetes API server, etcd, scheduler, and controllers. 
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="eks-cluster">
 	<meta property="og:description" content="EKS Cluster# An EKS cluster has two halves:
-The control plane: the Kubernetes API server, etcd, scheduler, and controllers. AWS runs these for you, patches them, and keeps them highly available. You never SSH into it; you just get an API endpoint and a kubeconfig. The data plane: the worker nodes (EC2 instances) or Fargate tasks that actually run your pods. These live in your VPC, in the subnets you choose. For the worker nodes we’ll use a managed node group: AWS creates the EC2 instances from a launch template, joins them to the cluster, and can roll updates for us. (Fargate is the serverless alternative — no nodes to think about, but less control and a different cost model.)">
+The control plane: the Kubernetes API server, etcd, scheduler, and controllers. AWS runs these for you, patches them, and keeps them highly available. You never SSH into it; you just get an API endpoint and a kubeconfig. The data plane: the worker nodes (EC2 instances) or Fargate tasks that actually run your pods. These live in your VPC, in the subnets you choose. For the worker nodes we’ll use a managed node group: AWS creates the EC2 instances from a launch template, joins them to the cluster, and can roll updates for us. (Fargate is the serverless alternative - no nodes to think about, but less control and a different cost model.)">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
@@ -25,7 +25,7 @@ The control plane: the Kubernetes API server, etcd, scheduler, and controllers. 
 
 	<meta itemprop="name" content="eks-cluster">
 	<meta itemprop="description" content="EKS Cluster# An EKS cluster has two halves:
-The control plane: the Kubernetes API server, etcd, scheduler, and controllers. AWS runs these for you, patches them, and keeps them highly available. You never SSH into it; you just get an API endpoint and a kubeconfig. The data plane: the worker nodes (EC2 instances) or Fargate tasks that actually run your pods. These live in your VPC, in the subnets you choose. For the worker nodes we’ll use a managed node group: AWS creates the EC2 instances from a launch template, joins them to the cluster, and can roll updates for us. (Fargate is the serverless alternative — no nodes to think about, but less control and a different cost model.)">
+The control plane: the Kubernetes API server, etcd, scheduler, and controllers. AWS runs these for you, patches them, and keeps them highly available. You never SSH into it; you just get an API endpoint and a kubeconfig. The data plane: the worker nodes (EC2 instances) or Fargate tasks that actually run your pods. These live in your VPC, in the subnets you choose. For the worker nodes we’ll use a managed node group: AWS creates the EC2 instances from a launch template, joins them to the cluster, and can roll updates for us. (Fargate is the serverless alternative - no nodes to think about, but less control and a different cost model.)">
 	<meta itemprop="wordCount" content="455">
 
 <title>eks-cluster • Alperen Doc</title>
@@ -35,7 +35,7 @@ The control plane: the Kubernetes API server, etcd, scheduler, and controllers. 
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.2589e5ffdfcbbe53847c2c88d266fa762f1153a56b69343abf237baa7f025694.js" integrity="sha256-JYnl/9/LvlOEfCyI0mb6di8RU6VraTQ6vyN7qn8CVpQ=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.073e18ecafc34b4141dbadea430fa9ca7480486a6096d7565210c7a4747d840b.js" integrity="sha256-Bz4Y7K/DS0FB263qQw&#43;pynSASGpgltdWUhDHpHR9hAs=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2749,11 +2749,11 @@ The control plane: the Kubernetes API server, etcd, scheduler, and controllers. 
 <li>The <strong>control plane</strong>: the Kubernetes API server, etcd, scheduler, and controllers. AWS runs these for you, patches them, and keeps them highly available. You never SSH into it; you just get an API endpoint and a <code>kubeconfig</code>.</li>
 <li>The <strong>data plane</strong>: the worker nodes (EC2 instances) or Fargate tasks that actually run your pods. These live in <em>your</em> VPC, in the subnets you choose.</li>
 </ul>
-<p>For the worker nodes we&rsquo;ll use a <strong>managed node group</strong>: AWS creates the EC2 instances from a launch template, joins them to the cluster, and can roll updates for us. (<a href="https://docs.aws.amazon.com/eks/latest/userguide/fargate.html">Fargate</a> is the serverless alternative — no nodes to think about, but less control and a different cost model.)</p>
+<p>For the worker nodes we&rsquo;ll use a <strong>managed node group</strong>: AWS creates the EC2 instances from a launch template, joins them to the cluster, and can roll updates for us. (<a href="https://docs.aws.amazon.com/eks/latest/userguide/fargate.html">Fargate</a> is the serverless alternative - no nodes to think about, but less control and a different cost model.)</p>
 <p>We&rsquo;ll build the cluster with <a href="https://eksctl.io/"><code>eksctl</code></a>, the official CLI from the EKS team. Doing the same thing by clicking through the console takes about forty steps; <code>eksctl</code> takes one command.</p>
 <h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
 <p><strong>Create an EKS cluster named <code>patientping-eks</code> with a small managed node group in the <code>patientping</code> VPC&rsquo;s private subnets.</strong></p>
-<p><strong>Cost check:</strong> The EKS <strong>control plane</strong> costs about <strong>$0.10 per hour</strong> (~$73/month) from the moment the cluster is <code>Active</code>. The <code>t3.small</code> worker node adds a few dollars per month on top. This is the most expensive lesson in the whole document — <strong>delete the cluster when you&rsquo;re done.</strong></p>
+<p><strong>Cost check:</strong> The EKS <strong>control plane</strong> costs about <strong>$0.10 per hour</strong> (~$73/month) from the moment the cluster is <code>Active</code>. The <code>t3.small</code> worker node adds a few dollars per month on top. This is the most expensive lesson in the whole document - <strong>delete the cluster when you&rsquo;re done.</strong></p>
 <ol>
 <li>
 <p>Install <code>eksctl</code> if you don&rsquo;t have it (see the <a href="https://eksctl.io/installation/">official instructions</a>), and make sure your AWS CLI credentials are the <code>alperen-admin</code> user, not the root user.</p>
@@ -2784,7 +2784,7 @@ The control plane: the Kubernetes API server, etcd, scheduler, and controllers. 
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">instanceType</span>: <span style="color:#ae81ff">t3.small</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">desiredCapacity</span>: <span style="color:#ae81ff">2</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">privateNetworking</span>: <span style="color:#66d9ef">true</span></span></span></code></pre></div><blockquote class='book-hint '>
-<p>The VPC and subnet IDs are the ones from the Networking section — the same <code>patientping</code> VPC where <code>patientping-db</code> (RDS) lives. Keeping the nodes in <strong>private</strong> subnets means they don&rsquo;t get public IPs; they reach the internet through the NAT gateway.</p>
+<p>The VPC and subnet IDs are the ones from the Networking section - the same <code>patientping</code> VPC where <code>patientping-db</code> (RDS) lives. Keeping the nodes in <strong>private</strong> subnets means they don&rsquo;t get public IPs; they reach the internet through the NAT gateway.</p>
 </blockquote><ol start="3">
 <li>Create the cluster:</li>
 </ol>
@@ -2796,7 +2796,7 @@ The control plane: the Kubernetes API server, etcd, scheduler, and controllers. 
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get svc</span></span></code></pre></div><p>The <code>kubernetes</code> service in <code>default</code> should point at your new API endpoint.</p>
 <blockquote class='book-hint '>
 <p>Trouble? <code>eksctl utils write-kubeconfig --cluster patientping-eks</code> refreshes your <code>kubeconfig</code>, and <code>aws eks update-kubeconfig --name patientping-eks</code> does the same thing with the AWS CLI.</p>
-</blockquote><p><strong>That&rsquo;s it — you now have a real Kubernetes cluster.</strong> The rest of this section is just Kubernetes: manifests, secrets, and wiring up AWS services to it.</p>
+</blockquote><p><strong>That&rsquo;s it - you now have a real Kubernetes cluster.</strong> The rest of this section is just Kubernetes: manifests, secrets, and wiring up AWS services to it.</p>
 </article>
  
       
