@@ -19,6 +19,8 @@ bookCollapseSection: true
 
 ![Internet gateway diagram](/images/aws/internet-gateway-diagram.png)
 
+![Internet gateway traffic flow](/images/aws/network_traffic_in_a_vpc.png)
+
 - 005 - [route-tables](route-tables/) = trafiğin nereye gideceğini belirleyen route tabloları
 
 ![Route tables diagram](/images/aws/route-tables-diagram.png)

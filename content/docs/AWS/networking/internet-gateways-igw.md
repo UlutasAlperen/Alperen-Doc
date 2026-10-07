@@ -23,6 +23,7 @@ The route tells outgoing traffic, "Hey, this gateway exists; if you're trying to
 ![Internet gateway traffic flow](/images/aws/internet-gateway-flow.png)
 ## how to crate IGW to vpc(sanal ag)
 
+![Internet gateway traffic flow](/images/aws/network_traffic_in_a_vpc.png)
 **PatientPing servers need access to the internet. Start by attaching an IGW to our VPC.**
 
 **Cost check:** Internet gateways are free. You only pay for data transfer.
