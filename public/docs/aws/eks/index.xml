@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>eks on Alperen Doc</title>
+		<link>https://blog.ulutasalperen.com/docs/aws/eks/</link>
+		<description>Recent content in eks on Alperen Doc</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<atom:link href="https://blog.ulutasalperen.com/docs/aws/eks/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>eks-cluster</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/eks/eks-cluster/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/eks/eks-cluster/</guid>
+				<description>&lt;h1 id=&#34;eks-cluster&#34;&gt;EKS Cluster&lt;a class=&#34;anchor&#34; href=&#34;#eks-cluster&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;An EKS cluster has two halves:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The &lt;strong&gt;control plane&lt;/strong&gt;: the Kubernetes API server, etcd, scheduler, and controllers. AWS runs these for you, patches them, and keeps them highly available. You never SSH into it; you just get an API endpoint and a &lt;code&gt;kubeconfig&lt;/code&gt;.&lt;/li&gt;&#xA;&lt;li&gt;The &lt;strong&gt;data plane&lt;/strong&gt;: the worker nodes (EC2 instances) or Fargate tasks that actually run your pods. These live in &lt;em&gt;your&lt;/em&gt; VPC, in the subnets you choose.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;For the worker nodes we&amp;rsquo;ll use a &lt;strong&gt;managed node group&lt;/strong&gt;: AWS creates the EC2 instances from a launch template, joins them to the cluster, and can roll updates for us. (&lt;a href=&#34;https://docs.aws.amazon.com/eks/latest/userguide/fargate.html&#34;&gt;Fargate&lt;/a&gt; is the serverless alternative — no nodes to think about, but less control and a different cost model.)&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>eks-vs-kubeadm</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/eks/eks-vs-kubeadm/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/eks/eks-vs-kubeadm/</guid>
+				<description>&lt;h1 id=&#34;eks-vs-your-own-kubeadm-cluster&#34;&gt;EKS vs Your Own kubeadm Cluster&lt;a class=&#34;anchor&#34; href=&#34;#eks-vs-your-own-kubeadm-cluster&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;If you&amp;rsquo;ve been through my &lt;a href=&#34;../../../kubernetes_v2/multi-node-kubeadm/&#34;&gt;multi-node kubeadm&lt;/a&gt; notes, you&amp;rsquo;ve done it the hard way: Debian VMs on Proxmox, &lt;code&gt;containerd&lt;/code&gt;, &lt;code&gt;kubeadm init&lt;/code&gt;/&lt;code&gt;join&lt;/code&gt;, Cilium as the CNI, and every package upgrade lands on your desk. That cluster is &lt;em&gt;yours&lt;/em&gt; — you know every screw.&lt;/p&gt;&#xA;&lt;p&gt;EKS is the same Kubernetes API with most of the screws hidden. The point of this note is exactly what to compare: what disappears, what changes, and what stays stubbornly identical.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>eks-deploy-app</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/eks/eks-deploy-app/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/eks/eks-deploy-app/</guid>
+				<description>&lt;h1 id=&#34;deploy-app-to-eks&#34;&gt;Deploy App to EKS&lt;a class=&#34;anchor&#34; href=&#34;#deploy-app-to-eks&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;The cluster is up; now we run the PatientPing app on it. Nothing about this part is AWS-specific — it&amp;rsquo;s plain Kubernetes — but we&amp;rsquo;ll use AWS to expose the app to the internet at the end.&lt;/p&gt;&#xA;&lt;p&gt;We need two objects:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;A &lt;strong&gt;Deployment&lt;/strong&gt;: tells Kubernetes &amp;ldquo;keep 2 replicas of the &lt;code&gt;patientping-web&lt;/code&gt; container running&amp;rdquo;.&lt;/li&gt;&#xA;&lt;li&gt;A &lt;strong&gt;Service&lt;/strong&gt;: gives those pods a stable address. With &lt;code&gt;type: LoadBalancer&lt;/code&gt; on EKS, Kubernetes asks AWS to create an &lt;a href=&#34;../../ecs/application-load-balancer/&#34;&gt;Application Load Balancer&lt;/a&gt; for us — the same kind we built by hand in the ECS section.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;assignment&#34;&gt;Assignment&lt;a class=&#34;anchor&#34; href=&#34;#assignment&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Deploy &lt;code&gt;patientping-web&lt;/code&gt; to the &lt;code&gt;patientping-eks&lt;/code&gt; cluster and reach it through a load balancer.&lt;/strong&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>eks-connect-s3</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/eks/eks-connect-s3/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/eks/eks-connect-s3/</guid>
+				<description>&lt;h1 id=&#34;connect-s3-to-eks&#34;&gt;Connect S3 to EKS&lt;a class=&#34;anchor&#34; href=&#34;#connect-s3-to-eks&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;The PatientPing app serves a favicon and will store user uploads in S3. Our pods need to call the S3 API — but how do they get AWS credentials?&lt;/p&gt;&#xA;&lt;p&gt;The lazy way is to bake an access key into the container image or paste it into a &lt;code&gt;Deployment&lt;/code&gt; env var. &lt;strong&gt;Don&amp;rsquo;t.&lt;/strong&gt; Long-lived keys in a pod spec end up in git, in &lt;code&gt;kubectl describe&lt;/code&gt; output, and in your terminal history. And giving the &lt;strong&gt;worker nodes&lt;/strong&gt; a broad S3 role is also wrong: any pod on the node (including one you didn&amp;rsquo;t write) inherits it.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>eks-use-rds</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/eks/eks-use-rds/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/eks/eks-use-rds/</guid>
+				<description>&lt;h1 id=&#34;use-rds-from-eks&#34;&gt;Use RDS from EKS&lt;a class=&#34;anchor&#34; href=&#34;#use-rds-from-eks&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Our &lt;code&gt;patientping-db&lt;/code&gt; Postgres instance is sitting in a &lt;strong&gt;private subnet&lt;/strong&gt;, exactly where it belongs. Now the pods need to reach it. Two things have to be right:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Network path&lt;/strong&gt; — the RDS security group must allow traffic from the worker nodes on port &lt;code&gt;5432&lt;/code&gt;.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Credentials&lt;/strong&gt; — the app needs &lt;code&gt;DATABASE_URL&lt;/code&gt;, and that password shouldn&amp;rsquo;t live in the &lt;code&gt;Deployment&lt;/code&gt; YAML (anything in a manifest ends up in git and in &lt;code&gt;kubectl get deploy -o yaml&lt;/code&gt;).&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Kubernetes &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/secret/&#34;&gt;Secrets&lt;/a&gt; are the second half of the answer, and security groups are the first.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>eks-node-affinity-taints</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/eks/eks-node-affinity-taints/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/eks/eks-node-affinity-taints/</guid>
+				<description>&lt;h1 id=&#34;node-affinity-and-taints-on-eks&#34;&gt;Node Affinity and Taints on EKS&lt;a class=&#34;anchor&#34; href=&#34;#node-affinity-and-taints-on-eks&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Everything in my &lt;a href=&#34;../../../kubernetes_v2/taints-affinity-quotas/&#34;&gt;taints, affinity and quotas&lt;/a&gt; notes works on EKS &lt;strong&gt;verbatim&lt;/strong&gt;. &lt;code&gt;kubectl taint&lt;/code&gt;, tolerations, &lt;code&gt;nodeAffinity&lt;/code&gt;, &lt;code&gt;topologySpreadConstraints&lt;/code&gt; — the API doesn&amp;rsquo;t know or care that AWS is underneath. What &lt;em&gt;is&lt;/em&gt; different is how nodes appear, how they get their labels and taints, and what happens to all of it when the autoscaler is involved.&lt;/p&gt;&#xA;&lt;blockquote class=&#39;book-hint &#39;&gt;&#xA;&lt;p&gt;Kısa hatırlatma: &lt;strong&gt;taint&lt;/strong&gt; node&amp;rsquo;un kapıdaki tabelası (&amp;ldquo;her pod giremez&amp;rdquo;), &lt;strong&gt;toleration&lt;/strong&gt; pod&amp;rsquo;un geçiş izni, &lt;strong&gt;nodeAffinity&lt;/strong&gt; ise &amp;ldquo;şu node&amp;rsquo;a git&amp;rdquo; talebi. İkisini karıştırmayın — toleration sizi oraya göndermez, sadece engeli kaldırır.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>eks-ha-cluster</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/eks/eks-ha-cluster/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/eks/eks-ha-cluster/</guid>
+				<description>&lt;h1 id=&#34;high-availability-on-eks&#34;&gt;High Availability on EKS&lt;a class=&#34;anchor&#34; href=&#34;#high-availability-on-eks&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;In the &lt;a href=&#34;../../../kubernetes_v2/ha-control-plane/&#34;&gt;HA notes&lt;/a&gt; for the kubeadm cluster, HA was a project: stacked etcd members, an external etcd option, a keepalived VIP in front of the apiserver, and a failover test where you pull the power on a VM. On EKS, most of that project is &lt;strong&gt;already done for you&lt;/strong&gt; — but &amp;ldquo;done for you&amp;rdquo; is not the same as &amp;ldquo;you have no homework&amp;rdquo;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-control-plane-awss-job&#34;&gt;The control plane: AWS&amp;rsquo;s job&lt;a class=&#34;anchor&#34; href=&#34;#the-control-plane-awss-job&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;When you create &lt;code&gt;patientping-eks&lt;/code&gt;, AWS runs the control plane across &lt;strong&gt;three Availability Zones&lt;/strong&gt;, with an etcd cluster that tolerates member loss and a regional API endpoint your &lt;code&gt;kubeconfig&lt;/code&gt; already points at. There is no VIP to keep alive, no &lt;code&gt;--control-plane-endpoint&lt;/code&gt; to design, no etcd quorum to babysit.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>eks-spot-instances</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/eks/eks-spot-instances/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/eks/eks-spot-instances/</guid>
+				<description>&lt;h1 id=&#34;spot-instances-on-eks&#34;&gt;Spot Instances on EKS&lt;a class=&#34;anchor&#34; href=&#34;#spot-instances-on-eks&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;You already know &lt;a href=&#34;../../general-knowledge/spot-instances/&#34;&gt;spot instances&lt;/a&gt; from the EC2 lessons: unused AWS capacity at a &lt;strong&gt;~90% discount&lt;/strong&gt;, with one small caveat — &amp;ldquo;at any time I may literally delete your server&amp;rdquo; with a &lt;strong&gt;2-minute heads-up&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;EKS doesn&amp;rsquo;t change the deal; it just changes how you consume it. Instead of bidding on individual instances, you declare one line in a managed node group and Kubernetes schedules onto the cheap cattle:&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

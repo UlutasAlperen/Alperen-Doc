@@ -20,7 +20,7 @@ Here is the link to view the diagram I drew on Excalidraw: [Diagram link(excalid
 - Control access with IAM users, groups, roles and policies
 - Store files in S3 and serve them worldwide with CloudFront
 - Route traffic with Route 53 DNS records
-- Run containers with ECS and serverless functions with Lambda
+- Run containers with ECS or Kubernetes with EKS, serverless functions with Lambda
 - Monitor everything with CloudWatch and CloudTrail
 - And much more
 
@@ -120,6 +120,17 @@ Here is the link to view the diagram I drew on Excalidraw: [Diagram link(excalid
 10. [ecs-target-groups](ecs/ecs-target-groups/)
 11. [cloudwatch-log-groups](ecs/cloudwatch-log-groups/)
 12. [ecs-services](ecs/ecs-services/)
+
+### [AWS - EKS - Elastic Kubernetes Service](eks/)
+
+1. [eks-cluster](eks/eks-cluster/)
+2. [eks-vs-kubeadm](eks/eks-vs-kubeadm/)
+3. [eks-deploy-app](eks/eks-deploy-app/)
+4. [eks-connect-s3](eks/eks-connect-s3/)
+5. [eks-use-rds](eks/eks-use-rds/)
+6. [eks-node-affinity-taints](eks/eks-node-affinity-taints/)
+7. [eks-ha-cluster](eks/eks-ha-cluster/)
+8. [eks-spot-instances](eks/eks-spot-instances/)
 
 ### [AWS Lambda](lambda/)
 
