@@ -26,8 +26,8 @@ Here is the link to view the diagram I drew on Excalidraw: [Diagram link(excalid
 
 **Başlamadan önce:**
 
-- [create-iam-user-and-group](iam/create-iam-user-and-group/) = ilk admin IAM kullanıcını oluştur
-- [regions-and-availability-zones](networking/regions-and-availability-zones/) = region ve AZ kavramlarını öğren
+- [create-iam-user-and-group](iam/create-iam-user-and-group/) = ilk olarak admin IAM kullanıcısi olusturalim
+- [regions-and-availability-zones](networking/regions-and-availability-zones/) = region ve AZ kavramları
 
 ## AWS konular
 
