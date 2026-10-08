@@ -33,11 +33,18 @@
 				<description>&lt;h1 id=&#34;auto-scaling-groups&#34;&gt;Auto Scaling Groups&lt;a class=&#34;anchor&#34; href=&#34;#auto-scaling-groups&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;The process works fine for one server, but  if we needed &lt;em&gt;hundreds&lt;/em&gt; of servers?&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html&#34;&gt;Auto Scaling Groups&lt;/a&gt; (ASGs) help with this. We can give AWS an AMI and tell it how many instances we want.&lt;/p&gt;&#xA;&lt;p&gt;This gets even more powerful as we &lt;em&gt;instrument&lt;/em&gt; our servers. If a server starts to get &lt;strong&gt;busy&lt;/strong&gt;, AWS can automatically provision more. If servers are sitting &lt;strong&gt;idle&lt;/strong&gt;, we can reduce the server count.&lt;/p&gt;</description>
 			</item>
 			<item>
-				<title>AWS-compute-services</title>
+				<title>aws-compute-service</title>
 				<link>https://blog.ulutasalperen.com/docs/aws/general-knowledge/aws-compute-service/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
 				<guid>https://blog.ulutasalperen.com/docs/aws/general-knowledge/aws-compute-service/</guid>
 				<description>&lt;h1 id=&#34;additional-compute-services&#34;&gt;Additional Compute Services&lt;a class=&#34;anchor&#34; href=&#34;#additional-compute-services&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;AWS offers a range of purpose-built services designed to streamline specific use cases—from application deployment and data processing to web hosting and hybrid cloud setups. Let’s take a quick tour of some of these powerful solutions.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://blog.ulutasalperen.com/images/aws/beanstalk_batch.png&#34; alt=&#34;Compute services 1&#34; /&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://blog.ulutasalperen.com/images/aws/lightsail_outposts.png&#34; alt=&#34;Compute services 2&#34; /&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://blog.ulutasalperen.com/images/aws/compute_services_example.png&#34; alt=&#34;Compute services example&#34; /&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>aws-block-storage</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/general-knowledge/aws-block-storage/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/general-knowledge/aws-block-storage/</guid>
+				<description>&lt;h1 id=&#34;amazon-ec2-instance-store&#34;&gt;Amazon EC2 instance store&lt;a class=&#34;anchor&#34; href=&#34;#amazon-ec2-instance-store&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Amazon EC2 instance store isn&amp;rsquo;t a stand-alone AWS block storage service. Rather, it refers to the block-level storage that is physically attached to the EC2 instance host computer. Depending on the type of instance, EC2 instance store might come attached as the default storage. Since its data is lost when an instance is stopped or terminated, EC2 instance store is best for temporary memory-based storage needs like buffers, caches, and scratch data. It is not recommended for applications that require data retention.&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>

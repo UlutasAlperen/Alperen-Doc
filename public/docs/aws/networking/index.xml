@@ -30,7 +30,7 @@
 				<link>https://blog.ulutasalperen.com/docs/aws/networking/aws-subnetting/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
 				<guid>https://blog.ulutasalperen.com/docs/aws/networking/aws-subnetting/</guid>
-				<description>&lt;h1 id=&#34;subnetting&#34;&gt;Subnetting&lt;a class=&#34;anchor&#34; href=&#34;#subnetting&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;A VPC&amp;rsquo;s address space is split into smaller networks called &lt;strong&gt;subnets&lt;/strong&gt;. Each subnet lives in exactly one Availability Zone and gets its own CIDR block inside the VPC CIDR.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Public subnets&lt;/strong&gt; have a route to an &lt;a href=&#34;internet-gateways-igw/&#34;&gt;Internet Gateway&lt;/a&gt; - resources here can be reached from (and reach out to) the internet.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Private subnets&lt;/strong&gt; have no direct route to the internet - good for databases and internal services.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://blog.ulutasalperen.com/images/aws/vpc-subnetting-overview.png&#34; alt=&#34;VPC subnet layout with private and public subnets&#34; /&gt;&lt;/p&gt;</description>
+				<description>&lt;h1 id=&#34;subnetting&#34;&gt;Subnetting&lt;a class=&#34;anchor&#34; href=&#34;#subnetting&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;A VPC&amp;rsquo;s address space is split into smaller networks called &lt;strong&gt;subnets&lt;/strong&gt;. Each subnet lives in exactly one Availability Zone and gets its own CIDR block inside the VPC CIDR.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Public subnets&lt;/strong&gt; have a route to an &lt;a href=&#34;../internet-gateways-igw/&#34;&gt;Internet Gateway&lt;/a&gt; - resources here can be reached from (and reach out to) the internet.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Private subnets&lt;/strong&gt; have no direct route to the internet - good for databases and internal services.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://blog.ulutasalperen.com/images/aws/vpc-subnetting-overview.png&#34; alt=&#34;VPC subnet layout with private and public subnets&#34; /&gt;&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>internet-gateways-igw</title>
@@ -54,7 +54,7 @@
 				<description>&lt;h1 id=&#34;private-subnets&#34;&gt;Private Subnets&lt;a class=&#34;anchor&#34; href=&#34;#private-subnets&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;A subnet becomes &lt;em&gt;public&lt;/em&gt; by connecting it to a route table and an internet gateway, but what about our &lt;em&gt;private subnets&lt;/em&gt;?&lt;/p&gt;&#xA;&lt;p&gt;An IGW would make the subnet non-private and expose it to the internet. That is too risky for some resources.&lt;/p&gt;&#xA;&lt;p&gt;On the other hand, we don&amp;rsquo;t want to &lt;em&gt;completely&lt;/em&gt; cut off private infrastructure from internet access. Using a floppy disk to download updates is not exactly an option in the cloud.&lt;/p&gt;</description>
 			</item>
 			<item>
-				<title>Connecting-to-the-AWS-Cloud</title>
+				<title>connecting-to-the-aws-cloud</title>
 				<link>https://blog.ulutasalperen.com/docs/aws/networking/connecting-to-the-aws-cloud/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
 				<guid>https://blog.ulutasalperen.com/docs/aws/networking/connecting-to-the-aws-cloud/</guid>

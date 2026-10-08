@@ -751,7 +751,7 @@
 				<link>https://blog.ulutasalperen.com/docs/aws/networking/aws-subnetting/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
 				<guid>https://blog.ulutasalperen.com/docs/aws/networking/aws-subnetting/</guid>
-				<description>&lt;h1 id=&#34;subnetting&#34;&gt;Subnetting&lt;a class=&#34;anchor&#34; href=&#34;#subnetting&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;A VPC&amp;rsquo;s address space is split into smaller networks called &lt;strong&gt;subnets&lt;/strong&gt;. Each subnet lives in exactly one Availability Zone and gets its own CIDR block inside the VPC CIDR.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Public subnets&lt;/strong&gt; have a route to an &lt;a href=&#34;internet-gateways-igw/&#34;&gt;Internet Gateway&lt;/a&gt; - resources here can be reached from (and reach out to) the internet.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Private subnets&lt;/strong&gt; have no direct route to the internet - good for databases and internal services.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://blog.ulutasalperen.com/images/aws/vpc-subnetting-overview.png&#34; alt=&#34;VPC subnet layout with private and public subnets&#34; /&gt;&lt;/p&gt;</description>
+				<description>&lt;h1 id=&#34;subnetting&#34;&gt;Subnetting&lt;a class=&#34;anchor&#34; href=&#34;#subnetting&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;A VPC&amp;rsquo;s address space is split into smaller networks called &lt;strong&gt;subnets&lt;/strong&gt;. Each subnet lives in exactly one Availability Zone and gets its own CIDR block inside the VPC CIDR.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Public subnets&lt;/strong&gt; have a route to an &lt;a href=&#34;../internet-gateways-igw/&#34;&gt;Internet Gateway&lt;/a&gt; - resources here can be reached from (and reach out to) the internet.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Private subnets&lt;/strong&gt; have no direct route to the internet - good for databases and internal services.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://blog.ulutasalperen.com/images/aws/vpc-subnetting-overview.png&#34; alt=&#34;VPC subnet layout with private and public subnets&#34; /&gt;&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>cloud-watch-alarms</title>
@@ -810,7 +810,7 @@
 				<description>&lt;h1 id=&#34;testing-lambda-functions&#34;&gt;Testing Lambda Functions&lt;a class=&#34;anchor&#34; href=&#34;#testing-lambda-functions&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Your Lambda function is deployed, now let&amp;rsquo;s test it. Lambda provides several ways to &lt;a href=&#34;https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html&#34;&gt;invoke functions&lt;/a&gt;, and we&amp;rsquo;ll explore a few.&lt;/p&gt;&#xA;&lt;p&gt;When you test a Lambda function directly (via the CLI or AWS Console), you&amp;rsquo;re &lt;em&gt;not&lt;/em&gt; making an HTTP request to it. You&amp;rsquo;re telling AWS to execute your code with a specific payload. Take a look at this diagram:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/WvQZMrd-527x720.png&#34; alt=&#34;Lambda cli invocation&#34; /&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;invoke-from-the-cli&#34;&gt;Invoke from the CLI&lt;a class=&#34;anchor&#34; href=&#34;#invoke-from-the-cli&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;For our function, we need to simulate what &lt;a href=&#34;https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html&#34;&gt;API Gateway&lt;/a&gt; &lt;em&gt;would&lt;/em&gt; send. When you invoke the function directly via the console, you&amp;rsquo;re providing mock data. The IP address in your test event is not your real IP address; it&amp;rsquo;s example data you&amp;rsquo;re feeding to the function.&lt;/p&gt;</description>
 			</item>
 			<item>
-				<title>AWS-compute-services</title>
+				<title>aws-compute-service</title>
 				<link>https://blog.ulutasalperen.com/docs/aws/general-knowledge/aws-compute-service/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
 				<guid>https://blog.ulutasalperen.com/docs/aws/general-knowledge/aws-compute-service/</guid>
@@ -885,6 +885,13 @@
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
 				<guid>https://blog.ulutasalperen.com/docs/aws/cdn/presigned-urls/</guid>
 				<description>&lt;h1 id=&#34;presigned-urls&#34;&gt;Presigned URLs&lt;a class=&#34;anchor&#34; href=&#34;#presigned-urls&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Serving files is nice, but we often want CDN speed while still limiting access to specific users. To do that, we can use &lt;strong&gt;presigned URLs&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html&#34;&gt;&lt;strong&gt;Presigned URLs&lt;/strong&gt;&lt;/a&gt; are temporary, time-limited URLs that grant access to private S3 objects or CloudFront content. They&amp;rsquo;re like tickets that expire:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Time-limited:&lt;/strong&gt; The URL expires after a set duration (e.g., 1 hour, or 24 hours).&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Secure:&lt;/strong&gt; The content itself remains private; only those with the presigned URL can access it.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Controlled:&lt;/strong&gt; You control who gets the URL and when it expires.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Here&amp;rsquo;s what a presigned URL looks like:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>aws-block-storage</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/general-knowledge/aws-block-storage/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/general-knowledge/aws-block-storage/</guid>
+				<description>&lt;h1 id=&#34;amazon-ec2-instance-store&#34;&gt;Amazon EC2 instance store&lt;a class=&#34;anchor&#34; href=&#34;#amazon-ec2-instance-store&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Amazon EC2 instance store isn&amp;rsquo;t a stand-alone AWS block storage service. Rather, it refers to the block-level storage that is physically attached to the EC2 instance host computer. Depending on the type of instance, EC2 instance store might come attached as the default storage. Since its data is lost when an instance is stopped or terminated, EC2 instance store is best for temporary memory-based storage needs like buffers, caches, and scratch data. It is not recommended for applications that require data retention.&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>aws-cname-records</title>
@@ -1013,7 +1020,7 @@
 				<description>&lt;h1 id=&#34;deny-policies&#34;&gt;Deny Policies&lt;a class=&#34;anchor&#34; href=&#34;#deny-policies&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;An explicit &lt;code&gt;Deny&lt;/code&gt; policy always wins; even if other policies &lt;code&gt;Allow&lt;/code&gt; the same action. This is your shield when you need to set absolute boundaries.&lt;/p&gt;&#xA;&lt;p&gt;Follow the &lt;a href=&#34;https://en.wikipedia.org/wiki/Principle_of_least_privilege&#34;&gt;principle of least privilege&lt;/a&gt;: grant people and resources only the permissions they actually need, nothing more. So don&amp;rsquo;t &amp;ldquo;allow all actions by default&amp;rdquo; and then add &lt;code&gt;Deny&lt;/code&gt; rules for dangerous actions. Prefer to add permissions as they&amp;rsquo;re needed.&lt;/p&gt;&#xA;&lt;p&gt;That said, there are situations where &lt;code&gt;Deny&lt;/code&gt; policies are helpful:&lt;/p&gt;</description>
 			</item>
 			<item>
-				<title>Connecting-to-the-AWS-Cloud</title>
+				<title>connecting-to-the-aws-cloud</title>
 				<link>https://blog.ulutasalperen.com/docs/aws/networking/connecting-to-the-aws-cloud/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
 				<guid>https://blog.ulutasalperen.com/docs/aws/networking/connecting-to-the-aws-cloud/</guid>
