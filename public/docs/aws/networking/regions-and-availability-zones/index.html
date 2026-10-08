@@ -25,7 +25,7 @@ An outage in one region will (usually) not affect another region. The farther a 
 	<meta itemprop="name" content="regions-and-availability-zones">
 	<meta itemprop="description" content="Regions and Availability Zones# AWS has many regions to choose from. Each region is where your services are geographically located.
 An outage in one region will (usually) not affect another region. The farther a server is from the user, the higher the latency. Choose a region close to the folks using your service. Some services are available only in certain places, or are significantly more expensive in some regions. So we need to make sure a region meets our needs. As a service grows, we may want to host in more than one region. We also pay a toll for transferring data between regions.">
-	<meta itemprop="wordCount" content="258">
+	<meta itemprop="wordCount" content="869">
 
 <title>regions-and-availability-zones • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -34,7 +34,7 @@ An outage in one region will (usually) not affect another region. The farther a 
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.d93d956b8395348eb1f29ebffc9276e3d4ed934578019bbd0eedc007881ad240.js" integrity="sha256-2T2Va4OVNI6x8p6//JJ249Ttk0V4AZu9Du3AB4ga0kA=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.91efafc7454ad67aae5f64787b662c0bc3d2af1feed9dcfe253edcbb2e7c9ebe.js" integrity="sha256-ke&#43;vx0VK1nquX2R4e2YsC8PSrx/u2dz&#43;JT7cuy58nr4=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -1379,6 +1379,20 @@ An outage in one region will (usually) not affect another region. The farther a 
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/connecting-to-the-aws-cloud/" class="">
+      Connecting-to-the-AWS-Cloud</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -2668,6 +2682,20 @@ An outage in one region will (usually) not affect another region. The farther a 
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-compute-service/" class="">
+      AWS-compute-services</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -2730,6 +2758,19 @@ An outage in one region will (usually) not affect another region. The farther a 
 <nav id="TableOfContents">
   <ul>
     <li><a href="#availability-zones-azs">Availability Zones (AZs)</a></li>
+    <li><a href="#key-considerations-when-choosing-regions">Key considerations when choosing Regions</a>
+      <ul>
+        <li><a href="#compliance">Compliance</a></li>
+        <li><a href="#proximity">Proximity</a></li>
+        <li><a href="#feature-availability">Feature availability</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+    </li>
+    <li><a href="#designing-highly-available-architectures">Designing highly available architectures</a>
+      <ul>
+        <li><a href="#edge-locations">Edge locations</a></li>
+      </ul>
+    </li>
     <li><a href="#assignment">Assignment</a></li>
   </ul>
 </nav>
@@ -2758,6 +2799,36 @@ An outage in one region will (usually) not affect another region. The farther a 
 <li>An outage in one zone will (<em>usually</em>) not affect servers hosted in another zone.</li>
 <li>We pay a toll for transferring data between zones.</li>
 </ul>
+<h2 id="key-considerations-when-choosing-regions">Key considerations when choosing Regions<a class="anchor" href="#key-considerations-when-choosing-regions">#</a></h2>
+<p><img src="/images/aws/region_selection.png" alt="Region and AZ" /></p>
+<h3 id="compliance">Compliance<a class="anchor" href="#compliance">#</a></h3>
+<p>Compliance is an important consideration when selecting Regions for deploying business resources. Different geographical locations have varying regulatory requirements and data protection laws that organizations must follow. For example, the General Data Protection Regulation (GDPR) is designed to protect the personal data and privacy of individuals within the European Union (EU). An online retail company operating in the EU would be required to meet GDPR compliance to protect customer data. GDPR compliance includes obtaining proper consent for data collection and providing mechanisms for data access and deletion.
+Numbered divider2</p>
+<h3 id="proximity">Proximity<a class="anchor" href="#proximity">#</a></h3>
+<p>When selecting a Region, you also want to consider how to achieve low latency for your users. Regions closer to your user base minimize data travel time, which reduces latency and enhances application responsiveness. Choosing a Region or set of Regions farther away from customers could introduce delays, which might impact user satisfaction and overall system efficiency.
+Numbered divider3</p>
+<h3 id="feature-availability">Feature availability<a class="anchor" href="#feature-availability">#</a></h3>
+<p>You also want to consider which specific features and services are available in each Region. AWS is constantly expanding features and services to multiple locations, but not all Regions contain all AWS offerings. For example, AWS GovCloud Regions are specifically designed to meet the compliance and security requirements of US government agencies and their contractors. These Regions have stringent physical, operational, and personnel security controls in place. These controls are only available in specific Regions to meet certain governmental regulatory requirements.
+Numbered divider4</p>
+<h3 id="pricing">Pricing<a class="anchor" href="#pricing">#</a></h3>
+<p>When selecting a Region, pricing is also a factor that can influence your decision. Some Regions have lower operational costs than others. These operational costs can impact the overall expenses for hosting applications and services. Tax laws and regulations can also play a role in cost. Some Regions might offer tax incentives or have lower tax rates, which can affect customer pricing. Additionally, data sovereignty laws in certain Regions might require data to be stored locally, affecting both compliance and cost.</p>
+<h2 id="designing-highly-available-architectures">Designing highly available architectures<a class="anchor" href="#designing-highly-available-architectures">#</a></h2>
+<p>Deploying multi-Region and multi-AZ resources</p>
+<p>You&rsquo;ve learned how deploying your cloud resources to multiple Regions can achieve high availability. In addition to deploying to multiple Regions, you also want to deploy resources to multiple Availability Zones. By building redundant architectures or replicating your resources across multiple levels of AWS infrastructure, you can improve application reliability so that your users have access to your content when they need it.</p>
+<p>In addition to high availability, the AWS Global Infrastructure also helps you achieve agility and elasticity for your business. Let&rsquo;s discuss the difference between these advantages:</p>
+<ul>
+<li>
+<p>High availability: High availability refers to the capability of a system to operate continuously without failing. In the context of AWS infrastructure, it means that your applications can handle the failure of individual components without significant downtime.</p>
+</li>
+<li>
+<p>Agility: Agility refers to the ability to quickly adapt to changing requirements or market conditions. With AWS infrastructure in place, you can modify and deploy services rapidly.</p>
+</li>
+<li>
+<p>Elasticity: Elasticity refers to the ability of a system to scale resources up or down automatically in response to changes in demand. AWS infrastructure is set up for you to scale resources up and down on demand.</p>
+</li>
+</ul>
+<h3 id="edge-locations">Edge locations<a class="anchor" href="#edge-locations">#</a></h3>
+<p>In addition to AWS Regions that contain Availability Zones, AWS has a global edge network that provides quicker content access to users outside of standard Regions. These edge locations are strategically placed in areas like Atlanta, Georgia, USA or Shanghai, China to provide low-latency access to AWS services and content delivery. Edge locations offer multiple services to run closer to end users, including AWS networking services like Amazon CloudFront. CloudFront is a content delivery network (CDN) and caching system that you learn more about later in this training.</p>
 <h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
 <p><strong>Set your default AWS region to <code>us-east-1</code>.</strong></p>
 <p><strong>Cost check:</strong> Listing regions and availability zones is free, and changing your default region is also free.</p>
@@ -2850,6 +2921,19 @@ An outage in one region will (usually) not affect another region. The farther a 
 <nav id="TableOfContents">
   <ul>
     <li><a href="#availability-zones-azs">Availability Zones (AZs)</a></li>
+    <li><a href="#key-considerations-when-choosing-regions">Key considerations when choosing Regions</a>
+      <ul>
+        <li><a href="#compliance">Compliance</a></li>
+        <li><a href="#proximity">Proximity</a></li>
+        <li><a href="#feature-availability">Feature availability</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+    </li>
+    <li><a href="#designing-highly-available-architectures">Designing highly available architectures</a>
+      <ul>
+        <li><a href="#edge-locations">Edge locations</a></li>
+      </ul>
+    </li>
     <li><a href="#assignment">Assignment</a></li>
   </ul>
 </nav>

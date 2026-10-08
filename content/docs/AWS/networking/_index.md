@@ -30,3 +30,6 @@ bookCollapseSection: true
 - 006 - [private-subnets](private-subnets/) = internet'e doğrudan erişimi olmayan subnet'ler
 
 ![Private subnets diagram](/images/aws/private-subnets-diagram.png)
+
+- 007 - [Connecting-to-the-AWS-Cloud](Connecting-to-the-AWS-Cloud/) = internet'e doğrudan erişimi olmayan subnet'ler
+

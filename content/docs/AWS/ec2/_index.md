@@ -25,3 +25,11 @@ bookCollapseSection: true
 - 008 - [creating-and-using-your-own-ami](creating-and-using-your-own-ami/) = burada aslinda AMI (amazon machine image yani bildigin os iso) kendi istedgim tekrar kullanilabilir ornek vm aws'ye eklemek yani **instance** so you have a reusable image (and a simple backup).
 - 009 - [aws-launch-template](aws-launch-template/) = onceden hazirlanmis vm - [launch template](https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html) is a pre-baked configuration for EC2 instances.
 - 010 - [launch-from-template-aws](launch-from-template-aws/) = onceden hazirlanmis vm calistirma
+
+### Ec2 pricing options
+
+![Ec2 pricing alternatives](/images/aws/Ec2_pricing_options.png)
+
+### Alternative full managed server for container
+
+![Ec2 full managed server](/images/aws/Fargate.png)

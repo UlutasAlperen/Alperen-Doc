@@ -21,7 +21,7 @@ https://github.com/alex-shpak/hugo-book
 
 	<meta itemprop="name" content="ec2">
 	<meta itemprop="description" content="EC2 (Elastic Compute Cloud) kind of vm but in cloud they say# 001 - ec2-instance-configuration-keys = creatin of ssh key for vms 002 - ec2-instances = its just virtual machines 003 - elastic-ips = fancy name of static ipv4 004 - aws-security-groups = network guvenlik ayarlari ve bunu instanceye baglama 005 - ssh-to-aws-server = SSH ile sunucuya bağlanma 006 - deploy-site-to-aws-server = siteyi sunucuya deploy etme 007 - open-web-traffic = aslinda burada yaptigim benim tanimladigim statik ip’ye policy atayarak statik ip’ye gelelecek olan 8080 portunu aciyorum">
-	<meta itemprop="wordCount" content="145">
+	<meta itemprop="wordCount" content="154">
 
 <title>ec2 • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -30,7 +30,7 @@ https://github.com/alex-shpak/hugo-book
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.d93d956b8395348eb1f29ebffc9276e3d4ed934578019bbd0eedc007881ad240.js" integrity="sha256-2T2Va4OVNI6x8p6//JJ249Ttk0V4AZu9Du3AB4ga0kA=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.91efafc7454ad67aae5f64787b662c0bc3d2af1feed9dcfe253edcbb2e7c9ebe.js" integrity="sha256-ke&#43;vx0VK1nquX2R4e2YsC8PSrx/u2dz&#43;JT7cuy58nr4=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/aws/ec2/index.xml" title="ec2" />
 
   
@@ -1376,6 +1376,20 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/connecting-to-the-aws-cloud/" class="">
+      Connecting-to-the-AWS-Cloud</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -2665,6 +2679,20 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-compute-service/" class="">
+      AWS-compute-services</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -2724,7 +2752,16 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#ec2-pricing-options">Ec2 pricing options</a></li>
+        <li><a href="#alternative-full-managed-server-for-container">Alternative full managed server for container</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -2757,6 +2794,10 @@ https://github.com/alex-shpak/hugo-book
 <li>009 - <a href="aws-launch-template/">aws-launch-template</a> = onceden hazirlanmis vm - <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html">launch template</a> is a pre-baked configuration for EC2 instances.</li>
 <li>010 - <a href="launch-from-template-aws/">launch-from-template-aws</a> = onceden hazirlanmis vm calistirma</li>
 </ul>
+<h3 id="ec2-pricing-options">Ec2 pricing options<a class="anchor" href="#ec2-pricing-options">#</a></h3>
+<p><img src="/images/aws/Ec2_pricing_options.png" alt="Ec2 pricing alternatives" /></p>
+<h3 id="alternative-full-managed-server-for-container">Alternative full managed server for container<a class="anchor" href="#alternative-full-managed-server-for-container">#</a></h3>
+<p><img src="/images/aws/Fargate.png" alt="Ec2 full managed server" /></p>
 </article>
  
       
@@ -2778,9 +2819,9 @@ https://github.com/alex-shpak/hugo-book
 <div class="flex flex-wrap justify-between">
     <span>
     
-      <a href="/docs/aws/networking/private-subnets/" class="flex align-center">
+      <a href="/docs/aws/networking/connecting-to-the-aws-cloud/" class="flex align-center">
         <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
-        <span>private-subnets</span>
+        <span>Connecting-to-the-AWS-Cloud</span>
       </a>
     
     </span>
@@ -2822,7 +2863,16 @@ https://github.com/alex-shpak/hugo-book
     <div class="book-toc-content">
       
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#ec2-pricing-options">Ec2 pricing options</a></li>
+        <li><a href="#alternative-full-managed-server-for-container">Alternative full managed server for container</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
