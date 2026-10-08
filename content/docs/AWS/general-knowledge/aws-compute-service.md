@@ -1,6 +1,8 @@
 ---
-title: "AWS-compute-services"
+title: "aws-compute-service"
 weight: 40
+aliases:
+  - /docs/aws/general-knowledge/AWS-Compute-service/
 ---
 
 # Additional Compute Services

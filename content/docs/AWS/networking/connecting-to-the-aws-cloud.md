@@ -1,6 +1,8 @@
 ---
-title: "Connecting-to-the-AWS-Cloud"
+title: "connecting-to-the-aws-cloud"
 weight: 70
+aliases:
+  - /docs/aws/networking/Connecting-to-the-AWS-Cloud/
 ---
 
 # Connecting to the AWS Cloud

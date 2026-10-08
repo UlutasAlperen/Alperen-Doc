@@ -39,7 +39,7 @@ Here is the link to view the diagram I drew on Excalidraw: [Diagram link(excalid
 4. [internet-gateways-igw](networking/internet-gateways-igw/)
 5. [route-tables](networking/route-tables/)
 6. [private-subnets](networking/private-subnets/)
-7. [Connecting-to-the-AWS-Cloud](Connecting-to-the-AWS-Cloud/) 
+7. [connecting-to-the-aws-cloud](networking/connecting-to-the-aws-cloud/)
 
 ### [EC2 (Elastic Compute Cloud)](ec2/)
 
@@ -147,3 +147,4 @@ Here is the link to view the diagram I drew on Excalidraw: [Diagram link(excalid
 1. [reserved-instances-savings-plans](general-knowledge/reserved-instances-savings-plans/)
 2. [spot-instances](general-knowledge/spot-instances/)
 3. [auto-scaling-groups](general-knowledge/auto-scaling-groups/)
+4. [aws-compute-service](general-knowledge/aws-compute-service/)

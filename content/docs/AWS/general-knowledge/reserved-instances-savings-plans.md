@@ -24,4 +24,4 @@ Savings can range from **26%** to **72%**! In many cases, turning off a server e
 
 ## Next
 
-If you want to save _even more_, see [spot-instances](spot-instances/) - unused AWS capacity at a ~90% discount, with the caveat that AWS can reclaim it at any time.
+If you want to save _even more_, see [spot-instances](../spot-instances/) - unused AWS capacity at a ~90% discount, with the caveat that AWS can reclaim it at any time.

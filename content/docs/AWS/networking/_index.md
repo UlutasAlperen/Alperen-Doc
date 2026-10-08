@@ -31,5 +31,5 @@ bookCollapseSection: true
 
 ![Private subnets diagram](/images/aws/private-subnets-diagram.png)
 
-- 007 - [Connecting-to-the-AWS-Cloud](Connecting-to-the-AWS-Cloud/) = internet'e doğrudan erişimi olmayan subnet'ler
+- 007 - [connecting-to-the-aws-cloud](connecting-to-the-aws-cloud/) = AWS'e bağlanma yolları: Client VPN, Site-to-Site VPN, PrivateLink, Direct Connect
 

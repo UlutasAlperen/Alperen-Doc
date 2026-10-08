@@ -22,7 +22,7 @@ You already know why we might want [ECS](../ecs/why-ecs/) instead: it trades fle
 In this section we take the PatientPing app from the earlier lessons and run it on EKS:
 
 1. We create a cluster in our VPC.
-2. We compare it with my own [kubeadm cluster](../../../kubernetes_v2/multi-node-kubeadm/) - what AWS takes, what stays the same.
+2. We compare it with my own [kubeadm cluster](../../kubernetes_v2/multi-node-kubeadm/) - what AWS takes, what stays the same.
 3. We deploy `patientping-web` to it.
 4. We let the pods talk to S3 (for the favicon and other files).
 5. We let the pods talk to our RDS Postgres database.
