@@ -13,7 +13,7 @@ When someone looks up `www.boot.dev`, their [DNS resolver](https://www.cloudflar
 
 Try it yourself with the [`dig`](https://en.wikipedia.org/wiki/Dig_\(command\)) command line tool: `dig www.boot.dev`. It's useful for troubleshooting, and using it can teach you a lot about DNS.
 
-![A record visual](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/ViDzvxh-980x613.png)
+![DNS A records diagram](/images/aws/dns-a-records-diagram.png)
 
 An A record consists of two parts:
 
