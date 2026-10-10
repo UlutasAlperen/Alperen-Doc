@@ -8,20 +8,21 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Amazon S3 - Simple Storage Service# 001 - aws-s3 002 - aws-s3-bucket = The bucket is the highest level of organization in S3; it’s a container for storing objects. 003 - aws-s3-objects ">
+<meta name="description" content="Amazon S3 - Simple Storage Service# 001 - aws-s3 002 - aws-s3-bucket = The bucket is the highest level of organization in S3; it’s a container for storing objects. 003 - aws-s3-objects S3 Lifecycle# To avoid manually managing your object storage tier configurations, you can use S3 Lifecycle configurations to automate the process. When you define a lifecycle configuration for an object or group of objects, you can choose to automate between two types of actions, as follows:
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws/s3/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="s3">
-	<meta property="og:description" content="Amazon S3 - Simple Storage Service# 001 - aws-s3 002 - aws-s3-bucket = The bucket is the highest level of organization in S3; it’s a container for storing objects. 003 - aws-s3-objects">
+	<meta property="og:description" content="Amazon S3 - Simple Storage Service# 001 - aws-s3 002 - aws-s3-bucket = The bucket is the highest level of organization in S3; it’s a container for storing objects. 003 - aws-s3-objects S3 Lifecycle# To avoid manually managing your object storage tier configurations, you can use S3 Lifecycle configurations to automate the process. When you define a lifecycle configuration for an object or group of objects, you can choose to automate between two types of actions, as follows:">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="website">
 
 
 	<meta itemprop="name" content="s3">
-	<meta itemprop="description" content="Amazon S3 - Simple Storage Service# 001 - aws-s3 002 - aws-s3-bucket = The bucket is the highest level of organization in S3; it’s a container for storing objects. 003 - aws-s3-objects">
-	<meta itemprop="wordCount" content="32">
+	<meta itemprop="description" content="Amazon S3 - Simple Storage Service# 001 - aws-s3 002 - aws-s3-bucket = The bucket is the highest level of organization in S3; it’s a container for storing objects. 003 - aws-s3-objects S3 Lifecycle# To avoid manually managing your object storage tier configurations, you can use S3 Lifecycle configurations to automate the process. When you define a lifecycle configuration for an object or group of objects, you can choose to automate between two types of actions, as follows:">
+	<meta itemprop="wordCount" content="234">
 
 <title>s3 • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -30,7 +31,7 @@ https://github.com/alex-shpak/hugo-book
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.c326d2a9f063a2b8e80d15bdae0ab639263924954e7c3b9df0ef3896365620f5.js" integrity="sha256-wybSqfBjorjoDRW9rgq2OSY5JJVOfDud8O84ljZWIPU=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.78b59e984e0f8d8bddc18c910b833fddb84992b521e3bba42d596951add6729f.js" integrity="sha256-eLWemE4PjYvdwYyRC4M/3bhJkrUh47ukLVlpUa3Wcp8=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/aws/s3/index.xml" title="s3" />
 
   
@@ -2766,7 +2767,11 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#s3-lifecycle">S3 Lifecycle</a></li>
+  </ul>
+</nav>
 
 
 
@@ -2787,6 +2792,28 @@ https://github.com/alex-shpak/hugo-book
 <li>003 - <a href="aws-s3-objects/">aws-s3-objects</a></li>
 </ul>
 <p><img src="/images/aws/s3-objects-diagram.png" alt="S3 objects diagram" /></p>
+<h2 id="s3-lifecycle">S3 Lifecycle<a class="anchor" href="#s3-lifecycle">#</a></h2>
+<p>To avoid manually managing your object storage tier configurations, you can use S3 Lifecycle configurations to automate the process. When you define a lifecycle configuration for an object or group of objects, you can choose to automate between two types of actions, as follows:</p>
+<ul>
+<li>
+<p>Transition actions: define when objects should transition to another storage class.</p>
+</li>
+<li>
+<p>Expiration actions: define when objects expire and should be permanently deleted.</p>
+</li>
+</ul>
+<p>For example, you might transition objects to S3 Standard-IA storage class 30 days after you create them. Or you might archive objects to the S3 Glacier Deep Archive storage class 1 year after creating them.</p>
+<p><img src="/images/aws/s3-lifecycle.png" alt="S3 lifecycle" /></p>
+<p>Use cases</p>
+<p>The following situations are candidates for the use of S3 lifecycle configuration rules:</p>
+<ul>
+<li>
+<p>Periodic logs: If you upload periodic logs to a bucket, your application might need them for a week or a month. After that, you might want to delete them.</p>
+</li>
+<li>
+<p>Data that changes in access frequency: Some documents are frequently accessed for a limited period of time. After that, they are infrequently accessed. At some point, you might not need real-time access to them. However, your organization or regulations might require you to archive them for a specific period. After that, you can delete them.</p>
+</li>
+</ul>
 </article>
  
       
@@ -2852,7 +2879,11 @@ https://github.com/alex-shpak/hugo-book
     <div class="book-toc-content">
       
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#s3-lifecycle">S3 Lifecycle</a></li>
+  </ul>
+</nav>
 
 
 
