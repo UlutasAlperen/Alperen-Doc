@@ -59,3 +59,4 @@ scalable, and production-ready infrastructure using modern DevOps and cloud-nati
 - [kubernetes.io](https://kubernetes.io/docs/home/)
 - [docker.com](https://docs.docker.com/)
 - [iximiuz.com](https://labs.iximiuz.com/docs)
+- [skillbuilder.aws](https://skillbuilder.aws)

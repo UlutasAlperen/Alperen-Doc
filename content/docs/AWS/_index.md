@@ -4,7 +4,7 @@ weight: 5
 bookCollapseSection: true
 ---
 
-> Claimer: most of the content in this section i use boot.dev for recourses
+> Claimer: most of the content in this section i use boot.dev and skillbuilder.aws for recourses
 
 ![AWS full architecture diagram](/images/aws/aws-full-diagram.png)
 
