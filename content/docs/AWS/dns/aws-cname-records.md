@@ -21,7 +21,7 @@ CNAME           A                     IP
 Sometimes it can be a bit more complex:
 
 ```text
-dev.ulutasalperen.com → blog.boot.com  → blog.east.ulutasalperen.com → 1.2.3.4
+dev.ulutasalperen.com → blog.ulutasalperen.com  → blog.east.ulutasalperen.com → 1.2.3.4
 CNAME           CNAME                            A records           IP
 	                                    → blog.east.ulutasalperen.com → 1.2.3.5
 	                                    → blog.east.ulutasalperen.com → 1.2.3.6

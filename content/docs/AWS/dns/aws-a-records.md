@@ -9,9 +9,9 @@ DNS records tell the world where your domain points to. The most fundamental typ
 
 An A record (i.e., [Address record](https://www.cloudflare.com/learning/dns/dns-records/dns-a-record/)) maps a domain name to an IP address. It's the most common type of DNS record.
 
-When someone looks up `www.boot.dev`, their [DNS resolver](https://www.cloudflare.com/learning/dns/dns-server-types/) will ultimately find an A record with the IP address of that site's server.
+When someone looks up `www.ulutasalperen.com`, their [DNS resolver](https://www.cloudflare.com/learning/dns/dns-server-types/) will ultimately find an A record with the IP address of that site's server.
 
-Try it yourself with the [`dig`](https://en.wikipedia.org/wiki/Dig_\(command\)) command line tool: `dig www.boot.dev`. It's useful for troubleshooting, and using it can teach you a lot about DNS.
+Try it yourself with the [`dig`](https://en.wikipedia.org/wiki/Dig_\(command\)) command line tool: `dig www.ulutasalperen.dev`. It's useful for troubleshooting, and using it can teach you a lot about DNS.
 
 ![DNS A records diagram](/images/aws/dns-a-records-diagram.png)
 
@@ -20,9 +20,9 @@ An A record consists of two parts:
 - **Name:** the subdomain or domain (e.g. `www`, `blog`, `api`)
 - **Value:** an IP address (e.g. `10.0.10.50` or `192.168.1.100`)
 
-You can also use `@` to point to the root (or "apex") domain. For example, `boot.dev` → `104.26.0.86`.
+You can also use `@` to point to the root (or "apex") domain. For example, `ulutasalperen.com` → `104.26.0.86`.
 
-Sometimes you'll see multiple A records for the same domain name (including for `boot.dev`). This is valid and can happen for many reasons, including redundancy, load balancing (clients pick one of the IP addresses at random), and multi-region deployments.
+Sometimes you'll see multiple A records for the same domain name (including for `ulutasalperen.com`). This is valid and can happen for many reasons, including redundancy, load balancing (clients pick one of the IP addresses at random), and multi-region deployments.
 
 It's easy to mistakenly create an A record with the wrong IP address. If you're pointing `patientping.io` to your server, make sure you're using the server's _public_ IP address, not its private one. Private IPs (like `10.0.10.50`) only work within your VPC. For the internet to reach your server, you need the public IP!
 

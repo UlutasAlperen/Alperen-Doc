@@ -10,8 +10,8 @@ https://github.com/alex-shpak/hugo-book
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="A Records# DNS records tell the world where your domain points to. The most fundamental type of record is the A record.
 An A record (i.e., Address record) maps a domain name to an IP address. It’s the most common type of DNS record.
-When someone looks up www.boot.dev, their DNS resolver will ultimately find an A record with the IP address of that site’s server.
-Try it yourself with the dig command line tool: dig www.boot.dev. It’s useful for troubleshooting, and using it can teach you a lot about DNS.
+When someone looks up www.ulutasalperen.com, their DNS resolver will ultimately find an A record with the IP address of that site’s server.
+Try it yourself with the dig command line tool: dig www.ulutasalperen.dev. It’s useful for troubleshooting, and using it can teach you a lot about DNS.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
@@ -20,8 +20,8 @@ Try it yourself with the dig command line tool: dig www.boot.dev. It’s useful 
 	<meta property="og:title" content="aws-a-records">
 	<meta property="og:description" content="A Records# DNS records tell the world where your domain points to. The most fundamental type of record is the A record.
 An A record (i.e., Address record) maps a domain name to an IP address. It’s the most common type of DNS record.
-When someone looks up www.boot.dev, their DNS resolver will ultimately find an A record with the IP address of that site’s server.
-Try it yourself with the dig command line tool: dig www.boot.dev. It’s useful for troubleshooting, and using it can teach you a lot about DNS.">
+When someone looks up www.ulutasalperen.com, their DNS resolver will ultimately find an A record with the IP address of that site’s server.
+Try it yourself with the dig command line tool: dig www.ulutasalperen.dev. It’s useful for troubleshooting, and using it can teach you a lot about DNS.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
@@ -30,8 +30,8 @@ Try it yourself with the dig command line tool: dig www.boot.dev. It’s useful 
 	<meta itemprop="name" content="aws-a-records">
 	<meta itemprop="description" content="A Records# DNS records tell the world where your domain points to. The most fundamental type of record is the A record.
 An A record (i.e., Address record) maps a domain name to an IP address. It’s the most common type of DNS record.
-When someone looks up www.boot.dev, their DNS resolver will ultimately find an A record with the IP address of that site’s server.
-Try it yourself with the dig command line tool: dig www.boot.dev. It’s useful for troubleshooting, and using it can teach you a lot about DNS.">
+When someone looks up www.ulutasalperen.com, their DNS resolver will ultimately find an A record with the IP address of that site’s server.
+Try it yourself with the dig command line tool: dig www.ulutasalperen.dev. It’s useful for troubleshooting, and using it can teach you a lot about DNS.">
 	<meta itemprop="wordCount" content="472">
 
 <title>aws-a-records • Alperen Doc</title>
@@ -41,7 +41,7 @@ Try it yourself with the dig command line tool: dig www.boot.dev. It’s useful 
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.6830e5cb4970bb0ef26567f6507dcbe9fbfdae651371e25bfcf985b0f02c3bba.js" integrity="sha256-aDDly0lwuw7yZWf2UH3L6fv9rmUTceJb/PmFsPAsO7o=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.1bd89935f34b12e22ab2fad4f57cdcc1c1d6acc4bc34db96e0751d53ce94b67a.js" integrity="sha256-G9iZNfNLEuIqsvrU9XzcwcHWrMS8NNuW4HUdU86Utno=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2795,16 +2795,16 @@ Try it yourself with the dig command line tool: dig www.boot.dev. It’s useful 
   <article class="markdown book-article"><h1 id="a-records">A Records<a class="anchor" href="#a-records">#</a></h1>
 <p>DNS records tell the world where your domain points to. The most fundamental type of record is the <strong>A record</strong>.</p>
 <p>An A record (i.e., <a href="https://www.cloudflare.com/learning/dns/dns-records/dns-a-record/">Address record</a>) maps a domain name to an IP address. It&rsquo;s the most common type of DNS record.</p>
-<p>When someone looks up <code>www.boot.dev</code>, their <a href="https://www.cloudflare.com/learning/dns/dns-server-types/">DNS resolver</a> will ultimately find an A record with the IP address of that site&rsquo;s server.</p>
-<p>Try it yourself with the <a href="https://en.wikipedia.org/wiki/Dig_%5c%28command%5c%29"><code>dig</code></a> command line tool: <code>dig www.boot.dev</code>. It&rsquo;s useful for troubleshooting, and using it can teach you a lot about DNS.</p>
+<p>When someone looks up <code>www.ulutasalperen.com</code>, their <a href="https://www.cloudflare.com/learning/dns/dns-server-types/">DNS resolver</a> will ultimately find an A record with the IP address of that site&rsquo;s server.</p>
+<p>Try it yourself with the <a href="https://en.wikipedia.org/wiki/Dig_%5c%28command%5c%29"><code>dig</code></a> command line tool: <code>dig www.ulutasalperen.dev</code>. It&rsquo;s useful for troubleshooting, and using it can teach you a lot about DNS.</p>
 <p><img src="/images/aws/dns-a-records-diagram.png" alt="DNS A records diagram" /></p>
 <p>An A record consists of two parts:</p>
 <ul>
 <li><strong>Name:</strong> the subdomain or domain (e.g. <code>www</code>, <code>blog</code>, <code>api</code>)</li>
 <li><strong>Value:</strong> an IP address (e.g. <code>10.0.10.50</code> or <code>192.168.1.100</code>)</li>
 </ul>
-<p>You can also use <code>@</code> to point to the root (or &ldquo;apex&rdquo;) domain. For example, <code>boot.dev</code> → <code>104.26.0.86</code>.</p>
-<p>Sometimes you&rsquo;ll see multiple A records for the same domain name (including for <code>boot.dev</code>). This is valid and can happen for many reasons, including redundancy, load balancing (clients pick one of the IP addresses at random), and multi-region deployments.</p>
+<p>You can also use <code>@</code> to point to the root (or &ldquo;apex&rdquo;) domain. For example, <code>ulutasalperen.com</code> → <code>104.26.0.86</code>.</p>
+<p>Sometimes you&rsquo;ll see multiple A records for the same domain name (including for <code>ulutasalperen.com</code>). This is valid and can happen for many reasons, including redundancy, load balancing (clients pick one of the IP addresses at random), and multi-region deployments.</p>
 <p>It&rsquo;s easy to mistakenly create an A record with the wrong IP address. If you&rsquo;re pointing <code>patientping.io</code> to your server, make sure you&rsquo;re using the server&rsquo;s <em>public</em> IP address, not its private one. Private IPs (like <code>10.0.10.50</code>) only work within your VPC. For the internet to reach your server, you need the public IP!</p>
 <h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
 <p>PatientPing&rsquo;s internal site should answer at <code>www.patientping.internal</code> so the team can stop typing raw IPs. Let&rsquo;s point that domain name at an IP address.</p>
