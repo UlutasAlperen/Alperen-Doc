@@ -17,11 +17,11 @@ This repository contains the source of my personal documentation site, built wit
 ```
 ## Documentation
 
-- [Version Control Systems](https://dev.ulutasalperen.com/docs/version_control_systems) (Git, GitHub workflows, CI/CD concepts)
-- [Docker](https://dev.ulutasalperen.com/docs/docker)
-- [Kubernetes](https://dev.ulutasalperen.com/docs/kubernetes) (pods, deployments, services, storage, RBAC, scaling, and more)
-- [Kubernetes v2](https://dev.ulutasalperen.com/docs/kubernetes_v2)
-- [AWS](https://dev.ulutasalperen.com/docs/aws) (EC2, S3, IAM, ECS, EKS, Lambda, RDS, networking, CDN, DNS, monitoring)
+- [Version Control Systems](https://blog.ulutasalperen.com/docs/version_control_systems) (Git, GitHub workflows, CI/CD concepts)
+- [Docker](https://blog.ulutasalperen.com/docs/docker)
+- [Kubernetes](https://blog.ulutasalperen.com/docs/kubernetes) (pods, deployments, services, storage, RBAC, scaling, and more)
+- [Kubernetes v2](https://blog.ulutasalperen.com/docs/kubernetes_v2)
+- [AWS](https://blog.ulutasalperen.com/docs/aws) (EC2, S3, IAM, ECS, EKS, Lambda, RDS, networking, CDN, DNS, monitoring)
 
 ## Language Note
 

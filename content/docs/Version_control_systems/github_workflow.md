@@ -75,7 +75,7 @@ Caddy ile statik dosyalarımı web'e sunacağım. `/etc/caddy/Caddyfile` (temsil
 
 
 ```toml
-dev.ulutasalperen.com {
+blog.ulutasalperen.com {
     # Statik dosyaların konumunu belirtiyorum
     root * /var/www/kole/public 
     
