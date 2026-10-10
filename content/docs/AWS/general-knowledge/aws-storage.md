@@ -91,5 +91,4 @@ You can further optimize Amazon EFS storage costs by automatically moving data b
 
 
 ![efs life](/images/aws/efs-life-1.png)
-
 ![efs life 2](/images/aws/efs-life-2.png)
