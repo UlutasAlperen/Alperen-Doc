@@ -148,3 +148,4 @@ Here is the link to view the diagram I drew on Excalidraw: [Diagram link(excalid
 2. [spot-instances](general-knowledge/spot-instances/)
 3. [auto-scaling-groups](general-knowledge/auto-scaling-groups/)
 4. [aws-compute-service](general-knowledge/aws-compute-service/)
+4. [aws-service](general-knowledge/aws-storage/)

@@ -35,3 +35,4 @@ The following situations are candidates for the use of S3 lifecycle configuratio
 
 - Data that changes in access frequency: Some documents are frequently accessed for a limited period of time. After that, they are infrequently accessed. At some point, you might not need real-time access to them. However, your organization or regulations might require you to archive them for a specific period. After that, you can delete them.
 
+

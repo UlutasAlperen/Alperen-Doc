@@ -887,18 +887,18 @@
 				<description>&lt;h1 id=&#34;presigned-urls&#34;&gt;Presigned URLs&lt;a class=&#34;anchor&#34; href=&#34;#presigned-urls&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Serving files is nice, but we often want CDN speed while still limiting access to specific users. To do that, we can use &lt;strong&gt;presigned URLs&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html&#34;&gt;&lt;strong&gt;Presigned URLs&lt;/strong&gt;&lt;/a&gt; are temporary, time-limited URLs that grant access to private S3 objects or CloudFront content. They&amp;rsquo;re like tickets that expire:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Time-limited:&lt;/strong&gt; The URL expires after a set duration (e.g., 1 hour, or 24 hours).&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Secure:&lt;/strong&gt; The content itself remains private; only those with the presigned URL can access it.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Controlled:&lt;/strong&gt; You control who gets the URL and when it expires.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Here&amp;rsquo;s what a presigned URL looks like:&lt;/p&gt;</description>
 			</item>
 			<item>
-				<title>aws-block-storage</title>
-				<link>https://blog.ulutasalperen.com/docs/aws/general-knowledge/aws-block-storage/</link>
-				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://blog.ulutasalperen.com/docs/aws/general-knowledge/aws-block-storage/</guid>
-				<description>&lt;h1 id=&#34;amazon-ec2-instance-store&#34;&gt;Amazon EC2 instance store&lt;a class=&#34;anchor&#34; href=&#34;#amazon-ec2-instance-store&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Amazon EC2 instance store isn&amp;rsquo;t a stand-alone AWS block storage service. Rather, it refers to the block-level storage that is physically attached to the EC2 instance host computer. Depending on the type of instance, EC2 instance store might come attached as the default storage. Since its data is lost when an instance is stopped or terminated, EC2 instance store is best for temporary memory-based storage needs like buffers, caches, and scratch data. It is not recommended for applications that require data retention.&lt;/p&gt;</description>
-			</item>
-			<item>
 				<title>aws-cname-records</title>
 				<link>https://blog.ulutasalperen.com/docs/aws/dns/aws-cname-records/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
 				<guid>https://blog.ulutasalperen.com/docs/aws/dns/aws-cname-records/</guid>
 				<description>&lt;h1 id=&#34;cname-records&#34;&gt;CNAME Records&lt;a class=&#34;anchor&#34; href=&#34;#cname-records&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;What if you want &lt;code&gt;dev.ulutasalperen.com&lt;/code&gt; to point to the same server as &lt;code&gt;blog.ulutas.com&lt;/code&gt;? You could create another A record pointing to the same IP address, but there&amp;rsquo;s a better way: &lt;strong&gt;CNAME records&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;A &lt;strong&gt;&lt;a href=&#34;https://www.cloudflare.com/learning/dns/dns-records/dns-cname-record/&#34;&gt;CNAME record&lt;/a&gt;&lt;/strong&gt; (Canonical Name) maps one domain name to another domain name. It&amp;rsquo;s &lt;em&gt;kind of&lt;/em&gt; like a DNS-level redirect (or more accurately, an alias).&lt;/p&gt;&#xA;&lt;p&gt;When someone looks up &lt;code&gt;dev.ulutasalperen.com&lt;/code&gt;, the CNAME says: &amp;ldquo;Check &lt;code&gt;blog.ulutasalperen.com&lt;/code&gt; instead.&amp;rdquo; That domain&amp;rsquo;s A record then provides the IP address.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>aws-storage</title>
+				<link>https://blog.ulutasalperen.com/docs/aws/general-knowledge/aws-storage/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/aws/general-knowledge/aws-storage/</guid>
+				<description>&lt;h1 id=&#34;amazon-ec2-instance-store&#34;&gt;Amazon EC2 instance store&lt;a class=&#34;anchor&#34; href=&#34;#amazon-ec2-instance-store&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Amazon EC2 instance store isn&amp;rsquo;t a stand-alone AWS block storage service. Rather, it refers to the block-level storage that is physically attached to the EC2 instance host computer. Depending on the type of instance, EC2 instance store might come attached as the default storage. Since its data is lost when an instance is stopped or terminated, EC2 instance store is best for temporary memory-based storage needs like buffers, caches, and scratch data. It is not recommended for applications that require data retention.&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>cloudwatch-log-groups-and-viewing-lambda-logs</title>
