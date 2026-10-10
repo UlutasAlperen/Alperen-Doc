@@ -8,20 +8,20 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="EC2 (Elastic Compute Cloud) kind of vm but in cloud they say# 001 - ec2-instance-configuration-keys = creatin of ssh key for vms 002 - ec2-instances = its just virtual machines 003 - elastic-ips = fancy name of static ipv4 004 - aws-security-groups = network guvenlik ayarlari ve bunu instanceye baglama 005 - ssh-to-aws-server = SSH ile sunucuya bağlanma 006 - deploy-site-to-aws-server = siteyi sunucuya deploy etme 007 - open-web-traffic = aslinda burada yaptigim benim tanimladigim statik ip’ye policy atayarak statik ip’ye gelelecek olan 8080 portunu aciyorum ">
+<meta name="description" content="EC2 (Elastic Compute Cloud) kind of vm but in cloud they say# 001 - ec2-instance-configuration-keys = creating of ssh key for aws vm’s 002 - ec2-instances = its just virtual machines 003 - elastic-ips = fancy name of static ipv4 004 - aws-security-groups = network guvenlik ayarlari ve bunu instanceye baglama 005 - ssh-to-aws-server = SSH ile aws uzak sunucuya bağlanma (klasik ssh) 006 - deploy-site-to-aws-server = siteyi sunucuya deploy etme 007 - open-web-traffic = aslinda burada yaptigim benim tanimladigim statik ip’ye policy atayarak statik ip’ye gelelecek olan 8080 portunu aciyorum ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws/ec2/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="ec2">
-	<meta property="og:description" content="EC2 (Elastic Compute Cloud) kind of vm but in cloud they say# 001 - ec2-instance-configuration-keys = creatin of ssh key for vms 002 - ec2-instances = its just virtual machines 003 - elastic-ips = fancy name of static ipv4 004 - aws-security-groups = network guvenlik ayarlari ve bunu instanceye baglama 005 - ssh-to-aws-server = SSH ile sunucuya bağlanma 006 - deploy-site-to-aws-server = siteyi sunucuya deploy etme 007 - open-web-traffic = aslinda burada yaptigim benim tanimladigim statik ip’ye policy atayarak statik ip’ye gelelecek olan 8080 portunu aciyorum">
+	<meta property="og:description" content="EC2 (Elastic Compute Cloud) kind of vm but in cloud they say# 001 - ec2-instance-configuration-keys = creating of ssh key for aws vm’s 002 - ec2-instances = its just virtual machines 003 - elastic-ips = fancy name of static ipv4 004 - aws-security-groups = network guvenlik ayarlari ve bunu instanceye baglama 005 - ssh-to-aws-server = SSH ile aws uzak sunucuya bağlanma (klasik ssh) 006 - deploy-site-to-aws-server = siteyi sunucuya deploy etme 007 - open-web-traffic = aslinda burada yaptigim benim tanimladigim statik ip’ye policy atayarak statik ip’ye gelelecek olan 8080 portunu aciyorum">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="website">
 
 
 	<meta itemprop="name" content="ec2">
-	<meta itemprop="description" content="EC2 (Elastic Compute Cloud) kind of vm but in cloud they say# 001 - ec2-instance-configuration-keys = creatin of ssh key for vms 002 - ec2-instances = its just virtual machines 003 - elastic-ips = fancy name of static ipv4 004 - aws-security-groups = network guvenlik ayarlari ve bunu instanceye baglama 005 - ssh-to-aws-server = SSH ile sunucuya bağlanma 006 - deploy-site-to-aws-server = siteyi sunucuya deploy etme 007 - open-web-traffic = aslinda burada yaptigim benim tanimladigim statik ip’ye policy atayarak statik ip’ye gelelecek olan 8080 portunu aciyorum">
-	<meta itemprop="wordCount" content="154">
+	<meta itemprop="description" content="EC2 (Elastic Compute Cloud) kind of vm but in cloud they say# 001 - ec2-instance-configuration-keys = creating of ssh key for aws vm’s 002 - ec2-instances = its just virtual machines 003 - elastic-ips = fancy name of static ipv4 004 - aws-security-groups = network guvenlik ayarlari ve bunu instanceye baglama 005 - ssh-to-aws-server = SSH ile aws uzak sunucuya bağlanma (klasik ssh) 006 - deploy-site-to-aws-server = siteyi sunucuya deploy etme 007 - open-web-traffic = aslinda burada yaptigim benim tanimladigim statik ip’ye policy atayarak statik ip’ye gelelecek olan 8080 portunu aciyorum">
+	<meta itemprop="wordCount" content="161">
 
 <title>ec2 • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -30,7 +30,7 @@ https://github.com/alex-shpak/hugo-book
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.6d8260a2c910d5154800f7ed5d2a28653d526d7dd6d28798e5f3b2f281af9cff.js" integrity="sha256-bYJgoskQ1RVIAPftXSooZT1SbX3W0oeY5fOy8oGvnP8=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.99bfd7254803a283b2cbcd9fbb7ebfab9239f416e29685cbfa347b4181fc6398.js" integrity="sha256-mb/XJUgDooOyy82fu36/q5I59BbiloXL&#43;jR7QYH8Y5g=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/aws/ec2/index.xml" title="ec2" />
 
   
@@ -2788,14 +2788,14 @@ https://github.com/alex-shpak/hugo-book
       
   <article class="markdown book-article"><h1 id="ec2-elastic-compute-cloud-kind-of-vm-but-in-cloud-they-say">EC2 (Elastic Compute Cloud) kind of vm but in cloud they say<a class="anchor" href="#ec2-elastic-compute-cloud-kind-of-vm-but-in-cloud-they-say">#</a></h1>
 <ul>
-<li>001 - <a href="ec2-instance-configuration-keys/">ec2-instance-configuration-keys</a> = creatin of ssh key for vms</li>
+<li>001 - <a href="ec2-instance-configuration-keys/">ec2-instance-configuration-keys</a> = creating of ssh key for aws vm&rsquo;s</li>
 <li>002 - <a href="ec2-instances/">ec2-instances</a> = its just virtual machines</li>
 <li>003 - <a href="elastic-ips/">elastic-ips</a> = fancy name of static ipv4</li>
 <li>004 - <a href="aws-security-groups/">aws-security-groups</a> = network guvenlik ayarlari ve bunu instanceye baglama</li>
 </ul>
 <p><img src="/images/aws/security-groups-diagram.png" alt="Security groups diagram" /></p>
 <ul>
-<li>005 - <a href="ssh-to-aws-server/">ssh-to-aws-server</a> = SSH ile sunucuya bağlanma</li>
+<li>005 - <a href="ssh-to-aws-server/">ssh-to-aws-server</a> = SSH ile aws  uzak sunucuya bağlanma  (klasik ssh)</li>
 </ul>
 <p><img src="/images/aws/ssh-to-aws-server.png" alt="SSH to AWS server" /></p>
 <ul>
@@ -2805,8 +2805,8 @@ https://github.com/alex-shpak/hugo-book
 <p><img src="/images/aws/open-web-traffic-diagram.png" alt="Open web traffic" /></p>
 <ul>
 <li>008 - <a href="creating-and-using-your-own-ami/">creating-and-using-your-own-ami</a> = burada aslinda AMI (amazon machine image yani bildigin os iso) kendi istedgim tekrar kullanilabilir ornek vm aws&rsquo;ye eklemek yani <strong>instance</strong> so you have a reusable image (and a simple backup).</li>
-<li>009 - <a href="aws-launch-template/">aws-launch-template</a> = onceden hazirlanmis vm - <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html">launch template</a> is a pre-baked configuration for EC2 instances.</li>
-<li>010 - <a href="launch-from-template-aws/">launch-from-template-aws</a> = onceden hazirlanmis vm calistirma</li>
+<li>009 - <a href="aws-launch-template/">aws-launch-template</a> = onceden hazirlanmis vm sablon - <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html">launch template</a> is a pre-baked configuration for EC2 instances.</li>
+<li>010 - <a href="launch-from-template-aws/">launch-from-template-aws</a> = onceden hazirlanmis vm sablonunu calistirma</li>
 </ul>
 <h3 id="ec2-pricing-options">Ec2 pricing options<a class="anchor" href="#ec2-pricing-options">#</a></h3>
 <p><img src="/images/aws/Ec2_pricing_options.png" alt="Ec2 pricing alternatives" /></p>
