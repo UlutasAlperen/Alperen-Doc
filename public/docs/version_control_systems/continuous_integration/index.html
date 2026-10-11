@@ -1,171 +1,3189 @@
-<!doctype html><html lang=en dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Continuous Integration# Continuous Integration (CI) is where developers regularly push code changes into a central repository, and by doing so, automated builds and tests are automatically run.
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Continuous Integration# Continuous Integration (CI) is where developers regularly push code changes into a central repository, and by doing so, automated builds and tests are automatically run.
 Those tests can include unit tests, integration tests, styling checks, linting checks, security checks or any other type of automated test. If any of the tests fail, the build is considered “broken” and the developer is notified so they can fix it.
 I was forked boot.dev cli for testing CI at Boot.dev Cli# Here at Boot.dev CI tests that run each time a new pull request is opened. The reviewer doesn’t need to manually check for formatting issues or run tests locally before approving the changes. It automates part of the code review process.
-"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#2e3440"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/version_control_systems/continuous_integration/"><meta property="og:site_name" content="Alperen Doc"><meta property="og:title" content="continuous-integration"><meta property="og:description" content="Continuous Integration# Continuous Integration (CI) is where developers regularly push code changes into a central repository, and by doing so, automated builds and tests are automatically run.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/version_control_systems/continuous_integration/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="continuous-integration">
+	<meta property="og:description" content="Continuous Integration# Continuous Integration (CI) is where developers regularly push code changes into a central repository, and by doing so, automated builds and tests are automatically run.
 Those tests can include unit tests, integration tests, styling checks, linting checks, security checks or any other type of automated test. If any of the tests fail, the build is considered “broken” and the developer is notified so they can fix it.
-I was forked boot.dev cli for testing CI at Boot.dev Cli# Here at Boot.dev CI tests that run each time a new pull request is opened. The reviewer doesn’t need to manually check for formatting issues or run tests locally before approving the changes. It automates part of the code review process."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta itemprop=name content="continuous-integration"><meta itemprop=description content="Continuous Integration# Continuous Integration (CI) is where developers regularly push code changes into a central repository, and by doing so, automated builds and tests are automatically run.
+I was forked boot.dev cli for testing CI at Boot.dev Cli# Here at Boot.dev CI tests that run each time a new pull request is opened. The reviewer doesn’t need to manually check for formatting issues or run tests locally before approving the changes. It automates part of the code review process.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="continuous-integration">
+	<meta itemprop="description" content="Continuous Integration# Continuous Integration (CI) is where developers regularly push code changes into a central repository, and by doing so, automated builds and tests are automatically run.
 Those tests can include unit tests, integration tests, styling checks, linting checks, security checks or any other type of automated test. If any of the tests fail, the build is considered “broken” and the developer is notified so they can fix it.
-I was forked boot.dev cli for testing CI at Boot.dev Cli# Here at Boot.dev CI tests that run each time a new pull request is opened. The reviewer doesn’t need to manually check for formatting issues or run tests locally before approving the changes. It automates part of the code review process."><meta itemprop=wordCount content="1478"><title>continuous-integration • Alperen Doc</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://blog.ulutasalperen.com/docs/version_control_systems/continuous_integration/><link rel=stylesheet href=/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin=anonymous><script defer type=module src=/en.search.min.0f7aa5b2b0645b51c4dcc50455554959d26310c2d7a70a809e0bb185871d0ec4.js integrity="sha256-D3qlsrBkW1HE3MUEVVVJWdJjEMLXpwqAnguxhYcdDsQ=" crossorigin=anonymous></script></head><body dir=ltr class="book-kind-page book-type-docs"><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>Alperen Doc</span></a></h2><div class="book-search hidden"><input id=book-search-input type=text placeholder=Search aria-label=Search maxlength=64><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li><input type=checkbox id=section-c98b7b0912d2ce16bf2d0c1b2a0ef53e class=toggle checked>
-<label for=section-c98b7b0912d2ce16bf2d0c1b2a0ef53e class=flex><a href=/docs/version_control_systems/>Version Control Systems</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/version_control_systems/basic_git_conf/>basic-git-conf</a></li><li><a href=/docs/version_control_systems/basic_git_knowledge/>basic-git-knowledge</a></li><li><a href=/docs/version_control_systems/github_workflow/>github-workflow</a></li><li><a href=/docs/version_control_systems/continuous_integration/ class=active>continuous-integration</a></li><li><a href=/docs/version_control_systems/continuous_deployment/>continuous-deployment</a></li><li><a href=/docs/version_control_systems/git-status/>git-status</a></li><li><a href=/docs/version_control_systems/git-add/>git-add</a></li><li><a href=/docs/version_control_systems/git-commit/>git-commit</a></li><li><a href=/docs/version_control_systems/git-push/>git-push</a></li><li><a href=/docs/version_control_systems/git-branch/>git-branch</a></li><li><a href=/docs/version_control_systems/git-pull/>git-pull</a></li><li><a href=/docs/version_control_systems/git-log/>git-log</a></li><li><a href=/docs/version_control_systems/git-merge/>git-merge</a></li><li><a href=/docs/version_control_systems/git-rebase/>git-rebase</a></li><li><a href=/docs/version_control_systems/git-reset/>git-reset</a></li><li><a href=/docs/version_control_systems/git-remote/>git-remote</a></li><li><a href=/docs/version_control_systems/git-fetch/>git-fetch</a></li><li><a href=/docs/version_control_systems/git-switch/>git-switch</a></li><li><a href=/docs/version_control_systems/git-config/>git-config</a></li><li><a href=/docs/version_control_systems/gitignore/>gitignore</a></li><li><a href=/docs/version_control_systems/plumbing/>plumbing</a></li></ul></li><li><input type=checkbox id=section-3a7697c6cadb073648fe385c24b99067 class=toggle>
-<label for=section-3a7697c6cadb073648fe385c24b99067 class=flex><a href=/docs/docker/>Docker</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/docker/docker-kurulum-hardening-debian/>docker-kurulum-hardening-debian</a></li><li><a href=/docs/docker/manage-docker-as-non-root-user/>manage-docker-as-non-root-user</a></li><li><a href=/docs/docker/docker-containers-images/>docker-containers-images</a></li><li><a href=/docs/docker/docker-volumes/>docker-volumes</a></li><li><a href=/docs/docker/docker-build/>docker-build</a></li><li><a href=/docs/docker/optimize-container-images-with-multi-stage-builds/>optimize-container-images-with-multi-stage-builds</a></li><li><a href=/docs/docker/docker-network/>docker-network</a></li><li><a href=/docs/docker/docker-exec-shell/>docker-exec-shell</a></li><li><a href=/docs/docker/docker-logs/>docker-logs</a></li><li><a href=/docs/docker/docker-compose-basic/>docker-compose-basic</a></li><li><a href=/docs/docker/var-olan-volume-uzerine-docker-compose/>var-olan-volume-uzerine-docker-compose</a></li><li><a href=/docs/docker/docker-publish/>docker-publish</a></li><li><a href=/docs/docker/docker-kurulum-hardening-rocky/>docker-kurulum-hardening-rocky</a></li><li><a href=/docs/docker/docker-distroless-container-images/>docker-distroless-container-images</a></li></ul></li><li><input type=checkbox id=section-4983424dd98aa6981e3f0b69c8851617 class=toggle>
-<label for=section-4983424dd98aa6981e3f0b69c8851617 class=flex><a href=/docs/kubernetes/>Kubernetes</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/kubernetes/kubernetes-minikube/>kubernetes-minikube</a></li><li><a href=/docs/kubernetes/kubernetes-pods-minikube/>kubernetes-pods-minikube</a></li><li><a href=/docs/kubernetes/kubernetes-deployments-minikube/>kubernetes-deployments-minikube</a></li><li><a href=/docs/kubernetes/kubernetes-probes/>kubernetes-probes</a></li><li><a href=/docs/kubernetes/kubernetes-deployment-rollouts/>kubernetes-deployment-rollouts</a></li><li><a href=/docs/kubernetes/kubernetes-yaml-configurations/>kubernetes-yaml-configurations</a></li><li><a href=/docs/kubernetes/kubernetes-secrets/>kubernetes-secrets</a></li><li><a href=/docs/kubernetes/kubernetes-rbac/>kubernetes-rbac</a></li><li><a href=/docs/kubernetes/kubernetes-jobs-cronjobs/>kubernetes-jobs-cronjobs</a></li><li><a href=/docs/kubernetes/kubernetes-services/>kubernetes-services</a></li><li><a href=/docs/kubernetes/kubernetes-ingress/>kubernetes-ingress</a></li><li><a href=/docs/kubernetes/kubernetes-gateway-minikube/>kubernetes-gateway-minikube</a></li><li><a href=/docs/kubernetes/kubernetes-namespaces/>kubernetes-namespaces</a></li><li><a href=/docs/kubernetes/kubernetes-dns-coredns/>kubernetes-dns-coredns</a></li><li><a href=/docs/kubernetes/kubernetes-scaling-vertical/>kubernetes-scaling-vertical</a></li><li><a href=/docs/kubernetes/kubernetes-scaling-horizontal/>kubernetes-scaling-horizontal</a></li><li><a href=/docs/kubernetes/kubernetes-storage/>kubernetes-storage</a></li><li><a href=/docs/kubernetes/kubernetes-persistent-volumes/>kubernetes-persistent-volumes</a></li><li><a href=/docs/kubernetes/kubernetes-storage-classes/>kubernetes-storage-classes</a></li><li><a href=/docs/kubernetes/kubernetes-statefulsets/>kubernetes-statefulsets</a></li><li><a href=/docs/kubernetes/kubernetes-nodes-basic/>kubernetes-nodes-basic</a></li></ul></li><li><input type=checkbox id=section-d252687da0288af6a6a9360cd1123738 class=toggle>
-<label for=section-d252687da0288af6a6a9360cd1123738 class=flex><a href=/docs/kubernetes_v2/>Kubernetes v2</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/kubernetes_v2/helm/>helm</a></li><li><a href=/docs/kubernetes_v2/kustomize/>kustomize</a></li><li><a href=/docs/kubernetes_v2/cluster-extensions/>cluster-extensions</a></li><li><a href=/docs/kubernetes_v2/network-policy/>network-policy</a></li><li><a href=/docs/kubernetes_v2/security-context/>security-context</a></li><li><a href=/docs/kubernetes_v2/kubernetes-troubleshooting/>kubernetes-troubleshooting</a></li><li><a href=/docs/kubernetes_v2/control-plane-troubleshooting/>control-plane-troubleshooting</a></li><li><a href=/docs/kubernetes_v2/gitops-argocd/>gitops-argocd</a></li><li><a href=/docs/kubernetes_v2/vpa-cluster-autoscaler/>vpa-cluster-autoscaler</a></li><li><a href=/docs/kubernetes_v2/taints-affinity-quotas/>taints-affinity-quotas</a></li><li><a href=/docs/kubernetes_v2/pod-priority-disruption/>pod-priority-disruption</a></li><li><a href=/docs/kubernetes_v2/multi-node-kubeadm/>multi-node-kubeadm</a></li><li><a href=/docs/kubernetes_v2/kubeadm-upgrade-etcd/>kubeadm-upgrade-etcd</a></li><li><a href=/docs/kubernetes_v2/ha-control-plane/>ha-control-plane</a></li><li><a href=/docs/kubernetes_v2/devops-control-plane/>devops-control-plane</a></li><li><a href=/docs/kubernetes_v2/cert-manager/>cert-manager</a></li><li><a href=/docs/kubernetes_v2/cert-manager-production/>cert-manager-production</a></li><li><a href=/docs/kubernetes_v2/prometheus-stack/>prometheus-stack</a></li><li><a href=/docs/kubernetes_v2/victoriametrics/>victoriametrics</a></li><li><a href=/docs/kubernetes_v2/longhorn/>longhorn</a></li><li><a href=/docs/kubernetes_v2/postgresql-statefulset-replication/>postgresql-statefulset-replication</a></li><li><a href=/docs/kubernetes_v2/postgresql-longhorn-read-replicas/>postgresql-longhorn-read-replicas</a></li></ul></li><li><input type=checkbox id=section-390924aad12540f8027ddb300c8575d3 class=toggle>
-<label for=section-390924aad12540f8027ddb300c8575d3 class=flex><a href=/docs/aws/>AWS</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><input type=checkbox id=section-7ac94fcac7ebb60d389835a7fcb83889 class=toggle>
-<label for=section-7ac94fcac7ebb60d389835a7fcb83889 class=flex><a href=/docs/aws/networking/>networking</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/aws/networking/regions-and-availability-zones/>regions-and-availability-zones</a></li><li><a href=/docs/aws/networking/virtual-private-cloud-vpc/>virtual-private-cloud-vpc</a></li><li><a href=/docs/aws/networking/aws-subnetting/>aws-subnetting</a></li><li><a href=/docs/aws/networking/internet-gateways-igw/>internet-gateways-igw</a></li><li><a href=/docs/aws/networking/route-tables/>route-tables</a></li><li><a href=/docs/aws/networking/private-subnets/>private-subnets</a></li><li><a href=/docs/aws/networking/connecting-to-the-aws-cloud/>connecting-to-the-aws-cloud</a></li></ul></li><li><input type=checkbox id=section-6a36aff9d4c25c2cc9b7d03fca17883e class=toggle>
-<label for=section-6a36aff9d4c25c2cc9b7d03fca17883e class=flex><a href=/docs/aws/ec2/>ec2</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/aws/ec2/ec2-instance-configuration-keys/>ec2-instance-configuration-keys</a></li><li><a href=/docs/aws/ec2/ec2-instances/>ec2-instances</a></li><li><a href=/docs/aws/ec2/elastic-ips/>elastic-ips</a></li><li><a href=/docs/aws/ec2/aws-security-groups/>aws-security-groups</a></li><li><a href=/docs/aws/ec2/ssh-to-aws-server/>ssh-to-aws-server</a></li><li><a href=/docs/aws/ec2/deploy-site-to-aws-server/>deploy-site-to-aws-server</a></li><li><a href=/docs/aws/ec2/open-web-traffic/>open-web-traffic</a></li><li><a href=/docs/aws/ec2/creating-and-using-your-own-ami/>creating-and-using-your-own-ami</a></li><li><a href=/docs/aws/ec2/aws-launch-template/>aws-launch-template</a></li><li><a href=/docs/aws/ec2/launch-from-template-aws/>launch-from-template-aws</a></li></ul></li><li><input type=checkbox id=section-b73d690c546b071419fd1f673553fed1 class=toggle>
-<label for=section-b73d690c546b071419fd1f673553fed1 class=flex><a href=/docs/aws/rds/>rds</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/aws/rds/relational-database-service/>relational-database-service</a></li><li><a href=/docs/aws/rds/create-a-postgresql-database-in-aws/>create-a-postgresql-database-in-aws</a></li><li><a href=/docs/aws/rds/aws-connect-to-your-database/>aws-connect-to-your-database</a></li><li><a href=/docs/aws/rds/aws-connect-app-to-database/>aws-connect-app-to-database</a></li><li><a href=/docs/aws/rds/rds-backups/>rds-backups</a></li><li><a href=/docs/aws/rds/create-read-replicas-for-scalability/>create-read-replicas-for-scalability</a></li><li><a href=/docs/aws/rds/rds-general-knowledge/>rds-general-knowledge</a></li></ul></li><li><input type=checkbox id=section-df37bf19bddd1b463e10899723e49972 class=toggle>
-<label for=section-df37bf19bddd1b463e10899723e49972 class=flex><a href=/docs/aws/iam/>iam</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/aws/iam/create-iam-user-and-group/>create-iam-user-and-group</a></li><li><a href=/docs/aws/iam/identity-and-access-management/>identity-and-access-management</a></li><li><a href=/docs/aws/iam/create-iam-user/>create-iam-user</a></li><li><a href=/docs/aws/iam/inline-policies-iam-user/>inline-policies-iam-user</a></li><li><a href=/docs/aws/iam/iam-groups/>iam-groups</a></li><li><a href=/docs/aws/iam/iam-roles/>iam-roles</a></li><li><a href=/docs/aws/iam/aws-iam-deny-policies/>aws-iam-deny-policies</a></li><li><a href=/docs/aws/iam/aws-ssm-parameter-store/>aws-ssm-parameter-store</a></li><li><a href=/docs/aws/iam/accessing-ssm-parameters-from-ec2/>accessing-ssm-parameters-from-ec2</a></li><li><a href=/docs/aws/iam/use-ssm-from-ec2/>use-ssm-from-ec2</a></li></ul></li><li><input type=checkbox id=section-aee932daafc4b41b13adc2e2442618ba class=toggle>
-<label for=section-aee932daafc4b41b13adc2e2442618ba class=flex><a href=/docs/aws/monitoring/>monitoring</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/aws/monitoring/aws-external-monitoring/>aws-external-monitoring</a></li><li><a href=/docs/aws/monitoring/aws-internal-monitoring/>aws-internal-monitoring</a></li><li><a href=/docs/aws/monitoring/cloud-watch-alarms/>cloud-watch-alarms</a></li><li><a href=/docs/aws/monitoring/cloudtrail/>cloudtrail</a></li></ul></li><li><input type=checkbox id=section-2f38d96bcff4e2965101ac96ca363fcf class=toggle>
-<label for=section-2f38d96bcff4e2965101ac96ca363fcf class=flex><a href=/docs/aws/s3/>s3</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/aws/s3/aws-s3/>aws-s3</a></li><li><a href=/docs/aws/s3/aws-s3-bucket/>aws-s3-bucket</a></li><li><a href=/docs/aws/s3/aws-s3-objects/>aws-s3-objects</a></li></ul></li><li><input type=checkbox id=section-8c887fe27d64d1b20cc8ae2ca943bf90 class=toggle>
-<label for=section-8c887fe27d64d1b20cc8ae2ca943bf90 class=flex><a href=/docs/aws/dns/>dns</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/aws/dns/route-53-hosted-zones/>route-53-hosted-zones</a></li><li><a href=/docs/aws/dns/aws-a-records/>aws-a-records</a></li><li><a href=/docs/aws/dns/dns-ttl-and-caching/>dns-ttl-and-caching</a></li><li><a href=/docs/aws/dns/aws-verifying-dns/>aws-verifying-dns</a></li><li><a href=/docs/aws/dns/aws-cname-records/>aws-cname-records</a></li></ul></li><li><input type=checkbox id=section-6db6507c5b69aeaa72e952abc5260963 class=toggle>
-<label for=section-6db6507c5b69aeaa72e952abc5260963 class=flex><a href=/docs/aws/cdn/>cdn</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/aws/cdn/cloudfront-cdn/>cloudfront-cdn</a></li><li><a href=/docs/aws/cdn/cloudfront-distributions/>cloudfront-distributions</a></li><li><a href=/docs/aws/cdn/cloudfront-invalidation/>cloudfront-invalidation</a></li><li><a href=/docs/aws/cdn/presigned-urls/>presigned-urls</a></li><li><a href=/docs/aws/cdn/why-use-presigned-urls/>why-use-presigned-urls</a></li><li><a href=/docs/aws/cdn/cloudfront-with-dns/>cloudfront-with-dns</a></li></ul></li><li><input type=checkbox id=section-0a1e7816907ed9977365d8170f4ec356 class=toggle>
-<label for=section-0a1e7816907ed9977365d8170f4ec356 class=flex><a href=/docs/aws/ecs/>ecs</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/aws/ecs/vpc-and-networking-setup-for-ecs/>vpc-and-networking-setup-for-ecs</a></li><li><a href=/docs/aws/ecs/why-ecs/>why-ecs</a></li><li><a href=/docs/aws/ecs/elastic-container-registry/>elastic-container-registry</a></li><li><a href=/docs/aws/ecs/ecr-repo/>ecr-repo</a></li><li><a href=/docs/aws/ecs/ecs-clusters/>ecs-clusters</a></li><li><a href=/docs/aws/ecs/ecs-permissions/>ecs-permissions</a></li><li><a href=/docs/aws/ecs/ecs-task-definitions/>ecs-task-definitions</a></li><li><a href=/docs/aws/ecs/ecs-security-groups/>ecs-security-groups</a></li><li><a href=/docs/aws/ecs/application-load-balancer/>application-load-balancer</a></li><li><a href=/docs/aws/ecs/ecs-target-groups/>ecs-target-groups</a></li><li><a href=/docs/aws/ecs/cloudwatch-log-groups/>cloudwatch-log-groups</a></li><li><a href=/docs/aws/ecs/ecs-services/>ecs-services</a></li></ul></li><li><input type=checkbox id=section-e9b4a53fbf41951e3d1539a72a3f46ef class=toggle>
-<label for=section-e9b4a53fbf41951e3d1539a72a3f46ef class=flex><a href=/docs/aws/eks/>eks</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/aws/eks/eks-cluster/>eks-cluster</a></li><li><a href=/docs/aws/eks/eks-vs-kubeadm/>eks-vs-kubeadm</a></li><li><a href=/docs/aws/eks/eks-deploy-app/>eks-deploy-app</a></li><li><a href=/docs/aws/eks/eks-connect-s3/>eks-connect-s3</a></li><li><a href=/docs/aws/eks/eks-use-rds/>eks-use-rds</a></li><li><a href=/docs/aws/eks/eks-node-affinity-taints/>eks-node-affinity-taints</a></li><li><a href=/docs/aws/eks/eks-ha-cluster/>eks-ha-cluster</a></li><li><a href=/docs/aws/eks/eks-spot-instances/>eks-spot-instances</a></li></ul></li><li><input type=checkbox id=section-514dc5328411196c2c4bb685cf444143 class=toggle>
-<label for=section-514dc5328411196c2c4bb685cf444143 class=flex><a href=/docs/aws/lambda/>lambda</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/aws/lambda/aws-lambda/>aws-lambda</a></li><li><a href=/docs/aws/lambda/deploy-lambda/>deploy-lambda</a></li><li><a href=/docs/aws/lambda/testing-lambda-function/>testing-lambda-function</a></li><li><a href=/docs/aws/lambda/lambda-api-gateway/>lambda-api-gateway</a></li><li><a href=/docs/aws/lambda/cloudwatch-log-groups-and-viewing-lambda-logs/>cloudwatch-log-groups-and-viewing-lambda-logs</a></li><li><a href=/docs/aws/lambda/other-lambda-use-cases/>other-lambda-use-cases</a></li></ul></li><li><input type=checkbox id=section-8c8e51cd1f2a827eecce0fcb6812e371 class=toggle>
-<label for=section-8c8e51cd1f2a827eecce0fcb6812e371 class=flex><a href=/docs/aws/general-knowledge/>general-knowledge</a>
-<img src=/icons/chevron-right.svg class=book-icon alt=Expand></label><ul><li><a href=/docs/aws/general-knowledge/reserved-instances-savings-plans/>reserved-instances-savings-plans</a></li><li><a href=/docs/aws/general-knowledge/spot-instances/>spot-instances</a></li><li><a href=/docs/aws/general-knowledge/auto-scaling-groups/>auto-scaling-groups</a></li><li><a href=/docs/aws/general-knowledge/aws-compute-service/>aws-compute-service</a></li><li><a href=/docs/aws/general-knowledge/aws-storage/>aws-storage</a></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class="book-header hidden"><div class="flex align-center justify-between"><label for=menu-control><img src=/icons/menu.svg class=book-icon alt=Menu></label><h3>continuous-integration</h3><label for=toc-control><img src=/icons/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class=hidden><nav id=TableOfContents><ul><li><a href=#i-was-forked-bootdev-cli-for-testing-ci-at-bootdev-cli>I was forked boot.dev cli for testing CI at Boot.dev Cli</a></li><li><a href=#how-to-create-continuous-integration-ci-for-go-program>How to create Continuous Integration (CI) for go program</a></li></ul><ul><li><a href=#workflows>Workflows</a></li><li><a href=#jobs>Jobs</a></li><li><a href=#steps>Steps</a></li><li><a href=#assignment>Assignment</a></li></ul><ul><li><a href=#workflow-name>Workflow Name</a></li><li><a href=#triggering-the-workflow>Triggering the Workflow</a></li><li><a href=#jobs-1>Jobs</a></li><li><a href=#job-steps>Job Steps</a></li></ul><ul><li><a href=#assignment-1>Assignment</a></li></ul><ul><li><a href=#check-for-formatting-issues>Check for Formatting Issues</a></li></ul><ul><li><a href=#install-gosec>Install Gosec</a></li></ul><ul><li><a href=#assignment-2>Assignment</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=continuous-integration>Continuous Integration<a class=anchor href=#continuous-integration>#</a></h1><p>Continuous Integration (CI) is where developers regularly push code changes into a central repository, and by doing so, automated builds and tests are automatically run.</p><p>Those tests can include unit tests, integration tests, styling checks, linting checks, security checks or any other type of automated test. If <em>any</em> of the tests fail, the build is considered &ldquo;broken&rdquo; and the developer is notified so they can fix it.</p><h2 id=i-was-forked-bootdev-cli-for-testing-ci-at-bootdev-cli>I was forked boot.dev cli for testing CI at Boot.dev Cli<a class=anchor href=#i-was-forked-bootdev-cli-for-testing-ci-at-bootdev-cli>#</a></h2><p>Here at Boot.dev CI tests that run each time a new pull request is opened. The reviewer doesn&rsquo;t need to manually check for formatting issues or run tests locally before approving the changes. It automates <em>part</em> of the code review process.</p><p><em>CI is all about automating as much of the testing and review process as possible.</em></p><h2 id=how-to-create-continuous-integration-ci-for-go-program>How to create Continuous Integration (CI) for go program<a class=anchor href=#how-to-create-continuous-integration-ci-for-go-program>#</a></h2><ol><li>While still on the <code>addtests</code> branch, create a new <code>.github</code> directory in the root of your repository</li><li>Create a new directory inside <code>.github</code> called <code>workflows</code></li><li>Create a new workflow by adding a file called <code>ci.yml</code> inside <code>.github/workflows</code>:</li></ol><blockquote class=book-hint><p>Make sure you use the <code>.yml</code> extension. <code>.yaml</code> is valid, but we test for <code>.yml</code>.</p></blockquote><blockquote class=book-hint><p>GitHub Actions workflows are written in <a href=https://en.wikipedia.org/wiki/YAML>YAML</a>, and GitHub automatically checks for and runs workflows in the <code>.github/workflows</code> directory of your repository.</p></blockquote><ol start=4><li>Open <code>ci.yml</code> in your editor and add the following:</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>name</span>: <span style=color:#ae81ff>ci</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>on</span>:
-</span></span><span style=display:flex><span>  <span style=color:#f92672>pull_request</span>:
-</span></span><span style=display:flex><span>    <span style=color:#f92672>branches</span>: [<span style=color:#ae81ff>main]</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>jobs</span>:
-</span></span><span style=display:flex><span>  <span style=color:#f92672>tests</span>:
-</span></span><span style=display:flex><span>    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Tests</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Check out code</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v4</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Set up Go</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/setup-go@v5</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
-</span></span><span style=display:flex><span>          <span style=color:#f92672>go-version</span>: <span style=color:#e6db74>&#34;1.26.0&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Force Failure</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: <span style=color:#ae81ff>(exit 1)</span></span></span></code></pre></div><p><a href=https://docs.github.com/en/actions/creating-actions/setting-exit-codes-for-actions>By default</a>, a step &ldquo;succeeds&rdquo; if it exits with a status code of <code>0</code> and &ldquo;fails&rdquo; if it exits with a status code other than <code>0</code>.</p><p>Every (good) CLI tool that I&rsquo;m aware of follows the convention of exit code <code>0</code> = pass, anything else = fail. For example, if a test case fails, <code>go test</code> will exit with a status code of <code>1</code>.</p><p><em>Don&rsquo;t worry, I&rsquo;ll explain each line of the workflow file in detail soon.</em></p><p>Let&rsquo;s make sure that our CI tests fail when our tests fail. The last step of our workflow file is:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Force Failure</span>
-</span></span><span style=display:flex><span>  <span style=color:#f92672>run</span>: <span style=color:#ae81ff>(exit 1)</span></span></span></code></pre></div><p>This step always fails because it runs the command <code>exit 1</code>, which exits with a status code of <code>1</code>.</p><ol start=5><li>Commit and push your changes up to your remote branch. Then, on your pull requests page, you should see that the &ldquo;tests&rdquo; workflow runs and fails. Great! That means that our (very basic) CI is working.</li></ol><p><em>Paste the URL of your GitHub repo into the box and run the GitHub checks.</em></p><h1 id=breakdown-of-github-actions>Breakdown of GitHub Actions<a class=anchor href=#breakdown-of-github-actions>#</a></h1><p>Let&rsquo;s break down some of the concepts from the workflow file we created.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>name</span>: <span style=color:#ae81ff>ci</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>on</span>:
-</span></span><span style=display:flex><span>  <span style=color:#f92672>pull_request</span>:
-</span></span><span style=display:flex><span>    <span style=color:#f92672>branches</span>: [<span style=color:#ae81ff>main]</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>jobs</span>:
-</span></span><span style=display:flex><span>  <span style=color:#f92672>tests</span>:
-</span></span><span style=display:flex><span>    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Tests</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Check out code</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v4</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Set up Go</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/setup-go@v5</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
-</span></span><span style=display:flex><span>          <span style=color:#f92672>go-version</span>: <span style=color:#e6db74>&#34;1.26.0&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Force Failure</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: <span style=color:#ae81ff>(exit 1)</span></span></span></code></pre></div><h2 id=workflows>Workflows<a class=anchor href=#workflows>#</a></h2><p>A <a href=https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#workflows>workflow</a> is triggered when an <a href=https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#events>event</a> occurs in your GitHub repository. For example, we&rsquo;ll trigger our &ldquo;tests&rdquo; workflow when we open a pull request into the <code>main</code> branch.</p><p>In our case, the <code>ci.yml</code> file contains a single workflow called &ldquo;ci&rdquo;, but we could have named it anything.</p><h2 id=jobs>Jobs<a class=anchor href=#jobs>#</a></h2><p>A workflow is made up of one or more <a href=https://docs.github.com/en/actions/about-github-actions/understanding-github-actions#jobs>jobs</a>. A job is a set of steps that run on the same <a href=https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#runners>runner</a>, which is just a virtual machine that runs your job on GitHub&rsquo;s servers.</p><p>For now, we just have one job. You would typically have multiple jobs if you wanted to run your tests in parallel, or if you wanted to run your tests on multiple operating systems.</p><p>In our case, the <code>ci.yml</code> workflow contains a single job called &ldquo;Tests&rdquo;.</p><h2 id=steps>Steps<a class=anchor href=#steps>#</a></h2><p>A job is made up of one or more steps. A step is a single task that can run commands, a script, or an action. For example, the steps of a job might include:</p><ul><li>Checking out the code</li><li>Installing dependencies</li><li>Running tests</li></ul><p>In our case, the &ldquo;Tests&rdquo; job contains 3 steps:</p><ol><li>Check out the code</li><li>Set up Go</li><li>Force failure of the CI job</li></ol><h2 id=assignment>Assignment<a class=anchor href=#assignment>#</a></h2><p>Update the last step of the job to run <code>go version</code> instead of <code>(exit 1)</code>. That command should just print the current version of Go and exit with code <code>0</code>. Give the step a new name. Commit and push the changes, and your CI job should pass!</p><p>A workflow that triggers on pull requests will re-run when the branch to be merged is updated.</p><p><strong>Paste the URL of your GitHub repo into the box and run the GitHub checks</strong>.</p><h1 id=github-actions>GitHub Actions<a class=anchor href=#github-actions>#</a></h1><p>Let&rsquo;s dissect this workflow file and understand what each line is doing.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>name</span>: <span style=color:#ae81ff>ci</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>on</span>:
-</span></span><span style=display:flex><span>  <span style=color:#f92672>pull_request</span>:
-</span></span><span style=display:flex><span>    <span style=color:#f92672>branches</span>: [<span style=color:#ae81ff>main]</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>jobs</span>:
-</span></span><span style=display:flex><span>  <span style=color:#f92672>tests</span>:
-</span></span><span style=display:flex><span>    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Tests</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Check out code</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v4</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Set up Go</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/setup-go@v5</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
-</span></span><span style=display:flex><span>          <span style=color:#f92672>go-version</span>: <span style=color:#e6db74>&#34;1.26.0&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Echo Go version</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: <span style=color:#ae81ff>go version</span></span></span></code></pre></div><h2 id=workflow-name>Workflow Name<a class=anchor href=#workflow-name>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>name</span>: <span style=color:#ae81ff>ci</span></span></span></code></pre></div><p>The first line simply assigns a human-readable name to the workflow.</p><h2 id=triggering-the-workflow>Triggering the Workflow<a class=anchor href=#triggering-the-workflow>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>on</span>:
-</span></span><span style=display:flex><span>  <span style=color:#f92672>pull_request</span>:
-</span></span><span style=display:flex><span>    <span style=color:#f92672>branches</span>: [<span style=color:#ae81ff>main]</span></span></span></code></pre></div><p>The <code>on</code> key specifies when the workflow should run. In our case, we want to run the workflow when a pull request is opened to the <code>main</code> branch.</p><h2 id=jobs-1>Jobs<a class=anchor href=#jobs-1>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>jobs</span>:
-</span></span><span style=display:flex><span>  <span style=color:#f92672>tests</span>:
-</span></span><span style=display:flex><span>    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Tests</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest</span></span></span></code></pre></div><h2 id=job-steps>Job Steps<a class=anchor href=#job-steps>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Check out code</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v4</span></span></span></code></pre></div><p>Each job has a list of steps that make up the job. In our case, we have three steps. The first step checks out the code by using the pre-built <a href=https://github.com/actions/checkout>checkout</a> action to clone the repository into the runner. You&rsquo;ll almost always want to include this step in your workflows. The <code>uses</code> key specifies the action to use, and the <code>with</code> key specifies the inputs to the action.</p><p>An <a href=https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#actions>action</a> is a reusable custom application that helps reduce the complexity of creating workflows. The <a href=https://github.com/actions/checkout>checkout</a> action is a publicly available action that checks-out your repository so your workflow can access it.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Set up Go</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/setup-go@v5</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>with</span>:
-</span></span><span style=display:flex><span><span style=color:#f92672>go-version</span>: <span style=color:#e6db74>&#39;1.26.0&#39;</span></span></span></code></pre></div><p>The second step sets up Go by using the pre-built <a href=https://github.com/actions/setup-go>setup-go</a> action to configure a Go environment for use in workflows.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Echo Go version</span>
-</span></span><span style=display:flex><span>  <span style=color:#f92672>run</span>: <span style=color:#ae81ff>go version</span></span></span></code></pre></div><p>The third step runs the <code>go version</code> command to print the version of Go installed in the runner. The <code>run</code> key specifies the command to run. The <code>run</code> key is used to run arbitrary command-line commands in the runner.</p><h1 id=running-tests>Running Tests<a class=anchor href=#running-tests>#</a></h1><p>Our current CI doesn&rsquo;t do anything interesting.</p><p>A good CI pipeline typically includes:</p><ul><li>Unit tests</li><li>Integration tests</li><li>Styling checks</li><li>Linting checks</li><li>Security checks</li><li>Any other kind of automated test</li></ul><p>If <em>any</em> of the tests fail, the build is considered &ldquo;broken&rdquo; and the developer is notified (in our case by GitHub) so they can fix it.</p><h2 id=assignment-1>Assignment<a class=anchor href=#assignment-1>#</a></h2><p>The Notely repo has, <em>gasp</em>, zero unit tests!</p><ol><li><p>Create <code>internal/auth/get_api_key_test.go</code>.</p></li><li><p>Add a couple unit tests for <code>GetAPIKey</code>.</p><p>If you&rsquo;re still a little fuzzy on how to write unit tests in Go, I&rsquo;d highly recommend Dave Cheney&rsquo;s <a href=https://dave.cheney.net/2019/05/07/prefer-table-driven-tests>excellent blog post</a> on the subject.</p></li><li><p>Run them locally to make sure they work:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>go test ./...</span></span></code></pre></div><p>The <code>./...</code> tells Go to run all tests in the current directory and all subdirectories.</p></li></ol><p><strong>Run and submit</strong> the CLI tests from the <strong>root of your repo</strong>.</p><h1 id=formatting-ci>Formatting CI<a class=anchor href=#formatting-ci>#</a></h1><p>Now that we understand how to check for formatting issues, let&rsquo;s add a formatting check to the CI workflow.</p><h2 id=check-for-formatting-issues>Check for Formatting Issues<a class=anchor href=#check-for-formatting-issues>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>test -z <span style=color:#66d9ef>$(</span>go fmt ./...<span style=color:#66d9ef>)</span></span></span></code></pre></div><h1 id=ci-linting>CI Linting<a class=anchor href=#ci-linting>#</a></h1><p>To get linting on our CI runner, we can&rsquo;t just call <code>staticcheck</code>: it&rsquo;s not installed on the runner!</p><p>Before any steps that <em>use</em> the <code>staticcheck</code> command, you&rsquo;ll need to install it:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Install staticcheck</span>
-</span></span><span style=display:flex><span>  <span style=color:#f92672>run</span>: <span style=color:#ae81ff>go install honnef.co/go/tools/cmd/staticcheck@latest</span></span></span></code></pre></div><h1 id=security-checks>Security Checks<a class=anchor href=#security-checks>#</a></h1><p>Another common use case for continuous integration is static security checks. These are checks that can be run on your code to find potential security vulnerabilities.</p><p>There are <em>many</em> products out there that do this sort of thing. One of the most popular open-source ones is <a href=https://github.com/securego/gosec>Gosec</a>.</p><h2 id=install-gosec>Install Gosec<a class=anchor href=#install-gosec>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>go install github.com/securego/gosec/v2/cmd/gosec@latest</span></span></code></pre></div><h1 id=ci-security>CI Security<a class=anchor href=#ci-security>#</a></h1><p>Like <code>staticcheck</code>, <code>gosec</code> is <em>not</em> part of the Go toolchain. We&rsquo;ll need to install it in our remote runner before we can use it.</p><h2 id=assignment-2>Assignment<a class=anchor href=#assignment-2>#</a></h2><p>Security isn&rsquo;t a <em>style</em> concern, so let&rsquo;s add these next steps after <code>go test</code> in the &ldquo;Tests&rdquo; job.</p><p>Add the install step.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Install gosec</span>
-</span></span><span style=display:flex><span>  <span style=color:#f92672>run</span>: <span style=color:#ae81ff>go install github.com/securego/gosec/v2/cmd/gosec@latest</span></span></span></code></pre></div><p>Genel son CI</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yml data-lang=yml><span style=display:flex><span><span style=color:#f92672>name</span>: <span style=color:#ae81ff>ci</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>on</span>:
-</span></span><span style=display:flex><span>  <span style=color:#f92672>pull_request</span>:
-</span></span><span style=display:flex><span>    <span style=color:#f92672>branches</span>: [<span style=color:#ae81ff>main]</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>jobs</span>:
-</span></span><span style=display:flex><span>  <span style=color:#f92672>tests</span>:
-</span></span><span style=display:flex><span>    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Tests</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Check out code</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v4</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Set up Go</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/setup-go@v5</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
-</span></span><span style=display:flex><span>          <span style=color:#f92672>go-version</span>: <span style=color:#e6db74>&#34;1.25.1&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Run unit tests</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: <span style=color:#ae81ff>go test ./... -cover</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Install gosec</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: <span style=color:#ae81ff>go install github.com/securego/gosec/v2/cmd/gosec@latest</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Run gosec</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: <span style=color:#ae81ff>gosec ./...</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#f92672>style</span>:
-</span></span><span style=display:flex><span>    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Style</span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Check out code</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v4</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Set up Go</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/setup-go@v5</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
-</span></span><span style=display:flex><span>          <span style=color:#f92672>go-version</span>: <span style=color:#e6db74>&#34;1.25.1&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Check formatting</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: <span style=color:#ae81ff>test -z $(go fmt ./...)</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Install staticcheck</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: <span style=color:#ae81ff>go install honnef.co/go/tools/cmd/staticcheck@latest</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Run staticcheck</span>
-</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: <span style=color:#ae81ff>staticcheck ./...</span></span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div></div><div></div></div><div class="flex flex-wrap justify-between"><span><a href=/docs/version_control_systems/github_workflow/ class="flex align-center"><img src=/icons/backward.svg class=book-icon alt=Backward>
-<span>github-workflow</span>
-</a></span><span><a href=/docs/version_control_systems/continuous_deployment/ class="flex align-center"><span>continuous-deployment</span>
-<img src=/icons/forward.svg class=book-icon alt=Forward></a></span></div><div class=book-comments></div><script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script></footer><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#i-was-forked-bootdev-cli-for-testing-ci-at-bootdev-cli>I was forked boot.dev cli for testing CI at Boot.dev Cli</a></li><li><a href=#how-to-create-continuous-integration-ci-for-go-program>How to create Continuous Integration (CI) for go program</a></li></ul><ul><li><a href=#workflows>Workflows</a></li><li><a href=#jobs>Jobs</a></li><li><a href=#steps>Steps</a></li><li><a href=#assignment>Assignment</a></li></ul><ul><li><a href=#workflow-name>Workflow Name</a></li><li><a href=#triggering-the-workflow>Triggering the Workflow</a></li><li><a href=#jobs-1>Jobs</a></li><li><a href=#job-steps>Job Steps</a></li></ul><ul><li><a href=#assignment-1>Assignment</a></li></ul><ul><li><a href=#check-for-formatting-issues>Check for Formatting Issues</a></li></ul><ul><li><a href=#install-gosec>Install Gosec</a></li></ul><ul><li><a href=#assignment-2>Assignment</a></li></ul></nav></div></aside></main></body></html>
+I was forked boot.dev cli for testing CI at Boot.dev Cli# Here at Boot.dev CI tests that run each time a new pull request is opened. The reviewer doesn’t need to manually check for formatting issues or run tests locally before approving the changes. It automates part of the code review process.">
+	<meta itemprop="wordCount" content="1478">
+
+<title>continuous-integration • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/version_control_systems/continuous_integration/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.da00b2824a1faf962dc9e874d898f822ee4877d755ff6a32592aa9b9d12566f7.js" integrity="sha256-2gCygkofr5Ytyeh02Jj4Iu5Id9dV/2oyWSqpudElZvc=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle" checked />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic-git-conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic-git-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github-workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="active">
+      continuous-integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous-deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git-status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git-add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git-commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git-push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git-branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git-pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git-log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git-merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git-rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git-reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git-remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git-switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager/" class="">
+      cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager-production/" class="">
+      cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/prometheus-stack/" class="">
+      prometheus-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/victoriametrics/" class="">
+      victoriametrics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-390924aad12540f8027ddb300c8575d3" class="toggle"  />
+    <label for="section-390924aad12540f8027ddb300c8575d3" class="flex">
+      <a href="/docs/aws/" class="">
+        AWS</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7ac94fcac7ebb60d389835a7fcb83889" class="toggle"  />
+    <label for="section-7ac94fcac7ebb60d389835a7fcb83889" class="flex">
+      <a href="/docs/aws/networking/" class="">
+        networking</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/regions-and-availability-zones/" class="">
+      regions-and-availability-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/virtual-private-cloud-vpc/" class="">
+      virtual-private-cloud-vpc</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/aws-subnetting/" class="">
+      aws-subnetting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/internet-gateways-igw/" class="">
+      internet-gateways-igw</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/route-tables/" class="">
+      route-tables</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/private-subnets/" class="">
+      private-subnets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/connecting-to-the-aws-cloud/" class="">
+      connecting-to-the-aws-cloud</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="toggle"  />
+    <label for="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="flex">
+      <a href="/docs/aws/ec2/" class="">
+        ec2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instance-configuration-keys/" class="">
+      ec2-instance-configuration-keys</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instances/" class="">
+      ec2-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/elastic-ips/" class="">
+      elastic-ips</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-security-groups/" class="">
+      aws-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ssh-to-aws-server/" class="">
+      ssh-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/deploy-site-to-aws-server/" class="">
+      deploy-site-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/open-web-traffic/" class="">
+      open-web-traffic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/creating-and-using-your-own-ami/" class="">
+      creating-and-using-your-own-ami</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-launch-template/" class="">
+      aws-launch-template</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/launch-from-template-aws/" class="">
+      launch-from-template-aws</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b73d690c546b071419fd1f673553fed1" class="toggle"  />
+    <label for="section-b73d690c546b071419fd1f673553fed1" class="flex">
+      <a href="/docs/aws/rds/" class="">
+        rds</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/relational-database-service/" class="">
+      relational-database-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-a-postgresql-database-in-aws/" class="">
+      create-a-postgresql-database-in-aws</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-to-your-database/" class="">
+      aws-connect-to-your-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-app-to-database/" class="">
+      aws-connect-app-to-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-backups/" class="">
+      rds-backups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-read-replicas-for-scalability/" class="">
+      create-read-replicas-for-scalability</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-general-knowledge/" class="">
+      rds-general-knowledge</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-df37bf19bddd1b463e10899723e49972" class="toggle"  />
+    <label for="section-df37bf19bddd1b463e10899723e49972" class="flex">
+      <a href="/docs/aws/iam/" class="">
+        iam</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user-and-group/" class="">
+      create-iam-user-and-group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/identity-and-access-management/" class="">
+      identity-and-access-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user/" class="">
+      create-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/inline-policies-iam-user/" class="">
+      inline-policies-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-groups/" class="">
+      iam-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-roles/" class="">
+      iam-roles</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-iam-deny-policies/" class="">
+      aws-iam-deny-policies</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-ssm-parameter-store/" class="">
+      aws-ssm-parameter-store</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/accessing-ssm-parameters-from-ec2/" class="">
+      accessing-ssm-parameters-from-ec2</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/use-ssm-from-ec2/" class="">
+      use-ssm-from-ec2</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aee932daafc4b41b13adc2e2442618ba" class="toggle"  />
+    <label for="section-aee932daafc4b41b13adc2e2442618ba" class="flex">
+      <a href="/docs/aws/monitoring/" class="">
+        monitoring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-external-monitoring/" class="">
+      aws-external-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-internal-monitoring/" class="">
+      aws-internal-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloud-watch-alarms/" class="">
+      cloud-watch-alarms</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloudtrail/" class="">
+      cloudtrail</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f38d96bcff4e2965101ac96ca363fcf" class="toggle"  />
+    <label for="section-2f38d96bcff4e2965101ac96ca363fcf" class="flex">
+      <a href="/docs/aws/s3/" class="">
+        s3</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3/" class="">
+      aws-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-bucket/" class="">
+      aws-s3-bucket</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-objects/" class="">
+      aws-s3-objects</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="toggle"  />
+    <label for="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="flex">
+      <a href="/docs/aws/dns/" class="">
+        dns</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/route-53-hosted-zones/" class="">
+      route-53-hosted-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-a-records/" class="">
+      aws-a-records</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/dns-ttl-and-caching/" class="">
+      dns-ttl-and-caching</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-verifying-dns/" class="">
+      aws-verifying-dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-cname-records/" class="">
+      aws-cname-records</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6db6507c5b69aeaa72e952abc5260963" class="toggle"  />
+    <label for="section-6db6507c5b69aeaa72e952abc5260963" class="flex">
+      <a href="/docs/aws/cdn/" class="">
+        cdn</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-cdn/" class="">
+      cloudfront-cdn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-distributions/" class="">
+      cloudfront-distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-invalidation/" class="">
+      cloudfront-invalidation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/presigned-urls/" class="">
+      presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/why-use-presigned-urls/" class="">
+      why-use-presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-with-dns/" class="">
+      cloudfront-with-dns</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0a1e7816907ed9977365d8170f4ec356" class="toggle"  />
+    <label for="section-0a1e7816907ed9977365d8170f4ec356" class="flex">
+      <a href="/docs/aws/ecs/" class="">
+        ecs</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/vpc-and-networking-setup-for-ecs/" class="">
+      vpc-and-networking-setup-for-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/why-ecs/" class="">
+      why-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/elastic-container-registry/" class="">
+      elastic-container-registry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecr-repo/" class="">
+      ecr-repo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-clusters/" class="">
+      ecs-clusters</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-permissions/" class="">
+      ecs-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-task-definitions/" class="">
+      ecs-task-definitions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-security-groups/" class="">
+      ecs-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/application-load-balancer/" class="">
+      application-load-balancer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-target-groups/" class="">
+      ecs-target-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/cloudwatch-log-groups/" class="">
+      cloudwatch-log-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-services/" class="">
+      ecs-services</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="toggle"  />
+    <label for="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="flex">
+      <a href="/docs/aws/eks/" class="">
+        eks</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-cluster/" class="">
+      eks-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-vs-kubeadm/" class="">
+      eks-vs-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-deploy-app/" class="">
+      eks-deploy-app</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-connect-s3/" class="">
+      eks-connect-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-use-rds/" class="">
+      eks-use-rds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-node-affinity-taints/" class="">
+      eks-node-affinity-taints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-ha-cluster/" class="">
+      eks-ha-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-spot-instances/" class="">
+      eks-spot-instances</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-514dc5328411196c2c4bb685cf444143" class="toggle"  />
+    <label for="section-514dc5328411196c2c4bb685cf444143" class="flex">
+      <a href="/docs/aws/lambda/" class="">
+        lambda</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/aws-lambda/" class="">
+      aws-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/deploy-lambda/" class="">
+      deploy-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/testing-lambda-function/" class="">
+      testing-lambda-function</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/lambda-api-gateway/" class="">
+      lambda-api-gateway</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/cloudwatch-log-groups-and-viewing-lambda-logs/" class="">
+      cloudwatch-log-groups-and-viewing-lambda-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/other-lambda-use-cases/" class="">
+      other-lambda-use-cases</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c8e51cd1f2a827eecce0fcb6812e371" class="toggle"  />
+    <label for="section-8c8e51cd1f2a827eecce0fcb6812e371" class="flex">
+      <a href="/docs/aws/general-knowledge/" class="">
+        general-knowledge</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/reserved-instances-savings-plans/" class="">
+      reserved-instances-savings-plans</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/spot-instances/" class="">
+      spot-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/auto-scaling-groups/" class="">
+      auto-scaling-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-compute-service/" class="">
+      aws-compute-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-storage/" class="">
+      aws-storage</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>continuous-integration</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#i-was-forked-bootdev-cli-for-testing-ci-at-bootdev-cli">I was forked boot.dev cli for testing CI at Boot.dev Cli</a></li>
+    <li><a href="#how-to-create-continuous-integration-ci-for-go-program">How to create Continuous Integration (CI) for go program</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#workflows">Workflows</a></li>
+    <li><a href="#jobs">Jobs</a></li>
+    <li><a href="#steps">Steps</a></li>
+    <li><a href="#assignment">Assignment</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#workflow-name">Workflow Name</a></li>
+    <li><a href="#triggering-the-workflow">Triggering the Workflow</a></li>
+    <li><a href="#jobs-1">Jobs</a></li>
+    <li><a href="#job-steps">Job Steps</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#assignment-1">Assignment</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#check-for-formatting-issues">Check for Formatting Issues</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#install-gosec">Install Gosec</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#assignment-2">Assignment</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="continuous-integration">Continuous Integration<a class="anchor" href="#continuous-integration">#</a></h1>
+<p>Continuous Integration (CI) is where developers regularly push code changes into a central repository, and by doing so, automated builds and tests are automatically run.</p>
+<p>Those tests can include unit tests, integration tests, styling checks, linting checks, security checks or any other type of automated test. If <em>any</em> of the tests fail, the build is considered &ldquo;broken&rdquo; and the developer is notified so they can fix it.</p>
+<h2 id="i-was-forked-bootdev-cli-for-testing-ci-at-bootdev-cli">I was forked boot.dev cli for testing CI at Boot.dev Cli<a class="anchor" href="#i-was-forked-bootdev-cli-for-testing-ci-at-bootdev-cli">#</a></h2>
+<p>Here at Boot.dev  CI tests that run each time a new pull request is opened. The reviewer doesn&rsquo;t need to manually check for formatting issues or run tests locally before approving the changes. It automates <em>part</em> of the code review process.</p>
+<p><em>CI is all about automating as much of the testing and review process as possible.</em></p>
+<h2 id="how-to-create-continuous-integration-ci-for-go-program">How to create Continuous Integration (CI) for go program<a class="anchor" href="#how-to-create-continuous-integration-ci-for-go-program">#</a></h2>
+<ol>
+<li>While still on the <code>addtests</code> branch, create a new <code>.github</code> directory in the root of your repository</li>
+<li>Create a new directory inside <code>.github</code> called <code>workflows</code></li>
+<li>Create a new workflow by adding a file called <code>ci.yml</code> inside <code>.github/workflows</code>:</li>
+</ol>
+<blockquote class='book-hint '>
+<p>Make sure you use the <code>.yml</code> extension. <code>.yaml</code> is valid, but we test for <code>.yml</code>.</p>
+</blockquote><blockquote class='book-hint '>
+<p>GitHub Actions workflows are written in <a href="https://en.wikipedia.org/wiki/YAML">YAML</a>, and GitHub automatically checks for and runs workflows in the <code>.github/workflows</code> directory of your repository.</p>
+</blockquote><ol start="4">
+<li>Open <code>ci.yml</code> in your editor and add the following:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">ci</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">on</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">pull_request</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">branches</span>: [<span style="color:#ae81ff">main]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tests</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Tests</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Check out code</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Go</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/setup-go@v5</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">go-version</span>: <span style="color:#e6db74">&#34;1.26.0&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Force Failure</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">(exit 1)</span></span></span></code></pre></div><p><a href="https://docs.github.com/en/actions/creating-actions/setting-exit-codes-for-actions">By default</a>, a step &ldquo;succeeds&rdquo; if it exits with a status code of <code>0</code> and &ldquo;fails&rdquo; if it exits with a status code other than <code>0</code>.</p>
+<p>Every (good) CLI tool that I&rsquo;m aware of follows the convention of exit code <code>0</code> = pass, anything else = fail. For example, if a test case fails, <code>go test</code> will exit with a status code of <code>1</code>.</p>
+<p><em>Don&rsquo;t worry, I&rsquo;ll explain each line of the workflow file in detail soon.</em></p>
+<p>Let&rsquo;s make sure that our CI tests fail when our tests fail. The last step of our workflow file is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Force Failure</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">run</span>: <span style="color:#ae81ff">(exit 1)</span></span></span></code></pre></div><p>This step always fails because it runs the command <code>exit 1</code>, which exits with a status code of <code>1</code>.</p>
+<ol start="5">
+<li>Commit and push your changes up to your remote branch. Then, on your pull requests page, you should see that the &ldquo;tests&rdquo; workflow runs and fails. Great! That means that our (very basic) CI is working.</li>
+</ol>
+<p><em>Paste the URL of your GitHub repo into the box and run the GitHub checks.</em></p>
+<h1 id="breakdown-of-github-actions">Breakdown of GitHub Actions<a class="anchor" href="#breakdown-of-github-actions">#</a></h1>
+<p>Let&rsquo;s break down some of the concepts from the workflow file we created.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">ci</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">on</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">pull_request</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">branches</span>: [<span style="color:#ae81ff">main]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tests</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Tests</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Check out code</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Go</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/setup-go@v5</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">go-version</span>: <span style="color:#e6db74">&#34;1.26.0&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Force Failure</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">(exit 1)</span></span></span></code></pre></div><h2 id="workflows">Workflows<a class="anchor" href="#workflows">#</a></h2>
+<p>A <a href="https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#workflows">workflow</a> is triggered when an <a href="https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#events">event</a> occurs in your GitHub repository. For example, we&rsquo;ll trigger our &ldquo;tests&rdquo; workflow when we open a pull request into the <code>main</code> branch.</p>
+<p>In our case, the <code>ci.yml</code> file contains a single workflow called &ldquo;ci&rdquo;, but we could have named it anything.</p>
+<h2 id="jobs">Jobs<a class="anchor" href="#jobs">#</a></h2>
+<p>A workflow is made up of one or more <a href="https://docs.github.com/en/actions/about-github-actions/understanding-github-actions#jobs">jobs</a>. A job is a set of steps that run on the same <a href="https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#runners">runner</a>, which is just a virtual machine that runs your job on GitHub&rsquo;s servers.</p>
+<p>For now, we just have one job. You would typically have multiple jobs if you wanted to run your tests in parallel, or if you wanted to run your tests on multiple operating systems.</p>
+<p>In our case, the <code>ci.yml</code> workflow contains a single job called &ldquo;Tests&rdquo;.</p>
+<h2 id="steps">Steps<a class="anchor" href="#steps">#</a></h2>
+<p>A job is made up of one or more steps. A step is a single task that can run commands, a script, or an action. For example, the steps of a job might include:</p>
+<ul>
+<li>Checking out the code</li>
+<li>Installing dependencies</li>
+<li>Running tests</li>
+</ul>
+<p>In our case, the &ldquo;Tests&rdquo; job contains 3 steps:</p>
+<ol>
+<li>Check out the code</li>
+<li>Set up Go</li>
+<li>Force failure of the CI job</li>
+</ol>
+<h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
+<p>Update the last step of the job to run <code>go version</code> instead of <code>(exit 1)</code>. That command should just print the current version of Go and exit with code <code>0</code>. Give the step a new name. Commit and push the changes, and your CI job should pass!</p>
+<p>A workflow that triggers on pull requests will re-run when the branch to be merged is updated.</p>
+<p><strong>Paste the URL of your GitHub repo into the box and run the GitHub checks</strong>.</p>
+<h1 id="github-actions">GitHub Actions<a class="anchor" href="#github-actions">#</a></h1>
+<p>Let&rsquo;s dissect this workflow file and understand what each line is doing.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">ci</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">on</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">pull_request</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">branches</span>: [<span style="color:#ae81ff">main]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tests</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Tests</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Check out code</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Go</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/setup-go@v5</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">go-version</span>: <span style="color:#e6db74">&#34;1.26.0&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Echo Go version</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">go version</span></span></span></code></pre></div><h2 id="workflow-name">Workflow Name<a class="anchor" href="#workflow-name">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">ci</span></span></span></code></pre></div><p>The first line simply assigns a human-readable name to the workflow.</p>
+<h2 id="triggering-the-workflow">Triggering the Workflow<a class="anchor" href="#triggering-the-workflow">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">on</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">pull_request</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">branches</span>: [<span style="color:#ae81ff">main]</span></span></span></code></pre></div><p>The <code>on</code> key specifies when the workflow should run. In our case, we want to run the workflow when a pull request is opened to the <code>main</code> branch.</p>
+<h2 id="jobs-1">Jobs<a class="anchor" href="#jobs-1">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tests</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Tests</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span></span></span></code></pre></div><h2 id="job-steps">Job Steps<a class="anchor" href="#job-steps">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Check out code</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v4</span></span></span></code></pre></div><p>Each job has a list of steps that make up the job. In our case, we have three steps. The first step checks out the code by using the pre-built <a href="https://github.com/actions/checkout">checkout</a> action to clone the repository into the runner. You&rsquo;ll almost always want to include this step in your workflows. The <code>uses</code> key specifies the action to use, and the <code>with</code> key specifies the inputs to the action.</p>
+<p>An <a href="https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#actions">action</a> is a reusable custom application that helps reduce the complexity of creating workflows. The <a href="https://github.com/actions/checkout">checkout</a> action is a publicly available action that checks-out your repository so your workflow can access it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Go</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/setup-go@v5</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span><span style="color:#f92672">go-version</span>: <span style="color:#e6db74">&#39;1.26.0&#39;</span></span></span></code></pre></div><p>The second step sets up Go by using the pre-built <a href="https://github.com/actions/setup-go">setup-go</a> action to configure a Go environment for use in workflows.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Echo Go version</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">run</span>: <span style="color:#ae81ff">go version</span></span></span></code></pre></div><p>The third step runs the <code>go version</code> command to print the version of Go installed in the runner. The <code>run</code> key specifies the command to run. The <code>run</code> key is used to run arbitrary command-line commands in the runner.</p>
+<h1 id="running-tests">Running Tests<a class="anchor" href="#running-tests">#</a></h1>
+<p>Our current CI doesn&rsquo;t do anything interesting.</p>
+<p>A good CI pipeline typically includes:</p>
+<ul>
+<li>Unit tests</li>
+<li>Integration tests</li>
+<li>Styling checks</li>
+<li>Linting checks</li>
+<li>Security checks</li>
+<li>Any other kind of automated test</li>
+</ul>
+<p>If <em>any</em> of the tests fail, the build is considered &ldquo;broken&rdquo; and the developer is notified (in our case by GitHub) so they can fix it.</p>
+<h2 id="assignment-1">Assignment<a class="anchor" href="#assignment-1">#</a></h2>
+<p>The Notely repo has, <em>gasp</em>, zero unit tests!</p>
+<ol>
+<li>
+<p>Create <code>internal/auth/get_api_key_test.go</code>.</p>
+</li>
+<li>
+<p>Add a couple unit tests for <code>GetAPIKey</code>.</p>
+<p>If you&rsquo;re still a little fuzzy on how to write unit tests in Go, I&rsquo;d highly recommend Dave Cheney&rsquo;s <a href="https://dave.cheney.net/2019/05/07/prefer-table-driven-tests">excellent blog post</a> on the subject.</p>
+</li>
+<li>
+<p>Run them locally to make sure they work:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go test ./...</span></span></code></pre></div><p>The <code>./...</code> tells Go to run all tests in the current directory and all subdirectories.</p>
+</li>
+</ol>
+<p><strong>Run and submit</strong> the CLI tests from the <strong>root of your repo</strong>.</p>
+<h1 id="formatting-ci">Formatting CI<a class="anchor" href="#formatting-ci">#</a></h1>
+<p>Now that we understand how to check for formatting issues, let&rsquo;s add a formatting check to the CI workflow.</p>
+<h2 id="check-for-formatting-issues">Check for Formatting Issues<a class="anchor" href="#check-for-formatting-issues">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>test -z <span style="color:#66d9ef">$(</span>go fmt ./...<span style="color:#66d9ef">)</span></span></span></code></pre></div><h1 id="ci-linting">CI Linting<a class="anchor" href="#ci-linting">#</a></h1>
+<p>To get linting on our CI runner, we can&rsquo;t just call <code>staticcheck</code>: it&rsquo;s not installed on the runner!</p>
+<p>Before any steps that <em>use</em> the <code>staticcheck</code> command, you&rsquo;ll need to install it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install staticcheck</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">run</span>: <span style="color:#ae81ff">go install honnef.co/go/tools/cmd/staticcheck@latest</span></span></span></code></pre></div><h1 id="security-checks">Security Checks<a class="anchor" href="#security-checks">#</a></h1>
+<p>Another common use case for continuous integration is static security checks. These are checks that can be run on your code to find potential security vulnerabilities.</p>
+<p>There are <em>many</em> products out there that do this sort of thing. One of the most popular open-source ones is <a href="https://github.com/securego/gosec">Gosec</a>.</p>
+<h2 id="install-gosec">Install Gosec<a class="anchor" href="#install-gosec">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go install github.com/securego/gosec/v2/cmd/gosec@latest</span></span></code></pre></div><h1 id="ci-security">CI Security<a class="anchor" href="#ci-security">#</a></h1>
+<p>Like <code>staticcheck</code>, <code>gosec</code> is <em>not</em> part of the Go toolchain. We&rsquo;ll need to install it in our remote runner before we can use it.</p>
+<h2 id="assignment-2">Assignment<a class="anchor" href="#assignment-2">#</a></h2>
+<p>Security isn&rsquo;t a <em>style</em> concern, so let&rsquo;s add these next steps after <code>go test</code> in the &ldquo;Tests&rdquo; job.</p>
+<p>Add the install step.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install gosec</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">run</span>: <span style="color:#ae81ff">go install github.com/securego/gosec/v2/cmd/gosec@latest</span></span></span></code></pre></div><p>Genel son CI</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">ci</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">on</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">pull_request</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">branches</span>: [<span style="color:#ae81ff">main]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tests</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Tests</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Check out code</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Go</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/setup-go@v5</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">go-version</span>: <span style="color:#e6db74">&#34;1.25.1&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Run unit tests</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">go test ./... -cover</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install gosec</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">go install github.com/securego/gosec/v2/cmd/gosec@latest</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Run gosec</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">gosec ./...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">style</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Style</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Check out code</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Go</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/setup-go@v5</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">go-version</span>: <span style="color:#e6db74">&#34;1.25.1&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Check formatting</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">test -z $(go fmt ./...)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install staticcheck</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">go install honnef.co/go/tools/cmd/staticcheck@latest</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Run staticcheck</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">staticcheck ./...</span></span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/version_control_systems/github_workflow/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>github-workflow</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/version_control_systems/continuous_deployment/" class="flex align-center">
+        <span>continuous-deployment</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#i-was-forked-bootdev-cli-for-testing-ci-at-bootdev-cli">I was forked boot.dev cli for testing CI at Boot.dev Cli</a></li>
+    <li><a href="#how-to-create-continuous-integration-ci-for-go-program">How to create Continuous Integration (CI) for go program</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#workflows">Workflows</a></li>
+    <li><a href="#jobs">Jobs</a></li>
+    <li><a href="#steps">Steps</a></li>
+    <li><a href="#assignment">Assignment</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#workflow-name">Workflow Name</a></li>
+    <li><a href="#triggering-the-workflow">Triggering the Workflow</a></li>
+    <li><a href="#jobs-1">Jobs</a></li>
+    <li><a href="#job-steps">Job Steps</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#assignment-1">Assignment</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#check-for-formatting-issues">Check for Formatting Issues</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#install-gosec">Install Gosec</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#assignment-2">Assignment</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

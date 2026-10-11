@@ -88,4 +88,4 @@ kubectl exec deploy/patientping-web -- \
 
 **That's it - pods now have scoped, short-lived S3 access.** No keys in images, no node-wide role, and you can revoke everything by deleting one IAM role.
 
-> Not: `eksctl create iamserviceaccount` ServiceAccount'a `eks.amazonaws.com/role-arn` annotation'ı ekler. Pod başladığında AWS SDK bu annotation'ı görür ve token'ı STS'e yollar. Eski pod'ları `kubectl rollout restart deployment patientping-web` ile yeniden başlatmayı unutmayın.
+> Not: `eksctl create iamserviceaccount` ServiceAccount'a `eks.amazonaws.com/role-arn` annotation'ı ekler. Pod başladığında AWS SDK bu annotation'ı görür ve token'ı STS'e yollar. Eski pod'ları `kubectl rollout restart deployment patientping-web` ile yeniden başlatmayı unutma.

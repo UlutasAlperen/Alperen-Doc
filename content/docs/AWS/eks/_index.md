@@ -7,13 +7,13 @@ bookCollapseSection: true
 # AWS - EKS - Elastic Kubernetes Service
 
 - 001 - [eks-cluster](eks-cluster/) = cluster kurulumu (control plane + worker node'lar)
-- 002 - [eks-vs-kubeadm](eks-vs-kubeadm/) = kendi kubeadm cluster'ınla farklar
-- 003 - [eks-deploy-app](eks-deploy-app/) = uygulamayı EKS'e deploy etme
+- 002 - [eks-vs-kubeadm](eks-vs-kubeadm/) = kubeadm ike eks olusturulan cluster'ın farklari
+- 003 - [eks-deploy-app](eks-deploy-app/) = uygulamayı EKS'de deploy etme
 - 004 - [eks-connect-s3](eks-connect-s3/) = S3'e bağlama (IRSA ile pod bazlı IAM)
-- 005 - [eks-use-rds](eks-use-rds/) = RDS'i kullanma (Secret + security group)
+- 005 - [eks-use-rds](eks-use-rds/) = RDS kullanimi (Secret + security group)
 - 006 - [eks-node-affinity-taints](eks-node-affinity-taints/) = node affinity + taints EKS'te nasıl çalışır
-- 007 - [eks-ha-cluster](eks-ha-cluster/) = HA: control plane AWS'te, worker katmanı sende
-- 008 - [eks-spot-instances](eks-spot-instances/) = spot node group + stateless app (ucuz cattle)
+- 007 - [eks-ha-cluster](eks-ha-cluster/) = HA - control plane AWS de nasil calisiyor
+- 008 - [eks-spot-instances](eks-spot-instances/) = spot node group + stateless app nasil yapilir
 
 [EKS](https://aws.amazon.com/eks/) (**Elastic Kubernetes Service**) is AWS' _managed_ Kubernetes offering. If you've been through my [Kubernetes](../../kubernetes/) notes with Minikube, this is the production version of the same thing: the **control plane** (API server, etcd, scheduler) is run and patched by AWS, and you manage the **worker nodes** (or let Fargate run pods without nodes at all).
 

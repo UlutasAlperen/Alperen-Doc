@@ -84,7 +84,7 @@ You should get the PatientPing app's response.
 
 **Cost check:** The load balancer that Kubernetes created for you costs roughly **$0.025 per hour** plus data transfer, same as the ECS ALB. Two `t3.small` pods don't cost anything extra beyond the worker nodes you're already paying for.
 
-> Not: `kubectl get svc`'deki EXTERNAL-IP bazen `<pending>` görünür - AWS ALB'yi arka planda oluşturuyordur, 2-3 dakika verin.
+> Not: `kubectl get svc`'deki EXTERNAL-IP bazen `<pending>` görünür - AWS ALB'yi arka planda olusturdugundan 2-3 dakika beklesek tatli olur.
 
 ## Cleanup later
 
