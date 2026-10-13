@@ -23,7 +23,7 @@ https://github.com/alex-shpak/hugo-book
 
 	<meta itemprop="name" content="aws-storage">
 	<meta itemprop="description" content="Amazon EC2 instance store# Amazon EC2 instance store isn’t a stand-alone AWS block storage service. Rather, it refers to the block-level storage that is physically attached to the EC2 instance host computer. Depending on the type of instance, EC2 instance store might come attached as the default storage. Since its data is lost when an instance is stopped or terminated, EC2 instance store is best for temporary memory-based storage needs like buffers, caches, and scratch data. It is not recommended for applications that require data retention.">
-	<meta itemprop="wordCount" content="956">
+	<meta itemprop="wordCount" content="1074">
 
 <title>aws-storage • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -32,7 +32,7 @@ https://github.com/alex-shpak/hugo-book
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.da00b2824a1faf962dc9e874d898f822ee4877d755ff6a32592aa9b9d12566f7.js" integrity="sha256-2gCygkofr5Ytyeh02Jj4Iu5Id9dV/2oyWSqpudElZvc=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a5a3aadfbefcc9ac5152185f89910b3d2ab27883bbe8fec7a9f4dd2b834f9873.js" integrity="sha256-paOq3778yaxRUhhfiZELPSqyeIO76P7HqfTdK4NPmHM=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2787,6 +2787,10 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#amazon-efs-storage-classes">Amazon EFS storage classes</a></li>
     <li><a href="#amazon-efs-data-lifecycle">Amazon EFS data lifecycle</a></li>
   </ul>
+
+  <ul>
+    <li><a href="#gateway-types">Gateway types</a></li>
+  </ul>
 </nav>
 
 
@@ -2855,6 +2859,14 @@ https://github.com/alex-shpak/hugo-book
 <p>You can further optimize Amazon EFS storage costs by automatically moving data between storage classes based on usage patterns. You can create lifecycle policies that determine when and how files transition between different storage tiers. These automated policies help ensure your data resides in the most cost-effective storage class without manual intervention.</p>
 <p><img src="/images/aws/efs-life-1.png" alt="efs life" />
 <img src="/images/aws/efs-life-2.png" alt="efs life 2" /></p>
+<h1 id="aws-storage-gateway">AWS Storage Gateway<a class="anchor" href="#aws-storage-gateway">#</a></h1>
+<p>Storage Gateway is a hybrid cloud storage service that makes it possible to seamlessly integrate on-premises environments with AWS Cloud storage. You can use it to extend your local storage to the cloud while maintaining low-latency access to frequently used data.</p>
+<p>You can use Storage Gateway to streamline storage management and reduce costs for practical hybrid cloud storage use cases. These include moving backups to the cloud, using on-premises file shares backed by cloud storage, and providing low-latency access to data in AWS for on-premises applications.</p>
+<p><img src="/images/aws/storage_gateway_1.png" alt="storage gateway 1" /></p>
+<h2 id="gateway-types">Gateway types<a class="anchor" href="#gateway-types">#</a></h2>
+<p>Storage Gateway offers three distinct types of gateways to meet different hybrid storage needs. Each gateway type is designed to address specific use cases and workload requirements.</p>
+<p><img src="/images/aws/storage_gateway_2.png" alt="storage gateway 2" /></p>
+<p><img src="/images/aws/storage_gateway_3.png" alt="storage gateway 3" /></p>
 </article>
  
       
@@ -2934,6 +2946,10 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#amazon-efs-benefits">Amazon EFS benefits</a></li>
     <li><a href="#amazon-efs-storage-classes">Amazon EFS storage classes</a></li>
     <li><a href="#amazon-efs-data-lifecycle">Amazon EFS data lifecycle</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#gateway-types">Gateway types</a></li>
   </ul>
 </nav>
 

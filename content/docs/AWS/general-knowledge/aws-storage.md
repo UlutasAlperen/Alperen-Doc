@@ -92,3 +92,22 @@ You can further optimize Amazon EFS storage costs by automatically moving data b
 
 ![efs life](/images/aws/efs-life-1.png)
 ![efs life 2](/images/aws/efs-life-2.png)
+
+# AWS Storage Gateway
+
+Storage Gateway is a hybrid cloud storage service that makes it possible to seamlessly integrate on-premises environments with AWS Cloud storage. You can use it to extend your local storage to the cloud while maintaining low-latency access to frequently used data.
+
+You can use Storage Gateway to streamline storage management and reduce costs for practical hybrid cloud storage use cases. These include moving backups to the cloud, using on-premises file shares backed by cloud storage, and providing low-latency access to data in AWS for on-premises applications.
+
+
+![storage gateway 1](/images/aws/storage_gateway_1.png)
+
+## Gateway types
+
+Storage Gateway offers three distinct types of gateways to meet different hybrid storage needs. Each gateway type is designed to address specific use cases and workload requirements.
+
+
+![storage gateway 2](/images/aws/storage_gateway_2.png)
+
+
+![storage gateway 3](/images/aws/storage_gateway_3.png)
