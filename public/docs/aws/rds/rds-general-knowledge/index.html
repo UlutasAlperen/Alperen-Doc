@@ -29,7 +29,7 @@ Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: 
 	<meta itemprop="description" content="RDS Storage and IOPS# When you create an RDS instance, you choose a type and amount of storage. AWS offers different storage types optimized for different workloads. Let’s go over them.
 General Purpose SSD (gp3)# This is the recommended default for most production workloads. It’s a good balance of performance and cost:
 Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: Can provision up to 16,000 IOPS if needed Cost-effective: Lower cost than provisioned IOPS Use case: Most applications, up to moderate I/O requirements Provisioned IOPS SSD (io1/io2)# This is for demanding workloads that need guaranteed performance:">
-	<meta itemprop="wordCount" content="573">
+	<meta itemprop="wordCount" content="902">
 
 <title>rds-general-knowledge • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: 
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.c9311304ed38192447fe411f547406f4bb4f8623c00cc9b26869ca7412f75680.js" integrity="sha256-yTETBO04GSRH/kEfVHQG9LtPhiPADMmyaGnKdBL3VoA=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.82c84f07712d24df3498d21f7878e75c180723ae9189a7633b86eef3184ed026.js" integrity="sha256-gshPB3EtJN80mNIfeHjnXBgHI66RiadjO4bu8xhO0CY=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2793,6 +2793,18 @@ Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: 
       </ul>
     </li>
   </ul>
+
+  <ul>
+    <li><a href="#amazon-dynamodb">Amazon DynamoDB</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#benefits">Benefits</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
 
 
@@ -2852,6 +2864,28 @@ Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: 
 <p>Some examples of practical use cases for Aurora are gaming applications, media and content management, and real-time analytics.
 Benefits</p>
 <p><img src="/images/aws/database_5.png" alt="database 5" /></p>
+<hr>
+<h1 id="nosql-databases">NoSQL databases<a class="anchor" href="#nosql-databases">#</a></h1>
+<p>NoSQL databases are sometimes referred to as non-relational databases because their structures are different than relational databases like Amazon RDS. Instead of row and column relationships, NoSQL databases build a structure for the data that they contain using key-value pairs instead. With key-value pairs, data is organized into items identified by unique keys.</p>
+<p>Each key has one or more associated attributes, or values, that represent various characteristics of the data. You can think of a key as a word entry in a dictionary, and the value as its associated definition. Not every item in the table has to have the same attributes, and you can add or remove attributes at any time.</p>
+<p>The following table shows an example of how key-value paired data is stored in NoSQL databases.</p>
+<p><img src="/images/aws/database_6.png" alt="database 6" /></p>
+<p><img src="/images/aws/database_7.png" alt="database 7" /></p>
+<h2 id="amazon-dynamodb">Amazon DynamoDB<a class="anchor" href="#amazon-dynamodb">#</a></h2>
+<p>DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance for both document and key-value data structures. It&rsquo;s a powerful and incredibly fast database option for use cases that require a flexible schema, and is ideal for applications that require high performance and seamless scaling.</p>
+<p>DynamoDB seamlessly scales alongside your data without impacting performance, which means that you only pay for the resources that you use. It also includes built-in security features for enhanced protection, and automatically spreads your data across multiple servers to handle your workload.
+Use cases</p>
+<p>Some examples of practical use cases for DynamoDB are gaming platforms, financial service applications, and mobile applications with global user bases.</p>
+<p><img src="/images/aws/database_8.png" alt="database 8" />
+<img src="/images/aws/database_9.png" alt="database 9" /></p>
+<hr>
+<p><img src="/images/aws/database_10.png" alt="database 10" /></p>
+<h1 id="amazon-elasticache">Amazon ElastiCache<a class="anchor" href="#amazon-elasticache">#</a></h1>
+<p>ElastiCache is a fully managed in-memory caching service that was built to help reduce the complexity of administering in-memory caching systems. This means that you can continue to use the same Redis, Valkey, or Memcached tools and configurations to scale your workloads. It automatically detects and replaces failed nodes, which makes it ideal for applications that need consistent high performance.
+Use cases</p>
+<p>Some examples of practical use cases for ElastiCache are session data management, database query enhancement, and gaming leaderboards.</p>
+<h3 id="benefits">Benefits<a class="anchor" href="#benefits">#</a></h3>
+<p><img src="/images/aws/database_11.png" alt="database 11" /></p>
 </article>
  
       
@@ -2934,6 +2968,18 @@ Benefits</p>
     <li><a href="#amazon-aurora">Amazon Aurora</a>
       <ul>
         <li><a href="#use-cases-1">Use cases</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#amazon-dynamodb">Amazon DynamoDB</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#benefits">Benefits</a></li>
       </ul>
     </li>
   </ul>
