@@ -29,7 +29,7 @@ Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: 
 	<meta itemprop="description" content="RDS Storage and IOPS# When you create an RDS instance, you choose a type and amount of storage. AWS offers different storage types optimized for different workloads. Let’s go over them.
 General Purpose SSD (gp3)# This is the recommended default for most production workloads. It’s a good balance of performance and cost:
 Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: Can provision up to 16,000 IOPS if needed Cost-effective: Lower cost than provisioned IOPS Use case: Most applications, up to moderate I/O requirements Provisioned IOPS SSD (io1/io2)# This is for demanding workloads that need guaranteed performance:">
-	<meta itemprop="wordCount" content="200">
+	<meta itemprop="wordCount" content="573">
 
 <title>rds-general-knowledge • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: 
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.a5a3aadfbefcc9ac5152185f89910b3d2ab27883bbe8fec7a9f4dd2b834f9873.js" integrity="sha256-paOq3778yaxRUhhfiZELPSqyeIO76P7HqfTdK4NPmHM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.c9311304ed38192447fe411f547406f4bb4f8623c00cc9b26869ca7412f75680.js" integrity="sha256-yTETBO04GSRH/kEfVHQG9LtPhiPADMmyaGnKdBL3VoA=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2779,6 +2779,20 @@ Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: 
     <li><a href="#provisioned-iops-ssd-io1io2">Provisioned IOPS SSD (<code>io1</code>/<code>io2</code>)</a></li>
     <li><a href="#what-are-iops">What Are IOPS?</a></li>
   </ul>
+
+  <ul>
+    <li><a href="#amazon-relational-database-service-amazon-rds">Amazon Relational Database Service (Amazon RDS)</a>
+      <ul>
+        <li><a href="#supported-database-engines">Supported database engines</a></li>
+        <li><a href="#use-cases">Use cases</a></li>
+      </ul>
+    </li>
+    <li><a href="#amazon-aurora">Amazon Aurora</a>
+      <ul>
+        <li><a href="#use-cases-1">Use cases</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
 
 
@@ -2815,6 +2829,29 @@ Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: 
 <li><strong>Lower IOPS</strong> = slower database operations</li>
 </ul>
 <p>For most applications, the default 3,000 IOPS from general purpose storage is plenty. You only need provisioned IOPS if you have a specific performance requirement that general purpose can&rsquo;t meet.</p>
+<h1 id="relational-databases">Relational databases<a class="anchor" href="#relational-databases">#</a></h1>
+<p>Relational databases store data in a way that relates it to other pieces of data, and they use structured query language, or SQL, to manage and query data. This approach stores data in an easily understandable, consistent, and scalable way that works great for applications requiring structured data management.</p>
+<p>AWS offers fully managed relational database solutions that remove the burden of database administration while maintaining high availability and security. AWS relational databases support popular database engines like MySQL, PostgreSQL, and Oracle, making it easier to migrate existing databases to AWS.</p>
+<p>An example of a relational database would be an inventory management system for a restaurant. Each record in the database includes data for a single item, such as product name, size, price, and so on. The following table shows how this type of data is configured in a relational database.</p>
+<hr>
+<p><img src="/images/aws/database_1.png" alt="database 1" /></p>
+<h2 id="amazon-relational-database-service-amazon-rds">Amazon Relational Database Service (Amazon RDS)<a class="anchor" href="#amazon-relational-database-service-amazon-rds">#</a></h2>
+<p>Amazon RDS is a managed relational database service that handles routine database tasks such as backups, patching, and hardware provisioning. Amazon RDS supports multiple database instance class types that optimize for memory, performance, or input/output (I/O).</p>
+<p>To improve data resilience, Amazon RDS offers Multi-AZ deployment and automated backups, but you can also manually create backups using DB snapshots. These are full backups of your entire database instance, which can be useful for specific point-in-time recovery or long-term data archiving purposes. Amazon RDS offers security features including network isolation, encryption in transit, and encryption at rest. You can readily scale database resources vertically or horizontally as needed.</p>
+<h3 id="supported-database-engines">Supported database engines<a class="anchor" href="#supported-database-engines">#</a></h3>
+<p>Amazon RDS supports different database engines, including Amazon Aurora, MySQL, PostgreSQL, Microsoft SQL Server, MariaDB, and Oracle Database.</p>
+<h3 id="use-cases">Use cases<a class="anchor" href="#use-cases">#</a></h3>
+<p>Some examples of practical use cases for Amazon RDS are web applications, enterprise workloads, and product inventories for e-commerce platforms.</p>
+<p><img src="/images/aws/database_2.png" alt="database 2" />
+<img src="/images/aws/database_3.png" alt="database 3" /></p>
+<hr>
+<p><img src="/images/aws/database_4.png" alt="database 4" /></p>
+<h2 id="amazon-aurora">Amazon Aurora<a class="anchor" href="#amazon-aurora">#</a></h2>
+<p>Aurora is a managed relational database designed to help reduce unnecessary I/O operations. It&rsquo;s compatible with MySQL and PostgreSQL, provides high performance and availability, and automatically scales alongside your workloads. Aurora replicates data across multiple Availability Zones for enhanced durability and fault tolerance, and features automated backups, encryption at rest, and continuous monitoring.</p>
+<h3 id="use-cases-1">Use cases<a class="anchor" href="#use-cases-1">#</a></h3>
+<p>Some examples of practical use cases for Aurora are gaming applications, media and content management, and real-time analytics.
+Benefits</p>
+<p><img src="/images/aws/database_5.png" alt="database 5" /></p>
 </article>
  
       
@@ -2885,6 +2922,20 @@ Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: 
     <li><a href="#general-purpose-ssd-gp3">General Purpose SSD (<code>gp3</code>)</a></li>
     <li><a href="#provisioned-iops-ssd-io1io2">Provisioned IOPS SSD (<code>io1</code>/<code>io2</code>)</a></li>
     <li><a href="#what-are-iops">What Are IOPS?</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#amazon-relational-database-service-amazon-rds">Amazon Relational Database Service (Amazon RDS)</a>
+      <ul>
+        <li><a href="#supported-database-engines">Supported database engines</a></li>
+        <li><a href="#use-cases">Use cases</a></li>
+      </ul>
+    </li>
+    <li><a href="#amazon-aurora">Amazon Aurora</a>
+      <ul>
+        <li><a href="#use-cases-1">Use cases</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
