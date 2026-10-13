@@ -29,7 +29,7 @@ Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: 
 	<meta itemprop="description" content="RDS Storage and IOPS# When you create an RDS instance, you choose a type and amount of storage. AWS offers different storage types optimized for different workloads. Let’s go over them.
 General Purpose SSD (gp3)# This is the recommended default for most production workloads. It’s a good balance of performance and cost:
 Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: Can provision up to 16,000 IOPS if needed Cost-effective: Lower cost than provisioned IOPS Use case: Most applications, up to moderate I/O requirements Provisioned IOPS SSD (io1/io2)# This is for demanding workloads that need guaranteed performance:">
-	<meta itemprop="wordCount" content="902">
+	<meta itemprop="wordCount" content="1583">
 
 <title>rds-general-knowledge • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: 
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.82c84f07712d24df3498d21f7878e75c180723ae9189a7633b86eef3184ed026.js" integrity="sha256-gshPB3EtJN80mNIfeHjnXBgHI66RiadjO4bu8xhO0CY=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.c01e73a7f212eb80af528359ad50b6dd84bf3d29dcc38949c5eade2e3841a8a5.js" integrity="sha256-wB5zp/IS64CvUoNZrVC23YS/PSncw4lJxereLjhBqKU=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2805,6 +2805,34 @@ Baseline performance: 3,000 IOPS (Input/Output Operations Per Second) Scalable: 
       </ul>
     </li>
   </ul>
+
+  <ul>
+    <li><a href="#amazon-documentdb">Amazon DocumentDB</a></li>
+    <li><a href="#benefits-1">Benefits</a>
+      <ul>
+        <li><a href="#mongodb-compatibility">MongoDB compatibility</a></li>
+        <li><a href="#performance-and-scalability">Performance and scalability</a></li>
+        <li><a href="#increased-read-throughput">Increased read throughput</a></li>
+      </ul>
+    </li>
+    <li><a href="#aws-backup">AWS Backup</a></li>
+    <li><a href="#use-cases-2">Use cases</a></li>
+    <li><a href="#benefits-2">Benefits</a>
+      <ul>
+        <li><a href="#centralized-backup-management">Centralized backup management</a></li>
+        <li><a href="#cross-region-backup-redundancy">Cross-region backup redundancy</a></li>
+        <li><a href="#streamlined-regulatory-compliance">Streamlined regulatory compliance</a></li>
+      </ul>
+    </li>
+    <li><a href="#amazon-neptune">Amazon Neptune</a></li>
+    <li><a href="#use-cases-3">Use cases</a></li>
+    <li><a href="#benefits-3">Benefits</a>
+      <ul>
+        <li><a href="#purpose-built-for-complex-relationships">Purpose-built for complex relationships</a></li>
+        <li><a href="#high-performance-and-scalability">High performance and scalability</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
 
 
@@ -2886,6 +2914,42 @@ Use cases</p>
 <p>Some examples of practical use cases for ElastiCache are session data management, database query enhancement, and gaming leaderboards.</p>
 <h3 id="benefits">Benefits<a class="anchor" href="#benefits">#</a></h3>
 <p><img src="/images/aws/database_11.png" alt="database 11" /></p>
+<hr>
+<h1 id="additional-database-services">Additional Database Services<a class="anchor" href="#additional-database-services">#</a></h1>
+<h2 id="amazon-documentdb">Amazon DocumentDB<a class="anchor" href="#amazon-documentdb">#</a></h2>
+<p>Amazon DocumentDB (with MongoDB compatibility) is fully managed service designed to handle semistructured data, which is information that doesn&rsquo;t conform to rigid relational schemas. Amazon DocumentDB is a MongoDB-compatible database, so it manages JSON-like documents with dynamic schemas.</p>
+<p>Amazon DocumentDB is perfect for applications requiring frequent schema changes and document-oriented data. Unlike relational databases or nonrelational databases, you can quickly iterate without relying on predefined schemas. Amazon DocumentDB can store, query, and index JSON data effortlessly, all while benefiting from automatic scaling, continuous backup, and enterprise-grade security features.
+Use cases</p>
+<p>Some examples of practical use cases for Amazon DocumentDB are content management systems, catalog and inventory management, and user profile and personalization systems.</p>
+<h2 id="benefits-1">Benefits<a class="anchor" href="#benefits-1">#</a></h2>
+<h3 id="mongodb-compatibility">MongoDB compatibility<a class="anchor" href="#mongodb-compatibility">#</a></h3>
+<p>Amazon DocumentDB is fully compatible with MongoDB workloads and supports MongoDB APIs, drivers, and tools. This compatibility means that you can use existing MongoDB code and skills without modification. You can also migrate MongoDB applications to Amazon DocumentDB with minimal changes to their application code.</p>
+<h3 id="performance-and-scalability">Performance and scalability<a class="anchor" href="#performance-and-scalability">#</a></h3>
+<p>Amazon DocumentDB automatically scales storage up to 64 TB in 10 GB increments based on your application needs. It can handle millions of requests per second with consistent performance. It also provides the option to scale compute resources up or down as needed.</p>
+<h3 id="increased-read-throughput">Increased read throughput<a class="anchor" href="#increased-read-throughput">#</a></h3>
+<p>Amazon DocumentDB improves read throughput for high-volume applications by creating up to 15 replica instances that share underlying storage.</p>
+<h2 id="aws-backup">AWS Backup<a class="anchor" href="#aws-backup">#</a></h2>
+<p>AWS Backup streamlines data protection across various AWS resources and on-premises deployments by providing a single dashboard for monitoring and managing backups. It eliminates the complexity of managing multiple backup strategies by supporting multiple storage types, including Amazon Elastic Block Store (Amazon EBS) volumes, Amazon Elastic File System (Amazon EFS) file systems, and various databases.</p>
+<p>AWS Backup centralizes and automates data protection processes, improving consistency and reducing administrative overhead. It offers flexible scheduling options, encryption capabilities, and cross-Region backup support for enhanced disaster recovery.</p>
+<h2 id="use-cases-2">Use cases<a class="anchor" href="#use-cases-2">#</a></h2>
+<p>Some examples of practical use cases for AWS Backup are centralized disaster recovery, consistent backup policies for compliance requirements, and consolidating multiple backup processes through a single interface.</p>
+<h2 id="benefits-2">Benefits<a class="anchor" href="#benefits-2">#</a></h2>
+<h3 id="centralized-backup-management">Centralized backup management<a class="anchor" href="#centralized-backup-management">#</a></h3>
+<p>AWS Backup provides a single dashboard to manage backups across multiple AWS services and accounts. You can monitor backup jobs, restore points, and verify compliance status from one central location to reduce operational complexity and potential configuration errors.</p>
+<p>You can create automated backup schedules that align with your business requirements and compliance needs. You can set up backup policies that automatically protect new resources as they&rsquo;re created.</p>
+<h3 id="cross-region-backup-redundancy">Cross-region backup redundancy<a class="anchor" href="#cross-region-backup-redundancy">#</a></h3>
+<p>AWS Backup enables automatic replication of backup data across different AWS Regions for disaster recovery purposes. You can quickly restore data from secondary Regions if the primary Region experiences an outage. Cross-Region redundancy helps you meet compliance requirements while guaranteeing data accessibility during Regional failures.</p>
+<h3 id="streamlined-regulatory-compliance">Streamlined regulatory compliance<a class="anchor" href="#streamlined-regulatory-compliance">#</a></h3>
+<p>AWS Backup maintains detailed audit logs and reports to demonstrate compliance with regulatory requirements. You can use it to enforce backup policies across your organization and track backup activities for security and compliance purposes.</p>
+<h2 id="amazon-neptune">Amazon Neptune<a class="anchor" href="#amazon-neptune">#</a></h2>
+<p>Neptune is a fully managed, purpose-built graph database service that manages highly connected data sets, like those used in social networking applications. It excels at understanding complex relationships that are difficult to identify in traditional relational databases like user connections, friend networks, and interaction patterns. Neptune can maintain high performance even as data complexity grows, and offers high availability with automatic failover and backups.</p>
+<h2 id="use-cases-3">Use cases<a class="anchor" href="#use-cases-3">#</a></h2>
+<p>Some examples of practical use cases for Amazon Neptune are social network user connection mapping, fraud detection systems, and search and recommendation systems.</p>
+<h2 id="benefits-3">Benefits<a class="anchor" href="#benefits-3">#</a></h2>
+<h3 id="purpose-built-for-complex-relationships">Purpose-built for complex relationships<a class="anchor" href="#purpose-built-for-complex-relationships">#</a></h3>
+<p>Neptune excels at storing and querying highly connected data using graph models. It supports both property graph and resource description framework, or RDF, models making it ideal for relationship mapping and pattern matching applications.</p>
+<h3 id="high-performance-and-scalability">High performance and scalability<a class="anchor" href="#high-performance-and-scalability">#</a></h3>
+<p>Neptune delivers consistent performance at scale, processing billions of relationships in milliseconds. It automatically grows storage up to 64 TB based on your application needs. Its purpose-built engine optimizes graph queries to enable fast traversal of connected data points at scale.</p>
 </article>
  
       
@@ -2980,6 +3044,34 @@ Use cases</p>
     <li>
       <ul>
         <li><a href="#benefits">Benefits</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#amazon-documentdb">Amazon DocumentDB</a></li>
+    <li><a href="#benefits-1">Benefits</a>
+      <ul>
+        <li><a href="#mongodb-compatibility">MongoDB compatibility</a></li>
+        <li><a href="#performance-and-scalability">Performance and scalability</a></li>
+        <li><a href="#increased-read-throughput">Increased read throughput</a></li>
+      </ul>
+    </li>
+    <li><a href="#aws-backup">AWS Backup</a></li>
+    <li><a href="#use-cases-2">Use cases</a></li>
+    <li><a href="#benefits-2">Benefits</a>
+      <ul>
+        <li><a href="#centralized-backup-management">Centralized backup management</a></li>
+        <li><a href="#cross-region-backup-redundancy">Cross-region backup redundancy</a></li>
+        <li><a href="#streamlined-regulatory-compliance">Streamlined regulatory compliance</a></li>
+      </ul>
+    </li>
+    <li><a href="#amazon-neptune">Amazon Neptune</a></li>
+    <li><a href="#use-cases-3">Use cases</a></li>
+    <li><a href="#benefits-3">Benefits</a>
+      <ul>
+        <li><a href="#purpose-built-for-complex-relationships">Purpose-built for complex relationships</a></li>
+        <li><a href="#high-performance-and-scalability">High performance and scalability</a></li>
       </ul>
     </li>
   </ul>
