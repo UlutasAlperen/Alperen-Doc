@@ -40,3 +40,6 @@ CloudTrail provides auditing, security monitoring, and operational troubleshooti
 It can be used for compliance and auditing, identifying security incidents, troubleshooting operational issues.
 
 ![cloudtrail 2](/images/aws/cloudtrial_2.png)
+
+![cloudtrail 3](/images/aws/cloudtrial_3.png)
+![cloudtrail 4](/images/aws/cloudtrial_4.png)
