@@ -15,6 +15,18 @@ Our metrics and logs are being sent to AWS, but we have to check them manually t
 
 Let's create a simple alarm that triggers when our server goes above **20% CPU usage**. When triggered, it will send a notification via SNS ([Simple Notification Service](https://aws.amazon.com/sns/)) to a given email address.
 
+
+![cloudwatch 1](/images/aws/cloudwatch_1.png)
+
+### Benefits:
+
+CloudWatch helps you visualize and analyze your resources, operate efficiently with automation, use an integrated view, proactively monitor, and gain insights.
+
+> Use case: It can be used to monitor and troubleshoot infrastructure.
+
+### Example:
+A retail company is using CloudWatch features to monitor their application running on Amazon Elastic Compute Cloud (Amazon EC2) instances. CloudWatch automatically collects metrics, like utilization, on the EC2 instances. The company sets up CloudWatch to collect logs on the application performance. They also have alarms for when the Amazon EC2 utilization gets too high for an extended period. They even have an action configured to automate and scale up the number of EC2 instances when the alarm sounds. Finally, they create a custom dashboard to visualize everything all in one place. Now they can analyze the logs to gain insights on performance issues or application errors.
+
 ## Assignment
 
 **Create a CloudWatch alarm that trigger an email when CPU usage exceeds 20%.**

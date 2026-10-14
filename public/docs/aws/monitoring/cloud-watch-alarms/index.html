@@ -29,7 +29,7 @@ Our service is in an Auto Scaling Group of 1-10 servers based on CPU usage, and 
 	<meta itemprop="description" content="CloudWatch Alarms# Our metrics and logs are being sent to AWS, but we have to check them manually to find out if something is wrong. Not ideal…
 CloudWatch Alarms lets us set up automatic “actions” to be taken when certain criteria are met. For example:
 Our service is in an Auto Scaling Group of 1-10 servers based on CPU usage, and we just hit 10! We have a service emitting a high number of 5XX errors! One of our servers is at 95% disk usage! Let’s create a simple alarm that triggers when our server goes above 20% CPU usage. When triggered, it will send a notification via SNS (Simple Notification Service) to a given email address.">
-	<meta itemprop="wordCount" content="442">
+	<meta itemprop="wordCount" content="583">
 
 <title>cloud-watch-alarms • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
@@ -38,7 +38,7 @@ Our service is in an Auto Scaling Group of 1-10 servers based on CPU usage, and 
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.c01e73a7f212eb80af528359ad50b6dd84bf3d29dcc38949c5eade2e3841a8a5.js" integrity="sha256-wB5zp/IS64CvUoNZrVC23YS/PSncw4lJxereLjhBqKU=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.ecf4b6f18b1ac2128d585e2cb41c4be64ae887c97ed461ce1684975b1cb6e53e.js" integrity="sha256-7PS28YsawhKNWF4stBxL5kroh8l&#43;1GHOFoSXWxy25T4=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -2775,6 +2775,12 @@ Our service is in an Auto Scaling Group of 1-10 servers based on CPU usage, and 
   
 <nav id="TableOfContents">
   <ul>
+    <li>
+      <ul>
+        <li><a href="#benefits">Benefits:</a></li>
+        <li><a href="#example">Example:</a></li>
+      </ul>
+    </li>
     <li><a href="#assignment">Assignment</a></li>
     <li><a href="#tip">Tip</a></li>
   </ul>
@@ -2798,6 +2804,13 @@ Our service is in an Auto Scaling Group of 1-10 servers based on CPU usage, and 
 <li>One of our servers is at 95% disk usage!</li>
 </ul>
 <p>Let&rsquo;s create a simple alarm that triggers when our server goes above <strong>20% CPU usage</strong>. When triggered, it will send a notification via SNS (<a href="https://aws.amazon.com/sns/">Simple Notification Service</a>) to a given email address.</p>
+<p><img src="/images/aws/cloudwatch_1.png" alt="cloudwatch 1" /></p>
+<h3 id="benefits">Benefits:<a class="anchor" href="#benefits">#</a></h3>
+<p>CloudWatch helps you visualize and analyze your resources, operate efficiently with automation, use an integrated view, proactively monitor, and gain insights.</p>
+<blockquote class='book-hint '>
+<p>Use case: It can be used to monitor and troubleshoot infrastructure.</p>
+</blockquote><h3 id="example">Example:<a class="anchor" href="#example">#</a></h3>
+<p>A retail company is using CloudWatch features to monitor their application running on Amazon Elastic Compute Cloud (Amazon EC2) instances. CloudWatch automatically collects metrics, like utilization, on the EC2 instances. The company sets up CloudWatch to collect logs on the application performance. They also have alarms for when the Amazon EC2 utilization gets too high for an extended period. They even have an action configured to automate and scale up the number of EC2 instances when the alarm sounds. Finally, they create a custom dashboard to visualize everything all in one place. Now they can analyze the logs to gain insights on performance issues or application errors.</p>
 <h2 id="assignment">Assignment<a class="anchor" href="#assignment">#</a></h2>
 <p><strong>Create a CloudWatch alarm that trigger an email when CPU usage exceeds 20%.</strong></p>
 <p><strong>Cost check:</strong> CloudWatch Alarms are free for the first 10 alarms. SNS notifications cost <code>$0.50</code> per 100,000 requests.</p>
@@ -2944,6 +2957,12 @@ Our service is in an Auto Scaling Group of 1-10 servers based on CPU usage, and 
   
 <nav id="TableOfContents">
   <ul>
+    <li>
+      <ul>
+        <li><a href="#benefits">Benefits:</a></li>
+        <li><a href="#example">Example:</a></li>
+      </ul>
+    </li>
     <li><a href="#assignment">Assignment</a></li>
     <li><a href="#tip">Tip</a></li>
   </ul>

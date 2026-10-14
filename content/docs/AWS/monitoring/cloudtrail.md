@@ -25,3 +25,18 @@ For example, you might see that user `vvega` ran the API call `DescribeAlarms` a
 There's [Organization trails](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-trail-organization.html), which lets us combine multiple AWS accounts into a single trail and see what users are doing across all of them.
 
 **Cost check:** CloudTrail is free for the first copy of management events (create, modify, delete API calls). Data events (S3 object-level activity, Lambda function invocations) cost `$0.10` per 100,000 events.
+
+
+![cloudtrail 1](/images/aws/cloudtrail_1.png)
+
+## AWS CloudTrail
+
+CloudTrail tracks user activity and API usage in the AWS Cloud, on premises, and even with other cloud providers. CloudTrail provides a detailed history of API calls, so you can track changes and identify who made them and when. This helps you understand what actions were taken on your AWS resources.
+
+### Benefits: 
+CloudTrail provides auditing, security monitoring, and operational troubleshooting. It also helps you prove compliance and improve your security posture.
+
+### Use cases: 
+It can be used for compliance and auditing, identifying security incidents, troubleshooting operational issues.
+
+![cloudtrail 2](/images/aws/cloudtrial_2.png)
