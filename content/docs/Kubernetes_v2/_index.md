@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes v2"
-weight: 4
+weight: 5
 bookCollapseSection: true
 ---
 These are the follow-up notes to my [Kubernetes](../kubernetes/) section - same Minikube cluster, next level: packaging, hardening, operations and multi-node. I use this section to:

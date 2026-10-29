@@ -1,6 +1,6 @@
 ---
 title: "Docker"
-weight: 2
+weight: 3
 bookCollapseSection: true
 ---
 [Docker](https://docs.docker.com/) is _the_ container platform. Nearly every DevOps workflow uses it to package, ship and run applications. I use Docker to:

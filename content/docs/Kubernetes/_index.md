@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes"
-weight: 3
+weight: 4
 bookCollapseSection: true
 ---
 # What Is Kubernetes?
