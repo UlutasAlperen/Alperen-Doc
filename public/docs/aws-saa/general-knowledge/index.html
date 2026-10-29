@@ -1,0 +1,4120 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AWS SAA-C03 - General Knowledge: Tek Satırlık Özet ve Sınav Rehberi# Amaç: Sınav öncesi hızlı tekrar. Her servisin ne yaptığını, hangi senaryoda seçileceğini ve benzer servislerden nasıl ayrıldığını hatırlatır. Ayrıntılı açıklamalar için ilgili konu dokümanlarına bak.
+Sınav yaklaşımı: Sorudaki gereksinimi belirle: en düşük operasyonel yük, yüksek erişilebilirlik, düşük maliyet, gerçek zamanlı işleme, minimum gecikme veya veri dayanıklılığı. Ardından bu gereksinimi karşılayan servisi seç.
+1. Compute - İşlem ve Uygulama Çalıştırma# EC2: AWS üzerinde sanal sunucu; işletim sistemi, instance tipi, disk ve ağ yapılandırması üzerinde kontrol sağlar. Sınavda: Özel işletim sistemi yapılandırması, uzun süre çalışan uygulama veya tam sunucu kontrolü isteniyorsa EC2. Lambda: Sunucu yönetmeden olay tetiklemeli kod çalıştırır; kullanım ve çalışma süresine göre ücretlendirilir. Sınavda: S3’e dosya yüklenince işlem başlatma, SQS mesajı işleme veya kısa süreli API backend’i oluşturma. ECS: AWS’nin container orkestrasyon servisidir; Docker container’larını görev ve servis olarak çalıştırır. Sınavda: Kubernetes karmaşıklığı olmadan AWS üzerinde container yönetmek. EKS: AWS tarafından yönetilen Kubernetes control plane sunar; worker node’lar EC2 veya desteklenen iş yüklerinde Fargate üzerinde çalışabilir. Sınavda: Kubernetes API’si, mevcut Kubernetes araçları ve ekosistemi gerekiyorsa EKS. Fargate: ECS veya EKS container’ları için sunucu/worker node yönetme ihtiyacını azaltan serverless compute altyapısıdır. Sınavda: Container çalıştırılacak ancak EC2 instance’ları ve node kapasitesi yönetilmek istenmiyorsa Fargate. Lightsail: Basitleştirilmiş sanal sunucu, disk, ağ ve uygulama altyapısı sunar. Sınavda: Küçük web sitesi, blog veya kolay kurulabilen VPS benzeri ortam. AWS Batch: Batch işlerini kuyruklar, zamanlar ve uygun işlem kapasitesinde çalıştırır. Sınavda: Büyük veri setleri üzerinde toplu hesaplama, simülasyon veya çok sayıda bağımsız iş. Elastic Beanstalk: Uygulama dağıtımı, kapasite, yük dengeleme ve izleme gibi altyapı işlerini yönetir; EC2 tabanlı kaynaklara erişim imkânı da vardır. Sınavda: Uygulama kodunu dağıtmak, altyapı ayrıntılarını daha az yönetmek. Auto Scaling: EC2 instance sayısını talebe veya politikalara göre artırır ve azaltır. Sınavda: Trafik değişimlerine otomatik uyum ve kapasite maliyetini kontrol etme. EC2 Placement Groups: Instance’ların fiziksel yerleşimini kontrol ederek düşük gecikme, yüksek ağ performansı veya donanım arızalarına karşı ayrışma sağlar. Sınavda: Cluster = düşük gecikme; Spread = instance’ları ayrı donanımlara yayma; Partition = büyük dağıtık sistemlerde bölüm bazlı ayrışma. Karıştırma:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/general-knowledge/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="general-knowledge">
+	<meta property="og:description" content="AWS SAA-C03 - General Knowledge: Tek Satırlık Özet ve Sınav Rehberi# Amaç: Sınav öncesi hızlı tekrar. Her servisin ne yaptığını, hangi senaryoda seçileceğini ve benzer servislerden nasıl ayrıldığını hatırlatır. Ayrıntılı açıklamalar için ilgili konu dokümanlarına bak.
+Sınav yaklaşımı: Sorudaki gereksinimi belirle: en düşük operasyonel yük, yüksek erişilebilirlik, düşük maliyet, gerçek zamanlı işleme, minimum gecikme veya veri dayanıklılığı. Ardından bu gereksinimi karşılayan servisi seç.
+1. Compute - İşlem ve Uygulama Çalıştırma# EC2: AWS üzerinde sanal sunucu; işletim sistemi, instance tipi, disk ve ağ yapılandırması üzerinde kontrol sağlar. Sınavda: Özel işletim sistemi yapılandırması, uzun süre çalışan uygulama veya tam sunucu kontrolü isteniyorsa EC2. Lambda: Sunucu yönetmeden olay tetiklemeli kod çalıştırır; kullanım ve çalışma süresine göre ücretlendirilir. Sınavda: S3’e dosya yüklenince işlem başlatma, SQS mesajı işleme veya kısa süreli API backend’i oluşturma. ECS: AWS’nin container orkestrasyon servisidir; Docker container’larını görev ve servis olarak çalıştırır. Sınavda: Kubernetes karmaşıklığı olmadan AWS üzerinde container yönetmek. EKS: AWS tarafından yönetilen Kubernetes control plane sunar; worker node’lar EC2 veya desteklenen iş yüklerinde Fargate üzerinde çalışabilir. Sınavda: Kubernetes API’si, mevcut Kubernetes araçları ve ekosistemi gerekiyorsa EKS. Fargate: ECS veya EKS container’ları için sunucu/worker node yönetme ihtiyacını azaltan serverless compute altyapısıdır. Sınavda: Container çalıştırılacak ancak EC2 instance’ları ve node kapasitesi yönetilmek istenmiyorsa Fargate. Lightsail: Basitleştirilmiş sanal sunucu, disk, ağ ve uygulama altyapısı sunar. Sınavda: Küçük web sitesi, blog veya kolay kurulabilen VPS benzeri ortam. AWS Batch: Batch işlerini kuyruklar, zamanlar ve uygun işlem kapasitesinde çalıştırır. Sınavda: Büyük veri setleri üzerinde toplu hesaplama, simülasyon veya çok sayıda bağımsız iş. Elastic Beanstalk: Uygulama dağıtımı, kapasite, yük dengeleme ve izleme gibi altyapı işlerini yönetir; EC2 tabanlı kaynaklara erişim imkânı da vardır. Sınavda: Uygulama kodunu dağıtmak, altyapı ayrıntılarını daha az yönetmek. Auto Scaling: EC2 instance sayısını talebe veya politikalara göre artırır ve azaltır. Sınavda: Trafik değişimlerine otomatik uyum ve kapasite maliyetini kontrol etme. EC2 Placement Groups: Instance’ların fiziksel yerleşimini kontrol ederek düşük gecikme, yüksek ağ performansı veya donanım arızalarına karşı ayrışma sağlar. Sınavda: Cluster = düşük gecikme; Spread = instance’ları ayrı donanımlara yayma; Partition = büyük dağıtık sistemlerde bölüm bazlı ayrışma. Karıştırma:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="general-knowledge">
+	<meta itemprop="description" content="AWS SAA-C03 - General Knowledge: Tek Satırlık Özet ve Sınav Rehberi# Amaç: Sınav öncesi hızlı tekrar. Her servisin ne yaptığını, hangi senaryoda seçileceğini ve benzer servislerden nasıl ayrıldığını hatırlatır. Ayrıntılı açıklamalar için ilgili konu dokümanlarına bak.
+Sınav yaklaşımı: Sorudaki gereksinimi belirle: en düşük operasyonel yük, yüksek erişilebilirlik, düşük maliyet, gerçek zamanlı işleme, minimum gecikme veya veri dayanıklılığı. Ardından bu gereksinimi karşılayan servisi seç.
+1. Compute - İşlem ve Uygulama Çalıştırma# EC2: AWS üzerinde sanal sunucu; işletim sistemi, instance tipi, disk ve ağ yapılandırması üzerinde kontrol sağlar. Sınavda: Özel işletim sistemi yapılandırması, uzun süre çalışan uygulama veya tam sunucu kontrolü isteniyorsa EC2. Lambda: Sunucu yönetmeden olay tetiklemeli kod çalıştırır; kullanım ve çalışma süresine göre ücretlendirilir. Sınavda: S3’e dosya yüklenince işlem başlatma, SQS mesajı işleme veya kısa süreli API backend’i oluşturma. ECS: AWS’nin container orkestrasyon servisidir; Docker container’larını görev ve servis olarak çalıştırır. Sınavda: Kubernetes karmaşıklığı olmadan AWS üzerinde container yönetmek. EKS: AWS tarafından yönetilen Kubernetes control plane sunar; worker node’lar EC2 veya desteklenen iş yüklerinde Fargate üzerinde çalışabilir. Sınavda: Kubernetes API’si, mevcut Kubernetes araçları ve ekosistemi gerekiyorsa EKS. Fargate: ECS veya EKS container’ları için sunucu/worker node yönetme ihtiyacını azaltan serverless compute altyapısıdır. Sınavda: Container çalıştırılacak ancak EC2 instance’ları ve node kapasitesi yönetilmek istenmiyorsa Fargate. Lightsail: Basitleştirilmiş sanal sunucu, disk, ağ ve uygulama altyapısı sunar. Sınavda: Küçük web sitesi, blog veya kolay kurulabilen VPS benzeri ortam. AWS Batch: Batch işlerini kuyruklar, zamanlar ve uygun işlem kapasitesinde çalıştırır. Sınavda: Büyük veri setleri üzerinde toplu hesaplama, simülasyon veya çok sayıda bağımsız iş. Elastic Beanstalk: Uygulama dağıtımı, kapasite, yük dengeleme ve izleme gibi altyapı işlerini yönetir; EC2 tabanlı kaynaklara erişim imkânı da vardır. Sınavda: Uygulama kodunu dağıtmak, altyapı ayrıntılarını daha az yönetmek. Auto Scaling: EC2 instance sayısını talebe veya politikalara göre artırır ve azaltır. Sınavda: Trafik değişimlerine otomatik uyum ve kapasite maliyetini kontrol etme. EC2 Placement Groups: Instance’ların fiziksel yerleşimini kontrol ederek düşük gecikme, yüksek ağ performansı veya donanım arızalarına karşı ayrışma sağlar. Sınavda: Cluster = düşük gecikme; Spread = instance’ları ayrı donanımlara yayma; Partition = büyük dağıtık sistemlerde bölüm bazlı ayrışma. Karıştırma:">
+	<meta itemprop="wordCount" content="3818">
+
+<title>general-knowledge • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/general-knowledge/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.3b8753a4da8485fc1ca5af2c0e6f8a67161896a03363de86de0f9f1e1577f294.js" integrity="sha256-O4dTpNqEhfwcpa8sDm&#43;KZxYYlqAzY96G3g&#43;fHhV38pQ=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic-git-conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic-git-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github-workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous-integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous-deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git-status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git-add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git-commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git-push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git-branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git-pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git-log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git-merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git-rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git-reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git-remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git-switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4ebc7360f9ae508312064855054fc795" class="toggle"  />
+    <label for="section-4ebc7360f9ae508312064855054fc795" class="flex">
+      <a href="/docs/linux/" class="">
+        Linux</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/linux-user-management/" class="">
+      linux-user-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/group-management/" class="">
+      group-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/file-permissions/" class="">
+      file-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/system-information/" class="">
+      system-information</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/sudo/" class="">
+      sudo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/ssh/" class="">
+      ssh</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/systemd/" class="">
+      systemd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/process-management/" class="">
+      process-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/process-internals/" class="">
+      process-internals</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/cron-timers/" class="">
+      cron-timers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/networking-basics/" class="">
+      networking-basics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/dns/" class="">
+      dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/firewall/" class="">
+      firewall</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/network-troubleshooting/" class="">
+      network-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/filesystem-hierarchy/" class="">
+      filesystem-hierarchy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-management/" class="">
+      disk-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/lvm/" class="">
+      lvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-troubleshooting/" class="">
+      disk-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/log-management/" class="">
+      log-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/selinux-apparmor/" class="">
+      selinux-apparmor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/security-hardening/" class="">
+      security-hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/package-management/" class="">
+      package-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/performance-triage/" class="">
+      performance-triage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/boot-process/" class="">
+      boot-process</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager/" class="">
+      cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager-production/" class="">
+      cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/prometheus-stack/" class="">
+      prometheus-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/victoriametrics/" class="">
+      victoriametrics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-390924aad12540f8027ddb300c8575d3" class="toggle"  />
+    <label for="section-390924aad12540f8027ddb300c8575d3" class="flex">
+      <a href="/docs/aws/" class="">
+        AWS</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7ac94fcac7ebb60d389835a7fcb83889" class="toggle"  />
+    <label for="section-7ac94fcac7ebb60d389835a7fcb83889" class="flex">
+      <a href="/docs/aws/networking/" class="">
+        networking</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/regions-and-availability-zones/" class="">
+      regions-and-availability-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/virtual-private-cloud-vpc/" class="">
+      virtual-private-cloud-vpc</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/aws-subnetting/" class="">
+      aws-subnetting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/internet-gateways-igw/" class="">
+      internet-gateways-igw</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/route-tables/" class="">
+      route-tables</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/private-subnets/" class="">
+      private-subnets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/connecting-to-the-aws-cloud/" class="">
+      connecting-to-the-aws-cloud</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="toggle"  />
+    <label for="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="flex">
+      <a href="/docs/aws/ec2/" class="">
+        ec2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instance-configuration-keys/" class="">
+      ec2-instance-configuration-keys</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instances/" class="">
+      ec2-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/elastic-ips/" class="">
+      elastic-ips</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-security-groups/" class="">
+      aws-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ssh-to-aws-server/" class="">
+      ssh-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/deploy-site-to-aws-server/" class="">
+      deploy-site-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/open-web-traffic/" class="">
+      open-web-traffic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/creating-and-using-your-own-ami/" class="">
+      creating-and-using-your-own-ami</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-launch-template/" class="">
+      aws-launch-template</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/launch-from-template-aws/" class="">
+      launch-from-template-aws</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b73d690c546b071419fd1f673553fed1" class="toggle"  />
+    <label for="section-b73d690c546b071419fd1f673553fed1" class="flex">
+      <a href="/docs/aws/rds/" class="">
+        rds</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/relational-database-service/" class="">
+      relational-database-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-a-postgresql-database-in-aws/" class="">
+      create-a-postgresql-database-in-aws</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-to-your-database/" class="">
+      aws-connect-to-your-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-app-to-database/" class="">
+      aws-connect-app-to-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-backups/" class="">
+      rds-backups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-read-replicas-for-scalability/" class="">
+      create-read-replicas-for-scalability</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-general-knowledge/" class="">
+      rds-general-knowledge</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-df37bf19bddd1b463e10899723e49972" class="toggle"  />
+    <label for="section-df37bf19bddd1b463e10899723e49972" class="flex">
+      <a href="/docs/aws/iam/" class="">
+        iam</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user-and-group/" class="">
+      create-iam-user-and-group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/identity-and-access-management/" class="">
+      identity-and-access-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user/" class="">
+      create-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/inline-policies-iam-user/" class="">
+      inline-policies-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-groups/" class="">
+      iam-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-roles/" class="">
+      iam-roles</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-iam-deny-policies/" class="">
+      aws-iam-deny-policies</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-ssm-parameter-store/" class="">
+      aws-ssm-parameter-store</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/accessing-ssm-parameters-from-ec2/" class="">
+      accessing-ssm-parameters-from-ec2</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/use-ssm-from-ec2/" class="">
+      use-ssm-from-ec2</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aee932daafc4b41b13adc2e2442618ba" class="toggle"  />
+    <label for="section-aee932daafc4b41b13adc2e2442618ba" class="flex">
+      <a href="/docs/aws/monitoring/" class="">
+        monitoring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-external-monitoring/" class="">
+      aws-external-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-internal-monitoring/" class="">
+      aws-internal-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloud-watch-alarms/" class="">
+      cloud-watch-alarms</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloudtrail/" class="">
+      cloudtrail</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f38d96bcff4e2965101ac96ca363fcf" class="toggle"  />
+    <label for="section-2f38d96bcff4e2965101ac96ca363fcf" class="flex">
+      <a href="/docs/aws/s3/" class="">
+        s3</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3/" class="">
+      aws-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-bucket/" class="">
+      aws-s3-bucket</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-objects/" class="">
+      aws-s3-objects</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="toggle"  />
+    <label for="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="flex">
+      <a href="/docs/aws/dns/" class="">
+        dns</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/route-53-hosted-zones/" class="">
+      route-53-hosted-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-a-records/" class="">
+      aws-a-records</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/dns-ttl-and-caching/" class="">
+      dns-ttl-and-caching</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-verifying-dns/" class="">
+      aws-verifying-dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-cname-records/" class="">
+      aws-cname-records</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6db6507c5b69aeaa72e952abc5260963" class="toggle"  />
+    <label for="section-6db6507c5b69aeaa72e952abc5260963" class="flex">
+      <a href="/docs/aws/cdn/" class="">
+        cdn</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-cdn/" class="">
+      cloudfront-cdn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-distributions/" class="">
+      cloudfront-distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-invalidation/" class="">
+      cloudfront-invalidation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/presigned-urls/" class="">
+      presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/why-use-presigned-urls/" class="">
+      why-use-presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-with-dns/" class="">
+      cloudfront-with-dns</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0a1e7816907ed9977365d8170f4ec356" class="toggle"  />
+    <label for="section-0a1e7816907ed9977365d8170f4ec356" class="flex">
+      <a href="/docs/aws/ecs/" class="">
+        ecs</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/vpc-and-networking-setup-for-ecs/" class="">
+      vpc-and-networking-setup-for-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/why-ecs/" class="">
+      why-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/elastic-container-registry/" class="">
+      elastic-container-registry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecr-repo/" class="">
+      ecr-repo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-clusters/" class="">
+      ecs-clusters</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-permissions/" class="">
+      ecs-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-task-definitions/" class="">
+      ecs-task-definitions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-security-groups/" class="">
+      ecs-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/application-load-balancer/" class="">
+      application-load-balancer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-target-groups/" class="">
+      ecs-target-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/cloudwatch-log-groups/" class="">
+      cloudwatch-log-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-services/" class="">
+      ecs-services</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="toggle"  />
+    <label for="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="flex">
+      <a href="/docs/aws/eks/" class="">
+        eks</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-cluster/" class="">
+      eks-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-vs-kubeadm/" class="">
+      eks-vs-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-deploy-app/" class="">
+      eks-deploy-app</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-connect-s3/" class="">
+      eks-connect-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-use-rds/" class="">
+      eks-use-rds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-node-affinity-taints/" class="">
+      eks-node-affinity-taints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-ha-cluster/" class="">
+      eks-ha-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-spot-instances/" class="">
+      eks-spot-instances</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-514dc5328411196c2c4bb685cf444143" class="toggle"  />
+    <label for="section-514dc5328411196c2c4bb685cf444143" class="flex">
+      <a href="/docs/aws/lambda/" class="">
+        lambda</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/aws-lambda/" class="">
+      aws-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/deploy-lambda/" class="">
+      deploy-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/testing-lambda-function/" class="">
+      testing-lambda-function</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/lambda-api-gateway/" class="">
+      lambda-api-gateway</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/cloudwatch-log-groups-and-viewing-lambda-logs/" class="">
+      cloudwatch-log-groups-and-viewing-lambda-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/other-lambda-use-cases/" class="">
+      other-lambda-use-cases</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c8e51cd1f2a827eecce0fcb6812e371" class="toggle"  />
+    <label for="section-8c8e51cd1f2a827eecce0fcb6812e371" class="flex">
+      <a href="/docs/aws/general-knowledge/" class="">
+        general-knowledge</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/reserved-instances-savings-plans/" class="">
+      reserved-instances-savings-plans</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/spot-instances/" class="">
+      spot-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/auto-scaling-groups/" class="">
+      auto-scaling-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-compute-service/" class="">
+      aws-compute-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-storage/" class="">
+      aws-storage</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a14af2ca83d48a09ca9e95956b571c95" class="toggle" checked />
+    <label for="section-a14af2ca83d48a09ca9e95956b571c95" class="flex">
+      <a href="/docs/aws-saa/" class="">
+        AWS SAA-C03</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d7a4d33193f42203b134464389609c85" class="toggle"  />
+    <label for="section-d7a4d33193f42203b134464389609c85" class="flex">
+      <a href="/docs/aws-saa/secure-architectures/" class="">
+        secure-architectures</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/iam-policies-roles-cross-account/" class="">
+      iam-policies-roles-cross-account</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/identity-federation-and-cognito/" class="">
+      identity-federation-and-cognito</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/kms-encryption-deep-dive/" class="">
+      kms-encryption-deep-dive</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/secrets-manager-vs-parameter-store/" class="">
+      secrets-manager-vs-parameter-store</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/s3-security-and-access-points/" class="">
+      s3-security-and-access-points</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/network-security-sg-nacl-vpc-endpoints/" class="">
+      network-security-sg-nacl-vpc-endpoints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/security-services-waf-guardduty-inspector/" class="">
+      security-services-waf-guardduty-inspector</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-192c4b77c3981a3689b2ad460682c75a" class="toggle"  />
+    <label for="section-192c4b77c3981a3689b2ad460682c75a" class="flex">
+      <a href="/docs/aws-saa/resilient-architectures/" class="">
+        resilient-architectures</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/ha-vs-fault-tolerance/" class="">
+      ha-vs-fault-tolerance</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/disaster-recovery-strategies/" class="">
+      disaster-recovery-strategies</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/elb-and-auto-scaling-resilience/" class="">
+      elb-and-auto-scaling-resilience</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/decoupling-with-sqs-sns/" class="">
+      decoupling-with-sqs-sns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/event-driven-eventbridge-step-functions/" class="">
+      event-driven-eventbridge-step-functions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
+      rds-and-aurora-failover</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/route53-routing-policies-and-failover/" class="">
+      route53-routing-policies-and-failover</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/vpc-connectivity-peering-tgw-direct-connect/" class="">
+      vpc-connectivity-peering-tgw-direct-connect</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-77f5be17cdf6c42d98229d24b36f842f" class="toggle"  />
+    <label for="section-77f5be17cdf6c42d98229d24b36f842f" class="flex">
+      <a href="/docs/aws-saa/high-performing-architectures/" class="">
+        high-performing-architectures</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/s3-storage-and-performance/" class="">
+      s3-storage-and-performance</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
+      caching-elasticache-cloudfront</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/database-selection-matrix/" class="">
+      database-selection-matrix</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/dynamodb-deep-dive/" class="">
+      dynamodb-deep-dive</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
+      compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/data-transfer-and-hybrid-services/" class="">
+      data-transfer-and-hybrid-services</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e2d0e82a8a6a43f9898e89e817bab4e9" class="toggle"  />
+    <label for="section-e2d0e82a8a6a43f9898e89e817bab4e9" class="flex">
+      <a href="/docs/aws-saa/cost-optimized-architectures/" class="">
+        cost-optimized-architectures</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/cost-optimized-architectures/pricing-models-ri-savings-plans-spot/" class="">
+      pricing-models-ri-savings-plans-spot</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/cost-optimized-architectures/s3-cost-and-lifecycle-policies/" class="">
+      s3-cost-and-lifecycle-policies</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/cost-optimized-architectures/cost-management-tools/" class="">
+      cost-management-tools</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/cost-optimized-architectures/cost-optimized-architecture-patterns/" class="">
+      cost-optimized-architecture-patterns</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/general-knowledge/" class="active">
+      general-knowledge</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>general-knowledge</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-compute---işlem-ve-uygulama-çalıştırma">1. Compute - İşlem ve Uygulama Çalıştırma</a></li>
+    <li><a href="#2-storage---depolama">2. Storage - Depolama</a></li>
+    <li><a href="#3-database---veritabanları">3. Database - Veritabanları</a></li>
+    <li><a href="#4-networking--cdn---ağ-ve-trafik-yönetimi">4. Networking &amp; CDN - Ağ ve Trafik Yönetimi</a></li>
+    <li><a href="#5-integration--messaging---mesajlaşma-ve-iş-akışları">5. Integration &amp; Messaging - Mesajlaşma ve İş Akışları</a></li>
+    <li><a href="#6-security--identity---güvenlik-ve-kimlik">6. Security &amp; Identity - Güvenlik ve Kimlik</a></li>
+    <li><a href="#7-management--monitoring---yönetim-ve-izleme">7. Management &amp; Monitoring - Yönetim ve İzleme</a></li>
+    <li><a href="#8-analytics--machine-learning---analitik-ve-ml">8. Analytics &amp; Machine Learning - Analitik ve ML</a></li>
+    <li><a href="#9-migration---taşıma-ve-geçiş">9. Migration - Taşıma ve Geçiş</a></li>
+    <li><a href="#10-cost-optimization---maliyet-optimizasyonu">10. Cost Optimization - Maliyet Optimizasyonu</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="aws-saa-c03---general-knowledge-tek-satırlık-özet-ve-sınav-rehberi">AWS SAA-C03 - General Knowledge: Tek Satırlık Özet ve Sınav Rehberi<a class="anchor" href="#aws-saa-c03---general-knowledge-tek-sat%c4%b1rl%c4%b1k-%c3%b6zet-ve-s%c4%b1nav-rehberi">#</a></h1>
+<blockquote class='book-hint '>
+<p><strong>Amaç:</strong> Sınav öncesi hızlı tekrar. Her servisin ne yaptığını, hangi senaryoda seçileceğini ve benzer servislerden nasıl ayrıldığını hatırlatır. Ayrıntılı açıklamalar için ilgili konu dokümanlarına bak.</p>
+</blockquote><p><strong>Sınav yaklaşımı:</strong> Sorudaki gereksinimi belirle: en düşük operasyonel yük, yüksek erişilebilirlik, düşük maliyet, gerçek zamanlı işleme, minimum gecikme veya veri dayanıklılığı. Ardından bu gereksinimi karşılayan servisi seç.</p>
+<hr>
+<h2 id="1-compute---işlem-ve-uygulama-çalıştırma">1. Compute - İşlem ve Uygulama Çalıştırma<a class="anchor" href="#1-compute---i%c5%9flem-ve-uygulama-%c3%a7al%c4%b1%c5%9ft%c4%b1rma">#</a></h2>
+<ul>
+<li><strong>EC2:</strong> AWS üzerinde sanal sunucu; işletim sistemi, instance tipi, disk ve ağ yapılandırması üzerinde kontrol sağlar. <strong>Sınavda:</strong> Özel işletim sistemi yapılandırması, uzun süre çalışan uygulama veya tam sunucu kontrolü isteniyorsa EC2.</li>
+<li><strong>Lambda:</strong> Sunucu yönetmeden olay tetiklemeli kod çalıştırır; kullanım ve çalışma süresine göre ücretlendirilir. <strong>Sınavda:</strong> S3&rsquo;e dosya yüklenince işlem başlatma, SQS mesajı işleme veya kısa süreli API backend&rsquo;i oluşturma.</li>
+<li><strong>ECS:</strong> AWS&rsquo;nin container orkestrasyon servisidir; Docker container&rsquo;larını görev ve servis olarak çalıştırır. <strong>Sınavda:</strong> Kubernetes karmaşıklığı olmadan AWS üzerinde container yönetmek.</li>
+<li><strong>EKS:</strong> AWS tarafından yönetilen Kubernetes control plane sunar; worker node&rsquo;lar EC2 veya desteklenen iş yüklerinde Fargate üzerinde çalışabilir. <strong>Sınavda:</strong> Kubernetes API&rsquo;si, mevcut Kubernetes araçları ve ekosistemi gerekiyorsa EKS.</li>
+<li><strong>Fargate:</strong> ECS veya EKS container&rsquo;ları için sunucu/worker node yönetme ihtiyacını azaltan serverless compute altyapısıdır. <strong>Sınavda:</strong> Container çalıştırılacak ancak EC2 instance&rsquo;ları ve node kapasitesi yönetilmek istenmiyorsa Fargate.</li>
+<li><strong>Lightsail:</strong> Basitleştirilmiş sanal sunucu, disk, ağ ve uygulama altyapısı sunar. <strong>Sınavda:</strong> Küçük web sitesi, blog veya kolay kurulabilen VPS benzeri ortam.</li>
+<li><strong>AWS Batch:</strong> Batch işlerini kuyruklar, zamanlar ve uygun işlem kapasitesinde çalıştırır. <strong>Sınavda:</strong> Büyük veri setleri üzerinde toplu hesaplama, simülasyon veya çok sayıda bağımsız iş.</li>
+<li><strong>Elastic Beanstalk:</strong> Uygulama dağıtımı, kapasite, yük dengeleme ve izleme gibi altyapı işlerini yönetir; EC2 tabanlı kaynaklara erişim imkânı da vardır. <strong>Sınavda:</strong> Uygulama kodunu dağıtmak, altyapı ayrıntılarını daha az yönetmek.</li>
+<li><strong>Auto Scaling:</strong> EC2 instance sayısını talebe veya politikalara göre artırır ve azaltır. <strong>Sınavda:</strong> Trafik değişimlerine otomatik uyum ve kapasite maliyetini kontrol etme.</li>
+<li><strong>EC2 Placement Groups:</strong> Instance&rsquo;ların fiziksel yerleşimini kontrol ederek düşük gecikme, yüksek ağ performansı veya donanım arızalarına karşı ayrışma sağlar. <strong>Sınavda:</strong> Cluster = düşük gecikme; Spread = instance&rsquo;ları ayrı donanımlara yayma; Partition = büyük dağıtık sistemlerde bölüm bazlı ayrışma.</li>
+</ul>
+<p><strong>Karıştırma:</strong></p>
+<ul>
+<li>ECS = container orkestrasyonu; Fargate = container çalıştırma altyapısı.</li>
+<li>EKS = yönetilen Kubernetes; ECS = AWS&rsquo;nin kendi container orkestrasyonu.</li>
+<li>Lambda = fonksiyon çalıştırma; Fargate = container çalıştırma.</li>
+<li>Auto Scaling = kapasiteyi dinamik değiştirme; ELB = gelen trafiği hedeflere dağıtma.</li>
+</ul>
+<h2 id="2-storage---depolama">2. Storage - Depolama<a class="anchor" href="#2-storage---depolama">#</a></h2>
+<ul>
+<li><strong>S3:</strong> Nesne depolama; dosyalar bucket içinde object olarak saklanır. Çok yüksek dayanıklılık, sürümleme, lifecycle ve farklı depolama sınıfları sunar. <strong>Sınavda:</strong> Yedekler, medya dosyaları, statik web içeriği, data lake ve arşiv.</li>
+<li><strong>S3 Storage Classes:</strong> Veriye erişim sıklığı ve erişim süresine göre maliyeti optimize eder. <strong>Sınavda:</strong> Sık erişim = S3 Standard; öngörülebilir seyrek erişim = Standard-IA; erişim deseni belirsiz = Intelligent-Tiering; arşiv = Glacier sınıfları.</li>
+<li><strong>EBS:</strong> EC2&rsquo;ye bağlanan block storage; işletim sistemi diski ve veritabanı diskleri için kullanılır. <strong>Sınavda:</strong> Kalıcı block disk, düşük gecikmeli disk I/O&rsquo;su ve belirli performans gereksinimleri.</li>
+<li><strong>EBS Snapshots:</strong> EBS volume verisinin point-in-time yedeğidir; artımlı snapshot mekanizması kullanır. <strong>Sınavda:</strong> Volume yedeği, başka bir AZ veya Region&rsquo;a kopyalama ve kurtarma.</li>
+<li><strong>Instance Store:</strong> Fiziksel sunucuya bağlı geçici block storage; kalıcı veri için uygun değildir. <strong>Sınavda:</strong> Geçici cache, buffer ve yeniden oluşturulabilir yüksek performanslı veriler.</li>
+<li><strong>EFS:</strong> Birden fazla Linux/Unix istemcisinin aynı dosya sistemine erişmesini sağlayan yönetilen NFS dosya depolamasıdır. <strong>Sınavda:</strong> Birden fazla EC2 instance&rsquo;ının aynı dosyaları eş zamanlı okuması ve yazması.</li>
+<li><strong>FSx:</strong> Windows File Server, Lustre, NetApp ONTAP ve OpenZFS gibi yönetilen dosya sistemleri sunar. <strong>Sınavda:</strong> Windows SMB/Active Directory, HPC için Lustre veya belirli kurumsal dosya sistemi özellikleri.</li>
+<li><strong>Storage Gateway:</strong> On-premises ortam ile AWS depolama servisleri arasında hibrit entegrasyon sağlar. <strong>Sınavda:</strong> Yerel uygulamaların bulut depolamasına geçişini kolaylaştırma.</li>
+<li><strong>AWS Snow Family:</strong> Büyük miktarda veriyi fiziksel cihazlarla taşıma ve uygun modellerde edge computing sağlama yaklaşımıdır. <strong>Sınavda:</strong> Sınırlı ağ bant genişliği, yüksek veri aktarım süresi veya bağlantı kısıtları.</li>
+<li><strong>AWS DataSync:</strong> NFS, SMB ve desteklenen depolama sistemleri arasında veriyi otomatik ve verimli biçimde taşır. <strong>Sınavda:</strong> On-premises dosyaları S3 veya EFS&rsquo;ye düzenli ya da toplu taşıma.</li>
+<li><strong>AWS Backup:</strong> Desteklenen AWS kaynakları için merkezi yedekleme planları, politikalar ve saklama yönetimi sunar. <strong>Sınavda:</strong> Birden fazla AWS servisinin yedeklerini merkezi yönetmek.</li>
+</ul>
+<p><strong>Karıştırma:</strong></p>
+<ul>
+<li>S3 = object; EBS = block; EFS = shared file.</li>
+<li>EBS genellikle bir AZ&rsquo;ye bağlıdır; EFS birden fazla AZ&rsquo;den erişilebilir şekilde yapılandırılabilir.</li>
+<li>Instance Store geçicidir; EBS kalıcı disk olarak kullanılabilir.</li>
+<li>DataSync = veri taşıma; Storage Gateway = hibrit depolama entegrasyonu; Snow Family = fiziksel veri aktarımı.</li>
+</ul>
+<h2 id="3-database---veritabanları">3. Database - Veritabanları<a class="anchor" href="#3-database---veritabanlar%c4%b1">#</a></h2>
+<ul>
+<li><strong>RDS:</strong> MySQL, PostgreSQL, MariaDB, Oracle ve SQL Server gibi ilişkisel veritabanlarını yönetilen hizmet olarak çalıştırır. <strong>Sınavda:</strong> SQL, ilişkisel veri, otomatik yedekleme ve yönetilen veritabanı.</li>
+<li><strong>RDS Multi-AZ:</strong> Veritabanı altyapısının farklı AZ&rsquo;lerde yüksek erişilebilirlik için yedeklenmesini sağlar. <strong>Sınavda:</strong> Veritabanı instance&rsquo;ı veya AZ arızasında otomatik failover.</li>
+<li><strong>RDS Read Replica:</strong> Okuma sorgularını ana veritabanından ayırmak için asenkron replika oluşturur. <strong>Sınavda:</strong> Okuma ağırlıklı iş yüklerinde performans artırma.</li>
+<li><strong>Amazon Aurora:</strong> AWS tarafından tasarlanmış, MySQL ve PostgreSQL uyumlu ilişkisel veritabanıdır. Ayrıştırılmış, dağıtık depolama mimarisi ve yönetilen failover özellikleri sunar. <strong>Sınavda:</strong> Yüksek performans, yüksek erişilebilirlik ve ilişkisel veri.</li>
+<li><strong>Aurora Serverless:</strong> Aurora kapasitesini desteklenen yapılandırmalarda talebe göre otomatik ölçekler. <strong>Sınavda:</strong> Değişken veya öngörülemeyen veritabanı yükü.</li>
+<li><strong>DynamoDB:</strong> Yönetilen, dağıtık NoSQL key-value ve document veritabanıdır. <strong>Sınavda:</strong> Çok yüksek ölçek, düşük gecikmeli anahtar erişimi ve sunucu yönetimi olmadan kapasite yönetimi.</li>
+<li><strong>DynamoDB DAX:</strong> DynamoDB okumaları için bellek içi cache katmanıdır. <strong>Sınavda:</strong> Sık okunan verilerde mikro saniye düzeyinde okuma gecikmesi hedefi.</li>
+<li><strong>ElastiCache:</strong> Redis OSS veya Memcached tabanlı yönetilen cache çözümleri sunar. <strong>Sınavda:</strong> Veritabanı üzerindeki okuma yükünü azaltma ve uygulama gecikmesini düşürme.</li>
+<li><strong>Redshift:</strong> Analitik sorgular ve büyük ölçekli veri ambarı iş yükleri için kullanılır. <strong>Sınavda:</strong> Büyük veri üzerinde SQL raporlama, BI ve analitik.</li>
+<li><strong>Neptune:</strong> İlişkileri ve bağlantıları grafik modeliyle tutar. <strong>Sınavda:</strong> Sosyal ağ ilişkileri, fraud bağlantıları ve graph traversal.</li>
+<li><strong>DocumentDB:</strong> MongoDB ile uyumlu API&rsquo;ler sunan yönetilen document database hizmetidir. <strong>Sınavda:</strong> Belge tabanlı veri modeli ve MongoDB uyumlu uygulama gereksinimleri.</li>
+<li><strong>OpenSearch Service:</strong> Tam metin arama, log analizi ve arama odaklı analiz sağlar. <strong>Sınavda:</strong> Uygulama arama kutusu, log arama ve indekslenmiş metin sorguları.</li>
+<li><strong>Timestream:</strong> Zaman damgalı veriler ve zaman serisi analizi için tasarlanmıştır. <strong>Sınavda:</strong> IoT telemetrisi, sensör verileri ve zaman serisi metrikleri.</li>
+<li><strong>QLDB:</strong> Değişiklik geçmişini kriptografik olarak doğrulanabilir bir ledger yapısında tutmak için tasarlanmıştı. <strong>Sınavda:</strong> Eski kaynaklarda karşılaşabilirsin; AWS, QLDB desteğini 31 Temmuz 2025&rsquo;te sona erdirdiğinden güncel mimariler için aktif bir seçenek olarak değerlendirme.</li>
+</ul>
+<p><strong>Karıştırma:</strong></p>
+<ul>
+<li>Multi-AZ = yüksek erişilebilirlik ve failover; Read Replica = okuma kapasitesini artırma.</li>
+<li>RDS = ilişkisel veritabanı; DynamoDB = NoSQL; Redshift = analitik veri ambarı.</li>
+<li>ElastiCache = uygulama cache&rsquo;i; DAX = DynamoDB&rsquo;ye özel cache.</li>
+<li>OpenSearch = arama ve indeksleme; Neptune = grafik ilişkileri.</li>
+</ul>
+<h2 id="4-networking--cdn---ağ-ve-trafik-yönetimi">4. Networking &amp; CDN - Ağ ve Trafik Yönetimi<a class="anchor" href="#4-networking--cdn---a%c4%9f-ve-trafik-y%c3%b6netimi">#</a></h2>
+<ul>
+<li><strong>VPC:</strong> AWS kaynaklarının IP aralıklarını, subnet&rsquo;lerini, route table&rsquo;larını ve ağ güvenliğini tanımlayan izole sanal ağdır. <strong>Sınavda:</strong> Kaynakları özel ağda çalıştırma ve ağ erişimini kontrol etme.</li>
+<li><strong>Subnet:</strong> VPC içindeki belirli bir Availability Zone&rsquo;a ait IP aralığıdır. <strong>Sınavda:</strong> Kaynakları AZ&rsquo;lere ve public/private ağ katmanlarına ayırma.</li>
+<li><strong>Internet Gateway (IGW):</strong> VPC ile internet arasında internet yönlendirmesini sağlar. <strong>Sınavda:</strong> Public subnet&rsquo;teki kaynağın internete erişmesi; bunun için route, public IP ve güvenlik kuralları da gerekir.</li>
+<li><strong>NAT Gateway:</strong> Private subnet&rsquo;teki IPv4 kaynaklarının internete veya dış ağlara bağlantı başlatmasını sağlar; internetten doğrudan başlatılan bağlantıları kabul etmez. <strong>Sınavda:</strong> Private EC2&rsquo;nin yazılım güncellemesi indirmesi.</li>
+<li><strong>Security Group:</strong> ENI/instance düzeyinde stateful sanal güvenlik duvarıdır. <strong>Sınavda:</strong> Yalnızca belirli kaynaklardan belirli portlara izin verme.</li>
+<li><strong>Network ACL (NACL):</strong> Subnet düzeyinde stateless filtreleme yapar; inbound ve outbound kuralları ayrı değerlendirilir. <strong>Sınavda:</strong> Subnet düzeyinde ek filtreleme veya belirli IP aralıklarını engelleme.</li>
+<li><strong>Route Table:</strong> Hedef IP aralığına göre trafiğin IGW, NAT, peering veya başka bir hedefe yönlendirilmesini belirler. <strong>Sınavda:</strong> Public/private subnet erişim sorunları ve ağ yolları.</li>
+<li><strong>Route 53:</strong> DNS, health check ve routing policy hizmetidir. <strong>Sınavda:</strong> DNS yönlendirme, failover, latency-based veya geolocation routing.</li>
+<li><strong>CloudFront:</strong> İçeriği edge location&rsquo;larda cache ederek kullanıcılara daha düşük gecikmeyle ulaştıran CDN&rsquo;dir. <strong>Sınavda:</strong> Global kullanıcılar, statik içerik hızlandırma ve origin yükünü azaltma.</li>
+<li><strong>Elastic Load Balancing (ELB):</strong> Trafiği sağlıklı hedeflere dağıtır. <strong>Sınavda:</strong> ALB = HTTP/HTTPS ve katman 7 yönlendirme; NLB = katman 4, TCP/UDP ve yüksek performans; Gateway Load Balancer = sanal ağ güvenlik cihazları.</li>
+<li><strong>AWS Global Accelerator:</strong> Anycast statik IP&rsquo;ler ve AWS global ağı üzerinden trafiği uygun bölgesel endpoint&rsquo;lere yönlendirir. <strong>Sınavda:</strong> Global uygulamalar, hızlı failover ve TCP/UDP trafiğinin AWS ağı üzerinden yönlendirilmesi.</li>
+<li><strong>AWS Direct Connect:</strong> On-premises veri merkezi ile AWS arasında özel ağ bağlantısı sağlar. <strong>Sınavda:</strong> Daha tutarlı ağ performansı, yüksek bant genişliği ve özel bağlantı ihtiyacı.</li>
+<li><strong>Site-to-Site VPN:</strong> On-premises ağ ile AWS arasında internet üzerinden IPsec tünelleri oluşturur. <strong>Sınavda:</strong> Hızlı hibrit bağlantı veya Direct Connect&rsquo;e yedek bağlantı.</li>
+<li><strong>VPC Peering:</strong> İki VPC arasında doğrudan özel IP yönlendirmesi sağlar; transit yönlendirme desteklemez. <strong>Sınavda:</strong> Az sayıda VPC&rsquo;yi birbirine bağlama.</li>
+<li><strong>Transit Gateway:</strong> Çok sayıda VPC ve on-premises ağı merkezi hub üzerinden bağlar. <strong>Sınavda:</strong> Çoklu hesap ve VPC&rsquo;lerde merkezi ağ topolojisi.</li>
+<li><strong>VPC Endpoints:</strong> AWS servislerine özel ağ üzerinden erişim sağlar. <strong>Sınavda:</strong> Private subnet&rsquo;teki EC2&rsquo;nin internet/NAT kullanmadan S3 veya DynamoDB&rsquo;ye erişmesi için Gateway Endpoint; birçok diğer servis için uygun Interface Endpoint.</li>
+<li><strong>AWS PrivateLink:</strong> Bir servise VPC endpoint üzerinden özel erişim sağlar; servis sağlayıcı ve tüketici ağlarını doğrudan birbirine açmadan bağlantı kurabilir. <strong>Sınavda:</strong> Başka bir VPC&rsquo;deki veya üçüncü taraf sağlayıcıdaki servise özel erişim.</li>
+</ul>
+<p><strong>Karıştırma:</strong></p>
+<ul>
+<li>Public subnet olmak tek başına internete erişim sağlamaz: IGW route&rsquo;u ve uygun public IP gerekir.</li>
+<li>NAT Gateway = private kaynakların outbound IPv4 internet erişimi; IGW = VPC&rsquo;nin internet bağlantısı.</li>
+<li>Security Group = stateful; NACL = stateless.</li>
+<li>VPC Peering = transit yok; Transit Gateway = merkezi transit yönlendirme.</li>
+<li>CloudFront = içerik cache/CDN; Global Accelerator = global ağ yönlendirme.</li>
+<li>Route 53 = DNS; ELB = uygulama trafiğini hedeflere dağıtma.</li>
+</ul>
+<h2 id="5-integration--messaging---mesajlaşma-ve-iş-akışları">5. Integration &amp; Messaging - Mesajlaşma ve İş Akışları<a class="anchor" href="#5-integration--messaging---mesajla%c5%9fma-ve-i%c5%9f-ak%c4%b1%c5%9flar%c4%b1">#</a></h2>
+<ul>
+<li><strong>SQS:</strong> Dağıtık uygulamalar arasında mesajları kuyrukta tutarak üretici ve tüketiciyi birbirinden ayırır. <strong>Sınavda:</strong> Asenkron işleme, yük patlamalarını tamponlama ve başarısız mesajları DLQ&rsquo;ya yönlendirme.</li>
+<li><strong>SQS FIFO:</strong> Mesaj sıralamasını ve uygun kullanımda deduplication desteğini sağlar. <strong>Sınavda:</strong> Sıralama veya mesajların tekilleştirilmesi gerektiğinde FIFO; aksi durumda Standard daha yüksek esneklik ve ölçek sunar.</li>
+<li><strong>SNS:</strong> Bir mesajı birden fazla aboneye yayınlayan pub/sub hizmetidir. <strong>Sınavda:</strong> Tek olayın birden fazla SQS kuyruğuna, Lambda fonksiyonuna veya başka desteklenen abonelere iletilmesi.</li>
+<li><strong>EventBridge:</strong> Servislerden gelen olayları kurallara göre hedeflere yönlendirir. <strong>Sınavda:</strong> Bir AWS kaynağındaki olay gerçekleşince Lambda, Step Functions veya başka bir hedefi tetikleme.</li>
+<li><strong>Step Functions:</strong> Birden fazla adımı, dallanmayı, tekrar denemeyi ve hata yönetimini state machine ile orkestre eder. <strong>Sınavda:</strong> Birden fazla servisten oluşan iş akışı ve kontrollü hata yönetimi.</li>
+<li><strong>Kinesis Data Streams:</strong> Gerçek zamanlı veri akışlarını toplar ve tüketicilere sunar. <strong>Sınavda:</strong> Clickstream, IoT veya sürekli gelen logların düşük gecikmeyle işlenmesi.</li>
+<li><strong>Amazon Data Firehose:</strong> Akış verisini desteklenen hedeflere teslim eder; tamponlama ve dönüşüm seçenekleri sunar. <strong>Sınavda:</strong> Streaming verisini S3, Redshift veya desteklenen hedeflere yönetilen biçimde aktarma.</li>
+<li><strong>Managed Service for Apache Flink:</strong> Akış verisi üzerinde durum bilgili gerçek zamanlı analiz çalıştırır. <strong>Sınavda:</strong> Gelen olaylar üzerinde sürekli hesaplama ve pencere bazlı analiz. Eski kaynaklarda Kinesis Data Analytics adıyla geçebilir.</li>
+<li><strong>API Gateway:</strong> Yönetilen API endpoint&rsquo;leri oluşturur; kimlik doğrulama, throttling ve entegrasyon özellikleri sunar. <strong>Sınavda:</strong> Lambda veya backend servisleri için yönetilen HTTP API katmanı.</li>
+<li><strong>AWS AppSync:</strong> GraphQL API&rsquo;leri ve desteklenen veri kaynaklarıyla entegrasyon sağlar. <strong>Sınavda:</strong> İstemcinin ihtiyacı olan alanları tek GraphQL API üzerinden sorgulaması.</li>
+<li><strong>Amazon MQ:</strong> ActiveMQ veya RabbitMQ gibi mesajlaşma sistemleriyle uyumluluk sağlar. <strong>Sınavda:</strong> Mevcut uygulamanın geleneksel broker protokollerini ve özelliklerini koruması gerekiyorsa.</li>
+</ul>
+<p><strong>Karıştırma:</strong></p>
+<ul>
+<li>SQS = mesajı kuyrukta tutar; SNS = mesajı abonelere yayınlar.</li>
+<li>EventBridge = olay bazlı yönlendirme; SQS = asenkron kuyruk.</li>
+<li>Step Functions = iş akışının adımlarını yönetir; EventBridge = olayları kurallara göre yönlendirir.</li>
+<li>Kinesis Data Streams = akışı toplama ve tüketme; Firehose = akışı hedefe teslim etme.</li>
+<li>API Gateway = API katmanı; AppSync = GraphQL API.</li>
+</ul>
+<h2 id="6-security--identity---güvenlik-ve-kimlik">6. Security &amp; Identity - Güvenlik ve Kimlik<a class="anchor" href="#6-security--identity---g%c3%bcvenlik-ve-kimlik">#</a></h2>
+<ul>
+<li><strong>IAM:</strong> AWS kullanıcılarının, rollerinin ve servislerin hangi işlemleri yapabileceğini policy&rsquo;lerle belirler. <strong>Sınavda:</strong> Least privilege, IAM role, cross-account access ve servisler arası yetkilendirme.</li>
+<li><strong>IAM Role:</strong> Uzun ömürlü erişim anahtarları yerine geçici kimlik bilgileriyle AWS kaynaklarına erişim sağlar. <strong>Sınavda:</strong> EC2&rsquo;nin S3&rsquo;e veya Lambda&rsquo;nın DynamoDB&rsquo;ye güvenli erişmesi.</li>
+<li><strong>AWS KMS:</strong> Şifreleme anahtarlarını ve bunların kullanım izinlerini yönetir. <strong>Sınavda:</strong> S3, EBS, RDS veya uygulama verisini şifreleme ve anahtar erişimini kontrol etme.</li>
+<li><strong>AWS Secrets Manager:</strong> Veritabanı parolaları, API anahtarları ve diğer gizli bilgileri saklar; desteklenen entegrasyonlarda rotasyonu yönetebilir. <strong>Sınavda:</strong> Veritabanı parolasını güvenli saklama ve otomatik döndürme.</li>
+<li><strong>SSM Parameter Store:</strong> Konfigürasyon ve parametreleri merkezi saklar; SecureString ile KMS destekli şifreleme yapabilir. <strong>Sınavda:</strong> Uygulama ayarları ve basit parametre yönetimi.</li>
+<li><strong>Amazon Cognito:</strong> Uygulama kullanıcılarının kayıt, giriş ve token tabanlı kimlik doğrulama ihtiyaçlarını karşılar. <strong>Sınavda:</strong> Web veya mobil uygulama kullanıcılarını AWS IAM kullanıcılarından ayrı yönetme.</li>
+<li><strong>AWS WAF:</strong> HTTP/HTTPS isteklerini web ACL ve kurallarla filtreler. <strong>Sınavda:</strong> SQL injection, XSS, IP tabanlı filtreleme ve istek hız sınırlandırma.</li>
+<li><strong>AWS Shield:</strong> DDoS saldırılarına karşı koruma sağlar; Standard temel korumayı otomatik sunar, Advanced ek özellikler sağlar. <strong>Sınavda:</strong> DDoS riskini azaltma.</li>
+<li><strong>Amazon GuardDuty:</strong> CloudTrail, VPC Flow Logs ve diğer desteklenen veri kaynaklarından tehdit göstergeleri çıkarır. <strong>Sınavda:</strong> Şüpheli API çağrıları, olası hesap ihlali ve kötü amaçlı ağ etkinliği.</li>
+<li><strong>Amazon Inspector:</strong> Desteklenen kaynaklarda yazılım zafiyetlerini ve belirli güvenlik risklerini değerlendirir. <strong>Sınavda:</strong> EC2, container image ve desteklenen compute kaynaklarında vulnerability management.</li>
+<li><strong>Amazon Macie:</strong> S3&rsquo;teki hassas verileri, makine öğrenmesi ve eşleştirme yöntemleriyle keşfetmeye yardımcı olur. <strong>Sınavda:</strong> S3 içindeki PII ve benzeri hassas bilgileri tespit etme.</li>
+<li><strong>AWS Security Hub:</strong> Birden fazla güvenlik kaynağından gelen bulguları merkezileştirir ve güvenlik duruşunu değerlendirmeye yardımcı olur. <strong>Sınavda:</strong> Birden fazla güvenlik hizmetinin bulgularını tek yerde toplama.</li>
+<li><strong>AWS CloudTrail:</strong> AWS hesap etkinliğini ve API çağrılarını kaydeder. <strong>Sınavda:</strong> Kim, ne zaman, hangi API işlemini yaptı sorusunun cevabı.</li>
+<li><strong>AWS Artifact:</strong> AWS uyumluluk raporlarına ve ilgili anlaşma belgelerine erişim sağlar. <strong>Sınavda:</strong> AWS&rsquo;nin SOC, ISO ve PCI gibi uyumluluk belgelerini edinme.</li>
+<li><strong>AWS Certificate Manager (ACM):</strong> Desteklenen AWS servislerinde TLS sertifikalarının sağlanması ve yenilenmesini yönetir. <strong>Sınavda:</strong> ALB veya CloudFront üzerinde HTTPS sertifikası kullanma.</li>
+<li><strong>AWS Directory Service:</strong> Microsoft Active Directory ile ilgili yönetilen dizin ihtiyaçlarını karşılar. <strong>Sınavda:</strong> Windows iş yükleri, domain join ve Active Directory entegrasyonu.</li>
+</ul>
+<p><strong>Karıştırma:</strong></p>
+<ul>
+<li>IAM = AWS kaynaklarına erişim yetkisi; Cognito = uygulama kullanıcı kimliği.</li>
+<li>KMS = anahtar yönetimi; Secrets Manager = gizli bilgilerin saklanması ve rotasyonu.</li>
+<li>CloudTrail = API denetim kaydı; CloudWatch = metrik, log ve alarm.</li>
+<li>GuardDuty = tehdit tespiti; Inspector = zafiyet taraması; Macie = S3 hassas veri keşfi.</li>
+<li>WAF = web istek filtreleme; Shield = DDoS koruması; Security Hub = güvenlik bulgularını birleştirme.</li>
+</ul>
+<h2 id="7-management--monitoring---yönetim-ve-izleme">7. Management &amp; Monitoring - Yönetim ve İzleme<a class="anchor" href="#7-management--monitoring---y%c3%b6netim-ve-izleme">#</a></h2>
+<ul>
+<li><strong>Amazon CloudWatch:</strong> Metrik, log, alarm ve gözlemlenebilirlik özellikleri sağlar. <strong>Sınavda:</strong> CPU kullanımı yükselince alarm oluşturma veya belirli bir metriğe göre aksiyon başlatma.</li>
+<li><strong>CloudWatch Logs:</strong> Uygulama ve servis loglarını toplar, saklar ve sorgulamaya yardımcı olur. <strong>Sınavda:</strong> Hata kayıtlarını inceleme, log grupları ve log tabanlı metrikler.</li>
+<li><strong>AWS X-Ray:</strong> Dağıtık uygulamalarda isteklerin servisler arasındaki izini sürer. <strong>Sınavda:</strong> Mikroservislerde gecikmenin hangi servisten kaynaklandığını bulma.</li>
+<li><strong>AWS Config:</strong> Kaynak konfigürasyonlarını kaydeder ve kurallarla uyumluluk değerlendirmesi yapar. <strong>Sınavda:</strong> Security Group&rsquo;un zaman içinde değişimini bulma veya kurallara aykırı kaynakları tespit etme.</li>
+<li><strong>AWS Systems Manager (SSM):</strong> Desteklenen sunuculara uzaktan erişim, patch yönetimi, envanter ve otomasyon sağlar. <strong>Sınavda:</strong> SSH/RDP açmadan yönetim için Session Manager veya merkezi patch operasyonları.</li>
+<li><strong>AWS CloudFormation:</strong> AWS kaynaklarını şablonlarla tanımlayıp yönetir. <strong>Sınavda:</strong> Tekrarlanabilir altyapı dağıtımı ve Infrastructure as Code.</li>
+<li><strong>AWS Service Catalog:</strong> Kuruluşların onaylanmış altyapı ürünlerini kullanıcılarına sunmasını sağlar. <strong>Sınavda:</strong> Kullanıcıların yalnızca kurumsal olarak onaylanan yapılandırmaları dağıtması.</li>
+<li><strong>AWS Organizations:</strong> Birden fazla AWS hesabını merkezi yönetir; SCP ve konsolide faturalandırma gibi özellikler sunar. <strong>Sınavda:</strong> Çoklu hesap yönetimi ve hesap seviyesinde izin sınırları.</li>
+<li><strong>AWS Control Tower:</strong> Landing zone ve çoklu hesap ortamının kurulumunu ve yönetişimini kolaylaştırır. <strong>Sınavda:</strong> Yeni kurumsal AWS ortamı, merkezi guardrail ve hesap yaşam döngüsü.</li>
+<li><strong>AWS Trusted Advisor:</strong> Desteklenen kontrol kategorilerinde maliyet, güvenlik, performans ve hata toleransı önerileri sunar. <strong>Sınavda:</strong> Kullanılmayan kaynakları veya önerilen iyileştirmeleri tespit etme.</li>
+<li><strong>AWS Compute Optimizer:</strong> Desteklenen compute kaynakları için kullanım verisine dayalı boyutlandırma önerileri üretir. <strong>Sınavda:</strong> Fazla büyük veya yetersiz boyutlandırılmış EC2 ve diğer desteklenen kaynakları belirleme.</li>
+<li><strong>AWS Backup:</strong> Desteklenen kaynaklar için merkezi yedekleme politikaları, saklama ve kurtarma yönetimi sunar. <strong>Sınavda:</strong> Birden fazla hesap veya serviste standart yedekleme stratejisi.</li>
+</ul>
+<p><strong>Karıştırma:</strong></p>
+<ul>
+<li>CloudWatch = çalışma zamanı metrik ve logları; Config = kaynak konfigürasyonu ve uyumluluk geçmişi.</li>
+<li>CloudTrail = API denetim izi; X-Ray = dağıtık istek izleme.</li>
+<li>Organizations = hesap ve politika yönetimi; Control Tower = yönetilen landing zone ve guardrail yaklaşımı.</li>
+<li>CloudFormation = altyapıyı tanımlama; Systems Manager = çalışan kaynakları yönetme.</li>
+</ul>
+<h2 id="8-analytics--machine-learning---analitik-ve-ml">8. Analytics &amp; Machine Learning - Analitik ve ML<a class="anchor" href="#8-analytics--machine-learning---analitik-ve-ml">#</a></h2>
+<ul>
+<li><strong>Amazon Athena:</strong> S3&rsquo;teki veriyi sunucu yönetmeden SQL ile sorgular. <strong>Sınavda:</strong> Data lake üzerinde seyrek veya ihtiyaca bağlı analitik sorgular.</li>
+<li><strong>AWS Glue:</strong> Veri keşfi, Data Catalog ve ETL işlerini destekler. <strong>Sınavda:</strong> S3 verisini dönüştürüp analize hazırlama veya şemasını kataloglama.</li>
+<li><strong>Amazon Managed Service for Apache Flink:</strong> Sürekli gelen akış verisini gerçek zamanlı işler ve analiz eder. <strong>Sınavda:</strong> Streaming verisi üzerinde sürekli hesaplama.</li>
+<li><strong>Amazon QuickSight:</strong> Yönetilen BI ve dashboard hizmetidir. <strong>Sınavda:</strong> İş zekâsı raporları, görselleştirme ve dashboard.</li>
+<li><strong>Amazon EMR:</strong> Hadoop, Spark ve desteklenen büyük veri çerçevelerini çalıştırır. <strong>Sınavda:</strong> Büyük ölçekli dağıtık veri işleme.</li>
+<li><strong>Amazon SageMaker AI:</strong> Makine öğrenmesi modellerinin geliştirilmesi, eğitilmesi ve dağıtılmasına yönelik araçlar sağlar. <strong>Sınavda:</strong> Özel ML modeli oluşturma ve üretime alma.</li>
+<li><strong>Amazon Rekognition:</strong> Görüntü ve videolardaki nesne, yüz ve diğer desteklenen özellikleri analiz eder. <strong>Sınavda:</strong> Görsel içerik analizi.</li>
+<li><strong>Amazon Comprehend:</strong> Metin üzerinde doğal dil işleme görevleri gerçekleştirir. <strong>Sınavda:</strong> Duygu analizi, varlık çıkarımı ve metin sınıflandırma.</li>
+<li><strong>Amazon Translate:</strong> Diller arasında metin çevirisi yapar. <strong>Sınavda:</strong> Uygulamalarda otomatik çok dilli içerik.</li>
+<li><strong>Amazon Polly:</strong> Metni konuşmaya dönüştürür (text-to-speech). <strong>Sınavda:</strong> Metinden ses üretimi.</li>
+<li><strong>Amazon Transcribe:</strong> Konuşmayı metne dönüştürür (speech-to-text). <strong>Sınavda:</strong> Ses kayıtlarının yazıya çevrilmesi.</li>
+<li><strong>Amazon Textract:</strong> Belge ve formlardan metin, tablo ve form alanlarını çıkarır. <strong>Sınavda:</strong> Tarama veya PDF belgelerinden yapılandırılmış veri elde etme.</li>
+</ul>
+<p><strong>Karıştırma:</strong></p>
+<ul>
+<li>Athena = S3 üzerinde SQL; Glue = katalog ve ETL.</li>
+<li>EMR = yönetilen büyük veri çerçeveleri; Redshift = analitik veri ambarı.</li>
+<li>Rekognition = görsel; Comprehend = metin; Transcribe = ses → metin; Polly = metin → ses; Textract = belge → yapılandırılmış veri.</li>
+</ul>
+<h2 id="9-migration---taşıma-ve-geçiş">9. Migration - Taşıma ve Geçiş<a class="anchor" href="#9-migration---ta%c5%9f%c4%b1ma-ve-ge%c3%a7i%c5%9f">#</a></h2>
+<ul>
+<li><strong>AWS Database Migration Service (DMS):</strong> Veritabanları arasında veri taşımayı ve desteklenen senaryolarda değişiklikleri çoğaltmayı sağlar. <strong>Sınavda:</strong> Kaynak veritabanı çalışırken hedefe geçiş ve downtime&rsquo;ı azaltma.</li>
+<li><strong>AWS Schema Conversion Tool (SCT):</strong> Desteklenen heterojen veritabanı geçişlerinde şema ve kod dönüşümüne yardımcı olur. <strong>Sınavda:</strong> Oracle veya SQL Server&rsquo;dan PostgreSQL gibi farklı motorlara geçiş.</li>
+<li><strong>AWS Migration Hub:</strong> Birden fazla migrasyon projesinin ilerlemesini merkezi izlemeye yardımcı olur. <strong>Sınavda:</strong> Büyük ölçekli sunucu ve uygulama taşıma süreçlerini takip etme.</li>
+<li><strong>AWS Application Migration Service (MGN):</strong> Sunucuları AWS&rsquo;ye lift-and-shift yaklaşımıyla taşımak için replikasyon ve geçiş süreçlerini yönetir. <strong>Sınavda:</strong> Uygulamayı büyük ölçüde yeniden tasarlamadan EC2&rsquo;ye taşıma.</li>
+<li><strong>AWS DataSync:</strong> Dosya verisini desteklenen on-premises ve AWS depolama sistemleri arasında taşır. <strong>Sınavda:</strong> Büyük miktarda dosyayı verimli biçimde kopyalama.</li>
+<li><strong>AWS Transfer Family:</strong> SFTP, FTPS, FTP ve AS2 gibi desteklenen protokollerle yönetilen dosya transferi sunar. <strong>Sınavda:</strong> Müşterilerin veya iş ortaklarının mevcut dosya transfer protokolüyle S3/EFS&rsquo;ye veri göndermesi.</li>
+<li><strong>AWS Snow Family:</strong> Büyük veri setlerinin fiziksel cihazlarla taşınmasını destekler. <strong>Sınavda:</strong> Ağ üzerinden transferin çok uzun sürmesi veya bağlantı kısıtları.</li>
+<li><strong>AWS Storage Gateway:</strong> On-premises uygulamalarla AWS depolama hizmetleri arasında hibrit bağlantı sağlar. <strong>Sınavda:</strong> Yerel sistemlerin bulut depolamasını entegre biçimde kullanması.</li>
+</ul>
+<p><strong>Karıştırma:</strong></p>
+<ul>
+<li>DMS = veritabanı verisi; SCT = şema/kod dönüşümü.</li>
+<li>MGN = sunucu taşıma; DataSync = dosya taşıma.</li>
+<li>Transfer Family = SFTP/FTPS/FTP/AS2 gibi protokoller; Storage Gateway = hibrit depolama.</li>
+</ul>
+<h2 id="10-cost-optimization---maliyet-optimizasyonu">10. Cost Optimization - Maliyet Optimizasyonu<a class="anchor" href="#10-cost-optimization---maliyet-optimizasyonu">#</a></h2>
+<ul>
+<li><strong>AWS Cost Explorer:</strong> Geçmiş harcamaları, maliyet eğilimlerini ve tahminleri analiz eder. <strong>Sınavda:</strong> Maliyet artışının kaynağını inceleme.</li>
+<li><strong>AWS Budgets:</strong> Belirlenen bütçe veya kullanım eşikleri için uyarılar oluşturur; desteklenen senaryolarda aksiyonlarla entegre edilebilir. <strong>Sınavda:</strong> Harcama hedefini aşmadan önce bildirim alma.</li>
+<li><strong>Cost and Usage Report (CUR):</strong> AWS kullanım ve maliyet verilerini ayrıntılı biçimde sunar. <strong>Sınavda:</strong> Ayrıntılı fatura analizi ve Athena ile sorgulama.</li>
+<li><strong>AWS Pricing Calculator:</strong> Mimari dağıtımdan önce tahmini maliyet hesaplamaya yardımcı olur. <strong>Sınavda:</strong> Planlanan altyapının maliyetini önceden tahmin etme.</li>
+<li><strong>Savings Plans:</strong> Belirli kullanım türleri için saatlik harcama taahhüdü karşılığında indirim sağlar. <strong>Sınavda:</strong> Uzun vadeli ve öngörülebilir compute kullanımını daha düşük maliyetle çalıştırma.</li>
+<li><strong>Reserved Instances (RI):</strong> Uygun servislerde kullanım taahhüdü karşılığında indirim sağlar; bazı türlerde kapasite rezervasyonu da söz konusudur. <strong>Sınavda:</strong> Özellikle RDS veya belirli EC2 kullanım senaryolarında uzun vadeli maliyet optimizasyonu.</li>
+<li><strong>On-Demand Instances:</strong> Uzun vadeli taahhüt olmadan kullandıkça ödeme modelidir. <strong>Sınavda:</strong> Kısa süreli veya belirsiz iş yükleri.</li>
+<li><strong>Spot Instances:</strong> AWS&rsquo;nin kullanılmayan EC2 kapasitesini indirimli sunar; kapasite geri alınabilir. <strong>Sınavda:</strong> Kesintiye dayanıklı batch, dağıtık işlem ve esnek iş yükleri.</li>
+<li><strong>S3 Lifecycle Policies:</strong> Nesneleri zaman veya kurallara göre farklı depolama sınıflarına taşır ya da siler. <strong>Sınavda:</strong> Eski logları daha ucuz arşiv sınıfına taşıma.</li>
+<li><strong>S3 Intelligent-Tiering:</strong> Erişim desenine göre nesneleri uygun erişim katmanlarında tutarak maliyet optimizasyonu sağlar. <strong>Sınavda:</strong> Erişim sıklığı önceden tahmin edilemiyorsa.</li>
+</ul>
+<p><strong>Karıştırma:</strong></p>
+<ul>
+<li>Cost Explorer = maliyet analizi; Budgets = eşik ve uyarı; CUR = ayrıntılı maliyet verisi; Pricing Calculator = geleceğe yönelik tahmin.</li>
+<li>Spot = en ucuz seçeneklerden biri, fakat kesintiye dayanıklı iş yükleri için.</li>
+<li>Savings Plans/RI = taahhüt karşılığında indirim; On-Demand = taahhütsüz kullanım.</li>
+<li>S3 Lifecycle = kurallara göre geçiş; Intelligent-Tiering = erişim desenine göre otomatik katmanlama.</li>
+</ul>
+<hr>
+<h1 id="11-sınavda-sık-karşılaşılan-senaryo--servis-eşleştirmeleri">11. Sınavda Sık Karşılaşılan Senaryo → Servis Eşleştirmeleri<a class="anchor" href="#11-s%c4%b1navda-s%c4%b1k-kar%c5%9f%c4%b1la%c5%9f%c4%b1lan-senaryo--servis-e%c5%9fle%c5%9ftirmeleri">#</a></h1>
+<table>
+	<thead>
+			<tr>
+					<th>Sorudaki gereksinim</th>
+					<th>Öncelikli servis / çözüm</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>S3&rsquo;e yüklenen dosya otomatik işlensin</td>
+					<td>S3 Event Notification + Lambda</td>
+			</tr>
+			<tr>
+					<td>Uygulama bileşenleri birbirini beklemeden çalışsın</td>
+					<td>SQS</td>
+			</tr>
+			<tr>
+					<td>Bir olay birden fazla tüketiciye iletilsin</td>
+					<td>SNS veya EventBridge; olayın türüne göre</td>
+			</tr>
+			<tr>
+					<td>Birden fazla adımlı iş akışı, retry ve hata dalları olsun</td>
+					<td>Step Functions</td>
+			</tr>
+			<tr>
+					<td>Private EC2 internete çıkabilsin</td>
+					<td>NAT Gateway + uygun route</td>
+			</tr>
+			<tr>
+					<td>Private EC2, internet kullanmadan S3&rsquo;e erişsin</td>
+					<td>S3 Gateway Endpoint</td>
+			</tr>
+			<tr>
+					<td>Birden fazla EC2 aynı Linux dosyalarını paylaşsın</td>
+					<td>EFS</td>
+			</tr>
+			<tr>
+					<td>EC2 için kalıcı block disk</td>
+					<td>EBS</td>
+			</tr>
+			<tr>
+					<td>Global kullanıcılar statik içeriğe hızlı erişsin</td>
+					<td>CloudFront</td>
+			</tr>
+			<tr>
+					<td>HTTP host/path bazlı yönlendirme</td>
+					<td>ALB</td>
+			</tr>
+			<tr>
+					<td>TCP/UDP yük dengeleme ve düşük seviyeli trafik</td>
+					<td>NLB</td>
+			</tr>
+			<tr>
+					<td>Çok sayıda VPC merkezi olarak bağlansın</td>
+					<td>Transit Gateway</td>
+			</tr>
+			<tr>
+					<td>İki VPC arasında basit özel bağlantı</td>
+					<td>VPC Peering</td>
+			</tr>
+			<tr>
+					<td>EC2, AWS API&rsquo;lerine anahtar saklamadan erişsin</td>
+					<td>IAM Role</td>
+			</tr>
+			<tr>
+					<td>S3 içindeki hassas veriler bulunsun</td>
+					<td>Macie</td>
+			</tr>
+			<tr>
+					<td>Şüpheli AWS etkinliği tespit edilsin</td>
+					<td>GuardDuty</td>
+			</tr>
+			<tr>
+					<td>API çağrısının kim tarafından yapıldığı bulunsun</td>
+					<td>CloudTrail</td>
+			</tr>
+			<tr>
+					<td>Kaynak konfigürasyonu değişiklikleri takip edilsin</td>
+					<td>AWS Config</td>
+			</tr>
+			<tr>
+					<td>Birden fazla AWS hesabı merkezi yönetilsin</td>
+					<td>Organizations; kurulum ve guardrail için Control Tower</td>
+			</tr>
+			<tr>
+					<td>Büyük veriyi S3 üzerinde SQL ile sorgula</td>
+					<td>Athena</td>
+			</tr>
+			<tr>
+					<td>Veriyi keşfet, katalogla ve ETL uygula</td>
+					<td>Glue</td>
+			</tr>
+			<tr>
+					<td>SQL raporlama için analitik veri ambarı</td>
+					<td>Redshift</td>
+			</tr>
+			<tr>
+					<td>Veritabanı okuma yükü artırılsın</td>
+					<td>Read Replica; cache ihtiyacı varsa ElastiCache</td>
+			</tr>
+			<tr>
+					<td>Veritabanı arızasında otomatik failover</td>
+					<td>RDS Multi-AZ veya uygun Aurora yapılandırması</td>
+			</tr>
+			<tr>
+					<td>Veritabanı parolası otomatik döndürülsün</td>
+					<td>Secrets Manager</td>
+			</tr>
+			<tr>
+					<td>Çok büyük veriyi internet yerine fiziksel aktar</td>
+					<td>Snow Family</td>
+			</tr>
+			<tr>
+					<td>Dosya sunucularını AWS&rsquo;ye verimli kopyala</td>
+					<td>DataSync</td>
+			</tr>
+			<tr>
+					<td>Mevcut sunucuyu minimum değişiklikle AWS&rsquo;ye taşı</td>
+					<td>MGN</td>
+			</tr>
+			<tr>
+					<td>Harcamalar belirli eşiğe gelince uyarı al</td>
+					<td>AWS Budgets</td>
+			</tr>
+			<tr>
+					<td>Uygun, kesintiye dayanıklı işlem en düşük maliyetle çalışsın</td>
+					<td>Spot Instances</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h1 id="12-sınav-öncesi-son-kontrol">12. Sınav Öncesi Son Kontrol<a class="anchor" href="#12-s%c4%b1nav-%c3%b6ncesi-son-kontrol">#</a></h1>
+<p>Soruyu cevaplamadan önce şu ayrımları kontrol et:</p>
+<ol>
+<li><strong>Availability mi, scalability mi?</strong> Arıza durumunda çalışmaya devam etmek ile artan trafiği karşılamak farklı gereksinimlerdir.</li>
+<li><strong>Managed service mi, tam kontrol mü?</strong> Yönetim yükünü azaltan çözüm çoğunlukla tercih edilir; fakat sorudaki özelleştirme gereksinimleri belirleyicidir.</li>
+<li><strong>Block, file, object mı?</strong> EBS, EFS/FSx ve S3 birbirinin yerine geçen depolama türleri değildir.</li>
+<li><strong>Senkron mu, asenkron mu?</strong> Üretici ve tüketiciyi ayırmak gerekiyorsa SQS; olay yayınlamak gerekiyorsa SNS veya EventBridge.</li>
+<li><strong>Private erişim mi, internet erişimi mi?</strong> VPC Endpoint, NAT Gateway ve IGW farklı ihtiyaçları karşılar.</li>
+<li><strong>Veritabanı HA mı, okuma ölçeklendirmesi mi?</strong> Multi-AZ ve Read Replica aynı problem için tasarlanmamıştır.</li>
+<li><strong>Güvenlikte hangi katman?</strong> IAM yetkilendirme, KMS şifreleme anahtarı, Secrets Manager gizli bilgi, GuardDuty tehdit tespiti ve Inspector zafiyet değerlendirmesidir.</li>
+<li><strong>En az operasyonel yük mü, en düşük maliyet mi?</strong> Bunlar her zaman aynı çözüm değildir. Gereksinimlerin tamamını karşılayan seçeneği tercih et.</li>
+<li><strong>Kesinti kabul ediliyor mu?</strong> Spot Instances gibi kesintiye açık seçenekleri, kesintisiz çalışması gereken kritik işler için otomatik olarak seçme.</li>
+<li><strong>Sorudaki kesin ifadeleri kontrol et.</strong> “Automatically”, “without managing servers”, “near real-time”, “private connectivity”, “minimal operational overhead” ve “least cost” gibi ifadeler çözümün seçiminde belirleyicidir.</li>
+</ol>
+<blockquote class='book-hint '>
+<p><strong>Son kural:</strong> Servis isimlerini ezberlemek tek başına yeterli değildir. AWS SAA-C03 sorularında genellikle ihtiyacı en az operasyonel yükle, gerekli erişilebilirlik ve güvenlik düzeyini koruyarak karşılayan mimari aranır. Her soruda önce gereksinimi, sonra kısıtları, en son servisi belirle.</p>
+</blockquote></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/aws-saa/cost-optimized-architectures/cost-optimized-architecture-patterns/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>cost-optimized-architecture-patterns</span>
+      </a>
+    
+    </span>
+    <span>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-compute---işlem-ve-uygulama-çalıştırma">1. Compute - İşlem ve Uygulama Çalıştırma</a></li>
+    <li><a href="#2-storage---depolama">2. Storage - Depolama</a></li>
+    <li><a href="#3-database---veritabanları">3. Database - Veritabanları</a></li>
+    <li><a href="#4-networking--cdn---ağ-ve-trafik-yönetimi">4. Networking &amp; CDN - Ağ ve Trafik Yönetimi</a></li>
+    <li><a href="#5-integration--messaging---mesajlaşma-ve-iş-akışları">5. Integration &amp; Messaging - Mesajlaşma ve İş Akışları</a></li>
+    <li><a href="#6-security--identity---güvenlik-ve-kimlik">6. Security &amp; Identity - Güvenlik ve Kimlik</a></li>
+    <li><a href="#7-management--monitoring---yönetim-ve-izleme">7. Management &amp; Monitoring - Yönetim ve İzleme</a></li>
+    <li><a href="#8-analytics--machine-learning---analitik-ve-ml">8. Analytics &amp; Machine Learning - Analitik ve ML</a></li>
+    <li><a href="#9-migration---taşıma-ve-geçiş">9. Migration - Taşıma ve Geçiş</a></li>
+    <li><a href="#10-cost-optimization---maliyet-optimizasyonu">10. Cost Optimization - Maliyet Optimizasyonu</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
