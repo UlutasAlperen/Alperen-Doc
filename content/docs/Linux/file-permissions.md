@@ -91,18 +91,27 @@ chmod -R g+rw <DIRECTORY>
 
 ## 4. Change Permissions with Octal Notation
 
-Each class receives one octal digit that sums read (4), write (2), and execute (1):
+Each class receives one octal digit. The digit is the sum of its permission values:
 
-| Octal | Bits | Permissions |
+| Value | Permission | Meaning |
 |---|---|---|
-| 0 | 000 | `---` |
-| 1 | 001 | `--x` |
-| 2 | 010 | `-w-` |
-| 3 | 011 | `-wx` |
-| 4 | 100 | `r--` |
-| 5 | 101 | `r-x` |
-| 6 | 110 | `rw-` |
-| 7 | 111 | `rwx` |
+| 4 | `r` (read) | Read the file contents or list the directory entries |
+| 2 | `w` (write) | Change the file contents or create and delete entries in a directory |
+| 1 | `x` (execute) | Run the file as a program or traverse the directory |
+| 0 | `-` (none) | No permission |
+
+Add the values together to build one digit:
+
+| Octal | Calculation | Bits | Permissions |
+|---|---|---|---|
+| 0 | none | 000 | `---` |
+| 1 | 1 | 001 | `--x` |
+| 2 | 2 | 010 | `-w-` |
+| 3 | 2 + 1 | 011 | `-wx` |
+| 4 | 4 | 100 | `r--` |
+| 5 | 4 + 1 | 101 | `r-x` |
+| 6 | 4 + 2 | 110 | `rw-` |
+| 7 | 4 + 2 + 1 | 111 | `rwx` |
 
 Read the three digits as owner, group, other:
 
@@ -111,6 +120,8 @@ chmod 750 <FILE>
 ```
 
 Expected result: `rwxr-x---` for owner `alice`, group `devops`.
+
+Each digit is calculated independently: the leading 7 is 4 + 2 + 1 (`rwx`) for the owner, the 5 is 4 + 1 (`r-x`) for the group, and the 0 grants no permissions to other.
 
 Common combinations:
 
@@ -186,6 +197,16 @@ UMASK 022
 ## 7. Apply Special Bits
 
 The three special bits occupy the first octal digit or replace the execute letter in the permission string.
+
+The special bits use the same value logic as the permission digits, applied in the fourth (leading) octal position: SUID adds 4, SGID adds 2, and the sticky bit adds 1. This is why their octal values are 4000, 2000 and 1000.
+
+| Value | Special bit | Combined example | Resulting permissions |
+|---|---|---|---|
+| 4 | SUID | `chmod 4755` | SUID plus `rwxr-xr-x` |
+| 2 | SGID | `chmod 2775` | SGID plus `rwxrwxr-x` |
+| 1 | Sticky bit | `chmod 1777` | Sticky bit plus `rwxrwxrwx` |
+
+The values add up like the permission digits: a leading digit of 7 (4 + 2 + 1) sets SUID, SGID and the sticky bit at the same time, while a leading digit of 6 (4 + 2) sets SUID and SGID without the sticky bit.
 
 | Special bit | Octal | Symbol | Effect |
 |---|---|---|---|
