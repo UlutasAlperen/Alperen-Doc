@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Linux on Alperen Doc</title>
+		<link>https://blog.ulutasalperen.com/docs/linux/</link>
+		<description>Recent content in Linux on Alperen Doc</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<atom:link href="https://blog.ulutasalperen.com/docs/linux/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Linux User Management</title>
+				<link>https://blog.ulutasalperen.com/docs/linux/linux-user-management/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://blog.ulutasalperen.com/docs/linux/linux-user-management/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;Scope:&lt;/strong&gt; Debian-based and RHEL-based Linux distributions&lt;br&gt;&#xA;&lt;strong&gt;Topics:&lt;/strong&gt; Regular user creation, system user creation, sudo privileges, verification, and usage scenarios.&lt;/p&gt;&#xA;&lt;h1 id=&#34;part-1-debian-based-systems&#34;&gt;Part 1: Debian-Based Systems&lt;a class=&#34;anchor&#34; href=&#34;#part-1-debian-based-systems&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;Examples:&lt;/strong&gt; Debian, Ubuntu&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-install-sudo&#34;&gt;1. Install sudo&lt;a class=&#34;anchor&#34; href=&#34;#1-install-sudo&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Run as root:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;apt update&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;apt install sudo&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-create-a-regular-user&#34;&gt;2. Create a Regular User&lt;a class=&#34;anchor&#34; href=&#34;#2-create-a-regular-user&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Create a user interactively:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adduser &amp;lt;USERNAME&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Alternatively, use &lt;code&gt;useradd&lt;/code&gt;:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;useradd -m -s /bin/bash &amp;lt;USERNAME&amp;gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;passwd &amp;lt;USERNAME&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Options:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;-m&lt;/code&gt;: Creates the user&amp;rsquo;s home directory.&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;-s /bin/bash&lt;/code&gt;: Sets Bash as the default shell.&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;passwd&lt;/code&gt;: Sets or changes the user&amp;rsquo;s password.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;3-grant-sudo-privileges&#34;&gt;3. Grant Sudo Privileges&lt;a class=&#34;anchor&#34; href=&#34;#3-grant-sudo-privileges&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Add the user to the &lt;code&gt;sudo&lt;/code&gt; group:&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

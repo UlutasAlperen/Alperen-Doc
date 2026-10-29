@@ -14,21 +14,21 @@
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/basic_git_knowledge/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/</loc>
-  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-pods-minikube/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/kustomize/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/linux/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/manage-docker-as-non-root-user/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/cluster-extensions/</loc>
   </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/docker/</loc>
+  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-containers-images/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/github_workflow/</loc>
-  </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-deployments-minikube/</loc>
   </url><url>
@@ -36,21 +36,23 @@
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-volumes/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/</loc>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-probes/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/network-policy/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/</loc>
-  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/continuous_deployment/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/docker/docker-build/</loc>
   </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/</loc>
+  </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-deployment-rollouts/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/security-context/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/aws/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/kubernetes-troubleshooting/</loc>
   </url><url>
@@ -95,6 +97,8 @@
     <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-status/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-services/</loc>
+  </url><url>
+    <loc>https://blog.ulutasalperen.com/docs/linux/linux-user-management/</loc>
   </url><url>
     <loc>https://blog.ulutasalperen.com/docs/aws/networking/</loc>
   </url><url>
