@@ -6,8 +6,6 @@ weight: 100
 
 > **Amaç:** Sınav öncesi hızlı tekrar. Her servisin ne yaptığını, hangi senaryoda seçileceğini ve benzer servislerden nasıl ayrıldığını hatırlatır. Ayrıntılı açıklamalar için ilgili konu dokümanlarına bak.
 
-**Sınav yaklaşımı:** Sorudaki gereksinimi belirle: en düşük operasyonel yük, yüksek erişilebilirlik, düşük maliyet, gerçek zamanlı işleme, minimum gecikme veya veri dayanıklılığı. Ardından bu gereksinimi karşılayan servisi seç.
-
 ---
 
 ## 1. Compute - İşlem ve Uygulama Çalıştırma
