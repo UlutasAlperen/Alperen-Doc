@@ -1,5 +1,5 @@
 ---
-title: "Linux User Management"
+title: "linux-user-management"
 weight: 10
 ---
 **Scope:** Debian-based and RHEL-based Linux distributions  

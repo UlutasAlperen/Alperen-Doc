@@ -1,0 +1,3512 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Scope: Debian-based and RHEL-based Linux distributions
+Topics: Interface inspection, links, routes, neighbors, sockets, hostname configuration, netplan, NetworkManager, and verification.
+1. Inspect Network Interfaces# List all interfaces and addresses:
+ip addr showUse the compact view:
+ip -br addrExpected output:
+lo UNKNOWN 127.0.0.1/8 ::1/128 eth0 UP 192.0.2.10/24 fe80::a00:27ff:fe1a:2b3c/642. Inspect and Change the Link State# Show link state and MAC addresses:
+ip link showBring an interface up:
+sudo ip link set &lt;INTERFACE&gt; up3. Inspect Routes# Show the routing table:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/linux/networking-basics/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="networking-basics">
+	<meta property="og:description" content="Scope: Debian-based and RHEL-based Linux distributions
+Topics: Interface inspection, links, routes, neighbors, sockets, hostname configuration, netplan, NetworkManager, and verification.
+1. Inspect Network Interfaces# List all interfaces and addresses:
+ip addr showUse the compact view:
+ip -br addrExpected output:
+lo UNKNOWN 127.0.0.1/8 ::1/128 eth0 UP 192.0.2.10/24 fe80::a00:27ff:fe1a:2b3c/642. Inspect and Change the Link State# Show link state and MAC addresses:
+ip link showBring an interface up:
+sudo ip link set &lt;INTERFACE&gt; up3. Inspect Routes# Show the routing table:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="networking-basics">
+	<meta itemprop="description" content="Scope: Debian-based and RHEL-based Linux distributions
+Topics: Interface inspection, links, routes, neighbors, sockets, hostname configuration, netplan, NetworkManager, and verification.
+1. Inspect Network Interfaces# List all interfaces and addresses:
+ip addr showUse the compact view:
+ip -br addrExpected output:
+lo UNKNOWN 127.0.0.1/8 ::1/128 eth0 UP 192.0.2.10/24 fe80::a00:27ff:fe1a:2b3c/642. Inspect and Change the Link State# Show link state and MAC addresses:
+ip link showBring an interface up:
+sudo ip link set &lt;INTERFACE&gt; up3. Inspect Routes# Show the routing table:">
+	<meta itemprop="wordCount" content="878">
+
+<title>networking-basics • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/linux/networking-basics/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.2717c173d31e1424177e095b6301c63f2558df43c4923cf34d083e2f8cfcbc76.js" integrity="sha256-JxfBc9MeFCQXfglbYwHGPyVY30PEkjzzTQg&#43;L4z8vHY=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic-git-conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic-git-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github-workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous-integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous-deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git-status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git-add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git-commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git-push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git-branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git-pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git-log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git-merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git-rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git-reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git-remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git-switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4ebc7360f9ae508312064855054fc795" class="toggle" checked />
+    <label for="section-4ebc7360f9ae508312064855054fc795" class="flex">
+      <a href="/docs/linux/" class="">
+        Linux</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/linux-user-management/" class="">
+      linux-user-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/group-management/" class="">
+      group-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/file-permissions/" class="">
+      file-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/sudo/" class="">
+      sudo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/ssh/" class="">
+      ssh</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/systemd/" class="">
+      systemd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/process-management/" class="">
+      process-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/cron-timers/" class="">
+      cron-timers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/networking-basics/" class="active">
+      networking-basics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/dns/" class="">
+      dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/firewall/" class="">
+      firewall</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/network-troubleshooting/" class="">
+      network-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/filesystem-hierarchy/" class="">
+      filesystem-hierarchy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-management/" class="">
+      disk-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/lvm/" class="">
+      lvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-troubleshooting/" class="">
+      disk-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/log-management/" class="">
+      log-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/selinux-apparmor/" class="">
+      selinux-apparmor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/security-hardening/" class="">
+      security-hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/package-management/" class="">
+      package-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/performance-triage/" class="">
+      performance-triage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/boot-process/" class="">
+      boot-process</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager/" class="">
+      cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager-production/" class="">
+      cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/prometheus-stack/" class="">
+      prometheus-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/victoriametrics/" class="">
+      victoriametrics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-390924aad12540f8027ddb300c8575d3" class="toggle"  />
+    <label for="section-390924aad12540f8027ddb300c8575d3" class="flex">
+      <a href="/docs/aws/" class="">
+        AWS</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7ac94fcac7ebb60d389835a7fcb83889" class="toggle"  />
+    <label for="section-7ac94fcac7ebb60d389835a7fcb83889" class="flex">
+      <a href="/docs/aws/networking/" class="">
+        networking</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/regions-and-availability-zones/" class="">
+      regions-and-availability-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/virtual-private-cloud-vpc/" class="">
+      virtual-private-cloud-vpc</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/aws-subnetting/" class="">
+      aws-subnetting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/internet-gateways-igw/" class="">
+      internet-gateways-igw</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/route-tables/" class="">
+      route-tables</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/private-subnets/" class="">
+      private-subnets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/connecting-to-the-aws-cloud/" class="">
+      connecting-to-the-aws-cloud</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="toggle"  />
+    <label for="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="flex">
+      <a href="/docs/aws/ec2/" class="">
+        ec2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instance-configuration-keys/" class="">
+      ec2-instance-configuration-keys</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instances/" class="">
+      ec2-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/elastic-ips/" class="">
+      elastic-ips</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-security-groups/" class="">
+      aws-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ssh-to-aws-server/" class="">
+      ssh-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/deploy-site-to-aws-server/" class="">
+      deploy-site-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/open-web-traffic/" class="">
+      open-web-traffic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/creating-and-using-your-own-ami/" class="">
+      creating-and-using-your-own-ami</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-launch-template/" class="">
+      aws-launch-template</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/launch-from-template-aws/" class="">
+      launch-from-template-aws</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b73d690c546b071419fd1f673553fed1" class="toggle"  />
+    <label for="section-b73d690c546b071419fd1f673553fed1" class="flex">
+      <a href="/docs/aws/rds/" class="">
+        rds</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/relational-database-service/" class="">
+      relational-database-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-a-postgresql-database-in-aws/" class="">
+      create-a-postgresql-database-in-aws</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-to-your-database/" class="">
+      aws-connect-to-your-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-app-to-database/" class="">
+      aws-connect-app-to-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-backups/" class="">
+      rds-backups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-read-replicas-for-scalability/" class="">
+      create-read-replicas-for-scalability</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-general-knowledge/" class="">
+      rds-general-knowledge</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-df37bf19bddd1b463e10899723e49972" class="toggle"  />
+    <label for="section-df37bf19bddd1b463e10899723e49972" class="flex">
+      <a href="/docs/aws/iam/" class="">
+        iam</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user-and-group/" class="">
+      create-iam-user-and-group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/identity-and-access-management/" class="">
+      identity-and-access-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user/" class="">
+      create-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/inline-policies-iam-user/" class="">
+      inline-policies-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-groups/" class="">
+      iam-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-roles/" class="">
+      iam-roles</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-iam-deny-policies/" class="">
+      aws-iam-deny-policies</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-ssm-parameter-store/" class="">
+      aws-ssm-parameter-store</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/accessing-ssm-parameters-from-ec2/" class="">
+      accessing-ssm-parameters-from-ec2</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/use-ssm-from-ec2/" class="">
+      use-ssm-from-ec2</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aee932daafc4b41b13adc2e2442618ba" class="toggle"  />
+    <label for="section-aee932daafc4b41b13adc2e2442618ba" class="flex">
+      <a href="/docs/aws/monitoring/" class="">
+        monitoring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-external-monitoring/" class="">
+      aws-external-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-internal-monitoring/" class="">
+      aws-internal-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloud-watch-alarms/" class="">
+      cloud-watch-alarms</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloudtrail/" class="">
+      cloudtrail</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f38d96bcff4e2965101ac96ca363fcf" class="toggle"  />
+    <label for="section-2f38d96bcff4e2965101ac96ca363fcf" class="flex">
+      <a href="/docs/aws/s3/" class="">
+        s3</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3/" class="">
+      aws-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-bucket/" class="">
+      aws-s3-bucket</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-objects/" class="">
+      aws-s3-objects</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="toggle"  />
+    <label for="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="flex">
+      <a href="/docs/aws/dns/" class="">
+        dns</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/route-53-hosted-zones/" class="">
+      route-53-hosted-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-a-records/" class="">
+      aws-a-records</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/dns-ttl-and-caching/" class="">
+      dns-ttl-and-caching</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-verifying-dns/" class="">
+      aws-verifying-dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-cname-records/" class="">
+      aws-cname-records</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6db6507c5b69aeaa72e952abc5260963" class="toggle"  />
+    <label for="section-6db6507c5b69aeaa72e952abc5260963" class="flex">
+      <a href="/docs/aws/cdn/" class="">
+        cdn</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-cdn/" class="">
+      cloudfront-cdn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-distributions/" class="">
+      cloudfront-distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-invalidation/" class="">
+      cloudfront-invalidation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/presigned-urls/" class="">
+      presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/why-use-presigned-urls/" class="">
+      why-use-presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-with-dns/" class="">
+      cloudfront-with-dns</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0a1e7816907ed9977365d8170f4ec356" class="toggle"  />
+    <label for="section-0a1e7816907ed9977365d8170f4ec356" class="flex">
+      <a href="/docs/aws/ecs/" class="">
+        ecs</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/vpc-and-networking-setup-for-ecs/" class="">
+      vpc-and-networking-setup-for-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/why-ecs/" class="">
+      why-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/elastic-container-registry/" class="">
+      elastic-container-registry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecr-repo/" class="">
+      ecr-repo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-clusters/" class="">
+      ecs-clusters</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-permissions/" class="">
+      ecs-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-task-definitions/" class="">
+      ecs-task-definitions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-security-groups/" class="">
+      ecs-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/application-load-balancer/" class="">
+      application-load-balancer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-target-groups/" class="">
+      ecs-target-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/cloudwatch-log-groups/" class="">
+      cloudwatch-log-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-services/" class="">
+      ecs-services</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="toggle"  />
+    <label for="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="flex">
+      <a href="/docs/aws/eks/" class="">
+        eks</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-cluster/" class="">
+      eks-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-vs-kubeadm/" class="">
+      eks-vs-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-deploy-app/" class="">
+      eks-deploy-app</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-connect-s3/" class="">
+      eks-connect-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-use-rds/" class="">
+      eks-use-rds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-node-affinity-taints/" class="">
+      eks-node-affinity-taints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-ha-cluster/" class="">
+      eks-ha-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-spot-instances/" class="">
+      eks-spot-instances</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-514dc5328411196c2c4bb685cf444143" class="toggle"  />
+    <label for="section-514dc5328411196c2c4bb685cf444143" class="flex">
+      <a href="/docs/aws/lambda/" class="">
+        lambda</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/aws-lambda/" class="">
+      aws-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/deploy-lambda/" class="">
+      deploy-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/testing-lambda-function/" class="">
+      testing-lambda-function</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/lambda-api-gateway/" class="">
+      lambda-api-gateway</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/cloudwatch-log-groups-and-viewing-lambda-logs/" class="">
+      cloudwatch-log-groups-and-viewing-lambda-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/other-lambda-use-cases/" class="">
+      other-lambda-use-cases</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c8e51cd1f2a827eecce0fcb6812e371" class="toggle"  />
+    <label for="section-8c8e51cd1f2a827eecce0fcb6812e371" class="flex">
+      <a href="/docs/aws/general-knowledge/" class="">
+        general-knowledge</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/reserved-instances-savings-plans/" class="">
+      reserved-instances-savings-plans</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/spot-instances/" class="">
+      spot-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/auto-scaling-groups/" class="">
+      auto-scaling-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-compute-service/" class="">
+      aws-compute-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-storage/" class="">
+      aws-storage</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>networking-basics</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-inspect-network-interfaces">1. Inspect Network Interfaces</a></li>
+    <li><a href="#2-inspect-and-change-the-link-state">2. Inspect and Change the Link State</a></li>
+    <li><a href="#3-inspect-routes">3. Inspect Routes</a></li>
+    <li><a href="#4-inspect-neighbors">4. Inspect Neighbors</a></li>
+    <li><a href="#5-inspect-listening-ports">5. Inspect Listening Ports</a></li>
+    <li><a href="#6-test-connectivity">6. Test Connectivity</a></li>
+    <li><a href="#7-inspect-the-hostname">7. Inspect the Hostname</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-identify-the-netplan-configuration">1. Identify the Netplan Configuration</a></li>
+    <li><a href="#2-write-a-static-address-configuration">2. Write a Static Address Configuration</a></li>
+    <li><a href="#3-validate-and-apply">3. Validate and Apply</a></li>
+    <li><a href="#4-verify-the-result">4. Verify the Result</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-inspect-devices-and-connections">1. Inspect Devices and Connections</a></li>
+    <li><a href="#2-configure-a-static-address">2. Configure a Static Address</a></li>
+    <li><a href="#3-verify-the-result">3. Verify the Result</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#legacy-interface-configuration">Legacy Interface Configuration</a></li>
+    <li><a href="#configuration-file-locations">Configuration File Locations</a></li>
+    <li><a href="#verification-steps">Verification Steps</a></li>
+    <li><a href="#command-reference">Command Reference</a></li>
+    <li><a href="#security-guidelines">Security Guidelines</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p><strong>Scope:</strong> Debian-based and RHEL-based Linux distributions<br>
+<strong>Topics:</strong> Interface inspection, links, routes, neighbors, sockets, hostname configuration, netplan, NetworkManager, and verification.</p>
+<h2 id="1-inspect-network-interfaces">1. Inspect Network Interfaces<a class="anchor" href="#1-inspect-network-interfaces">#</a></h2>
+<p>List all interfaces and addresses:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ip addr show</span></span></code></pre></div><p>Use the compact view:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ip -br addr</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>lo               UNKNOWN        127.0.0.1/8 ::1/128
+</span></span><span style="display:flex;"><span>eth0             UP             192.0.2.10/24 fe80::a00:27ff:fe1a:2b3c/64</span></span></code></pre></div><h2 id="2-inspect-and-change-the-link-state">2. Inspect and Change the Link State<a class="anchor" href="#2-inspect-and-change-the-link-state">#</a></h2>
+<p>Show link state and MAC addresses:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ip link show</span></span></code></pre></div><p>Bring an interface up:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ip link set &lt;INTERFACE&gt; up</span></span></code></pre></div><h2 id="3-inspect-routes">3. Inspect Routes<a class="anchor" href="#3-inspect-routes">#</a></h2>
+<p>Show the routing table:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ip route show</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>default via 192.0.2.1 dev eth0
+</span></span><span style="display:flex;"><span>192.0.2.0/24 dev eth0 proto kernel scope link src 192.0.2.10</span></span></code></pre></div><p>Check which route a destination uses:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ip route get &lt;TARGET_IP&gt;</span></span></code></pre></div><h2 id="4-inspect-neighbors">4. Inspect Neighbors<a class="anchor" href="#4-inspect-neighbors">#</a></h2>
+<p>Show the ARP/NDP neighbor table:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ip neigh show</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>192.0.2.1 dev eth0 lladdr 00:11:22:33:44:55 REACHABLE</span></span></code></pre></div><h2 id="5-inspect-listening-ports">5. Inspect Listening Ports<a class="anchor" href="#5-inspect-listening-ports">#</a></h2>
+<p>List listening TCP and UDP sockets with owning processes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ss -tulpn</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Netid State  Local Address:Port  Process
+</span></span><span style="display:flex;"><span>tcp   LISTEN 0.0.0.0:22          users:((&#34;sshd&#34;,pid=812,fd=3))
+</span></span><span style="display:flex;"><span>tcp   LISTEN 0.0.0.0:80          users:((&#34;nginx&#34;,pid=950,fd=6))</span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li><code>-t</code>: Shows TCP sockets.</li>
+<li><code>-u</code>: Shows UDP sockets.</li>
+<li><code>-l</code>: Shows listening sockets only.</li>
+<li><code>-p</code>: Shows the owning process. Requires root for processes of other users.</li>
+<li><code>-n</code>: Shows numeric port numbers instead of service names.</li>
+</ul>
+<h2 id="6-test-connectivity">6. Test Connectivity<a class="anchor" href="#6-test-connectivity">#</a></h2>
+<p>Test reachability and latency:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ping -c <span style="color:#ae81ff">4</span> &lt;GATEWAY_IP&gt;
+</span></span><span style="display:flex;"><span>ping -c <span style="color:#ae81ff">4</span> &lt;TARGET_IP&gt;</span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li><code>-c 4</code>: Sends four packets and stops.</li>
+</ul>
+<h2 id="7-inspect-the-hostname">7. Inspect the Hostname<a class="anchor" href="#7-inspect-the-hostname">#</a></h2>
+<p>Show the hostname and related settings:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hostnamectl</span></span></code></pre></div><p>Set a static hostname:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo hostnamectl set-hostname &lt;HOSTNAME&gt;</span></span></code></pre></div><p>The static hostname is stored in <code>/etc/hostname</code> and is applied at boot on both distribution families.</p>
+<hr>
+<h1 id="part-1-debian-based-systems">Part 1: Debian-Based Systems<a class="anchor" href="#part-1-debian-based-systems">#</a></h1>
+<p><strong>Examples:</strong> Debian, Ubuntu</p>
+<h2 id="1-identify-the-netplan-configuration">1. Identify the Netplan Configuration<a class="anchor" href="#1-identify-the-netplan-configuration">#</a></h2>
+<p>List existing netplan files:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls /etc/netplan/</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>00-installer-config.yaml</span></span></code></pre></div><p>File names end in <code>.yaml</code> and are applied in lexical order.</p>
+<h2 id="2-write-a-static-address-configuration">2. Write a Static Address Configuration<a class="anchor" href="#2-write-a-static-address-configuration">#</a></h2>
+<p>Edit the file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo vim /etc/netplan/00-installer-config.yaml</span></span></code></pre></div><p>Example configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">network</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">version</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">renderer</span>: <span style="color:#ae81ff">networkd</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ethernets</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;INTERFACE&gt;</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">dhcp4</span>: <span style="color:#66d9ef">no</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">addresses</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#ae81ff">192.0.2.10</span><span style="color:#ae81ff">/24</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">routes</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">to</span>: <span style="color:#ae81ff">default</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">via</span>: <span style="color:#ae81ff">192.0.2.1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">nameservers</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">addresses</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#ae81ff">192.0.2.53</span>
+</span></span><span style="display:flex;"><span>          - <span style="color:#ae81ff">8.8.8.8</span></span></span></code></pre></div><p>For DHCP, set <code>dhcp4: true</code> and drop the <code>addresses</code>, <code>routes</code>, and <code>nameservers</code> keys.</p>
+<h2 id="3-validate-and-apply">3. Validate and Apply<a class="anchor" href="#3-validate-and-apply">#</a></h2>
+<p>Validate the syntax and generate the backend configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo netplan generate</span></span></code></pre></div><p>Apply with automatic rollback:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo netplan try</span></span></code></pre></div><p><code>netplan try</code> applies the configuration and rolls it back after 120 seconds unless it is confirmed. Use it for remote sessions.</p>
+<p>Apply without rollback:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo netplan apply</span></span></code></pre></div><h2 id="4-verify-the-result">4. Verify the Result<a class="anchor" href="#4-verify-the-result">#</a></h2>
+<p>Check the address and the default route:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ip -br addr show &lt;INTERFACE&gt;
+</span></span><span style="display:flex;"><span>ip route show</span></span></code></pre></div><p>Confirm the gateway is reachable:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ping -c <span style="color:#ae81ff">4</span> 192.0.2.1</span></span></code></pre></div><hr>
+<h1 id="part-2-rhel-based-systems">Part 2: RHEL-Based Systems<a class="anchor" href="#part-2-rhel-based-systems">#</a></h1>
+<p><strong>Examples:</strong> RHEL, Rocky Linux, AlmaLinux</p>
+<h2 id="1-inspect-devices-and-connections">1. Inspect Devices and Connections<a class="anchor" href="#1-inspect-devices-and-connections">#</a></h2>
+<p>Show device states:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmcli device status</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>DEVICE  TYPE      STATE      CONNECTION
+</span></span><span style="display:flex;"><span>eth0    ethernet  connected  eth0
+</span></span><span style="display:flex;"><span>lo      loopback  unmanaged  --</span></span></code></pre></div><p>Show connection profiles:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmcli device show &lt;INTERFACE&gt;
+</span></span><span style="display:flex;"><span>nmcli connection show</span></span></code></pre></div><h2 id="2-configure-a-static-address">2. Configure a Static Address<a class="anchor" href="#2-configure-a-static-address">#</a></h2>
+<p>Modify the active connection profile:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nmcli connection modify &lt;CONNECTION&gt; <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  ipv4.method manual <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  ipv4.addresses 192.0.2.10/24 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  ipv4.gateway 192.0.2.1 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  ipv4.dns <span style="color:#e6db74">&#34;192.0.2.53 8.8.8.8&#34;</span></span></span></code></pre></div><p>Activate the changes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nmcli connection up &lt;CONNECTION&gt;</span></span></code></pre></div><p>Switch back to DHCP:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nmcli connection modify &lt;CONNECTION&gt; ipv4.method auto
+</span></span><span style="display:flex;"><span>sudo nmcli connection up &lt;CONNECTION&gt;</span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li><code>ipv4.method manual</code>: Configures a static address. Use <code>auto</code> for DHCP.</li>
+<li><code>ipv4.addresses</code>: Sets the address and prefix length.</li>
+<li><code>ipv4.gateway</code>: Sets the default gateway.</li>
+<li><code>ipv4.dns</code>: Sets the DNS servers for this connection.</li>
+</ul>
+<h2 id="3-verify-the-result">3. Verify the Result<a class="anchor" href="#3-verify-the-result">#</a></h2>
+<p>Check the applied configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ip -br addr show &lt;INTERFACE&gt;
+</span></span><span style="display:flex;"><span>ip route show
+</span></span><span style="display:flex;"><span>nmcli device show &lt;INTERFACE&gt;</span></span></code></pre></div><p>Confirm that <code>IP4.ADDRESS</code> and <code>IP4.GATEWAY</code> contain the expected values.</p>
+<hr>
+<h1 id="part-3-important-notes">Part 3: Important Notes<a class="anchor" href="#part-3-important-notes">#</a></h1>
+<h2 id="legacy-interface-configuration">Legacy Interface Configuration<a class="anchor" href="#legacy-interface-configuration">#</a></h2>
+<p>On older Debian systems, interfaces are configured in <code>/etc/network/interfaces</code> with the <code>ifupdown</code> tools. Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>auto eth0
+</span></span><span style="display:flex;"><span>iface eth0 inet static
+</span></span><span style="display:flex;"><span>    address 192.0.2.10/24
+</span></span><span style="display:flex;"><span>    gateway 192.0.2.1</span></span></code></pre></div><p>Apply with <code>ifup eth0</code> or <code>systemctl restart networking</code>. On current releases, netplan is the supported configuration path. Do not mix <code>ifupdown</code> and netplan configuration for the same interface.</p>
+<p>On RHEL 7 and earlier, interface files were stored in <code>/etc/sysconfig/network-scripts/</code>. RHEL 9 manages these profiles through NetworkManager. Prefer <code>nmcli</code> over editing keyfiles directly.</p>
+<h2 id="configuration-file-locations">Configuration File Locations<a class="anchor" href="#configuration-file-locations">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>Item</th>
+					<th>Debian-based</th>
+					<th>RHEL-based</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Interface configuration</td>
+					<td><code>/etc/netplan/*.yaml</code></td>
+					<td>NetworkManager connection profiles</td>
+			</tr>
+			<tr>
+					<td>Connection profiles</td>
+					<td>Not used</td>
+					<td><code>/etc/NetworkManager/system-connections/</code></td>
+			</tr>
+			<tr>
+					<td>Legacy interface files</td>
+					<td><code>/etc/network/interfaces</code></td>
+					<td><code>/etc/sysconfig/network-scripts/</code></td>
+			</tr>
+			<tr>
+					<td>Static hostname</td>
+					<td><code>/etc/hostname</code></td>
+					<td><code>/etc/hostname</code></td>
+			</tr>
+			<tr>
+					<td>Local name mappings</td>
+					<td><code>/etc/hosts</code></td>
+					<td><code>/etc/hosts</code></td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="verification-steps">Verification Steps<a class="anchor" href="#verification-steps">#</a></h2>
+<p>Run these checks after every configuration change:</p>
+<ol>
+<li>Confirm the interface is up: <code>ip link show &lt;INTERFACE&gt;</code>.</li>
+<li>Confirm the expected address: <code>ip -br addr show &lt;INTERFACE&gt;</code>.</li>
+<li>Confirm the default route: <code>ip route show</code>.</li>
+<li>Confirm the gateway is reachable: <code>ping -c 4 &lt;GATEWAY_IP&gt;</code>.</li>
+<li>Confirm external connectivity: <code>ping -c 4 8.8.8.8</code>.</li>
+<li>Confirm that name resolution works.</li>
+</ol>
+<h2 id="command-reference">Command Reference<a class="anchor" href="#command-reference">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>Operation</th>
+					<th>Debian-based</th>
+					<th>RHEL-based</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Show addresses</td>
+					<td><code>ip addr show</code></td>
+					<td><code>ip addr show</code></td>
+			</tr>
+			<tr>
+					<td>Show routes</td>
+					<td><code>ip route show</code></td>
+					<td><code>ip route show</code></td>
+			</tr>
+			<tr>
+					<td>Show listening ports</td>
+					<td><code>ss -tulpn</code></td>
+					<td><code>ss -tulpn</code></td>
+			</tr>
+			<tr>
+					<td>Edit configuration</td>
+					<td>Text files in <code>/etc/netplan/</code></td>
+					<td><code>nmcli connection modify</code></td>
+			</tr>
+			<tr>
+					<td>Apply configuration</td>
+					<td><code>netplan apply</code></td>
+					<td><code>nmcli connection up &lt;CONNECTION&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Test before applying</td>
+					<td><code>netplan try</code></td>
+					<td>Not available</td>
+			</tr>
+			<tr>
+					<td>Set hostname</td>
+					<td><code>hostnamectl set-hostname &lt;HOSTNAME&gt;</code></td>
+					<td><code>hostnamectl set-hostname &lt;HOSTNAME&gt;</code></td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="security-guidelines">Security Guidelines<a class="anchor" href="#security-guidelines">#</a></h2>
+<ul>
+<li>Do not edit and apply network configuration blindly over SSH. Keep console access or use <code>netplan try</code> before <code>netplan apply</code>.</li>
+<li>Replace placeholders such as <code>&lt;INTERFACE&gt;</code>, <code>&lt;CONNECTION&gt;</code>, and <code>&lt;HOSTNAME&gt;</code> with actual values. Do not include the angle brackets in commands.</li>
+<li>Make one change at a time and verify connectivity after each change.</li>
+<li>Persist configuration through netplan or NetworkManager. Do not leave long-lived addresses configured only with <code>ip addr add</code>.</li>
+<li>Document static addresses centrally and avoid conflicts with active DHCP ranges.</li>
+<li>Restrict management access to dedicated networks where possible. Do not expose management ports on public interfaces.</li>
+<li>Keep an out-of-band or console path available before changing network settings on a remote host.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/linux/cron-timers/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>cron-timers</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/linux/dns/" class="flex align-center">
+        <span>dns</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-inspect-network-interfaces">1. Inspect Network Interfaces</a></li>
+    <li><a href="#2-inspect-and-change-the-link-state">2. Inspect and Change the Link State</a></li>
+    <li><a href="#3-inspect-routes">3. Inspect Routes</a></li>
+    <li><a href="#4-inspect-neighbors">4. Inspect Neighbors</a></li>
+    <li><a href="#5-inspect-listening-ports">5. Inspect Listening Ports</a></li>
+    <li><a href="#6-test-connectivity">6. Test Connectivity</a></li>
+    <li><a href="#7-inspect-the-hostname">7. Inspect the Hostname</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-identify-the-netplan-configuration">1. Identify the Netplan Configuration</a></li>
+    <li><a href="#2-write-a-static-address-configuration">2. Write a Static Address Configuration</a></li>
+    <li><a href="#3-validate-and-apply">3. Validate and Apply</a></li>
+    <li><a href="#4-verify-the-result">4. Verify the Result</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-inspect-devices-and-connections">1. Inspect Devices and Connections</a></li>
+    <li><a href="#2-configure-a-static-address">2. Configure a Static Address</a></li>
+    <li><a href="#3-verify-the-result">3. Verify the Result</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#legacy-interface-configuration">Legacy Interface Configuration</a></li>
+    <li><a href="#configuration-file-locations">Configuration File Locations</a></li>
+    <li><a href="#verification-steps">Verification Steps</a></li>
+    <li><a href="#command-reference">Command Reference</a></li>
+    <li><a href="#security-guidelines">Security Guidelines</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

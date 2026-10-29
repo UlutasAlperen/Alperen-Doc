@@ -1,0 +1,3661 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Scope: Distro-independent; applies to ext4, XFS, and other standard Linux filesystems
+Topics: ls -l output, ugo and rwx, chmod notation, ownership with chown and chgrp, umask, SUID, SGID, sticky bit, ACLs, and verification.
+Main Flow# 1. Read the Permission String# List the file details:
+ls -l &lt;FILE&gt;Expected output:
+-rwxr-xr-- 1 alice devops 2048 Mar 5 10:00 report.shBreak down the output:
+-rwxr-xr--: Permission string. 1: Hard link count. alice: Owner (user). devops: Owning group. 2048: Size in bytes. Mar 5 10:00: Last modification time. report.sh: File name. Read the permission string as follows:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/linux/file-permissions/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="file-permissions">
+	<meta property="og:description" content="Scope: Distro-independent; applies to ext4, XFS, and other standard Linux filesystems
+Topics: ls -l output, ugo and rwx, chmod notation, ownership with chown and chgrp, umask, SUID, SGID, sticky bit, ACLs, and verification.
+Main Flow# 1. Read the Permission String# List the file details:
+ls -l &lt;FILE&gt;Expected output:
+-rwxr-xr-- 1 alice devops 2048 Mar 5 10:00 report.shBreak down the output:
+-rwxr-xr--: Permission string. 1: Hard link count. alice: Owner (user). devops: Owning group. 2048: Size in bytes. Mar 5 10:00: Last modification time. report.sh: File name. Read the permission string as follows:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="file-permissions">
+	<meta itemprop="description" content="Scope: Distro-independent; applies to ext4, XFS, and other standard Linux filesystems
+Topics: ls -l output, ugo and rwx, chmod notation, ownership with chown and chgrp, umask, SUID, SGID, sticky bit, ACLs, and verification.
+Main Flow# 1. Read the Permission String# List the file details:
+ls -l &lt;FILE&gt;Expected output:
+-rwxr-xr-- 1 alice devops 2048 Mar 5 10:00 report.shBreak down the output:
+-rwxr-xr--: Permission string. 1: Hard link count. alice: Owner (user). devops: Owning group. 2048: Size in bytes. Mar 5 10:00: Last modification time. report.sh: File name. Read the permission string as follows:">
+	<meta itemprop="wordCount" content="1271">
+
+<title>file-permissions • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/linux/file-permissions/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.2717c173d31e1424177e095b6301c63f2558df43c4923cf34d083e2f8cfcbc76.js" integrity="sha256-JxfBc9MeFCQXfglbYwHGPyVY30PEkjzzTQg&#43;L4z8vHY=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic-git-conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic-git-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github-workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous-integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous-deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git-status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git-add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git-commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git-push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git-branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git-pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git-log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git-merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git-rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git-reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git-remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git-switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4ebc7360f9ae508312064855054fc795" class="toggle" checked />
+    <label for="section-4ebc7360f9ae508312064855054fc795" class="flex">
+      <a href="/docs/linux/" class="">
+        Linux</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/linux-user-management/" class="">
+      linux-user-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/group-management/" class="">
+      group-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/file-permissions/" class="active">
+      file-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/sudo/" class="">
+      sudo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/ssh/" class="">
+      ssh</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/systemd/" class="">
+      systemd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/process-management/" class="">
+      process-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/cron-timers/" class="">
+      cron-timers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/networking-basics/" class="">
+      networking-basics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/dns/" class="">
+      dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/firewall/" class="">
+      firewall</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/network-troubleshooting/" class="">
+      network-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/filesystem-hierarchy/" class="">
+      filesystem-hierarchy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-management/" class="">
+      disk-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/lvm/" class="">
+      lvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-troubleshooting/" class="">
+      disk-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/log-management/" class="">
+      log-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/selinux-apparmor/" class="">
+      selinux-apparmor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/security-hardening/" class="">
+      security-hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/package-management/" class="">
+      package-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/performance-triage/" class="">
+      performance-triage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/boot-process/" class="">
+      boot-process</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager/" class="">
+      cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager-production/" class="">
+      cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/prometheus-stack/" class="">
+      prometheus-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/victoriametrics/" class="">
+      victoriametrics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-390924aad12540f8027ddb300c8575d3" class="toggle"  />
+    <label for="section-390924aad12540f8027ddb300c8575d3" class="flex">
+      <a href="/docs/aws/" class="">
+        AWS</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7ac94fcac7ebb60d389835a7fcb83889" class="toggle"  />
+    <label for="section-7ac94fcac7ebb60d389835a7fcb83889" class="flex">
+      <a href="/docs/aws/networking/" class="">
+        networking</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/regions-and-availability-zones/" class="">
+      regions-and-availability-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/virtual-private-cloud-vpc/" class="">
+      virtual-private-cloud-vpc</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/aws-subnetting/" class="">
+      aws-subnetting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/internet-gateways-igw/" class="">
+      internet-gateways-igw</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/route-tables/" class="">
+      route-tables</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/private-subnets/" class="">
+      private-subnets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/connecting-to-the-aws-cloud/" class="">
+      connecting-to-the-aws-cloud</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="toggle"  />
+    <label for="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="flex">
+      <a href="/docs/aws/ec2/" class="">
+        ec2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instance-configuration-keys/" class="">
+      ec2-instance-configuration-keys</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instances/" class="">
+      ec2-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/elastic-ips/" class="">
+      elastic-ips</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-security-groups/" class="">
+      aws-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ssh-to-aws-server/" class="">
+      ssh-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/deploy-site-to-aws-server/" class="">
+      deploy-site-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/open-web-traffic/" class="">
+      open-web-traffic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/creating-and-using-your-own-ami/" class="">
+      creating-and-using-your-own-ami</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-launch-template/" class="">
+      aws-launch-template</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/launch-from-template-aws/" class="">
+      launch-from-template-aws</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b73d690c546b071419fd1f673553fed1" class="toggle"  />
+    <label for="section-b73d690c546b071419fd1f673553fed1" class="flex">
+      <a href="/docs/aws/rds/" class="">
+        rds</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/relational-database-service/" class="">
+      relational-database-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-a-postgresql-database-in-aws/" class="">
+      create-a-postgresql-database-in-aws</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-to-your-database/" class="">
+      aws-connect-to-your-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-app-to-database/" class="">
+      aws-connect-app-to-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-backups/" class="">
+      rds-backups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-read-replicas-for-scalability/" class="">
+      create-read-replicas-for-scalability</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-general-knowledge/" class="">
+      rds-general-knowledge</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-df37bf19bddd1b463e10899723e49972" class="toggle"  />
+    <label for="section-df37bf19bddd1b463e10899723e49972" class="flex">
+      <a href="/docs/aws/iam/" class="">
+        iam</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user-and-group/" class="">
+      create-iam-user-and-group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/identity-and-access-management/" class="">
+      identity-and-access-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user/" class="">
+      create-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/inline-policies-iam-user/" class="">
+      inline-policies-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-groups/" class="">
+      iam-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-roles/" class="">
+      iam-roles</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-iam-deny-policies/" class="">
+      aws-iam-deny-policies</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-ssm-parameter-store/" class="">
+      aws-ssm-parameter-store</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/accessing-ssm-parameters-from-ec2/" class="">
+      accessing-ssm-parameters-from-ec2</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/use-ssm-from-ec2/" class="">
+      use-ssm-from-ec2</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aee932daafc4b41b13adc2e2442618ba" class="toggle"  />
+    <label for="section-aee932daafc4b41b13adc2e2442618ba" class="flex">
+      <a href="/docs/aws/monitoring/" class="">
+        monitoring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-external-monitoring/" class="">
+      aws-external-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-internal-monitoring/" class="">
+      aws-internal-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloud-watch-alarms/" class="">
+      cloud-watch-alarms</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloudtrail/" class="">
+      cloudtrail</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f38d96bcff4e2965101ac96ca363fcf" class="toggle"  />
+    <label for="section-2f38d96bcff4e2965101ac96ca363fcf" class="flex">
+      <a href="/docs/aws/s3/" class="">
+        s3</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3/" class="">
+      aws-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-bucket/" class="">
+      aws-s3-bucket</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-objects/" class="">
+      aws-s3-objects</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="toggle"  />
+    <label for="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="flex">
+      <a href="/docs/aws/dns/" class="">
+        dns</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/route-53-hosted-zones/" class="">
+      route-53-hosted-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-a-records/" class="">
+      aws-a-records</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/dns-ttl-and-caching/" class="">
+      dns-ttl-and-caching</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-verifying-dns/" class="">
+      aws-verifying-dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-cname-records/" class="">
+      aws-cname-records</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6db6507c5b69aeaa72e952abc5260963" class="toggle"  />
+    <label for="section-6db6507c5b69aeaa72e952abc5260963" class="flex">
+      <a href="/docs/aws/cdn/" class="">
+        cdn</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-cdn/" class="">
+      cloudfront-cdn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-distributions/" class="">
+      cloudfront-distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-invalidation/" class="">
+      cloudfront-invalidation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/presigned-urls/" class="">
+      presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/why-use-presigned-urls/" class="">
+      why-use-presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-with-dns/" class="">
+      cloudfront-with-dns</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0a1e7816907ed9977365d8170f4ec356" class="toggle"  />
+    <label for="section-0a1e7816907ed9977365d8170f4ec356" class="flex">
+      <a href="/docs/aws/ecs/" class="">
+        ecs</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/vpc-and-networking-setup-for-ecs/" class="">
+      vpc-and-networking-setup-for-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/why-ecs/" class="">
+      why-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/elastic-container-registry/" class="">
+      elastic-container-registry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecr-repo/" class="">
+      ecr-repo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-clusters/" class="">
+      ecs-clusters</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-permissions/" class="">
+      ecs-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-task-definitions/" class="">
+      ecs-task-definitions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-security-groups/" class="">
+      ecs-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/application-load-balancer/" class="">
+      application-load-balancer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-target-groups/" class="">
+      ecs-target-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/cloudwatch-log-groups/" class="">
+      cloudwatch-log-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-services/" class="">
+      ecs-services</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="toggle"  />
+    <label for="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="flex">
+      <a href="/docs/aws/eks/" class="">
+        eks</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-cluster/" class="">
+      eks-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-vs-kubeadm/" class="">
+      eks-vs-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-deploy-app/" class="">
+      eks-deploy-app</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-connect-s3/" class="">
+      eks-connect-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-use-rds/" class="">
+      eks-use-rds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-node-affinity-taints/" class="">
+      eks-node-affinity-taints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-ha-cluster/" class="">
+      eks-ha-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-spot-instances/" class="">
+      eks-spot-instances</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-514dc5328411196c2c4bb685cf444143" class="toggle"  />
+    <label for="section-514dc5328411196c2c4bb685cf444143" class="flex">
+      <a href="/docs/aws/lambda/" class="">
+        lambda</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/aws-lambda/" class="">
+      aws-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/deploy-lambda/" class="">
+      deploy-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/testing-lambda-function/" class="">
+      testing-lambda-function</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/lambda-api-gateway/" class="">
+      lambda-api-gateway</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/cloudwatch-log-groups-and-viewing-lambda-logs/" class="">
+      cloudwatch-log-groups-and-viewing-lambda-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/other-lambda-use-cases/" class="">
+      other-lambda-use-cases</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c8e51cd1f2a827eecce0fcb6812e371" class="toggle"  />
+    <label for="section-8c8e51cd1f2a827eecce0fcb6812e371" class="flex">
+      <a href="/docs/aws/general-knowledge/" class="">
+        general-knowledge</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/reserved-instances-savings-plans/" class="">
+      reserved-instances-savings-plans</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/spot-instances/" class="">
+      spot-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/auto-scaling-groups/" class="">
+      auto-scaling-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-compute-service/" class="">
+      aws-compute-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-storage/" class="">
+      aws-storage</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>file-permissions</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-read-the-permission-string">1. Read the Permission String</a></li>
+    <li><a href="#2-understand-ugo-and-rwx">2. Understand ugo and rwx</a></li>
+    <li><a href="#3-change-permissions-with-symbolic-notation">3. Change Permissions with Symbolic Notation</a></li>
+    <li><a href="#4-change-permissions-with-octal-notation">4. Change Permissions with Octal Notation</a></li>
+    <li><a href="#5-change-ownership">5. Change Ownership</a></li>
+    <li><a href="#6-set-the-default-umask">6. Set the Default umask</a></li>
+    <li><a href="#7-apply-special-bits">7. Apply Special Bits</a></li>
+    <li><a href="#8-configure-acls">8. Configure ACLs</a></li>
+    <li><a href="#9-verify-the-result">9. Verify the Result</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#permission-evaluation-order">Permission Evaluation Order</a></li>
+    <li><a href="#symbolic-vs-octal-notation">Symbolic vs. Octal Notation</a></li>
+    <li><a href="#command-reference">Command Reference</a></li>
+    <li><a href="#security-guidelines">Security Guidelines</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p><strong>Scope:</strong> Distro-independent; applies to ext4, XFS, and other standard Linux filesystems<br>
+<strong>Topics:</strong> ls -l output, ugo and rwx, chmod notation, ownership with chown and chgrp, umask, SUID, SGID, sticky bit, ACLs, and verification.</p>
+<h1 id="main-flow">Main Flow<a class="anchor" href="#main-flow">#</a></h1>
+<h2 id="1-read-the-permission-string">1. Read the Permission String<a class="anchor" href="#1-read-the-permission-string">#</a></h2>
+<p>List the file details:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls -l &lt;FILE&gt;</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>-rwxr-xr-- 1 alice devops 2048 Mar  5 10:00 report.sh</span></span></code></pre></div><p>Break down the output:</p>
+<ul>
+<li><code>-rwxr-xr--</code>: Permission string.</li>
+<li><code>1</code>: Hard link count.</li>
+<li><code>alice</code>: Owner (user).</li>
+<li><code>devops</code>: Owning group.</li>
+<li><code>2048</code>: Size in bytes.</li>
+<li><code>Mar  5 10:00</code>: Last modification time.</li>
+<li><code>report.sh</code>: File name.</li>
+</ul>
+<p>Read the permission string as follows:</p>
+<ul>
+<li>Character 1: File type. <code>-</code> is a regular file, <code>d</code> is a directory, <code>l</code> is a symbolic link.</li>
+<li>Characters 2-4: Owner permissions, <code>rwx</code>.</li>
+<li>Characters 5-7: Group permissions, <code>rwx</code>.</li>
+<li>Characters 8-10: Other permissions, <code>rwx</code>.</li>
+</ul>
+<h2 id="2-understand-ugo-and-rwx">2. Understand ugo and rwx<a class="anchor" href="#2-understand-ugo-and-rwx">#</a></h2>
+<p>Three classes of users and three permissions combine into nine permission bits:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Class</th>
+					<th>Letter</th>
+					<th>Meaning</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Owner</td>
+					<td><code>u</code></td>
+					<td>The file&rsquo;s owning user</td>
+			</tr>
+			<tr>
+					<td>Group</td>
+					<td><code>g</code></td>
+					<td>The file&rsquo;s owning group</td>
+			</tr>
+			<tr>
+					<td>Other</td>
+					<td><code>o</code></td>
+					<td>Everyone else</td>
+			</tr>
+			<tr>
+					<td>All</td>
+					<td><code>a</code></td>
+					<td>Owner, group, and other combined</td>
+			</tr>
+	</tbody>
+</table>
+<table>
+	<thead>
+			<tr>
+					<th>Permission</th>
+					<th>Letter</th>
+					<th>Octal</th>
+					<th>On a file</th>
+					<th>On a directory</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Read</td>
+					<td><code>r</code></td>
+					<td>4</td>
+					<td>Read file contents</td>
+					<td>List entries with <code>ls</code></td>
+			</tr>
+			<tr>
+					<td>Write</td>
+					<td><code>w</code></td>
+					<td>2</td>
+					<td>Modify file contents</td>
+					<td>Create, rename, or delete entries</td>
+			</tr>
+			<tr>
+					<td>Execute</td>
+					<td><code>x</code></td>
+					<td>1</td>
+					<td>Run the file as a program</td>
+					<td>Enter the directory with <code>cd</code>, access entries by name</td>
+			</tr>
+	</tbody>
+</table>
+<p>Directory write access without execute is meaningless, and execute without read allows access to known names but no listing.</p>
+<h2 id="3-change-permissions-with-symbolic-notation">3. Change Permissions with Symbolic Notation<a class="anchor" href="#3-change-permissions-with-symbolic-notation">#</a></h2>
+<p>Add execute permission for the owner:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod u+x &lt;FILE&gt;</span></span></code></pre></div><p>Remove write permission for group and other:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod go-w &lt;FILE&gt;</span></span></code></pre></div><p>Set exact permissions for all classes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod u<span style="color:#f92672">=</span>rwx,g<span style="color:#f92672">=</span>rx,o<span style="color:#f92672">=</span>r &lt;FILE&gt;</span></span></code></pre></div><p>Apply recursively to a directory tree:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod -R g+rw &lt;DIRECTORY&gt;</span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li><code>u</code>, <code>g</code>, <code>o</code>, <code>a</code>: Select owner, group, other, or all classes.</li>
+<li><code>+</code>, <code>-</code>, <code>=</code>: Add, remove, or set permissions exactly.</li>
+<li><code>r</code>, <code>w</code>, <code>x</code>: Select the read, write, and execute permissions.</li>
+<li><code>-R</code>: Applies the change recursively. Use with care.</li>
+</ul>
+<h2 id="4-change-permissions-with-octal-notation">4. Change Permissions with Octal Notation<a class="anchor" href="#4-change-permissions-with-octal-notation">#</a></h2>
+<p>Each class receives one octal digit that sums read (4), write (2), and execute (1):</p>
+<table>
+	<thead>
+			<tr>
+					<th>Octal</th>
+					<th>Bits</th>
+					<th>Permissions</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>0</td>
+					<td>000</td>
+					<td><code>---</code></td>
+			</tr>
+			<tr>
+					<td>1</td>
+					<td>001</td>
+					<td><code>--x</code></td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td>010</td>
+					<td><code>-w-</code></td>
+			</tr>
+			<tr>
+					<td>3</td>
+					<td>011</td>
+					<td><code>-wx</code></td>
+			</tr>
+			<tr>
+					<td>4</td>
+					<td>100</td>
+					<td><code>r--</code></td>
+			</tr>
+			<tr>
+					<td>5</td>
+					<td>101</td>
+					<td><code>r-x</code></td>
+			</tr>
+			<tr>
+					<td>6</td>
+					<td>110</td>
+					<td><code>rw-</code></td>
+			</tr>
+			<tr>
+					<td>7</td>
+					<td>111</td>
+					<td><code>rwx</code></td>
+			</tr>
+	</tbody>
+</table>
+<p>Read the three digits as owner, group, other:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod <span style="color:#ae81ff">750</span> &lt;FILE&gt;</span></span></code></pre></div><p>Expected result: <code>rwxr-x---</code> for owner <code>alice</code>, group <code>devops</code>.</p>
+<p>Common combinations:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Octal</th>
+					<th>Permissions</th>
+					<th>Typical use</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>600</td>
+					<td><code>rw-------</code></td>
+					<td>Private files such as SSH keys</td>
+			</tr>
+			<tr>
+					<td>644</td>
+					<td><code>rw-r--r--</code></td>
+					<td>Readable configuration files</td>
+			</tr>
+			<tr>
+					<td>700</td>
+					<td><code>rwx------</code></td>
+					<td>Private scripts and <code>~/.ssh</code></td>
+			</tr>
+			<tr>
+					<td>750</td>
+					<td><code>rwxr-x---</code></td>
+					<td>Group-shared scripts</td>
+			</tr>
+			<tr>
+					<td>755</td>
+					<td><code>rwxr-xr-x</code></td>
+					<td>Public executables</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="5-change-ownership">5. Change Ownership<a class="anchor" href="#5-change-ownership">#</a></h2>
+<p>Change the owner and group of a file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chown &lt;USERNAME&gt;:&lt;GROUP_NAME&gt; &lt;FILE&gt;</span></span></code></pre></div><p>Change only the group:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chgrp &lt;GROUP_NAME&gt; &lt;FILE&gt;</span></span></code></pre></div><p>Apply recursively to a directory tree:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chown -R &lt;USERNAME&gt;:&lt;GROUP_NAME&gt; &lt;DIRECTORY&gt;</span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li><code>&lt;USERNAME&gt;</code>: New owning user.</li>
+<li><code>&lt;GROUP_NAME&gt;</code>: New owning group.</li>
+<li><code>-R</code>: Applies the change recursively.</li>
+</ul>
+<p>Only root can change the owning user. A group owner can change the group to any of their own groups.</p>
+<h2 id="6-set-the-default-umask">6. Set the Default umask<a class="anchor" href="#6-set-the-default-umask">#</a></h2>
+<p>The umask subtracts permissions from the defaults of <code>666</code> for files and <code>777</code> for directories. Display the current value:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>umask</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>0022</span></span></code></pre></div><p>With <code>umask 022</code>, new files are created as <code>644</code> and new directories as <code>755</code>. With <code>umask 077</code>, new files are created as <code>600</code> and new directories as <code>700</code>.</p>
+<p>Set the umask for the current session:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>umask <span style="color:#ae81ff">077</span></span></span></code></pre></div><p>Make it persistent for a user in <code>~/.bashrc</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>umask 077</span></span></code></pre></div><p>Set the system default for new logins in <code>/etc/login.defs</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#a6e22e">UMASK 022</span></span></span></code></pre></div><h2 id="7-apply-special-bits">7. Apply Special Bits<a class="anchor" href="#7-apply-special-bits">#</a></h2>
+<p>The three special bits occupy the first octal digit or replace the execute letter in the permission string.</p>
+<table>
+	<thead>
+			<tr>
+					<th>Special bit</th>
+					<th>Octal</th>
+					<th>Symbol</th>
+					<th>Effect</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>SUID</td>
+					<td>4000</td>
+					<td><code>s</code> in the owner execute position</td>
+					<td>The file runs with the effective UID of the file owner</td>
+			</tr>
+			<tr>
+					<td>SGID</td>
+					<td>2000</td>
+					<td><code>s</code> in the group execute position</td>
+					<td>The file runs with the file group; on a directory, new entries inherit the directory group</td>
+			</tr>
+			<tr>
+					<td>Sticky bit</td>
+					<td>1000</td>
+					<td><code>t</code> in the other execute position</td>
+					<td>Only the file owner, directory owner, or root can delete entries</td>
+			</tr>
+	</tbody>
+</table>
+<p>Set SUID on a script owner:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod u+s &lt;FILE&gt;
+</span></span><span style="display:flex;"><span>chmod <span style="color:#ae81ff">4755</span> &lt;FILE&gt;</span></span></code></pre></div><p>Set SGID on a shared project directory so new files keep the group:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod g+s &lt;DIRECTORY&gt;
+</span></span><span style="display:flex;"><span>chmod <span style="color:#ae81ff">2775</span> &lt;DIRECTORY&gt;</span></span></code></pre></div><p>Set the sticky bit on <code>/tmp</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod <span style="color:#ae81ff">1777</span> /tmp</span></span></code></pre></div><p>Expected result: <code>drwxrwxrwt</code>. Every user can create files in <code>/tmp</code>, but users can only delete their own files. This is the standard protection for world-writable directories.</p>
+<p>SUID on scripts is ignored by most kernels for security reasons. Restrict SUID to vetted compiled binaries such as <code>/usr/bin/passwd</code>.</p>
+<h2 id="8-configure-acls">8. Configure ACLs<a class="anchor" href="#8-configure-acls">#</a></h2>
+<p>Access control lists grant permissions to specific users or groups beyond the <code>ugo</code> model. Check the ACL tools first:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>getfacl &lt;FILE&gt;
+</span></span><span style="display:flex;"><span>setfacl --version</span></span></code></pre></div><p>Grant read access to a single user:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>setfacl -m u:&lt;USERNAME&gt;:r &lt;FILE&gt;</span></span></code></pre></div><p>Grant read and execute access to a group on a directory:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>setfacl -m g:&lt;GROUP_NAME&gt;:rx &lt;DIRECTORY&gt;</span></span></code></pre></div><p>Set a default ACL so new entries inherit it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>setfacl -d -m g:&lt;GROUP_NAME&gt;:rx &lt;DIRECTORY&gt;</span></span></code></pre></div><p>Remove an ACL entry:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>setfacl -x u:&lt;USERNAME&gt; &lt;FILE&gt;</span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li><code>-m</code>: Modifies the ACL.</li>
+<li><code>-x</code>: Removes an ACL entry.</li>
+<li><code>-d</code>: Applies the rule as a default ACL on a directory.</li>
+<li><code>-R</code>: Applies the rule recursively.</li>
+</ul>
+<p>Files with ACLs show a <code>+</code> at the end of the permission string in <code>ls -l</code>. Use <code>getfacl</code> to read the full effective permissions.</p>
+<h2 id="9-verify-the-result">9. Verify the Result<a class="anchor" href="#9-verify-the-result">#</a></h2>
+<p>Inspect the effective permissions:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls -l &lt;FILE&gt;
+</span></span><span style="display:flex;"><span>getfacl &lt;FILE&gt;
+</span></span><span style="display:flex;"><span>stat -c <span style="color:#e6db74">&#39;%A %U:%G %n&#39;</span> &lt;FILE&gt;</span></span></code></pre></div><p>Expected output for <code>stat</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>-rwxr-x--- alice devops report.sh</span></span></code></pre></div><p>Check directory traversal on the full path:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>namei -l &lt;PATH&gt;</span></span></code></pre></div><p>Every directory component on the path requires execute permission for the accessing account, otherwise the final file permissions do not matter.</p>
+<hr>
+<h1 id="part-3-important-notes">Part 3: Important Notes<a class="anchor" href="#part-3-important-notes">#</a></h1>
+<h2 id="permission-evaluation-order">Permission Evaluation Order<a class="anchor" href="#permission-evaluation-order">#</a></h2>
+<ul>
+<li>ACLs are checked first. If a matching user or group ACL entry exists, it determines the outcome.</li>
+<li>Otherwise, the <code>ugo</code> bits apply: owner, then group, then other.</li>
+<li>The most specific match wins, so an owner ACL entry overrides the group mask.</li>
+</ul>
+<h2 id="symbolic-vs-octal-notation">Symbolic vs. Octal Notation<a class="anchor" href="#symbolic-vs-octal-notation">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>Property</th>
+					<th>Symbolic</th>
+					<th>Octal</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Syntax</td>
+					<td><code>chmod u+x &lt;FILE&gt;</code></td>
+					<td><code>chmod 750 &lt;FILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Change type</td>
+					<td>Relative or selective</td>
+					<td>Absolute for all classes at once</td>
+			</tr>
+			<tr>
+					<td>Readability</td>
+					<td>States the intent</td>
+					<td>States the final state</td>
+			</tr>
+			<tr>
+					<td>Risk</td>
+					<td>Low</td>
+					<td>Overwrites all nine bits at once</td>
+			</tr>
+	</tbody>
+</table>
+<p>Prefer symbolic notation for single-bit changes and octal notation when setting a complete, well-understood permission set.</p>
+<h2 id="command-reference">Command Reference<a class="anchor" href="#command-reference">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>Operation</th>
+					<th>Command</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>List permissions</td>
+					<td><code>ls -l &lt;FILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Add permission</td>
+					<td><code>chmod u+x &lt;FILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Remove permission</td>
+					<td><code>chmod go-w &lt;FILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Set absolute permissions</td>
+					<td><code>chmod 750 &lt;FILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Change owner and group</td>
+					<td><code>chown &lt;USERNAME&gt;:&lt;GROUP_NAME&gt; &lt;FILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Change group only</td>
+					<td><code>chgrp &lt;GROUP_NAME&gt; &lt;FILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Set SUID</td>
+					<td><code>chmod 4755 &lt;FILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Set SGID</td>
+					<td><code>chmod 2775 &lt;DIRECTORY&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Set sticky bit</td>
+					<td><code>chmod 1777 /tmp</code></td>
+			</tr>
+			<tr>
+					<td>Show umask</td>
+					<td><code>umask</code></td>
+			</tr>
+			<tr>
+					<td>Read ACL</td>
+					<td><code>getfacl &lt;FILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Grant ACL entry</td>
+					<td><code>setfacl -m u:&lt;USERNAME&gt;:r &lt;FILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Remove ACL entry</td>
+					<td><code>setfacl -x u:&lt;USERNAME&gt; &lt;FILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Show exact metadata</td>
+					<td><code>stat -c '%A %U:%G %n' &lt;FILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Check path traversal</td>
+					<td><code>namei -l &lt;PATH&gt;</code></td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="security-guidelines">Security Guidelines<a class="anchor" href="#security-guidelines">#</a></h2>
+<ul>
+<li>Replace placeholders such as <code>&lt;FILE&gt;</code>, <code>&lt;USERNAME&gt;</code>, and <code>&lt;GROUP_NAME&gt;</code> with actual values. Do not include the angle brackets in commands.</li>
+<li>Set a restrictive umask such as <code>077</code> on accounts that handle credentials or private keys.</li>
+<li>Never use <code>chmod 777</code>. It grants write access to every account and is never a fix for permission problems.</li>
+<li>Avoid <code>chmod -R</code> on system paths. Recursive changes are difficult to reverse and can break services.</li>
+<li>Do not set SUID on scripts or interpreters. SUID means the file runs with its owner&rsquo;s privileges, so any flaw becomes a privilege escalation path.</li>
+<li>Keep <code>/tmp</code> and other shared directories at <code>1777</code> with the sticky bit set.</li>
+<li>Remove ACL entries when they are no longer needed. ACLs override the <code>ugo</code> bits and are easy to forget during audits.</li>
+<li>Verify ownership and permissions after every change with <code>ls -l</code>, <code>getfacl</code>, or <code>stat</code>.</li>
+<li>Grant group access through a dedicated group per project instead of widening permissions for other users.</li>
+<li>When logged in as root, the commands above do not require the <code>sudo</code> prefix.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/linux/group-management/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>group-management</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/linux/sudo/" class="flex align-center">
+        <span>sudo</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-read-the-permission-string">1. Read the Permission String</a></li>
+    <li><a href="#2-understand-ugo-and-rwx">2. Understand ugo and rwx</a></li>
+    <li><a href="#3-change-permissions-with-symbolic-notation">3. Change Permissions with Symbolic Notation</a></li>
+    <li><a href="#4-change-permissions-with-octal-notation">4. Change Permissions with Octal Notation</a></li>
+    <li><a href="#5-change-ownership">5. Change Ownership</a></li>
+    <li><a href="#6-set-the-default-umask">6. Set the Default umask</a></li>
+    <li><a href="#7-apply-special-bits">7. Apply Special Bits</a></li>
+    <li><a href="#8-configure-acls">8. Configure ACLs</a></li>
+    <li><a href="#9-verify-the-result">9. Verify the Result</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#permission-evaluation-order">Permission Evaluation Order</a></li>
+    <li><a href="#symbolic-vs-octal-notation">Symbolic vs. Octal Notation</a></li>
+    <li><a href="#command-reference">Command Reference</a></li>
+    <li><a href="#security-guidelines">Security Guidelines</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

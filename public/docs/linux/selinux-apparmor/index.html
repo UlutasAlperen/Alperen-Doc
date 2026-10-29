@@ -1,0 +1,3483 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Scope: Mandatory access control on RHEL-based and Debian-based Linux distributions
+Topics: SELinux modes, file contexts, booleans, denial analysis, AppArmor profiles, troubleshooting.
+Traditional Unix permissions implement discretionary access control (DAC): the file owner decides who may read, write, or execute a resource. Mandatory access control (MAC) adds a system-wide policy that restricts programs to only the resources they are explicitly allowed to use, regardless of file ownership. SELinux enforces MAC with labels on processes and objects, while AppArmor enforces it with path-based profiles.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/linux/selinux-apparmor/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="selinux-apparmor">
+	<meta property="og:description" content="Scope: Mandatory access control on RHEL-based and Debian-based Linux distributions
+Topics: SELinux modes, file contexts, booleans, denial analysis, AppArmor profiles, troubleshooting.
+Traditional Unix permissions implement discretionary access control (DAC): the file owner decides who may read, write, or execute a resource. Mandatory access control (MAC) adds a system-wide policy that restricts programs to only the resources they are explicitly allowed to use, regardless of file ownership. SELinux enforces MAC with labels on processes and objects, while AppArmor enforces it with path-based profiles.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="selinux-apparmor">
+	<meta itemprop="description" content="Scope: Mandatory access control on RHEL-based and Debian-based Linux distributions
+Topics: SELinux modes, file contexts, booleans, denial analysis, AppArmor profiles, troubleshooting.
+Traditional Unix permissions implement discretionary access control (DAC): the file owner decides who may read, write, or execute a resource. Mandatory access control (MAC) adds a system-wide policy that restricts programs to only the resources they are explicitly allowed to use, regardless of file ownership. SELinux enforces MAC with labels on processes and objects, while AppArmor enforces it with path-based profiles.">
+	<meta itemprop="wordCount" content="1077">
+
+<title>selinux-apparmor • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/linux/selinux-apparmor/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.2717c173d31e1424177e095b6301c63f2558df43c4923cf34d083e2f8cfcbc76.js" integrity="sha256-JxfBc9MeFCQXfglbYwHGPyVY30PEkjzzTQg&#43;L4z8vHY=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic-git-conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic-git-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github-workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous-integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous-deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git-status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git-add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git-commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git-push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git-branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git-pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git-log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git-merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git-rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git-reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git-remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git-switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4ebc7360f9ae508312064855054fc795" class="toggle" checked />
+    <label for="section-4ebc7360f9ae508312064855054fc795" class="flex">
+      <a href="/docs/linux/" class="">
+        Linux</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/linux-user-management/" class="">
+      linux-user-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/group-management/" class="">
+      group-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/file-permissions/" class="">
+      file-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/sudo/" class="">
+      sudo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/ssh/" class="">
+      ssh</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/systemd/" class="">
+      systemd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/process-management/" class="">
+      process-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/cron-timers/" class="">
+      cron-timers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/networking-basics/" class="">
+      networking-basics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/dns/" class="">
+      dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/firewall/" class="">
+      firewall</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/network-troubleshooting/" class="">
+      network-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/filesystem-hierarchy/" class="">
+      filesystem-hierarchy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-management/" class="">
+      disk-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/lvm/" class="">
+      lvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-troubleshooting/" class="">
+      disk-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/log-management/" class="">
+      log-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/selinux-apparmor/" class="active">
+      selinux-apparmor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/security-hardening/" class="">
+      security-hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/package-management/" class="">
+      package-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/performance-triage/" class="">
+      performance-triage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/boot-process/" class="">
+      boot-process</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager/" class="">
+      cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager-production/" class="">
+      cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/prometheus-stack/" class="">
+      prometheus-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/victoriametrics/" class="">
+      victoriametrics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-390924aad12540f8027ddb300c8575d3" class="toggle"  />
+    <label for="section-390924aad12540f8027ddb300c8575d3" class="flex">
+      <a href="/docs/aws/" class="">
+        AWS</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7ac94fcac7ebb60d389835a7fcb83889" class="toggle"  />
+    <label for="section-7ac94fcac7ebb60d389835a7fcb83889" class="flex">
+      <a href="/docs/aws/networking/" class="">
+        networking</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/regions-and-availability-zones/" class="">
+      regions-and-availability-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/virtual-private-cloud-vpc/" class="">
+      virtual-private-cloud-vpc</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/aws-subnetting/" class="">
+      aws-subnetting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/internet-gateways-igw/" class="">
+      internet-gateways-igw</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/route-tables/" class="">
+      route-tables</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/private-subnets/" class="">
+      private-subnets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/connecting-to-the-aws-cloud/" class="">
+      connecting-to-the-aws-cloud</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="toggle"  />
+    <label for="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="flex">
+      <a href="/docs/aws/ec2/" class="">
+        ec2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instance-configuration-keys/" class="">
+      ec2-instance-configuration-keys</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instances/" class="">
+      ec2-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/elastic-ips/" class="">
+      elastic-ips</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-security-groups/" class="">
+      aws-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ssh-to-aws-server/" class="">
+      ssh-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/deploy-site-to-aws-server/" class="">
+      deploy-site-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/open-web-traffic/" class="">
+      open-web-traffic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/creating-and-using-your-own-ami/" class="">
+      creating-and-using-your-own-ami</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-launch-template/" class="">
+      aws-launch-template</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/launch-from-template-aws/" class="">
+      launch-from-template-aws</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b73d690c546b071419fd1f673553fed1" class="toggle"  />
+    <label for="section-b73d690c546b071419fd1f673553fed1" class="flex">
+      <a href="/docs/aws/rds/" class="">
+        rds</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/relational-database-service/" class="">
+      relational-database-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-a-postgresql-database-in-aws/" class="">
+      create-a-postgresql-database-in-aws</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-to-your-database/" class="">
+      aws-connect-to-your-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-app-to-database/" class="">
+      aws-connect-app-to-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-backups/" class="">
+      rds-backups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-read-replicas-for-scalability/" class="">
+      create-read-replicas-for-scalability</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-general-knowledge/" class="">
+      rds-general-knowledge</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-df37bf19bddd1b463e10899723e49972" class="toggle"  />
+    <label for="section-df37bf19bddd1b463e10899723e49972" class="flex">
+      <a href="/docs/aws/iam/" class="">
+        iam</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user-and-group/" class="">
+      create-iam-user-and-group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/identity-and-access-management/" class="">
+      identity-and-access-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user/" class="">
+      create-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/inline-policies-iam-user/" class="">
+      inline-policies-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-groups/" class="">
+      iam-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-roles/" class="">
+      iam-roles</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-iam-deny-policies/" class="">
+      aws-iam-deny-policies</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-ssm-parameter-store/" class="">
+      aws-ssm-parameter-store</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/accessing-ssm-parameters-from-ec2/" class="">
+      accessing-ssm-parameters-from-ec2</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/use-ssm-from-ec2/" class="">
+      use-ssm-from-ec2</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aee932daafc4b41b13adc2e2442618ba" class="toggle"  />
+    <label for="section-aee932daafc4b41b13adc2e2442618ba" class="flex">
+      <a href="/docs/aws/monitoring/" class="">
+        monitoring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-external-monitoring/" class="">
+      aws-external-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-internal-monitoring/" class="">
+      aws-internal-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloud-watch-alarms/" class="">
+      cloud-watch-alarms</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloudtrail/" class="">
+      cloudtrail</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f38d96bcff4e2965101ac96ca363fcf" class="toggle"  />
+    <label for="section-2f38d96bcff4e2965101ac96ca363fcf" class="flex">
+      <a href="/docs/aws/s3/" class="">
+        s3</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3/" class="">
+      aws-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-bucket/" class="">
+      aws-s3-bucket</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-objects/" class="">
+      aws-s3-objects</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="toggle"  />
+    <label for="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="flex">
+      <a href="/docs/aws/dns/" class="">
+        dns</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/route-53-hosted-zones/" class="">
+      route-53-hosted-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-a-records/" class="">
+      aws-a-records</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/dns-ttl-and-caching/" class="">
+      dns-ttl-and-caching</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-verifying-dns/" class="">
+      aws-verifying-dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-cname-records/" class="">
+      aws-cname-records</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6db6507c5b69aeaa72e952abc5260963" class="toggle"  />
+    <label for="section-6db6507c5b69aeaa72e952abc5260963" class="flex">
+      <a href="/docs/aws/cdn/" class="">
+        cdn</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-cdn/" class="">
+      cloudfront-cdn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-distributions/" class="">
+      cloudfront-distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-invalidation/" class="">
+      cloudfront-invalidation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/presigned-urls/" class="">
+      presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/why-use-presigned-urls/" class="">
+      why-use-presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-with-dns/" class="">
+      cloudfront-with-dns</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0a1e7816907ed9977365d8170f4ec356" class="toggle"  />
+    <label for="section-0a1e7816907ed9977365d8170f4ec356" class="flex">
+      <a href="/docs/aws/ecs/" class="">
+        ecs</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/vpc-and-networking-setup-for-ecs/" class="">
+      vpc-and-networking-setup-for-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/why-ecs/" class="">
+      why-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/elastic-container-registry/" class="">
+      elastic-container-registry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecr-repo/" class="">
+      ecr-repo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-clusters/" class="">
+      ecs-clusters</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-permissions/" class="">
+      ecs-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-task-definitions/" class="">
+      ecs-task-definitions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-security-groups/" class="">
+      ecs-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/application-load-balancer/" class="">
+      application-load-balancer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-target-groups/" class="">
+      ecs-target-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/cloudwatch-log-groups/" class="">
+      cloudwatch-log-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-services/" class="">
+      ecs-services</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="toggle"  />
+    <label for="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="flex">
+      <a href="/docs/aws/eks/" class="">
+        eks</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-cluster/" class="">
+      eks-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-vs-kubeadm/" class="">
+      eks-vs-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-deploy-app/" class="">
+      eks-deploy-app</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-connect-s3/" class="">
+      eks-connect-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-use-rds/" class="">
+      eks-use-rds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-node-affinity-taints/" class="">
+      eks-node-affinity-taints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-ha-cluster/" class="">
+      eks-ha-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-spot-instances/" class="">
+      eks-spot-instances</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-514dc5328411196c2c4bb685cf444143" class="toggle"  />
+    <label for="section-514dc5328411196c2c4bb685cf444143" class="flex">
+      <a href="/docs/aws/lambda/" class="">
+        lambda</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/aws-lambda/" class="">
+      aws-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/deploy-lambda/" class="">
+      deploy-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/testing-lambda-function/" class="">
+      testing-lambda-function</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/lambda-api-gateway/" class="">
+      lambda-api-gateway</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/cloudwatch-log-groups-and-viewing-lambda-logs/" class="">
+      cloudwatch-log-groups-and-viewing-lambda-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/other-lambda-use-cases/" class="">
+      other-lambda-use-cases</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c8e51cd1f2a827eecce0fcb6812e371" class="toggle"  />
+    <label for="section-8c8e51cd1f2a827eecce0fcb6812e371" class="flex">
+      <a href="/docs/aws/general-knowledge/" class="">
+        general-knowledge</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/reserved-instances-savings-plans/" class="">
+      reserved-instances-savings-plans</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/spot-instances/" class="">
+      spot-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/auto-scaling-groups/" class="">
+      auto-scaling-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-compute-service/" class="">
+      aws-compute-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-storage/" class="">
+      aws-storage</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>selinux-apparmor</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-check-the-selinux-mode">1. Check the SELinux Mode</a></li>
+    <li><a href="#2-change-the-mode-at-runtime">2. Change the Mode at Runtime</a></li>
+    <li><a href="#3-set-the-mode-persistently">3. Set the Mode Persistently</a></li>
+    <li><a href="#4-inspect-file-contexts">4. Inspect File Contexts</a></li>
+    <li><a href="#5-restore-file-contexts">5. Restore File Contexts</a></li>
+    <li><a href="#6-manage-booleans">6. Manage Booleans</a></li>
+    <li><a href="#7-diagnose-denials">7. Diagnose Denials</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-check-apparmor-status">1. Check AppArmor Status</a></li>
+    <li><a href="#2-inspect-profiles">2. Inspect Profiles</a></li>
+    <li><a href="#3-switch-between-enforce-and-complain-mode">3. Switch Between Enforce and Complain Mode</a></li>
+    <li><a href="#4-create-a-minimal-profile">4. Create a Minimal Profile</a></li>
+    <li><a href="#5-inspect-denial-logs">5. Inspect Denial Logs</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#permission-denied-with-correct-unix-permissions">Permission Denied with Correct Unix Permissions</a></li>
+    <li><a href="#selinux-vs-apparmor">SELinux vs. AppArmor</a></li>
+    <li><a href="#command-reference">Command Reference</a></li>
+    <li><a href="#security-guidelines">Security Guidelines</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p><strong>Scope:</strong> Mandatory access control on RHEL-based and Debian-based Linux distributions<br>
+<strong>Topics:</strong> SELinux modes, file contexts, booleans, denial analysis, AppArmor profiles, troubleshooting.</p>
+<p>Traditional Unix permissions implement discretionary access control (DAC): the file owner decides who may read, write, or execute a resource. Mandatory access control (MAC) adds a system-wide policy that restricts programs to only the resources they are explicitly allowed to use, regardless of file ownership. SELinux enforces MAC with labels on processes and objects, while AppArmor enforces it with path-based profiles.</p>
+<h1 id="part-1-selinux-rhel-based-systems">Part 1: SELinux (RHEL-Based Systems)<a class="anchor" href="#part-1-selinux-rhel-based-systems">#</a></h1>
+<p><strong>Examples:</strong> RHEL, Rocky Linux, AlmaLinux</p>
+<h2 id="1-check-the-selinux-mode">1. Check the SELinux Mode<a class="anchor" href="#1-check-the-selinux-mode">#</a></h2>
+<p>Inspect the current mode:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>getenforce</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Enforcing</span></span></code></pre></div><p>Inspect the full status:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sestatus</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>SELinux status:                 enabled
+</span></span><span style="display:flex;"><span>Loaded policy name:             targeted
+</span></span><span style="display:flex;"><span>Current mode:                   enforcing
+</span></span><span style="display:flex;"><span>Mode from config file:          enforcing</span></span></code></pre></div><h2 id="2-change-the-mode-at-runtime">2. Change the Mode at Runtime<a class="anchor" href="#2-change-the-mode-at-runtime">#</a></h2>
+<p>Run as root:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>setenforce <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>setenforce <span style="color:#ae81ff">1</span></span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li><code>0</code>: Switches to permissive mode. Violations are logged but not blocked.</li>
+<li><code>1</code>: Switches to enforcing mode. Violations are logged and blocked.</li>
+</ul>
+<p>The change is runtime only and is lost on reboot. Use permissive mode to test whether SELinux is responsible for a failure.</p>
+<h2 id="3-set-the-mode-persistently">3. Set the Mode Persistently<a class="anchor" href="#3-set-the-mode-persistently">#</a></h2>
+<p>Inspect the configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat /etc/selinux/config</span></span></code></pre></div><p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>SELINUX=enforcing
+</span></span><span style="display:flex;"><span>SELINUXTYPE=targeted</span></span></code></pre></div><p>Edit <code>SELINUX=</code> to one of <code>enforcing</code>, <code>permissive</code>, or <code>disabled</code>. Changing <code>disabled</code> to an active mode requires a full filesystem relabel and a reboot:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>touch /.autorelabel
+</span></span><span style="display:flex;"><span>reboot</span></span></code></pre></div><h2 id="4-inspect-file-contexts">4. Inspect File Contexts<a class="anchor" href="#4-inspect-file-contexts">#</a></h2>
+<p>Every file and process carries a security context:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls -Z /var/www</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>unconfined_u:object_r:httpd_sys_content_t:s0 index.html</span></span></code></pre></div><p>Inspect process contexts with <code>ps -eZ | grep httpd</code>.</p>
+<h2 id="5-restore-file-contexts">5. Restore File Contexts<a class="anchor" href="#5-restore-file-contexts">#</a></h2>
+<p>Fix a wrong label temporarily:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chcon -t httpd_sys_content_t /srv/www/index.html</span></span></code></pre></div><p><code>chcon</code> changes are lost when contexts are relabeled. For a persistent mapping, define a file context rule and apply it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>semanage fcontext -a -t httpd_sys_content_t <span style="color:#e6db74">&#34;/srv/www(/.*)?&#34;</span>
+</span></span><span style="display:flex;"><span>restorecon -Rv /srv/www</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Relabeled /srv/www/index.html (unconfined_u:object_r:default_t:s0 -&gt; unconfined_u:object_r:httpd_sys_content_t:s0)</span></span></code></pre></div><p>Verify the mapping with <code>semanage fcontext -l | grep /srv/www</code> and <code>ls -Z /srv/www</code>.</p>
+<p><strong>Options:</strong></p>
+<ul>
+<li><code>semanage fcontext -a</code>: Adds a persistent context mapping.</li>
+<li><code>-t &lt;TYPE&gt;</code>: Sets the target type, for example <code>httpd_sys_content_t</code>.</li>
+<li><code>&quot;/srv/www(/.*)?&quot;</code>: Matches the directory and everything below it.</li>
+<li><code>restorecon -Rv</code>: Restores contexts recursively and prints each change.</li>
+</ul>
+<p>On RHEL 9, <code>semanage</code> is provided by <code>policycoreutils-python-utils</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dnf install policycoreutils-python-utils</span></span></code></pre></div><h2 id="6-manage-booleans">6. Manage Booleans<a class="anchor" href="#6-manage-booleans">#</a></h2>
+<p>List booleans related to a service or inspect a single one:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>getsebool -a | grep httpd
+</span></span><span style="display:flex;"><span>getsebool httpd_can_network_connect</span></span></code></pre></div><p>Enable a boolean persistently:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>setsebool -P httpd_can_network_connect on</span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li><code>-P</code>: Writes the change to policy so it survives a reboot.</li>
+<li>Without <code>-P</code>: Applies the change only until the next reboot.</li>
+</ul>
+<h2 id="7-diagnose-denials">7. Diagnose Denials<a class="anchor" href="#7-diagnose-denials">#</a></h2>
+<p>Search the audit log for access vector cache denials:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ausearch -m avc -ts recent</span></span></code></pre></div><p>Explain the denials:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ausearch -m avc -ts today | audit2why</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>type=AVC msg=audit(...): avc:  denied  { read } for  pid=1234 comm=&#34;httpd&#34; ...
+</span></span><span style="display:flex;"><span>    was caused by:
+</span></span><span style="display:flex;"><span>        Missing type enforcement (TE) allow rule.</span></span></code></pre></div><p>For detailed suggestions, install <code>setroubleshoot-server</code> and run <code>sealert -a /var/log/audit/audit.log</code>.</p>
+<p><code>ausearch</code> requires the audit daemon:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>systemctl enable --now auditd</span></span></code></pre></div><hr>
+<h1 id="part-2-apparmor-debian-based-systems">Part 2: AppArmor (Debian-Based Systems)<a class="anchor" href="#part-2-apparmor-debian-based-systems">#</a></h1>
+<p><strong>Examples:</strong> Debian, Ubuntu</p>
+<h2 id="1-check-apparmor-status">1. Check AppArmor Status<a class="anchor" href="#1-check-apparmor-status">#</a></h2>
+<p>Run as root:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aa-status</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>apparmor module is loaded.
+</span></span><span style="display:flex;"><span>18 profiles are in enforce mode.
+</span></span><span style="display:flex;"><span>3 profiles are in complain mode.</span></span></code></pre></div><p>Install the tools if the command is missing:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt install apparmor apparmor-utils</span></span></code></pre></div><h2 id="2-inspect-profiles">2. Inspect Profiles<a class="anchor" href="#2-inspect-profiles">#</a></h2>
+<p>List the loaded profiles:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls /etc/apparmor.d</span></span></code></pre></div><p>Each profile file is named after the executable path with <code>/</code> replaced by <code>.</code>. Inspect one:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat /etc/apparmor.d/usr.sbin.tcpdump</span></span></code></pre></div><h2 id="3-switch-between-enforce-and-complain-mode">3. Switch Between Enforce and Complain Mode<a class="anchor" href="#3-switch-between-enforce-and-complain-mode">#</a></h2>
+<p>Put a profile into complain mode for testing:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aa-complain /etc/apparmor.d/usr.sbin.mysqld</span></span></code></pre></div><p>Return it to enforce mode:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aa-enforce /etc/apparmor.d/usr.sbin.mysqld</span></span></code></pre></div><p>Disable a profile completely:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aa-disable /etc/apparmor.d/usr.sbin.mysqld</span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li>Enforce mode: Violations are logged and blocked.</li>
+<li>Complain mode: Violations are logged but not blocked. Use it to gather a profile before enforcing.</li>
+<li><code>aa-disable</code>: Unloads the profile and stops it from loading at boot.</li>
+</ul>
+<h2 id="4-create-a-minimal-profile">4. Create a Minimal Profile<a class="anchor" href="#4-create-a-minimal-profile">#</a></h2>
+<p>Create a profile for a custom service:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>touch /etc/apparmor.d/usr.sbin.myappd</span></span></code></pre></div><p>Example content:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>#include &lt;tunables/global&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/usr/sbin/myappd {
+</span></span><span style="display:flex;"><span>  #include &lt;abstractions/base&gt;
+</span></span><span style="display:flex;"><span>  #include &lt;abstractions/nameservice&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  capability net_bind_service,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  /etc/myapp.conf r,
+</span></span><span style="display:flex;"><span>  /var/lib/myapp/** rwk,
+</span></span><span style="display:flex;"><span>  /var/log/myapp.log w,
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>Load the profile:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apparmor_parser -r /etc/apparmor.d/usr.sbin.myappd</span></span></code></pre></div><p>Alternatively, generate a profile interactively with <code>aa-genprof /usr/sbin/myappd</code> and exercise the application while it runs so that the required accesses are recorded.</p>
+<h2 id="5-inspect-denial-logs">5. Inspect Denial Logs<a class="anchor" href="#5-inspect-denial-logs">#</a></h2>
+<p>Search the kernel log for AppArmor events:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>journalctl -k | grep apparmor</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>audit: type=1400 audit(...): apparmor=&#34;DENIED&#34; operation=&#34;open&#34; profile=&#34;/usr/sbin/myappd&#34; name=&#34;/srv/data/file&#34; comm=&#34;myappd&#34;</span></span></code></pre></div><p>Filter only denials:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>journalctl | grep <span style="color:#e6db74">&#39;apparmor=&#34;DENIED&#34;&#39;</span></span></span></code></pre></div><hr>
+<h1 id="part-3-important-notes">Part 3: Important Notes<a class="anchor" href="#part-3-important-notes">#</a></h1>
+<h2 id="permission-denied-with-correct-unix-permissions">Permission Denied with Correct Unix Permissions<a class="anchor" href="#permission-denied-with-correct-unix-permissions">#</a></h2>
+<p>When <code>ls -l</code> shows correct ownership and mode but access still fails, follow this diagnostic flow:</p>
+<ul>
+<li>Confirm the DAC layer first: <code>ls -l &lt;PATH&gt;</code> and <code>namei -l &lt;PATH&gt;</code> for the full path chain.</li>
+<li>Identify the MAC layer in use: <code>getenforce</code> on RHEL-based systems, <code>aa-status</code> on Debian-based systems.</li>
+<li>Reproduce the failure and capture the denial: <code>ausearch -m avc -ts recent</code> for SELinux, <code>journalctl -k | grep apparmor</code> for AppArmor.</li>
+<li>Confirm the MAC layer is responsible: switch to permissive (<code>setenforce 0</code>) or complain (<code>aa-complain &lt;PROFILE&gt;</code>), reproduce again, and compare.</li>
+<li>Fix the policy instead of the symptom: correct file contexts with <code>restorecon</code>, add a persistent mapping with <code>semanage fcontext</code>, enable a boolean with <code>setsebool -P</code>, or extend the AppArmor profile.</li>
+<li>Restore enforcing or enforce mode and verify that the application still works.</li>
+</ul>
+<h2 id="selinux-vs-apparmor">SELinux vs. AppArmor<a class="anchor" href="#selinux-vs-apparmor">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>Property</th>
+					<th>SELinux</th>
+					<th>AppArmor</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Common defaults</td>
+					<td>RHEL, Rocky Linux, AlmaLinux, Fedora</td>
+					<td>Debian, Ubuntu, SUSE</td>
+			</tr>
+			<tr>
+					<td>Enforcement model</td>
+					<td>Labels on processes and files</td>
+					<td>Path-based profiles</td>
+			</tr>
+			<tr>
+					<td>Main configuration</td>
+					<td>Policy modules, file contexts, booleans</td>
+					<td>Text profiles in <code>/etc/apparmor.d</code></td>
+			</tr>
+			<tr>
+					<td>Switch to learning mode</td>
+					<td><code>setenforce 0</code> (system-wide)</td>
+					<td><code>aa-complain &lt;PROFILE&gt;</code> (per profile)</td>
+			</tr>
+			<tr>
+					<td>Inspect denials</td>
+					<td><code>ausearch -m avc</code>, <code>audit2why</code>, <code>sealert</code></td>
+					<td><code>journalctl -k</code>, <code>dmesg</code></td>
+			</tr>
+			<tr>
+					<td>Persistent disable</td>
+					<td><code>SELINUX=disabled</code> in <code>/etc/selinux/config</code> and reboot</td>
+					<td><code>aa-disable &lt;PROFILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Profile generation</td>
+					<td><code>audit2allow</code> from denials</td>
+					<td><code>aa-genprof</code>, <code>aa-logprof</code></td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="command-reference">Command Reference<a class="anchor" href="#command-reference">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>Operation</th>
+					<th>SELinux</th>
+					<th>AppArmor</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Check status</td>
+					<td><code>getenforce</code>, <code>sestatus</code></td>
+					<td><code>aa-status</code></td>
+			</tr>
+			<tr>
+					<td>Switch to learning mode</td>
+					<td><code>setenforce 0</code></td>
+					<td><code>aa-complain &lt;PROFILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Enforce policy</td>
+					<td><code>setenforce 1</code></td>
+					<td><code>aa-enforce &lt;PROFILE&gt;</code></td>
+			</tr>
+			<tr>
+					<td>Inspect labels or profiles</td>
+					<td><code>ls -Z</code>, <code>ps -eZ</code></td>
+					<td><code>ls /etc/apparmor.d</code></td>
+			</tr>
+			<tr>
+					<td>Fix access rules</td>
+					<td><code>restorecon</code>, <code>semanage fcontext</code></td>
+					<td>Edit profile, <code>apparmor_parser -r</code></td>
+			</tr>
+			<tr>
+					<td>Analyze denials</td>
+					<td><code>ausearch -m avc -ts recent</code></td>
+					<td><code>journalctl -k | grep apparmor</code></td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="security-guidelines">Security Guidelines<a class="anchor" href="#security-guidelines">#</a></h2>
+<ul>
+<li>Do not disable SELinux or AppArmor to fix a denial. Fix the policy and keep MAC enabled.</li>
+<li>Use permissive or complain mode only for testing, and return to enforcing mode afterwards.</li>
+<li>Prefer <code>semanage fcontext</code> plus <code>restorecon</code> over <code>chcon</code>. <code>chcon</code> changes are lost on the next relabel.</li>
+<li>Use <code>setsebool -P</code> for permanent boolean changes. Without <code>-P</code> the change is lost on reboot.</li>
+<li>Keep profiles and policy changes minimal: allow only the paths and capabilities the application needs.</li>
+<li>Record the reason for every policy change and remove temporary exceptions after troubleshooting.</li>
+<li>Install <code>auditd</code> and keep audit logs long enough to reconstruct past denials.</li>
+<li>Regenerate or reload policy after every change and retest the affected application.</li>
+<li>Run <code>aa-status</code> and <code>sestatus</code> as part of routine server audits to verify the expected mode.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/linux/log-management/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>log-management</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/linux/security-hardening/" class="flex align-center">
+        <span>security-hardening</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-check-the-selinux-mode">1. Check the SELinux Mode</a></li>
+    <li><a href="#2-change-the-mode-at-runtime">2. Change the Mode at Runtime</a></li>
+    <li><a href="#3-set-the-mode-persistently">3. Set the Mode Persistently</a></li>
+    <li><a href="#4-inspect-file-contexts">4. Inspect File Contexts</a></li>
+    <li><a href="#5-restore-file-contexts">5. Restore File Contexts</a></li>
+    <li><a href="#6-manage-booleans">6. Manage Booleans</a></li>
+    <li><a href="#7-diagnose-denials">7. Diagnose Denials</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-check-apparmor-status">1. Check AppArmor Status</a></li>
+    <li><a href="#2-inspect-profiles">2. Inspect Profiles</a></li>
+    <li><a href="#3-switch-between-enforce-and-complain-mode">3. Switch Between Enforce and Complain Mode</a></li>
+    <li><a href="#4-create-a-minimal-profile">4. Create a Minimal Profile</a></li>
+    <li><a href="#5-inspect-denial-logs">5. Inspect Denial Logs</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#permission-denied-with-correct-unix-permissions">Permission Denied with Correct Unix Permissions</a></li>
+    <li><a href="#selinux-vs-apparmor">SELinux vs. AppArmor</a></li>
+    <li><a href="#command-reference">Command Reference</a></li>
+    <li><a href="#security-guidelines">Security Guidelines</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

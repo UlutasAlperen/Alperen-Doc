@@ -1,0 +1,3468 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Scope: Log sources, locations, querying, and rotation on Debian-based and RHEL-based distributions
+Topics: rsyslog, /var/log layout, journald, journalctl, logrotate.
+1. Understand the Log Sources# Two logging systems handle messages on current distributions:
+systemd-journald: Collects messages from the kernel, services, and stdout/stderr of units. Stores them in the journal, which is volatile in /run/log/journal unless persistent storage is configured. rsyslog: Traditional syslog daemon. Reads /etc/rsyslog.conf and /etc/rsyslog.d/*.conf and writes text files under /var/log. On RHEL-based systems it imports messages from the journal through the imjournal module. Rules in rsyslog use &lt;FACILITY&gt;.&lt;PRIORITY&gt; selectors. Example configuration in /etc/rsyslog.d/50-custom.conf:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/linux/log-management/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="log-management">
+	<meta property="og:description" content="Scope: Log sources, locations, querying, and rotation on Debian-based and RHEL-based distributions
+Topics: rsyslog, /var/log layout, journald, journalctl, logrotate.
+1. Understand the Log Sources# Two logging systems handle messages on current distributions:
+systemd-journald: Collects messages from the kernel, services, and stdout/stderr of units. Stores them in the journal, which is volatile in /run/log/journal unless persistent storage is configured. rsyslog: Traditional syslog daemon. Reads /etc/rsyslog.conf and /etc/rsyslog.d/*.conf and writes text files under /var/log. On RHEL-based systems it imports messages from the journal through the imjournal module. Rules in rsyslog use &lt;FACILITY&gt;.&lt;PRIORITY&gt; selectors. Example configuration in /etc/rsyslog.d/50-custom.conf:">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="log-management">
+	<meta itemprop="description" content="Scope: Log sources, locations, querying, and rotation on Debian-based and RHEL-based distributions
+Topics: rsyslog, /var/log layout, journald, journalctl, logrotate.
+1. Understand the Log Sources# Two logging systems handle messages on current distributions:
+systemd-journald: Collects messages from the kernel, services, and stdout/stderr of units. Stores them in the journal, which is volatile in /run/log/journal unless persistent storage is configured. rsyslog: Traditional syslog daemon. Reads /etc/rsyslog.conf and /etc/rsyslog.d/*.conf and writes text files under /var/log. On RHEL-based systems it imports messages from the journal through the imjournal module. Rules in rsyslog use &lt;FACILITY&gt;.&lt;PRIORITY&gt; selectors. Example configuration in /etc/rsyslog.d/50-custom.conf:">
+	<meta itemprop="wordCount" content="846">
+
+<title>log-management • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/linux/log-management/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.2717c173d31e1424177e095b6301c63f2558df43c4923cf34d083e2f8cfcbc76.js" integrity="sha256-JxfBc9MeFCQXfglbYwHGPyVY30PEkjzzTQg&#43;L4z8vHY=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic-git-conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic-git-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github-workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous-integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous-deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git-status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git-add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git-commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git-push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git-branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git-pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git-log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git-merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git-rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git-reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git-remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git-switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4ebc7360f9ae508312064855054fc795" class="toggle" checked />
+    <label for="section-4ebc7360f9ae508312064855054fc795" class="flex">
+      <a href="/docs/linux/" class="">
+        Linux</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/linux-user-management/" class="">
+      linux-user-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/group-management/" class="">
+      group-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/file-permissions/" class="">
+      file-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/sudo/" class="">
+      sudo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/ssh/" class="">
+      ssh</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/systemd/" class="">
+      systemd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/process-management/" class="">
+      process-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/cron-timers/" class="">
+      cron-timers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/networking-basics/" class="">
+      networking-basics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/dns/" class="">
+      dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/firewall/" class="">
+      firewall</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/network-troubleshooting/" class="">
+      network-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/filesystem-hierarchy/" class="">
+      filesystem-hierarchy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-management/" class="">
+      disk-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/lvm/" class="">
+      lvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-troubleshooting/" class="">
+      disk-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/log-management/" class="active">
+      log-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/selinux-apparmor/" class="">
+      selinux-apparmor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/security-hardening/" class="">
+      security-hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/package-management/" class="">
+      package-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/performance-triage/" class="">
+      performance-triage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/boot-process/" class="">
+      boot-process</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager/" class="">
+      cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager-production/" class="">
+      cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/prometheus-stack/" class="">
+      prometheus-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/victoriametrics/" class="">
+      victoriametrics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-390924aad12540f8027ddb300c8575d3" class="toggle"  />
+    <label for="section-390924aad12540f8027ddb300c8575d3" class="flex">
+      <a href="/docs/aws/" class="">
+        AWS</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7ac94fcac7ebb60d389835a7fcb83889" class="toggle"  />
+    <label for="section-7ac94fcac7ebb60d389835a7fcb83889" class="flex">
+      <a href="/docs/aws/networking/" class="">
+        networking</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/regions-and-availability-zones/" class="">
+      regions-and-availability-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/virtual-private-cloud-vpc/" class="">
+      virtual-private-cloud-vpc</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/aws-subnetting/" class="">
+      aws-subnetting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/internet-gateways-igw/" class="">
+      internet-gateways-igw</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/route-tables/" class="">
+      route-tables</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/private-subnets/" class="">
+      private-subnets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/connecting-to-the-aws-cloud/" class="">
+      connecting-to-the-aws-cloud</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="toggle"  />
+    <label for="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="flex">
+      <a href="/docs/aws/ec2/" class="">
+        ec2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instance-configuration-keys/" class="">
+      ec2-instance-configuration-keys</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instances/" class="">
+      ec2-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/elastic-ips/" class="">
+      elastic-ips</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-security-groups/" class="">
+      aws-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ssh-to-aws-server/" class="">
+      ssh-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/deploy-site-to-aws-server/" class="">
+      deploy-site-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/open-web-traffic/" class="">
+      open-web-traffic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/creating-and-using-your-own-ami/" class="">
+      creating-and-using-your-own-ami</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-launch-template/" class="">
+      aws-launch-template</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/launch-from-template-aws/" class="">
+      launch-from-template-aws</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b73d690c546b071419fd1f673553fed1" class="toggle"  />
+    <label for="section-b73d690c546b071419fd1f673553fed1" class="flex">
+      <a href="/docs/aws/rds/" class="">
+        rds</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/relational-database-service/" class="">
+      relational-database-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-a-postgresql-database-in-aws/" class="">
+      create-a-postgresql-database-in-aws</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-to-your-database/" class="">
+      aws-connect-to-your-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-app-to-database/" class="">
+      aws-connect-app-to-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-backups/" class="">
+      rds-backups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-read-replicas-for-scalability/" class="">
+      create-read-replicas-for-scalability</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-general-knowledge/" class="">
+      rds-general-knowledge</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-df37bf19bddd1b463e10899723e49972" class="toggle"  />
+    <label for="section-df37bf19bddd1b463e10899723e49972" class="flex">
+      <a href="/docs/aws/iam/" class="">
+        iam</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user-and-group/" class="">
+      create-iam-user-and-group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/identity-and-access-management/" class="">
+      identity-and-access-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user/" class="">
+      create-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/inline-policies-iam-user/" class="">
+      inline-policies-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-groups/" class="">
+      iam-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-roles/" class="">
+      iam-roles</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-iam-deny-policies/" class="">
+      aws-iam-deny-policies</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-ssm-parameter-store/" class="">
+      aws-ssm-parameter-store</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/accessing-ssm-parameters-from-ec2/" class="">
+      accessing-ssm-parameters-from-ec2</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/use-ssm-from-ec2/" class="">
+      use-ssm-from-ec2</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aee932daafc4b41b13adc2e2442618ba" class="toggle"  />
+    <label for="section-aee932daafc4b41b13adc2e2442618ba" class="flex">
+      <a href="/docs/aws/monitoring/" class="">
+        monitoring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-external-monitoring/" class="">
+      aws-external-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-internal-monitoring/" class="">
+      aws-internal-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloud-watch-alarms/" class="">
+      cloud-watch-alarms</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloudtrail/" class="">
+      cloudtrail</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f38d96bcff4e2965101ac96ca363fcf" class="toggle"  />
+    <label for="section-2f38d96bcff4e2965101ac96ca363fcf" class="flex">
+      <a href="/docs/aws/s3/" class="">
+        s3</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3/" class="">
+      aws-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-bucket/" class="">
+      aws-s3-bucket</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-objects/" class="">
+      aws-s3-objects</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="toggle"  />
+    <label for="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="flex">
+      <a href="/docs/aws/dns/" class="">
+        dns</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/route-53-hosted-zones/" class="">
+      route-53-hosted-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-a-records/" class="">
+      aws-a-records</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/dns-ttl-and-caching/" class="">
+      dns-ttl-and-caching</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-verifying-dns/" class="">
+      aws-verifying-dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-cname-records/" class="">
+      aws-cname-records</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6db6507c5b69aeaa72e952abc5260963" class="toggle"  />
+    <label for="section-6db6507c5b69aeaa72e952abc5260963" class="flex">
+      <a href="/docs/aws/cdn/" class="">
+        cdn</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-cdn/" class="">
+      cloudfront-cdn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-distributions/" class="">
+      cloudfront-distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-invalidation/" class="">
+      cloudfront-invalidation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/presigned-urls/" class="">
+      presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/why-use-presigned-urls/" class="">
+      why-use-presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-with-dns/" class="">
+      cloudfront-with-dns</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0a1e7816907ed9977365d8170f4ec356" class="toggle"  />
+    <label for="section-0a1e7816907ed9977365d8170f4ec356" class="flex">
+      <a href="/docs/aws/ecs/" class="">
+        ecs</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/vpc-and-networking-setup-for-ecs/" class="">
+      vpc-and-networking-setup-for-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/why-ecs/" class="">
+      why-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/elastic-container-registry/" class="">
+      elastic-container-registry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecr-repo/" class="">
+      ecr-repo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-clusters/" class="">
+      ecs-clusters</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-permissions/" class="">
+      ecs-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-task-definitions/" class="">
+      ecs-task-definitions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-security-groups/" class="">
+      ecs-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/application-load-balancer/" class="">
+      application-load-balancer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-target-groups/" class="">
+      ecs-target-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/cloudwatch-log-groups/" class="">
+      cloudwatch-log-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-services/" class="">
+      ecs-services</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="toggle"  />
+    <label for="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="flex">
+      <a href="/docs/aws/eks/" class="">
+        eks</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-cluster/" class="">
+      eks-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-vs-kubeadm/" class="">
+      eks-vs-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-deploy-app/" class="">
+      eks-deploy-app</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-connect-s3/" class="">
+      eks-connect-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-use-rds/" class="">
+      eks-use-rds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-node-affinity-taints/" class="">
+      eks-node-affinity-taints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-ha-cluster/" class="">
+      eks-ha-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-spot-instances/" class="">
+      eks-spot-instances</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-514dc5328411196c2c4bb685cf444143" class="toggle"  />
+    <label for="section-514dc5328411196c2c4bb685cf444143" class="flex">
+      <a href="/docs/aws/lambda/" class="">
+        lambda</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/aws-lambda/" class="">
+      aws-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/deploy-lambda/" class="">
+      deploy-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/testing-lambda-function/" class="">
+      testing-lambda-function</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/lambda-api-gateway/" class="">
+      lambda-api-gateway</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/cloudwatch-log-groups-and-viewing-lambda-logs/" class="">
+      cloudwatch-log-groups-and-viewing-lambda-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/other-lambda-use-cases/" class="">
+      other-lambda-use-cases</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c8e51cd1f2a827eecce0fcb6812e371" class="toggle"  />
+    <label for="section-8c8e51cd1f2a827eecce0fcb6812e371" class="flex">
+      <a href="/docs/aws/general-knowledge/" class="">
+        general-knowledge</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/reserved-instances-savings-plans/" class="">
+      reserved-instances-savings-plans</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/spot-instances/" class="">
+      spot-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/auto-scaling-groups/" class="">
+      auto-scaling-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-compute-service/" class="">
+      aws-compute-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-storage/" class="">
+      aws-storage</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>log-management</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-understand-the-log-sources">1. Understand the Log Sources</a></li>
+    <li><a href="#2-inspect-the-varlog-layout">2. Inspect the /var/log Layout</a></li>
+    <li><a href="#3-query-the-journal-with-journalctl">3. Query the Journal with journalctl</a></li>
+    <li><a href="#4-rotate-logs-with-logrotate">4. Rotate Logs with logrotate</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-read-debian-specific-log-files">1. Read Debian-Specific Log Files</a></li>
+    <li><a href="#2-read-package-and-authentication-history">2. Read Package and Authentication History</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-read-rhel-specific-log-files">1. Read RHEL-Specific Log Files</a></li>
+    <li><a href="#2-enable-persistent-journal-storage">2. Enable Persistent Journal Storage</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#log-file-comparison">Log File Comparison</a></li>
+    <li><a href="#security-guidelines">Security Guidelines</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p><strong>Scope:</strong> Log sources, locations, querying, and rotation on Debian-based and RHEL-based distributions<br>
+<strong>Topics:</strong> rsyslog, /var/log layout, journald, journalctl, logrotate.</p>
+<h2 id="1-understand-the-log-sources">1. Understand the Log Sources<a class="anchor" href="#1-understand-the-log-sources">#</a></h2>
+<p>Two logging systems handle messages on current distributions:</p>
+<ul>
+<li>systemd-journald: Collects messages from the kernel, services, and stdout/stderr of units. Stores them in the journal, which is volatile in <code>/run/log/journal</code> unless persistent storage is configured.</li>
+<li>rsyslog: Traditional syslog daemon. Reads <code>/etc/rsyslog.conf</code> and <code>/etc/rsyslog.d/*.conf</code> and writes text files under <code>/var/log</code>. On RHEL-based systems it imports messages from the journal through the <code>imjournal</code> module.</li>
+</ul>
+<p>Rules in rsyslog use <code>&lt;FACILITY&gt;.&lt;PRIORITY&gt;</code> selectors. Example configuration in <code>/etc/rsyslog.d/50-custom.conf</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>auth,authpriv.*                 /var/log/auth.log
+</span></span><span style="display:flex;"><span>kern.*                          /var/log/kern.log
+</span></span><span style="display:flex;"><span>*.*;auth,authpriv.none          -/var/log/syslog</span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li><code>auth</code>, <code>kern</code>: Facilities (message sources).</li>
+<li><code>*</code>, <code>none</code>: Priorities from <code>emerg</code> down to <code>debug</code>; <code>none</code> excludes a facility.</li>
+<li><code>-</code> before the path: Enables asynchronous writes for high-volume logs.</li>
+</ul>
+<h2 id="2-inspect-the-varlog-layout">2. Inspect the /var/log Layout<a class="anchor" href="#2-inspect-the-varlog-layout">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>Path</th>
+					<th>Contents</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>/var/log/syslog</code></td>
+					<td>General system messages (Debian-based)</td>
+			</tr>
+			<tr>
+					<td><code>/var/log/messages</code></td>
+					<td>General system messages (RHEL-based)</td>
+			</tr>
+			<tr>
+					<td><code>/var/log/auth.log</code></td>
+					<td>Authentication and sudo events (Debian-based)</td>
+			</tr>
+			<tr>
+					<td><code>/var/log/secure</code></td>
+					<td>Authentication and sudo events (RHEL-based)</td>
+			</tr>
+			<tr>
+					<td><code>/var/log/kern.log</code></td>
+					<td>Kernel messages (Debian-based)</td>
+			</tr>
+			<tr>
+					<td><code>/var/log/cron</code></td>
+					<td>Cron scheduler activity</td>
+			</tr>
+			<tr>
+					<td><code>/var/log/audit/audit.log</code></td>
+					<td>Audit subsystem and SELinux events (RHEL-based)</td>
+			</tr>
+			<tr>
+					<td><code>/var/log/journal/</code></td>
+					<td>Persistent journal storage</td>
+			</tr>
+			<tr>
+					<td><code>/var/log/dpkg.log</code>, <code>/var/log/dnf.log</code></td>
+					<td>Package transactions</td>
+			</tr>
+	</tbody>
+</table>
+<p>Binary accounting files also live here: <code>/var/log/wtmp</code> (successful logins, read with <code>last</code>) and <code>/var/log/btmp</code> (failed logins, read with <code>lastb</code>).</p>
+<p>List files and sizes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls -lh /var/log
+</span></span><span style="display:flex;"><span>du -xh -d <span style="color:#ae81ff">1</span> /var/log | sort -h</span></span></code></pre></div><h2 id="3-query-the-journal-with-journalctl">3. Query the Journal with journalctl<a class="anchor" href="#3-query-the-journal-with-journalctl">#</a></h2>
+<p>Inspect the usage:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>journalctl -u &lt;SERVICE&gt;
+</span></span><span style="display:flex;"><span>journalctl --since <span style="color:#e6db74">&#34;2026-01-01 10:00:00&#34;</span> --until <span style="color:#e6db74">&#34;2026-01-01 12:00:00&#34;</span>
+</span></span><span style="display:flex;"><span>journalctl -p err
+</span></span><span style="display:flex;"><span>journalctl -b
+</span></span><span style="display:flex;"><span>journalctl -f</span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li><code>-u &lt;SERVICE&gt;</code>: Shows messages for one systemd unit.</li>
+<li><code>--since</code>, <code>--until</code>: Time window in <code>YYYY-MM-DD HH:MM:SS</code> form. Relative values such as <code>yesterday</code>, <code>today</code>, or <code>-1h</code> are also accepted.</li>
+<li><code>-p err</code>: Filters by priority (<code>emerg</code>, <code>alert</code>, <code>crit</code>, <code>err</code>, <code>warning</code>, <code>notice</code>, <code>info</code>, <code>debug</code>) and includes all higher priorities.</li>
+<li><code>-b</code>: Current boot. Use <code>-b -1</code> for the previous boot.</li>
+<li><code>-f</code>: Follows new messages like <code>tail -f</code>.</li>
+<li><code>-n 50</code>: Shows the last 50 entries.</li>
+<li><code>--no-pager</code>: Plain output for scripts.</li>
+</ul>
+<p>Expected output (example):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Jan 29 10:12:33 host sshd[1234]: Accepted publickey for deploy from 10.0.0.5 port 51234 ssh2</span></span></code></pre></div><h2 id="4-rotate-logs-with-logrotate">4. Rotate Logs with logrotate<a class="anchor" href="#4-rotate-logs-with-logrotate">#</a></h2>
+<p>logrotate ages and compresses log files on schedule through <code>logrotate.timer</code> or a cron job. Distribution defaults live in <code>/etc/logrotate.conf</code>; per-application drop-ins go in <code>/etc/logrotate.d/</code>.</p>
+<p>Example configuration in <code>/etc/logrotate.d/&lt;APP&gt;</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>/var/log/&lt;APP&gt;/*.log {
+</span></span><span style="display:flex;"><span>    daily
+</span></span><span style="display:flex;"><span>    rotate 14
+</span></span><span style="display:flex;"><span>    compress
+</span></span><span style="display:flex;"><span>    delaycompress
+</span></span><span style="display:flex;"><span>    missingok
+</span></span><span style="display:flex;"><span>    notifempty
+</span></span><span style="display:flex;"><span>    create 0640 root adm
+</span></span><span style="display:flex;"><span>    sharedscripts
+</span></span><span style="display:flex;"><span>    postrotate
+</span></span><span style="display:flex;"><span>        systemctl reload &lt;APP&gt; &gt; /dev/null 2&gt;&amp;1 || true
+</span></span><span style="display:flex;"><span>    endscript
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li><code>daily</code>: Rotation frequency (<code>daily</code>, <code>weekly</code>, <code>monthly</code>).</li>
+<li><code>rotate 14</code>: Number of rotated archives to keep.</li>
+<li><code>compress</code>, <code>delaycompress</code>: Compress rotated logs, delaying compression by one cycle.</li>
+<li><code>missingok</code>, <code>notifempty</code>: Do not fail on missing files and skip empty logs.</li>
+<li><code>create 0640 root adm</code>: Mode and ownership of the newly created log file.</li>
+<li><code>sharedscripts</code>, <code>postrotate</code>: Run the script block once after rotation, typically to make the service reopen its log files.</li>
+</ul>
+<p>Test the configuration without changing files:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>logrotate -d /etc/logrotate.conf</span></span></code></pre></div><p>Force a rotation now:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>logrotate -f /etc/logrotate.conf</span></span></code></pre></div><p>Force a single drop-in:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>logrotate -f /etc/logrotate.d/&lt;APP&gt;</span></span></code></pre></div><hr>
+<h1 id="part-1-debian-based-systems">Part 1: Debian-Based Systems<a class="anchor" href="#part-1-debian-based-systems">#</a></h1>
+<p><strong>Examples:</strong> Debian, Ubuntu</p>
+<h2 id="1-read-debian-specific-log-files">1. Read Debian-Specific Log Files<a class="anchor" href="#1-read-debian-specific-log-files">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tail -n <span style="color:#ae81ff">100</span> /var/log/syslog
+</span></span><span style="display:flex;"><span>tail -n <span style="color:#ae81ff">100</span> /var/log/auth.log
+</span></span><span style="display:flex;"><span>tail -n <span style="color:#ae81ff">100</span> /var/log/kern.log</span></span></code></pre></div><ul>
+<li><code>/var/log/syslog</code>: General system messages.</li>
+<li><code>/var/log/auth.log</code>: Authentication and sudo events. Monitor for repeated failures.</li>
+<li><code>/var/log/kern.log</code>: Kernel messages, hardware errors, and filesystem warnings.</li>
+</ul>
+<p>These files are readable by the <code>adm</code> group. Grant read access to trusted administrators without giving them a root shell:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>usermod -aG adm &lt;USERNAME&gt;</span></span></code></pre></div><h2 id="2-read-package-and-authentication-history">2. Read Package and Authentication History<a class="anchor" href="#2-read-package-and-authentication-history">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>grep <span style="color:#e6db74">&#34; install &#34;</span> /var/log/dpkg.log
+</span></span><span style="display:flex;"><span>zgrep -h <span style="color:#e6db74">&#34;Failed password&#34;</span> /var/log/auth.log*</span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li><code>zgrep</code>: Searches compressed (<code>.gz</code>) rotated logs as well as plain files.</li>
+</ul>
+<hr>
+<h1 id="part-2-rhel-based-systems">Part 2: RHEL-Based Systems<a class="anchor" href="#part-2-rhel-based-systems">#</a></h1>
+<p><strong>Examples:</strong> RHEL, Rocky Linux, AlmaLinux</p>
+<h2 id="1-read-rhel-specific-log-files">1. Read RHEL-Specific Log Files<a class="anchor" href="#1-read-rhel-specific-log-files">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tail -n <span style="color:#ae81ff">100</span> /var/log/messages
+</span></span><span style="display:flex;"><span>tail -n <span style="color:#ae81ff">100</span> /var/log/secure</span></span></code></pre></div><ul>
+<li><code>/var/log/messages</code>: General system messages written by rsyslog.</li>
+<li><code>/var/log/secure</code>: Authentication and sudo events.</li>
+<li><code>/var/log/audit/audit.log</code>: Audit subsystem and SELinux denial events.</li>
+</ul>
+<h2 id="2-enable-persistent-journal-storage">2. Enable Persistent Journal Storage<a class="anchor" href="#2-enable-persistent-journal-storage">#</a></h2>
+<p>The journal is volatile by default and loses its history at every reboot. Enable persistent storage and cap its size in <code>/etc/systemd/journald.conf</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#66d9ef">[Journal]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Storage</span><span style="color:#f92672">=</span><span style="color:#e6db74">persistent</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">SystemMaxUse</span><span style="color:#f92672">=</span><span style="color:#e6db74">1G</span></span></span></code></pre></div><p>Apply the configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir -p /var/log/journal
+</span></span><span style="display:flex;"><span>systemctl restart systemd-journald</span></span></code></pre></div><p>Messages now survive reboots and can be queried across boots:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>journalctl -b -1</span></span></code></pre></div><hr>
+<h1 id="part-3-important-notes">Part 3: Important Notes<a class="anchor" href="#part-3-important-notes">#</a></h1>
+<h2 id="log-file-comparison">Log File Comparison<a class="anchor" href="#log-file-comparison">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>Topic</th>
+					<th>Debian-based</th>
+					<th>RHEL-based</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>General messages</td>
+					<td><code>/var/log/syslog</code></td>
+					<td><code>/var/log/messages</code></td>
+			</tr>
+			<tr>
+					<td>Authentication</td>
+					<td><code>/var/log/auth.log</code></td>
+					<td><code>/var/log/secure</code></td>
+			</tr>
+			<tr>
+					<td>Kernel messages</td>
+					<td><code>/var/log/kern.log</code></td>
+					<td><code>/var/log/messages</code>, <code>journalctl -k</code></td>
+			</tr>
+			<tr>
+					<td>Package log</td>
+					<td><code>/var/log/dpkg.log</code></td>
+					<td><code>/var/log/dnf.log</code>, <code>/var/log/yum.log</code></td>
+			</tr>
+			<tr>
+					<td>Default ownership</td>
+					<td><code>root:adm</code>, mode <code>0640</code></td>
+					<td><code>root:root</code>, mode <code>0600</code></td>
+			</tr>
+			<tr>
+					<td>Log reader group</td>
+					<td><code>adm</code></td>
+					<td><code>root</code></td>
+			</tr>
+			<tr>
+					<td>Journald persistence</td>
+					<td><code>/var/log/journal</code> when enabled</td>
+					<td><code>/var/log/journal</code> when enabled</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="security-guidelines">Security Guidelines<a class="anchor" href="#security-guidelines">#</a></h2>
+<ul>
+<li>Centralize logs on a remote host or log platform. A compromised host cannot be trusted to report its own logs.</li>
+<li>Restrict log permissions: <code>0640 root:adm</code> on Debian-based and <code>0600 root:root</code> on RHEL-based systems. Never make logs world-readable.</li>
+<li>Do not rotate live logs manually with <code>mv</code> or <code>cp</code>. Use logrotate so services can reopen their files consistently.</li>
+<li>Never log credentials, tokens, or private keys. Redact secrets at the application level before messages reach rsyslog or journald.</li>
+<li>Retain authentication and audit logs (<code>auth.log</code>, <code>secure</code>, <code>audit.log</code>) for a defined period that covers your incident response window.</li>
+<li>Back up <code>/etc/rsyslog.conf</code>, <code>/etc/rsyslog.d</code>, and <code>/etc/logrotate.d</code> together with the rest of <code>/etc</code>.</li>
+<li>Protect <code>/var/log/journal</code>; it is a common target for evidence removal during intrusions.</li>
+<li>Record the <code>journalctl</code> queries used during an incident, since retained history changes with vacuum and <code>SystemMaxUse</code> settings.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/linux/disk-troubleshooting/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>disk-troubleshooting</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/linux/selinux-apparmor/" class="flex align-center">
+        <span>selinux-apparmor</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-understand-the-log-sources">1. Understand the Log Sources</a></li>
+    <li><a href="#2-inspect-the-varlog-layout">2. Inspect the /var/log Layout</a></li>
+    <li><a href="#3-query-the-journal-with-journalctl">3. Query the Journal with journalctl</a></li>
+    <li><a href="#4-rotate-logs-with-logrotate">4. Rotate Logs with logrotate</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-read-debian-specific-log-files">1. Read Debian-Specific Log Files</a></li>
+    <li><a href="#2-read-package-and-authentication-history">2. Read Package and Authentication History</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-read-rhel-specific-log-files">1. Read RHEL-Specific Log Files</a></li>
+    <li><a href="#2-enable-persistent-journal-storage">2. Enable Persistent Journal Storage</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#log-file-comparison">Log File Comparison</a></li>
+    <li><a href="#security-guidelines">Security Guidelines</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

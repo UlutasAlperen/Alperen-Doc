@@ -1,0 +1,3495 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Scope: Debian-based and RHEL-based Linux distributions
+Topics: Host firewalls, ufw, application profiles, firewalld, zones, rich rules, nftables, iptables, common ports, and safe rule management.
+A host firewall filters incoming and outgoing traffic on a single system. It is the first control point for exposed services and should be configured before a service is started on a production interface. Debian-based systems commonly use ufw, RHEL-based systems use firewalld, and both build their rules on the nftables kernel framework.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/linux/firewall/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="firewall">
+	<meta property="og:description" content="Scope: Debian-based and RHEL-based Linux distributions
+Topics: Host firewalls, ufw, application profiles, firewalld, zones, rich rules, nftables, iptables, common ports, and safe rule management.
+A host firewall filters incoming and outgoing traffic on a single system. It is the first control point for exposed services and should be configured before a service is started on a production interface. Debian-based systems commonly use ufw, RHEL-based systems use firewalld, and both build their rules on the nftables kernel framework.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="firewall">
+	<meta itemprop="description" content="Scope: Debian-based and RHEL-based Linux distributions
+Topics: Host firewalls, ufw, application profiles, firewalld, zones, rich rules, nftables, iptables, common ports, and safe rule management.
+A host firewall filters incoming and outgoing traffic on a single system. It is the first control point for exposed services and should be configured before a service is started on a production interface. Debian-based systems commonly use ufw, RHEL-based systems use firewalld, and both build their rules on the nftables kernel framework.">
+	<meta itemprop="wordCount" content="890">
+
+<title>firewall • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/linux/firewall/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.2717c173d31e1424177e095b6301c63f2558df43c4923cf34d083e2f8cfcbc76.js" integrity="sha256-JxfBc9MeFCQXfglbYwHGPyVY30PEkjzzTQg&#43;L4z8vHY=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic-git-conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic-git-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github-workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous-integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous-deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git-status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git-add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git-commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git-push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git-branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git-pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git-log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git-merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git-rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git-reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git-remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git-switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4ebc7360f9ae508312064855054fc795" class="toggle" checked />
+    <label for="section-4ebc7360f9ae508312064855054fc795" class="flex">
+      <a href="/docs/linux/" class="">
+        Linux</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/linux-user-management/" class="">
+      linux-user-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/group-management/" class="">
+      group-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/file-permissions/" class="">
+      file-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/sudo/" class="">
+      sudo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/ssh/" class="">
+      ssh</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/systemd/" class="">
+      systemd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/process-management/" class="">
+      process-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/cron-timers/" class="">
+      cron-timers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/networking-basics/" class="">
+      networking-basics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/dns/" class="">
+      dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/firewall/" class="active">
+      firewall</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/network-troubleshooting/" class="">
+      network-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/filesystem-hierarchy/" class="">
+      filesystem-hierarchy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-management/" class="">
+      disk-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/lvm/" class="">
+      lvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-troubleshooting/" class="">
+      disk-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/log-management/" class="">
+      log-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/selinux-apparmor/" class="">
+      selinux-apparmor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/security-hardening/" class="">
+      security-hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/package-management/" class="">
+      package-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/performance-triage/" class="">
+      performance-triage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/boot-process/" class="">
+      boot-process</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager/" class="">
+      cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager-production/" class="">
+      cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/prometheus-stack/" class="">
+      prometheus-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/victoriametrics/" class="">
+      victoriametrics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-390924aad12540f8027ddb300c8575d3" class="toggle"  />
+    <label for="section-390924aad12540f8027ddb300c8575d3" class="flex">
+      <a href="/docs/aws/" class="">
+        AWS</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7ac94fcac7ebb60d389835a7fcb83889" class="toggle"  />
+    <label for="section-7ac94fcac7ebb60d389835a7fcb83889" class="flex">
+      <a href="/docs/aws/networking/" class="">
+        networking</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/regions-and-availability-zones/" class="">
+      regions-and-availability-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/virtual-private-cloud-vpc/" class="">
+      virtual-private-cloud-vpc</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/aws-subnetting/" class="">
+      aws-subnetting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/internet-gateways-igw/" class="">
+      internet-gateways-igw</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/route-tables/" class="">
+      route-tables</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/private-subnets/" class="">
+      private-subnets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/connecting-to-the-aws-cloud/" class="">
+      connecting-to-the-aws-cloud</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="toggle"  />
+    <label for="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="flex">
+      <a href="/docs/aws/ec2/" class="">
+        ec2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instance-configuration-keys/" class="">
+      ec2-instance-configuration-keys</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instances/" class="">
+      ec2-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/elastic-ips/" class="">
+      elastic-ips</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-security-groups/" class="">
+      aws-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ssh-to-aws-server/" class="">
+      ssh-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/deploy-site-to-aws-server/" class="">
+      deploy-site-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/open-web-traffic/" class="">
+      open-web-traffic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/creating-and-using-your-own-ami/" class="">
+      creating-and-using-your-own-ami</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-launch-template/" class="">
+      aws-launch-template</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/launch-from-template-aws/" class="">
+      launch-from-template-aws</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b73d690c546b071419fd1f673553fed1" class="toggle"  />
+    <label for="section-b73d690c546b071419fd1f673553fed1" class="flex">
+      <a href="/docs/aws/rds/" class="">
+        rds</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/relational-database-service/" class="">
+      relational-database-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-a-postgresql-database-in-aws/" class="">
+      create-a-postgresql-database-in-aws</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-to-your-database/" class="">
+      aws-connect-to-your-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-app-to-database/" class="">
+      aws-connect-app-to-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-backups/" class="">
+      rds-backups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-read-replicas-for-scalability/" class="">
+      create-read-replicas-for-scalability</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-general-knowledge/" class="">
+      rds-general-knowledge</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-df37bf19bddd1b463e10899723e49972" class="toggle"  />
+    <label for="section-df37bf19bddd1b463e10899723e49972" class="flex">
+      <a href="/docs/aws/iam/" class="">
+        iam</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user-and-group/" class="">
+      create-iam-user-and-group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/identity-and-access-management/" class="">
+      identity-and-access-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user/" class="">
+      create-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/inline-policies-iam-user/" class="">
+      inline-policies-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-groups/" class="">
+      iam-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-roles/" class="">
+      iam-roles</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-iam-deny-policies/" class="">
+      aws-iam-deny-policies</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-ssm-parameter-store/" class="">
+      aws-ssm-parameter-store</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/accessing-ssm-parameters-from-ec2/" class="">
+      accessing-ssm-parameters-from-ec2</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/use-ssm-from-ec2/" class="">
+      use-ssm-from-ec2</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aee932daafc4b41b13adc2e2442618ba" class="toggle"  />
+    <label for="section-aee932daafc4b41b13adc2e2442618ba" class="flex">
+      <a href="/docs/aws/monitoring/" class="">
+        monitoring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-external-monitoring/" class="">
+      aws-external-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-internal-monitoring/" class="">
+      aws-internal-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloud-watch-alarms/" class="">
+      cloud-watch-alarms</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloudtrail/" class="">
+      cloudtrail</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f38d96bcff4e2965101ac96ca363fcf" class="toggle"  />
+    <label for="section-2f38d96bcff4e2965101ac96ca363fcf" class="flex">
+      <a href="/docs/aws/s3/" class="">
+        s3</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3/" class="">
+      aws-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-bucket/" class="">
+      aws-s3-bucket</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-objects/" class="">
+      aws-s3-objects</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="toggle"  />
+    <label for="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="flex">
+      <a href="/docs/aws/dns/" class="">
+        dns</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/route-53-hosted-zones/" class="">
+      route-53-hosted-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-a-records/" class="">
+      aws-a-records</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/dns-ttl-and-caching/" class="">
+      dns-ttl-and-caching</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-verifying-dns/" class="">
+      aws-verifying-dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-cname-records/" class="">
+      aws-cname-records</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6db6507c5b69aeaa72e952abc5260963" class="toggle"  />
+    <label for="section-6db6507c5b69aeaa72e952abc5260963" class="flex">
+      <a href="/docs/aws/cdn/" class="">
+        cdn</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-cdn/" class="">
+      cloudfront-cdn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-distributions/" class="">
+      cloudfront-distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-invalidation/" class="">
+      cloudfront-invalidation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/presigned-urls/" class="">
+      presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/why-use-presigned-urls/" class="">
+      why-use-presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-with-dns/" class="">
+      cloudfront-with-dns</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0a1e7816907ed9977365d8170f4ec356" class="toggle"  />
+    <label for="section-0a1e7816907ed9977365d8170f4ec356" class="flex">
+      <a href="/docs/aws/ecs/" class="">
+        ecs</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/vpc-and-networking-setup-for-ecs/" class="">
+      vpc-and-networking-setup-for-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/why-ecs/" class="">
+      why-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/elastic-container-registry/" class="">
+      elastic-container-registry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecr-repo/" class="">
+      ecr-repo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-clusters/" class="">
+      ecs-clusters</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-permissions/" class="">
+      ecs-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-task-definitions/" class="">
+      ecs-task-definitions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-security-groups/" class="">
+      ecs-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/application-load-balancer/" class="">
+      application-load-balancer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-target-groups/" class="">
+      ecs-target-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/cloudwatch-log-groups/" class="">
+      cloudwatch-log-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-services/" class="">
+      ecs-services</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="toggle"  />
+    <label for="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="flex">
+      <a href="/docs/aws/eks/" class="">
+        eks</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-cluster/" class="">
+      eks-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-vs-kubeadm/" class="">
+      eks-vs-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-deploy-app/" class="">
+      eks-deploy-app</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-connect-s3/" class="">
+      eks-connect-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-use-rds/" class="">
+      eks-use-rds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-node-affinity-taints/" class="">
+      eks-node-affinity-taints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-ha-cluster/" class="">
+      eks-ha-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-spot-instances/" class="">
+      eks-spot-instances</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-514dc5328411196c2c4bb685cf444143" class="toggle"  />
+    <label for="section-514dc5328411196c2c4bb685cf444143" class="flex">
+      <a href="/docs/aws/lambda/" class="">
+        lambda</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/aws-lambda/" class="">
+      aws-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/deploy-lambda/" class="">
+      deploy-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/testing-lambda-function/" class="">
+      testing-lambda-function</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/lambda-api-gateway/" class="">
+      lambda-api-gateway</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/cloudwatch-log-groups-and-viewing-lambda-logs/" class="">
+      cloudwatch-log-groups-and-viewing-lambda-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/other-lambda-use-cases/" class="">
+      other-lambda-use-cases</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c8e51cd1f2a827eecce0fcb6812e371" class="toggle"  />
+    <label for="section-8c8e51cd1f2a827eecce0fcb6812e371" class="flex">
+      <a href="/docs/aws/general-knowledge/" class="">
+        general-knowledge</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/reserved-instances-savings-plans/" class="">
+      reserved-instances-savings-plans</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/spot-instances/" class="">
+      spot-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/auto-scaling-groups/" class="">
+      auto-scaling-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-compute-service/" class="">
+      aws-compute-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-storage/" class="">
+      aws-storage</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>firewall</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-install-ufw">1. Install ufw</a></li>
+    <li><a href="#2-inspect-the-current-rules">2. Inspect the Current Rules</a></li>
+    <li><a href="#3-set-the-default-policies">3. Set the Default Policies</a></li>
+    <li><a href="#4-allow-traffic-by-port">4. Allow Traffic by Port</a></li>
+    <li><a href="#5-allow-an-application-profile">5. Allow an Application Profile</a></li>
+    <li><a href="#6-enable-the-firewall">6. Enable the Firewall</a></li>
+    <li><a href="#7-delete-rules">7. Delete Rules</a></li>
+    <li><a href="#8-enable-logging">8. Enable Logging</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-install-and-start-firewalld">1. Install and Start firewalld</a></li>
+    <li><a href="#2-understand-zones">2. Understand Zones</a></li>
+    <li><a href="#3-inspect-the-rules">3. Inspect the Rules</a></li>
+    <li><a href="#4-open-services-and-ports">4. Open Services and Ports</a></li>
+    <li><a href="#5-remove-rules">5. Remove Rules</a></li>
+    <li><a href="#6-add-a-rich-rule">6. Add a Rich Rule</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#nftables-and-iptables">nftables and iptables</a></li>
+    <li><a href="#common-ports">Common Ports</a></li>
+    <li><a href="#command-reference">Command Reference</a></li>
+    <li><a href="#security-guidelines">Security Guidelines</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><p><strong>Scope:</strong> Debian-based and RHEL-based Linux distributions<br>
+<strong>Topics:</strong> Host firewalls, ufw, application profiles, firewalld, zones, rich rules, nftables, iptables, common ports, and safe rule management.</p>
+<p>A host firewall filters incoming and outgoing traffic on a single system. It is the first control point for exposed services and should be configured before a service is started on a production interface. Debian-based systems commonly use ufw, RHEL-based systems use firewalld, and both build their rules on the nftables kernel framework.</p>
+<hr>
+<h1 id="part-1-debian-based-systems">Part 1: Debian-Based Systems<a class="anchor" href="#part-1-debian-based-systems">#</a></h1>
+<p><strong>Examples:</strong> Debian, Ubuntu</p>
+<h2 id="1-install-ufw">1. Install ufw<a class="anchor" href="#1-install-ufw">#</a></h2>
+<p>Run as root:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt update
+</span></span><span style="display:flex;"><span>apt install ufw</span></span></code></pre></div><h2 id="2-inspect-the-current-rules">2. Inspect the Current Rules<a class="anchor" href="#2-inspect-the-current-rules">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ufw status verbose</span></span></code></pre></div><p>Expected output on a fresh system:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Status: inactive
+</span></span><span style="display:flex;"><span>Default: deny (incoming), allow (outgoing), disabled (routed)
+</span></span><span style="display:flex;"><span>Logging: off</span></span></code></pre></div><h2 id="3-set-the-default-policies">3. Set the Default Policies<a class="anchor" href="#3-set-the-default-policies">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ufw default deny incoming
+</span></span><span style="display:flex;"><span>sudo ufw default allow outgoing</span></span></code></pre></div><p>Deny incoming and allow outgoing is the standard baseline for servers.</p>
+<h2 id="4-allow-traffic-by-port">4. Allow Traffic by Port<a class="anchor" href="#4-allow-traffic-by-port">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ufw allow 22/tcp
+</span></span><span style="display:flex;"><span>sudo ufw allow 80/tcp
+</span></span><span style="display:flex;"><span>sudo ufw allow 443/tcp
+</span></span><span style="display:flex;"><span>sudo ufw allow from 192.0.2.0/24 to any port <span style="color:#ae81ff">5432</span> proto tcp</span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li><code>allow</code>: Accepts matching traffic. Use <code>deny</code> to drop it.</li>
+<li><code>22/tcp</code>: Port and protocol. Always specify the protocol for TCP and UDP services.</li>
+<li><code>from &lt;SOURCE&gt;</code>: Restricts the rule to one source address or subnet.</li>
+<li><code>to any port &lt;PORT&gt;</code>: Sets the destination port.</li>
+<li><code>comment &quot;&lt;TEXT&gt;&quot;</code>: Attaches a note to the rule for later audits.</li>
+</ul>
+<h2 id="5-allow-an-application-profile">5. Allow an Application Profile<a class="anchor" href="#5-allow-an-application-profile">#</a></h2>
+<p>List the known profiles and inspect one:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ufw app list
+</span></span><span style="display:flex;"><span>sudo ufw app info <span style="color:#e6db74">&#34;OpenSSH&#34;</span></span></span></code></pre></div><p>Allow by profile name:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ufw allow <span style="color:#e6db74">&#34;OpenSSH&#34;</span></span></span></code></pre></div><h2 id="6-enable-the-firewall">6. Enable the Firewall<a class="anchor" href="#6-enable-the-firewall">#</a></h2>
+<p>Allow SSH before enabling ufw:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ufw allow 22/tcp
+</span></span><span style="display:flex;"><span>sudo ufw enable</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Firewall is active and enabled on system startup</span></span></code></pre></div><p>Confirm the active ruleset:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ufw status numbered</span></span></code></pre></div><h2 id="7-delete-rules">7. Delete Rules<a class="anchor" href="#7-delete-rules">#</a></h2>
+<p>List rules with numbers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ufw status numbered</span></span></code></pre></div><p>Delete by number or by definition:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ufw delete <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>sudo ufw delete allow 80/tcp</span></span></code></pre></div><h2 id="8-enable-logging">8. Enable Logging<a class="anchor" href="#8-enable-logging">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ufw logging on
+</span></span><span style="display:flex;"><span>sudo tail -f /var/log/ufw.log</span></span></code></pre></div><p>Set the log level with <code>sudo ufw logging medium</code>. Logging records dropped packets and can be verbose on exposed hosts.</p>
+<hr>
+<h1 id="part-2-rhel-based-systems">Part 2: RHEL-Based Systems<a class="anchor" href="#part-2-rhel-based-systems">#</a></h1>
+<p><strong>Examples:</strong> RHEL, Rocky Linux, AlmaLinux</p>
+<h2 id="1-install-and-start-firewalld">1. Install and Start firewalld<a class="anchor" href="#1-install-and-start-firewalld">#</a></h2>
+<p>Run as root:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dnf install firewalld
+</span></span><span style="display:flex;"><span>systemctl enable --now firewalld</span></span></code></pre></div><p>Verify the service:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>systemctl status firewalld</span></span></code></pre></div><h2 id="2-understand-zones">2. Understand Zones<a class="anchor" href="#2-understand-zones">#</a></h2>
+<p>firewalld applies rules through zones. Each interface is bound to one zone, and the zone defines which traffic is accepted.</p>
+<p>Show the default and active zones:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>firewall-cmd --get-default-zone
+</span></span><span style="display:flex;"><span>firewall-cmd --get-active-zones</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>public
+</span></span><span style="display:flex;"><span>  interfaces: eth0</span></span></code></pre></div><h2 id="3-inspect-the-rules">3. Inspect the Rules<a class="anchor" href="#3-inspect-the-rules">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>firewall-cmd --list-all
+</span></span><span style="display:flex;"><span>firewall-cmd --list-services
+</span></span><span style="display:flex;"><span>firewall-cmd --list-ports</span></span></code></pre></div><h2 id="4-open-services-and-ports">4. Open Services and Ports<a class="anchor" href="#4-open-services-and-ports">#</a></h2>
+<p>Add a rule for the current session only:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo firewall-cmd --add-service<span style="color:#f92672">=</span>ssh
+</span></span><span style="display:flex;"><span>sudo firewall-cmd --add-port<span style="color:#f92672">=</span>8080/tcp</span></span></code></pre></div><p>Make the rule persistent:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo firewall-cmd --permanent --add-service<span style="color:#f92672">=</span>ssh
+</span></span><span style="display:flex;"><span>sudo firewall-cmd --permanent --add-port<span style="color:#f92672">=</span>8080/tcp
+</span></span><span style="display:flex;"><span>sudo firewall-cmd --reload</span></span></code></pre></div><p>Verify the result:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo firewall-cmd --list-all</span></span></code></pre></div><p><strong>Options:</strong></p>
+<ul>
+<li><code>--permanent</code>: Writes the rule to the configuration. Without it, the rule is lost at reload or reboot.</li>
+<li><code>--reload</code>: Applies the permanent configuration to the runtime.</li>
+<li><code>--add-service=&lt;SERVICE&gt;</code>: Opens the ports defined for a named service in <code>/usr/lib/firewalld/services/</code>.</li>
+<li><code>--add-port=&lt;PORT&gt;/&lt;PROTOCOL&gt;</code>: Opens a single port.</li>
+</ul>
+<h2 id="5-remove-rules">5. Remove Rules<a class="anchor" href="#5-remove-rules">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo firewall-cmd --permanent --remove-service<span style="color:#f92672">=</span>ssh
+</span></span><span style="display:flex;"><span>sudo firewall-cmd --permanent --remove-port<span style="color:#f92672">=</span>8080/tcp
+</span></span><span style="display:flex;"><span>sudo firewall-cmd --reload</span></span></code></pre></div><h2 id="6-add-a-rich-rule">6. Add a Rich Rule<a class="anchor" href="#6-add-a-rich-rule">#</a></h2>
+<p>Restrict a database port to one source subnet:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo firewall-cmd --permanent --add-rich-rule<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;rule family=&#34;ipv4&#34; source address=&#34;192.0.2.0/24&#34; port protocol=&#34;tcp&#34; port=&#34;5432&#34; accept&#39;</span>
+</span></span><span style="display:flex;"><span>sudo firewall-cmd --reload</span></span></code></pre></div><p>List rich rules:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo firewall-cmd --list-rich-rules</span></span></code></pre></div><hr>
+<h1 id="part-3-important-notes">Part 3: Important Notes<a class="anchor" href="#part-3-important-notes">#</a></h1>
+<h2 id="nftables-and-iptables">nftables and iptables<a class="anchor" href="#nftables-and-iptables">#</a></h2>
+<p>Both ufw and firewalld generate nftables rules on current releases. <code>iptables</code> is a compatibility layer over the same kernel framework. Inspect the live ruleset with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nft list ruleset
+</span></span><span style="display:flex;"><span>sudo iptables -L -n -v</span></span></code></pre></div><p>Install the tools if they are missing with <code>apt install nftables iptables</code> or <code>dnf install nftables iptables-nft</code>.</p>
+<p>Do not mix manual <code>nft</code> or <code>iptables</code> rules with ufw or firewalld. The frontends overwrite or conflict with direct rules at every reload. Choose one management path per host.</p>
+<h2 id="common-ports">Common Ports<a class="anchor" href="#common-ports">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>Port</th>
+					<th>Protocol</th>
+					<th>Service</th>
+					<th>Typical use</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>22</td>
+					<td>TCP</td>
+					<td>SSH</td>
+					<td>Administration</td>
+			</tr>
+			<tr>
+					<td>25</td>
+					<td>TCP</td>
+					<td>SMTP</td>
+					<td>Mail relay</td>
+			</tr>
+			<tr>
+					<td>53</td>
+					<td>TCP/UDP</td>
+					<td>DNS</td>
+					<td>Name resolution</td>
+			</tr>
+			<tr>
+					<td>123</td>
+					<td>UDP</td>
+					<td>NTP</td>
+					<td>Time synchronization</td>
+			</tr>
+			<tr>
+					<td>80</td>
+					<td>TCP</td>
+					<td>HTTP</td>
+					<td>Web servers</td>
+			</tr>
+			<tr>
+					<td>443</td>
+					<td>TCP</td>
+					<td>HTTPS</td>
+					<td>Web servers</td>
+			</tr>
+			<tr>
+					<td>3306</td>
+					<td>TCP</td>
+					<td>MySQL/MariaDB</td>
+					<td>Database</td>
+			</tr>
+			<tr>
+					<td>5432</td>
+					<td>TCP</td>
+					<td>PostgreSQL</td>
+					<td>Database</td>
+			</tr>
+			<tr>
+					<td>6443</td>
+					<td>TCP</td>
+					<td>Kubernetes API server</td>
+					<td>Cluster control plane</td>
+			</tr>
+			<tr>
+					<td>2379-2380</td>
+					<td>TCP</td>
+					<td>etcd</td>
+					<td>Cluster control plane</td>
+			</tr>
+			<tr>
+					<td>10250</td>
+					<td>TCP</td>
+					<td>kubelet API</td>
+					<td>Cluster nodes</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="command-reference">Command Reference<a class="anchor" href="#command-reference">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>Operation</th>
+					<th>ufw</th>
+					<th>firewalld</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Show status</td>
+					<td><code>ufw status verbose</code></td>
+					<td><code>firewall-cmd --list-all</code></td>
+			</tr>
+			<tr>
+					<td>Open a port</td>
+					<td><code>ufw allow 8080/tcp</code></td>
+					<td><code>firewall-cmd --permanent --add-port=8080/tcp</code></td>
+			</tr>
+			<tr>
+					<td>Close a port</td>
+					<td><code>ufw delete allow 8080/tcp</code></td>
+					<td><code>firewall-cmd --permanent --remove-port=8080/tcp</code></td>
+			</tr>
+			<tr>
+					<td>Restrict a source</td>
+					<td><code>ufw allow from &lt;SOURCE&gt; to any port 5432 proto tcp</code></td>
+					<td>Rich rule with <code>source address</code></td>
+			</tr>
+			<tr>
+					<td>Enable</td>
+					<td><code>ufw enable</code></td>
+					<td><code>systemctl enable --now firewalld</code></td>
+			</tr>
+			<tr>
+					<td>Reload</td>
+					<td><code>ufw reload</code></td>
+					<td><code>firewall-cmd --reload</code></td>
+			</tr>
+			<tr>
+					<td>Logging</td>
+					<td><code>ufw logging on</code></td>
+					<td><code>firewall-cmd --set-log-denied=all</code></td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="security-guidelines">Security Guidelines<a class="anchor" href="#security-guidelines">#</a></h2>
+<ul>
+<li>Open only the ports the host actually needs. Keep the default policy at deny incoming.</li>
+<li>Add allow rules before enabling the firewall. Enabling ufw without an SSH rule cuts off remote access.</li>
+<li>Persist every rule. ufw rules persist by default; firewalld rules require <code>--permanent</code> and <code>--reload</code>.</li>
+<li>Restrict management ports such as 22 and 6443 to trusted source addresses where possible.</li>
+<li>Avoid locking yourself out: keep console access, test changes in a second session before disconnecting, and prefer temporary rules during maintenance windows.</li>
+<li>Do not mix ufw, firewalld, and manual <code>nft</code> or <code>iptables</code> rules on one host.</li>
+<li>Review the active ruleset regularly with <code>ufw status numbered</code> or <code>firewall-cmd --list-all</code>.</li>
+<li>Keep database and cluster ports off public interfaces. Bound exposure to the networks that use them.</li>
+<li>Treat firewall logs as sensitive operational data and forward them to a central log system.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/linux/dns/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>dns</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/docs/linux/network-troubleshooting/" class="flex align-center">
+        <span>network-troubleshooting</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-install-ufw">1. Install ufw</a></li>
+    <li><a href="#2-inspect-the-current-rules">2. Inspect the Current Rules</a></li>
+    <li><a href="#3-set-the-default-policies">3. Set the Default Policies</a></li>
+    <li><a href="#4-allow-traffic-by-port">4. Allow Traffic by Port</a></li>
+    <li><a href="#5-allow-an-application-profile">5. Allow an Application Profile</a></li>
+    <li><a href="#6-enable-the-firewall">6. Enable the Firewall</a></li>
+    <li><a href="#7-delete-rules">7. Delete Rules</a></li>
+    <li><a href="#8-enable-logging">8. Enable Logging</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-install-and-start-firewalld">1. Install and Start firewalld</a></li>
+    <li><a href="#2-understand-zones">2. Understand Zones</a></li>
+    <li><a href="#3-inspect-the-rules">3. Inspect the Rules</a></li>
+    <li><a href="#4-open-services-and-ports">4. Open Services and Ports</a></li>
+    <li><a href="#5-remove-rules">5. Remove Rules</a></li>
+    <li><a href="#6-add-a-rich-rule">6. Add a Rich Rule</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#nftables-and-iptables">nftables and iptables</a></li>
+    <li><a href="#common-ports">Common Ports</a></li>
+    <li><a href="#command-reference">Command Reference</a></li>
+    <li><a href="#security-guidelines">Security Guidelines</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

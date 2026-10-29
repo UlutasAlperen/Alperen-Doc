@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -9,32 +9,32 @@ https://github.com/alex-shpak/hugo-book
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Linux is the foundation of nearly every DevOps workflow. From homelab servers to production clusters, everything runs on it. I use Linux to:
-Manage users, groups and permissions Operate services and processes Configure networking and storage Automate administration tasks with the shell And much more Linux konular# Linux User Management = user creation, system users, sudo privileges on Debian- and RHEL-based systems ">
+Manage users, groups and permissions Operate services and processes Configure networking and storage Automate administration tasks with the shell And much more Linux konular# linux-user-management = user creation, system users, sudo privileges on Debian- and RHEL-based systems group-management = group creation, primary vs supplementary groups, /etc/group file-permissions = chmod, chown, umask, SUID/SGID/sticky bit, ACLs sudo = visudo, /etc/sudoers, sudoers.d, NOPASSWD ssh = key generation, authorized_keys, sshd_config hardening systemd = systemctl, unit files, journalctl process-management = ps, top, kill, signals, zombies cron-timers = crontab syntax, [Timer] units networking-basics = ip, nmcli, netplan, interfaces dns = /etc/hosts, resolvectl, dig firewall = port rules, zones, persistence network-troubleshooting = ss, curl, tcpdump, layered diagnosis filesystem-hierarchy = what lives where on a Linux system disk-management = lsblk, parted, mkfs, /etc/fstab, swap lvm = logical volumes, extending volumes and filesystems disk-troubleshooting = df, du, inodes, deleted-but-open files log-management = /var/log, journalctl queries, logrotate selinux-apparmor = MAC, contexts, profiles, diagnosing denials security-hardening = baseline hardening, brute-force protection package-management = install, upgrade, repos, holds performance-triage = load average, CPU vs I/O wait, memory, disk I/O boot-process = GRUB → initramfs → systemd targets ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/linux/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/linux/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="Linux">
 	<meta property="og:description" content="Linux is the foundation of nearly every DevOps workflow. From homelab servers to production clusters, everything runs on it. I use Linux to:
-Manage users, groups and permissions Operate services and processes Configure networking and storage Automate administration tasks with the shell And much more Linux konular# Linux User Management = user creation, system users, sudo privileges on Debian- and RHEL-based systems">
+Manage users, groups and permissions Operate services and processes Configure networking and storage Automate administration tasks with the shell And much more Linux konular# linux-user-management = user creation, system users, sudo privileges on Debian- and RHEL-based systems group-management = group creation, primary vs supplementary groups, /etc/group file-permissions = chmod, chown, umask, SUID/SGID/sticky bit, ACLs sudo = visudo, /etc/sudoers, sudoers.d, NOPASSWD ssh = key generation, authorized_keys, sshd_config hardening systemd = systemctl, unit files, journalctl process-management = ps, top, kill, signals, zombies cron-timers = crontab syntax, [Timer] units networking-basics = ip, nmcli, netplan, interfaces dns = /etc/hosts, resolvectl, dig firewall = port rules, zones, persistence network-troubleshooting = ss, curl, tcpdump, layered diagnosis filesystem-hierarchy = what lives where on a Linux system disk-management = lsblk, parted, mkfs, /etc/fstab, swap lvm = logical volumes, extending volumes and filesystems disk-troubleshooting = df, du, inodes, deleted-but-open files log-management = /var/log, journalctl queries, logrotate selinux-apparmor = MAC, contexts, profiles, diagnosing denials security-hardening = baseline hardening, brute-force protection package-management = install, upgrade, repos, holds performance-triage = load average, CPU vs I/O wait, memory, disk I/O boot-process = GRUB → initramfs → systemd targets">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="website">
 
 
 	<meta itemprop="name" content="Linux">
 	<meta itemprop="description" content="Linux is the foundation of nearly every DevOps workflow. From homelab servers to production clusters, everything runs on it. I use Linux to:
-Manage users, groups and permissions Operate services and processes Configure networking and storage Automate administration tasks with the shell And much more Linux konular# Linux User Management = user creation, system users, sudo privileges on Debian- and RHEL-based systems">
-	<meta itemprop="wordCount" content="62">
+Manage users, groups and permissions Operate services and processes Configure networking and storage Automate administration tasks with the shell And much more Linux konular# linux-user-management = user creation, system users, sudo privileges on Debian- and RHEL-based systems group-management = group creation, primary vs supplementary groups, /etc/group file-permissions = chmod, chown, umask, SUID/SGID/sticky bit, ACLs sudo = visudo, /etc/sudoers, sudoers.d, NOPASSWD ssh = key generation, authorized_keys, sshd_config hardening systemd = systemctl, unit files, journalctl process-management = ps, top, kill, signals, zombies cron-timers = crontab syntax, [Timer] units networking-basics = ip, nmcli, netplan, interfaces dns = /etc/hosts, resolvectl, dig firewall = port rules, zones, persistence network-troubleshooting = ss, curl, tcpdump, layered diagnosis filesystem-hierarchy = what lives where on a Linux system disk-management = lsblk, parted, mkfs, /etc/fstab, swap lvm = logical volumes, extending volumes and filesystems disk-troubleshooting = df, du, inodes, deleted-but-open files log-management = /var/log, journalctl queries, logrotate selinux-apparmor = MAC, contexts, profiles, diagnosing denials security-hardening = baseline hardening, brute-force protection package-management = install, upgrade, repos, holds performance-triage = load average, CPU vs I/O wait, memory, disk I/O boot-process = GRUB → initramfs → systemd targets">
+	<meta itemprop="wordCount" content="208">
 
 <title>Linux • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/linux/">
+<link rel="canonical" href="http://localhost:1313/docs/linux/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.588477ae18da6dfbb204693924c5b4f9146633fa9ce5017d669bca30e8f91b5a.js" integrity="sha256-WIR3rhjabfuyBGk5JMW0&#43;RRmM/qc5QF9ZpvKMOj5G1o=" crossorigin="anonymous"></script>
-<link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/linux/index.xml" title="Linux" />
+  <script defer type="module" src="/en.search.min.2717c173d31e1424177e095b6301c63f2558df43c4923cf34d083e2f8cfcbc76.js" integrity="sha256-JxfBc9MeFCQXfglbYwHGPyVY30PEkjzzTQg&#43;L4z8vHY=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/docs/linux/index.xml" title="Linux" />
 
   
 </head>
@@ -418,7 +418,301 @@ Manage users, groups and permissions Operate services and processes Configure ne
 
   
     <a href="/docs/linux/linux-user-management/" class="">
-      Linux User Management</a>
+      linux-user-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/group-management/" class="">
+      group-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/file-permissions/" class="">
+      file-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/sudo/" class="">
+      sudo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/ssh/" class="">
+      ssh</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/systemd/" class="">
+      systemd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/process-management/" class="">
+      process-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/cron-timers/" class="">
+      cron-timers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/networking-basics/" class="">
+      networking-basics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/dns/" class="">
+      dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/firewall/" class="">
+      firewall</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/network-troubleshooting/" class="">
+      network-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/filesystem-hierarchy/" class="">
+      filesystem-hierarchy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-management/" class="">
+      disk-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/lvm/" class="">
+      lvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-troubleshooting/" class="">
+      disk-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/log-management/" class="">
+      log-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/selinux-apparmor/" class="">
+      selinux-apparmor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/security-hardening/" class="">
+      security-hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/package-management/" class="">
+      package-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/performance-triage/" class="">
+      performance-triage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/boot-process/" class="">
+      boot-process</a>
   
 
         </li>
@@ -2831,7 +3125,28 @@ Manage users, groups and permissions Operate services and processes Configure ne
 </ul>
 <h2 id="linux-konular">Linux konular<a class="anchor" href="#linux-konular">#</a></h2>
 <ol>
-<li><a href="linux-user-management/">Linux User Management</a> = user creation, system users, sudo privileges on Debian- and RHEL-based systems</li>
+<li><a href="linux-user-management/">linux-user-management</a> = user creation, system users, sudo privileges on Debian- and RHEL-based systems</li>
+<li><a href="group-management/">group-management</a> = group creation, primary vs supplementary groups, <code>/etc/group</code></li>
+<li><a href="file-permissions/">file-permissions</a> = <code>chmod</code>, <code>chown</code>, <code>umask</code>, SUID/SGID/sticky bit, ACLs</li>
+<li><a href="sudo/">sudo</a> = <code>visudo</code>, <code>/etc/sudoers</code>, <code>sudoers.d</code>, NOPASSWD</li>
+<li><a href="ssh/">ssh</a> = key generation, <code>authorized_keys</code>, <code>sshd_config</code> hardening</li>
+<li><a href="systemd/">systemd</a> = <code>systemctl</code>, unit files, <code>journalctl</code></li>
+<li><a href="process-management/">process-management</a> = <code>ps</code>, <code>top</code>, <code>kill</code>, signals, zombies</li>
+<li><a href="cron-timers/">cron-timers</a> = <code>crontab</code> syntax, <code>[Timer]</code> units</li>
+<li><a href="networking-basics/">networking-basics</a> = <code>ip</code>, <code>nmcli</code>, netplan, interfaces</li>
+<li><a href="dns/">dns</a> = <code>/etc/hosts</code>, <code>resolvectl</code>, <code>dig</code></li>
+<li><a href="firewall/">firewall</a> = port rules, zones, persistence</li>
+<li><a href="network-troubleshooting/">network-troubleshooting</a> = <code>ss</code>, <code>curl</code>, <code>tcpdump</code>, layered diagnosis</li>
+<li><a href="filesystem-hierarchy/">filesystem-hierarchy</a> = what lives where on a Linux system</li>
+<li><a href="disk-management/">disk-management</a> = <code>lsblk</code>, <code>parted</code>, <code>mkfs</code>, <code>/etc/fstab</code>, swap</li>
+<li><a href="lvm/">lvm</a> = logical volumes, extending volumes and filesystems</li>
+<li><a href="disk-troubleshooting/">disk-troubleshooting</a> = <code>df</code>, <code>du</code>, inodes, deleted-but-open files</li>
+<li><a href="log-management/">log-management</a> = <code>/var/log</code>, <code>journalctl</code> queries, <code>logrotate</code></li>
+<li><a href="selinux-apparmor/">selinux-apparmor</a> = MAC, contexts, profiles, diagnosing denials</li>
+<li><a href="security-hardening/">security-hardening</a> = baseline hardening, brute-force protection</li>
+<li><a href="package-management/">package-management</a> = install, upgrade, repos, holds</li>
+<li><a href="performance-triage/">performance-triage</a> = load average, CPU vs I/O wait, memory, disk I/O</li>
+<li><a href="boot-process/">boot-process</a> = GRUB → initramfs → systemd targets</li>
 </ol>
 </article>
  
@@ -2863,7 +3178,7 @@ Manage users, groups and permissions Operate services and processes Configure ne
     <span>
     
       <a href="/docs/linux/linux-user-management/" class="flex align-center">
-        <span>Linux User Management</span>
+        <span>linux-user-management</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     
