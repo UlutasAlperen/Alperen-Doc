@@ -3,9 +3,9 @@ title: "secrets-manager-vs-parameter-store"
 weight: 40
 ---
 
-# Secrets Manager vs SSM Parameter Store
+# Secrets Manager vs SSM (Systems Manager) Parameter Store
 
-The exam loves this comparison - a scenario mentions database passwords or API keys, and you must pick the right vault. Both store secrets encrypted with KMS, but the differences decide the answer.
+The exam loves this comparison - a scenario mentions database passwords or API keys, and you must pick the right vault. Both store secrets encrypted with KMS (Key Management Service), but the differences decide the answer.
 
 ## Side by side
 
@@ -13,11 +13,11 @@ The exam loves this comparison - a scenario mentions database passwords or API k
 |---|---|---|
 | Purpose | Secrets (DB creds, API keys) | Config + secrets |
 | **Rotation** | **Built-in** (Lambda-backed, automatic) | DIY (custom automation) |
-| Cross-account | Native (resource policy) | Via IAM, more work |
+| Cross-account | Native (resource policy) | Via IAM (Identity and Access Management), more work |
 | Pricing | **~$0.40/secret/month** + API calls | Standard tier: **free**; Advanced: $0.05/param |
 | Size limit | 64 KB | Standard 4 KB / Advanced 8 KB |
 | Versioning | Automatic versions + staging labels (`AWSCURRENT`) | Labeled versions |
-| Integration | RDS, Redshift, DocumentDB native | Everything via SSM API |
+| Integration | RDS (Relational Database Service), Redshift, DocumentDB native | Everything via SSM API |
 
 ## Decision rule
 
@@ -47,9 +47,9 @@ The app keeps asking Secrets Manager for the secret by name - it always gets the
 Two tiers:
 
 - **Standard** - free, 4 KB, 10,000 params per account (soft limit), no advanced policies
-- **Advanced** - paid, 8 KB, more params, parameter policies (TTL to force expiry!)
+- **Advanced** - paid, 8 KB, more params, parameter policies (TTL (time to live) to force expiry!)
 
-Parameters are `String`, `StringList`, or `SecureString` (encrypted with KMS). EC2 instances fetch them via the SSM agent + an instance role - see my hands-on notes: [aws-ssm-parameter-store](../../../aws/iam/aws-ssm-parameter-store/).
+Parameters are `String`, `StringList`, or `SecureString` (encrypted with KMS). EC2 (Elastic Compute Cloud) instances fetch them via the SSM agent + an instance role - see my hands-on notes: [aws-ssm-parameter-store](../../../aws/iam/aws-ssm-parameter-store/).
 
 > Not: "gizli bilgi + otomatik rotasyon + kurulus icinde guvenli paylasim" = Secrets Manager. "Sadece config saklayacagim, ucuz olsun" = Parameter Store. Sinavda rotasyon kelimesi geciyorsa cevap neredeyse kesin Secrets Manager.
 
@@ -60,18 +60,22 @@ Parameters are `String`, `StringList`, or `SecureString` (encrypted with KMS). E
 - **A)** SSM Parameter Store (Standard tier)
 - **B)** AWS Secrets Manager
 - **C)** AWS Systems Manager OpsCenter
-- **D)** An encrypted EBS volume
+- **D)** An encrypted EBS (Elastic Block Store) volume
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Automatic rotation + cross-account + managed integrations = Secrets Manager.
+{{% /details %}}
 
 **Q2: An application needs 500 non-sensitive configuration values, and the team wants minimal cost. Which option is MOST cost-effective?**
 
 - **A)** Secrets Manager
 - **B)** SSM Parameter Store Standard tier
-- **C)** KMS encrypted S3 bucket
+- **C)** KMS encrypted S3 (Simple Storage Service) bucket
 - **D)** DynamoDB
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Standard tier parameters are free and designed for exactly this.
+{{% /details %}}
 
 ## Ozet
 

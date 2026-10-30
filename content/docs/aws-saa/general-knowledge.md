@@ -10,10 +10,10 @@ weight: 100
 
 ## 1. Compute - İşlem ve Uygulama Çalıştırma
 
-- **EC2:** AWS üzerinde sanal sunucu; işletim sistemi, instance tipi, disk ve ağ yapılandırması üzerinde kontrol sağlar. **Sınavda:** Özel işletim sistemi yapılandırması, uzun süre çalışan uygulama veya tam sunucu kontrolü isteniyorsa EC2.
-- **Lambda:** Sunucu yönetmeden olay tetiklemeli kod çalıştırır; kullanım ve çalışma süresine göre ücretlendirilir. **Sınavda:** S3'e dosya yüklenince işlem başlatma, SQS mesajı işleme veya kısa süreli API backend'i oluşturma.
-- **ECS:** AWS'nin container orkestrasyon servisidir; Docker container'larını görev ve servis olarak çalıştırır. **Sınavda:** Kubernetes karmaşıklığı olmadan AWS üzerinde container yönetmek.
-- **EKS:** AWS tarafından yönetilen Kubernetes control plane sunar; worker node'lar EC2 veya desteklenen iş yüklerinde Fargate üzerinde çalışabilir. **Sınavda:** Kubernetes API'si, mevcut Kubernetes araçları ve ekosistemi gerekiyorsa EKS.
+- **EC2 (Elastic Compute Cloud):** AWS üzerinde sanal sunucu; işletim sistemi, instance tipi, disk ve ağ yapılandırması üzerinde kontrol sağlar. **Sınavda:** Özel işletim sistemi yapılandırması, uzun süre çalışan uygulama veya tam sunucu kontrolü isteniyorsa EC2.
+- **Lambda:** Sunucu yönetmeden olay tetiklemeli kod çalıştırır; kullanım ve çalışma süresine göre ücretlendirilir. **Sınavda:** S3 (Simple Storage Service)'e dosya yüklenince işlem başlatma, SQS (Simple Queue Service) mesajı işleme veya kısa süreli API backend'i oluşturma.
+- **ECS (Elastic Container Service):** AWS'nin container orkestrasyon servisidir; Docker container'larını görev ve servis olarak çalıştırır. **Sınavda:** Kubernetes karmaşıklığı olmadan AWS üzerinde container yönetmek.
+- **EKS (Elastic Kubernetes Service):** AWS tarafından yönetilen Kubernetes control plane sunar; worker node'lar EC2 veya desteklenen iş yüklerinde Fargate üzerinde çalışabilir. **Sınavda:** Kubernetes API'si, mevcut Kubernetes araçları ve ekosistemi gerekiyorsa EKS.
 - **Fargate:** ECS veya EKS container'ları için sunucu/worker node yönetme ihtiyacını azaltan serverless compute altyapısıdır. **Sınavda:** Container çalıştırılacak ancak EC2 instance'ları ve node kapasitesi yönetilmek istenmiyorsa Fargate.
 - **Lightsail:** Basitleştirilmiş sanal sunucu, disk, ağ ve uygulama altyapısı sunar. **Sınavda:** Küçük web sitesi, blog veya kolay kurulabilen VPS benzeri ortam.
 - **AWS Batch:** Batch işlerini kuyruklar, zamanlar ve uygun işlem kapasitesinde çalıştırır. **Sınavda:** Büyük veri setleri üzerinde toplu hesaplama, simülasyon veya çok sayıda bağımsız iş.
@@ -25,16 +25,16 @@ weight: 100
 - ECS = container orkestrasyonu; Fargate = container çalıştırma altyapısı.
 - EKS = yönetilen Kubernetes; ECS = AWS'nin kendi container orkestrasyonu.
 - Lambda = fonksiyon çalıştırma; Fargate = container çalıştırma.
-- Auto Scaling = kapasiteyi dinamik değiştirme; ELB = gelen trafiği hedeflere dağıtma.
+- Auto Scaling = kapasiteyi dinamik değiştirme; ELB (Elastic Load Balancing) = gelen trafiği hedeflere dağıtma.
 
 ## 2. Storage - Depolama
 
 - **S3:** Nesne depolama; dosyalar bucket içinde object olarak saklanır. Çok yüksek dayanıklılık, sürümleme, lifecycle ve farklı depolama sınıfları sunar. **Sınavda:** Yedekler, medya dosyaları, statik web içeriği, data lake ve arşiv.
 - **S3 Storage Classes:** Veriye erişim sıklığı ve erişim süresine göre maliyeti optimize eder. **Sınavda:** Sık erişim = S3 Standard; öngörülebilir seyrek erişim = Standard-IA; erişim deseni belirsiz = Intelligent-Tiering; arşiv = Glacier sınıfları.
-- **EBS:** EC2'ye bağlanan block storage; işletim sistemi diski ve veritabanı diskleri için kullanılır. **Sınavda:** Kalıcı block disk, düşük gecikmeli disk I/O'su ve belirli performans gereksinimleri.
-- **EBS Snapshots:** EBS volume verisinin point-in-time yedeğidir; artımlı snapshot mekanizması kullanır. **Sınavda:** Volume yedeği, başka bir AZ veya Region'a kopyalama ve kurtarma.
+- **EBS (Elastic Block Store):** EC2'ye bağlanan block storage; işletim sistemi diski ve veritabanı diskleri için kullanılır. **Sınavda:** Kalıcı block disk, düşük gecikmeli disk I/O'su ve belirli performans gereksinimleri.
+- **EBS Snapshots:** EBS volume verisinin point-in-time yedeğidir; artımlı snapshot mekanizması kullanır. **Sınavda:** Volume yedeği, başka bir AZ (Availability Zone) veya Region'a kopyalama ve kurtarma.
 - **Instance Store:** Fiziksel sunucuya bağlı geçici block storage; kalıcı veri için uygun değildir. **Sınavda:** Geçici cache, buffer ve yeniden oluşturulabilir yüksek performanslı veriler.
-- **EFS:** Birden fazla Linux/Unix istemcisinin aynı dosya sistemine erişmesini sağlayan yönetilen NFS dosya depolamasıdır. **Sınavda:** Birden fazla EC2 instance'ının aynı dosyaları eş zamanlı okuması ve yazması.
+- **EFS (Elastic File System):** Birden fazla Linux/Unix istemcisinin aynı dosya sistemine erişmesini sağlayan yönetilen NFS dosya depolamasıdır. **Sınavda:** Birden fazla EC2 instance'ının aynı dosyaları eş zamanlı okuması ve yazması.
 - **FSx:** Windows File Server, Lustre, NetApp ONTAP ve OpenZFS gibi yönetilen dosya sistemleri sunar. **Sınavda:** Windows SMB/Active Directory, HPC için Lustre veya belirli kurumsal dosya sistemi özellikleri.
 - **Storage Gateway:** On-premises ortam ile AWS depolama servisleri arasında hibrit entegrasyon sağlar. **Sınavda:** Yerel uygulamaların bulut depolamasına geçişini kolaylaştırma.
 - **AWS Snow Family:** Büyük miktarda veriyi fiziksel cihazlarla taşıma ve uygun modellerde edge computing sağlama yaklaşımıdır. **Sınavda:** Sınırlı ağ bant genişliği, yüksek veri aktarım süresi veya bağlantı kısıtları.
@@ -49,20 +49,20 @@ weight: 100
 
 ## 3. Database - Veritabanları
 
-- **RDS:** MySQL, PostgreSQL, MariaDB, Oracle ve SQL Server gibi ilişkisel veritabanlarını yönetilen hizmet olarak çalıştırır. **Sınavda:** SQL, ilişkisel veri, otomatik yedekleme ve yönetilen veritabanı.
+- **RDS (Relational Database Service):** MySQL, PostgreSQL, MariaDB, Oracle ve SQL Server gibi ilişkisel veritabanlarını yönetilen hizmet olarak çalıştırır. **Sınavda:** SQL, ilişkisel veri, otomatik yedekleme ve yönetilen veritabanı.
 - **RDS Multi-AZ:** Veritabanı altyapısının farklı AZ'lerde yüksek erişilebilirlik için yedeklenmesini sağlar. **Sınavda:** Veritabanı instance'ı veya AZ arızasında otomatik failover.
 - **RDS Read Replica:** Okuma sorgularını ana veritabanından ayırmak için asenkron replika oluşturur. **Sınavda:** Okuma ağırlıklı iş yüklerinde performans artırma.
 - **Amazon Aurora:** AWS tarafından tasarlanmış, MySQL ve PostgreSQL uyumlu ilişkisel veritabanıdır. Ayrıştırılmış, dağıtık depolama mimarisi ve yönetilen failover özellikleri sunar. **Sınavda:** Yüksek performans, yüksek erişilebilirlik ve ilişkisel veri.
 - **Aurora Serverless:** Aurora kapasitesini desteklenen yapılandırmalarda talebe göre otomatik ölçekler. **Sınavda:** Değişken veya öngörülemeyen veritabanı yükü.
 - **DynamoDB:** Yönetilen, dağıtık NoSQL key-value ve document veritabanıdır. **Sınavda:** Çok yüksek ölçek, düşük gecikmeli anahtar erişimi ve sunucu yönetimi olmadan kapasite yönetimi.
-- **DynamoDB DAX:** DynamoDB okumaları için bellek içi cache katmanıdır. **Sınavda:** Sık okunan verilerde mikro saniye düzeyinde okuma gecikmesi hedefi.
+- **DynamoDB DAX (DynamoDB Accelerator):** DynamoDB okumaları için bellek içi cache katmanıdır. **Sınavda:** Sık okunan verilerde mikro saniye düzeyinde okuma gecikmesi hedefi.
 - **ElastiCache:** Redis OSS veya Memcached tabanlı yönetilen cache çözümleri sunar. **Sınavda:** Veritabanı üzerindeki okuma yükünü azaltma ve uygulama gecikmesini düşürme.
 - **Redshift:** Analitik sorgular ve büyük ölçekli veri ambarı iş yükleri için kullanılır. **Sınavda:** Büyük veri üzerinde SQL raporlama, BI ve analitik.
 - **Neptune:** İlişkileri ve bağlantıları grafik modeliyle tutar. **Sınavda:** Sosyal ağ ilişkileri, fraud bağlantıları ve graph traversal.
 - **DocumentDB:** MongoDB ile uyumlu API'ler sunan yönetilen document database hizmetidir. **Sınavda:** Belge tabanlı veri modeli ve MongoDB uyumlu uygulama gereksinimleri.
 - **OpenSearch Service:** Tam metin arama, log analizi ve arama odaklı analiz sağlar. **Sınavda:** Uygulama arama kutusu, log arama ve indekslenmiş metin sorguları.
 - **Timestream:** Zaman damgalı veriler ve zaman serisi analizi için tasarlanmıştır. **Sınavda:** IoT telemetrisi, sensör verileri ve zaman serisi metrikleri.
-- **QLDB:** Değişiklik geçmişini kriptografik olarak doğrulanabilir bir ledger yapısında tutmak için tasarlanmıştı. **Sınavda:** Eski kaynaklarda karşılaşabilirsin; AWS, QLDB desteğini 31 Temmuz 2025'te sona erdirdiğinden güncel mimariler için aktif bir seçenek olarak değerlendirme.
+- **QLDB (Quantum Ledger Database):** Değişiklik geçmişini kriptografik olarak doğrulanabilir bir ledger yapısında tutmak için tasarlanmıştı. **Sınavda:** Eski kaynaklarda karşılaşabilirsin; AWS, QLDB desteğini 31 Temmuz 2025'te sona erdirdiğinden güncel mimariler için aktif bir seçenek olarak değerlendirme.
 
 **Karıştırma:**
 - Multi-AZ = yüksek erişilebilirlik ve failover; Read Replica = okuma kapasitesini artırma.
@@ -72,16 +72,16 @@ weight: 100
 
 ## 4. Networking & CDN - Ağ ve Trafik Yönetimi
 
-- **VPC:** AWS kaynaklarının IP aralıklarını, subnet'lerini, route table'larını ve ağ güvenliğini tanımlayan izole sanal ağdır. **Sınavda:** Kaynakları özel ağda çalıştırma ve ağ erişimini kontrol etme.
+- **VPC (Virtual Private Cloud):** AWS kaynaklarının IP aralıklarını, subnet'lerini, route table'larını ve ağ güvenliğini tanımlayan izole sanal ağdır. **Sınavda:** Kaynakları özel ağda çalıştırma ve ağ erişimini kontrol etme.
 - **Subnet:** VPC içindeki belirli bir Availability Zone'a ait IP aralığıdır. **Sınavda:** Kaynakları AZ'lere ve public/private ağ katmanlarına ayırma.
 - **Internet Gateway (IGW):** VPC ile internet arasında internet yönlendirmesini sağlar. **Sınavda:** Public subnet'teki kaynağın internete erişmesi; bunun için route, public IP ve güvenlik kuralları da gerekir.
 - **NAT Gateway:** Private subnet'teki IPv4 kaynaklarının internete veya dış ağlara bağlantı başlatmasını sağlar; internetten doğrudan başlatılan bağlantıları kabul etmez. **Sınavda:** Private EC2'nin yazılım güncellemesi indirmesi.
-- **Security Group:** ENI/instance düzeyinde stateful sanal güvenlik duvarıdır. **Sınavda:** Yalnızca belirli kaynaklardan belirli portlara izin verme.
+- **Security Group:** ENI (Elastic Network Interface)/instance düzeyinde stateful sanal güvenlik duvarıdır. **Sınavda:** Yalnızca belirli kaynaklardan belirli portlara izin verme.
 - **Network ACL (NACL):** Subnet düzeyinde stateless filtreleme yapar; inbound ve outbound kuralları ayrı değerlendirilir. **Sınavda:** Subnet düzeyinde ek filtreleme veya belirli IP aralıklarını engelleme.
 - **Route Table:** Hedef IP aralığına göre trafiğin IGW, NAT, peering veya başka bir hedefe yönlendirilmesini belirler. **Sınavda:** Public/private subnet erişim sorunları ve ağ yolları.
 - **Route 53:** DNS, health check ve routing policy hizmetidir. **Sınavda:** DNS yönlendirme, failover, latency-based veya geolocation routing.
 - **CloudFront:** İçeriği edge location'larda cache ederek kullanıcılara daha düşük gecikmeyle ulaştıran CDN'dir. **Sınavda:** Global kullanıcılar, statik içerik hızlandırma ve origin yükünü azaltma.
-- **Elastic Load Balancing (ELB):** Trafiği sağlıklı hedeflere dağıtır. **Sınavda:** ALB = HTTP/HTTPS ve katman 7 yönlendirme; NLB = katman 4, TCP/UDP ve yüksek performans; Gateway Load Balancer = sanal ağ güvenlik cihazları.
+- **Elastic Load Balancing (ELB):** Trafiği sağlıklı hedeflere dağıtır. **Sınavda:** ALB (Application Load Balancer) = HTTP/HTTPS ve katman 7 yönlendirme; NLB (Network Load Balancer) = katman 4, TCP/UDP ve yüksek performans; Gateway Load Balancer = sanal ağ güvenlik cihazları.
 - **AWS Global Accelerator:** Anycast statik IP'ler ve AWS global ağı üzerinden trafiği uygun bölgesel endpoint'lere yönlendirir. **Sınavda:** Global uygulamalar, hızlı failover ve TCP/UDP trafiğinin AWS ağı üzerinden yönlendirilmesi.
 - **AWS Direct Connect:** On-premises veri merkezi ile AWS arasında özel ağ bağlantısı sağlar. **Sınavda:** Daha tutarlı ağ performansı, yüksek bant genişliği ve özel bağlantı ihtiyacı.
 - **Site-to-Site VPN:** On-premises ağ ile AWS arasında internet üzerinden IPsec tünelleri oluşturur. **Sınavda:** Hızlı hibrit bağlantı veya Direct Connect'e yedek bağlantı.
@@ -100,9 +100,9 @@ weight: 100
 
 ## 5. Integration & Messaging - Mesajlaşma ve İş Akışları
 
-- **SQS:** Dağıtık uygulamalar arasında mesajları kuyrukta tutarak üretici ve tüketiciyi birbirinden ayırır. **Sınavda:** Asenkron işleme, yük patlamalarını tamponlama ve başarısız mesajları DLQ'ya yönlendirme.
+- **SQS:** Dağıtık uygulamalar arasında mesajları kuyrukta tutarak üretici ve tüketiciyi birbirinden ayırır. **Sınavda:** Asenkron işleme, yük patlamalarını tamponlama ve başarısız mesajları DLQ (dead-letter queue)'ya yönlendirme.
 - **SQS FIFO:** Mesaj sıralamasını ve uygun kullanımda deduplication desteğini sağlar. **Sınavda:** Sıralama veya mesajların tekilleştirilmesi gerektiğinde FIFO; aksi durumda Standard daha yüksek esneklik ve ölçek sunar.
-- **SNS:** Bir mesajı birden fazla aboneye yayınlayan pub/sub hizmetidir. **Sınavda:** Tek olayın birden fazla SQS kuyruğuna, Lambda fonksiyonuna veya başka desteklenen abonelere iletilmesi.
+- **SNS (Simple Notification Service):** Bir mesajı birden fazla aboneye yayınlayan pub/sub hizmetidir. **Sınavda:** Tek olayın birden fazla SQS kuyruğuna, Lambda fonksiyonuna veya başka desteklenen abonelere iletilmesi.
 - **EventBridge:** Servislerden gelen olayları kurallara göre hedeflere yönlendirir. **Sınavda:** Bir AWS kaynağındaki olay gerçekleşince Lambda, Step Functions veya başka bir hedefi tetikleme.
 - **Step Functions:** Birden fazla adımı, dallanmayı, tekrar denemeyi ve hata yönetimini state machine ile orkestre eder. **Sınavda:** Birden fazla servisten oluşan iş akışı ve kontrollü hata yönetimi.
 - **Kinesis Data Streams:** Gerçek zamanlı veri akışlarını toplar ve tüketicilere sunar. **Sınavda:** Clickstream, IoT veya sürekli gelen logların düşük gecikmeyle işlenmesi.
@@ -121,13 +121,13 @@ weight: 100
 
 ## 6. Security & Identity - Güvenlik ve Kimlik
 
-- **IAM:** AWS kullanıcılarının, rollerinin ve servislerin hangi işlemleri yapabileceğini policy'lerle belirler. **Sınavda:** Least privilege, IAM role, cross-account access ve servisler arası yetkilendirme.
+- **IAM (Identity and Access Management):** AWS kullanıcılarının, rollerinin ve servislerin hangi işlemleri yapabileceğini policy'lerle belirler. **Sınavda:** Least privilege, IAM role, cross-account access ve servisler arası yetkilendirme.
 - **IAM Role:** Uzun ömürlü erişim anahtarları yerine geçici kimlik bilgileriyle AWS kaynaklarına erişim sağlar. **Sınavda:** EC2'nin S3'e veya Lambda'nın DynamoDB'ye güvenli erişmesi.
-- **AWS KMS:** Şifreleme anahtarlarını ve bunların kullanım izinlerini yönetir. **Sınavda:** S3, EBS, RDS veya uygulama verisini şifreleme ve anahtar erişimini kontrol etme.
+- **AWS KMS (Key Management Service):** Şifreleme anahtarlarını ve bunların kullanım izinlerini yönetir. **Sınavda:** S3, EBS, RDS veya uygulama verisini şifreleme ve anahtar erişimini kontrol etme.
 - **AWS Secrets Manager:** Veritabanı parolaları, API anahtarları ve diğer gizli bilgileri saklar; desteklenen entegrasyonlarda rotasyonu yönetebilir. **Sınavda:** Veritabanı parolasını güvenli saklama ve otomatik döndürme.
-- **SSM Parameter Store:** Konfigürasyon ve parametreleri merkezi saklar; SecureString ile KMS destekli şifreleme yapabilir. **Sınavda:** Uygulama ayarları ve basit parametre yönetimi.
+- **SSM (Systems Manager) Parameter Store:** Konfigürasyon ve parametreleri merkezi saklar; SecureString ile KMS destekli şifreleme yapabilir. **Sınavda:** Uygulama ayarları ve basit parametre yönetimi.
 - **Amazon Cognito:** Uygulama kullanıcılarının kayıt, giriş ve token tabanlı kimlik doğrulama ihtiyaçlarını karşılar. **Sınavda:** Web veya mobil uygulama kullanıcılarını AWS IAM kullanıcılarından ayrı yönetme.
-- **AWS WAF:** HTTP/HTTPS isteklerini web ACL ve kurallarla filtreler. **Sınavda:** SQL injection, XSS, IP tabanlı filtreleme ve istek hız sınırlandırma.
+- **AWS WAF (Web Application Firewall):** HTTP/HTTPS isteklerini web ACL ve kurallarla filtreler. **Sınavda:** SQL injection, XSS, IP tabanlı filtreleme ve istek hız sınırlandırma.
 - **AWS Shield:** DDoS saldırılarına karşı koruma sağlar; Standard temel korumayı otomatik sunar, Advanced ek özellikler sağlar. **Sınavda:** DDoS riskini azaltma.
 - **Amazon GuardDuty:** CloudTrail, VPC Flow Logs ve diğer desteklenen veri kaynaklarından tehdit göstergeleri çıkarır. **Sınavda:** Şüpheli API çağrıları, olası hesap ihlali ve kötü amaçlı ağ etkinliği.
 - **Amazon Inspector:** Desteklenen kaynaklarda yazılım zafiyetlerini ve belirli güvenlik risklerini değerlendirir. **Sınavda:** EC2, container image ve desteklenen compute kaynaklarında vulnerability management.
@@ -154,7 +154,7 @@ weight: 100
 - **AWS Systems Manager (SSM):** Desteklenen sunuculara uzaktan erişim, patch yönetimi, envanter ve otomasyon sağlar. **Sınavda:** SSH/RDP açmadan yönetim için Session Manager veya merkezi patch operasyonları.
 - **AWS CloudFormation:** AWS kaynaklarını şablonlarla tanımlayıp yönetir. **Sınavda:** Tekrarlanabilir altyapı dağıtımı ve Infrastructure as Code.
 - **AWS Service Catalog:** Kuruluşların onaylanmış altyapı ürünlerini kullanıcılarına sunmasını sağlar. **Sınavda:** Kullanıcıların yalnızca kurumsal olarak onaylanan yapılandırmaları dağıtması.
-- **AWS Organizations:** Birden fazla AWS hesabını merkezi yönetir; SCP ve konsolide faturalandırma gibi özellikler sunar. **Sınavda:** Çoklu hesap yönetimi ve hesap seviyesinde izin sınırları.
+- **AWS Organizations:** Birden fazla AWS hesabını merkezi yönetir; SCP (service control policy) ve konsolide faturalandırma gibi özellikler sunar. **Sınavda:** Çoklu hesap yönetimi ve hesap seviyesinde izin sınırları.
 - **AWS Control Tower:** Landing zone ve çoklu hesap ortamının kurulumunu ve yönetişimini kolaylaştırır. **Sınavda:** Yeni kurumsal AWS ortamı, merkezi guardrail ve hesap yaşam döngüsü.
 - **AWS Trusted Advisor:** Desteklenen kontrol kategorilerinde maliyet, güvenlik, performans ve hata toleransı önerileri sunar. **Sınavda:** Kullanılmayan kaynakları veya önerilen iyileştirmeleri tespit etme.
 - **AWS Compute Optimizer:** Desteklenen compute kaynakları için kullanım verisine dayalı boyutlandırma önerileri üretir. **Sınavda:** Fazla büyük veya yetersiz boyutlandırılmış EC2 ve diğer desteklenen kaynakları belirleme.
@@ -172,7 +172,7 @@ weight: 100
 - **AWS Glue:** Veri keşfi, Data Catalog ve ETL işlerini destekler. **Sınavda:** S3 verisini dönüştürüp analize hazırlama veya şemasını kataloglama.
 - **Amazon Managed Service for Apache Flink:** Sürekli gelen akış verisini gerçek zamanlı işler ve analiz eder. **Sınavda:** Streaming verisi üzerinde sürekli hesaplama.
 - **Amazon QuickSight:** Yönetilen BI ve dashboard hizmetidir. **Sınavda:** İş zekâsı raporları, görselleştirme ve dashboard.
-- **Amazon EMR:** Hadoop, Spark ve desteklenen büyük veri çerçevelerini çalıştırır. **Sınavda:** Büyük ölçekli dağıtık veri işleme.
+- **Amazon EMR (Elastic MapReduce):** Hadoop, Spark ve desteklenen büyük veri çerçevelerini çalıştırır. **Sınavda:** Büyük ölçekli dağıtık veri işleme.
 - **Amazon SageMaker AI:** Makine öğrenmesi modellerinin geliştirilmesi, eğitilmesi ve dağıtılmasına yönelik araçlar sağlar. **Sınavda:** Özel ML modeli oluşturma ve üretime alma.
 - **Amazon Rekognition:** Görüntü ve videolardaki nesne, yüz ve diğer desteklenen özellikleri analiz eder. **Sınavda:** Görsel içerik analizi.
 - **Amazon Comprehend:** Metin üzerinde doğal dil işleme görevleri gerçekleştirir. **Sınavda:** Duygu analizi, varlık çıkarımı ve metin sınıflandırma.
@@ -269,7 +269,7 @@ Soruyu cevaplamadan önce şu ayrımları kontrol et:
 3. **Block, file, object mı?** EBS, EFS/FSx ve S3 birbirinin yerine geçen depolama türleri değildir.
 4. **Senkron mu, asenkron mu?** Üretici ve tüketiciyi ayırmak gerekiyorsa SQS; olay yayınlamak gerekiyorsa SNS veya EventBridge.
 5. **Private erişim mi, internet erişimi mi?** VPC Endpoint, NAT Gateway ve IGW farklı ihtiyaçları karşılar.
-6. **Veritabanı HA mı, okuma ölçeklendirmesi mi?** Multi-AZ ve Read Replica aynı problem için tasarlanmamıştır.
+6. **Veritabanı HA (high availability) mı, okuma ölçeklendirmesi mi?** Multi-AZ ve Read Replica aynı problem için tasarlanmamıştır.
 7. **Güvenlikte hangi katman?** IAM yetkilendirme, KMS şifreleme anahtarı, Secrets Manager gizli bilgi, GuardDuty tehdit tespiti ve Inspector zafiyet değerlendirmesidir.
 8. **En az operasyonel yük mü, en düşük maliyet mi?** Bunlar her zaman aynı çözüm değildir. Gereksinimlerin tamamını karşılayan seçeneği tercih et.
 9. **Kesinti kabul ediliyor mu?** Spot Instances gibi kesintiye açık seçenekleri, kesintisiz çalışması gereken kritik işler için otomatik olarak seçme.

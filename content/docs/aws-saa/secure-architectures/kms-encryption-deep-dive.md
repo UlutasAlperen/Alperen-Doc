@@ -3,7 +3,7 @@ title: "kms-encryption-deep-dive"
 weight: 30
 ---
 
-# KMS and Encryption Deep Dive
+# KMS (Key Management Service) and Encryption Deep Dive
 
 Encryption questions on the exam come down to one choice: **which encryption option and where do the keys live**. AWS KMS is the default answer for almost all of them.
 
@@ -15,7 +15,7 @@ Encryption questions on the exam come down to one choice: **which encryption opt
 | **AWS managed key** (`aws/s3` etc.) | AWS | Automatic for most services, cannot rotate on demand |
 | **Customer managed key (CMK)** | You | Full control: key policy, rotation, disable, grants |
 | Asymmetric keys | You | Sign/verify or public-key encryption outside KMS |
-| Multi-region keys | You | Global tables, cross-region DR with one key |
+| Multi-region keys | You | Global tables, cross-region DR (disaster recovery) with one key |
 
 Automatic rotation: customer managed keys rotate **once a year** (you can trigger early rotation). You cannot export the key material - KMS is the boundary.
 
@@ -33,7 +33,7 @@ flowchart LR
 - This is why encrypting 5 GB with KMS "directly" isn't a thing - and why KMS API calls are cheap but not free
 - **Encryption context** = additional key/value pairs in the request; change it and decryption fails (tamper detection)
 
-## S3 encryption options - the classic exam table
+## S3 (Simple Storage Service) encryption options - the classic exam table
 
 | Option | Key location | Exam hint |
 |---|---|---|
@@ -42,7 +42,7 @@ flowchart LR
 | **SSE-C** | **Customer provides** the key per request | Customer manages keys, S3 never stores them |
 | **Client-side** | Customer, before upload | Maximum control, you manage everything |
 
-EBS encryption follows the same pattern (SSE-KMS style, transparent to the OS, cannot "convert" - you must snapshot & copy). RDS encryption is enabled **at creation time** (snapshot-copy-and-restore to encrypt an existing DB).
+EBS (Elastic Block Store) encryption follows the same pattern (SSE-KMS style, transparent to the OS, cannot "convert" - you must snapshot & copy). RDS (Relational Database Service) encryption is enabled **at creation time** (snapshot-copy-and-restore to encrypt an existing DB).
 
 > Not: "mevcut RDS'i sifrele" sorusu gelirse cevap: snapshot al → sifreli kopyala → yeni instance olustur. Canli instance'i sonradan sifreleme yok.
 
@@ -50,7 +50,7 @@ EBS encryption follows the same pattern (SSE-KMS style, transparent to the OS, c
 
 - The **key policy** is the root of trust for a KMS key - it says who can administer and use the key
 - **Grants** = programmatic, delegatable permissions (used heavily by other AWS services)
-- IAM policies alone cannot grant access to a key unless the key policy allows it
+- IAM (Identity and Access Management) policies alone cannot grant access to a key unless the key policy allows it
 - Cross-account use: the key policy must allow the other account, **and** that account's IAM policies must allow it too (both are required)
 
 ## KMS vs CloudHSM
@@ -58,7 +58,7 @@ EBS encryption follows the same pattern (SSE-KMS style, transparent to the OS, c
 | | KMS | CloudHSM |
 |---|---|---|
 | Keys | Shared multi-tenant service | **Dedicated** hardware (FIPS 140-2 Level 3) |
-| Ops | AWS manages the HSM | You manage the cluster (and the availability) |
+| Ops | AWS manages the HSM (Hardware Security Module) | You manage the cluster (and the availability) |
 | Cost | Pay per API call + key | Pay per hour per HSM |
 | Answer when... | 99% of questions | "dedicated HSM / single-tenant / FIPS Level 3 / you own the key material" |
 
@@ -71,7 +71,9 @@ EBS encryption follows the same pattern (SSE-KMS style, transparent to the OS, c
 - **C)** SSE-C
 - **D)** Client-side encryption with a key stored in the bucket
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Customer-controlled key + CloudTrail audit of key usage = SSE-KMS with a CMK. D stores the key next to the data.
+{{% /details %}}
 
 **Q2: An on-premises application must encrypt data with a dedicated, single-tenant hardware security module that meets FIPS 140-2 Level 3. What should be used?**
 
@@ -80,7 +82,9 @@ EBS encryption follows the same pattern (SSE-KMS style, transparent to the OS, c
 - **C)** Secrets Manager
 - **D)** S3 SSE-C
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** "Dedicated/single-tenant HSM" = CloudHSM.
+{{% /details %}}
 
 ## Ozet
 

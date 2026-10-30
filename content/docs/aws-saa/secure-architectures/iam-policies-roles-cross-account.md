@@ -3,7 +3,7 @@ title: "iam-policies-roles-cross-account"
 weight: 10
 ---
 
-# IAM Policies, Roles and Cross-Account Access
+# IAM (Identity and Access Management) Policies, Roles and Cross-Account Access
 
 IAM is the backbone of every security question on the exam. If a scenario says "grant access", the answer almost always involves **IAM roles** - never sharing credentials, never embedding keys.
 
@@ -27,16 +27,16 @@ Every policy is a JSON document:
 }
 ```
 
-The four levers you can pull: **Effect** (Allow/Deny), **Action** (what API call), **Resource** (which ARN), **Condition** (when/where/from which IP).
+The four levers you can pull: **Effect** (Allow/Deny), **Action** (what API call), **Resource** (which ARN (Amazon Resource Name)), **Condition** (when/where/from which IP).
 
 ## Policy types
 
 | Type | Attached to | Notes |
 |---|---|---|
 | Identity-based | Users, groups, roles | AWS managed, customer managed, or inline |
-| Resource-based | S3 buckets, SQS, KMS keys, Secrets Manager | Can grant access to **other accounts** |
+| Resource-based | S3 (Simple Storage Service) buckets, SQS (Simple Queue Service), KMS (Key Management Service) keys, Secrets Manager | Can grant access to **other accounts** |
 | Permission boundaries | A role/user | Caps the maximum permissions |
-| SCP (Organizations) | Accounts/OUs | Caps everything in the account - **does not grant** |
+| SCP (service control policy, Organizations) | Accounts/OUs | Caps everything in the account - **does not grant** |
 | Session policies | Temporary credentials | Rarely tested, caps a role session |
 
 ## Policy evaluation logic
@@ -56,7 +56,7 @@ Managed vs inline: **managed policies** are reusable and attach to many principa
 ## Roles vs users
 
 - **Users** have long-lived credentials (access keys, passwords) - humans only, and only if federation is not possible
-- **Roles** issue **temporary credentials** via STS (default 1 hour, up to 12h for EC2) - everything else uses roles
+- **Roles** issue **temporary credentials** via STS (Security Token Service) - default 1 hour, up to 12h for EC2 (Elastic Compute Cloud) - everything else uses roles
 
 Every "grant a service access to another service" question is answered with a role:
 
@@ -93,7 +93,9 @@ Trust policy = **who can assume the role** (on the role itself). Permissions pol
 - **C)** Make the S3 bucket public
 - **D)** Copy the objects to the local instance store
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Cross-account role assumption with temporary credentials. A leaks long-lived keys to a server, C is a security hole, D doesn't solve ongoing access.
+{{% /details %}}
 
 **Q2: An IAM policy allows `s3:*` and a bucket policy explicitly denies `s3:DeleteObject`. Can the user delete an object?**
 
@@ -102,7 +104,9 @@ Trust policy = **who can assume the role** (on the role itself). Permissions pol
 - **C)** Yes, because resource-based policies are evaluated first
 - **D)** Only if the user is in the Administrators group
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Explicit deny wins over every allow in the evaluation logic.
+{{% /details %}}
 
 ## Ozet
 

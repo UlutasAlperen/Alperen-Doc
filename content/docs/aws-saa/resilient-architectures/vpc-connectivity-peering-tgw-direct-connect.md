@@ -3,7 +3,7 @@ title: "vpc-connectivity-peering-tgw-direct-connect"
 weight: 80
 ---
 
-# VPC Connectivity: Peering, Transit Gateway, VPN and Direct Connect
+# VPC (Virtual Private Cloud) Connectivity: Peering, Transit Gateway, VPN and Direct Connect
 
 "Connect these networks" questions come in three flavors: VPC-to-VPC, VPC-to-on-prem, and hybrid at scale. The exam wants the **right topology for the scale** - not just "what works".
 
@@ -55,7 +55,7 @@ flowchart TB
 
 ## VPC Endpoints and PrivateLink (recap)
 
-For *AWS service* access without any of the above: [network-security-sg-nacl-vpc-endpoints](../../secure-architectures/network-security-sg-nacl-vpc-endpoints/). Gateway endpoints (S3/DynamoDB) are free; interface endpoints use PrivateLink and can expose **your service** to other accounts privately.
+For *AWS service* access without any of the above: [network-security-sg-nacl-vpc-endpoints](../../secure-architectures/network-security-sg-nacl-vpc-endpoints/). Gateway endpoints (S3 (Simple Storage Service)/DynamoDB) are free; interface endpoints use PrivateLink and can expose **your service** to other accounts privately.
 
 ## Choosing quickly - the exam cheat sheet
 
@@ -79,7 +79,9 @@ For *AWS service* access without any of the above: [network-security-sg-nacl-vpc
 - **C)** One large VPC
 - **D)** Site-to-site VPN
 
-**Answer: B.** Peering at 30 VPCs is a 435-connection mesh; TGW is the designed answer.
+{{% details "Cevabı göster" %}}
+**Answer: B.** Peering at 30 VPCs is a 435-connection mesh; TGW (Transit Gateway) is the designed answer.
+{{% /details %}}
 
 **Q2: An on-premises datacenter must connect to AWS with consistent low latency and no traffic over the public internet. Which service?**
 
@@ -88,7 +90,9 @@ For *AWS service* access without any of the above: [network-security-sg-nacl-vpc
 - **C)** VPC peering
 - **D)** Internet Gateway
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Dedicated private line = Direct Connect.
+{{% /details %}}
 
 ## Ozet
 

@@ -11,16 +11,16 @@ The most common question format in Domain 3: "the application needs X - which da
 
 | Workload | Service | Why |
 |---|---|---|
-| Relational OLTP, joins, transactions, known schema | **RDS** (or **Aurora** for cloud-native scale) | Managed SQL, Multi-AZ, replicas |
+| Relational OLTP (online transaction processing), joins, transactions, known schema | **RDS (Relational Database Service)** (or **Aurora** for cloud-native scale) | Managed SQL, Multi-AZ, replicas |
 | Massive-scale key-value, any traffic shape, single-digit ms | **DynamoDB** | Serverless NoSQL, unlimited scale |
 | Hot data, microsecond reads, session store | **ElastiCache** (Redis/Memcached) | In-memory |
-| Data warehouse, OLAP, columnar analytics | **Redshift** | Petabyte analytics |
-| Interactive SQL on S3 data lake | **Athena** | Serverless, pay per query |
+| Data warehouse, OLAP (online analytical processing), columnar analytics | **Redshift** | Petabyte analytics |
+| Interactive SQL on S3 (Simple Storage Service) data lake | **Athena** | Serverless, pay per query |
 | Search, autocomplete, log analytics | **OpenSearch** | Full-text search |
 | Document workloads, MongoDB-compatible | **DocumentDB** | Mongo API without Mongo ops |
 | Graph relationships (social, fraud, routes) | **Neptune** | Graph DB |
 | Time series (IoT, metrics) | **Timestream** | Built for timestamps |
-| Immutable ledger / audit | **QLDB** | Cryptographic verifiability |
+| Immutable ledger / audit | **QLDB (Quantum Ledger Database)** | Cryptographic verifiability |
 | In-memory cache with SQL on RDS-adjacent | **Redis** | Microsecond latency |
 
 ## RDS vs DynamoDB - the heavyweight bout
@@ -55,7 +55,7 @@ flowchart TB
 ## OLTP vs OLAP (favorite definitions)
 
 - **OLTP** (online transaction processing) - many small fast transactions: RDS, Aurora, DynamoDB
-- **OLAP** (online analytical processing) - big scans and aggregations: **Redshift** (warehouse), Athena (serverless on S3), EMR (Hadoop/Spark)
+- **OLAP** (online analytical processing) - big scans and aggregations: **Redshift** (warehouse), Athena (serverless on S3), EMR (Elastic MapReduce) - Hadoop/Spark
 
 "Run complex analytical queries over years of data without affecting the transactional database" → **ETL into Redshift** (Glue for the extract/transform part).
 
@@ -70,16 +70,20 @@ flowchart TB
 - **C)** Redshift
 - **D)** ElastiCache
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Key-value access + internet scale + unpredictable = DynamoDB.
+{{% /details %}}
 
 **Q2: A data team needs to run complex analytical joins over 3 years of sales data without slowing down the order-processing database. What should be used?**
 
 - **A)** Add read replicas to RDS
 - **B)** Move analytics to Redshift and load with Glue
 - **C)** Run the queries on the RDS primary
-- **D)** Enable DynamoDB DAX
+- **D)** Enable DynamoDB DAX (DynamoDB Accelerator)
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** OLAP workload = warehouse (Redshift), ETL via Glue.
+{{% /details %}}
 
 ## Ozet
 

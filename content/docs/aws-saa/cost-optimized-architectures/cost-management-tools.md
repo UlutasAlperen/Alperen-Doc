@@ -11,12 +11,12 @@ weight: 30
 
 | Tool | What it's for | Scenario keyword |
 |---|---|---|
-| **Cost Explorer** | Visualize & forecast costs, RI/SP utilization & coverage | "why did costs rise", "should we buy RIs" |
+| **Cost Explorer** | Visualize & forecast costs, RI (Reserved Instance)/SP (Savings Plan) utilization & coverage | "why did costs rise", "should we buy RIs" |
 | **Cost & Usage Report (CUR)** | Most granular billing data (hourly, resource-level) | "detailed analysis in Athena/QuickSight" |
 | **Budgets** | Alert and act at thresholds | "notify me at 80% of budget", "stop resources" |
 | **Cost Anomaly Detection** | ML-based unusual-spend alerts | "sudden unexpected spike" |
 | **Pricing Calculator** | Estimate costs **before** building | "what will this architecture cost" |
-| **Trusted Advisor** | Best-practice checks: cost, security, performance, fault tolerance, **service limits** | "find idle resources, unattached EBS" |
+| **Trusted Advisor** | Best-practice checks: cost, security, performance, fault tolerance, **service limits** | "find idle resources, unattached EBS (Elastic Block Store)" |
 | **Compute Optimizer** | Right-size recommendations | "is this instance too big" |
 | **AWS Budgets + Billing Alarms** | Classic proactive control | CloudWatch alarm on estimated charges |
 
@@ -24,8 +24,8 @@ weight: 30
 
 - **Cost Explorer**: 12 months history default, forecasting up to 12 months, save custom views; **RI/SP utilization reports** answer "are we wasting our commitment"
 - **CUR** is the only source with full resource-level detail → analyze with **Athena**, visualize with **QuickSight**
-- **Budgets** can trigger actions (e.g. apply an IAM policy via Service Catalog to stop non-prod); alert types: actual, forecasted, and planned (RI/SP)
-- **Trusted Advisor** full checks require Business/Enterprise support; the "cost" category finds idle ELBs, unassociated Elastic IPs, low-utilization instances
+- **Budgets** can trigger actions (e.g. apply an IAM (Identity and Access Management) policy via Service Catalog to stop non-prod); alert types: actual, forecasted, and planned (RI/SP)
+- **Trusted Advisor** full checks require Business/Enterprise support; the "cost" category finds idle ELBs (Elastic Load Balancing), unassociated Elastic IPs, low-utilization instances
 - **Compute Optimizer** analyzes CloudWatch metrics and recommends right-sized instances (needs opt-in)
 
 ```mermaid
@@ -48,7 +48,9 @@ flowchart LR
 - **C)** Trusted Advisor
 - **D)** Cost & Usage Report
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Forecasted-threshold alerts + budget actions = Budgets.
+{{% /details %}}
 
 **Q2: A finance team needs resource-level, hourly billing data to build a custom chargeback dashboard in QuickSight. What should they use?**
 
@@ -57,7 +59,9 @@ flowchart LR
 - **C)** Cost & Usage Report analyzed with Athena
 - **D)** CloudWatch Metrics
 
+{{% details "Cevabı göster" %}}
 **Answer: C.** Only CUR has resource-level granularity; QuickSight visualizes it.
+{{% /details %}}
 
 ## Ozet
 

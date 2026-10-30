@@ -3,13 +3,13 @@ title: "s3-storage-and-performance"
 weight: 10
 ---
 
-# S3 Storage Classes and Performance
+# S3 (Simple Storage Service) Storage Classes and Performance
 
 Two things get tested: **which storage class for which data** (mostly a cost question - see [s3-cost](../../cost-optimized-architectures/s3-cost-and-lifecycle-policies/) - but with performance implications) and **how to move big data in and out fast**.
 
 ## Storage classes at a glance
 
-| Class | Durability / AZs | Access pattern | Min storage |
+| Class | Durability / AZs (Availability Zone) | Access pattern | Min storage |
 |---|---|---|---|
 | **S3 Standard** | 99.99% / 3+ AZs | Frequent, low latency | - |
 | **Standard-IA** | 99.99% / 3+ AZs | Infrequent but instant | 30 days |
@@ -55,7 +55,9 @@ Hands-on: [aws-s3-objects](../../../aws/s3/aws-s3-objects/), [aws-s3-bucket](../
 - **C)** Switch to One Zone-IA
 - **D)** Increase the bucket's storage class
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Multipart = resumable parallel parts; Transfer Acceleration = edge-based fast path.
+{{% /details %}}
 
 **Q2: Medical images must be retrievable in milliseconds but are rarely accessed, and kept for 10 years. Which class?**
 
@@ -64,7 +66,9 @@ Hands-on: [aws-s3-objects](../../../aws/s3/aws-s3-objects/), [aws-s3-bucket](../
 - **C)** S3 Standard
 - **D)** One Zone-IA
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** "Milliseconds but rare" = Instant Retrieval. Deep Archive takes hours.
+{{% /details %}}
 
 ## Ozet
 

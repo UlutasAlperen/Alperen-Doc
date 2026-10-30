@@ -5,7 +5,7 @@ weight: 40
 
 # DynamoDB Deep Dive
 
-DynamoDB shows up in ~a third of all "which database" and "how do I scale reads" questions. The exam-level knowledge is: **partitioning, capacity modes, indexes, DAX and Global Tables**.
+DynamoDB shows up in ~a third of all "which database" and "how do I scale reads" questions. The exam-level knowledge is: **partitioning, capacity modes, indexes, DAX (DynamoDB Accelerator) and Global Tables**.
 
 ## Data model basics
 
@@ -19,7 +19,7 @@ DynamoDB shows up in ~a third of all "which database" and "how do I scale reads"
 
 | | **On-demand** | **Provisioned** |
 |---|---|---|
-| Pricing | Per request (pay per use) | Per hour on WCU/RCU + autoscaling |
+| Pricing | Per request (pay per use) | Per hour on WCU (write capacity unit)/RCU (read capacity unit) + autoscaling |
 | Best for | Unknown, spiky traffic | Steady, predictable traffic |
 | Scaling | Instant, no planning | Auto scaling policy on utilization |
 
@@ -28,7 +28,7 @@ DynamoDB shows up in ~a third of all "which database" and "how do I scale reads"
 
 ## Indexes
 
-| | **LSI (Local)** | **GSI (Global)** |
+| | **LSI (local secondary index)** | **GSI (global secondary index)** |
 |---|---|---|
 | Key | Same partition key, new sort key | Any key (new partition + sort) |
 | Consistency | Can be strongly consistent | **Always eventually consistent** |
@@ -40,9 +40,9 @@ Sparse index trick: items missing the indexed attribute are simply not in the in
 ## Scaling and acceleration features
 
 - **DAX** - write-through in-memory cache, microsecond reads, API-compatible (see [caching](../caching-elasticache-cloudfront/))
-- **Global Tables** - multi-region, **multi-active** replication (conflict resolution last-writer-wins), <1s replication → DR + local latency
+- **Global Tables** - multi-region, **multi-active** replication (conflict resolution last-writer-wins), <1s replication → DR (disaster recovery) + local latency
 - **DynamoDB Streams** + Lambda - react to item changes (event-driven)
-- **TTL** - auto-delete expired items (sessions, temp data)
+- **TTL (time to live)** - auto-delete expired items (sessions, temp data)
 - **Transactions** - ACID across multiple items/tables (up to 100 items per transaction)
 - **PartiQL** - SQL-like syntax for DynamoDB
 - Adaptive capacity handles "hot partitions" automatically
@@ -66,7 +66,9 @@ flowchart LR
 - **C)** Partition key: `orderDate`
 - **D)** No sort key, use Scan
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Composite key enables the range query without a Scan.
+{{% /details %}}
 
 **Q2: A global application needs users in Asia and Europe to write locally with the same table, and tolerate a regional outage. Which feature?**
 
@@ -75,7 +77,9 @@ flowchart LR
 - **C)** Read replicas
 - **D)** ElastiCache Redis
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Multi-region multi-active replication = Global Tables.
+{{% /details %}}
 
 ## Ozet
 

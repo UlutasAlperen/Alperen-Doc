@@ -3,7 +3,7 @@ title: "s3-cost-and-lifecycle-policies"
 weight: 20
 ---
 
-# S3 Cost Optimization and Lifecycle Policies
+# S3 (Simple Storage Service) Cost Optimization and Lifecycle Policies
 
 S3 cost questions are really about **storage class transitions** and **data transfer** - the two levers that move the bill the most.
 
@@ -33,7 +33,7 @@ flowchart LR
 |---|---|
 | **Data transfer OUT to internet** | CloudFront (cheaper per GB), keep clients in-region |
 | **Requests** (PUT/GET) | Batch where possible; right-size storage class |
-| **Data transfer between AZs** | Keep multi-tier apps within an AZ where HA allows (or use endpoints) |
+| **Data transfer between AZs (Availability Zone)** | Keep multi-tier apps within an AZ where HA (high availability) allows (or use endpoints) |
 | **Retrieval fees** (IA/Glacier) | Don't use IA for frequently-read data |
 | **Versioning leftovers** | Lifecycle to expire noncurrent versions |
 | **Incomplete multipart uploads** | Lifecycle rule to abort incomplete uploads |
@@ -55,16 +55,20 @@ flowchart LR
 - **C)** Delete after 30 days
 - **D)** Enable Transfer Acceleration
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Long retention + no access + cheapest = Deep Archive transition.
+{{% /details %}}
 
 **Q2: An S3 bill shows high charges for data transfer to the internet for a popular image-heavy website. What is the MOST cost-effective fix?**
 
-- **A)** Move the images to EBS
+- **A)** Move the images to EBS (Elastic Block Store)
 - **B)** Serve the images through CloudFront
 - **C)** Enable versioning
 - **D)** Compress the bucket
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** CloudFront's per-GB rate beats S3 internet egress, and it caches repeats.
+{{% /details %}}
 
 ## Ozet
 

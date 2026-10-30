@@ -11,7 +11,7 @@ Queues move messages; **events** announce that something happened. The exam test
 
 The evolution of CloudWatch Events: a serverless **event bus** with rules.
 
-- **Default bus** - AWS service events (EC2 state changes, S3 events via CloudTrail...)
+- **Default bus** - AWS service events (EC2 (Elastic Compute Cloud) state changes, S3 (Simple Storage Service) events via CloudTrail...)
 - **Custom bus** - your application's events; can be shared cross-account
 - **Partner sources** - SaaS events (Zendesk, Datadog, Shopify...) land directly in your bus
 - **Rules** match event patterns and route to targets (Lambda, SQS, SNS, Step Functions...)
@@ -34,7 +34,7 @@ The evolution of CloudWatch Events: a serverless **event bus** with rules.
 
 Serverless **workflow orchestration** - each step is a state, defined in JSON (Amazon States Language).
 
-- Integrates natively with Lambda, ECS, SQS, DynamoDB, and 200+ services
+- Integrates natively with Lambda, ECS (Elastic Container Service), SQS, DynamoDB, and 200+ services
 - Built-in **retries, error handling, timeouts, wait states, parallel branches**
 - **Standard workflows** - long-running (up to 1 year), exactly-once execution, visual console
 - **Express workflows** - high-volume (millions), up to 5 minutes, at-least-once, cheaper
@@ -67,7 +67,9 @@ Often paired in event-driven questions: managed front door for HTTP APIs with th
 - **C)** SQS standard queue
 - **D)** CloudWatch Logs
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Content filtering + SaaS partner sources + replay = EventBridge.
+{{% /details %}}
 
 **Q2: A loan approval process runs several Lambda functions, waits for a human decision, and must retry failed steps automatically. Which service coordinates it?**
 
@@ -76,7 +78,9 @@ Often paired in event-driven questions: managed front door for HTTP APIs with th
 - **C)** AWS Step Functions
 - **D)** AWS Batch
 
+{{% details "Cevabı göster" %}}
 **Answer: C.** Multi-step orchestration with retries and wait states = Step Functions.
+{{% /details %}}
 
 ## Ozet
 

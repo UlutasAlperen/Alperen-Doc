@@ -3,7 +3,7 @@ title: "pricing-models-ri-savings-plans-spot"
 weight: 10
 ---
 
-# Pricing Models: On-Demand, RIs, Savings Plans and Spot
+# Pricing Models: On-Demand, RIs (Reserved Instance), Savings Plans and Spot
 
 Almost every cost question is a matching game: **workload pattern → purchase option**. Get these five into your head and half of Domain 4 is free.
 
@@ -12,15 +12,15 @@ Almost every cost question is a matching game: **workload pattern → purchase o
 | Option | Discount | Commitment | Best for |
 |---|---|---|---|
 | **On-Demand** | 0% | None | Spiky, unknown, short-lived workloads |
-| **Savings Plans** (Compute / EC2 Instance / SageMaker) | up to **72%** | 1 or 3 years, $/hour commitment | Steady usage, want flexibility |
+| **Savings Plans** (Compute / EC2 (Elastic Compute Cloud) Instance / SageMaker) | up to **72%** | 1 or 3 years, $/hour commitment | Steady usage, want flexibility |
 | **Reserved Instances** (Standard / Convertible) | up to **72%** | 1 or 3 years, specific instance family | Very steady, known capacity |
 | **Spot Instances** | up to **90%** | None - can be reclaimed (2-min notice) | Fault-tolerant, interruptible work |
 | **Dedicated Hosts / Instances** | 0% (premium) | None/1-3y | Licensing, compliance, single-tenant |
 
 ## Savings Plans vs Reserved Instances (a favorite comparison)
 
-- **Savings Plans** = commit to **$X/hour of compute**; covers any instance family, region (Compute SP), Fargate and Lambda too. More flexible → usually the better answer
-- **Reserved Instances** = commit to a **specific instance type/region**; can be **standard** (most discount, resellable) or **convertible** (less discount, can change family/OS); zonal RI also reserves **capacity** in an AZ
+- **Savings Plans** = commit to **$X/hour of compute**; covers any instance family, region (Compute SP (Savings Plan)), Fargate and Lambda too. More flexible → usually the better answer
+- **Reserved Instances** = commit to a **specific instance type/region**; can be **standard** (most discount, resellable) or **convertible** (less discount, can change family/OS); zonal RI also reserves **capacity** in an AZ (Availability Zone)
 - **Scheduled RIs** = recurring time windows (rarely tested)
 
 > Not: "surekli calisan ve tahmin edilebilir is yuk" = Savings Plans (esnek oldugu icin RI'ye tercih edilir). "Kesintiye dayanikli toplu is / ML egitim / test ortami" = Spot. "Windows/SQL lisansi bizim" = Dedicated Host.
@@ -28,7 +28,7 @@ Almost every cost question is a matching game: **workload pattern → purchase o
 ## Spot - details the exam tests
 
 - Spare capacity at up to 90% off; AWS can reclaim with a **2-minute interruption notice**
-- Combine with **ASG / Batch / ECS / EKS / Fargate Spot** and graceful shutdown handling
+- Combine with **ASG (Auto Scaling Group) / Batch / ECS (Elastic Container Service) / EKS (Elastic Kubernetes Service) / Fargate Spot** and graceful shutdown handling
 - **Hibernate / stop-interruptible** options for checkpoint-friendly workloads
 - Diversify instance types and AZs to reduce interruption probability (see my notes: [spot-instances](../../../aws/general-knowledge/spot-instances/))
 
@@ -57,7 +57,9 @@ flowchart LR
 - **C)** Dedicated Hosts
 - **D)** Standard RIs
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Fault-tolerant, interruptible, cheapest = Spot.
+{{% /details %}}
 
 **Q2: A company runs 40 m5.large instances 24/7 for the next 3 years and wants the largest discount but may need to switch to c5 later. Which option?**
 
@@ -66,7 +68,9 @@ flowchart LR
 - **C)** Scheduled RIs
 - **D)** Spot Instances
 
+{{% details "Cevabı göster" %}}
 **Answer: A.** Steady usage + long horizon + flexibility to change families = Compute Savings Plans (a Convertible RI would also discount but Compute SP is the flexible, family-agnostic commitment).
+{{% /details %}}
 
 ## Ozet
 

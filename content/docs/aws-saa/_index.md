@@ -31,7 +31,7 @@ bookCollapseSection: true
 1. Every topic page explains **what the service is, when to pick it, and what the exam loves to trick you with**.
 2. Each page ends with an **Exam check** (mini questions with answers) and an **Ozet** (one-line "X = ..." summaries).
 3. The [general-knowledge](general-knowledge/) page collects **all** those one-liners in one place - my cheat sheet before the exam.
-4. Real labs (VPC, EC2, RDS, ECS, EKS...) are in the [AWS](../aws/) section - go there when you want to build it, come here when you want to pass it.
+4. Real labs (VPC (Virtual Private Cloud), EC2 (Elastic Compute Cloud), RDS (Relational Database Service), ECS (Elastic Container Service), EKS (Elastic Kubernetes Service)...) are in the [AWS](../aws/) section - go there when you want to build it, come here when you want to pass it.
 
 ## AWS SAA-C03 konular
 

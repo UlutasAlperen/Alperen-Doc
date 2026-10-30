@@ -3,9 +3,9 @@ title: "s3-security-and-access-points"
 weight: 50
 ---
 
-# S3 Security and Access Points
+# S3 (Simple Storage Service) Security and Access Points
 
-S3 security questions usually start with "an object was accidentally made public" or "only this VPC may access the bucket". The answer set is small: **Block Public Access**, bucket policies, IAM, and **Access Points**.
+S3 security questions usually start with "an object was accidentally made public" or "only this VPC (Virtual Private Cloud) may access the bucket". The answer set is small: **Block Public Access**, bucket policies, IAM (Identity and Access Management), and **Access Points**.
 
 ## The access control toolkit
 
@@ -78,7 +78,9 @@ flowchart TB
 - **C)** Enable versioning on the bucket
 - **D)** Move objects to Glacier
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Account-level Block Public Access overrides every bucket policy and ACL.
+{{% /details %}}
 
 **Q2: Only instances inside a specific VPC should be able to read a bucket. What should the architect configure?**
 
@@ -87,7 +89,9 @@ flowchart TB
 - **C)** A security group attached to the bucket
 - **D)** A pre-signed URL on each object
 
-**Answer: B.** The Deny + `aws:sourceVpce` condition pattern. A doesn't restrict network origin, C is nonsense (SGs don't attach to buckets), D is per-object and temporary.
+{{% details "Cevabı göster" %}}
+**Answer: B.** The Deny + `aws:sourceVpce` condition pattern. A doesn't restrict network origin, C is nonsense (SGs (Security Group) don't attach to buckets), D is per-object and temporary.
+{{% /details %}}
 
 ## Ozet
 

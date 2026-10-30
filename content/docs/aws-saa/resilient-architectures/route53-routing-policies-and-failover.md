@@ -23,10 +23,10 @@ DNS is the cheapest high-availability tool AWS gives you. The exam wants you to 
 ## Health checks and failover
 
 - Route 53 health checks monitor endpoints (HTTP/TCP, string match), or **CloudWatch alarms** as the source
-- **Failover routing** + health check = automatic active-passive DR: primary unhealthy → DNS points at secondary
-- Note the DNS TTL effect: failover is only as fast as the record's TTL (see [dns-ttl-and-caching](../../../aws/dns/dns-ttl-and-caching/))
+- **Failover routing** + health check = automatic active-passive DR (disaster recovery): primary unhealthy → DNS points at secondary
+- Note the DNS TTL (time to live) effect: failover is only as fast as the record's TTL (see [dns-ttl-and-caching](../../../aws/dns/dns-ttl-and-caching/))
 
-Classic pattern - **static site failover to S3**:
+Classic pattern - **static site failover to S3 (Simple Storage Service)**:
 
 ```mermaid
 flowchart LR
@@ -39,7 +39,7 @@ flowchart LR
 | | **Alias record** | **CNAME** |
 |---|---|---|
 | Apex (zone root) | **Works** | Not allowed |
-| Points to | AWS resources (ALB, CloudFront, S3 website, API GW...) | Any DNS name |
+| Points to | AWS resources (ALB (Application Load Balancer), CloudFront, S3 website, API GW...) | Any DNS name |
 | Charges | **Free** for AWS targets | Normal DNS queries |
 
 "Point the root domain (`example.com`, no www) at an ALB" → **Alias record**, always.
@@ -57,7 +57,9 @@ Hosted zones (public vs private) and record types are covered in my hands-on not
 - **C)** Geolocation
 - **D)** Simple
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Percentage-based split = weighted.
+{{% /details %}}
 
 **Q2: Users in Europe must receive European-specific content, and users in the US must receive US content. Which policy?**
 
@@ -66,7 +68,9 @@ Hosted zones (public vs private) and record types are covered in my hands-on not
 - **C)** Failover routing
 - **D)** Multivalue answer
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Content varies **by where the user is** = geolocation. Latency would pick the fastest, not the "correct" content.
+{{% /details %}}
 
 **Q3: A primary web app in `us-east-1` must automatically fail over to an S3 static website in `eu-west-1` when its health check fails. Which routing policy?**
 
@@ -75,7 +79,9 @@ Hosted zones (public vs private) and record types are covered in my hands-on not
 - **C)** Geoproximity
 - **D)** IP-based
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Active-passive + health check = failover routing.
+{{% /details %}}
 
 ## Ozet
 

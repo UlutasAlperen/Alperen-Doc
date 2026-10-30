@@ -3,13 +3,13 @@ title: "elb-and-auto-scaling-resilience"
 weight: 30
 ---
 
-# ELB and Auto Scaling Resilience
+# ELB (Elastic Load Balancing) and Auto Scaling Resilience
 
 The load balancer is the front door and the Auto Scaling Group is the immune system. Together they answer most "traffic doubles at noon" and "an instance died" questions.
 
 ## Choosing the load balancer
 
-| | **ALB** | **NLB** | **GWLB** | CLB (legacy) |
+| | **ALB (Application Load Balancer)** | **NLB (Network Load Balancer)** | **GWLB (Gateway Load Balancer)** | CLB (Classic Load Balancer) - legacy |
 |---|---|---|---|---|
 | Layer | **7** (HTTP/HTTPS) | **4** (TCP/UDP/TLS) | 3 (IP) | 4/7 |
 | Routing | Path, host, headers, query | Port/IP, ultra low latency | 3rd party appliances | Simple |
@@ -27,11 +27,11 @@ ALB extras worth knowing: **path-based routing**, **host-based routing**, **redi
 
 ## Auto Scaling Groups
 
-An ASG takes a **launch template** and maintains capacity:
+An ASG (Auto Scaling Group) takes a **launch template** and maintains capacity:
 
 - `min / desired / max` size
-- **Health checks**: EC2 status checks (default) or **ELB health checks** (unhealthy → replace, this is the resilient option)
-- **Rebalancing** across AZs after an AZ recovers
+- **Health checks**: EC2 (Elastic Compute Cloud) status checks (default) or **ELB health checks** (unhealthy → replace, this is the resilient option)
+- **Rebalancing** across AZs (Availability Zone) after an AZ recovers
 - **Lifecycle hooks** (pause instances for custom setup before `InService`)
 
 ### Scaling policies - pick by scenario keyword
@@ -64,7 +64,9 @@ flowchart LR
 - **C)** GWLB
 - **D)** Route 53 weighted routing
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Path-based Layer 7 routing = ALB.
+{{% /details %}}
 
 **Q2: An ASG should keep average CPU utilization near 40% with the least operational effort. Which policy?**
 
@@ -73,7 +75,9 @@ flowchart LR
 - **C)** Target tracking scaling
 - **D)** Manual instance provisioning
 
+{{% details "Cevabı göster" %}}
 **Answer: C.** Target tracking is the "thermostat" policy - set a target, done.
+{{% /details %}}
 
 ## Ozet
 

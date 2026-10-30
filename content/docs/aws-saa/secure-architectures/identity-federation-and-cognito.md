@@ -5,9 +5,9 @@ weight: 20
 
 # Identity Federation and Cognito
 
-Creating IAM users inside AWS for every employee is a management nightmare - and the exam knows it. The right answer for "our 500 employees use Active Directory" is always **federation**: let an external identity provider handle the humans, and give them **temporary AWS credentials**.
+Creating IAM (Identity and Access Management) users inside AWS for every employee is a management nightmare - and the exam knows it. The right answer for "our 500 employees use Active Directory" is always **federation**: let an external identity provider handle the humans, and give them **temporary AWS credentials**.
 
-## Federation with SAML 2.0 (corporate identities)
+## Federation with SAML (Security Assertion Markup Language) 2.0 (corporate identities)
 
 The scenario keyword is **Active Directory / ADFS / Okta / Azure AD**. Pattern:
 
@@ -22,13 +22,13 @@ flowchart LR
 - **No IAM users are created** in AWS
 - Best for **workforce** identities (employees)
 
-**IAM Identity Center** (the artist formerly known as AWS SSO) is the modern managed version of this: connect one IdP, get a single portal with access to many accounts.
+**IAM Identity Center** (the artist formerly known as AWS SSO (Single Sign-On)) is the modern managed version of this: connect one IdP, get a single portal with access to many accounts.
 
 ## Federation with web identities (customer-facing)
 
 The scenario keywords are **mobile app, social login, "users sign in with Google/Facebook/Amazon"**:
 
-- **Web identity federation** → STS temporary credentials via `AssumeRoleWithWebIdentity`
+- **Web identity federation** → STS (Security Token Service) temporary credentials via `AssumeRoleWithWebIdentity`
 - **Amazon Cognito** is the service that packages this for you
 
 ## Cognito: User Pools vs Identity Pools
@@ -37,12 +37,12 @@ This pair appears in almost every "customer login" question. The trick is knowin
 
 | | User Pool | Identity Pool |
 |---|---|---|
-| What it is | A **user directory** (sign-up, sign-in, MFA) | A **credential vending machine** |
+| What it is | A **user directory** (sign-up, sign-in, MFA (multi-factor authentication)) | A **credential vending machine** |
 | Returns | JWT tokens (authentication) | **AWS temporary credentials** (authorization) |
 | Users | Your app's end users | Any authenticated (or guest) user |
 | Analogy | "Login system" | "Bridge to AWS services" |
 
-You usually use **both**: the user authenticates against the User Pool, then the Identity Pool exchanges the JWT for AWS credentials so the app can talk to S3/DynamoDB directly.
+You usually use **both**: the user authenticates against the User Pool, then the Identity Pool exchanges the JWT for AWS credentials so the app can talk to S3 (Simple Storage Service)/DynamoDB directly.
 
 ```mermaid
 flowchart LR
@@ -58,7 +58,7 @@ flowchart LR
 
 - **"Employees / internal"** → SAML 2.0 federation or IAM Identity Center
 - **"Customers / mobile / social login"** → Cognito
-- **"Application on EC2 calls AWS"** → IAM role (not federation at all)
+- **"Application on EC2 (Elastic Compute Cloud) calls AWS"** → IAM role (not federation at all)
 - Cross-account access between two AWS accounts → **AssumeRole**, not federation
 
 ## Exam check
@@ -70,7 +70,9 @@ flowchart LR
 - **C)** SAML federation with Active Directory
 - **D)** One shared IAM user for all players
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Social login → User Pool; direct AWS access from the app → Identity Pool. A/D leak shared credentials, C is for enterprise workforce.
+{{% /details %}}
 
 **Q2: A company wants its 200 Active Directory users to access multiple AWS accounts with their existing usernames and passwords. What should the architect recommend?**
 
@@ -79,7 +81,9 @@ flowchart LR
 - **C)** Store the AD passwords in Secrets Manager
 - **D)** Use Cognito User Pools
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Corporate identities + multiple accounts = SAML federation with IAM Identity Center.
+{{% /details %}}
 
 ## Ozet
 

@@ -3,7 +3,7 @@ title: "network-security-sg-nacl-vpc-endpoints"
 weight: 60
 ---
 
-# Network Security: Security Groups, NACLs and VPC Endpoints
+# Network Security: Security Groups, NACLs (Network Access Control List) and VPC (Virtual Private Cloud) Endpoints
 
 Two firewall layers and one private connectivity mechanism - and the exam will absolutely ask you to compare the first two.
 
@@ -11,7 +11,7 @@ Two firewall layers and one private connectivity mechanism - and the exam will a
 
 | | **Security Group** | **NACL** |
 |---|---|---|
-| Attaches to | ENI / instance | **Subnet** |
+| Attaches to | ENI (Elastic Network Interface) / instance | **Subnet** |
 | State | **Stateful** (reply traffic auto-allowed) | **Stateless** (allow + deny rules for each direction) |
 | Rules | **Allow only** | Allow **and deny** |
 | Evaluation | All rules evaluated | Rules in **number order**, lowest first |
@@ -30,12 +30,12 @@ Hands-on version: [aws-security-groups](../../../aws/ec2/aws-security-groups/), 
 
 ## VPC Endpoints - private access to AWS services
 
-By default, "instance in a private subnet calls S3" goes through a NAT Gateway (costs money per GB). A **VPC endpoint** keeps the traffic **inside the AWS network**:
+By default, "instance in a private subnet calls S3 (Simple Storage Service)" goes through a NAT Gateway (costs money per GB). A **VPC endpoint** keeps the traffic **inside the AWS network**:
 
 | Type | Services | How it works |
 |---|---|---|
 | **Gateway endpoint** | **S3, DynamoDB** only | Route table entry - **free** |
-| **Interface endpoint (PrivateLink)** | Almost everything else (SQS, KMS, API GW...) | ENI with a private IP - **hourly + per-GB cost** |
+| **Interface endpoint (PrivateLink)** | Almost everything else (SQS (Simple Queue Service), KMS (Key Management Service), API GW...) | ENI with a private IP - **hourly + per-GB cost** |
 
 Why the exam cares:
 
@@ -64,18 +64,22 @@ flowchart LR
 - **A)** Security group with a deny rule
 - **B)** Network ACL with a deny rule
 - **C)** VPC endpoint policy
-- **D)** An IAM policy with an explicit deny
+- **D)** An IAM (Identity and Access Management) policy with an explicit deny
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Security groups have no deny rules; NACLs do.
+{{% /details %}}
 
-**Q2: An EC2 instance in a private subnet frequently downloads objects from S3. The team wants to eliminate NAT Gateway data processing charges and keep traffic off the public internet. What should be used?**
+**Q2: An EC2 (Elastic Compute Cloud) instance in a private subnet frequently downloads objects from S3. The team wants to eliminate NAT Gateway data processing charges and keep traffic off the public internet. What should be used?**
 
 - **A)** A gateway VPC endpoint for S3
 - **B)** An interface VPC endpoint for S3
 - **C)** A public IP on the instance
 - **D)** CloudFront
 
+{{% details "Cevabı göster" %}}
 **Answer: A.** S3 + cost reduction + private = **gateway** endpoint (free). Interface endpoints work but cost hourly.
+{{% /details %}}
 
 ## Ozet
 

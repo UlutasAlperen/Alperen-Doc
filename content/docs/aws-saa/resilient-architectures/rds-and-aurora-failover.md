@@ -3,7 +3,7 @@ title: "rds-and-aurora-failover"
 weight: 60
 ---
 
-# RDS and Aurora Resilience: Multi-AZ vs Read Replicas
+# RDS (Relational Database Service) and Aurora Resilience: Multi-AZ vs Read Replicas
 
 The single most confused pair in the whole exam. One is for **high availability**, the other for **performance** - and mixing them up is exactly what the question writers count on.
 
@@ -11,11 +11,11 @@ The single most confused pair in the whole exam. One is for **high availability*
 
 | | **Multi-AZ** | **Read Replica** |
 |---|---|---|
-| Purpose | **Failover / HA** | **Read scaling** |
+| Purpose | **Failover / HA (high availability)** | **Read scaling** |
 | Replication | **Synchronous** standby | **Asynchronous** |
 | Reads from standby | **No** (standby is invisible) | Yes (you connect to its endpoint) |
 | Failover | Automatic (~60s, DNS change) | Manual promotion |
-| Regions | Same region (different AZs) | **Cross-region** possible |
+| Regions | Same region (different AZs (Availability Zone)) | **Cross-region** possible |
 
 Combining both is the standard "production" answer: Multi-AZ for safety, replicas for scale.
 
@@ -32,7 +32,7 @@ Combining both is the standard "production" answer: Multi-AZ for safety, replica
 - Up to **15 read replicas** with sub-10ms replica lag; the reader endpoint load-balances them
 - **Failover: < 30 seconds**, no data loss (replicas are failover targets)
 - **Backtrack** (MySQL): rewind the whole DB to a point in time in seconds (no restore!)
-- **Aurora Global Database**: primary region + up to 5 secondary regions → RPO < 1s, RTO < 1min
+- **Aurora Global Database**: primary region + up to 5 secondary regions → RPO (Recovery Point Objective) < 1s, RTO (Recovery Time Objective) < 1min
 - **Aurora Serverless v2**: scales capacity per second, good for spiky/infrequent workloads
 - Multi-master exists for write availability in one region (rarely the answer)
 
@@ -47,7 +47,7 @@ flowchart TB
 
 ## RDS backups (know the RPO angle)
 
-- **Automated backups**: daily snapshot + transaction logs → **PITR** to any second in the retention window (0-35 days)
+- **Automated backups**: daily snapshot + transaction logs → **PITR (point-in-time recovery)** to any second in the retention window (0-35 days)
 - **Manual snapshots**: kept until deleted, copy across regions/accounts
 - After a restore, you get a **new instance with a new DNS endpoint** - update the app
 
@@ -62,7 +62,9 @@ Hands-on: [rds-backups](../../../aws/rds/rds-backups/), [create-read-replicas-fo
 - **C)** Enable deletion protection
 - **D)** Increase the backup retention
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Read load → read replicas. Multi-AZ adds zero read capacity (the standby can't be read).
+{{% /details %}}
 
 **Q2: An Aurora deployment must survive a regional outage with an RPO of under 1 second. What should be used?**
 
@@ -71,7 +73,9 @@ Hands-on: [rds-backups](../../../aws/rds/rds-backups/), [create-read-replicas-fo
 - **C)** Read replicas in the same region
 - **D)** Snapshots copied weekly
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Global Database = RPO < 1s across regions. Snapshots are hours-scale RPO.
+{{% /details %}}
 
 ## Ozet
 

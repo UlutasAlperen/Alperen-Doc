@@ -3,7 +3,7 @@ title: "compute-performance-ec2-options"
 weight: 50
 ---
 
-# Compute Performance: EC2 Options
+# Compute Performance: EC2 (Elastic Compute Cloud) Options
 
 "Which instance type / placement / purchase option" questions test whether you know the **instance family alphabet** and the three placement group shapes. (Pricing is covered in [pricing-models](../../cost-optimized-architectures/pricing-models-ri-savings-plans-spot/).)
 
@@ -25,7 +25,7 @@ weight: 50
 
 | Type | What it gives | Limit / use |
 |---|---|---|
-| **Cluster** | Instances in one AZ, same rack → **lowest latency, highest throughput** | HPC, tightly-coupled, low-latency networking |
+| **Cluster** | Instances in one AZ (Availability Zone), same rack → **lowest latency, highest throughput** | HPC, tightly-coupled, low-latency networking |
 | **Spread** | Instances on **distinct hardware** (max 7 per group per AZ) | Critical instances that must not fail together |
 | **Partition** | Hardware partitions (up to 100s of instances) | Big data: HDFS, HBase, Cassandra, Kafka |
 
@@ -43,10 +43,10 @@ flowchart TB
 
 ## Networking and storage performance
 
-- **ENA** (enhanced networking): 25 Gbps+ , required for modern types; **EFA** = OS-bypass for HPC/ML
-- **Instance store** = raw NVMe on the host → highest IOPS, but **ephemeral** (data dies with the instance)
-- **EBS gp3/io2** = network block storage; io2 for provisioned IOPS (databases); st/sc1 for cheap cold
-- AMI choice: pick the right region/architecture (see [creating-and-using-your-own-ami](../../../aws/ec2/creating-and-using-your-own-ami/))
+- **ENA (Elastic Network Adapter)** (enhanced networking): 25 Gbps+ , required for modern types; **EFA (Elastic Fabric Adapter)** = OS-bypass for HPC/ML
+- **Instance store** = raw NVMe on the host → highest IOPS (input/output operations per second), but **ephemeral** (data dies with the instance)
+- **EBS (Elastic Block Store) gp3/io2** = network block storage; io2 for provisioned IOPS (databases); st/sc1 for cheap cold
+- AMI (Amazon Machine Image) choice: pick the right region/architecture (see [creating-and-using-your-own-ami](../../../aws/ec2/creating-and-using-your-own-ami/))
 
 ## Exam check
 
@@ -57,7 +57,9 @@ flowchart TB
 - **C)** Partition
 - **D)** Multi-AZ group
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Cluster placement = single rack, single AZ, minimum latency.
+{{% /details %}}
 
 **Q2: Three critical instances must run on separate physical hardware so one host failure can't take them all down. Which placement?**
 
@@ -66,7 +68,9 @@ flowchart TB
 - **C)** Spread
 - **D)** Auto Scaling
 
+{{% details "Cevabı göster" %}}
 **Answer: C.** Spread = distinct hardware (7 per AZ limit).
+{{% /details %}}
 
 ## Ozet
 

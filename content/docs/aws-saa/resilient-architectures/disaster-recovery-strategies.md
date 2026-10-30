@@ -5,7 +5,7 @@ weight: 20
 
 # Disaster Recovery Strategies
 
-This is a pure memorization page with a huge payoff: the four DR strategies appear in almost every resiliency scenario. Learn them as a **cost ↔ recovery time** slider.
+This is a pure memorization page with a huge payoff: the four DR (disaster recovery) strategies appear in almost every resiliency scenario. Learn them as a **cost ↔ recovery time** slider.
 
 ## Two numbers decide everything
 
@@ -30,9 +30,9 @@ flowchart LR
     ws -->|cheaper, slower| aa[Multi-site active/active]
 ```
 
-- **Backup & restore** - snapshots + AMIs + cross-region S3 replication; "we can afford a day of downtime" scenarios. RDS snapshots, EBS snapshots, AWS Backup.
+- **Backup & restore** - snapshots + AMIs (Amazon Machine Image) + cross-region S3 (Simple Storage Service) replication; "we can afford a day of downtime" scenarios. RDS (Relational Database Service) snapshots, EBS (Elastic Block Store) snapshots, AWS Backup.
 - **Pilot light** - the data layer (RDS Multi-AZ / Aurora) is live in the DR region, but app servers are off. On disaster: start instances from AMIs.
-- **Warm standby** - a smaller but **functional** environment always running (scaled-down ASG, read replicas). Scale up on disaster.
+- **Warm standby** - a smaller but **functional** environment always running (scaled-down ASG (Auto Scaling Group), read replicas). Scale up on disaster.
 - **Multi-site active/active** - traffic served from both regions simultaneously (Route 53 latency/weighted routing). Zero downtime, double the bill.
 
 ## Services that make each strategy happen
@@ -55,7 +55,9 @@ flowchart LR
 - **C)** Backup & restore
 - **D)** Pilot light
 
+{{% details "Cevabı göster" %}}
 **Answer: C.** Hours-scale RTO/RPO + lowest cost = backup & restore.
+{{% /details %}}
 
 **Q2: A system requires an RTO of 5 minutes and an RPO of 1 minute across regions. Which combination?**
 
@@ -64,7 +66,9 @@ flowchart LR
 - **C)** Pilot light with AMIs in a second region
 - **D)** S3 versioning
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Aurora Global gives RPO < 1s / RTO < 1min; the others are too slow.
+{{% /details %}}
 
 ## Ozet
 

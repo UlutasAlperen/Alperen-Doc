@@ -3,7 +3,7 @@ title: "decoupling-with-sqs-sns"
 weight: 40
 ---
 
-# Decoupling with SQS and SNS
+# Decoupling with SQS (Simple Queue Service) and SNS (Simple Notification Service)
 
 "When a downstream system fails, the whole app shouldn't fail" → **decouple with a queue**. SQS/SNS questions are among the most frequent on the exam, and the answers hinge on a few precise differences.
 
@@ -33,7 +33,7 @@ FIFO queue names end in `.fifo`. **Message group ID** = parallel processing lane
 
 ### Queue as a buffer for scaling
 
-`ApproximateNumberOfMessages` (queue depth) as a **CloudWatch metric** → ASG scales consumers on backlog, not CPU. This is the classic "workers behind a queue" architecture.
+`ApproximateNumberOfMessages` (queue depth) as a **CloudWatch metric** → ASG (Auto Scaling Group) scales consumers on backlog, not CPU. This is the classic "workers behind a queue" architecture.
 
 ## SNS - the push-based topic
 
@@ -67,16 +67,20 @@ flowchart LR
 - **C)** SNS Standard topic
 - **D)** Kinesis Data Firehose
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Exactly-once + strict ordering = SQS FIFO.
+{{% /details %}}
 
 **Q2: An image upload must trigger a thumbnail generator AND a metadata indexer independently. If one consumer is down, the other must keep working. What design?**
 
-- **A)** One EC2 worker doing both jobs
+- **A)** One EC2 (Elastic Compute Cloud) worker doing both jobs
 - **B)** SNS topic with an SQS queue per consumer
 - **C)** An SQS standard queue polled by both consumers (competing)
 - **D)** An email notification
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Fan-out with per-consumer queues = independent durability. C makes consumers compete for the same messages.
+{{% /details %}}
 
 **Q3: A consumer processes messages that can take up to 15 minutes, longer than the visibility timeout. What should be done?**
 
@@ -85,7 +89,9 @@ flowchart LR
 - **C)** Set the queue to FIFO
 - **D)** Enable long polling
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Otherwise the message reappears and another consumer double-processes it.
+{{% /details %}}
 
 ## Ozet
 

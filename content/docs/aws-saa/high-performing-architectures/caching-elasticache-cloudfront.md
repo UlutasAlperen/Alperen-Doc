@@ -3,7 +3,7 @@ title: "caching-elasticache-cloudfront"
 weight: 20
 ---
 
-# Caching: ElastiCache, CloudFront and DAX
+# Caching: ElastiCache, CloudFront and DAX (DynamoDB Accelerator)
 
 The fastest query is the one you never make. Caching questions on the exam come down to: **what layer** (CDN, application, database) and **which engine** (Redis vs Memcached vs DAX).
 
@@ -33,7 +33,7 @@ Exam shortcut: "failover / durability / data structures / sorted leaderboard" �
 
 - **Lazy loading** (cache-aside): cache only what's requested; cheap on cache size, but first request after expiry = cache miss → DB hit
 - **Write-through**: write to cache and DB together; consistent, but writes are slower and everything gets cached
-- **TTL management**: expired = stale data gone; "the product name is wrong after update" → missing invalidation / TTL question
+- **TTL (time to live) management**: expired = stale data gone; "the product name is wrong after update" → missing invalidation / TTL question
 - Session state in Redis = the standard "sticky sessions are bad, where do sessions go" answer
 
 ## DynamoDB DAX
@@ -62,23 +62,27 @@ flowchart LR
 
 ## Exam check
 
-**Q1: A product catalog API runs the same SQL queries thousands of times per minute against RDS. What gives the biggest performance gain?**
+**Q1: A product catalog API runs the same SQL queries thousands of times per minute against RDS (Relational Database Service). What gives the biggest performance gain?**
 
 - **A)** Switch RDS to Multi-AZ
 - **B)** Add ElastiCache in front of the database
 - **C)** Add read replicas
 - **D)** Enable RDS Performance Insights
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Repeated identical queries = cache. Read replicas help too, but caching removes most DB hits entirely.
+{{% /details %}}
 
 **Q2: Session data must survive the failure of a node and support sorted-set leaderboards. Which engine?**
 
 - **A)** Memcached
 - **B)** Redis
 - **C)** DynamoDB
-- **D)** S3
+- **D)** S3 (Simple Storage Service)
 
+{{% details "Cevabı göster" %}}
 **Answer: B.** Replication + data structures = Redis.
+{{% /details %}}
 
 ## Ozet
 
