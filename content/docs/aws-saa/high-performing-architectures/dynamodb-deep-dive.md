@@ -61,19 +61,19 @@ flowchart LR
 
 **Q1: A table stores orders keyed by `customerId`, and the app frequently queries "all orders for customer X between two dates". Which key design?**
 
-A) Partition key: `orderId`
-B) Partition key: `customerId`, sort key: `orderDate`
-C) Partition key: `orderDate`
-D) No sort key, use Scan
+- **A)** Partition key: `orderId`
+- **B)** Partition key: `customerId`, sort key: `orderDate`
+- **C)** Partition key: `orderDate`
+- **D)** No sort key, use Scan
 
 **Answer: B.** Composite key enables the range query without a Scan.
 
 **Q2: A global application needs users in Asia and Europe to write locally with the same table, and tolerate a regional outage. Which feature?**
 
-A) DynamoDB DAX
-B) DynamoDB Global Tables
-C) Read replicas
-D) ElastiCache Redis
+- **A)** DynamoDB DAX
+- **B)** DynamoDB Global Tables
+- **C)** Read replicas
+- **D)** ElastiCache Redis
 
 **Answer: B.** Multi-region multi-active replication = Global Tables.
 

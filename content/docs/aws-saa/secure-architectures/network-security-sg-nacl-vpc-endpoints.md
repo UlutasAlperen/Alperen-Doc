@@ -61,19 +61,19 @@ flowchart LR
 
 **Q1: A security team must block traffic from a specific IP address to a subnet. Which mechanism?**
 
-A) Security group with a deny rule
-B) Network ACL with a deny rule
-C) VPC endpoint policy
-D) An IAM policy with an explicit deny
+- **A)** Security group with a deny rule
+- **B)** Network ACL with a deny rule
+- **C)** VPC endpoint policy
+- **D)** An IAM policy with an explicit deny
 
 **Answer: B.** Security groups have no deny rules; NACLs do.
 
 **Q2: An EC2 instance in a private subnet frequently downloads objects from S3. The team wants to eliminate NAT Gateway data processing charges and keep traffic off the public internet. What should be used?**
 
-A) A gateway VPC endpoint for S3
-B) An interface VPC endpoint for S3
-C) A public IP on the instance
-D) CloudFront
+- **A)** A gateway VPC endpoint for S3
+- **B)** An interface VPC endpoint for S3
+- **C)** A public IP on the instance
+- **D)** CloudFront
 
 **Answer: A.** S3 + cost reduction + private = **gateway** endpoint (free). Interface endpoints work but cost hourly.
 

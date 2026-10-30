@@ -43,19 +43,19 @@ flowchart LR
 
 **Q1: Management wants an alert when monthly spend is forecast to exceed $10,000, and wants non-production resources stopped automatically at 100% of budget. Which service?**
 
-A) Cost Explorer
-B) AWS Budgets
-C) Trusted Advisor
-D) Cost & Usage Report
+- **A)** Cost Explorer
+- **B)** AWS Budgets
+- **C)** Trusted Advisor
+- **D)** Cost & Usage Report
 
 **Answer: B.** Forecasted-threshold alerts + budget actions = Budgets.
 
 **Q2: A finance team needs resource-level, hourly billing data to build a custom chargeback dashboard in QuickSight. What should they use?**
 
-A) Cost Explorer
-B) AWS Budgets
-C) Cost & Usage Report analyzed with Athena
-D) CloudWatch Metrics
+- **A)** Cost Explorer
+- **B)** AWS Budgets
+- **C)** Cost & Usage Report analyzed with Athena
+- **D)** CloudWatch Metrics
 
 **Answer: C.** Only CUR has resource-level granularity; QuickSight visualizes it.
 

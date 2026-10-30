@@ -62,28 +62,28 @@ flowchart LR
 
 **Q1: Orders must be processed exactly once, in the order they were received. Which queue type?**
 
-A) SQS Standard
-B) SQS FIFO
-C) SNS Standard topic
-D) Kinesis Data Firehose
+- **A)** SQS Standard
+- **B)** SQS FIFO
+- **C)** SNS Standard topic
+- **D)** Kinesis Data Firehose
 
 **Answer: B.** Exactly-once + strict ordering = SQS FIFO.
 
 **Q2: An image upload must trigger a thumbnail generator AND a metadata indexer independently. If one consumer is down, the other must keep working. What design?**
 
-A) One EC2 worker doing both jobs
-B) SNS topic with an SQS queue per consumer
-C) An SQS standard queue polled by both consumers (competing)
-D) An email notification
+- **A)** One EC2 worker doing both jobs
+- **B)** SNS topic with an SQS queue per consumer
+- **C)** An SQS standard queue polled by both consumers (competing)
+- **D)** An email notification
 
 **Answer: B.** Fan-out with per-consumer queues = independent durability. C makes consumers compete for the same messages.
 
 **Q3: A consumer processes messages that can take up to 15 minutes, longer than the visibility timeout. What should be done?**
 
-A) Increase the message retention
-B) Extend the visibility timeout during processing
-C) Set the queue to FIFO
-D) Enable long polling
+- **A)** Increase the message retention
+- **B)** Extend the visibility timeout during processing
+- **C)** Set the queue to FIFO
+- **D)** Enable long polling
 
 **Answer: B.** Otherwise the message reappears and another consumer double-processes it.
 

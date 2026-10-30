@@ -50,19 +50,19 @@ Hands-on: [aws-s3-objects](../../../aws/s3/aws-s3-objects/), [aws-s3-bucket](../
 
 **Q1: Large video files (50 GB each) are uploaded from offices worldwide and uploads frequently fail on slow links. What improves reliability AND speed?**
 
-A) Enable versioning
-B) Multipart upload with S3 Transfer Acceleration
-C) Switch to One Zone-IA
-D) Increase the bucket's storage class
+- **A)** Enable versioning
+- **B)** Multipart upload with S3 Transfer Acceleration
+- **C)** Switch to One Zone-IA
+- **D)** Increase the bucket's storage class
 
 **Answer: B.** Multipart = resumable parallel parts; Transfer Acceleration = edge-based fast path.
 
 **Q2: Medical images must be retrievable in milliseconds but are rarely accessed, and kept for 10 years. Which class?**
 
-A) Glacier Deep Archive
-B) Glacier Instant Retrieval
-C) S3 Standard
-D) One Zone-IA
+- **A)** Glacier Deep Archive
+- **B)** Glacier Instant Retrieval
+- **C)** S3 Standard
+- **D)** One Zone-IA
 
 **Answer: B.** "Milliseconds but rare" = Instant Retrieval. Deep Archive takes hours.
 

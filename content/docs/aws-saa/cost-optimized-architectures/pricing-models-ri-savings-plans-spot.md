@@ -52,19 +52,19 @@ flowchart LR
 
 **Q1: A CI/CD build farm runs thousands of short-lived jobs that can tolerate failures and must minimize cost. What should be used?**
 
-A) On-Demand instances
-B) Spot Instances
-C) Dedicated Hosts
-D) Standard RIs
+- **A)** On-Demand instances
+- **B)** Spot Instances
+- **C)** Dedicated Hosts
+- **D)** Standard RIs
 
 **Answer: B.** Fault-tolerant, interruptible, cheapest = Spot.
 
 **Q2: A company runs 40 m5.large instances 24/7 for the next 3 years and wants the largest discount but may need to switch to c5 later. Which option?**
 
-A) Compute Savings Plans (3-year)
-B) On-Demand
-C) Scheduled RIs
-D) Spot Instances
+- **A)** Compute Savings Plans (3-year)
+- **B)** On-Demand
+- **C)** Scheduled RIs
+- **D)** Spot Instances
 
 **Answer: A.** Steady usage + long horizon + flexibility to change families = Compute Savings Plans (a Convertible RI would also discount but Compute SP is the flexible, family-agnostic commitment).
 

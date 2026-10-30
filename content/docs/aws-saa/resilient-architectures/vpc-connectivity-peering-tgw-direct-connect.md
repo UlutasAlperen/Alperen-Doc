@@ -74,19 +74,19 @@ For *AWS service* access without any of the above: [network-security-sg-nacl-vpc
 
 **Q1: A company has 30 VPCs across several accounts and wants any VPC to reach any other with centralized control and transitive routing. What should be used?**
 
-A) Full mesh of VPC peering connections
-B) Transit Gateway
-C) One large VPC
-D) Site-to-site VPN
+- **A)** Full mesh of VPC peering connections
+- **B)** Transit Gateway
+- **C)** One large VPC
+- **D)** Site-to-site VPN
 
 **Answer: B.** Peering at 30 VPCs is a 435-connection mesh; TGW is the designed answer.
 
 **Q2: An on-premises datacenter must connect to AWS with consistent low latency and no traffic over the public internet. Which service?**
 
-A) Site-to-site VPN
-B) AWS Direct Connect
-C) VPC peering
-D) Internet Gateway
+- **A)** Site-to-site VPN
+- **B)** AWS Direct Connect
+- **C)** VPC peering
+- **D)** Internet Gateway
 
 **Answer: B.** Dedicated private line = Direct Connect.
 

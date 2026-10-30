@@ -50,19 +50,19 @@ flowchart LR
 
 **Q1: A company can tolerate up to 4 hours of downtime and up to 1 hour of data loss, and wants the LOWEST cost. Which DR strategy?**
 
-A) Multi-site active/active
-B) Warm standby
-C) Backup & restore
-D) Pilot light
+- **A)** Multi-site active/active
+- **B)** Warm standby
+- **C)** Backup & restore
+- **D)** Pilot light
 
 **Answer: C.** Hours-scale RTO/RPO + lowest cost = backup & restore.
 
 **Q2: A system requires an RTO of 5 minutes and an RPO of 1 minute across regions. Which combination?**
 
-A) Nightly EBS snapshots copied cross-region
-B) Aurora Global Database with Route 53 failover
-C) Pilot light with AMIs in a second region
-D) S3 versioning
+- **A)** Nightly EBS snapshots copied cross-region
+- **B)** Aurora Global Database with Route 53 failover
+- **C)** Pilot light with AMIs in a second region
+- **D)** S3 versioning
 
 **Answer: B.** Aurora Global gives RPO < 1s / RTO < 1min; the others are too slow.
 

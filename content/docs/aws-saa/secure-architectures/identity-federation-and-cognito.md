@@ -65,19 +65,19 @@ flowchart LR
 
 **Q1: A mobile game lets millions of players sign in with Facebook, and the app needs to write player scores to DynamoDB. Which combination should be used?**
 
-A) IAM users with access keys embedded in the app
-B) Cognito User Pool for sign-in + Identity Pool for AWS credentials
-C) SAML federation with Active Directory
-D) One shared IAM user for all players
+- **A)** IAM users with access keys embedded in the app
+- **B)** Cognito User Pool for sign-in + Identity Pool for AWS credentials
+- **C)** SAML federation with Active Directory
+- **D)** One shared IAM user for all players
 
 **Answer: B.** Social login → User Pool; direct AWS access from the app → Identity Pool. A/D leak shared credentials, C is for enterprise workforce.
 
 **Q2: A company wants its 200 Active Directory users to access multiple AWS accounts with their existing usernames and passwords. What should the architect recommend?**
 
-A) Create one IAM user per employee in each account
-B) Federate AD with AWS using SAML 2.0 via IAM Identity Center
-C) Store the AD passwords in Secrets Manager
-D) Use Cognito User Pools
+- **A)** Create one IAM user per employee in each account
+- **B)** Federate AD with AWS using SAML 2.0 via IAM Identity Center
+- **C)** Store the AD passwords in Secrets Manager
+- **D)** Use Cognito User Pools
 
 **Answer: B.** Corporate identities + multiple accounts = SAML federation with IAM Identity Center.
 

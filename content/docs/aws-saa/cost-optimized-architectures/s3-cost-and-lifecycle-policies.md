@@ -50,19 +50,19 @@ flowchart LR
 
 **Q1: A company stores daily backups that are never accessed after 30 days but must be retained for 7 years at minimal cost. What should be done?**
 
-A) Keep everything in S3 Standard
-B) Lifecycle rule: transition to Glacier Deep Archive after 30 days
-C) Delete after 30 days
-D) Enable Transfer Acceleration
+- **A)** Keep everything in S3 Standard
+- **B)** Lifecycle rule: transition to Glacier Deep Archive after 30 days
+- **C)** Delete after 30 days
+- **D)** Enable Transfer Acceleration
 
 **Answer: B.** Long retention + no access + cheapest = Deep Archive transition.
 
 **Q2: An S3 bill shows high charges for data transfer to the internet for a popular image-heavy website. What is the MOST cost-effective fix?**
 
-A) Move the images to EBS
-B) Serve the images through CloudFront
-C) Enable versioning
-D) Compress the bucket
+- **A)** Move the images to EBS
+- **B)** Serve the images through CloudFront
+- **C)** Enable versioning
+- **D)** Compress the bucket
 
 **Answer: B.** CloudFront's per-GB rate beats S3 internet egress, and it caches repeats.
 

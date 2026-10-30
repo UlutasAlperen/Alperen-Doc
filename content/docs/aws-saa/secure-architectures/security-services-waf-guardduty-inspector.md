@@ -54,28 +54,28 @@ flowchart TB
 
 **Q1: A company notices its public web application is being targeted by SQL injection attempts. Which service should it deploy?**
 
-A) GuardDuty
-B) AWS WAF
-C) Amazon Inspector
-D) AWS Shield Standard
+- **A)** GuardDuty
+- **B)** AWS WAF
+- **C)** Amazon Inspector
+- **D)** AWS Shield Standard
 
 **Answer: B.** SQL injection is a Layer 7 attack = WAF rules.
 
 **Q2: The security team wants to discover which S3 buckets contain unencrypted credit card numbers. Which service?**
 
-A) Amazon Macie
-B) Amazon GuardDuty
-C) AWS Config
-D) Amazon Inspector
+- **A)** Amazon Macie
+- **B)** Amazon GuardDuty
+- **C)** AWS Config
+- **D)** Amazon Inspector
 
 **Answer: A.** Sensitive data discovery in S3 = Macie.
 
 **Q3: A company wants protection against DDoS attacks including reimbursement for scaling costs caused by the attack. Which offering?**
 
-A) Shield Standard
-B) Shield Advanced
-C) WAF rate-based rules
-D) Network Firewall
+- **A)** Shield Standard
+- **B)** Shield Advanced
+- **C)** WAF rate-based rules
+- **D)** Network Firewall
 
 **Answer: B.** Cost protection + DDoS Response Team = Shield Advanced.
 

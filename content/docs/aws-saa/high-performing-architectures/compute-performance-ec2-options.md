@@ -52,19 +52,19 @@ flowchart TB
 
 **Q1: A tightly-coupled HPC simulation needs the lowest possible latency between 20 nodes. Which placement group?**
 
-A) Spread
-B) Cluster
-C) Partition
-D) Multi-AZ group
+- **A)** Spread
+- **B)** Cluster
+- **C)** Partition
+- **D)** Multi-AZ group
 
 **Answer: B.** Cluster placement = single rack, single AZ, minimum latency.
 
 **Q2: Three critical instances must run on separate physical hardware so one host failure can't take them all down. Which placement?**
 
-A) Cluster
-B) Partition
-C) Spread
-D) Auto Scaling
+- **A)** Cluster
+- **B)** Partition
+- **C)** Spread
+- **D)** Auto Scaling
 
 **Answer: C.** Spread = distinct hardware (7 per AZ limit).
 

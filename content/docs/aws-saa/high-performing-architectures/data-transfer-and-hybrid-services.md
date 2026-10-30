@@ -54,28 +54,28 @@ flowchart LR
 
 **Q1: Business partners must upload daily reports using SFTP, and the files must land in S3 without managing any servers. What should the architect use?**
 
-A) AWS DataSync
-B) AWS Transfer Family
-C) Storage Gateway File Gateway
-D) Snowball Edge
+- **A)** AWS DataSync
+- **B)** AWS Transfer Family
+- **C)** Storage Gateway File Gateway
+- **D)** Snowball Edge
 
 **Answer: B.** Managed SFTP front-end to S3 = Transfer Family.
 
 **Q2: A 300 TB file archive on-premises must move to S3, but the WAN link is 50 Mbps. What is the fastest practical approach?**
 
-A) DataSync over the WAN
-B) AWS Snowball Edge
-C) S3 Transfer Acceleration
-D) RDS snapshots
+- **A)** DataSync over the WAN
+- **B)** AWS Snowball Edge
+- **C)** S3 Transfer Acceleration
+- **D)** RDS snapshots
 
 **Answer: B.** 300 TB over 50 Mbps would take months; ship a Snowball.
 
 **Q3: An on-premises application must keep using local iSCSI block storage while data is backed up to AWS. Which service?**
 
-A) Volume Gateway (stored mode)
-B) File Gateway
-C) Transfer Family
-D) EFS
+- **A)** Volume Gateway (stored mode)
+- **B)** File Gateway
+- **C)** Transfer Family
+- **D)** EFS
 
 **Answer: A.** iSCSI block storage = Volume Gateway; stored mode keeps the full dataset locally with async EBS snapshots.
 

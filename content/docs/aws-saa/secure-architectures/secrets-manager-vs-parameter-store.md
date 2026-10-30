@@ -57,19 +57,19 @@ Parameters are `String`, `StringList`, or `SecureString` (encrypted with KMS). E
 
 **Q1: A company needs to store database credentials and automatically rotate them every 30 days. Applications run on both EC2 and Lambda across two AWS accounts. Which service?**
 
-A) SSM Parameter Store (Standard tier)
-B) AWS Secrets Manager
-C) AWS Systems Manager OpsCenter
-D) An encrypted EBS volume
+- **A)** SSM Parameter Store (Standard tier)
+- **B)** AWS Secrets Manager
+- **C)** AWS Systems Manager OpsCenter
+- **D)** An encrypted EBS volume
 
 **Answer: B.** Automatic rotation + cross-account + managed integrations = Secrets Manager.
 
 **Q2: An application needs 500 non-sensitive configuration values, and the team wants minimal cost. Which option is MOST cost-effective?**
 
-A) Secrets Manager
-B) SSM Parameter Store Standard tier
-C) KMS encrypted S3 bucket
-D) DynamoDB
+- **A)** Secrets Manager
+- **B)** SSM Parameter Store Standard tier
+- **C)** KMS encrypted S3 bucket
+- **D)** DynamoDB
 
 **Answer: B.** Standard tier parameters are free and designed for exactly this.
 

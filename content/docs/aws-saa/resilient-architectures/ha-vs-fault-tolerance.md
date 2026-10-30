@@ -48,19 +48,19 @@ A synchronous chain (web → app → queue-less worker) fails as a whole. Puttin
 
 **Q1: An architecture must tolerate the failure of an entire Availability Zone with no manual intervention and the least operational overhead. What is the minimum design?**
 
-A) Two EC2 instances in the same AZ with an ELB
-B) Instances across two AZs behind an ELB (or an ASG with multi-AZ subnets)
-C) An EBS snapshot policy
-D) A larger instance type in one AZ
+- **A)** Two EC2 instances in the same AZ with an ELB
+- **B)** Instances across two AZs behind an ELB (or an ASG with multi-AZ subnets)
+- **C)** An EBS snapshot policy
+- **D)** A larger instance type in one AZ
 
 **Answer: B.** Multi-AZ + ELB/ASG. A survives instance failure only, C is recovery not tolerance.
 
 **Q2: What is a "single point of failure" in a three-tier web app where all instances sit in one AZ?**
 
-A) The ELB
-B) The AZ itself
-C) The IAM role
-D) The AMI
+- **A)** The ELB
+- **B)** The AZ itself
+- **C)** The IAM role
+- **D)** The AMI
 
 **Answer: B.** Everything shares one failure domain - the AZ.
 

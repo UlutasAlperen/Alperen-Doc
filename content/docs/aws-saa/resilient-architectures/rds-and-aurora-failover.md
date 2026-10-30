@@ -57,19 +57,19 @@ Hands-on: [rds-backups](../../../aws/rds/rds-backups/), [create-read-replicas-fo
 
 **Q1: A reporting application floods the primary database with heavy read queries, causing latency for writes. What is the MOST appropriate fix without changing the application architecture?**
 
-A) Switch to Multi-AZ
-B) Create read replicas and point reporting at them
-C) Enable deletion protection
-D) Increase the backup retention
+- **A)** Switch to Multi-AZ
+- **B)** Create read replicas and point reporting at them
+- **C)** Enable deletion protection
+- **D)** Increase the backup retention
 
 **Answer: B.** Read load → read replicas. Multi-AZ adds zero read capacity (the standby can't be read).
 
 **Q2: An Aurora deployment must survive a regional outage with an RPO of under 1 second. What should be used?**
 
-A) Automated backups with PITR
-B) Aurora Global Database with a secondary region
-C) Read replicas in the same region
-D) Snapshots copied weekly
+- **A)** Automated backups with PITR
+- **B)** Aurora Global Database with a secondary region
+- **C)** Read replicas in the same region
+- **D)** Snapshots copied weekly
 
 **Answer: B.** Global Database = RPO < 1s across regions. Snapshots are hours-scale RPO.
 

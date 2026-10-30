@@ -66,19 +66,19 @@ EBS encryption follows the same pattern (SSE-KMS style, transparent to the OS, c
 
 **Q1: A compliance requirement states that all data at rest must be encrypted with keys the customer controls, and every decryption attempt must be logged. Which S3 option?**
 
-A) SSE-S3
-B) SSE-KMS with a customer managed key
-C) SSE-C
-D) Client-side encryption with a key stored in the bucket
+- **A)** SSE-S3
+- **B)** SSE-KMS with a customer managed key
+- **C)** SSE-C
+- **D)** Client-side encryption with a key stored in the bucket
 
 **Answer: B.** Customer-controlled key + CloudTrail audit of key usage = SSE-KMS with a CMK. D stores the key next to the data.
 
 **Q2: An on-premises application must encrypt data with a dedicated, single-tenant hardware security module that meets FIPS 140-2 Level 3. What should be used?**
 
-A) AWS KMS with an AWS managed key
-B) AWS CloudHSM
-C) Secrets Manager
-D) S3 SSE-C
+- **A)** AWS KMS with an AWS managed key
+- **B)** AWS CloudHSM
+- **C)** Secrets Manager
+- **D)** S3 SSE-C
 
 **Answer: B.** "Dedicated/single-tenant HSM" = CloudHSM.
 

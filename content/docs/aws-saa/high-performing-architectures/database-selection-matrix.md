@@ -65,19 +65,19 @@ flowchart TB
 
 **Q1: A startup expects unpredictable traffic from 0 to 10 million users and stores simple user profile records accessed by user ID. Which database?**
 
-A) RDS MySQL
-B) DynamoDB
-C) Redshift
-D) ElastiCache
+- **A)** RDS MySQL
+- **B)** DynamoDB
+- **C)** Redshift
+- **D)** ElastiCache
 
 **Answer: B.** Key-value access + internet scale + unpredictable = DynamoDB.
 
 **Q2: A data team needs to run complex analytical joins over 3 years of sales data without slowing down the order-processing database. What should be used?**
 
-A) Add read replicas to RDS
-B) Move analytics to Redshift and load with Glue
-C) Run the queries on the RDS primary
-D) Enable DynamoDB DAX
+- **A)** Add read replicas to RDS
+- **B)** Move analytics to Redshift and load with Glue
+- **C)** Run the queries on the RDS primary
+- **D)** Enable DynamoDB DAX
 
 **Answer: B.** OLAP workload = warehouse (Redshift), ETL via Glue.
 

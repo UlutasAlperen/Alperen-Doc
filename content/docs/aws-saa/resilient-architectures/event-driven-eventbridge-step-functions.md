@@ -62,19 +62,19 @@ Often paired in event-driven questions: managed front door for HTTP APIs with th
 
 **Q1: SaaS events from three vendors must be filtered by event type and routed to different Lambda functions, with the ability to replay yesterday's events after a bug fix. Which service?**
 
-A) SNS with subscriptions
-B) EventBridge with rules and an archive
-C) SQS standard queue
-D) CloudWatch Logs
+- **A)** SNS with subscriptions
+- **B)** EventBridge with rules and an archive
+- **C)** SQS standard queue
+- **D)** CloudWatch Logs
 
 **Answer: B.** Content filtering + SaaS partner sources + replay = EventBridge.
 
 **Q2: A loan approval process runs several Lambda functions, waits for a human decision, and must retry failed steps automatically. Which service coordinates it?**
 
-A) SQS
-B) Amazon EventBridge
-C) AWS Step Functions
-D) AWS Batch
+- **A)** SQS
+- **B)** Amazon EventBridge
+- **C)** AWS Step Functions
+- **D)** AWS Batch
 
 **Answer: C.** Multi-step orchestration with retries and wait states = Step Functions.
 

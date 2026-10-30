@@ -38,19 +38,19 @@ Exam nuance: "most cost-effective" **still must meet requirements**. If the ques
 
 **Q1: A nightly batch job processes images for 2 hours and can restart from checkpoints. The MOST cost-effective compute is:**
 
-A) A reserved m5.2xlarge running 24/7
-B) Spot instances via AWS Batch
-C) An on-demand c5.4xlarge
-D) A dedicated host
+- **A)** A reserved m5.2xlarge running 24/7
+- **B)** Spot instances via AWS Batch
+- **C)** An on-demand c5.4xlarge
+- **D)** A dedicated host
 
 **Answer: B.** Short, restartable, fault-tolerant job = Spot (or Lambda if it fits - but "2 hours, checkpoints" points to Spot/Batch).
 
 **Q2: A small company needs to host a mostly static marketing site with a contact form, at the lowest cost. What should be used?**
 
-A) An EC2 web server running 24/7
-B) S3 static website hosting + CloudFront + Lambda/API Gateway for the form
-C) A three-tier RDS-backed app
-D) An ECS cluster
+- **A)** An EC2 web server running 24/7
+- **B)** S3 static website hosting + CloudFront + Lambda/API Gateway for the form
+- **C)** A three-tier RDS-backed app
+- **D)** An ECS cluster
 
 **Answer: B.** Static content doesn't need always-on compute.
 

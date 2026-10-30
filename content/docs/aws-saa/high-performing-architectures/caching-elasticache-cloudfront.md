@@ -64,19 +64,19 @@ flowchart LR
 
 **Q1: A product catalog API runs the same SQL queries thousands of times per minute against RDS. What gives the biggest performance gain?**
 
-A) Switch RDS to Multi-AZ
-B) Add ElastiCache in front of the database
-C) Add read replicas
-D) Enable RDS Performance Insights
+- **A)** Switch RDS to Multi-AZ
+- **B)** Add ElastiCache in front of the database
+- **C)** Add read replicas
+- **D)** Enable RDS Performance Insights
 
 **Answer: B.** Repeated identical queries = cache. Read replicas help too, but caching removes most DB hits entirely.
 
 **Q2: Session data must survive the failure of a node and support sorted-set leaderboards. Which engine?**
 
-A) Memcached
-B) Redis
-C) DynamoDB
-D) S3
+- **A)** Memcached
+- **B)** Redis
+- **C)** DynamoDB
+- **D)** S3
 
 **Answer: B.** Replication + data structures = Redis.
 

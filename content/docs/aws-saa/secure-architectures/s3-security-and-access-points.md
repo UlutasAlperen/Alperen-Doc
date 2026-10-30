@@ -73,19 +73,19 @@ flowchart TB
 
 **Q1: A security audit found that an S3 bucket allows public ACLs. The requirement is that no object in any bucket of the account can ever be made public. What is the fastest fix?**
 
-A) Delete the bucket policy
-B) Enable S3 Block Public Access at the **account** level
-C) Enable versioning on the bucket
-D) Move objects to Glacier
+- **A)** Delete the bucket policy
+- **B)** Enable S3 Block Public Access at the **account** level
+- **C)** Enable versioning on the bucket
+- **D)** Move objects to Glacier
 
 **Answer: B.** Account-level Block Public Access overrides every bucket policy and ACL.
 
 **Q2: Only instances inside a specific VPC should be able to read a bucket. What should the architect configure?**
 
-A) An IAM role with `s3:GetObject`
-B) A bucket policy denying requests where `aws:sourceVpce` is not the VPC endpoint
-C) A security group attached to the bucket
-D) A pre-signed URL on each object
+- **A)** An IAM role with `s3:GetObject`
+- **B)** A bucket policy denying requests where `aws:sourceVpce` is not the VPC endpoint
+- **C)** A security group attached to the bucket
+- **D)** A pre-signed URL on each object
 
 **Answer: B.** The Deny + `aws:sourceVpce` condition pattern. A doesn't restrict network origin, C is nonsense (SGs don't attach to buckets), D is per-object and temporary.
 

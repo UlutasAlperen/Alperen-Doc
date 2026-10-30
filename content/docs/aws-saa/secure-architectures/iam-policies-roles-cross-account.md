@@ -88,19 +88,19 @@ Trust policy = **who can assume the role** (on the role itself). Permissions pol
 
 **Q1: An application running on EC2 must read objects from an S3 bucket in another AWS account. What is the MOST secure way to grant this access?**
 
-A) Create an IAM user in the other account and store its access keys on the EC2 instance
-B) Create an IAM role in the S3 account that trusts the EC2 instance's role, and assume it
-C) Make the S3 bucket public
-D) Copy the objects to the local instance store
+- **A)** Create an IAM user in the other account and store its access keys on the EC2 instance
+- **B)** Create an IAM role in the S3 account that trusts the EC2 instance's role, and assume it
+- **C)** Make the S3 bucket public
+- **D)** Copy the objects to the local instance store
 
 **Answer: B.** Cross-account role assumption with temporary credentials. A leaks long-lived keys to a server, C is a security hole, D doesn't solve ongoing access.
 
 **Q2: An IAM policy allows `s3:*` and a bucket policy explicitly denies `s3:DeleteObject`. Can the user delete an object?**
 
-A) Yes, the identity policy allows all S3 actions
-B) No, an explicit deny always overrides any allow
-C) Yes, because resource-based policies are evaluated first
-D) Only if the user is in the Administrators group
+- **A)** Yes, the identity policy allows all S3 actions
+- **B)** No, an explicit deny always overrides any allow
+- **C)** Yes, because resource-based policies are evaluated first
+- **D)** Only if the user is in the Administrators group
 
 **Answer: B.** Explicit deny wins over every allow in the evaluation logic.
 

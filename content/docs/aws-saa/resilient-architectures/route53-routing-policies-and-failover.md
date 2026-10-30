@@ -52,28 +52,28 @@ Hosted zones (public vs private) and record types are covered in my hands-on not
 
 **Q1: A company wants 10% of traffic to go to a new application version and 90% to the current one, gradually increasing. Which routing policy?**
 
-A) Latency
-B) Weighted
-C) Geolocation
-D) Simple
+- **A)** Latency
+- **B)** Weighted
+- **C)** Geolocation
+- **D)** Simple
 
 **Answer: B.** Percentage-based split = weighted.
 
 **Q2: Users in Europe must receive European-specific content, and users in the US must receive US content. Which policy?**
 
-A) Latency routing
-B) Geolocation routing
-C) Failover routing
-D) Multivalue answer
+- **A)** Latency routing
+- **B)** Geolocation routing
+- **C)** Failover routing
+- **D)** Multivalue answer
 
 **Answer: B.** Content varies **by where the user is** = geolocation. Latency would pick the fastest, not the "correct" content.
 
 **Q3: A primary web app in `us-east-1` must automatically fail over to an S3 static website in `eu-west-1` when its health check fails. Which routing policy?**
 
-A) Weighted
-B) Failover
-C) Geoproximity
-D) IP-based
+- **A)** Weighted
+- **B)** Failover
+- **C)** Geoproximity
+- **D)** IP-based
 
 **Answer: B.** Active-passive + health check = failover routing.
 

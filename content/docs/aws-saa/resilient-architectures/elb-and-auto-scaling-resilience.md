@@ -59,19 +59,19 @@ flowchart LR
 
 **Q1: A web application must route `/api` to one set of instances and `/images` to another, and terminate HTTPS centrally. Which load balancer?**
 
-A) NLB
-B) ALB
-C) GWLB
-D) Route 53 weighted routing
+- **A)** NLB
+- **B)** ALB
+- **C)** GWLB
+- **D)** Route 53 weighted routing
 
 **Answer: B.** Path-based Layer 7 routing = ALB.
 
 **Q2: An ASG should keep average CPU utilization near 40% with the least operational effort. Which policy?**
 
-A) Scheduled scaling
-B) Simple scaling with manual alarms
-C) Target tracking scaling
-D) Manual instance provisioning
+- **A)** Scheduled scaling
+- **B)** Simple scaling with manual alarms
+- **C)** Target tracking scaling
+- **D)** Manual instance provisioning
 
 **Answer: C.** Target tracking is the "thermostat" policy - set a target, done.
 
