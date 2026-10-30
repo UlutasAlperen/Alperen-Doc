@@ -44,6 +44,7 @@ bookCollapseSection: true
 5. [s3-security-and-access-points](secure-architectures/s3-security-and-access-points/)
 6. [network-security-sg-nacl-vpc-endpoints](secure-architectures/network-security-sg-nacl-vpc-endpoints/)
 7. [security-services-waf-guardduty-inspector](secure-architectures/security-services-waf-guardduty-inspector/)
+8. [governance-monitoring-organizations-config-ssm](secure-architectures/governance-monitoring-organizations-config-ssm/)
 
 ### [Domain 2 - Design Resilient Architectures](resilient-architectures/)
 
@@ -52,26 +53,33 @@ bookCollapseSection: true
 3. [elb-and-auto-scaling-resilience](resilient-architectures/elb-and-auto-scaling-resilience/)
 4. [decoupling-with-sqs-sns](resilient-architectures/decoupling-with-sqs-sns/)
 5. [event-driven-eventbridge-step-functions](resilient-architectures/event-driven-eventbridge-step-functions/)
-6. [rds-and-aurora-failover](resilient-architectures/rds-and-aurora-failover/)
-7. [route53-routing-policies-and-failover](resilient-architectures/route53-routing-policies-and-failover/)
-8. [vpc-connectivity-peering-tgw-direct-connect](resilient-architectures/vpc-connectivity-peering-tgw-direct-connect/)
+6. [streaming-kinesis-data-streams-firehose](resilient-architectures/streaming-kinesis-data-streams-firehose/)
+7. [rds-and-aurora-failover](resilient-architectures/rds-and-aurora-failover/)
+8. [route53-routing-policies-and-failover](resilient-architectures/route53-routing-policies-and-failover/)
+9. [vpc-connectivity-peering-tgw-direct-connect](resilient-architectures/vpc-connectivity-peering-tgw-direct-connect/)
 
 ### [Domain 3 - Design High-Performing Architectures](high-performing-architectures/)
 
 1. [s3-storage-and-performance](high-performing-architectures/s3-storage-and-performance/)
-2. [caching-elasticache-cloudfront](high-performing-architectures/caching-elasticache-cloudfront/)
-3. [database-selection-matrix](high-performing-architectures/database-selection-matrix/)
-4. [dynamodb-deep-dive](high-performing-architectures/dynamodb-deep-dive/)
-5. [compute-performance-ec2-options](high-performing-architectures/compute-performance-ec2-options/)
-6. [data-transfer-and-hybrid-services](high-performing-architectures/data-transfer-and-hybrid-services/)
+2. [block-and-file-storage-ebs-efs-fsx](high-performing-architectures/block-and-file-storage-ebs-efs-fsx/)
+3. [caching-elasticache-cloudfront](high-performing-architectures/caching-elasticache-cloudfront/)
+4. [database-selection-matrix](high-performing-architectures/database-selection-matrix/)
+5. [dynamodb-deep-dive](high-performing-architectures/dynamodb-deep-dive/)
+6. [compute-performance-ec2-options](high-performing-architectures/compute-performance-ec2-options/)
+7. [serverless-and-containers-lambda-ecs-eks](high-performing-architectures/serverless-and-containers-lambda-ecs-eks/)
+8. [data-transfer-and-hybrid-services](high-performing-architectures/data-transfer-and-hybrid-services/)
 
 ### [Domain 4 - Design Cost-Optimized Architectures](cost-optimized-architectures/)
 
 1. [pricing-models-ri-savings-plans-spot](cost-optimized-architectures/pricing-models-ri-savings-plans-spot/)
 2. [s3-cost-and-lifecycle-policies](cost-optimized-architectures/s3-cost-and-lifecycle-policies/)
-3. [cost-management-tools](cost-optimized-architectures/cost-management-tools/)
-4. [cost-optimized-architecture-patterns](cost-optimized-architectures/cost-optimized-architecture-patterns/)
+3. [cost-management-tools](cost-management-tools/)
+4. [cost-optimized-architecture-patterns](cost-optimized-architecture-patterns/)
+
+### [Architecture Playbook - 5 Golden Blueprints](architecture-playbook/)
 
 ### [General knowledge - cheat sheet](general-knowledge/)
 
-> Not: burasi sinav oncesi son tekrar sayfasi. Her servisi tek satirda "bu aslinda su" diye ozetliyor.
+### [Practice Exam - 20 Realistic Scenario Questions](practice-exam/)
+
+> Not: burasi sinav oncesi son tekrar ve deneme bolumu. `architecture-playbook` en cok cikan 5 mimari sablonu, `general-knowledge` her servisi tek satirda ozetleyen cheat sheet'i, `practice-exam` ise gercek sinav zorlugunda 20 senaryo sorusunu icerir.

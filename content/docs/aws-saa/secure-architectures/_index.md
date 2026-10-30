@@ -13,6 +13,7 @@ bookCollapseSection: true
 - 005 - [s3-security-and-access-points](s3-security-and-access-points/) = bucket policy vs ACL, Block Public Access, Access Points
 - 006 - [network-security-sg-nacl-vpc-endpoints](network-security-sg-nacl-vpc-endpoints/) = stateful vs stateless, gateway vs interface endpoint
 - 007 - [security-services-waf-guardduty-inspector](security-services-waf-guardduty-inspector/) = WAF (Web Application Firewall), Shield, GuardDuty, Inspector, Macie - hangisi hangi is icin
+- 008 - [governance-monitoring-organizations-config-ssm](governance-monitoring-organizations-config-ssm/) = Organizations & SCP, Control Tower, CloudTrail vs Config vs CloudWatch, SSM Session Manager
 
 Bu domain sinavda "bu mimaride guvenlik acigi ne, en guvenli secenek hangisi" tipi sorularla gelir. Temel fikir su: **en az yetki (least privilege)**, **varsayilan olarak kapali (deny by default)** ve **her yerde sifreleme**.
 

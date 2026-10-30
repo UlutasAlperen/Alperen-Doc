@@ -20,8 +20,9 @@ The most common question format in Domain 3: "the application needs X - which da
 | Document workloads, MongoDB-compatible | **DocumentDB** | Mongo API without Mongo ops |
 | Graph relationships (social, fraud, routes) | **Neptune** | Graph DB |
 | Time series (IoT, metrics) | **Timestream** | Built for timestamps |
-| Immutable ledger / audit | **QLDB (Quantum Ledger Database)** | Cryptographic verifiability |
+| Immutable ledger / audit | **Aurora PostgreSQL / S3 Object Lock** *(Note: AWS deprecated **QLDB** on July 31, 2025)* | Cryptographic verifiability / WORM |
 | In-memory cache with SQL on RDS-adjacent | **Redis** | Microsecond latency |
+| Query exabytes in S3 directly from a data warehouse | **Redshift Spectrum** | Joins Redshift tables with S3 Parquet files without loading |
 
 ## RDS vs DynamoDB - the heavyweight bout
 

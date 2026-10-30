@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,34 +8,34 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Data Transfer and Hybrid Services# Moving data is its own question family: “we have 500 TB on-premises, get it to S3” or “users must still write to a local file server”. Each answer is a specific service - and mixing them up is easy, so learn the one job per service.
-The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bulk transfer (NFS/SMB/HDFS/object → S3/EFS/FSx) “migrate file shares”, “agent, scheduled, fast” Transfer Family Managed SFTP / FTPS / FTP endpoints backed by S3/EFS “partners upload via SFTP” Storage Gateway Hybrid: local file/volume/tape interface → S3/EBS-backed “on-prem apps keep using local protocols” Snow Family Physically ship petabytes “no bandwidth / 100 TB&#43;” AWS Backup Centralized backup plans “tag-based backup across services” Storage Gateway modes (classic exam trio)# File Gateway - NFS/SMB share backed by S3 objects (“local file share, objects in S3”) Volume Gateway - iSCSI block storage; cached (hot data local, everything in S3) vs stored (full copy local, async backup to EBS snapshots) Tape Gateway - virtual tape library (VTL) for legacy backup software Snow Family# Device Scale Notes Snowcone ~8-14 TB, rugged edge device Edge computing &#43; transfer Snowball Edge 80-210 TB The standard “ship a box” answer Snowmobile 100 PB per truck Exabyte-scale, literally a shipping container “Petabytes of data, limited bandwidth” → Snowball. “Ongoing streaming” → Kinesis / DataSync instead.
+<meta name="description" content="Data Transfer and Hybrid Services# Moving data is its own question family: “we have 500 TB on-premises, get it to S3 (Simple Storage Service)” or “users must still write to a local file server”. Each answer is a specific service - and mixing them up is easy, so learn the one job per service.
+The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bulk transfer (NFS/SMB/HDFS/object → S3/EFS (Elastic File System)/FSx) “migrate file shares”, “agent, scheduled, fast” Transfer Family Managed SFTP / FTPS / FTP endpoints backed by S3/EFS “partners upload via SFTP” Storage Gateway Hybrid: local file/volume/tape interface → S3/EBS-backed “on-prem apps keep using local protocols” Snow Family Physically ship petabytes “no bandwidth / 100 TB&#43;” AWS Backup Centralized backup plans “tag-based backup across services” Storage Gateway modes (classic exam trio)# File Gateway - NFS/SMB share backed by S3 objects (“local file share, objects in S3”) Volume Gateway - iSCSI block storage; cached (hot data local, everything in S3) vs stored (full copy local, async backup to EBS (Elastic Block Store) snapshots) Tape Gateway - virtual tape library (VTL) for legacy backup software Snow Family# Device Scale Notes Snowcone ~8-14 TB, rugged edge device Edge computing &#43; transfer Snowball Edge 80-210 TB The standard “ship a box” answer Snowmobile 100 PB per truck Exabyte-scale, literally a shipping container “Petabytes of data, limited bandwidth” → Snowball. “Ongoing streaming” → Kinesis / DataSync instead.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/data-transfer-and-hybrid-services/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/high-performing-architectures/data-transfer-and-hybrid-services/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="data-transfer-and-hybrid-services">
-	<meta property="og:description" content="Data Transfer and Hybrid Services# Moving data is its own question family: “we have 500 TB on-premises, get it to S3” or “users must still write to a local file server”. Each answer is a specific service - and mixing them up is easy, so learn the one job per service.
-The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bulk transfer (NFS/SMB/HDFS/object → S3/EFS/FSx) “migrate file shares”, “agent, scheduled, fast” Transfer Family Managed SFTP / FTPS / FTP endpoints backed by S3/EFS “partners upload via SFTP” Storage Gateway Hybrid: local file/volume/tape interface → S3/EBS-backed “on-prem apps keep using local protocols” Snow Family Physically ship petabytes “no bandwidth / 100 TB&#43;” AWS Backup Centralized backup plans “tag-based backup across services” Storage Gateway modes (classic exam trio)# File Gateway - NFS/SMB share backed by S3 objects (“local file share, objects in S3”) Volume Gateway - iSCSI block storage; cached (hot data local, everything in S3) vs stored (full copy local, async backup to EBS snapshots) Tape Gateway - virtual tape library (VTL) for legacy backup software Snow Family# Device Scale Notes Snowcone ~8-14 TB, rugged edge device Edge computing &#43; transfer Snowball Edge 80-210 TB The standard “ship a box” answer Snowmobile 100 PB per truck Exabyte-scale, literally a shipping container “Petabytes of data, limited bandwidth” → Snowball. “Ongoing streaming” → Kinesis / DataSync instead.">
+	<meta property="og:description" content="Data Transfer and Hybrid Services# Moving data is its own question family: “we have 500 TB on-premises, get it to S3 (Simple Storage Service)” or “users must still write to a local file server”. Each answer is a specific service - and mixing them up is easy, so learn the one job per service.
+The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bulk transfer (NFS/SMB/HDFS/object → S3/EFS (Elastic File System)/FSx) “migrate file shares”, “agent, scheduled, fast” Transfer Family Managed SFTP / FTPS / FTP endpoints backed by S3/EFS “partners upload via SFTP” Storage Gateway Hybrid: local file/volume/tape interface → S3/EBS-backed “on-prem apps keep using local protocols” Snow Family Physically ship petabytes “no bandwidth / 100 TB&#43;” AWS Backup Centralized backup plans “tag-based backup across services” Storage Gateway modes (classic exam trio)# File Gateway - NFS/SMB share backed by S3 objects (“local file share, objects in S3”) Volume Gateway - iSCSI block storage; cached (hot data local, everything in S3) vs stored (full copy local, async backup to EBS (Elastic Block Store) snapshots) Tape Gateway - virtual tape library (VTL) for legacy backup software Snow Family# Device Scale Notes Snowcone ~8-14 TB, rugged edge device Edge computing &#43; transfer Snowball Edge 80-210 TB The standard “ship a box” answer Snowmobile 100 PB per truck Exabyte-scale, literally a shipping container “Petabytes of data, limited bandwidth” → Snowball. “Ongoing streaming” → Kinesis / DataSync instead.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="data-transfer-and-hybrid-services">
-	<meta itemprop="description" content="Data Transfer and Hybrid Services# Moving data is its own question family: “we have 500 TB on-premises, get it to S3” or “users must still write to a local file server”. Each answer is a specific service - and mixing them up is easy, so learn the one job per service.
-The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bulk transfer (NFS/SMB/HDFS/object → S3/EFS/FSx) “migrate file shares”, “agent, scheduled, fast” Transfer Family Managed SFTP / FTPS / FTP endpoints backed by S3/EFS “partners upload via SFTP” Storage Gateway Hybrid: local file/volume/tape interface → S3/EBS-backed “on-prem apps keep using local protocols” Snow Family Physically ship petabytes “no bandwidth / 100 TB&#43;” AWS Backup Centralized backup plans “tag-based backup across services” Storage Gateway modes (classic exam trio)# File Gateway - NFS/SMB share backed by S3 objects (“local file share, objects in S3”) Volume Gateway - iSCSI block storage; cached (hot data local, everything in S3) vs stored (full copy local, async backup to EBS snapshots) Tape Gateway - virtual tape library (VTL) for legacy backup software Snow Family# Device Scale Notes Snowcone ~8-14 TB, rugged edge device Edge computing &#43; transfer Snowball Edge 80-210 TB The standard “ship a box” answer Snowmobile 100 PB per truck Exabyte-scale, literally a shipping container “Petabytes of data, limited bandwidth” → Snowball. “Ongoing streaming” → Kinesis / DataSync instead.">
-	<meta itemprop="wordCount" content="568">
+	<meta itemprop="description" content="Data Transfer and Hybrid Services# Moving data is its own question family: “we have 500 TB on-premises, get it to S3 (Simple Storage Service)” or “users must still write to a local file server”. Each answer is a specific service - and mixing them up is easy, so learn the one job per service.
+The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bulk transfer (NFS/SMB/HDFS/object → S3/EFS (Elastic File System)/FSx) “migrate file shares”, “agent, scheduled, fast” Transfer Family Managed SFTP / FTPS / FTP endpoints backed by S3/EFS “partners upload via SFTP” Storage Gateway Hybrid: local file/volume/tape interface → S3/EBS-backed “on-prem apps keep using local protocols” Snow Family Physically ship petabytes “no bandwidth / 100 TB&#43;” AWS Backup Centralized backup plans “tag-based backup across services” Storage Gateway modes (classic exam trio)# File Gateway - NFS/SMB share backed by S3 objects (“local file share, objects in S3”) Volume Gateway - iSCSI block storage; cached (hot data local, everything in S3) vs stored (full copy local, async backup to EBS (Elastic Block Store) snapshots) Tape Gateway - virtual tape library (VTL) for legacy backup software Snow Family# Device Scale Notes Snowcone ~8-14 TB, rugged edge device Edge computing &#43; transfer Snowball Edge 80-210 TB The standard “ship a box” answer Snowmobile 100 PB per truck Exabyte-scale, literally a shipping container “Petabytes of data, limited bandwidth” → Snowball. “Ongoing streaming” → Kinesis / DataSync instead.">
+	<meta itemprop="wordCount" content="592">
 
 <title>data-transfer-and-hybrid-services • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/data-transfer-and-hybrid-services/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/high-performing-architectures/data-transfer-and-hybrid-services/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bul
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bul
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bul
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bul
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bul
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3613,7 +3697,7 @@ The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bul
     <li><a href="#the-transfer-service-lineup">The transfer service lineup</a></li>
     <li><a href="#storage-gateway-modes-classic-exam-trio">Storage Gateway modes (classic exam trio)</a></li>
     <li><a href="#snow-family">Snow Family</a></li>
-    <li><a href="#database-migration---dms-and-friends">Database migration - DMS and friends</a></li>
+    <li><a href="#database-migration---dms-database-migration-service-and-friends">Database migration - DMS (Database Migration Service) and friends</a></li>
     <li><a href="#exam-check">Exam check</a></li>
     <li><a href="#ozet">Ozet</a></li>
   </ul>
@@ -3629,7 +3713,7 @@ The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bul
       
       
   <article class="markdown book-article"><h1 id="data-transfer-and-hybrid-services">Data Transfer and Hybrid Services<a class="anchor" href="#data-transfer-and-hybrid-services">#</a></h1>
-<p>Moving data is its own question family: &ldquo;we have 500 TB on-premises, get it to S3&rdquo; or &ldquo;users must still write to a local file server&rdquo;. Each answer is a specific service - and mixing them up is easy, so learn the <strong>one job per service</strong>.</p>
+<p>Moving data is its own question family: &ldquo;we have 500 TB on-premises, get it to S3 (Simple Storage Service)&rdquo; or &ldquo;users must still write to a local file server&rdquo;. Each answer is a specific service - and mixing them up is easy, so learn the <strong>one job per service</strong>.</p>
 <h2 id="the-transfer-service-lineup">The transfer service lineup<a class="anchor" href="#the-transfer-service-lineup">#</a></h2>
 <table>
 	<thead>
@@ -3642,7 +3726,7 @@ The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bul
 	<tbody>
 			<tr>
 					<td><strong>DataSync</strong></td>
-					<td>Scheduled bulk transfer (NFS/SMB/HDFS/object → S3/EFS/FSx)</td>
+					<td>Scheduled bulk transfer (NFS/SMB/HDFS/object → S3/EFS (Elastic File System)/FSx)</td>
 					<td>&ldquo;migrate file shares&rdquo;, &ldquo;agent, scheduled, fast&rdquo;</td>
 			</tr>
 			<tr>
@@ -3670,7 +3754,7 @@ The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bul
 <h2 id="storage-gateway-modes-classic-exam-trio">Storage Gateway modes (classic exam trio)<a class="anchor" href="#storage-gateway-modes-classic-exam-trio">#</a></h2>
 <ul>
 <li><strong>File Gateway</strong> - NFS/SMB share backed by S3 objects (&ldquo;local file share, objects in S3&rdquo;)</li>
-<li><strong>Volume Gateway</strong> - iSCSI block storage; <strong>cached</strong> (hot data local, everything in S3) vs <strong>stored</strong> (full copy local, async backup to EBS snapshots)</li>
+<li><strong>Volume Gateway</strong> - iSCSI block storage; <strong>cached</strong> (hot data local, everything in S3) vs <strong>stored</strong> (full copy local, async backup to EBS (Elastic Block Store) snapshots)</li>
 <li><strong>Tape Gateway</strong> - virtual tape library (VTL) for legacy backup software</li>
 </ul>
 <h2 id="snow-family">Snow Family<a class="anchor" href="#snow-family">#</a></h2>
@@ -3701,11 +3785,11 @@ The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bul
 	</tbody>
 </table>
 <p>&ldquo;Petabytes of data, limited bandwidth&rdquo; → Snowball. &ldquo;Ongoing streaming&rdquo; → Kinesis / DataSync instead.</p>
-<h2 id="database-migration---dms-and-friends">Database migration - DMS and friends<a class="anchor" href="#database-migration---dms-and-friends">#</a></h2>
+<h2 id="database-migration---dms-database-migration-service-and-friends">Database migration - DMS (Database Migration Service) and friends<a class="anchor" href="#database-migration---dms-database-migration-service-and-friends">#</a></h2>
 <ul>
 <li><strong>DMS (Database Migration Service)</strong> - keeps the source running while replicating to the target (minimal downtime migration). Homogeneous (Postgres→Postgres) works directly; heterogeneous (Oracle→Aurora) needs <strong>SCT (Schema Conversion Tool)</strong> first</li>
 <li><strong>DMS + SCT</strong> is the answer to &ldquo;migrate Oracle to Aurora with minimal downtime&rdquo;</li>
-<li><strong>Application Migration Service (MGN)</strong> - lift-and-shift whole servers (physical/VMware) to EC2</li>
+<li><strong>Application Migration Service (MGN)</strong> - lift-and-shift whole servers (physical/VMware) to EC2 (Elastic Compute Cloud)</li>
 <li><strong>Migration Hub</strong> - single dashboard tracking all migrations</li>
 <li>Aurora has native <strong>MySQL/PostgreSQL compatible</strong> engines = &ldquo;migrate without rewriting queries&rdquo;</li>
 </ul>
@@ -3716,23 +3800,35 @@ The transfer service lineup# Service Job Scenario keyword DataSync Scheduled bul
 <p>Not: karar kisa yollari: &ldquo;dosya paylasimi tasi&rdquo; = DataSync, &ldquo;SFTP sunucusu istiyorlar&rdquo; = Transfer Family, &ldquo;yerel sistem S3&rsquo;u gorsun&rdquo; = Storage Gateway, &ldquo;veri cok internet yavas&rdquo; = Snow, &ldquo;DB tasi kesintisiz&rdquo; = DMS.</p>
 </blockquote><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: Business partners must upload daily reports using SFTP, and the files must land in S3 without managing any servers. What should the architect use?</strong></p>
-<p>A) AWS DataSync
-B) AWS Transfer Family
-C) Storage Gateway File Gateway
-D) Snowball Edge</p>
+<ul>
+<li><strong>A)</strong> AWS DataSync</li>
+<li><strong>B)</strong> AWS Transfer Family</li>
+<li><strong>C)</strong> Storage Gateway File Gateway</li>
+<li><strong>D)</strong> Snowball Edge</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Managed SFTP front-end to S3 = Transfer Family.</p>
+</div></details>
 <p><strong>Q2: A 300 TB file archive on-premises must move to S3, but the WAN link is 50 Mbps. What is the fastest practical approach?</strong></p>
-<p>A) DataSync over the WAN
-B) AWS Snowball Edge
-C) S3 Transfer Acceleration
-D) RDS snapshots</p>
+<ul>
+<li><strong>A)</strong> DataSync over the WAN</li>
+<li><strong>B)</strong> AWS Snowball Edge</li>
+<li><strong>C)</strong> S3 Transfer Acceleration</li>
+<li><strong>D)</strong> RDS (Relational Database Service) snapshots</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> 300 TB over 50 Mbps would take months; ship a Snowball.</p>
+</div></details>
 <p><strong>Q3: An on-premises application must keep using local iSCSI block storage while data is backed up to AWS. Which service?</strong></p>
-<p>A) Volume Gateway (stored mode)
-B) File Gateway
-C) Transfer Family
-D) EFS</p>
+<ul>
+<li><strong>A)</strong> Volume Gateway (stored mode)</li>
+<li><strong>B)</strong> File Gateway</li>
+<li><strong>C)</strong> Transfer Family</li>
+<li><strong>D)</strong> EFS</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: A.</strong> iSCSI block storage = Volume Gateway; stored mode keeps the full dataset locally with async EBS snapshots.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>DataSync = toplu dosya tasiyici (agent&rsquo;li, planli)</li>
@@ -3763,9 +3859,9 @@ D) EFS</p>
 <div class="flex flex-wrap justify-between">
     <span>
     
-      <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="flex align-center">
+      <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="flex align-center">
         <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
-        <span>compute-performance-ec2-options</span>
+        <span>serverless-and-containers-lambda-ecs-eks</span>
       </a>
     
     </span>
@@ -3812,7 +3908,7 @@ D) EFS</p>
     <li><a href="#the-transfer-service-lineup">The transfer service lineup</a></li>
     <li><a href="#storage-gateway-modes-classic-exam-trio">Storage Gateway modes (classic exam trio)</a></li>
     <li><a href="#snow-family">Snow Family</a></li>
-    <li><a href="#database-migration---dms-and-friends">Database migration - DMS and friends</a></li>
+    <li><a href="#database-migration---dms-database-migration-service-and-friends">Database migration - DMS (Database Migration Service) and friends</a></li>
     <li><a href="#exam-check">Exam check</a></li>
     <li><a href="#ozet">Ozet</a></li>
   </ul>

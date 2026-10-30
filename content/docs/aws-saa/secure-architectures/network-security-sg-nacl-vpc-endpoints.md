@@ -55,7 +55,18 @@ flowchart LR
     ec2 -.->|old path: NAT, paid| nat[NAT Gateway]
 ```
 
-**PrivateLink** is the underlying technology of interface endpoints, and it can also expose **your own service** as an endpoint service to other VPCs/accounts - "share a service privately across accounts without peering" → PrivateLink.
+**PrivateLink** is the underlying technology of interface endpoints, and it can also expose **your own service** (behind an NLB (Network Load Balancer)) as an endpoint service to other VPCs/accounts - "share a service privately across accounts without peering or CIDR overlap concerns" → PrivateLink.
+
+> [!WARNING]
+> **Sınav Tuzağı (Exam Trap) - Gateway Endpoint vs On-Premises:**
+> **S3 ve DynamoDB Gateway Endpoint'leri VPC dışından (Site-to-Site VPN, Direct Connect, VPC Peering veya Transit Gateway üzerinden) ERİŞİLEMEZ!**
+> - Sadece VPC içindeki EC2/Lambda S3'e gidecekse → **Gateway Endpoint (ücretsiz)**.
+> - Şirket içi (on-premises) veri merkezinden Direct Connect / VPN üzerinden özel IP ile S3'e erişilecekse → **S3 Interface Endpoint (PrivateLink)** seçilmelidir!
+
+## NAT Gateway High Availability & IPv6 Egress-Only IGW
+
+- **NAT Gateway is zonal**: a single NAT Gateway lives in **one AZ (Availability Zone)** (in a **public** subnet with an Elastic IP). For true **Multi-AZ High Availability**, deploy **one NAT Gateway in each AZ** and configure each AZ's private route table to use its local NAT Gateway (avoids single-AZ failure AND cross-AZ data transfer fees).
+- **Egress-Only Internet Gateway (IPv6)**: IPv6 addresses in AWS are globally unique public unicast addresses (there is no NAT for IPv6). To give private IPv6 instances outbound-only internet access while blocking inbound IPv6 connections, use a free **Egress-Only Internet Gateway** (and add a `::/0` route).
 
 ## Exam check
 

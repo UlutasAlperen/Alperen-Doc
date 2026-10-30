@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -9,15 +9,15 @@ https://github.com/alex-shpak/hugo-book
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="High Availability vs Fault Tolerance# Every resilience question starts here: how much downtime is acceptable? The exam expects you to distinguish two very different promises - and to hunt for single points of failure (SPOF).
-The definitions# High Availability (HA) Fault Tolerance (FT) Goal Minimize downtime Zero downtime Behavior on failure Recover quickly (seconds-minutes) Continue without interruption Cost Moderate Expensive (everything duplicated) Example Multi-AZ RDS with failover Aircraft systems, active-active multi-region Reliability is the umbrella term: the system does what it should over time. Scalability (vertical vs horizontal) and recoverability feed into it.
+The definitions# High Availability (HA) Fault Tolerance (FT) Goal Minimize downtime Zero downtime Behavior on failure Recover quickly (seconds-minutes) Continue without interruption Cost Moderate Expensive (everything duplicated) Example Multi-AZ RDS (Relational Database Service) with failover Aircraft systems, active-active multi-region Reliability is the umbrella term: the system does what it should over time. Scalability (vertical vs horizontal) and recoverability feed into it.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/ha-vs-fault-tolerance/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/resilient-architectures/ha-vs-fault-tolerance/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="ha-vs-fault-tolerance">
 	<meta property="og:description" content="High Availability vs Fault Tolerance# Every resilience question starts here: how much downtime is acceptable? The exam expects you to distinguish two very different promises - and to hunt for single points of failure (SPOF).
-The definitions# High Availability (HA) Fault Tolerance (FT) Goal Minimize downtime Zero downtime Behavior on failure Recover quickly (seconds-minutes) Continue without interruption Cost Moderate Expensive (everything duplicated) Example Multi-AZ RDS with failover Aircraft systems, active-active multi-region Reliability is the umbrella term: the system does what it should over time. Scalability (vertical vs horizontal) and recoverability feed into it.">
+The definitions# High Availability (HA) Fault Tolerance (FT) Goal Minimize downtime Zero downtime Behavior on failure Recover quickly (seconds-minutes) Continue without interruption Cost Moderate Expensive (everything duplicated) Example Multi-AZ RDS (Relational Database Service) with failover Aircraft systems, active-active multi-region Reliability is the umbrella term: the system does what it should over time. Scalability (vertical vs horizontal) and recoverability feed into it.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
@@ -25,17 +25,17 @@ The definitions# High Availability (HA) Fault Tolerance (FT) Goal Minimize downt
 
 	<meta itemprop="name" content="ha-vs-fault-tolerance">
 	<meta itemprop="description" content="High Availability vs Fault Tolerance# Every resilience question starts here: how much downtime is acceptable? The exam expects you to distinguish two very different promises - and to hunt for single points of failure (SPOF).
-The definitions# High Availability (HA) Fault Tolerance (FT) Goal Minimize downtime Zero downtime Behavior on failure Recover quickly (seconds-minutes) Continue without interruption Cost Moderate Expensive (everything duplicated) Example Multi-AZ RDS with failover Aircraft systems, active-active multi-region Reliability is the umbrella term: the system does what it should over time. Scalability (vertical vs horizontal) and recoverability feed into it.">
-	<meta itemprop="wordCount" content="443">
+The definitions# High Availability (HA) Fault Tolerance (FT) Goal Minimize downtime Zero downtime Behavior on failure Recover quickly (seconds-minutes) Continue without interruption Cost Moderate Expensive (everything duplicated) Example Multi-AZ RDS (Relational Database Service) with failover Aircraft systems, active-active multi-region Reliability is the umbrella term: the system does what it should over time. Scalability (vertical vs horizontal) and recoverability feed into it.">
+	<meta itemprop="wordCount" content="476">
 
 <title>ha-vs-fault-tolerance • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/ha-vs-fault-tolerance/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/resilient-architectures/ha-vs-fault-tolerance/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ The definitions# High Availability (HA) Fault Tolerance (FT) Goal Minimize downt
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ The definitions# High Availability (HA) Fault Tolerance (FT) Goal Minimize downt
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ The definitions# High Availability (HA) Fault Tolerance (FT) Goal Minimize downt
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ The definitions# High Availability (HA) Fault Tolerance (FT) Goal Minimize downt
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ The definitions# High Availability (HA) Fault Tolerance (FT) Goal Minimize downt
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3656,22 +3740,22 @@ The definitions# High Availability (HA) Fault Tolerance (FT) Goal Minimize downt
 			</tr>
 			<tr>
 					<td>Example</td>
-					<td>Multi-AZ RDS with failover</td>
+					<td>Multi-AZ RDS (Relational Database Service) with failover</td>
 					<td>Aircraft systems, active-active multi-region</td>
 			</tr>
 	</tbody>
 </table>
 <p><strong>Reliability</strong> is the umbrella term: the system does what it should over time. <strong>Scalability</strong> (vertical vs horizontal) and <strong>recoverability</strong> feed into it.</p>
 <blockquote class='book-hint '>
-<p>Not: soruda &ldquo;kabul edilebilir kesinti kisa olsun&rdquo; varsa HA, &ldquo;hic kesinti olmasin, hicbir kayip olmasin&rdquo; varsa FT. &ldquo;En ucuz olani&rdquo; sorularinda ise genelde HA + iyi bir DR plani kazanir.</p>
+<p>Not: soruda &ldquo;kabul edilebilir kesinti kisa olsun&rdquo; varsa HA, &ldquo;hic kesinti olmasin, hicbir kayip olmasin&rdquo; varsa FT. &ldquo;En ucuz olani&rdquo; sorularinda ise genelde HA + iyi bir DR (disaster recovery) plani kazanir.</p>
 </blockquote><h2 id="where-failures-happen---the-checklist">Where failures happen - the checklist<a class="anchor" href="#where-failures-happen---the-checklist">#</a></h2>
 <p>Run every architecture through this list:</p>
 <ol>
 <li><strong>Instance</strong> dies → Auto Scaling Group replaces it (cattle, not pets - see <a href="../../../aws/general-knowledge/auto-scaling-groups/">auto-scaling-groups</a>)</li>
-<li><strong>AZ</strong> dies → spread across <strong>2+ AZs</strong> (subnets, ELB, RDS Multi-AZ)</li>
-<li><strong>Region</strong> dies → multi-region: Aurora Global, S3 CRR, Route 53 failover</li>
+<li><strong>AZ (Availability Zone)</strong> dies → spread across <strong>2+ AZs</strong> (subnets, ELB (Elastic Load Balancing), RDS Multi-AZ)</li>
+<li><strong>Region</strong> dies → multi-region: Aurora Global, S3 (Simple Storage Service) CRR, Route 53 failover</li>
 <li><strong>Dependency</strong> dies or slows down → <strong>decouple</strong> with SQS (see <a href="../decoupling-with-sqs-sns/">decoupling-with-sqs-sns</a>)</li>
-<li><strong>Traffic spike</strong> → ASG + ELB scaling</li>
+<li><strong>Traffic spike</strong> → ASG (Auto Scaling Group) + ELB scaling</li>
 <li><strong>Deployment</strong> goes bad → multiple targets, rolling deployments, health checks</li>
 </ol>
 <pre class="mermaid">flowchart TB
@@ -3683,17 +3767,25 @@ The definitions# High Availability (HA) Fault Tolerance (FT) Goal Minimize downt
 <p>A synchronous chain (web → app → queue-less worker) fails as a whole. Putting <strong>SQS between tiers</strong> means the producer keeps working even when the consumer is down - the messages simply wait. Stateless compute + managed state (RDS/S3/SQS) is the exam&rsquo;s golden architecture.</p>
 <h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: An architecture must tolerate the failure of an entire Availability Zone with no manual intervention and the least operational overhead. What is the minimum design?</strong></p>
-<p>A) Two EC2 instances in the same AZ with an ELB
-B) Instances across two AZs behind an ELB (or an ASG with multi-AZ subnets)
-C) An EBS snapshot policy
-D) A larger instance type in one AZ</p>
+<ul>
+<li><strong>A)</strong> Two EC2 (Elastic Compute Cloud) instances in the same AZ with an ELB</li>
+<li><strong>B)</strong> Instances across two AZs behind an ELB (or an ASG with multi-AZ subnets)</li>
+<li><strong>C)</strong> An EBS (Elastic Block Store) snapshot policy</li>
+<li><strong>D)</strong> A larger instance type in one AZ</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Multi-AZ + ELB/ASG. A survives instance failure only, C is recovery not tolerance.</p>
+</div></details>
 <p><strong>Q2: What is a &ldquo;single point of failure&rdquo; in a three-tier web app where all instances sit in one AZ?</strong></p>
-<p>A) The ELB
-B) The AZ itself
-C) The IAM role
-D) The AMI</p>
+<ul>
+<li><strong>A)</strong> The ELB</li>
+<li><strong>B)</strong> The AZ itself</li>
+<li><strong>C)</strong> The IAM (Identity and Access Management) role</li>
+<li><strong>D)</strong> The AMI (Amazon Machine Image)</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Everything shares one failure domain - the AZ.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>HA = kesintiyi kisalt (multi-AZ), FT = kesintiyi sifirla (aktif-aktif, pahali)</li>

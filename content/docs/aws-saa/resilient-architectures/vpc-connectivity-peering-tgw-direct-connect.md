@@ -49,9 +49,17 @@ flowchart TB
 | Resilience | Two tunnels per connection | **Backup with VPN** is the exam pattern |
 
 - **BGP** propagates routes in both cases
-- **Direct Connect Gateway** = one DX connection to access many VPCs in different regions
+- **Direct Connect Gateway** = one DX connection to access many VPCs in different regions (via Public VIF for AWS public services like S3, Private VIF for VPCs, or **Transit VIF** for Transit Gateway)
+- **Encryption on Direct Connect**: DX is a private dedicated line, **not encrypted by default**! If compliance requires encryption in transit over DX, either enable **MACsec** (on supported 10G/100G connections) or run a **Site-to-Site VPN over Direct Connect** (IPsec tunnel inside the DX link).
 - "Must not traverse the public internet + consistent latency" → DX. "Quick, cheap, temporary or backup link" → VPN
 - **AWS Client VPN** = managed OpenVPN for individual employees (not site-to-site)
+
+## Hybrid DNS: Route 53 Resolver Inbound vs Outbound Endpoints
+
+When you connect on-premises to AWS via VPN or Direct Connect, DNS queries need to cross the bridge too:
+
+- **Route 53 Resolver Inbound Endpoint**: allows **on-premises DNS servers to resolve AWS Private Hosted Zones** (gives on-prem forwarders private IPs inside your VPC).
+- **Route 53 Resolver Outbound Endpoint + Forwarding Rules**: allows **EC2 (Elastic Compute Cloud) instances in the VPC to resolve on-premises domain names** (`corp.local`) by forwarding queries to on-premises DNS servers.
 
 ## VPC Endpoints and PrivateLink (recap)
 

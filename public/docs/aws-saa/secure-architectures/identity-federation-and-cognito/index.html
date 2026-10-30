@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,37 +8,34 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Identity Federation and Cognito# Creating IAM users inside AWS for every employee is a management nightmare - and the exam knows it. The right answer for “our 500 employees use Active Directory” is always federation: let an external identity provider handle the humans, and give them temporary AWS credentials.
-Federation with SAML 2.0 (corporate identities)# The scenario keyword is Active Directory / ADFS / Okta / Azure AD. Pattern:
-flowchart LR user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta] idp --&gt;|SAML assertion| sts[AWS STS] sts --&gt;|temporary creds| user The IdP maps groups → IAM roles (via the AssumeRoleWithSAML API) No IAM users are created in AWS Best for workforce identities (employees) IAM Identity Center (the artist formerly known as AWS SSO) is the modern managed version of this: connect one IdP, get a single portal with access to many accounts.
+<meta name="description" content="Identity Federation and Cognito# Creating IAM (Identity and Access Management) users inside AWS for every employee is a management nightmare - and the exam knows it. The right answer for “our 500 employees use Active Directory” is always federation: let an external identity provider handle the humans, and give them temporary AWS credentials.
+Federation with SAML (Security Assertion Markup Language) 2.0 (corporate identities)# The scenario keyword is Active Directory / ADFS / Okta / Azure AD. Pattern:
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/identity-federation-and-cognito/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/secure-architectures/identity-federation-and-cognito/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="identity-federation-and-cognito">
-	<meta property="og:description" content="Identity Federation and Cognito# Creating IAM users inside AWS for every employee is a management nightmare - and the exam knows it. The right answer for “our 500 employees use Active Directory” is always federation: let an external identity provider handle the humans, and give them temporary AWS credentials.
-Federation with SAML 2.0 (corporate identities)# The scenario keyword is Active Directory / ADFS / Okta / Azure AD. Pattern:
-flowchart LR user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta] idp --&gt;|SAML assertion| sts[AWS STS] sts --&gt;|temporary creds| user The IdP maps groups → IAM roles (via the AssumeRoleWithSAML API) No IAM users are created in AWS Best for workforce identities (employees) IAM Identity Center (the artist formerly known as AWS SSO) is the modern managed version of this: connect one IdP, get a single portal with access to many accounts.">
+	<meta property="og:description" content="Identity Federation and Cognito# Creating IAM (Identity and Access Management) users inside AWS for every employee is a management nightmare - and the exam knows it. The right answer for “our 500 employees use Active Directory” is always federation: let an external identity provider handle the humans, and give them temporary AWS credentials.
+Federation with SAML (Security Assertion Markup Language) 2.0 (corporate identities)# The scenario keyword is Active Directory / ADFS / Okta / Azure AD. Pattern:">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="identity-federation-and-cognito">
-	<meta itemprop="description" content="Identity Federation and Cognito# Creating IAM users inside AWS for every employee is a management nightmare - and the exam knows it. The right answer for “our 500 employees use Active Directory” is always federation: let an external identity provider handle the humans, and give them temporary AWS credentials.
-Federation with SAML 2.0 (corporate identities)# The scenario keyword is Active Directory / ADFS / Okta / Azure AD. Pattern:
-flowchart LR user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta] idp --&gt;|SAML assertion| sts[AWS STS] sts --&gt;|temporary creds| user The IdP maps groups → IAM roles (via the AssumeRoleWithSAML API) No IAM users are created in AWS Best for workforce identities (employees) IAM Identity Center (the artist formerly known as AWS SSO) is the modern managed version of this: connect one IdP, get a single portal with access to many accounts.">
-	<meta itemprop="wordCount" content="586">
+	<meta itemprop="description" content="Identity Federation and Cognito# Creating IAM (Identity and Access Management) users inside AWS for every employee is a management nightmare - and the exam knows it. The right answer for “our 500 employees use Active Directory” is always federation: let an external identity provider handle the humans, and give them temporary AWS credentials.
+Federation with SAML (Security Assertion Markup Language) 2.0 (corporate identities)# The scenario keyword is Active Directory / ADFS / Okta / Azure AD. Pattern:">
+	<meta itemprop="wordCount" content="611">
 
 <title>identity-federation-and-cognito • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/identity-federation-and-cognito/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/secure-architectures/identity-federation-and-cognito/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3217,6 +3214,20 @@ flowchart LR user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta] idp --&gt;|SAM
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3317,6 +3328,20 @@ flowchart LR user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta] idp --&gt;|SAM
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3396,6 +3421,20 @@ flowchart LR user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta] idp --&gt;|SAM
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3440,6 +3479,20 @@ flowchart LR user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta] idp --&gt;|SAM
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3550,8 +3603,36 @@ flowchart LR user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta] idp --&gt;|SAM
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3613,7 +3694,7 @@ flowchart LR user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta] idp --&gt;|SAM
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#federation-with-saml-20-corporate-identities">Federation with SAML 2.0 (corporate identities)</a></li>
+    <li><a href="#federation-with-saml-security-assertion-markup-language-20-corporate-identities">Federation with SAML (Security Assertion Markup Language) 2.0 (corporate identities)</a></li>
     <li><a href="#federation-with-web-identities-customer-facing">Federation with web identities (customer-facing)</a></li>
     <li><a href="#cognito-user-pools-vs-identity-pools">Cognito: User Pools vs Identity Pools</a></li>
     <li><a href="#exam-tips">Exam tips</a></li>
@@ -3632,8 +3713,8 @@ flowchart LR user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta] idp --&gt;|SAM
       
       
   <article class="markdown book-article"><h1 id="identity-federation-and-cognito">Identity Federation and Cognito<a class="anchor" href="#identity-federation-and-cognito">#</a></h1>
-<p>Creating IAM users inside AWS for every employee is a management nightmare - and the exam knows it. The right answer for &ldquo;our 500 employees use Active Directory&rdquo; is always <strong>federation</strong>: let an external identity provider handle the humans, and give them <strong>temporary AWS credentials</strong>.</p>
-<h2 id="federation-with-saml-20-corporate-identities">Federation with SAML 2.0 (corporate identities)<a class="anchor" href="#federation-with-saml-20-corporate-identities">#</a></h2>
+<p>Creating IAM (Identity and Access Management) users inside AWS for every employee is a management nightmare - and the exam knows it. The right answer for &ldquo;our 500 employees use Active Directory&rdquo; is always <strong>federation</strong>: let an external identity provider handle the humans, and give them <strong>temporary AWS credentials</strong>.</p>
+<h2 id="federation-with-saml-security-assertion-markup-language-20-corporate-identities">Federation with SAML (Security Assertion Markup Language) 2.0 (corporate identities)<a class="anchor" href="#federation-with-saml-security-assertion-markup-language-20-corporate-identities">#</a></h2>
 <p>The scenario keyword is <strong>Active Directory / ADFS / Okta / Azure AD</strong>. Pattern:</p>
 <pre class="mermaid">flowchart LR
     user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta]
@@ -3643,11 +3724,11 @@ flowchart LR user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta] idp --&gt;|SAM
 <li><strong>No IAM users are created</strong> in AWS</li>
 <li>Best for <strong>workforce</strong> identities (employees)</li>
 </ul>
-<p><strong>IAM Identity Center</strong> (the artist formerly known as AWS SSO) is the modern managed version of this: connect one IdP, get a single portal with access to many accounts.</p>
+<p><strong>IAM Identity Center</strong> (the artist formerly known as AWS SSO (Single Sign-On)) is the modern managed version of this: connect one IdP, get a single portal with access to many accounts.</p>
 <h2 id="federation-with-web-identities-customer-facing">Federation with web identities (customer-facing)<a class="anchor" href="#federation-with-web-identities-customer-facing">#</a></h2>
 <p>The scenario keywords are <strong>mobile app, social login, &ldquo;users sign in with Google/Facebook/Amazon&rdquo;</strong>:</p>
 <ul>
-<li><strong>Web identity federation</strong> → STS temporary credentials via <code>AssumeRoleWithWebIdentity</code></li>
+<li><strong>Web identity federation</strong> → STS (Security Token Service) temporary credentials via <code>AssumeRoleWithWebIdentity</code></li>
 <li><strong>Amazon Cognito</strong> is the service that packages this for you</li>
 </ul>
 <h2 id="cognito-user-pools-vs-identity-pools">Cognito: User Pools vs Identity Pools<a class="anchor" href="#cognito-user-pools-vs-identity-pools">#</a></h2>
@@ -3663,7 +3744,7 @@ flowchart LR user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta] idp --&gt;|SAM
 	<tbody>
 			<tr>
 					<td>What it is</td>
-					<td>A <strong>user directory</strong> (sign-up, sign-in, MFA)</td>
+					<td>A <strong>user directory</strong> (sign-up, sign-in, MFA (multi-factor authentication))</td>
 					<td>A <strong>credential vending machine</strong></td>
 			</tr>
 			<tr>
@@ -3683,7 +3764,7 @@ flowchart LR user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta] idp --&gt;|SAM
 			</tr>
 	</tbody>
 </table>
-<p>You usually use <strong>both</strong>: the user authenticates against the User Pool, then the Identity Pool exchanges the JWT for AWS credentials so the app can talk to S3/DynamoDB directly.</p>
+<p>You usually use <strong>both</strong>: the user authenticates against the User Pool, then the Identity Pool exchanges the JWT for AWS credentials so the app can talk to S3 (Simple Storage Service)/DynamoDB directly.</p>
 <pre class="mermaid">flowchart LR
     app[Mobile app] --&gt;|sign in| up[User Pool]
     up --&gt;|JWT| app
@@ -3694,22 +3775,30 @@ flowchart LR user[Employee] --&gt; idp[Corporate IdP - ADFS/Okta] idp --&gt;|SAM
 <ul>
 <li><strong>&ldquo;Employees / internal&rdquo;</strong> → SAML 2.0 federation or IAM Identity Center</li>
 <li><strong>&ldquo;Customers / mobile / social login&rdquo;</strong> → Cognito</li>
-<li><strong>&ldquo;Application on EC2 calls AWS&rdquo;</strong> → IAM role (not federation at all)</li>
+<li><strong>&ldquo;Application on EC2 (Elastic Compute Cloud) calls AWS&rdquo;</strong> → IAM role (not federation at all)</li>
 <li>Cross-account access between two AWS accounts → <strong>AssumeRole</strong>, not federation</li>
 </ul>
 <h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: A mobile game lets millions of players sign in with Facebook, and the app needs to write player scores to DynamoDB. Which combination should be used?</strong></p>
-<p>A) IAM users with access keys embedded in the app
-B) Cognito User Pool for sign-in + Identity Pool for AWS credentials
-C) SAML federation with Active Directory
-D) One shared IAM user for all players</p>
+<ul>
+<li><strong>A)</strong> IAM users with access keys embedded in the app</li>
+<li><strong>B)</strong> Cognito User Pool for sign-in + Identity Pool for AWS credentials</li>
+<li><strong>C)</strong> SAML federation with Active Directory</li>
+<li><strong>D)</strong> One shared IAM user for all players</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Social login → User Pool; direct AWS access from the app → Identity Pool. A/D leak shared credentials, C is for enterprise workforce.</p>
+</div></details>
 <p><strong>Q2: A company wants its 200 Active Directory users to access multiple AWS accounts with their existing usernames and passwords. What should the architect recommend?</strong></p>
-<p>A) Create one IAM user per employee in each account
-B) Federate AD with AWS using SAML 2.0 via IAM Identity Center
-C) Store the AD passwords in Secrets Manager
-D) Use Cognito User Pools</p>
+<ul>
+<li><strong>A)</strong> Create one IAM user per employee in each account</li>
+<li><strong>B)</strong> Federate AD with AWS using SAML 2.0 via IAM Identity Center</li>
+<li><strong>C)</strong> Store the AD passwords in Secrets Manager</li>
+<li><strong>D)</strong> Use Cognito User Pools</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Corporate identities + multiple accounts = SAML federation with IAM Identity Center.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>Federation = dis kimlik saglayici (IdP) insani tanir, AWS gecici credential verir</li>
@@ -3787,7 +3876,7 @@ D) Use Cognito User Pools</p>
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#federation-with-saml-20-corporate-identities">Federation with SAML 2.0 (corporate identities)</a></li>
+    <li><a href="#federation-with-saml-security-assertion-markup-language-20-corporate-identities">Federation with SAML (Security Assertion Markup Language) 2.0 (corporate identities)</a></li>
     <li><a href="#federation-with-web-identities-customer-facing">Federation with web identities (customer-facing)</a></li>
     <li><a href="#cognito-user-pools-vs-identity-pools">Cognito: User Pools vs Identity Pools</a></li>
     <li><a href="#exam-tips">Exam tips</a></li>

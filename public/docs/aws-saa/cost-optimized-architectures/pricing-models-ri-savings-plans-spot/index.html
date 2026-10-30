@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,34 +8,34 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Pricing Models: On-Demand, RIs, Savings Plans and Spot# Almost every cost question is a matching game: workload pattern → purchase option. Get these five into your head and half of Domain 4 is free.
-The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknown, short-lived workloads Savings Plans (Compute / EC2 Instance / SageMaker) up to 72% 1 or 3 years, $/hour commitment Steady usage, want flexibility Reserved Instances (Standard / Convertible) up to 72% 1 or 3 years, specific instance family Very steady, known capacity Spot Instances up to 90% None - can be reclaimed (2-min notice) Fault-tolerant, interruptible work Dedicated Hosts / Instances 0% (premium) None/1-3y Licensing, compliance, single-tenant Savings Plans vs Reserved Instances (a favorite comparison)# Savings Plans = commit to $X/hour of compute; covers any instance family, region (Compute SP), Fargate and Lambda too. More flexible → usually the better answer Reserved Instances = commit to a specific instance type/region; can be standard (most discount, resellable) or convertible (less discount, can change family/OS); zonal RI also reserves capacity in an AZ Scheduled RIs = recurring time windows (rarely tested) Not: “surekli calisan ve tahmin edilebilir is yuk” = Savings Plans (esnek oldugu icin RI’ye tercih edilir). “Kesintiye dayanikli toplu is / ML egitim / test ortami” = Spot. “Windows/SQL lisansi bizim” = Dedicated Host.
+<meta name="description" content="Pricing Models: On-Demand, RIs (Reserved Instance), Savings Plans and Spot# Almost every cost question is a matching game: workload pattern → purchase option. Get these five into your head and half of Domain 4 is free.
+The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknown, short-lived workloads Savings Plans (Compute / EC2 (Elastic Compute Cloud) Instance / SageMaker) up to 72% 1 or 3 years, $/hour commitment Steady usage, want flexibility Reserved Instances (Standard / Convertible) up to 72% 1 or 3 years, specific instance family Very steady, known capacity Spot Instances up to 90% None - can be reclaimed (2-min notice) Fault-tolerant, interruptible work Dedicated Hosts / Instances 0% (premium) None/1-3y Licensing, compliance, single-tenant Savings Plans vs Reserved Instances (a favorite comparison)# Savings Plans = commit to $X/hour of compute; covers any instance family, region (Compute SP (Savings Plan)), Fargate and Lambda too. More flexible → usually the better answer Reserved Instances = commit to a specific instance type/region; can be standard (most discount, resellable) or convertible (less discount, can change family/OS); zonal RI also reserves capacity in an AZ (Availability Zone) Scheduled RIs = recurring time windows (rarely tested) Not: “surekli calisan ve tahmin edilebilir is yuk” = Savings Plans (esnek oldugu icin RI’ye tercih edilir). “Kesintiye dayanikli toplu is / ML egitim / test ortami” = Spot. “Windows/SQL lisansi bizim” = Dedicated Host.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/cost-optimized-architectures/pricing-models-ri-savings-plans-spot/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/cost-optimized-architectures/pricing-models-ri-savings-plans-spot/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="pricing-models-ri-savings-plans-spot">
-	<meta property="og:description" content="Pricing Models: On-Demand, RIs, Savings Plans and Spot# Almost every cost question is a matching game: workload pattern → purchase option. Get these five into your head and half of Domain 4 is free.
-The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknown, short-lived workloads Savings Plans (Compute / EC2 Instance / SageMaker) up to 72% 1 or 3 years, $/hour commitment Steady usage, want flexibility Reserved Instances (Standard / Convertible) up to 72% 1 or 3 years, specific instance family Very steady, known capacity Spot Instances up to 90% None - can be reclaimed (2-min notice) Fault-tolerant, interruptible work Dedicated Hosts / Instances 0% (premium) None/1-3y Licensing, compliance, single-tenant Savings Plans vs Reserved Instances (a favorite comparison)# Savings Plans = commit to $X/hour of compute; covers any instance family, region (Compute SP), Fargate and Lambda too. More flexible → usually the better answer Reserved Instances = commit to a specific instance type/region; can be standard (most discount, resellable) or convertible (less discount, can change family/OS); zonal RI also reserves capacity in an AZ Scheduled RIs = recurring time windows (rarely tested) Not: “surekli calisan ve tahmin edilebilir is yuk” = Savings Plans (esnek oldugu icin RI’ye tercih edilir). “Kesintiye dayanikli toplu is / ML egitim / test ortami” = Spot. “Windows/SQL lisansi bizim” = Dedicated Host.">
+	<meta property="og:description" content="Pricing Models: On-Demand, RIs (Reserved Instance), Savings Plans and Spot# Almost every cost question is a matching game: workload pattern → purchase option. Get these five into your head and half of Domain 4 is free.
+The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknown, short-lived workloads Savings Plans (Compute / EC2 (Elastic Compute Cloud) Instance / SageMaker) up to 72% 1 or 3 years, $/hour commitment Steady usage, want flexibility Reserved Instances (Standard / Convertible) up to 72% 1 or 3 years, specific instance family Very steady, known capacity Spot Instances up to 90% None - can be reclaimed (2-min notice) Fault-tolerant, interruptible work Dedicated Hosts / Instances 0% (premium) None/1-3y Licensing, compliance, single-tenant Savings Plans vs Reserved Instances (a favorite comparison)# Savings Plans = commit to $X/hour of compute; covers any instance family, region (Compute SP (Savings Plan)), Fargate and Lambda too. More flexible → usually the better answer Reserved Instances = commit to a specific instance type/region; can be standard (most discount, resellable) or convertible (less discount, can change family/OS); zonal RI also reserves capacity in an AZ (Availability Zone) Scheduled RIs = recurring time windows (rarely tested) Not: “surekli calisan ve tahmin edilebilir is yuk” = Savings Plans (esnek oldugu icin RI’ye tercih edilir). “Kesintiye dayanikli toplu is / ML egitim / test ortami” = Spot. “Windows/SQL lisansi bizim” = Dedicated Host.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="pricing-models-ri-savings-plans-spot">
-	<meta itemprop="description" content="Pricing Models: On-Demand, RIs, Savings Plans and Spot# Almost every cost question is a matching game: workload pattern → purchase option. Get these five into your head and half of Domain 4 is free.
-The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknown, short-lived workloads Savings Plans (Compute / EC2 Instance / SageMaker) up to 72% 1 or 3 years, $/hour commitment Steady usage, want flexibility Reserved Instances (Standard / Convertible) up to 72% 1 or 3 years, specific instance family Very steady, known capacity Spot Instances up to 90% None - can be reclaimed (2-min notice) Fault-tolerant, interruptible work Dedicated Hosts / Instances 0% (premium) None/1-3y Licensing, compliance, single-tenant Savings Plans vs Reserved Instances (a favorite comparison)# Savings Plans = commit to $X/hour of compute; covers any instance family, region (Compute SP), Fargate and Lambda too. More flexible → usually the better answer Reserved Instances = commit to a specific instance type/region; can be standard (most discount, resellable) or convertible (less discount, can change family/OS); zonal RI also reserves capacity in an AZ Scheduled RIs = recurring time windows (rarely tested) Not: “surekli calisan ve tahmin edilebilir is yuk” = Savings Plans (esnek oldugu icin RI’ye tercih edilir). “Kesintiye dayanikli toplu is / ML egitim / test ortami” = Spot. “Windows/SQL lisansi bizim” = Dedicated Host.">
-	<meta itemprop="wordCount" content="512">
+	<meta itemprop="description" content="Pricing Models: On-Demand, RIs (Reserved Instance), Savings Plans and Spot# Almost every cost question is a matching game: workload pattern → purchase option. Get these five into your head and half of Domain 4 is free.
+The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknown, short-lived workloads Savings Plans (Compute / EC2 (Elastic Compute Cloud) Instance / SageMaker) up to 72% 1 or 3 years, $/hour commitment Steady usage, want flexibility Reserved Instances (Standard / Convertible) up to 72% 1 or 3 years, specific instance family Very steady, known capacity Spot Instances up to 90% None - can be reclaimed (2-min notice) Fault-tolerant, interruptible work Dedicated Hosts / Instances 0% (premium) None/1-3y Licensing, compliance, single-tenant Savings Plans vs Reserved Instances (a favorite comparison)# Savings Plans = commit to $X/hour of compute; covers any instance family, region (Compute SP (Savings Plan)), Fargate and Lambda too. More flexible → usually the better answer Reserved Instances = commit to a specific instance type/region; can be standard (most discount, resellable) or convertible (less discount, can change family/OS); zonal RI also reserves capacity in an AZ (Availability Zone) Scheduled RIs = recurring time windows (rarely tested) Not: “surekli calisan ve tahmin edilebilir is yuk” = Savings Plans (esnek oldugu icin RI’ye tercih edilir). “Kesintiye dayanikli toplu is / ML egitim / test ortami” = Spot. “Windows/SQL lisansi bizim” = Dedicated Host.">
+	<meta itemprop="wordCount" content="534">
 
 <title>pricing-models-ri-savings-plans-spot • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/cost-optimized-architectures/pricing-models-ri-savings-plans-spot/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/cost-optimized-architectures/pricing-models-ri-savings-plans-spot/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknow
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknow
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknow
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknow
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknow
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3628,7 +3712,7 @@ The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknow
 
       
       
-  <article class="markdown book-article"><h1 id="pricing-models-on-demand-ris-savings-plans-and-spot">Pricing Models: On-Demand, RIs, Savings Plans and Spot<a class="anchor" href="#pricing-models-on-demand-ris-savings-plans-and-spot">#</a></h1>
+  <article class="markdown book-article"><h1 id="pricing-models-on-demand-ris-reserved-instance-savings-plans-and-spot">Pricing Models: On-Demand, RIs (Reserved Instance), Savings Plans and Spot<a class="anchor" href="#pricing-models-on-demand-ris-reserved-instance-savings-plans-and-spot">#</a></h1>
 <p>Almost every cost question is a matching game: <strong>workload pattern → purchase option</strong>. Get these five into your head and half of Domain 4 is free.</p>
 <h2 id="the-options">The options<a class="anchor" href="#the-options">#</a></h2>
 <table>
@@ -3648,7 +3732,7 @@ The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknow
 					<td>Spiky, unknown, short-lived workloads</td>
 			</tr>
 			<tr>
-					<td><strong>Savings Plans</strong> (Compute / EC2 Instance / SageMaker)</td>
+					<td><strong>Savings Plans</strong> (Compute / EC2 (Elastic Compute Cloud) Instance / SageMaker)</td>
 					<td>up to <strong>72%</strong></td>
 					<td>1 or 3 years, $/hour commitment</td>
 					<td>Steady usage, want flexibility</td>
@@ -3675,8 +3759,8 @@ The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknow
 </table>
 <h2 id="savings-plans-vs-reserved-instances-a-favorite-comparison">Savings Plans vs Reserved Instances (a favorite comparison)<a class="anchor" href="#savings-plans-vs-reserved-instances-a-favorite-comparison">#</a></h2>
 <ul>
-<li><strong>Savings Plans</strong> = commit to <strong>$X/hour of compute</strong>; covers any instance family, region (Compute SP), Fargate and Lambda too. More flexible → usually the better answer</li>
-<li><strong>Reserved Instances</strong> = commit to a <strong>specific instance type/region</strong>; can be <strong>standard</strong> (most discount, resellable) or <strong>convertible</strong> (less discount, can change family/OS); zonal RI also reserves <strong>capacity</strong> in an AZ</li>
+<li><strong>Savings Plans</strong> = commit to <strong>$X/hour of compute</strong>; covers any instance family, region (Compute SP (Savings Plan)), Fargate and Lambda too. More flexible → usually the better answer</li>
+<li><strong>Reserved Instances</strong> = commit to a <strong>specific instance type/region</strong>; can be <strong>standard</strong> (most discount, resellable) or <strong>convertible</strong> (less discount, can change family/OS); zonal RI also reserves <strong>capacity</strong> in an AZ (Availability Zone)</li>
 <li><strong>Scheduled RIs</strong> = recurring time windows (rarely tested)</li>
 </ul>
 <blockquote class='book-hint '>
@@ -3684,7 +3768,7 @@ The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknow
 </blockquote><h2 id="spot---details-the-exam-tests">Spot - details the exam tests<a class="anchor" href="#spot---details-the-exam-tests">#</a></h2>
 <ul>
 <li>Spare capacity at up to 90% off; AWS can reclaim with a <strong>2-minute interruption notice</strong></li>
-<li>Combine with <strong>ASG / Batch / ECS / EKS / Fargate Spot</strong> and graceful shutdown handling</li>
+<li>Combine with <strong>ASG (Auto Scaling Group) / Batch / ECS (Elastic Container Service) / EKS (Elastic Kubernetes Service) / Fargate Spot</strong> and graceful shutdown handling</li>
 <li><strong>Hibernate / stop-interruptible</strong> options for checkpoint-friendly workloads</li>
 <li>Diversify instance types and AZs to reduce interruption probability (see my notes: <a href="../../../aws/general-knowledge/spot-instances/">spot-instances</a>)</li>
 </ul>
@@ -3701,17 +3785,25 @@ The options# Option Discount Commitment Best for On-Demand 0% None Spiky, unknow
     q --&gt;|interruptible batch| spot[Spot]
     q --&gt;|license-bound| dh[Dedicated Host]</pre><script src="/mermaid.min.js"></script><script>mermaid.initialize({"flowchart":{"useMaxWidth":true},"theme":"default"})</script><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: A CI/CD build farm runs thousands of short-lived jobs that can tolerate failures and must minimize cost. What should be used?</strong></p>
-<p>A) On-Demand instances
-B) Spot Instances
-C) Dedicated Hosts
-D) Standard RIs</p>
+<ul>
+<li><strong>A)</strong> On-Demand instances</li>
+<li><strong>B)</strong> Spot Instances</li>
+<li><strong>C)</strong> Dedicated Hosts</li>
+<li><strong>D)</strong> Standard RIs</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Fault-tolerant, interruptible, cheapest = Spot.</p>
+</div></details>
 <p><strong>Q2: A company runs 40 m5.large instances 24/7 for the next 3 years and wants the largest discount but may need to switch to c5 later. Which option?</strong></p>
-<p>A) Compute Savings Plans (3-year)
-B) On-Demand
-C) Scheduled RIs
-D) Spot Instances</p>
+<ul>
+<li><strong>A)</strong> Compute Savings Plans (3-year)</li>
+<li><strong>B)</strong> On-Demand</li>
+<li><strong>C)</strong> Scheduled RIs</li>
+<li><strong>D)</strong> Spot Instances</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: A.</strong> Steady usage + long horizon + flexibility to change families = Compute Savings Plans (a Convertible RI would also discount but Compute SP is the flexible, family-agnostic commitment).</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>On-Demand = esnek, pahali; tahmin edilemeyen isler</li>

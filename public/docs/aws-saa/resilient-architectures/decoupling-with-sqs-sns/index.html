@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,16 +8,16 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Decoupling with SQS and SNS# “When a downstream system fails, the whole app shouldn’t fail” → decouple with a queue. SQS/SNS questions are among the most frequent on the exam, and the answers hinge on a few precise differences.
+<meta name="description" content="Decoupling with SQS (Simple Queue Service) and SNS (Simple Notification Service)# “When a downstream system fails, the whole app shouldn’t fail” → decouple with a queue. SQS/SNS questions are among the most frequent on the exam, and the answers hinge on a few precise differences.
 SQS - the pull-based queue# Producers send messages, consumers poll and delete. Fully managed, near unlimited scale.
 Standard vs FIFO# Standard FIFO Order Best-effort (may reorder) Strict per message group Delivery At-least-once (duplicates possible) Exactly-once processing (deduplicated) Throughput Nearly unlimited 300 msg/s (3,000 with batching) Use when Speed matters Orders, payments, “exactly once” FIFO queue names end in .fifo. Message group ID = parallel processing lanes within ordering; deduplication ID = duplicate suppression window (5 min).
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/decoupling-with-sqs-sns/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/resilient-architectures/decoupling-with-sqs-sns/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="decoupling-with-sqs-sns">
-	<meta property="og:description" content="Decoupling with SQS and SNS# “When a downstream system fails, the whole app shouldn’t fail” → decouple with a queue. SQS/SNS questions are among the most frequent on the exam, and the answers hinge on a few precise differences.
+	<meta property="og:description" content="Decoupling with SQS (Simple Queue Service) and SNS (Simple Notification Service)# “When a downstream system fails, the whole app shouldn’t fail” → decouple with a queue. SQS/SNS questions are among the most frequent on the exam, and the answers hinge on a few precise differences.
 SQS - the pull-based queue# Producers send messages, consumers poll and delete. Fully managed, near unlimited scale.
 Standard vs FIFO# Standard FIFO Order Best-effort (may reorder) Strict per message group Delivery At-least-once (duplicates possible) Exactly-once processing (deduplicated) Throughput Nearly unlimited 300 msg/s (3,000 with batching) Use when Speed matters Orders, payments, “exactly once” FIFO queue names end in .fifo. Message group ID = parallel processing lanes within ordering; deduplication ID = duplicate suppression window (5 min).">
 	<meta property="og:locale" content="en">
@@ -26,19 +26,19 @@ Standard vs FIFO# Standard FIFO Order Best-effort (may reorder) Strict per messa
 
 
 	<meta itemprop="name" content="decoupling-with-sqs-sns">
-	<meta itemprop="description" content="Decoupling with SQS and SNS# “When a downstream system fails, the whole app shouldn’t fail” → decouple with a queue. SQS/SNS questions are among the most frequent on the exam, and the answers hinge on a few precise differences.
+	<meta itemprop="description" content="Decoupling with SQS (Simple Queue Service) and SNS (Simple Notification Service)# “When a downstream system fails, the whole app shouldn’t fail” → decouple with a queue. SQS/SNS questions are among the most frequent on the exam, and the answers hinge on a few precise differences.
 SQS - the pull-based queue# Producers send messages, consumers poll and delete. Fully managed, near unlimited scale.
 Standard vs FIFO# Standard FIFO Order Best-effort (may reorder) Strict per message group Delivery At-least-once (duplicates possible) Exactly-once processing (deduplicated) Throughput Nearly unlimited 300 msg/s (3,000 with batching) Use when Speed matters Orders, payments, “exactly once” FIFO queue names end in .fifo. Message group ID = parallel processing lanes within ordering; deduplication ID = duplicate suppression window (5 min).">
-	<meta itemprop="wordCount" content="640">
+	<meta itemprop="wordCount" content="658">
 
 <title>decoupling-with-sqs-sns • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/decoupling-with-sqs-sns/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/resilient-architectures/decoupling-with-sqs-sns/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3217,6 +3217,20 @@ Standard vs FIFO# Standard FIFO Order Best-effort (may reorder) Strict per messa
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3317,6 +3331,20 @@ Standard vs FIFO# Standard FIFO Order Best-effort (may reorder) Strict per messa
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3396,6 +3424,20 @@ Standard vs FIFO# Standard FIFO Order Best-effort (may reorder) Strict per messa
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3440,6 +3482,20 @@ Standard vs FIFO# Standard FIFO Order Best-effort (may reorder) Strict per messa
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3550,8 +3606,36 @@ Standard vs FIFO# Standard FIFO Order Best-effort (may reorder) Strict per messa
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3636,7 +3720,7 @@ Standard vs FIFO# Standard FIFO Order Best-effort (may reorder) Strict per messa
 
       
       
-  <article class="markdown book-article"><h1 id="decoupling-with-sqs-and-sns">Decoupling with SQS and SNS<a class="anchor" href="#decoupling-with-sqs-and-sns">#</a></h1>
+  <article class="markdown book-article"><h1 id="decoupling-with-sqs-simple-queue-service-and-sns-simple-notification-service">Decoupling with SQS (Simple Queue Service) and SNS (Simple Notification Service)<a class="anchor" href="#decoupling-with-sqs-simple-queue-service-and-sns-simple-notification-service">#</a></h1>
 <p>&ldquo;When a downstream system fails, the whole app shouldn&rsquo;t fail&rdquo; → <strong>decouple with a queue</strong>. SQS/SNS questions are among the most frequent on the exam, and the answers hinge on a few precise differences.</p>
 <h2 id="sqs---the-pull-based-queue">SQS - the pull-based queue<a class="anchor" href="#sqs---the-pull-based-queue">#</a></h2>
 <p>Producers send messages, <strong>consumers poll and delete</strong>. Fully managed, near unlimited scale.</p>
@@ -3683,7 +3767,7 @@ Standard vs FIFO# Standard FIFO Order Best-effort (may reorder) Strict per messa
 <li>Retention: 1 min - 14 days</li>
 </ul>
 <h3 id="queue-as-a-buffer-for-scaling">Queue as a buffer for scaling<a class="anchor" href="#queue-as-a-buffer-for-scaling">#</a></h3>
-<p><code>ApproximateNumberOfMessages</code> (queue depth) as a <strong>CloudWatch metric</strong> → ASG scales consumers on backlog, not CPU. This is the classic &ldquo;workers behind a queue&rdquo; architecture.</p>
+<p><code>ApproximateNumberOfMessages</code> (queue depth) as a <strong>CloudWatch metric</strong> → ASG (Auto Scaling Group) scales consumers on backlog, not CPU. This is the classic &ldquo;workers behind a queue&rdquo; architecture.</p>
 <h2 id="sns---the-push-based-topic">SNS - the push-based topic<a class="anchor" href="#sns---the-push-based-topic">#</a></h2>
 <p>Pub/sub: one message, <strong>many subscribers</strong> (fan-out). Push to SQS queues, Lambda, HTTP(S), email, SMS.</p>
 <ul>
@@ -3702,23 +3786,35 @@ Standard vs FIFO# Standard FIFO Order Best-effort (may reorder) Strict per messa
 <p>&ldquo;Real-time ordered <strong>stream</strong> that multiple applications replay from the same data&rdquo; → <strong>Kinesis Data Streams</strong> (retention + shard iterators). &ldquo;Just get the work done, each message processed once by one consumer&rdquo; → <strong>SQS</strong>.</p>
 <h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: Orders must be processed exactly once, in the order they were received. Which queue type?</strong></p>
-<p>A) SQS Standard
-B) SQS FIFO
-C) SNS Standard topic
-D) Kinesis Data Firehose</p>
+<ul>
+<li><strong>A)</strong> SQS Standard</li>
+<li><strong>B)</strong> SQS FIFO</li>
+<li><strong>C)</strong> SNS Standard topic</li>
+<li><strong>D)</strong> Kinesis Data Firehose</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Exactly-once + strict ordering = SQS FIFO.</p>
+</div></details>
 <p><strong>Q2: An image upload must trigger a thumbnail generator AND a metadata indexer independently. If one consumer is down, the other must keep working. What design?</strong></p>
-<p>A) One EC2 worker doing both jobs
-B) SNS topic with an SQS queue per consumer
-C) An SQS standard queue polled by both consumers (competing)
-D) An email notification</p>
+<ul>
+<li><strong>A)</strong> One EC2 (Elastic Compute Cloud) worker doing both jobs</li>
+<li><strong>B)</strong> SNS topic with an SQS queue per consumer</li>
+<li><strong>C)</strong> An SQS standard queue polled by both consumers (competing)</li>
+<li><strong>D)</strong> An email notification</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Fan-out with per-consumer queues = independent durability. C makes consumers compete for the same messages.</p>
+</div></details>
 <p><strong>Q3: A consumer processes messages that can take up to 15 minutes, longer than the visibility timeout. What should be done?</strong></p>
-<p>A) Increase the message retention
-B) Extend the visibility timeout during processing
-C) Set the queue to FIFO
-D) Enable long polling</p>
+<ul>
+<li><strong>A)</strong> Increase the message retention</li>
+<li><strong>B)</strong> Extend the visibility timeout during processing</li>
+<li><strong>C)</strong> Set the queue to FIFO</li>
+<li><strong>D)</strong> Enable long polling</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Otherwise the message reappears and another consumer double-processes it.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>SQS = kuyruk, consumer <strong>ceker</strong> (pull), mesajlar dayanikli bekler</li>

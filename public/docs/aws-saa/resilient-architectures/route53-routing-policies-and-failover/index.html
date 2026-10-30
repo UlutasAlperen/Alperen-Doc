@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -9,15 +9,15 @@ https://github.com/alex-shpak/hugo-book
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Route 53 Routing Policies and Failover# DNS is the cheapest high-availability tool AWS gives you. The exam wants you to match a business requirement to one of seven routing policies - the words “latency”, “geolocation”, “failover” and “weighted” each map to exactly one answer.
-The routing policies# Policy What it does Scenario keyword Simple One record, random answer “single resource”, no smartness needed Weighted Split traffic by % “canary 10% to the new version”, “A/B test” Latency Send users to the lowest latency region “best performance for the user” Failover Active-passive; health check flips DNS “disaster recovery”, “passive standby” Geolocation Route by user’s location “content licensing”, “different content per country” Geoproximity Route by resource location &#43; bias “shift more traffic to region X” IP-based Route by user’s IP CIDR “these offices go to that endpoint” Multivalue answer Up to 8 healthy records, client picks “poor man’s load balancing” Health checks and failover# Route 53 health checks monitor endpoints (HTTP/TCP, string match), or CloudWatch alarms as the source Failover routing &#43; health check = automatic active-passive DR: primary unhealthy → DNS points at secondary Note the DNS TTL effect: failover is only as fast as the record’s TTL (see dns-ttl-and-caching) Classic pattern - static site failover to S3:
+The routing policies# Policy What it does Scenario keyword Simple One record, random answer “single resource”, no smartness needed Weighted Split traffic by % “canary 10% to the new version”, “A/B test” Latency Send users to the lowest latency region “best performance for the user” Failover Active-passive; health check flips DNS “disaster recovery”, “passive standby” Geolocation Route by user’s location “content licensing”, “different content per country” Geoproximity Route by resource location &#43; bias “shift more traffic to region X” IP-based Route by user’s IP CIDR “these offices go to that endpoint” Multivalue answer Up to 8 healthy records, client picks “poor man’s load balancing” Health checks and failover# Route 53 health checks monitor endpoints (HTTP/TCP, string match), or CloudWatch alarms as the source Failover routing &#43; health check = automatic active-passive DR (disaster recovery): primary unhealthy → DNS points at secondary Note the DNS TTL (time to live) effect: failover is only as fast as the record’s TTL (see dns-ttl-and-caching) Classic pattern - static site failover to S3 (Simple Storage Service):
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/route53-routing-policies-and-failover/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/resilient-architectures/route53-routing-policies-and-failover/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="route53-routing-policies-and-failover">
 	<meta property="og:description" content="Route 53 Routing Policies and Failover# DNS is the cheapest high-availability tool AWS gives you. The exam wants you to match a business requirement to one of seven routing policies - the words “latency”, “geolocation”, “failover” and “weighted” each map to exactly one answer.
-The routing policies# Policy What it does Scenario keyword Simple One record, random answer “single resource”, no smartness needed Weighted Split traffic by % “canary 10% to the new version”, “A/B test” Latency Send users to the lowest latency region “best performance for the user” Failover Active-passive; health check flips DNS “disaster recovery”, “passive standby” Geolocation Route by user’s location “content licensing”, “different content per country” Geoproximity Route by resource location &#43; bias “shift more traffic to region X” IP-based Route by user’s IP CIDR “these offices go to that endpoint” Multivalue answer Up to 8 healthy records, client picks “poor man’s load balancing” Health checks and failover# Route 53 health checks monitor endpoints (HTTP/TCP, string match), or CloudWatch alarms as the source Failover routing &#43; health check = automatic active-passive DR: primary unhealthy → DNS points at secondary Note the DNS TTL effect: failover is only as fast as the record’s TTL (see dns-ttl-and-caching) Classic pattern - static site failover to S3:">
+The routing policies# Policy What it does Scenario keyword Simple One record, random answer “single resource”, no smartness needed Weighted Split traffic by % “canary 10% to the new version”, “A/B test” Latency Send users to the lowest latency region “best performance for the user” Failover Active-passive; health check flips DNS “disaster recovery”, “passive standby” Geolocation Route by user’s location “content licensing”, “different content per country” Geoproximity Route by resource location &#43; bias “shift more traffic to region X” IP-based Route by user’s IP CIDR “these offices go to that endpoint” Multivalue answer Up to 8 healthy records, client picks “poor man’s load balancing” Health checks and failover# Route 53 health checks monitor endpoints (HTTP/TCP, string match), or CloudWatch alarms as the source Failover routing &#43; health check = automatic active-passive DR (disaster recovery): primary unhealthy → DNS points at secondary Note the DNS TTL (time to live) effect: failover is only as fast as the record’s TTL (see dns-ttl-and-caching) Classic pattern - static site failover to S3 (Simple Storage Service):">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
@@ -25,17 +25,17 @@ The routing policies# Policy What it does Scenario keyword Simple One record, ra
 
 	<meta itemprop="name" content="route53-routing-policies-and-failover">
 	<meta itemprop="description" content="Route 53 Routing Policies and Failover# DNS is the cheapest high-availability tool AWS gives you. The exam wants you to match a business requirement to one of seven routing policies - the words “latency”, “geolocation”, “failover” and “weighted” each map to exactly one answer.
-The routing policies# Policy What it does Scenario keyword Simple One record, random answer “single resource”, no smartness needed Weighted Split traffic by % “canary 10% to the new version”, “A/B test” Latency Send users to the lowest latency region “best performance for the user” Failover Active-passive; health check flips DNS “disaster recovery”, “passive standby” Geolocation Route by user’s location “content licensing”, “different content per country” Geoproximity Route by resource location &#43; bias “shift more traffic to region X” IP-based Route by user’s IP CIDR “these offices go to that endpoint” Multivalue answer Up to 8 healthy records, client picks “poor man’s load balancing” Health checks and failover# Route 53 health checks monitor endpoints (HTTP/TCP, string match), or CloudWatch alarms as the source Failover routing &#43; health check = automatic active-passive DR: primary unhealthy → DNS points at secondary Note the DNS TTL effect: failover is only as fast as the record’s TTL (see dns-ttl-and-caching) Classic pattern - static site failover to S3:">
-	<meta itemprop="wordCount" content="506">
+The routing policies# Policy What it does Scenario keyword Simple One record, random answer “single resource”, no smartness needed Weighted Split traffic by % “canary 10% to the new version”, “A/B test” Latency Send users to the lowest latency region “best performance for the user” Failover Active-passive; health check flips DNS “disaster recovery”, “passive standby” Geolocation Route by user’s location “content licensing”, “different content per country” Geoproximity Route by resource location &#43; bias “shift more traffic to region X” IP-based Route by user’s IP CIDR “these offices go to that endpoint” Multivalue answer Up to 8 healthy records, client picks “poor man’s load balancing” Health checks and failover# Route 53 health checks monitor endpoints (HTTP/TCP, string match), or CloudWatch alarms as the source Failover routing &#43; health check = automatic active-passive DR (disaster recovery): primary unhealthy → DNS points at secondary Note the DNS TTL (time to live) effect: failover is only as fast as the record’s TTL (see dns-ttl-and-caching) Classic pattern - static site failover to S3 (Simple Storage Service):">
+	<meta itemprop="wordCount" content="655">
 
 <title>route53-routing-policies-and-failover • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/route53-routing-policies-and-failover/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/resilient-architectures/route53-routing-policies-and-failover/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ The routing policies# Policy What it does Scenario keyword Simple One record, ra
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ The routing policies# Policy What it does Scenario keyword Simple One record, ra
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ The routing policies# Policy What it does Scenario keyword Simple One record, ra
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ The routing policies# Policy What it does Scenario keyword Simple One record, ra
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ The routing policies# Policy What it does Scenario keyword Simple One record, ra
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3613,6 +3697,7 @@ The routing policies# Policy What it does Scenario keyword Simple One record, ra
     <li><a href="#the-routing-policies">The routing policies</a></li>
     <li><a href="#health-checks-and-failover">Health checks and failover</a></li>
     <li><a href="#alias-vs-cname---a-favorite-trick">Alias vs CNAME - a favorite trick</a></li>
+    <li><a href="#route-53--cloudfront-vs-aws-global-accelerator">Route 53 / CloudFront vs AWS Global Accelerator</a></li>
     <li><a href="#exam-check">Exam check</a></li>
     <li><a href="#ozet">Ozet</a></li>
   </ul>
@@ -3684,10 +3769,10 @@ The routing policies# Policy What it does Scenario keyword Simple One record, ra
 <h2 id="health-checks-and-failover">Health checks and failover<a class="anchor" href="#health-checks-and-failover">#</a></h2>
 <ul>
 <li>Route 53 health checks monitor endpoints (HTTP/TCP, string match), or <strong>CloudWatch alarms</strong> as the source</li>
-<li><strong>Failover routing</strong> + health check = automatic active-passive DR: primary unhealthy → DNS points at secondary</li>
-<li>Note the DNS TTL effect: failover is only as fast as the record&rsquo;s TTL (see <a href="../../../aws/dns/dns-ttl-and-caching/">dns-ttl-and-caching</a>)</li>
+<li><strong>Failover routing</strong> + health check = automatic active-passive DR (disaster recovery): primary unhealthy → DNS points at secondary</li>
+<li>Note the DNS TTL (time to live) effect: failover is only as fast as the record&rsquo;s TTL (see <a href="../../../aws/dns/dns-ttl-and-caching/">dns-ttl-and-caching</a>)</li>
 </ul>
-<p>Classic pattern - <strong>static site failover to S3</strong>:</p>
+<p>Classic pattern - <strong>static site failover to S3 (Simple Storage Service)</strong>:</p>
 <pre class="mermaid">flowchart LR
     hc[Health check: primary] --&gt;|healthy| a[Primary: EC2/ALB]
     hc --&gt;|unhealthy| b[Secondary: S3 static website]</pre><script src="/mermaid.min.js"></script><script>mermaid.initialize({"flowchart":{"useMaxWidth":true},"theme":"default"})</script><h2 id="alias-vs-cname---a-favorite-trick">Alias vs CNAME - a favorite trick<a class="anchor" href="#alias-vs-cname---a-favorite-trick">#</a></h2>
@@ -3707,7 +3792,7 @@ The routing policies# Policy What it does Scenario keyword Simple One record, ra
 			</tr>
 			<tr>
 					<td>Points to</td>
-					<td>AWS resources (ALB, CloudFront, S3 website, API GW&hellip;)</td>
+					<td>AWS resources (ALB (Application Load Balancer), CloudFront, S3 website, API GW&hellip;)</td>
 					<td>Any DNS name</td>
 			</tr>
 			<tr>
@@ -3718,28 +3803,77 @@ The routing policies# Policy What it does Scenario keyword Simple One record, ra
 	</tbody>
 </table>
 <p>&ldquo;Point the root domain (<code>example.com</code>, no www) at an ALB&rdquo; → <strong>Alias record</strong>, always.</p>
-<p>Hosted zones (public vs private) and record types are covered in my hands-on notes: <a href="../../../aws/dns/route-53-hosted-zones/">route-53-hosted-zones</a>, <a href="../../../aws/cdn/cloudfront-with-dns/">cloudfront-with-dns</a>.</p>
-<blockquote class='book-hint '>
-<p>Not: kisa hatirlatma - &ldquo;latency&rdquo; en hizli bolgeye, &ldquo;geolocation&rdquo; kullanici neredeyse oraya, &ldquo;weighted&rdquo; yuzdelik dagilima, &ldquo;failover&rdquo; saglik kontrolune bakar. Sorudaki tek kelime genelde cevabi verir.</p>
-</blockquote><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
+<p>Hosted zones (public vs private) and record types are covered in my hands-on notes: <a href="../../../AWS/dns/route-53-hosted-zones/">route-53-hosted-zones</a>, <a href="../../../AWS/cdn/cloudfront-with-dns/">cloudfront-with-dns</a>.</p>
+<h2 id="route-53--cloudfront-vs-aws-global-accelerator">Route 53 / CloudFront vs AWS Global Accelerator<a class="anchor" href="#route-53--cloudfront-vs-aws-global-accelerator">#</a></h2>
+<p>This comparison comes up whenever global latency or regional failover is mentioned:</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th><strong>CloudFront</strong></th>
+					<th><strong>AWS Global Accelerator</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>What it does</td>
+					<td><strong>Caches content</strong> (HTTP/HTTPS) at 600+ edge locations</td>
+					<td>Proxies <strong>TCP/UDP</strong> packets onto the AWS backbone via <strong>2 static Anycast IPs</strong> (no caching!)</td>
+			</tr>
+			<tr>
+					<td>Protocols</td>
+					<td>HTTP / HTTPS / WebSocket</td>
+					<td><strong>Any TCP or UDP</strong> (gaming, IoT, VoIP, custom ports, HTTP)</td>
+			</tr>
+			<tr>
+					<td>Static IPs for whitelisting</td>
+					<td>No (dynamic edge IPs)</td>
+					<td><strong>Yes — 2 static Anycast IPv4 addresses</strong></td>
+			</tr>
+			<tr>
+					<td>Failover speed</td>
+					<td>Depends on origin health / DNS</td>
+					<td><strong>&lt; 30 seconds</strong> (no client DNS TTL caching issues because the Anycast IP never changes!)</td>
+			</tr>
+			<tr>
+					<td>Targets</td>
+					<td>S3, ALB, API Gateway, custom HTTP</td>
+					<td><strong>ALB, NLB, EC2 instances, Elastic IPs</strong> across multiple regions</td>
+			</tr>
+	</tbody>
+</table>
+<blockquote class='book-hint note'>
+<p><strong>Not:</strong> Kısa hatırlatma — &ldquo;latency&rdquo; en hızlı bölgeye, &ldquo;geolocation&rdquo; kullanıcı neredeyse oraya, &ldquo;weighted&rdquo; yüzdelik dağılıma, &ldquo;failover&rdquo; sağlık kontrolüne bakar. Soruda <strong>&ldquo;2 statik IP (whitelisting), UDP/TCP oyun/finans trafiği veya DNS TTL beklemeden anında bölgesel failover&rdquo;</strong> geçiyorsa cevap <strong>AWS Global Accelerator</strong>&lsquo;dır.</p></blockquote><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: A company wants 10% of traffic to go to a new application version and 90% to the current one, gradually increasing. Which routing policy?</strong></p>
-<p>A) Latency
-B) Weighted
-C) Geolocation
-D) Simple</p>
+<ul>
+<li><strong>A)</strong> Latency</li>
+<li><strong>B)</strong> Weighted</li>
+<li><strong>C)</strong> Geolocation</li>
+<li><strong>D)</strong> Simple</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Percentage-based split = weighted.</p>
+</div></details>
 <p><strong>Q2: Users in Europe must receive European-specific content, and users in the US must receive US content. Which policy?</strong></p>
-<p>A) Latency routing
-B) Geolocation routing
-C) Failover routing
-D) Multivalue answer</p>
+<ul>
+<li><strong>A)</strong> Latency routing</li>
+<li><strong>B)</strong> Geolocation routing</li>
+<li><strong>C)</strong> Failover routing</li>
+<li><strong>D)</strong> Multivalue answer</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Content varies <strong>by where the user is</strong> = geolocation. Latency would pick the fastest, not the &ldquo;correct&rdquo; content.</p>
+</div></details>
 <p><strong>Q3: A primary web app in <code>us-east-1</code> must automatically fail over to an S3 static website in <code>eu-west-1</code> when its health check fails. Which routing policy?</strong></p>
-<p>A) Weighted
-B) Failover
-C) Geoproximity
-D) IP-based</p>
+<ul>
+<li><strong>A)</strong> Weighted</li>
+<li><strong>B)</strong> Failover</li>
+<li><strong>C)</strong> Geoproximity</li>
+<li><strong>D)</strong> IP-based</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Active-passive + health check = failover routing.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>Simple = tek kaynak, Weighted = yuzde dagilim, Latency = en hizli bolge</li>
@@ -3819,6 +3953,7 @@ D) IP-based</p>
     <li><a href="#the-routing-policies">The routing policies</a></li>
     <li><a href="#health-checks-and-failover">Health checks and failover</a></li>
     <li><a href="#alias-vs-cname---a-favorite-trick">Alias vs CNAME - a favorite trick</a></li>
+    <li><a href="#route-53--cloudfront-vs-aws-global-accelerator">Route 53 / CloudFront vs AWS Global Accelerator</a></li>
     <li><a href="#exam-check">Exam check</a></li>
     <li><a href="#ozet">Ozet</a></li>
   </ul>

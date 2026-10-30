@@ -27,7 +27,26 @@ Two patterns appear over and over:
 1. **Static website hosting** - bucket policy allows `s3:GetObject` for `*`, Block Public Access off, website endpoint
 2. **Private content via CloudFront** - bucket stays private; CloudFront accesses it with **OAC (Origin Access Control)** so users can never hit S3 directly
 
-> Not: sinavda 2023'ten beri "en guvenli" statik site cevabi CloudFront + OAC. Bucket'i public yapmak hala calisir ama "MOST secure" sorularinda kaybeder.
+> [!NOTE]
+> **Not:** Sınavda 2023'ten beri "en güvenli" statik site cevabı **CloudFront + OAC (Origin Access Control)** (eski adıyla OAI)'dir. Bucket'ı public yapmak hâlâ çalışır ama "MOST secure" sorularında kaybeder. Birden fazla özel dosyaya (örn. HLS video parçaları) URL değiştirmeden süreli erişim verilecekse **CloudFront Signed Cookies**, tek bir dosyaya verilecekse **CloudFront Signed URL / S3 Pre-Signed URL** seçilir.
+
+## S3 Object Lock (WORM), Glacier Vault Lock & MFA Delete
+
+Compliance questions ("files must never be deleted or modified for 7 years") test these mechanisms:
+
+| Feature | How it works | Exam keyword |
+|---|---|---|
+| **Object Lock - Compliance mode** | Object version cannot be overwritten or deleted by **anyone — including the root user** — until retention expires | "Strict regulatory compliance, even root cannot delete" |
+| **Object Lock - Governance mode** | Protected by default, but users with `s3:BypassGovernanceRetention` IAM permission can override | "Prevent accidental deletion, allow admin override" |
+| **Object Lock - Legal Hold** | On/off switch with **no expiration date**; stays locked until explicitly removed (`s3:PutObjectLegalHold`) | "Indefinite hold during a legal investigation" |
+| **Glacier Vault Lock** | Lock a Glacier vault policy with a 24-hour confirmation code; **immutable forever** once locked | "Archive vault compliance policy that can never be changed" |
+| **MFA Delete** | Requires MFA code to permanently delete an object version or suspend Versioning (**only the Root user** can enable/disable via CLI/API) | "Extra authentication before deleting versioned objects" |
+
+*Prerequisite:* **S3 Versioning must be enabled** before you can use S3 Object Lock or MFA Delete.
+
+## CORS (Cross-Origin Resource Sharing)
+
+If a web page hosted at `https://app.example.com` makes browser `fetch`/`XHR` requests (or loads fonts/images via JS) from `https://assets.otherdomain.com` (another S3 bucket), you must configure a **CORS rule on the target (assets) S3 bucket** allowing the `Origin: https://app.example.com`.
 
 ## Restricting access to a VPC
 

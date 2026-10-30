@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,15 +8,15 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Compute Performance: EC2 Options# “Which instance type / placement / purchase option” questions test whether you know the instance family alphabet and the three placement group shapes. (Pricing is covered in pricing-models.)
+<meta name="description" content="Compute Performance: EC2 (Elastic Compute Cloud) Options# “Which instance type / placement / purchase option” questions test whether you know the instance family alphabet and the three placement group shapes. (Pricing is covered in pricing-models.)
 Instance families# Family Optimized for Mnemonic T (t3, t4g) Burstable general purpose (baseline CPU &#43; credits) “t” = tiny/test M (m5, m6i) Balanced general purpose “m” = middle C (c5, c7g) Compute intensive (app servers, game servers, batch) “c” = compute R (r5, x2idn) / X / Z Memory intensive (in-memory DB, caches, big data) “r” = RAM P / G / VT / Inf GPU/ML training and inference “p/g” = graphics Hpc / D High performance compute, high disk throughput Mac macOS build farms Burstable (T family) detail: instances earn CPU credits when idle and spend them under load; “unlimited” mode can pay for extra credits. “Variable low CPU baseline” → T family.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="compute-performance-ec2-options">
-	<meta property="og:description" content="Compute Performance: EC2 Options# “Which instance type / placement / purchase option” questions test whether you know the instance family alphabet and the three placement group shapes. (Pricing is covered in pricing-models.)
+	<meta property="og:description" content="Compute Performance: EC2 (Elastic Compute Cloud) Options# “Which instance type / placement / purchase option” questions test whether you know the instance family alphabet and the three placement group shapes. (Pricing is covered in pricing-models.)
 Instance families# Family Optimized for Mnemonic T (t3, t4g) Burstable general purpose (baseline CPU &#43; credits) “t” = tiny/test M (m5, m6i) Balanced general purpose “m” = middle C (c5, c7g) Compute intensive (app servers, game servers, batch) “c” = compute R (r5, x2idn) / X / Z Memory intensive (in-memory DB, caches, big data) “r” = RAM P / G / VT / Inf GPU/ML training and inference “p/g” = graphics Hpc / D High performance compute, high disk throughput Mac macOS build farms Burstable (T family) detail: instances earn CPU credits when idle and spend them under load; “unlimited” mode can pay for extra credits. “Variable low CPU baseline” → T family.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
@@ -24,18 +24,18 @@ Instance families# Family Optimized for Mnemonic T (t3, t4g) Burstable general p
 
 
 	<meta itemprop="name" content="compute-performance-ec2-options">
-	<meta itemprop="description" content="Compute Performance: EC2 Options# “Which instance type / placement / purchase option” questions test whether you know the instance family alphabet and the three placement group shapes. (Pricing is covered in pricing-models.)
+	<meta itemprop="description" content="Compute Performance: EC2 (Elastic Compute Cloud) Options# “Which instance type / placement / purchase option” questions test whether you know the instance family alphabet and the three placement group shapes. (Pricing is covered in pricing-models.)
 Instance families# Family Optimized for Mnemonic T (t3, t4g) Burstable general purpose (baseline CPU &#43; credits) “t” = tiny/test M (m5, m6i) Balanced general purpose “m” = middle C (c5, c7g) Compute intensive (app servers, game servers, batch) “c” = compute R (r5, x2idn) / X / Z Memory intensive (in-memory DB, caches, big data) “r” = RAM P / G / VT / Inf GPU/ML training and inference “p/g” = graphics Hpc / D High performance compute, high disk throughput Mac macOS build farms Burstable (T family) detail: instances earn CPU credits when idle and spend them under load; “unlimited” mode can pay for extra credits. “Variable low CPU baseline” → T family.">
-	<meta itemprop="wordCount" content="460">
+	<meta itemprop="wordCount" content="485">
 
 <title>compute-performance-ec2-options • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ Instance families# Family Optimized for Mnemonic T (t3, t4g) Burstable general p
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ Instance families# Family Optimized for Mnemonic T (t3, t4g) Burstable general p
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ Instance families# Family Optimized for Mnemonic T (t3, t4g) Burstable general p
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ Instance families# Family Optimized for Mnemonic T (t3, t4g) Burstable general p
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="active">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ Instance families# Family Optimized for Mnemonic T (t3, t4g) Burstable general p
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3627,7 +3711,7 @@ Instance families# Family Optimized for Mnemonic T (t3, t4g) Burstable general p
 
       
       
-  <article class="markdown book-article"><h1 id="compute-performance-ec2-options">Compute Performance: EC2 Options<a class="anchor" href="#compute-performance-ec2-options">#</a></h1>
+  <article class="markdown book-article"><h1 id="compute-performance-ec2-elastic-compute-cloud-options">Compute Performance: EC2 (Elastic Compute Cloud) Options<a class="anchor" href="#compute-performance-ec2-elastic-compute-cloud-options">#</a></h1>
 <p>&ldquo;Which instance type / placement / purchase option&rdquo; questions test whether you know the <strong>instance family alphabet</strong> and the three placement group shapes. (Pricing is covered in <a href="../../cost-optimized-architectures/pricing-models-ri-savings-plans-spot/">pricing-models</a>.)</p>
 <h2 id="instance-families">Instance families<a class="anchor" href="#instance-families">#</a></h2>
 <table>
@@ -3689,7 +3773,7 @@ Instance families# Family Optimized for Mnemonic T (t3, t4g) Burstable general p
 	<tbody>
 			<tr>
 					<td><strong>Cluster</strong></td>
-					<td>Instances in one AZ, same rack → <strong>lowest latency, highest throughput</strong></td>
+					<td>Instances in one AZ (Availability Zone), same rack → <strong>lowest latency, highest throughput</strong></td>
 					<td>HPC, tightly-coupled, low-latency networking</td>
 			</tr>
 			<tr>
@@ -3713,24 +3797,32 @@ Instance families# Family Optimized for Mnemonic T (t3, t4g) Burstable general p
         d[EC2] .. e[EC2] .. f[EC2]
     end</pre><script src="/mermaid.min.js"></script><script>mermaid.initialize({"flowchart":{"useMaxWidth":true},"theme":"default"})</script><h2 id="networking-and-storage-performance">Networking and storage performance<a class="anchor" href="#networking-and-storage-performance">#</a></h2>
 <ul>
-<li><strong>ENA</strong> (enhanced networking): 25 Gbps+ , required for modern types; <strong>EFA</strong> = OS-bypass for HPC/ML</li>
-<li><strong>Instance store</strong> = raw NVMe on the host → highest IOPS, but <strong>ephemeral</strong> (data dies with the instance)</li>
-<li><strong>EBS gp3/io2</strong> = network block storage; io2 for provisioned IOPS (databases); st/sc1 for cheap cold</li>
-<li>AMI choice: pick the right region/architecture (see <a href="../../../aws/ec2/creating-and-using-your-own-ami/">creating-and-using-your-own-ami</a>)</li>
+<li><strong>ENA (Elastic Network Adapter)</strong> (enhanced networking): 25 Gbps+ , required for modern types; <strong>EFA (Elastic Fabric Adapter)</strong> = OS-bypass for HPC/ML</li>
+<li><strong>Instance store</strong> = raw NVMe on the host → highest IOPS (input/output operations per second), but <strong>ephemeral</strong> (data dies with the instance)</li>
+<li><strong>EBS (Elastic Block Store) gp3/io2</strong> = network block storage; io2 for provisioned IOPS (databases); st/sc1 for cheap cold</li>
+<li>AMI (Amazon Machine Image) choice: pick the right region/architecture (see <a href="../../../aws/ec2/creating-and-using-your-own-ami/">creating-and-using-your-own-ami</a>)</li>
 </ul>
 <h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: A tightly-coupled HPC simulation needs the lowest possible latency between 20 nodes. Which placement group?</strong></p>
-<p>A) Spread
-B) Cluster
-C) Partition
-D) Multi-AZ group</p>
+<ul>
+<li><strong>A)</strong> Spread</li>
+<li><strong>B)</strong> Cluster</li>
+<li><strong>C)</strong> Partition</li>
+<li><strong>D)</strong> Multi-AZ group</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Cluster placement = single rack, single AZ, minimum latency.</p>
+</div></details>
 <p><strong>Q2: Three critical instances must run on separate physical hardware so one host failure can&rsquo;t take them all down. Which placement?</strong></p>
-<p>A) Cluster
-B) Partition
-C) Spread
-D) Auto Scaling</p>
+<ul>
+<li><strong>A)</strong> Cluster</li>
+<li><strong>B)</strong> Partition</li>
+<li><strong>C)</strong> Spread</li>
+<li><strong>D)</strong> Auto Scaling</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: C.</strong> Spread = distinct hardware (7 per AZ limit).</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>T = burstable (CPU kredisi), M = dengeli, C = hesaplama, R/X = bellek, P/G = GPU</li>
@@ -3769,8 +3861,8 @@ D) Auto Scaling</p>
     </span>
     <span>
     
-      <a href="/docs/aws-saa/high-performing-architectures/data-transfer-and-hybrid-services/" class="flex align-center">
-        <span>data-transfer-and-hybrid-services</span>
+      <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="flex align-center">
+        <span>serverless-and-containers-lambda-ecs-eks</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     

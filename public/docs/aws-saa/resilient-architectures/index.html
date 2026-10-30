@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,31 +8,31 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Domain 2 - Design Resilient Architectures (30%)# 001 - ha-vs-fault-tolerance = high availability mi fault tolerance mi, SPOF avciligi 002 - disaster-recovery-strategies = RPO/RTO &#43; backup-restore, pilot light, warm standby, multi-site 003 - elb-and-auto-scaling-resilience = ALB/NLB/GWLB &#43; ASG scaling politikalari 004 - decoupling-with-sqs-sns = kuyruk &#43; pub/sub, FIFO, DLQ, fan-out 005 - event-driven-eventbridge-step-functions = olay yonlendirme ve is akisi orkestrasyonu 006 - rds-and-aurora-failover = Multi-AZ vs read replica, Aurora failover 007 - route53-routing-policies-and-failover = DNS routing politikalari ve health check ile failover 008 - vpc-connectivity-peering-tgw-direct-connect = VPC’ler arasi ve hibrit baglanti secenekleri Bu domain sinavin en buyuk dilimi (%30). Sorular genelde “sunucu olurse / bolge cokerse / trafik patlarsa ne olur” seklinde gelir. Cekirdek fikir: tek nokta arizasi (SPOF) birakma, her seyi cogul (multi-AZ) yap, servisleri birbirinden kopart (decouple).
+<meta name="description" content="Domain 2 - Design Resilient Architectures (30%)# 001 - ha-vs-fault-tolerance = high availability mi fault tolerance mi, SPOF (single point of failure) avciligi 002 - disaster-recovery-strategies = RPO (Recovery Point Objective)/RTO (Recovery Time Objective) &#43; backup-restore, pilot light, warm standby, multi-site 003 - elb-and-auto-scaling-resilience = ALB (Application Load Balancer)/NLB (Network Load Balancer)/GWLB (Gateway Load Balancer) &#43; ASG (Auto Scaling Group) scaling politikalari 004 - decoupling-with-sqs-sns = kuyruk &#43; pub/sub, FIFO, DLQ (dead-letter queue), fan-out 005 - event-driven-eventbridge-step-functions = olay yonlendirme ve is akisi orkestrasyonu 006 - streaming-kinesis-data-streams-firehose = Kinesis Data Streams vs Data Firehose vs Managed Apache Flink 007 - rds-and-aurora-failover = Multi-AZ vs read replica, Aurora failover 008 - route53-routing-policies-and-failover = DNS routing politikalari, Global Accelerator ve health check ile failover 009 - vpc-connectivity-peering-tgw-direct-connect = VPC (Virtual Private Cloud)’ler arasi, hibrit baglanti ve Route 53 Resolver Bu domain sinavin en buyuk dilimi (%30). Sorular genelde “sunucu olurse / bolge cokerse / trafik patlarsa ne olur” seklinde gelir. Cekirdek fikir: tek nokta arizasi (SPOF) birakma, her seyi cogul (multi-AZ) yap, servisleri birbirinden kopart (decouple).
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/resilient-architectures/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="resilient-architectures">
-	<meta property="og:description" content="Domain 2 - Design Resilient Architectures (30%)# 001 - ha-vs-fault-tolerance = high availability mi fault tolerance mi, SPOF avciligi 002 - disaster-recovery-strategies = RPO/RTO &#43; backup-restore, pilot light, warm standby, multi-site 003 - elb-and-auto-scaling-resilience = ALB/NLB/GWLB &#43; ASG scaling politikalari 004 - decoupling-with-sqs-sns = kuyruk &#43; pub/sub, FIFO, DLQ, fan-out 005 - event-driven-eventbridge-step-functions = olay yonlendirme ve is akisi orkestrasyonu 006 - rds-and-aurora-failover = Multi-AZ vs read replica, Aurora failover 007 - route53-routing-policies-and-failover = DNS routing politikalari ve health check ile failover 008 - vpc-connectivity-peering-tgw-direct-connect = VPC’ler arasi ve hibrit baglanti secenekleri Bu domain sinavin en buyuk dilimi (%30). Sorular genelde “sunucu olurse / bolge cokerse / trafik patlarsa ne olur” seklinde gelir. Cekirdek fikir: tek nokta arizasi (SPOF) birakma, her seyi cogul (multi-AZ) yap, servisleri birbirinden kopart (decouple).">
+	<meta property="og:description" content="Domain 2 - Design Resilient Architectures (30%)# 001 - ha-vs-fault-tolerance = high availability mi fault tolerance mi, SPOF (single point of failure) avciligi 002 - disaster-recovery-strategies = RPO (Recovery Point Objective)/RTO (Recovery Time Objective) &#43; backup-restore, pilot light, warm standby, multi-site 003 - elb-and-auto-scaling-resilience = ALB (Application Load Balancer)/NLB (Network Load Balancer)/GWLB (Gateway Load Balancer) &#43; ASG (Auto Scaling Group) scaling politikalari 004 - decoupling-with-sqs-sns = kuyruk &#43; pub/sub, FIFO, DLQ (dead-letter queue), fan-out 005 - event-driven-eventbridge-step-functions = olay yonlendirme ve is akisi orkestrasyonu 006 - streaming-kinesis-data-streams-firehose = Kinesis Data Streams vs Data Firehose vs Managed Apache Flink 007 - rds-and-aurora-failover = Multi-AZ vs read replica, Aurora failover 008 - route53-routing-policies-and-failover = DNS routing politikalari, Global Accelerator ve health check ile failover 009 - vpc-connectivity-peering-tgw-direct-connect = VPC (Virtual Private Cloud)’ler arasi, hibrit baglanti ve Route 53 Resolver Bu domain sinavin en buyuk dilimi (%30). Sorular genelde “sunucu olurse / bolge cokerse / trafik patlarsa ne olur” seklinde gelir. Cekirdek fikir: tek nokta arizasi (SPOF) birakma, her seyi cogul (multi-AZ) yap, servisleri birbirinden kopart (decouple).">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="website">
 
 
 	<meta itemprop="name" content="resilient-architectures">
-	<meta itemprop="description" content="Domain 2 - Design Resilient Architectures (30%)# 001 - ha-vs-fault-tolerance = high availability mi fault tolerance mi, SPOF avciligi 002 - disaster-recovery-strategies = RPO/RTO &#43; backup-restore, pilot light, warm standby, multi-site 003 - elb-and-auto-scaling-resilience = ALB/NLB/GWLB &#43; ASG scaling politikalari 004 - decoupling-with-sqs-sns = kuyruk &#43; pub/sub, FIFO, DLQ, fan-out 005 - event-driven-eventbridge-step-functions = olay yonlendirme ve is akisi orkestrasyonu 006 - rds-and-aurora-failover = Multi-AZ vs read replica, Aurora failover 007 - route53-routing-policies-and-failover = DNS routing politikalari ve health check ile failover 008 - vpc-connectivity-peering-tgw-direct-connect = VPC’ler arasi ve hibrit baglanti secenekleri Bu domain sinavin en buyuk dilimi (%30). Sorular genelde “sunucu olurse / bolge cokerse / trafik patlarsa ne olur” seklinde gelir. Cekirdek fikir: tek nokta arizasi (SPOF) birakma, her seyi cogul (multi-AZ) yap, servisleri birbirinden kopart (decouple).">
-	<meta itemprop="wordCount" content="140">
+	<meta itemprop="description" content="Domain 2 - Design Resilient Architectures (30%)# 001 - ha-vs-fault-tolerance = high availability mi fault tolerance mi, SPOF (single point of failure) avciligi 002 - disaster-recovery-strategies = RPO (Recovery Point Objective)/RTO (Recovery Time Objective) &#43; backup-restore, pilot light, warm standby, multi-site 003 - elb-and-auto-scaling-resilience = ALB (Application Load Balancer)/NLB (Network Load Balancer)/GWLB (Gateway Load Balancer) &#43; ASG (Auto Scaling Group) scaling politikalari 004 - decoupling-with-sqs-sns = kuyruk &#43; pub/sub, FIFO, DLQ (dead-letter queue), fan-out 005 - event-driven-eventbridge-step-functions = olay yonlendirme ve is akisi orkestrasyonu 006 - streaming-kinesis-data-streams-firehose = Kinesis Data Streams vs Data Firehose vs Managed Apache Flink 007 - rds-and-aurora-failover = Multi-AZ vs read replica, Aurora failover 008 - route53-routing-policies-and-failover = DNS routing politikalari, Global Accelerator ve health check ile failover 009 - vpc-connectivity-peering-tgw-direct-connect = VPC (Virtual Private Cloud)’ler arasi, hibrit baglanti ve Route 53 Resolver Bu domain sinavin en buyuk dilimi (%30). Sorular genelde “sunucu olurse / bolge cokerse / trafik patlarsa ne olur” seklinde gelir. Cekirdek fikir: tek nokta arizasi (SPOF) birakma, her seyi cogul (multi-AZ) yap, servisleri birbirinden kopart (decouple).">
+	<meta itemprop="wordCount" content="191">
 
 <title>resilient-architectures • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/resilient-architectures/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
-<link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/index.xml" title="resilient-architectures" />
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/docs/aws-saa/resilient-architectures/index.xml" title="resilient-architectures" />
 
   
 </head>
@@ -3211,6 +3211,20 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3311,6 +3325,20 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3390,6 +3418,20 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3434,6 +3476,20 @@ https://github.com/alex-shpak/hugo-book
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3544,8 +3600,36 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3618,18 +3702,19 @@ https://github.com/alex-shpak/hugo-book
       
   <article class="markdown book-article"><h1 id="domain-2---design-resilient-architectures-30">Domain 2 - Design Resilient Architectures (30%)<a class="anchor" href="#domain-2---design-resilient-architectures-30">#</a></h1>
 <ul>
-<li>001 - <a href="ha-vs-fault-tolerance/">ha-vs-fault-tolerance</a> = high availability mi fault tolerance mi, SPOF avciligi</li>
-<li>002 - <a href="disaster-recovery-strategies/">disaster-recovery-strategies</a> = RPO/RTO + backup-restore, pilot light, warm standby, multi-site</li>
-<li>003 - <a href="elb-and-auto-scaling-resilience/">elb-and-auto-scaling-resilience</a> = ALB/NLB/GWLB + ASG scaling politikalari</li>
-<li>004 - <a href="decoupling-with-sqs-sns/">decoupling-with-sqs-sns</a> = kuyruk + pub/sub, FIFO, DLQ, fan-out</li>
+<li>001 - <a href="ha-vs-fault-tolerance/">ha-vs-fault-tolerance</a> = high availability mi fault tolerance mi, SPOF (single point of failure) avciligi</li>
+<li>002 - <a href="disaster-recovery-strategies/">disaster-recovery-strategies</a> = RPO (Recovery Point Objective)/RTO (Recovery Time Objective) + backup-restore, pilot light, warm standby, multi-site</li>
+<li>003 - <a href="elb-and-auto-scaling-resilience/">elb-and-auto-scaling-resilience</a> = ALB (Application Load Balancer)/NLB (Network Load Balancer)/GWLB (Gateway Load Balancer) + ASG (Auto Scaling Group) scaling politikalari</li>
+<li>004 - <a href="decoupling-with-sqs-sns/">decoupling-with-sqs-sns</a> = kuyruk + pub/sub, FIFO, DLQ (dead-letter queue), fan-out</li>
 <li>005 - <a href="event-driven-eventbridge-step-functions/">event-driven-eventbridge-step-functions</a> = olay yonlendirme ve is akisi orkestrasyonu</li>
-<li>006 - <a href="rds-and-aurora-failover/">rds-and-aurora-failover</a> = Multi-AZ vs read replica, Aurora failover</li>
-<li>007 - <a href="route53-routing-policies-and-failover/">route53-routing-policies-and-failover</a> = DNS routing politikalari ve health check ile failover</li>
-<li>008 - <a href="vpc-connectivity-peering-tgw-direct-connect/">vpc-connectivity-peering-tgw-direct-connect</a> = VPC&rsquo;ler arasi ve hibrit baglanti secenekleri</li>
+<li>006 - <a href="streaming-kinesis-data-streams-firehose/">streaming-kinesis-data-streams-firehose</a> = Kinesis Data Streams vs Data Firehose vs Managed Apache Flink</li>
+<li>007 - <a href="rds-and-aurora-failover/">rds-and-aurora-failover</a> = Multi-AZ vs read replica, Aurora failover</li>
+<li>008 - <a href="route53-routing-policies-and-failover/">route53-routing-policies-and-failover</a> = DNS routing politikalari, Global Accelerator ve health check ile failover</li>
+<li>009 - <a href="vpc-connectivity-peering-tgw-direct-connect/">vpc-connectivity-peering-tgw-direct-connect</a> = VPC (Virtual Private Cloud)&rsquo;ler arasi, hibrit baglanti ve Route 53 Resolver</li>
 </ul>
 <p>Bu domain sinavin en buyuk dilimi (%30). Sorular genelde &ldquo;sunucu olurse / bolge cokerse / trafik patlarsa ne olur&rdquo; seklinde gelir. Cekirdek fikir: <strong>tek nokta arizasi (SPOF) birakma, her seyi cogul (multi-AZ) yap, servisleri birbirinden kopart (decouple)</strong>.</p>
 <blockquote class='book-hint '>
-<p>Not: pratik kurulumlar <a href="../../aws/">AWS</a> notlarinda - ornek ECS/ELB kurulumlari icin <a href="../../aws/ecs/application-load-balancer/">application-load-balancer</a>.</p>
+<p>Not: pratik kurulumlar <a href="../../aws/">AWS</a> notlarinda - ornek ECS (Elastic Container Service)/ELB (Elastic Load Balancing) kurulumlari icin <a href="../../aws/ecs/application-load-balancer/">application-load-balancer</a>.</p>
 </blockquote></article>
  
       
@@ -3651,9 +3736,9 @@ https://github.com/alex-shpak/hugo-book
 <div class="flex flex-wrap justify-between">
     <span>
     
-      <a href="/docs/aws-saa/secure-architectures/security-services-waf-guardduty-inspector/" class="flex align-center">
+      <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="flex align-center">
         <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
-        <span>security-services-waf-guardduty-inspector</span>
+        <span>governance-monitoring-organizations-config-ssm</span>
       </a>
     
     </span>

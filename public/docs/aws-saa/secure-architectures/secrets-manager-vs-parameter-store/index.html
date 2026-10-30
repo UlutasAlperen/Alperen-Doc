@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,34 +8,34 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Secrets Manager vs SSM Parameter Store# The exam loves this comparison - a scenario mentions database passwords or API keys, and you must pick the right vault. Both store secrets encrypted with KMS, but the differences decide the answer.
-Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds, API keys) Config &#43; secrets Rotation Built-in (Lambda-backed, automatic) DIY (custom automation) Cross-account Native (resource policy) Via IAM, more work Pricing ~$0.40/secret/month &#43; API calls Standard tier: free; Advanced: $0.05/param Size limit 64 KB Standard 4 KB / Advanced 8 KB Versioning Automatic versions &#43; staging labels (AWSCURRENT) Labeled versions Integration RDS, Redshift, DocumentDB native Everything via SSM API Decision rule# “Passwords must be rotated automatically” → Secrets Manager, no question “Cross-account secret sharing” → Secrets Manager “App config, feature flags, non-secret parameters, budget-conscious” → Parameter Store “Database credentials for RDS/Redshift/DocumentDB” → Secrets Manager (it integrates and rotates them out of the box) How Secrets Manager rotation works# sequenceDiagram participant SM as Secrets Manager participant L as Rotation Lambda participant DB as RDS/Aurora SM-&gt;&gt;L: trigger rotation L-&gt;&gt;DB: create new password L-&gt;&gt;SM: store new version (AWSPENDING) L-&gt;&gt;DB: test connection L-&gt;&gt;SM: label as AWSCURRENTThe app keeps asking Secrets Manager for the secret by name - it always gets the current version, so the app never knows the password changed.
+<meta name="description" content="Secrets Manager vs SSM (Systems Manager) Parameter Store# The exam loves this comparison - a scenario mentions database passwords or API keys, and you must pick the right vault. Both store secrets encrypted with KMS (Key Management Service), but the differences decide the answer.
+Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds, API keys) Config &#43; secrets Rotation Built-in (Lambda-backed, automatic) DIY (custom automation) Cross-account Native (resource policy) Via IAM (Identity and Access Management), more work Pricing ~$0.40/secret/month &#43; API calls Standard tier: free; Advanced: $0.05/param Size limit 64 KB Standard 4 KB / Advanced 8 KB Versioning Automatic versions &#43; staging labels (AWSCURRENT) Labeled versions Integration RDS (Relational Database Service), Redshift, DocumentDB native Everything via SSM API Decision rule# “Passwords must be rotated automatically” → Secrets Manager, no question “Cross-account secret sharing” → Secrets Manager “App config, feature flags, non-secret parameters, budget-conscious” → Parameter Store “Database credentials for RDS/Redshift/DocumentDB” → Secrets Manager (it integrates and rotates them out of the box) How Secrets Manager rotation works# sequenceDiagram participant SM as Secrets Manager participant L as Rotation Lambda participant DB as RDS/Aurora SM-&gt;&gt;L: trigger rotation L-&gt;&gt;DB: create new password L-&gt;&gt;SM: store new version (AWSPENDING) L-&gt;&gt;DB: test connection L-&gt;&gt;SM: label as AWSCURRENTThe app keeps asking Secrets Manager for the secret by name - it always gets the current version, so the app never knows the password changed.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/secrets-manager-vs-parameter-store/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/secure-architectures/secrets-manager-vs-parameter-store/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="secrets-manager-vs-parameter-store">
-	<meta property="og:description" content="Secrets Manager vs SSM Parameter Store# The exam loves this comparison - a scenario mentions database passwords or API keys, and you must pick the right vault. Both store secrets encrypted with KMS, but the differences decide the answer.
-Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds, API keys) Config &#43; secrets Rotation Built-in (Lambda-backed, automatic) DIY (custom automation) Cross-account Native (resource policy) Via IAM, more work Pricing ~$0.40/secret/month &#43; API calls Standard tier: free; Advanced: $0.05/param Size limit 64 KB Standard 4 KB / Advanced 8 KB Versioning Automatic versions &#43; staging labels (AWSCURRENT) Labeled versions Integration RDS, Redshift, DocumentDB native Everything via SSM API Decision rule# “Passwords must be rotated automatically” → Secrets Manager, no question “Cross-account secret sharing” → Secrets Manager “App config, feature flags, non-secret parameters, budget-conscious” → Parameter Store “Database credentials for RDS/Redshift/DocumentDB” → Secrets Manager (it integrates and rotates them out of the box) How Secrets Manager rotation works# sequenceDiagram participant SM as Secrets Manager participant L as Rotation Lambda participant DB as RDS/Aurora SM-&gt;&gt;L: trigger rotation L-&gt;&gt;DB: create new password L-&gt;&gt;SM: store new version (AWSPENDING) L-&gt;&gt;DB: test connection L-&gt;&gt;SM: label as AWSCURRENTThe app keeps asking Secrets Manager for the secret by name - it always gets the current version, so the app never knows the password changed.">
+	<meta property="og:description" content="Secrets Manager vs SSM (Systems Manager) Parameter Store# The exam loves this comparison - a scenario mentions database passwords or API keys, and you must pick the right vault. Both store secrets encrypted with KMS (Key Management Service), but the differences decide the answer.
+Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds, API keys) Config &#43; secrets Rotation Built-in (Lambda-backed, automatic) DIY (custom automation) Cross-account Native (resource policy) Via IAM (Identity and Access Management), more work Pricing ~$0.40/secret/month &#43; API calls Standard tier: free; Advanced: $0.05/param Size limit 64 KB Standard 4 KB / Advanced 8 KB Versioning Automatic versions &#43; staging labels (AWSCURRENT) Labeled versions Integration RDS (Relational Database Service), Redshift, DocumentDB native Everything via SSM API Decision rule# “Passwords must be rotated automatically” → Secrets Manager, no question “Cross-account secret sharing” → Secrets Manager “App config, feature flags, non-secret parameters, budget-conscious” → Parameter Store “Database credentials for RDS/Redshift/DocumentDB” → Secrets Manager (it integrates and rotates them out of the box) How Secrets Manager rotation works# sequenceDiagram participant SM as Secrets Manager participant L as Rotation Lambda participant DB as RDS/Aurora SM-&gt;&gt;L: trigger rotation L-&gt;&gt;DB: create new password L-&gt;&gt;SM: store new version (AWSPENDING) L-&gt;&gt;DB: test connection L-&gt;&gt;SM: label as AWSCURRENTThe app keeps asking Secrets Manager for the secret by name - it always gets the current version, so the app never knows the password changed.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="secrets-manager-vs-parameter-store">
-	<meta itemprop="description" content="Secrets Manager vs SSM Parameter Store# The exam loves this comparison - a scenario mentions database passwords or API keys, and you must pick the right vault. Both store secrets encrypted with KMS, but the differences decide the answer.
-Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds, API keys) Config &#43; secrets Rotation Built-in (Lambda-backed, automatic) DIY (custom automation) Cross-account Native (resource policy) Via IAM, more work Pricing ~$0.40/secret/month &#43; API calls Standard tier: free; Advanced: $0.05/param Size limit 64 KB Standard 4 KB / Advanced 8 KB Versioning Automatic versions &#43; staging labels (AWSCURRENT) Labeled versions Integration RDS, Redshift, DocumentDB native Everything via SSM API Decision rule# “Passwords must be rotated automatically” → Secrets Manager, no question “Cross-account secret sharing” → Secrets Manager “App config, feature flags, non-secret parameters, budget-conscious” → Parameter Store “Database credentials for RDS/Redshift/DocumentDB” → Secrets Manager (it integrates and rotates them out of the box) How Secrets Manager rotation works# sequenceDiagram participant SM as Secrets Manager participant L as Rotation Lambda participant DB as RDS/Aurora SM-&gt;&gt;L: trigger rotation L-&gt;&gt;DB: create new password L-&gt;&gt;SM: store new version (AWSPENDING) L-&gt;&gt;DB: test connection L-&gt;&gt;SM: label as AWSCURRENTThe app keeps asking Secrets Manager for the secret by name - it always gets the current version, so the app never knows the password changed.">
-	<meta itemprop="wordCount" content="469">
+	<meta itemprop="description" content="Secrets Manager vs SSM (Systems Manager) Parameter Store# The exam loves this comparison - a scenario mentions database passwords or API keys, and you must pick the right vault. Both store secrets encrypted with KMS (Key Management Service), but the differences decide the answer.
+Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds, API keys) Config &#43; secrets Rotation Built-in (Lambda-backed, automatic) DIY (custom automation) Cross-account Native (resource policy) Via IAM (Identity and Access Management), more work Pricing ~$0.40/secret/month &#43; API calls Standard tier: free; Advanced: $0.05/param Size limit 64 KB Standard 4 KB / Advanced 8 KB Versioning Automatic versions &#43; staging labels (AWSCURRENT) Labeled versions Integration RDS (Relational Database Service), Redshift, DocumentDB native Everything via SSM API Decision rule# “Passwords must be rotated automatically” → Secrets Manager, no question “Cross-account secret sharing” → Secrets Manager “App config, feature flags, non-secret parameters, budget-conscious” → Parameter Store “Database credentials for RDS/Redshift/DocumentDB” → Secrets Manager (it integrates and rotates them out of the box) How Secrets Manager rotation works# sequenceDiagram participant SM as Secrets Manager participant L as Rotation Lambda participant DB as RDS/Aurora SM-&gt;&gt;L: trigger rotation L-&gt;&gt;DB: create new password L-&gt;&gt;SM: store new version (AWSPENDING) L-&gt;&gt;DB: test connection L-&gt;&gt;SM: label as AWSCURRENTThe app keeps asking Secrets Manager for the secret by name - it always gets the current version, so the app never knows the password changed.">
+	<meta itemprop="wordCount" content="497">
 
 <title>secrets-manager-vs-parameter-store • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/secrets-manager-vs-parameter-store/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/secure-architectures/secrets-manager-vs-parameter-store/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds,
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds,
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds,
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds,
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds,
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3628,8 +3712,8 @@ Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds,
 
       
       
-  <article class="markdown book-article"><h1 id="secrets-manager-vs-ssm-parameter-store">Secrets Manager vs SSM Parameter Store<a class="anchor" href="#secrets-manager-vs-ssm-parameter-store">#</a></h1>
-<p>The exam loves this comparison - a scenario mentions database passwords or API keys, and you must pick the right vault. Both store secrets encrypted with KMS, but the differences decide the answer.</p>
+  <article class="markdown book-article"><h1 id="secrets-manager-vs-ssm-systems-manager-parameter-store">Secrets Manager vs SSM (Systems Manager) Parameter Store<a class="anchor" href="#secrets-manager-vs-ssm-systems-manager-parameter-store">#</a></h1>
+<p>The exam loves this comparison - a scenario mentions database passwords or API keys, and you must pick the right vault. Both store secrets encrypted with KMS (Key Management Service), but the differences decide the answer.</p>
 <h2 id="side-by-side">Side by side<a class="anchor" href="#side-by-side">#</a></h2>
 <table>
 	<thead>
@@ -3653,7 +3737,7 @@ Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds,
 			<tr>
 					<td>Cross-account</td>
 					<td>Native (resource policy)</td>
-					<td>Via IAM, more work</td>
+					<td>Via IAM (Identity and Access Management), more work</td>
 			</tr>
 			<tr>
 					<td>Pricing</td>
@@ -3672,7 +3756,7 @@ Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds,
 			</tr>
 			<tr>
 					<td>Integration</td>
-					<td>RDS, Redshift, DocumentDB native</td>
+					<td>RDS (Relational Database Service), Redshift, DocumentDB native</td>
 					<td>Everything via SSM API</td>
 			</tr>
 	</tbody>
@@ -3698,24 +3782,32 @@ Side by side# AWS Secrets Manager SSM Parameter Store Purpose Secrets (DB creds,
 <p>Two tiers:</p>
 <ul>
 <li><strong>Standard</strong> - free, 4 KB, 10,000 params per account (soft limit), no advanced policies</li>
-<li><strong>Advanced</strong> - paid, 8 KB, more params, parameter policies (TTL to force expiry!)</li>
+<li><strong>Advanced</strong> - paid, 8 KB, more params, parameter policies (TTL (time to live) to force expiry!)</li>
 </ul>
-<p>Parameters are <code>String</code>, <code>StringList</code>, or <code>SecureString</code> (encrypted with KMS). EC2 instances fetch them via the SSM agent + an instance role - see my hands-on notes: <a href="../../../aws/iam/aws-ssm-parameter-store/">aws-ssm-parameter-store</a>.</p>
+<p>Parameters are <code>String</code>, <code>StringList</code>, or <code>SecureString</code> (encrypted with KMS). EC2 (Elastic Compute Cloud) instances fetch them via the SSM agent + an instance role - see my hands-on notes: <a href="../../../aws/iam/aws-ssm-parameter-store/">aws-ssm-parameter-store</a>.</p>
 <blockquote class='book-hint '>
 <p>Not: &ldquo;gizli bilgi + otomatik rotasyon + kurulus icinde guvenli paylasim&rdquo; = Secrets Manager. &ldquo;Sadece config saklayacagim, ucuz olsun&rdquo; = Parameter Store. Sinavda rotasyon kelimesi geciyorsa cevap neredeyse kesin Secrets Manager.</p>
 </blockquote><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: A company needs to store database credentials and automatically rotate them every 30 days. Applications run on both EC2 and Lambda across two AWS accounts. Which service?</strong></p>
-<p>A) SSM Parameter Store (Standard tier)
-B) AWS Secrets Manager
-C) AWS Systems Manager OpsCenter
-D) An encrypted EBS volume</p>
+<ul>
+<li><strong>A)</strong> SSM Parameter Store (Standard tier)</li>
+<li><strong>B)</strong> AWS Secrets Manager</li>
+<li><strong>C)</strong> AWS Systems Manager OpsCenter</li>
+<li><strong>D)</strong> An encrypted EBS (Elastic Block Store) volume</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Automatic rotation + cross-account + managed integrations = Secrets Manager.</p>
+</div></details>
 <p><strong>Q2: An application needs 500 non-sensitive configuration values, and the team wants minimal cost. Which option is MOST cost-effective?</strong></p>
-<p>A) Secrets Manager
-B) SSM Parameter Store Standard tier
-C) KMS encrypted S3 bucket
-D) DynamoDB</p>
+<ul>
+<li><strong>A)</strong> Secrets Manager</li>
+<li><strong>B)</strong> SSM Parameter Store Standard tier</li>
+<li><strong>C)</strong> KMS encrypted S3 (Simple Storage Service) bucket</li>
+<li><strong>D)</strong> DynamoDB</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Standard tier parameters are free and designed for exactly this.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>Secrets Manager = sifre kasasi + <strong>otomatik rotasyon</strong>, pahalı ama yonetilmis</li>

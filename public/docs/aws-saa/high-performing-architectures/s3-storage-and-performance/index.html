@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,34 +8,34 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="S3 Storage Classes and Performance# Two things get tested: which storage class for which data (mostly a cost question - see s3-cost - but with performance implications) and how to move big data in and out fast.
-Storage classes at a glance# Class Durability / AZs Access pattern Min storage S3 Standard 99.99% / 3&#43; AZs Frequent, low latency - Standard-IA 99.99% / 3&#43; AZs Infrequent but instant 30 days One Zone-IA 99.5% / 1 AZ Infrequent, re-creatable 30 days Intelligent-Tiering 99.99% / 3&#43; AZs Unknown/changing patterns None (small monitoring fee/object) Glacier Instant Retrieval 99.99% / 3&#43; AZs Archival, ms retrieval 90 days Glacier Flexible Retrieval 99.99% / 3&#43; AZs Archive, minutes-hours 90 days Glacier Deep Archive 99.99% / 3&#43; AZs Archive, 12-48h retrieval 180 days Rules of thumb:
+<meta name="description" content="S3 (Simple Storage Service) Storage Classes and Performance# Two things get tested: which storage class for which data (mostly a cost question - see s3-cost - but with performance implications) and how to move big data in and out fast.
+Storage classes at a glance# Class Durability / AZs (Availability Zone) Access pattern Min storage S3 Standard 99.99% / 3&#43; AZs Frequent, low latency - Standard-IA 99.99% / 3&#43; AZs Infrequent but instant 30 days One Zone-IA 99.5% / 1 AZ Infrequent, re-creatable 30 days Intelligent-Tiering 99.99% / 3&#43; AZs Unknown/changing patterns None (small monitoring fee/object) Glacier Instant Retrieval 99.99% / 3&#43; AZs Archival, ms retrieval 90 days Glacier Flexible Retrieval 99.99% / 3&#43; AZs Archive, minutes-hours 90 days Glacier Deep Archive 99.99% / 3&#43; AZs Archive, 12-48h retrieval 180 days Rules of thumb:
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/s3-storage-and-performance/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/high-performing-architectures/s3-storage-and-performance/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="s3-storage-and-performance">
-	<meta property="og:description" content="S3 Storage Classes and Performance# Two things get tested: which storage class for which data (mostly a cost question - see s3-cost - but with performance implications) and how to move big data in and out fast.
-Storage classes at a glance# Class Durability / AZs Access pattern Min storage S3 Standard 99.99% / 3&#43; AZs Frequent, low latency - Standard-IA 99.99% / 3&#43; AZs Infrequent but instant 30 days One Zone-IA 99.5% / 1 AZ Infrequent, re-creatable 30 days Intelligent-Tiering 99.99% / 3&#43; AZs Unknown/changing patterns None (small monitoring fee/object) Glacier Instant Retrieval 99.99% / 3&#43; AZs Archival, ms retrieval 90 days Glacier Flexible Retrieval 99.99% / 3&#43; AZs Archive, minutes-hours 90 days Glacier Deep Archive 99.99% / 3&#43; AZs Archive, 12-48h retrieval 180 days Rules of thumb:">
+	<meta property="og:description" content="S3 (Simple Storage Service) Storage Classes and Performance# Two things get tested: which storage class for which data (mostly a cost question - see s3-cost - but with performance implications) and how to move big data in and out fast.
+Storage classes at a glance# Class Durability / AZs (Availability Zone) Access pattern Min storage S3 Standard 99.99% / 3&#43; AZs Frequent, low latency - Standard-IA 99.99% / 3&#43; AZs Infrequent but instant 30 days One Zone-IA 99.5% / 1 AZ Infrequent, re-creatable 30 days Intelligent-Tiering 99.99% / 3&#43; AZs Unknown/changing patterns None (small monitoring fee/object) Glacier Instant Retrieval 99.99% / 3&#43; AZs Archival, ms retrieval 90 days Glacier Flexible Retrieval 99.99% / 3&#43; AZs Archive, minutes-hours 90 days Glacier Deep Archive 99.99% / 3&#43; AZs Archive, 12-48h retrieval 180 days Rules of thumb:">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="s3-storage-and-performance">
-	<meta itemprop="description" content="S3 Storage Classes and Performance# Two things get tested: which storage class for which data (mostly a cost question - see s3-cost - but with performance implications) and how to move big data in and out fast.
-Storage classes at a glance# Class Durability / AZs Access pattern Min storage S3 Standard 99.99% / 3&#43; AZs Frequent, low latency - Standard-IA 99.99% / 3&#43; AZs Infrequent but instant 30 days One Zone-IA 99.5% / 1 AZ Infrequent, re-creatable 30 days Intelligent-Tiering 99.99% / 3&#43; AZs Unknown/changing patterns None (small monitoring fee/object) Glacier Instant Retrieval 99.99% / 3&#43; AZs Archival, ms retrieval 90 days Glacier Flexible Retrieval 99.99% / 3&#43; AZs Archive, minutes-hours 90 days Glacier Deep Archive 99.99% / 3&#43; AZs Archive, 12-48h retrieval 180 days Rules of thumb:">
-	<meta itemprop="wordCount" content="495">
+	<meta itemprop="description" content="S3 (Simple Storage Service) Storage Classes and Performance# Two things get tested: which storage class for which data (mostly a cost question - see s3-cost - but with performance implications) and how to move big data in and out fast.
+Storage classes at a glance# Class Durability / AZs (Availability Zone) Access pattern Min storage S3 Standard 99.99% / 3&#43; AZs Frequent, low latency - Standard-IA 99.99% / 3&#43; AZs Infrequent but instant 30 days One Zone-IA 99.5% / 1 AZ Infrequent, re-creatable 30 days Intelligent-Tiering 99.99% / 3&#43; AZs Unknown/changing patterns None (small monitoring fee/object) Glacier Instant Retrieval 99.99% / 3&#43; AZs Archival, ms retrieval 90 days Glacier Flexible Retrieval 99.99% / 3&#43; AZs Archive, minutes-hours 90 days Glacier Deep Archive 99.99% / 3&#43; AZs Archive, 12-48h retrieval 180 days Rules of thumb:">
+	<meta itemprop="wordCount" content="696">
 
 <title>s3-storage-and-performance • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/s3-storage-and-performance/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/high-performing-architectures/s3-storage-and-performance/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ Storage classes at a glance# Class Durability / AZs Access pattern Min storage S
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ Storage classes at a glance# Class Durability / AZs Access pattern Min storage S
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ Storage classes at a glance# Class Durability / AZs Access pattern Min storage S
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ Storage classes at a glance# Class Durability / AZs Access pattern Min storage S
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ Storage classes at a glance# Class Durability / AZs Access pattern Min storage S
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3612,6 +3696,12 @@ Storage classes at a glance# Class Durability / AZs Access pattern Min storage S
   <ul>
     <li><a href="#storage-classes-at-a-glance">Storage classes at a glance</a></li>
     <li><a href="#performance-fundamentals">Performance fundamentals</a></li>
+    <li><a href="#s3-replication-crr--srr-and-event-notifications">S3 Replication (CRR &amp; SRR) and Event Notifications</a>
+      <ul>
+        <li><a href="#cross-region-crr--same-region-replication-srr-rules-the-exam-tests">Cross-Region (CRR) &amp; Same-Region Replication (SRR) rules the exam tests:</a></li>
+        <li><a href="#s3-event-notifications-vs-amazon-eventbridge">S3 Event Notifications vs Amazon EventBridge:</a></li>
+      </ul>
+    </li>
     <li><a href="#exam-check">Exam check</a></li>
     <li><a href="#ozet">Ozet</a></li>
   </ul>
@@ -3626,14 +3716,14 @@ Storage classes at a glance# Class Durability / AZs Access pattern Min storage S
 
       
       
-  <article class="markdown book-article"><h1 id="s3-storage-classes-and-performance">S3 Storage Classes and Performance<a class="anchor" href="#s3-storage-classes-and-performance">#</a></h1>
+  <article class="markdown book-article"><h1 id="s3-simple-storage-service-storage-classes-and-performance">S3 (Simple Storage Service) Storage Classes and Performance<a class="anchor" href="#s3-simple-storage-service-storage-classes-and-performance">#</a></h1>
 <p>Two things get tested: <strong>which storage class for which data</strong> (mostly a cost question - see <a href="../../cost-optimized-architectures/s3-cost-and-lifecycle-policies/">s3-cost</a> - but with performance implications) and <strong>how to move big data in and out fast</strong>.</p>
 <h2 id="storage-classes-at-a-glance">Storage classes at a glance<a class="anchor" href="#storage-classes-at-a-glance">#</a></h2>
 <table>
 	<thead>
 			<tr>
 					<th>Class</th>
-					<th>Durability / AZs</th>
+					<th>Durability / AZs (Availability Zone)</th>
 					<th>Access pattern</th>
 					<th>Min storage</th>
 			</tr>
@@ -3702,22 +3792,42 @@ Storage classes at a glance# Class Durability / AZs Access pattern Min storage S
 </ul>
 <pre class="mermaid">flowchart LR
     client[Client in Asia] --&gt;|accelerated upload| edge[Nearest CloudFront edge]
-    edge --&gt;|AWS backbone| s3[(S3 us-east-1)]</pre><script src="/mermaid.min.js"></script><script>mermaid.initialize({"flowchart":{"useMaxWidth":true},"theme":"default"})</script><p>Hands-on: <a href="../../../aws/s3/aws-s3-objects/">aws-s3-objects</a>, <a href="../../../aws/s3/aws-s3-bucket/">aws-s3-bucket</a>.</p>
-<blockquote class='book-hint '>
-<p>Not: sinavda S3 performans sorusu iki kaliba iner: &ldquo;buyuk dosya yukleme yavas&rdquo; = multipart + Transfer Acceleration, &ldquo;cok fazla istek yavas&rdquo; = prefix&rsquo;leri dagit / request rate. Depolama class&rsquo;i sorulari ise aslinda cost sorusudur.</p>
-</blockquote><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
+    edge --&gt;|AWS backbone| s3[(S3 us-east-1)]</pre><script src="/mermaid.min.js"></script><script>mermaid.initialize({"flowchart":{"useMaxWidth":true},"theme":"default"})</script><p>Hands-on: <a href="../../../AWS/s3/aws-s3-objects/">aws-s3-objects</a>, <a href="../../../AWS/s3/aws-s3-bucket/">aws-s3-bucket</a>.</p>
+<h2 id="s3-replication-crr--srr-and-event-notifications">S3 Replication (CRR &amp; SRR) and Event Notifications<a class="anchor" href="#s3-replication-crr--srr-and-event-notifications">#</a></h2>
+<h3 id="cross-region-crr--same-region-replication-srr-rules-the-exam-tests">Cross-Region (CRR) &amp; Same-Region Replication (SRR) rules the exam tests:<a class="anchor" href="#cross-region-crr--same-region-replication-srr-rules-the-exam-tests">#</a></h3>
+<ol>
+<li><strong>S3 Versioning MUST be enabled</strong> on <strong>both</strong> the source and destination buckets.</li>
+<li><strong>Existing objects are NOT replicated automatically!</strong> CRR/SRR only replicates <em>new</em> objects uploaded after the rule is enabled. To replicate objects that already existed, run an <strong>S3 Batch Replication</strong> job.</li>
+<li><strong>Delete markers are NOT replicated by default</strong> (can be enabled optionally); permanent deletions (deleting a specific <code>versionId</code>) are <strong>never</strong> replicated (protects against malicious deletion).</li>
+<li><strong>S3 Replication Time Control (S3 RTC)</strong>: guarantees <strong>99.99% of new objects replicate within 15 minutes</strong> (backed by an SLA) — pick this when a compliance question specifies a strict 15-minute replication SLA.</li>
+</ol>
+<h3 id="s3-event-notifications-vs-amazon-eventbridge">S3 Event Notifications vs Amazon EventBridge:<a class="anchor" href="#s3-event-notifications-vs-amazon-eventbridge">#</a></h3>
+<ul>
+<li><strong>Standard S3 Event Notifications</strong>: send events (<code>s3:ObjectCreated:*</code>) directly to <strong>SNS (Simple Notification Service), SQS (Simple Queue Service), or Lambda</strong> (filters only on prefix/suffix; delivery takes seconds to minutes).</li>
+<li><strong>S3 + Amazon EventBridge</strong>: enable EventBridge on the bucket when you need <strong>advanced JSON filtering</strong> (object size, metadata, tag), <strong>routing to 18+ AWS services</strong> (Step Functions, Kinesis, ECS&hellip;), or <strong>event archiving and replay</strong>.</li>
+</ul>
+<blockquote class='book-hint warning'>
+<p><strong>Sınav Tuzağı (Exam Trap):</strong> &ldquo;CRR açtık ama eski dosyalar karşı bölgede görünmüyor&rdquo; sorusunun cevabı <strong>S3 Batch Replication</strong>&lsquo;dır. Ayrıca S3 performans soruları iki kalıba iner: &ldquo;büyük dosya yükleme yavaş&rdquo; = <strong>Multipart Upload + S3 Transfer Acceleration</strong>, &ldquo;yüksek istek hızı (<code>503 Slow Down</code>)&rdquo; = <strong>prefix&rsquo;leri dağıt</strong>.</p></blockquote><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: Large video files (50 GB each) are uploaded from offices worldwide and uploads frequently fail on slow links. What improves reliability AND speed?</strong></p>
-<p>A) Enable versioning
-B) Multipart upload with S3 Transfer Acceleration
-C) Switch to One Zone-IA
-D) Increase the bucket&rsquo;s storage class</p>
+<ul>
+<li><strong>A)</strong> Enable versioning</li>
+<li><strong>B)</strong> Multipart upload with S3 Transfer Acceleration</li>
+<li><strong>C)</strong> Switch to One Zone-IA</li>
+<li><strong>D)</strong> Increase the bucket&rsquo;s storage class</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Multipart = resumable parallel parts; Transfer Acceleration = edge-based fast path.</p>
+</div></details>
 <p><strong>Q2: Medical images must be retrievable in milliseconds but are rarely accessed, and kept for 10 years. Which class?</strong></p>
-<p>A) Glacier Deep Archive
-B) Glacier Instant Retrieval
-C) S3 Standard
-D) One Zone-IA</p>
+<ul>
+<li><strong>A)</strong> Glacier Deep Archive</li>
+<li><strong>B)</strong> Glacier Instant Retrieval</li>
+<li><strong>C)</strong> S3 Standard</li>
+<li><strong>D)</strong> One Zone-IA</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> &ldquo;Milliseconds but rare&rdquo; = Instant Retrieval. Deep Archive takes hours.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>Standard = sik erisim, IA = nadir ama aninda, One Zone-IA = tek AZ, yeniden uretilebilir</li>
@@ -3758,8 +3868,8 @@ D) One Zone-IA</p>
     </span>
     <span>
     
-      <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="flex align-center">
-        <span>caching-elasticache-cloudfront</span>
+      <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="flex align-center">
+        <span>block-and-file-storage-ebs-efs-fsx</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     
@@ -3798,6 +3908,12 @@ D) One Zone-IA</p>
   <ul>
     <li><a href="#storage-classes-at-a-glance">Storage classes at a glance</a></li>
     <li><a href="#performance-fundamentals">Performance fundamentals</a></li>
+    <li><a href="#s3-replication-crr--srr-and-event-notifications">S3 Replication (CRR &amp; SRR) and Event Notifications</a>
+      <ul>
+        <li><a href="#cross-region-crr--same-region-replication-srr-rules-the-exam-tests">Cross-Region (CRR) &amp; Same-Region Replication (SRR) rules the exam tests:</a></li>
+        <li><a href="#s3-event-notifications-vs-amazon-eventbridge">S3 Event Notifications vs Amazon EventBridge:</a></li>
+      </ul>
+    </li>
     <li><a href="#exam-check">Exam check</a></li>
     <li><a href="#ozet">Ozet</a></li>
   </ul>

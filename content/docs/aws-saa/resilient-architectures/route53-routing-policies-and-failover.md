@@ -44,9 +44,22 @@ flowchart LR
 
 "Point the root domain (`example.com`, no www) at an ALB" → **Alias record**, always.
 
-Hosted zones (public vs private) and record types are covered in my hands-on notes: [route-53-hosted-zones](../../../aws/dns/route-53-hosted-zones/), [cloudfront-with-dns](../../../aws/cdn/cloudfront-with-dns/).
+Hosted zones (public vs private) and record types are covered in my hands-on notes: [route-53-hosted-zones](../../../AWS/dns/route-53-hosted-zones/), [cloudfront-with-dns](../../../AWS/cdn/cloudfront-with-dns/).
 
-> Not: kisa hatirlatma - "latency" en hizli bolgeye, "geolocation" kullanici neredeyse oraya, "weighted" yuzdelik dagilima, "failover" saglik kontrolune bakar. Sorudaki tek kelime genelde cevabi verir.
+## Route 53 / CloudFront vs AWS Global Accelerator
+
+This comparison comes up whenever global latency or regional failover is mentioned:
+
+| | **CloudFront** | **AWS Global Accelerator** |
+|---|---|---|
+| What it does | **Caches content** (HTTP/HTTPS) at 600+ edge locations | Proxies **TCP/UDP** packets onto the AWS backbone via **2 static Anycast IPs** (no caching!) |
+| Protocols | HTTP / HTTPS / WebSocket | **Any TCP or UDP** (gaming, IoT, VoIP, custom ports, HTTP) |
+| Static IPs for whitelisting | No (dynamic edge IPs) | **Yes — 2 static Anycast IPv4 addresses** |
+| Failover speed | Depends on origin health / DNS | **< 30 seconds** (no client DNS TTL caching issues because the Anycast IP never changes!) |
+| Targets | S3, ALB, API Gateway, custom HTTP | **ALB, NLB, EC2 instances, Elastic IPs** across multiple regions |
+
+> [!NOTE]
+> **Not:** Kısa hatırlatma — "latency" en hızlı bölgeye, "geolocation" kullanıcı neredeyse oraya, "weighted" yüzdelik dağılıma, "failover" sağlık kontrolüne bakar. Soruda **"2 statik IP (whitelisting), UDP/TCP oyun/finans trafiği veya DNS TTL beklemeden anında bölgesel failover"** geçiyorsa cevap **AWS Global Accelerator**'dır.
 
 ## Exam check
 

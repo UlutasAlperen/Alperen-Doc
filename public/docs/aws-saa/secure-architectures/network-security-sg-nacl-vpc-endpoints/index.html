@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,34 +8,34 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Network Security: Security Groups, NACLs and VPC Endpoints# Two firewall layers and one private connectivity mechanism - and the exam will absolutely ask you to compare the first two.
-Security Group vs NACL - the mandatory table# Security Group NACL Attaches to ENI / instance Subnet State Stateful (reply traffic auto-allowed) Stateless (allow &#43; deny rules for each direction) Rules Allow only Allow and deny Evaluation All rules evaluated Rules in number order, lowest first Default Deny all inbound, allow all outbound Allow all in/out Use when Instance-level filtering Block a specific IP at subnet level Key consequences:
+<meta name="description" content="Network Security: Security Groups, NACLs (Network Access Control List) and VPC (Virtual Private Cloud) Endpoints# Two firewall layers and one private connectivity mechanism - and the exam will absolutely ask you to compare the first two.
+Security Group vs NACL - the mandatory table# Security Group NACL Attaches to ENI (Elastic Network Interface) / instance Subnet State Stateful (reply traffic auto-allowed) Stateless (allow &#43; deny rules for each direction) Rules Allow only Allow and deny Evaluation All rules evaluated Rules in number order, lowest first Default Deny all inbound, allow all outbound Allow all in/out Use when Instance-level filtering Block a specific IP at subnet level Key consequences:
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/network-security-sg-nacl-vpc-endpoints/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/secure-architectures/network-security-sg-nacl-vpc-endpoints/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="network-security-sg-nacl-vpc-endpoints">
-	<meta property="og:description" content="Network Security: Security Groups, NACLs and VPC Endpoints# Two firewall layers and one private connectivity mechanism - and the exam will absolutely ask you to compare the first two.
-Security Group vs NACL - the mandatory table# Security Group NACL Attaches to ENI / instance Subnet State Stateful (reply traffic auto-allowed) Stateless (allow &#43; deny rules for each direction) Rules Allow only Allow and deny Evaluation All rules evaluated Rules in number order, lowest first Default Deny all inbound, allow all outbound Allow all in/out Use when Instance-level filtering Block a specific IP at subnet level Key consequences:">
+	<meta property="og:description" content="Network Security: Security Groups, NACLs (Network Access Control List) and VPC (Virtual Private Cloud) Endpoints# Two firewall layers and one private connectivity mechanism - and the exam will absolutely ask you to compare the first two.
+Security Group vs NACL - the mandatory table# Security Group NACL Attaches to ENI (Elastic Network Interface) / instance Subnet State Stateful (reply traffic auto-allowed) Stateless (allow &#43; deny rules for each direction) Rules Allow only Allow and deny Evaluation All rules evaluated Rules in number order, lowest first Default Deny all inbound, allow all outbound Allow all in/out Use when Instance-level filtering Block a specific IP at subnet level Key consequences:">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="network-security-sg-nacl-vpc-endpoints">
-	<meta itemprop="description" content="Network Security: Security Groups, NACLs and VPC Endpoints# Two firewall layers and one private connectivity mechanism - and the exam will absolutely ask you to compare the first two.
-Security Group vs NACL - the mandatory table# Security Group NACL Attaches to ENI / instance Subnet State Stateful (reply traffic auto-allowed) Stateless (allow &#43; deny rules for each direction) Rules Allow only Allow and deny Evaluation All rules evaluated Rules in number order, lowest first Default Deny all inbound, allow all outbound Allow all in/out Use when Instance-level filtering Block a specific IP at subnet level Key consequences:">
-	<meta itemprop="wordCount" content="566">
+	<meta itemprop="description" content="Network Security: Security Groups, NACLs (Network Access Control List) and VPC (Virtual Private Cloud) Endpoints# Two firewall layers and one private connectivity mechanism - and the exam will absolutely ask you to compare the first two.
+Security Group vs NACL - the mandatory table# Security Group NACL Attaches to ENI (Elastic Network Interface) / instance Subnet State Stateful (reply traffic auto-allowed) Stateless (allow &#43; deny rules for each direction) Rules Allow only Allow and deny Evaluation All rules evaluated Rules in number order, lowest first Default Deny all inbound, allow all outbound Allow all in/out Use when Instance-level filtering Block a specific IP at subnet level Key consequences:">
+	<meta itemprop="wordCount" content="771">
 
 <title>network-security-sg-nacl-vpc-endpoints • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/network-security-sg-nacl-vpc-endpoints/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/secure-architectures/network-security-sg-nacl-vpc-endpoints/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ Security Group vs NACL - the mandatory table# Security Group NACL Attaches to EN
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ Security Group vs NACL - the mandatory table# Security Group NACL Attaches to EN
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ Security Group vs NACL - the mandatory table# Security Group NACL Attaches to EN
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ Security Group vs NACL - the mandatory table# Security Group NACL Attaches to EN
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ Security Group vs NACL - the mandatory table# Security Group NACL Attaches to EN
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3612,6 +3696,7 @@ Security Group vs NACL - the mandatory table# Security Group NACL Attaches to EN
   <ul>
     <li><a href="#security-group-vs-nacl---the-mandatory-table">Security Group vs NACL - the mandatory table</a></li>
     <li><a href="#vpc-endpoints---private-access-to-aws-services">VPC Endpoints - private access to AWS services</a></li>
+    <li><a href="#nat-gateway-high-availability--ipv6-egress-only-igw">NAT Gateway High Availability &amp; IPv6 Egress-Only IGW</a></li>
     <li><a href="#exam-check">Exam check</a></li>
     <li><a href="#ozet">Ozet</a></li>
   </ul>
@@ -3626,7 +3711,7 @@ Security Group vs NACL - the mandatory table# Security Group NACL Attaches to EN
 
       
       
-  <article class="markdown book-article"><h1 id="network-security-security-groups-nacls-and-vpc-endpoints">Network Security: Security Groups, NACLs and VPC Endpoints<a class="anchor" href="#network-security-security-groups-nacls-and-vpc-endpoints">#</a></h1>
+  <article class="markdown book-article"><h1 id="network-security-security-groups-nacls-network-access-control-list-and-vpc-virtual-private-cloud-endpoints">Network Security: Security Groups, NACLs (Network Access Control List) and VPC (Virtual Private Cloud) Endpoints<a class="anchor" href="#network-security-security-groups-nacls-network-access-control-list-and-vpc-virtual-private-cloud-endpoints">#</a></h1>
 <p>Two firewall layers and one private connectivity mechanism - and the exam will absolutely ask you to compare the first two.</p>
 <h2 id="security-group-vs-nacl---the-mandatory-table">Security Group vs NACL - the mandatory table<a class="anchor" href="#security-group-vs-nacl---the-mandatory-table">#</a></h2>
 <table>
@@ -3640,7 +3725,7 @@ Security Group vs NACL - the mandatory table# Security Group NACL Attaches to EN
 	<tbody>
 			<tr>
 					<td>Attaches to</td>
-					<td>ENI / instance</td>
+					<td>ENI (Elastic Network Interface) / instance</td>
 					<td><strong>Subnet</strong></td>
 			</tr>
 			<tr>
@@ -3680,7 +3765,7 @@ Security Group vs NACL - the mandatory table# Security Group NACL Attaches to EN
 <blockquote class='book-hint '>
 <p>Not: kural tek cumlede: &ldquo;tek IP engelle&rdquo; = NACL, &ldquo;sunucuya kural&rdquo; = Security Group. Stateful/stateless tablosu sinavda neredeyse her oturumda cikiyor.</p>
 </blockquote><h2 id="vpc-endpoints---private-access-to-aws-services">VPC Endpoints - private access to AWS services<a class="anchor" href="#vpc-endpoints---private-access-to-aws-services">#</a></h2>
-<p>By default, &ldquo;instance in a private subnet calls S3&rdquo; goes through a NAT Gateway (costs money per GB). A <strong>VPC endpoint</strong> keeps the traffic <strong>inside the AWS network</strong>:</p>
+<p>By default, &ldquo;instance in a private subnet calls S3 (Simple Storage Service)&rdquo; goes through a NAT Gateway (costs money per GB). A <strong>VPC endpoint</strong> keeps the traffic <strong>inside the AWS network</strong>:</p>
 <table>
 	<thead>
 			<tr>
@@ -3697,7 +3782,7 @@ Security Group vs NACL - the mandatory table# Security Group NACL Attaches to EN
 			</tr>
 			<tr>
 					<td><strong>Interface endpoint (PrivateLink)</strong></td>
-					<td>Almost everything else (SQS, KMS, API GW&hellip;)</td>
+					<td>Almost everything else (SQS (Simple Queue Service), KMS (Key Management Service), API GW&hellip;)</td>
 					<td>ENI with a private IP - <strong>hourly + per-GB cost</strong></td>
 			</tr>
 	</tbody>
@@ -3716,20 +3801,39 @@ Security Group vs NACL - the mandatory table# Security Group NACL Attaches to EN
     end
     rt --&gt;|gateway endpoint, free| s3[(S3)]
     ec2 --&gt;|interface endpoint| sqs[SQS]
-    ec2 -.-&gt;|old path: NAT, paid| nat[NAT Gateway]</pre><script src="/mermaid.min.js"></script><script>mermaid.initialize({"flowchart":{"useMaxWidth":true},"theme":"default"})</script><p><strong>PrivateLink</strong> is the underlying technology of interface endpoints, and it can also expose <strong>your own service</strong> as an endpoint service to other VPCs/accounts - &ldquo;share a service privately across accounts without peering&rdquo; → PrivateLink.</p>
+    ec2 -.-&gt;|old path: NAT, paid| nat[NAT Gateway]</pre><script src="/mermaid.min.js"></script><script>mermaid.initialize({"flowchart":{"useMaxWidth":true},"theme":"default"})</script><p><strong>PrivateLink</strong> is the underlying technology of interface endpoints, and it can also expose <strong>your own service</strong> (behind an NLB (Network Load Balancer)) as an endpoint service to other VPCs/accounts - &ldquo;share a service privately across accounts without peering or CIDR overlap concerns&rdquo; → PrivateLink.</p>
+<blockquote class='book-hint warning'>
+<p><strong>Sınav Tuzağı (Exam Trap) - Gateway Endpoint vs On-Premises:</strong>
+<strong>S3 ve DynamoDB Gateway Endpoint&rsquo;leri VPC dışından (Site-to-Site VPN, Direct Connect, VPC Peering veya Transit Gateway üzerinden) ERİŞİLEMEZ!</strong></p>
+<ul>
+<li>Sadece VPC içindeki EC2/Lambda S3&rsquo;e gidecekse → <strong>Gateway Endpoint (ücretsiz)</strong>.</li>
+<li>Şirket içi (on-premises) veri merkezinden Direct Connect / VPN üzerinden özel IP ile S3&rsquo;e erişilecekse → <strong>S3 Interface Endpoint (PrivateLink)</strong> seçilmelidir!</li>
+</ul></blockquote><h2 id="nat-gateway-high-availability--ipv6-egress-only-igw">NAT Gateway High Availability &amp; IPv6 Egress-Only IGW<a class="anchor" href="#nat-gateway-high-availability--ipv6-egress-only-igw">#</a></h2>
+<ul>
+<li><strong>NAT Gateway is zonal</strong>: a single NAT Gateway lives in <strong>one AZ (Availability Zone)</strong> (in a <strong>public</strong> subnet with an Elastic IP). For true <strong>Multi-AZ High Availability</strong>, deploy <strong>one NAT Gateway in each AZ</strong> and configure each AZ&rsquo;s private route table to use its local NAT Gateway (avoids single-AZ failure AND cross-AZ data transfer fees).</li>
+<li><strong>Egress-Only Internet Gateway (IPv6)</strong>: IPv6 addresses in AWS are globally unique public unicast addresses (there is no NAT for IPv6). To give private IPv6 instances outbound-only internet access while blocking inbound IPv6 connections, use a free <strong>Egress-Only Internet Gateway</strong> (and add a <code>::/0</code> route).</li>
+</ul>
 <h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: A security team must block traffic from a specific IP address to a subnet. Which mechanism?</strong></p>
-<p>A) Security group with a deny rule
-B) Network ACL with a deny rule
-C) VPC endpoint policy
-D) An IAM policy with an explicit deny</p>
+<ul>
+<li><strong>A)</strong> Security group with a deny rule</li>
+<li><strong>B)</strong> Network ACL with a deny rule</li>
+<li><strong>C)</strong> VPC endpoint policy</li>
+<li><strong>D)</strong> An IAM (Identity and Access Management) policy with an explicit deny</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Security groups have no deny rules; NACLs do.</p>
-<p><strong>Q2: An EC2 instance in a private subnet frequently downloads objects from S3. The team wants to eliminate NAT Gateway data processing charges and keep traffic off the public internet. What should be used?</strong></p>
-<p>A) A gateway VPC endpoint for S3
-B) An interface VPC endpoint for S3
-C) A public IP on the instance
-D) CloudFront</p>
+</div></details>
+<p><strong>Q2: An EC2 (Elastic Compute Cloud) instance in a private subnet frequently downloads objects from S3. The team wants to eliminate NAT Gateway data processing charges and keep traffic off the public internet. What should be used?</strong></p>
+<ul>
+<li><strong>A)</strong> A gateway VPC endpoint for S3</li>
+<li><strong>B)</strong> An interface VPC endpoint for S3</li>
+<li><strong>C)</strong> A public IP on the instance</li>
+<li><strong>D)</strong> CloudFront</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: A.</strong> S3 + cost reduction + private = <strong>gateway</strong> endpoint (free). Interface endpoints work but cost hourly.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>Security Group = instance seviyesinde, stateful, sadece allow</li>
@@ -3810,6 +3914,7 @@ D) CloudFront</p>
   <ul>
     <li><a href="#security-group-vs-nacl---the-mandatory-table">Security Group vs NACL - the mandatory table</a></li>
     <li><a href="#vpc-endpoints---private-access-to-aws-services">VPC Endpoints - private access to AWS services</a></li>
+    <li><a href="#nat-gateway-high-availability--ipv6-egress-only-igw">NAT Gateway High Availability &amp; IPv6 Egress-Only IGW</a></li>
     <li><a href="#exam-check">Exam check</a></li>
     <li><a href="#ozet">Ozet</a></li>
   </ul>

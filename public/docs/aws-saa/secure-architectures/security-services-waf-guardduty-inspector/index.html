@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,34 +8,34 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Security Services: WAF, Shield, GuardDuty, Inspector, Macie and friends# AWS has a swarm of security services with confusingly similar names. The exam doesn’t ask how they work internally - it gives you a one-line problem and expects you to name the right one. Learn the one keyword per service.
-The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP requests (SQLi, XSS, rate limiting) “web app attacks”, “Layer 7”, “bad bots” Shield Standard/Advanced DDoS protection “volumetric attack”, “availability during DDoS” GuardDuty Threat detection on accounts/workloads “compromised credentials”, “malicious IP”, “crypto mining” Inspector Vulnerability scanning (EC2, ECR, Lambda) “CVEs”, “software vulnerabilities”, “patch status” Macie Finds sensitive data (PII) in S3 “credit card numbers”, “PII discovery” Security Hub Aggregates findings across accounts “single dashboard”, “security standards” Detective Investigates findings, visualizes root cause “why did this happen”, “investigation” Network Firewall Managed firewall for VPC traffic “IPS/IDS for VPC”, “domain filtering” Firewall Manager Centrally manage WAF/SG/Network Firewall across accounts “apply one policy to all accounts” WAF details worth knowing# Attaches to CloudFront, ALB, API Gateway, AppSync (not NLB - WAF is Layer 7) Rules: allow / block / count, plus rate-based rules (“more than N requests per 5 min from one IP → block”) Managed rule groups cover OWASP Top 10 out of the box Shield: Standard vs Advanced# Standard - free, automatic for CloudFront, Route 53, ELB Advanced - paid (~$3,000/month &#43; usage), adds cost protection against usage spikes during an attack, 24/7 DDoS Response Team, and advanced diagnostics “Financial protection against DDoS-driven scaling bills” → Shield Advanced. That cost-protection angle is the favorite exam hint.
+<meta name="description" content="Security Services: WAF (Web Application Firewall), Shield, GuardDuty, Inspector, Macie and friends# AWS has a swarm of security services with confusingly similar names. The exam doesn’t ask how they work internally - it gives you a one-line problem and expects you to name the right one. Learn the one keyword per service.
+The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP requests (SQLi, XSS, rate limiting) “web app attacks”, “Layer 7”, “bad bots” Shield Standard/Advanced DDoS protection “volumetric attack”, “availability during DDoS” GuardDuty Threat detection on accounts/workloads “compromised credentials”, “malicious IP”, “crypto mining” Inspector Vulnerability scanning (EC2 (Elastic Compute Cloud), ECR (Elastic Container Registry), Lambda) “CVEs”, “software vulnerabilities”, “patch status” Macie Finds sensitive data (PII) in S3 (Simple Storage Service) “credit card numbers”, “PII discovery” Security Hub Aggregates findings across accounts “single dashboard”, “security standards” Detective Investigates findings, visualizes root cause “why did this happen”, “investigation” Network Firewall Managed firewall for VPC (Virtual Private Cloud) traffic “IPS/IDS for VPC”, “domain filtering” Firewall Manager Centrally manage WAF/SG (Security Group)/Network Firewall across accounts “apply one policy to all accounts” WAF details worth knowing# Attaches to CloudFront, ALB (Application Load Balancer), API Gateway, AppSync - not NLB (Network Load Balancer), WAF is Layer 7 Rules: allow / block / count, plus rate-based rules (“more than N requests per 5 min from one IP → block”) Managed rule groups cover OWASP Top 10 out of the box Shield: Standard vs Advanced# Standard - free, automatic for CloudFront, Route 53, ELB (Elastic Load Balancing) Advanced - paid (~$3,000/month &#43; usage), adds cost protection against usage spikes during an attack, 24/7 DDoS Response Team, and advanced diagnostics “Financial protection against DDoS-driven scaling bills” → Shield Advanced. That cost-protection angle is the favorite exam hint.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/security-services-waf-guardduty-inspector/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/secure-architectures/security-services-waf-guardduty-inspector/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="security-services-waf-guardduty-inspector">
-	<meta property="og:description" content="Security Services: WAF, Shield, GuardDuty, Inspector, Macie and friends# AWS has a swarm of security services with confusingly similar names. The exam doesn’t ask how they work internally - it gives you a one-line problem and expects you to name the right one. Learn the one keyword per service.
-The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP requests (SQLi, XSS, rate limiting) “web app attacks”, “Layer 7”, “bad bots” Shield Standard/Advanced DDoS protection “volumetric attack”, “availability during DDoS” GuardDuty Threat detection on accounts/workloads “compromised credentials”, “malicious IP”, “crypto mining” Inspector Vulnerability scanning (EC2, ECR, Lambda) “CVEs”, “software vulnerabilities”, “patch status” Macie Finds sensitive data (PII) in S3 “credit card numbers”, “PII discovery” Security Hub Aggregates findings across accounts “single dashboard”, “security standards” Detective Investigates findings, visualizes root cause “why did this happen”, “investigation” Network Firewall Managed firewall for VPC traffic “IPS/IDS for VPC”, “domain filtering” Firewall Manager Centrally manage WAF/SG/Network Firewall across accounts “apply one policy to all accounts” WAF details worth knowing# Attaches to CloudFront, ALB, API Gateway, AppSync (not NLB - WAF is Layer 7) Rules: allow / block / count, plus rate-based rules (“more than N requests per 5 min from one IP → block”) Managed rule groups cover OWASP Top 10 out of the box Shield: Standard vs Advanced# Standard - free, automatic for CloudFront, Route 53, ELB Advanced - paid (~$3,000/month &#43; usage), adds cost protection against usage spikes during an attack, 24/7 DDoS Response Team, and advanced diagnostics “Financial protection against DDoS-driven scaling bills” → Shield Advanced. That cost-protection angle is the favorite exam hint.">
+	<meta property="og:description" content="Security Services: WAF (Web Application Firewall), Shield, GuardDuty, Inspector, Macie and friends# AWS has a swarm of security services with confusingly similar names. The exam doesn’t ask how they work internally - it gives you a one-line problem and expects you to name the right one. Learn the one keyword per service.
+The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP requests (SQLi, XSS, rate limiting) “web app attacks”, “Layer 7”, “bad bots” Shield Standard/Advanced DDoS protection “volumetric attack”, “availability during DDoS” GuardDuty Threat detection on accounts/workloads “compromised credentials”, “malicious IP”, “crypto mining” Inspector Vulnerability scanning (EC2 (Elastic Compute Cloud), ECR (Elastic Container Registry), Lambda) “CVEs”, “software vulnerabilities”, “patch status” Macie Finds sensitive data (PII) in S3 (Simple Storage Service) “credit card numbers”, “PII discovery” Security Hub Aggregates findings across accounts “single dashboard”, “security standards” Detective Investigates findings, visualizes root cause “why did this happen”, “investigation” Network Firewall Managed firewall for VPC (Virtual Private Cloud) traffic “IPS/IDS for VPC”, “domain filtering” Firewall Manager Centrally manage WAF/SG (Security Group)/Network Firewall across accounts “apply one policy to all accounts” WAF details worth knowing# Attaches to CloudFront, ALB (Application Load Balancer), API Gateway, AppSync - not NLB (Network Load Balancer), WAF is Layer 7 Rules: allow / block / count, plus rate-based rules (“more than N requests per 5 min from one IP → block”) Managed rule groups cover OWASP Top 10 out of the box Shield: Standard vs Advanced# Standard - free, automatic for CloudFront, Route 53, ELB (Elastic Load Balancing) Advanced - paid (~$3,000/month &#43; usage), adds cost protection against usage spikes during an attack, 24/7 DDoS Response Team, and advanced diagnostics “Financial protection against DDoS-driven scaling bills” → Shield Advanced. That cost-protection angle is the favorite exam hint.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="security-services-waf-guardduty-inspector">
-	<meta itemprop="description" content="Security Services: WAF, Shield, GuardDuty, Inspector, Macie and friends# AWS has a swarm of security services with confusingly similar names. The exam doesn’t ask how they work internally - it gives you a one-line problem and expects you to name the right one. Learn the one keyword per service.
-The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP requests (SQLi, XSS, rate limiting) “web app attacks”, “Layer 7”, “bad bots” Shield Standard/Advanced DDoS protection “volumetric attack”, “availability during DDoS” GuardDuty Threat detection on accounts/workloads “compromised credentials”, “malicious IP”, “crypto mining” Inspector Vulnerability scanning (EC2, ECR, Lambda) “CVEs”, “software vulnerabilities”, “patch status” Macie Finds sensitive data (PII) in S3 “credit card numbers”, “PII discovery” Security Hub Aggregates findings across accounts “single dashboard”, “security standards” Detective Investigates findings, visualizes root cause “why did this happen”, “investigation” Network Firewall Managed firewall for VPC traffic “IPS/IDS for VPC”, “domain filtering” Firewall Manager Centrally manage WAF/SG/Network Firewall across accounts “apply one policy to all accounts” WAF details worth knowing# Attaches to CloudFront, ALB, API Gateway, AppSync (not NLB - WAF is Layer 7) Rules: allow / block / count, plus rate-based rules (“more than N requests per 5 min from one IP → block”) Managed rule groups cover OWASP Top 10 out of the box Shield: Standard vs Advanced# Standard - free, automatic for CloudFront, Route 53, ELB Advanced - paid (~$3,000/month &#43; usage), adds cost protection against usage spikes during an attack, 24/7 DDoS Response Team, and advanced diagnostics “Financial protection against DDoS-driven scaling bills” → Shield Advanced. That cost-protection angle is the favorite exam hint.">
-	<meta itemprop="wordCount" content="568">
+	<meta itemprop="description" content="Security Services: WAF (Web Application Firewall), Shield, GuardDuty, Inspector, Macie and friends# AWS has a swarm of security services with confusingly similar names. The exam doesn’t ask how they work internally - it gives you a one-line problem and expects you to name the right one. Learn the one keyword per service.
+The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP requests (SQLi, XSS, rate limiting) “web app attacks”, “Layer 7”, “bad bots” Shield Standard/Advanced DDoS protection “volumetric attack”, “availability during DDoS” GuardDuty Threat detection on accounts/workloads “compromised credentials”, “malicious IP”, “crypto mining” Inspector Vulnerability scanning (EC2 (Elastic Compute Cloud), ECR (Elastic Container Registry), Lambda) “CVEs”, “software vulnerabilities”, “patch status” Macie Finds sensitive data (PII) in S3 (Simple Storage Service) “credit card numbers”, “PII discovery” Security Hub Aggregates findings across accounts “single dashboard”, “security standards” Detective Investigates findings, visualizes root cause “why did this happen”, “investigation” Network Firewall Managed firewall for VPC (Virtual Private Cloud) traffic “IPS/IDS for VPC”, “domain filtering” Firewall Manager Centrally manage WAF/SG (Security Group)/Network Firewall across accounts “apply one policy to all accounts” WAF details worth knowing# Attaches to CloudFront, ALB (Application Load Balancer), API Gateway, AppSync - not NLB (Network Load Balancer), WAF is Layer 7 Rules: allow / block / count, plus rate-based rules (“more than N requests per 5 min from one IP → block”) Managed rule groups cover OWASP Top 10 out of the box Shield: Standard vs Advanced# Standard - free, automatic for CloudFront, Route 53, ELB (Elastic Load Balancing) Advanced - paid (~$3,000/month &#43; usage), adds cost protection against usage spikes during an attack, 24/7 DDoS Response Team, and advanced diagnostics “Financial protection against DDoS-driven scaling bills” → Shield Advanced. That cost-protection angle is the favorite exam hint.">
+	<meta itemprop="wordCount" content="602">
 
 <title>security-services-waf-guardduty-inspector • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/security-services-waf-guardduty-inspector/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/secure-architectures/security-services-waf-guardduty-inspector/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP reque
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP reque
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP reque
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP reque
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP reque
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3628,7 +3712,7 @@ The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP reque
 
       
       
-  <article class="markdown book-article"><h1 id="security-services-waf-shield-guardduty-inspector-macie-and-friends">Security Services: WAF, Shield, GuardDuty, Inspector, Macie and friends<a class="anchor" href="#security-services-waf-shield-guardduty-inspector-macie-and-friends">#</a></h1>
+  <article class="markdown book-article"><h1 id="security-services-waf-web-application-firewall-shield-guardduty-inspector-macie-and-friends">Security Services: WAF (Web Application Firewall), Shield, GuardDuty, Inspector, Macie and friends<a class="anchor" href="#security-services-waf-web-application-firewall-shield-guardduty-inspector-macie-and-friends">#</a></h1>
 <p>AWS has a swarm of security services with confusingly similar names. The exam doesn&rsquo;t ask how they work internally - it gives you a one-line problem and expects you to name the right one. Learn the <strong>one keyword per service</strong>.</p>
 <h2 id="the-keyword-map">The keyword map<a class="anchor" href="#the-keyword-map">#</a></h2>
 <table>
@@ -3657,12 +3741,12 @@ The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP reque
 			</tr>
 			<tr>
 					<td><strong>Inspector</strong></td>
-					<td><strong>Vulnerability scanning</strong> (EC2, ECR, Lambda)</td>
+					<td><strong>Vulnerability scanning</strong> (EC2 (Elastic Compute Cloud), ECR (Elastic Container Registry), Lambda)</td>
 					<td>&ldquo;CVEs&rdquo;, &ldquo;software vulnerabilities&rdquo;, &ldquo;patch status&rdquo;</td>
 			</tr>
 			<tr>
 					<td><strong>Macie</strong></td>
-					<td>Finds <strong>sensitive data (PII)</strong> in S3</td>
+					<td>Finds <strong>sensitive data (PII)</strong> in S3 (Simple Storage Service)</td>
 					<td>&ldquo;credit card numbers&rdquo;, &ldquo;PII discovery&rdquo;</td>
 			</tr>
 			<tr>
@@ -3677,25 +3761,25 @@ The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP reque
 			</tr>
 			<tr>
 					<td><strong>Network Firewall</strong></td>
-					<td>Managed firewall for VPC traffic</td>
+					<td>Managed firewall for VPC (Virtual Private Cloud) traffic</td>
 					<td>&ldquo;IPS/IDS for VPC&rdquo;, &ldquo;domain filtering&rdquo;</td>
 			</tr>
 			<tr>
 					<td><strong>Firewall Manager</strong></td>
-					<td>Centrally manage WAF/SG/Network Firewall across accounts</td>
+					<td>Centrally manage WAF/SG (Security Group)/Network Firewall across accounts</td>
 					<td>&ldquo;apply one policy to all accounts&rdquo;</td>
 			</tr>
 	</tbody>
 </table>
 <h2 id="waf-details-worth-knowing">WAF details worth knowing<a class="anchor" href="#waf-details-worth-knowing">#</a></h2>
 <ul>
-<li>Attaches to <strong>CloudFront, ALB, API Gateway, AppSync</strong> (not NLB - WAF is Layer 7)</li>
+<li>Attaches to <strong>CloudFront, ALB (Application Load Balancer), API Gateway, AppSync</strong> - not NLB (Network Load Balancer), WAF is Layer 7</li>
 <li>Rules: allow / block / count, plus <strong>rate-based rules</strong> (&ldquo;more than N requests per 5 min from one IP → block&rdquo;)</li>
 <li>Managed rule groups cover OWASP Top 10 out of the box</li>
 </ul>
 <h2 id="shield-standard-vs-advanced">Shield: Standard vs Advanced<a class="anchor" href="#shield-standard-vs-advanced">#</a></h2>
 <ul>
-<li><strong>Standard</strong> - free, automatic for CloudFront, Route 53, ELB</li>
+<li><strong>Standard</strong> - free, automatic for CloudFront, Route 53, ELB (Elastic Load Balancing)</li>
 <li><strong>Advanced</strong> - paid (~$3,000/month + usage), adds <strong>cost protection</strong> against usage spikes during an attack, 24/7 <strong>DDoS Response Team</strong>, and advanced diagnostics</li>
 </ul>
 <p>&ldquo;Financial protection against DDoS-driven scaling bills&rdquo; → Shield Advanced. That cost-protection angle is the favorite exam hint.</p>
@@ -3706,30 +3790,42 @@ The keyword map# Service What it does Scenario keyword WAF Blocks bad HTTP reque
     s3s[S3 buckets] --&gt; macie[Macie: is sensitive data exposed?]
     gd &amp; insp &amp; macie --&gt; hub[Security Hub: one dashboard]</pre><script src="/mermaid.min.js"></script><script>mermaid.initialize({"flowchart":{"useMaxWidth":true},"theme":"default"})</script><ul>
 <li>GuardDuty <strong>needs no agents</strong> - it analyzes logs with ML</li>
-<li>Inspector agent is now built into the SSM agent; scans for CVEs and unintended network exposure</li>
+<li>Inspector agent is now built into the SSM (Systems Manager) agent; scans for CVEs and unintended network exposure</li>
 <li>Macie discovers PII and can trigger findings automatically</li>
 </ul>
 <blockquote class='book-hint '>
 <p>Not: sinavda en yaygin uc eslesme: &ldquo;web saldirisi&rdquo; → WAF, &ldquo;DDoS&rdquo; → Shield, &ldquo;hesap ele gecirilmis/supheli aktivite&rdquo; → GuardDuty. &ldquo;Zafiyet taramasi&rdquo; → Inspector, &ldquo;S3&rsquo;te PII&rdquo; → Macie.</p>
 </blockquote><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: A company notices its public web application is being targeted by SQL injection attempts. Which service should it deploy?</strong></p>
-<p>A) GuardDuty
-B) AWS WAF
-C) Amazon Inspector
-D) AWS Shield Standard</p>
+<ul>
+<li><strong>A)</strong> GuardDuty</li>
+<li><strong>B)</strong> AWS WAF</li>
+<li><strong>C)</strong> Amazon Inspector</li>
+<li><strong>D)</strong> AWS Shield Standard</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> SQL injection is a Layer 7 attack = WAF rules.</p>
+</div></details>
 <p><strong>Q2: The security team wants to discover which S3 buckets contain unencrypted credit card numbers. Which service?</strong></p>
-<p>A) Amazon Macie
-B) Amazon GuardDuty
-C) AWS Config
-D) Amazon Inspector</p>
+<ul>
+<li><strong>A)</strong> Amazon Macie</li>
+<li><strong>B)</strong> Amazon GuardDuty</li>
+<li><strong>C)</strong> AWS Config</li>
+<li><strong>D)</strong> Amazon Inspector</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: A.</strong> Sensitive data discovery in S3 = Macie.</p>
+</div></details>
 <p><strong>Q3: A company wants protection against DDoS attacks including reimbursement for scaling costs caused by the attack. Which offering?</strong></p>
-<p>A) Shield Standard
-B) Shield Advanced
-C) WAF rate-based rules
-D) Network Firewall</p>
+<ul>
+<li><strong>A)</strong> Shield Standard</li>
+<li><strong>B)</strong> Shield Advanced</li>
+<li><strong>C)</strong> WAF rate-based rules</li>
+<li><strong>D)</strong> Network Firewall</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Cost protection + DDoS Response Team = Shield Advanced.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>WAF = web uygulamasina yonelik HTTP saldirilari (SQLi, XSS, bot, rate limit)</li>
@@ -3769,8 +3865,8 @@ D) Network Firewall</p>
     </span>
     <span>
     
-      <a href="/docs/aws-saa/resilient-architectures/" class="flex align-center">
-        <span>resilient-architectures</span>
+      <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="flex align-center">
+        <span>governance-monitoring-organizations-config-ssm</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -10,16 +10,16 @@ https://github.com/alex-shpak/hugo-book
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Event-Driven Architecture: EventBridge and Step Functions# Queues move messages; events announce that something happened. The exam tests whether you can pick between “process this work item” (SQS), “notify everyone” (SNS), “route this event” (EventBridge) and “orchestrate this workflow” (Step Functions).
 Amazon EventBridge# The evolution of CloudWatch Events: a serverless event bus with rules.
-Default bus - AWS service events (EC2 state changes, S3 events via CloudTrail…) Custom bus - your application’s events; can be shared cross-account Partner sources - SaaS events (Zendesk, Datadog, Shopify…) land directly in your bus Rules match event patterns and route to targets (Lambda, SQS, SNS, Step Functions…) Content filtering: event patterns filter on fields before delivery (unlike SNS which delivers everything) Archive and replay - store events and replay them later (“we lost 2 hours of processing”) Schema registry - discover and generate code for event shapes EventBridge vs SNS vs SQS# Need Answer Durable work queue, backpressure SQS One message → many push subscribers SNS Filter and route events by content, multiple sources, replay EventBridge Fan-out with durability SNS → SQS (or EventBridge → SQS) “Event pattern filtering” and “replay archived events” are the two keywords that make EventBridge the answer.
+Default bus - AWS service events (EC2 (Elastic Compute Cloud) state changes, S3 (Simple Storage Service) events via CloudTrail…) Custom bus - your application’s events; can be shared cross-account Partner sources - SaaS events (Zendesk, Datadog, Shopify…) land directly in your bus Rules match event patterns and route to targets (Lambda, SQS, SNS, Step Functions…) Content filtering: event patterns filter on fields before delivery (unlike SNS which delivers everything) Archive and replay - store events and replay them later (“we lost 2 hours of processing”) Schema registry - discover and generate code for event shapes EventBridge vs SNS vs SQS# Need Answer Durable work queue, backpressure SQS One message → many push subscribers SNS Filter and route events by content, multiple sources, replay EventBridge Fan-out with durability SNS → SQS (or EventBridge → SQS) “Event pattern filtering” and “replay archived events” are the two keywords that make EventBridge the answer.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/event-driven-eventbridge-step-functions/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/resilient-architectures/event-driven-eventbridge-step-functions/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="event-driven-eventbridge-step-functions">
 	<meta property="og:description" content="Event-Driven Architecture: EventBridge and Step Functions# Queues move messages; events announce that something happened. The exam tests whether you can pick between “process this work item” (SQS), “notify everyone” (SNS), “route this event” (EventBridge) and “orchestrate this workflow” (Step Functions).
 Amazon EventBridge# The evolution of CloudWatch Events: a serverless event bus with rules.
-Default bus - AWS service events (EC2 state changes, S3 events via CloudTrail…) Custom bus - your application’s events; can be shared cross-account Partner sources - SaaS events (Zendesk, Datadog, Shopify…) land directly in your bus Rules match event patterns and route to targets (Lambda, SQS, SNS, Step Functions…) Content filtering: event patterns filter on fields before delivery (unlike SNS which delivers everything) Archive and replay - store events and replay them later (“we lost 2 hours of processing”) Schema registry - discover and generate code for event shapes EventBridge vs SNS vs SQS# Need Answer Durable work queue, backpressure SQS One message → many push subscribers SNS Filter and route events by content, multiple sources, replay EventBridge Fan-out with durability SNS → SQS (or EventBridge → SQS) “Event pattern filtering” and “replay archived events” are the two keywords that make EventBridge the answer.">
+Default bus - AWS service events (EC2 (Elastic Compute Cloud) state changes, S3 (Simple Storage Service) events via CloudTrail…) Custom bus - your application’s events; can be shared cross-account Partner sources - SaaS events (Zendesk, Datadog, Shopify…) land directly in your bus Rules match event patterns and route to targets (Lambda, SQS, SNS, Step Functions…) Content filtering: event patterns filter on fields before delivery (unlike SNS which delivers everything) Archive and replay - store events and replay them later (“we lost 2 hours of processing”) Schema registry - discover and generate code for event shapes EventBridge vs SNS vs SQS# Need Answer Durable work queue, backpressure SQS One message → many push subscribers SNS Filter and route events by content, multiple sources, replay EventBridge Fan-out with durability SNS → SQS (or EventBridge → SQS) “Event pattern filtering” and “replay archived events” are the two keywords that make EventBridge the answer.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
@@ -28,17 +28,17 @@ Default bus - AWS service events (EC2 state changes, S3 events via CloudTrail…
 	<meta itemprop="name" content="event-driven-eventbridge-step-functions">
 	<meta itemprop="description" content="Event-Driven Architecture: EventBridge and Step Functions# Queues move messages; events announce that something happened. The exam tests whether you can pick between “process this work item” (SQS), “notify everyone” (SNS), “route this event” (EventBridge) and “orchestrate this workflow” (Step Functions).
 Amazon EventBridge# The evolution of CloudWatch Events: a serverless event bus with rules.
-Default bus - AWS service events (EC2 state changes, S3 events via CloudTrail…) Custom bus - your application’s events; can be shared cross-account Partner sources - SaaS events (Zendesk, Datadog, Shopify…) land directly in your bus Rules match event patterns and route to targets (Lambda, SQS, SNS, Step Functions…) Content filtering: event patterns filter on fields before delivery (unlike SNS which delivers everything) Archive and replay - store events and replay them later (“we lost 2 hours of processing”) Schema registry - discover and generate code for event shapes EventBridge vs SNS vs SQS# Need Answer Durable work queue, backpressure SQS One message → many push subscribers SNS Filter and route events by content, multiple sources, replay EventBridge Fan-out with durability SNS → SQS (or EventBridge → SQS) “Event pattern filtering” and “replay archived events” are the two keywords that make EventBridge the answer.">
-	<meta itemprop="wordCount" content="553">
+Default bus - AWS service events (EC2 (Elastic Compute Cloud) state changes, S3 (Simple Storage Service) events via CloudTrail…) Custom bus - your application’s events; can be shared cross-account Partner sources - SaaS events (Zendesk, Datadog, Shopify…) land directly in your bus Rules match event patterns and route to targets (Lambda, SQS, SNS, Step Functions…) Content filtering: event patterns filter on fields before delivery (unlike SNS which delivers everything) Archive and replay - store events and replay them later (“we lost 2 hours of processing”) Schema registry - discover and generate code for event shapes EventBridge vs SNS vs SQS# Need Answer Durable work queue, backpressure SQS One message → many push subscribers SNS Filter and route events by content, multiple sources, replay EventBridge Fan-out with durability SNS → SQS (or EventBridge → SQS) “Event pattern filtering” and “replay archived events” are the two keywords that make EventBridge the answer.">
+	<meta itemprop="wordCount" content="566">
 
 <title>event-driven-eventbridge-step-functions • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/event-driven-eventbridge-step-functions/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/resilient-architectures/event-driven-eventbridge-step-functions/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3217,6 +3217,20 @@ Default bus - AWS service events (EC2 state changes, S3 events via CloudTrail…
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3317,6 +3331,20 @@ Default bus - AWS service events (EC2 state changes, S3 events via CloudTrail…
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3396,6 +3424,20 @@ Default bus - AWS service events (EC2 state changes, S3 events via CloudTrail…
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3440,6 +3482,20 @@ Default bus - AWS service events (EC2 state changes, S3 events via CloudTrail…
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3550,8 +3606,36 @@ Default bus - AWS service events (EC2 state changes, S3 events via CloudTrail…
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3639,7 +3723,7 @@ Default bus - AWS service events (EC2 state changes, S3 events via CloudTrail…
 <h2 id="amazon-eventbridge">Amazon EventBridge<a class="anchor" href="#amazon-eventbridge">#</a></h2>
 <p>The evolution of CloudWatch Events: a serverless <strong>event bus</strong> with rules.</p>
 <ul>
-<li><strong>Default bus</strong> - AWS service events (EC2 state changes, S3 events via CloudTrail&hellip;)</li>
+<li><strong>Default bus</strong> - AWS service events (EC2 (Elastic Compute Cloud) state changes, S3 (Simple Storage Service) events via CloudTrail&hellip;)</li>
 <li><strong>Custom bus</strong> - your application&rsquo;s events; can be shared cross-account</li>
 <li><strong>Partner sources</strong> - SaaS events (Zendesk, Datadog, Shopify&hellip;) land directly in your bus</li>
 <li><strong>Rules</strong> match event patterns and route to targets (Lambda, SQS, SNS, Step Functions&hellip;)</li>
@@ -3678,7 +3762,7 @@ Default bus - AWS service events (EC2 state changes, S3 events via CloudTrail…
 <h2 id="aws-step-functions">AWS Step Functions<a class="anchor" href="#aws-step-functions">#</a></h2>
 <p>Serverless <strong>workflow orchestration</strong> - each step is a state, defined in JSON (Amazon States Language).</p>
 <ul>
-<li>Integrates natively with Lambda, ECS, SQS, DynamoDB, and 200+ services</li>
+<li>Integrates natively with Lambda, ECS (Elastic Container Service), SQS, DynamoDB, and 200+ services</li>
 <li>Built-in <strong>retries, error handling, timeouts, wait states, parallel branches</strong></li>
 <li><strong>Standard workflows</strong> - long-running (up to 1 year), exactly-once execution, visual console</li>
 <li><strong>Express workflows</strong> - high-volume (millions), up to 5 minutes, at-least-once, cheaper</li>
@@ -3697,17 +3781,25 @@ Default bus - AWS service events (EC2 state changes, S3 events via CloudTrail…
 <p>Often paired in event-driven questions: managed front door for HTTP APIs with throttling, API keys, usage plans, and direct AWS service integrations. Hands-on: <a href="../../../aws/lambda/lambda-api-gateway/">lambda-api-gateway</a>.</p>
 <h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: SaaS events from three vendors must be filtered by event type and routed to different Lambda functions, with the ability to replay yesterday&rsquo;s events after a bug fix. Which service?</strong></p>
-<p>A) SNS with subscriptions
-B) EventBridge with rules and an archive
-C) SQS standard queue
-D) CloudWatch Logs</p>
+<ul>
+<li><strong>A)</strong> SNS with subscriptions</li>
+<li><strong>B)</strong> EventBridge with rules and an archive</li>
+<li><strong>C)</strong> SQS standard queue</li>
+<li><strong>D)</strong> CloudWatch Logs</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Content filtering + SaaS partner sources + replay = EventBridge.</p>
+</div></details>
 <p><strong>Q2: A loan approval process runs several Lambda functions, waits for a human decision, and must retry failed steps automatically. Which service coordinates it?</strong></p>
-<p>A) SQS
-B) Amazon EventBridge
-C) AWS Step Functions
-D) AWS Batch</p>
+<ul>
+<li><strong>A)</strong> SQS</li>
+<li><strong>B)</strong> Amazon EventBridge</li>
+<li><strong>C)</strong> AWS Step Functions</li>
+<li><strong>D)</strong> AWS Batch</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: C.</strong> Multi-step orchestration with retries and wait states = Step Functions.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>EventBridge = olay otobusu; kaynak, filtre, hedef, arsiv + replay</li>
@@ -3745,8 +3837,8 @@ D) AWS Batch</p>
     </span>
     <span>
     
-      <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="flex align-center">
-        <span>rds-and-aurora-failover</span>
+      <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="flex align-center">
+        <span>streaming-kinesis-data-streams-firehose</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     

@@ -42,9 +42,22 @@ flowchart LR
     edge -->|AWS backbone| s3[(S3 us-east-1)]
 ```
 
-Hands-on: [aws-s3-objects](../../../aws/s3/aws-s3-objects/), [aws-s3-bucket](../../../aws/s3/aws-s3-bucket/).
+Hands-on: [aws-s3-objects](../../../AWS/s3/aws-s3-objects/), [aws-s3-bucket](../../../AWS/s3/aws-s3-bucket/).
 
-> Not: sinavda S3 performans sorusu iki kaliba iner: "buyuk dosya yukleme yavas" = multipart + Transfer Acceleration, "cok fazla istek yavas" = prefix'leri dagit / request rate. Depolama class'i sorulari ise aslinda cost sorusudur.
+## S3 Replication (CRR & SRR) and Event Notifications
+
+### Cross-Region (CRR) & Same-Region Replication (SRR) rules the exam tests:
+1. **S3 Versioning MUST be enabled** on **both** the source and destination buckets.
+2. **Existing objects are NOT replicated automatically!** CRR/SRR only replicates *new* objects uploaded after the rule is enabled. To replicate objects that already existed, run an **S3 Batch Replication** job.
+3. **Delete markers are NOT replicated by default** (can be enabled optionally); permanent deletions (deleting a specific `versionId`) are **never** replicated (protects against malicious deletion).
+4. **S3 Replication Time Control (S3 RTC)**: guarantees **99.99% of new objects replicate within 15 minutes** (backed by an SLA) — pick this when a compliance question specifies a strict 15-minute replication SLA.
+
+### S3 Event Notifications vs Amazon EventBridge:
+- **Standard S3 Event Notifications**: send events (`s3:ObjectCreated:*`) directly to **SNS (Simple Notification Service), SQS (Simple Queue Service), or Lambda** (filters only on prefix/suffix; delivery takes seconds to minutes).
+- **S3 + Amazon EventBridge**: enable EventBridge on the bucket when you need **advanced JSON filtering** (object size, metadata, tag), **routing to 18+ AWS services** (Step Functions, Kinesis, ECS...), or **event archiving and replay**.
+
+> [!WARNING]
+> **Sınav Tuzağı (Exam Trap):** "CRR açtık ama eski dosyalar karşı bölgede görünmüyor" sorusunun cevabı **S3 Batch Replication**'dır. Ayrıca S3 performans soruları iki kalıba iner: "büyük dosya yükleme yavaş" = **Multipart Upload + S3 Transfer Acceleration**, "yüksek istek hızı (`503 Slow Down`)" = **prefix'leri dağıt**.
 
 ## Exam check
 

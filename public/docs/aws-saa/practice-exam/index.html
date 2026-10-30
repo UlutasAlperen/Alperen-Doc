@@ -1,0 +1,4192 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AWS SAA-C03 Practice Exam: 20 Realistic Scenario Questions# How to use this page: Every question below is written in the real SAA-C03 style — multiple plausible options where a single requirement keyword (“least operational overhead”, “most cost-effective”, “without traversing the public internet”, “RPO under 1 second”) decides the winner. Includes Multiple Response (Choose TWO) questions.
+Question 1 (Domain 1 - Security &amp; Networking)# A company has established an AWS Direct Connect connection between its on-premises data center and a VPC (Virtual Private Cloud). Applications running on-premises must upload sensitive files to an Amazon S3 (Simple Storage Service) bucket privately without traffic traversing the public internet, and without deploying proxy servers on EC2 (Elastic Compute Cloud). What should the solutions architect configure?
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/practice-exam/">
+	<meta property="og:site_name" content="Alperen Doc">
+	<meta property="og:title" content="practice-exam">
+	<meta property="og:description" content="AWS SAA-C03 Practice Exam: 20 Realistic Scenario Questions# How to use this page: Every question below is written in the real SAA-C03 style — multiple plausible options where a single requirement keyword (“least operational overhead”, “most cost-effective”, “without traversing the public internet”, “RPO under 1 second”) decides the winner. Includes Multiple Response (Choose TWO) questions.
+Question 1 (Domain 1 - Security &amp; Networking)# A company has established an AWS Direct Connect connection between its on-premises data center and a VPC (Virtual Private Cloud). Applications running on-premises must upload sensitive files to an Amazon S3 (Simple Storage Service) bucket privately without traffic traversing the public internet, and without deploying proxy servers on EC2 (Elastic Compute Cloud). What should the solutions architect configure?">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="docs">
+
+
+	<meta itemprop="name" content="practice-exam">
+	<meta itemprop="description" content="AWS SAA-C03 Practice Exam: 20 Realistic Scenario Questions# How to use this page: Every question below is written in the real SAA-C03 style — multiple plausible options where a single requirement keyword (“least operational overhead”, “most cost-effective”, “without traversing the public internet”, “RPO under 1 second”) decides the winner. Includes Multiple Response (Choose TWO) questions.
+Question 1 (Domain 1 - Security &amp; Networking)# A company has established an AWS Direct Connect connection between its on-premises data center and a VPC (Virtual Private Cloud). Applications running on-premises must upload sensitive files to an Amazon S3 (Simple Storage Service) bucket privately without traffic traversing the public internet, and without deploying proxy servers on EC2 (Elastic Compute Cloud). What should the solutions architect configure?">
+	<meta itemprop="wordCount" content="3922">
+
+<title>practice-exam • Alperen Doc</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/practice-exam/">
+<link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
+
+
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Alperen Doc</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="toggle"  />
+    <label for="section-c98b7b0912d2ce16bf2d0c1b2a0ef53e" class="flex">
+      <a href="/docs/version_control_systems/" class="">
+        Version Control Systems</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_conf/" class="">
+      basic-git-conf</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/basic_git_knowledge/" class="">
+      basic-git-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/github_workflow/" class="">
+      github-workflow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_integration/" class="">
+      continuous-integration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/continuous_deployment/" class="">
+      continuous-deployment</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-status/" class="">
+      git-status</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-add/" class="">
+      git-add</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-commit/" class="">
+      git-commit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-push/" class="">
+      git-push</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-branch/" class="">
+      git-branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-pull/" class="">
+      git-pull</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-log/" class="">
+      git-log</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-merge/" class="">
+      git-merge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-rebase/" class="">
+      git-rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-reset/" class="">
+      git-reset</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-remote/" class="">
+      git-remote</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-fetch/" class="">
+      git-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-switch/" class="">
+      git-switch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/git-config/" class="">
+      git-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/gitignore/" class="">
+      gitignore</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/version_control_systems/plumbing/" class="">
+      plumbing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4ebc7360f9ae508312064855054fc795" class="toggle"  />
+    <label for="section-4ebc7360f9ae508312064855054fc795" class="flex">
+      <a href="/docs/linux/" class="">
+        Linux</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/linux-user-management/" class="">
+      linux-user-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/group-management/" class="">
+      group-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/file-permissions/" class="">
+      file-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/system-information/" class="">
+      system-information</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/sudo/" class="">
+      sudo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/ssh/" class="">
+      ssh</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/systemd/" class="">
+      systemd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/process-management/" class="">
+      process-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/process-internals/" class="">
+      process-internals</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/cron-timers/" class="">
+      cron-timers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/networking-basics/" class="">
+      networking-basics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/dns/" class="">
+      dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/firewall/" class="">
+      firewall</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/network-troubleshooting/" class="">
+      network-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/filesystem-hierarchy/" class="">
+      filesystem-hierarchy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-management/" class="">
+      disk-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/lvm/" class="">
+      lvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/disk-troubleshooting/" class="">
+      disk-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/log-management/" class="">
+      log-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/selinux-apparmor/" class="">
+      selinux-apparmor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/security-hardening/" class="">
+      security-hardening</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/package-management/" class="">
+      package-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/performance-triage/" class="">
+      performance-triage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/linux/boot-process/" class="">
+      boot-process</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3a7697c6cadb073648fe385c24b99067" class="toggle"  />
+    <label for="section-3a7697c6cadb073648fe385c24b99067" class="flex">
+      <a href="/docs/docker/" class="">
+        Docker</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-debian/" class="">
+      docker-kurulum-hardening-debian</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/manage-docker-as-non-root-user/" class="">
+      manage-docker-as-non-root-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-containers-images/" class="">
+      docker-containers-images</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-volumes/" class="">
+      docker-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-build/" class="">
+      docker-build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/optimize-container-images-with-multi-stage-builds/" class="">
+      optimize-container-images-with-multi-stage-builds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-network/" class="">
+      docker-network</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-exec-shell/" class="">
+      docker-exec-shell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-logs/" class="">
+      docker-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-compose-basic/" class="">
+      docker-compose-basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/var-olan-volume-uzerine-docker-compose/" class="">
+      var-olan-volume-uzerine-docker-compose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-publish/" class="">
+      docker-publish</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-kurulum-hardening-rocky/" class="">
+      docker-kurulum-hardening-rocky</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/docker-distroless-container-images/" class="">
+      docker-distroless-container-images</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4983424dd98aa6981e3f0b69c8851617" class="toggle"  />
+    <label for="section-4983424dd98aa6981e3f0b69c8851617" class="flex">
+      <a href="/docs/kubernetes/" class="">
+        Kubernetes</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-minikube/" class="">
+      kubernetes-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-pods-minikube/" class="">
+      kubernetes-pods-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployments-minikube/" class="">
+      kubernetes-deployments-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-probes/" class="">
+      kubernetes-probes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-deployment-rollouts/" class="">
+      kubernetes-deployment-rollouts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-yaml-configurations/" class="">
+      kubernetes-yaml-configurations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-secrets/" class="">
+      kubernetes-secrets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-rbac/" class="">
+      kubernetes-rbac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-jobs-cronjobs/" class="">
+      kubernetes-jobs-cronjobs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-services/" class="">
+      kubernetes-services</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-ingress/" class="">
+      kubernetes-ingress</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-gateway-minikube/" class="">
+      kubernetes-gateway-minikube</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-namespaces/" class="">
+      kubernetes-namespaces</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-dns-coredns/" class="">
+      kubernetes-dns-coredns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-vertical/" class="">
+      kubernetes-scaling-vertical</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-scaling-horizontal/" class="">
+      kubernetes-scaling-horizontal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage/" class="">
+      kubernetes-storage</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-persistent-volumes/" class="">
+      kubernetes-persistent-volumes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-storage-classes/" class="">
+      kubernetes-storage-classes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-statefulsets/" class="">
+      kubernetes-statefulsets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes/kubernetes-nodes-basic/" class="">
+      kubernetes-nodes-basic</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d252687da0288af6a6a9360cd1123738" class="toggle"  />
+    <label for="section-d252687da0288af6a6a9360cd1123738" class="flex">
+      <a href="/docs/kubernetes_v2/" class="">
+        Kubernetes v2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/helm/" class="">
+      helm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kustomize/" class="">
+      kustomize</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cluster-extensions/" class="">
+      cluster-extensions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/network-policy/" class="">
+      network-policy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/security-context/" class="">
+      security-context</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubernetes-troubleshooting/" class="">
+      kubernetes-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/control-plane-troubleshooting/" class="">
+      control-plane-troubleshooting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/gitops-argocd/" class="">
+      gitops-argocd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/vpa-cluster-autoscaler/" class="">
+      vpa-cluster-autoscaler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/taints-affinity-quotas/" class="">
+      taints-affinity-quotas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/pod-priority-disruption/" class="">
+      pod-priority-disruption</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/multi-node-kubeadm/" class="">
+      multi-node-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/kubeadm-upgrade-etcd/" class="">
+      kubeadm-upgrade-etcd</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/ha-control-plane/" class="">
+      ha-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/devops-control-plane/" class="">
+      devops-control-plane</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager/" class="">
+      cert-manager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/cert-manager-production/" class="">
+      cert-manager-production</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/prometheus-stack/" class="">
+      prometheus-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/victoriametrics/" class="">
+      victoriametrics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/longhorn/" class="">
+      longhorn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-statefulset-replication/" class="">
+      postgresql-statefulset-replication</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/kubernetes_v2/postgresql-longhorn-read-replicas/" class="">
+      postgresql-longhorn-read-replicas</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-390924aad12540f8027ddb300c8575d3" class="toggle"  />
+    <label for="section-390924aad12540f8027ddb300c8575d3" class="flex">
+      <a href="/docs/aws/" class="">
+        AWS</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7ac94fcac7ebb60d389835a7fcb83889" class="toggle"  />
+    <label for="section-7ac94fcac7ebb60d389835a7fcb83889" class="flex">
+      <a href="/docs/aws/networking/" class="">
+        networking</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/regions-and-availability-zones/" class="">
+      regions-and-availability-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/virtual-private-cloud-vpc/" class="">
+      virtual-private-cloud-vpc</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/aws-subnetting/" class="">
+      aws-subnetting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/internet-gateways-igw/" class="">
+      internet-gateways-igw</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/route-tables/" class="">
+      route-tables</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/private-subnets/" class="">
+      private-subnets</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/networking/connecting-to-the-aws-cloud/" class="">
+      connecting-to-the-aws-cloud</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="toggle"  />
+    <label for="section-6a36aff9d4c25c2cc9b7d03fca17883e" class="flex">
+      <a href="/docs/aws/ec2/" class="">
+        ec2</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instance-configuration-keys/" class="">
+      ec2-instance-configuration-keys</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ec2-instances/" class="">
+      ec2-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/elastic-ips/" class="">
+      elastic-ips</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-security-groups/" class="">
+      aws-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/ssh-to-aws-server/" class="">
+      ssh-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/deploy-site-to-aws-server/" class="">
+      deploy-site-to-aws-server</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/open-web-traffic/" class="">
+      open-web-traffic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/creating-and-using-your-own-ami/" class="">
+      creating-and-using-your-own-ami</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/aws-launch-template/" class="">
+      aws-launch-template</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ec2/launch-from-template-aws/" class="">
+      launch-from-template-aws</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b73d690c546b071419fd1f673553fed1" class="toggle"  />
+    <label for="section-b73d690c546b071419fd1f673553fed1" class="flex">
+      <a href="/docs/aws/rds/" class="">
+        rds</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/relational-database-service/" class="">
+      relational-database-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-a-postgresql-database-in-aws/" class="">
+      create-a-postgresql-database-in-aws</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-to-your-database/" class="">
+      aws-connect-to-your-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/aws-connect-app-to-database/" class="">
+      aws-connect-app-to-database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-backups/" class="">
+      rds-backups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/create-read-replicas-for-scalability/" class="">
+      create-read-replicas-for-scalability</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/rds/rds-general-knowledge/" class="">
+      rds-general-knowledge</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-df37bf19bddd1b463e10899723e49972" class="toggle"  />
+    <label for="section-df37bf19bddd1b463e10899723e49972" class="flex">
+      <a href="/docs/aws/iam/" class="">
+        iam</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user-and-group/" class="">
+      create-iam-user-and-group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/identity-and-access-management/" class="">
+      identity-and-access-management</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/create-iam-user/" class="">
+      create-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/inline-policies-iam-user/" class="">
+      inline-policies-iam-user</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-groups/" class="">
+      iam-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/iam-roles/" class="">
+      iam-roles</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-iam-deny-policies/" class="">
+      aws-iam-deny-policies</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/aws-ssm-parameter-store/" class="">
+      aws-ssm-parameter-store</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/accessing-ssm-parameters-from-ec2/" class="">
+      accessing-ssm-parameters-from-ec2</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/iam/use-ssm-from-ec2/" class="">
+      use-ssm-from-ec2</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aee932daafc4b41b13adc2e2442618ba" class="toggle"  />
+    <label for="section-aee932daafc4b41b13adc2e2442618ba" class="flex">
+      <a href="/docs/aws/monitoring/" class="">
+        monitoring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-external-monitoring/" class="">
+      aws-external-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/aws-internal-monitoring/" class="">
+      aws-internal-monitoring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloud-watch-alarms/" class="">
+      cloud-watch-alarms</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/monitoring/cloudtrail/" class="">
+      cloudtrail</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f38d96bcff4e2965101ac96ca363fcf" class="toggle"  />
+    <label for="section-2f38d96bcff4e2965101ac96ca363fcf" class="flex">
+      <a href="/docs/aws/s3/" class="">
+        s3</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3/" class="">
+      aws-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-bucket/" class="">
+      aws-s3-bucket</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/s3/aws-s3-objects/" class="">
+      aws-s3-objects</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="toggle"  />
+    <label for="section-8c887fe27d64d1b20cc8ae2ca943bf90" class="flex">
+      <a href="/docs/aws/dns/" class="">
+        dns</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/route-53-hosted-zones/" class="">
+      route-53-hosted-zones</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-a-records/" class="">
+      aws-a-records</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/dns-ttl-and-caching/" class="">
+      dns-ttl-and-caching</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-verifying-dns/" class="">
+      aws-verifying-dns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/dns/aws-cname-records/" class="">
+      aws-cname-records</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6db6507c5b69aeaa72e952abc5260963" class="toggle"  />
+    <label for="section-6db6507c5b69aeaa72e952abc5260963" class="flex">
+      <a href="/docs/aws/cdn/" class="">
+        cdn</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-cdn/" class="">
+      cloudfront-cdn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-distributions/" class="">
+      cloudfront-distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-invalidation/" class="">
+      cloudfront-invalidation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/presigned-urls/" class="">
+      presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/why-use-presigned-urls/" class="">
+      why-use-presigned-urls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/cdn/cloudfront-with-dns/" class="">
+      cloudfront-with-dns</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0a1e7816907ed9977365d8170f4ec356" class="toggle"  />
+    <label for="section-0a1e7816907ed9977365d8170f4ec356" class="flex">
+      <a href="/docs/aws/ecs/" class="">
+        ecs</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/vpc-and-networking-setup-for-ecs/" class="">
+      vpc-and-networking-setup-for-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/why-ecs/" class="">
+      why-ecs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/elastic-container-registry/" class="">
+      elastic-container-registry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecr-repo/" class="">
+      ecr-repo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-clusters/" class="">
+      ecs-clusters</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-permissions/" class="">
+      ecs-permissions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-task-definitions/" class="">
+      ecs-task-definitions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-security-groups/" class="">
+      ecs-security-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/application-load-balancer/" class="">
+      application-load-balancer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-target-groups/" class="">
+      ecs-target-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/cloudwatch-log-groups/" class="">
+      cloudwatch-log-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/ecs/ecs-services/" class="">
+      ecs-services</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="toggle"  />
+    <label for="section-e9b4a53fbf41951e3d1539a72a3f46ef" class="flex">
+      <a href="/docs/aws/eks/" class="">
+        eks</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-cluster/" class="">
+      eks-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-vs-kubeadm/" class="">
+      eks-vs-kubeadm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-deploy-app/" class="">
+      eks-deploy-app</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-connect-s3/" class="">
+      eks-connect-s3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-use-rds/" class="">
+      eks-use-rds</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-node-affinity-taints/" class="">
+      eks-node-affinity-taints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-ha-cluster/" class="">
+      eks-ha-cluster</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/eks/eks-spot-instances/" class="">
+      eks-spot-instances</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-514dc5328411196c2c4bb685cf444143" class="toggle"  />
+    <label for="section-514dc5328411196c2c4bb685cf444143" class="flex">
+      <a href="/docs/aws/lambda/" class="">
+        lambda</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/aws-lambda/" class="">
+      aws-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/deploy-lambda/" class="">
+      deploy-lambda</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/testing-lambda-function/" class="">
+      testing-lambda-function</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/lambda-api-gateway/" class="">
+      lambda-api-gateway</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/cloudwatch-log-groups-and-viewing-lambda-logs/" class="">
+      cloudwatch-log-groups-and-viewing-lambda-logs</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/lambda/other-lambda-use-cases/" class="">
+      other-lambda-use-cases</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8c8e51cd1f2a827eecce0fcb6812e371" class="toggle"  />
+    <label for="section-8c8e51cd1f2a827eecce0fcb6812e371" class="flex">
+      <a href="/docs/aws/general-knowledge/" class="">
+        general-knowledge</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/reserved-instances-savings-plans/" class="">
+      reserved-instances-savings-plans</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/spot-instances/" class="">
+      spot-instances</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/auto-scaling-groups/" class="">
+      auto-scaling-groups</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-compute-service/" class="">
+      aws-compute-service</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws/general-knowledge/aws-storage/" class="">
+      aws-storage</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a14af2ca83d48a09ca9e95956b571c95" class="toggle" checked />
+    <label for="section-a14af2ca83d48a09ca9e95956b571c95" class="flex">
+      <a href="/docs/aws-saa/" class="">
+        AWS SAA-C03</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d7a4d33193f42203b134464389609c85" class="toggle"  />
+    <label for="section-d7a4d33193f42203b134464389609c85" class="flex">
+      <a href="/docs/aws-saa/secure-architectures/" class="">
+        secure-architectures</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/iam-policies-roles-cross-account/" class="">
+      iam-policies-roles-cross-account</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/identity-federation-and-cognito/" class="">
+      identity-federation-and-cognito</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/kms-encryption-deep-dive/" class="">
+      kms-encryption-deep-dive</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/secrets-manager-vs-parameter-store/" class="">
+      secrets-manager-vs-parameter-store</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/s3-security-and-access-points/" class="">
+      s3-security-and-access-points</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/network-security-sg-nacl-vpc-endpoints/" class="">
+      network-security-sg-nacl-vpc-endpoints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/security-services-waf-guardduty-inspector/" class="">
+      security-services-waf-guardduty-inspector</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-192c4b77c3981a3689b2ad460682c75a" class="toggle"  />
+    <label for="section-192c4b77c3981a3689b2ad460682c75a" class="flex">
+      <a href="/docs/aws-saa/resilient-architectures/" class="">
+        resilient-architectures</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/ha-vs-fault-tolerance/" class="">
+      ha-vs-fault-tolerance</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/disaster-recovery-strategies/" class="">
+      disaster-recovery-strategies</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/elb-and-auto-scaling-resilience/" class="">
+      elb-and-auto-scaling-resilience</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/decoupling-with-sqs-sns/" class="">
+      decoupling-with-sqs-sns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/event-driven-eventbridge-step-functions/" class="">
+      event-driven-eventbridge-step-functions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
+      rds-and-aurora-failover</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/route53-routing-policies-and-failover/" class="">
+      route53-routing-policies-and-failover</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/resilient-architectures/vpc-connectivity-peering-tgw-direct-connect/" class="">
+      vpc-connectivity-peering-tgw-direct-connect</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-77f5be17cdf6c42d98229d24b36f842f" class="toggle"  />
+    <label for="section-77f5be17cdf6c42d98229d24b36f842f" class="flex">
+      <a href="/docs/aws-saa/high-performing-architectures/" class="">
+        high-performing-architectures</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/s3-storage-and-performance/" class="">
+      s3-storage-and-performance</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
+      caching-elasticache-cloudfront</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/database-selection-matrix/" class="">
+      database-selection-matrix</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/dynamodb-deep-dive/" class="">
+      dynamodb-deep-dive</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
+      compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/data-transfer-and-hybrid-services/" class="">
+      data-transfer-and-hybrid-services</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e2d0e82a8a6a43f9898e89e817bab4e9" class="toggle"  />
+    <label for="section-e2d0e82a8a6a43f9898e89e817bab4e9" class="flex">
+      <a href="/docs/aws-saa/cost-optimized-architectures/" class="">
+        cost-optimized-architectures</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/cost-optimized-architectures/pricing-models-ri-savings-plans-spot/" class="">
+      pricing-models-ri-savings-plans-spot</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/cost-optimized-architectures/s3-cost-and-lifecycle-policies/" class="">
+      s3-cost-and-lifecycle-policies</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/cost-optimized-architectures/cost-management-tools/" class="">
+      cost-management-tools</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/cost-optimized-architectures/cost-optimized-architecture-patterns/" class="">
+      cost-optimized-architecture-patterns</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/general-knowledge/" class="">
+      general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="active">
+      practice-exam</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>practice-exam</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#question-1-domain-1---security--networking">Question 1 (Domain 1 - Security &amp; Networking)</a></li>
+        <li><a href="#question-2-domain-2---resilience--serverless">Question 2 (Domain 2 - Resilience &amp; Serverless)</a></li>
+        <li><a href="#question-3-domain-1---storage-governance">Question 3 (Domain 1 - Storage Governance)</a></li>
+        <li><a href="#question-4-domain-3---high-performing-storage">Question 4 (Domain 3 - High-Performing Storage)</a></li>
+        <li><a href="#question-5-domain-2---event-driven--streaming--choose-two">Question 5 (Domain 2 - Event-Driven &amp; Streaming) — <em>Choose TWO</em></a></li>
+        <li><a href="#question-6-domain-2---decoupling--auto-scaling">Question 6 (Domain 2 - Decoupling &amp; Auto Scaling)</a></li>
+        <li><a href="#question-7-domain-4---cost-optimized-networking">Question 7 (Domain 4 - Cost-Optimized Networking)</a></li>
+        <li><a href="#question-8-domain-1---security--operations">Question 8 (Domain 1 - Security &amp; Operations)</a></li>
+        <li><a href="#question-9-domain-2---disaster-recovery--databases">Question 9 (Domain 2 - Disaster Recovery &amp; Databases)</a></li>
+        <li><a href="#question-10-domain-3---networking--load-balancing">Question 10 (Domain 3 - Networking &amp; Load Balancing)</a></li>
+        <li><a href="#question-11-domain-3---s3-replication--compliance">Question 11 (Domain 3 - S3 Replication &amp; Compliance)</a></li>
+        <li><a href="#question-12-domain-1---encryption--kms-cross-account">Question 12 (Domain 1 - Encryption &amp; KMS Cross-Account)</a></li>
+        <li><a href="#question-13-domain-4---compute-pricing--cost-optimization">Question 13 (Domain 4 - Compute Pricing &amp; Cost Optimization)</a></li>
+        <li><a href="#question-14-domain-2---hybrid-dns">Question 14 (Domain 2 - Hybrid DNS)</a></li>
+        <li><a href="#question-15-domain-3---caching--cloudfront-security">Question 15 (Domain 3 - Caching &amp; CloudFront Security)</a></li>
+        <li><a href="#question-16-domain-1---web-security--ddos">Question 16 (Domain 1 - Web Security &amp; DDoS)</a></li>
+        <li><a href="#question-17-domain-2---global-traffic--non-http-failover">Question 17 (Domain 2 - Global Traffic &amp; Non-HTTP Failover)</a></li>
+        <li><a href="#question-18-domain-4---observability--right-sizing">Question 18 (Domain 4 - Observability &amp; Right-Sizing)</a></li>
+        <li><a href="#question-19-domain-3---analytics--data-lake-cost">Question 19 (Domain 3 - Analytics &amp; Data Lake Cost)</a></li>
+        <li><a href="#question-20-domain-1---multi-account-security--guardrails">Question 20 (Domain 1 - Multi-Account Security &amp; Guardrails)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="aws-saa-c03-practice-exam-20-realistic-scenario-questions">AWS SAA-C03 Practice Exam: 20 Realistic Scenario Questions<a class="anchor" href="#aws-saa-c03-practice-exam-20-realistic-scenario-questions">#</a></h1>
+<blockquote class='book-hint '>
+<p><strong>How to use this page:</strong> Every question below is written in the real SAA-C03 style — multiple plausible options where a single requirement keyword (<em>&ldquo;least operational overhead&rdquo;</em>, <em>&ldquo;most cost-effective&rdquo;</em>, <em>&ldquo;without traversing the public internet&rdquo;</em>, <em>&ldquo;RPO under 1 second&rdquo;</em>) decides the winner. Includes <strong>Multiple Response (Choose TWO)</strong> questions.</p>
+</blockquote><hr>
+<h3 id="question-1-domain-1---security--networking">Question 1 (Domain 1 - Security &amp; Networking)<a class="anchor" href="#question-1-domain-1---security--networking">#</a></h3>
+<p>A company has established an AWS Direct Connect connection between its on-premises data center and a VPC (Virtual Private Cloud). Applications running on-premises must upload sensitive files to an Amazon S3 (Simple Storage Service) bucket privately without traffic traversing the public internet, and without deploying proxy servers on EC2 (Elastic Compute Cloud). What should the solutions architect configure?</p>
+<ul>
+<li><strong>A)</strong> Create a VPC Gateway Endpoint for Amazon S3 and update the VPC route table</li>
+<li><strong>B)</strong> Create an Amazon S3 Interface VPC Endpoint (AWS PrivateLink) in the VPC and route on-premises S3 traffic to it</li>
+<li><strong>C)</strong> Attach an Internet Gateway to the VPC and use an S3 Bucket Policy with <code>aws:SourceIp</code></li>
+<li><strong>D)</strong> Configure S3 Transfer Acceleration on the bucket</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: B</strong></p>
+<ul>
+<li><strong>Why B is correct:</strong> VPC <strong>Interface Endpoints</strong> (powered by PrivateLink) create ENIs with private IPs inside your subnets, which are directly reachable from on-premises networks over Direct Connect or Site-to-Site VPN.</li>
+<li><strong>Why A is wrong (Classic Exam Trap):</strong> S3 <strong>Gateway Endpoints</strong> only add a prefix-list route for resources <em>inside</em> the VPC; they <strong>cannot</strong> be routed to from on-premises VPN, Direct Connect, or peered VPCs.</li>
+<li><strong>Why C &amp; D are wrong:</strong> Both traverse the public internet.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-2-domain-2---resilience--serverless">Question 2 (Domain 2 - Resilience &amp; Serverless)<a class="anchor" href="#question-2-domain-2---resilience--serverless">#</a></h3>
+<p>An e-commerce platform uses AWS Lambda functions inside a VPC to process checkout requests and write transactions to an Amazon RDS (Relational Database Service) for PostgreSQL Multi-AZ DB instance. During promotional events, sudden traffic spikes cause thousands of concurrent Lambda executions, overwhelming the database with new connection requests and causing timeouts. Which solution resolves this with the LEAST code and architectural change?</p>
+<ul>
+<li><strong>A)</strong> Create three RDS Read Replicas and point the Lambda checkout writes to the replica endpoints</li>
+<li><strong>B)</strong> Deploy Amazon RDS Proxy in the VPC and update the Lambda function to connect to the proxy endpoint</li>
+<li><strong>C)</strong> Migrate the PostgreSQL database to Amazon DynamoDB and rewrite all SQL queries</li>
+<li><strong>D)</strong> Put Amazon ElastiCache for Memcached in front of the RDS database for write operations</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: B</strong></p>
+<ul>
+<li><strong>Why B is correct:</strong> <strong>RDS Proxy</strong> pools and shares established database connections across thousands of ephemeral Lambda containers, preventing connection exhaustion and cutting failover times by up to 66% with just an endpoint change.</li>
+<li><strong>Why A is wrong:</strong> Read Replicas only accept <em>reads</em>, not checkout <em>writes</em>.</li>
+<li><strong>Why C is wrong:</strong> Huge rewrite effort (violates &ldquo;LEAST code change&rdquo;).</li>
+<li><strong>Why D is wrong:</strong> Memcached caches reads, it does not pool relational write connections.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-3-domain-1---storage-governance">Question 3 (Domain 1 - Storage Governance)<a class="anchor" href="#question-3-domain-1---storage-governance">#</a></h3>
+<p>A financial institution stores audit logs in an Amazon S3 bucket. Regulatory compliance requires that once a log file is written, it must not be overwritten or deleted by <strong>any</strong> user — including the AWS account root user — for a period of 7 years. After 7 years, the logs should be transitionable or deletable. Which configuration meets this requirement?</p>
+<ul>
+<li><strong>A)</strong> Enable S3 Object Lock in <strong>Governance mode</strong> with a retention period of 7 years</li>
+<li><strong>B)</strong> Enable S3 Object Lock in <strong>Compliance mode</strong> with a retention period of 7 years</li>
+<li><strong>C)</strong> Attach an S3 Bucket Policy with <code>Effect: Deny</code> on <code>s3:DeleteObject</code> for all IAM (Identity and Access Management) users</li>
+<li><strong>D)</strong> Enable S3 Versioning and MFA (Multi-Factor Authentication) Delete on the bucket</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: B</strong></p>
+<ul>
+<li><strong>Why B is correct:</strong> S3 Object Lock <strong>Compliance mode</strong> guarantees WORM (Write Once, Read Many) protection where <strong>no one, including the AWS account root user</strong>, can delete the object or shorten the retention period until it expires.</li>
+<li><strong>Why A is wrong:</strong> In <em>Governance mode</em>, principals with <code>s3:BypassGovernanceRetention</code> (which the root user can grant) can still override retention.</li>
+<li><strong>Why C &amp; D are wrong:</strong> The root user can always delete a bucket policy or use the root MFA device to disable MFA Delete.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-4-domain-3---high-performing-storage">Question 4 (Domain 3 - High-Performing Storage)<a class="anchor" href="#question-4-domain-3---high-performing-storage">#</a></h3>
+<p>A genomics research company stores 200 TB of raw sequencing files in an Amazon S3 bucket. Every Friday, they spin up a cluster of 64 compute-optimized EC2 Linux instances for 4 hours to run parallel analysis over this dataset. The instances need sub-millisecond latency, hundreds of GB/s of aggregate throughput, and POSIX file system access to the S3 objects. If the storage layer fails during the 4-hour window, the job can be re-run. What is the MOST cost-effective solution?</p>
+<ul>
+<li><strong>A)</strong> Amazon EFS (Elastic File System) Standard with Provisioned Throughput</li>
+<li><strong>B)</strong> Amazon FSx for Lustre <strong>Scratch</strong> file system linked to the S3 bucket</li>
+<li><strong>C)</strong> Amazon FSx for Lustre <strong>Persistent</strong> file system linked to the S3 bucket</li>
+<li><strong>D)</strong> Copy the 200 TB from S3 onto EBS (Elastic Block Store) <code>io2</code> Block Express volumes attached to each instance</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: B</strong></p>
+<ul>
+<li><strong>Why B is correct:</strong> <strong>FSx for Lustre</strong> provides native, high-speed POSIX access backed directly by an S3 data repository (hundreds of GB/s, sub-ms latency). Because the job is temporary (4 hours) and fault-tolerant, a <strong>Scratch</strong> deployment is significantly cheaper than Persistent.</li>
+<li><strong>Why A is wrong:</strong> EFS does not natively lazy-load objects from S3 and offers lower throughput than Lustre for HPC workloads.</li>
+<li><strong>Why C is wrong:</strong> Persistent Lustre is more expensive and unnecessary when the job can simply be restarted.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-5-domain-2---event-driven--streaming--choose-two">Question 5 (Domain 2 - Event-Driven &amp; Streaming) — <em>Choose TWO</em><a class="anchor" href="#question-5-domain-2---event-driven--streaming--choose-two">#</a></h3>
+<p>A media company ingests real-time clickstream events from its website. The data must be analyzed in real time using SQL window queries to detect trending articles within 10 seconds, AND simultaneously delivered in Apache Parquet format to an Amazon S3 data lake with a 1-minute buffer and minimal operational overhead. Which TWO services should be combined to build this pipeline? <strong>(Choose TWO)</strong></p>
+<ul>
+<li><strong>A)</strong> Amazon Kinesis Data Streams + Amazon Managed Service for Apache Flink</li>
+<li><strong>B)</strong> Amazon Data Firehose with built-in JSON-to-Parquet conversion delivering to S3</li>
+<li><strong>C)</strong> Amazon SQS (Simple Queue Service) Standard queue + AWS Batch</li>
+<li><strong>D)</strong> AWS Database Migration Service (DMS)</li>
+<li><strong>E)</strong> AWS DataSync scheduled every minute</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answers: A and B</strong></p>
+<ul>
+<li><strong>Why A &amp; B are correct:</strong> <strong>Kinesis Data Streams + Managed Apache Flink</strong> handles the real-time (10-second window) streaming analytics (A), while <strong>Amazon Data Firehose</strong> reads from the same Kinesis stream, buffers for 60 seconds, converts JSON to Parquet out-of-the-box, and writes directly to S3 (B).</li>
+<li><strong>Why C, D, E are wrong:</strong> SQS does not support streaming SQL window analytics or multiple independent stream consumers; DMS is for databases; DataSync is for file systems.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-6-domain-2---decoupling--auto-scaling">Question 6 (Domain 2 - Decoupling &amp; Auto Scaling)<a class="anchor" href="#question-6-domain-2---decoupling--auto-scaling">#</a></h3>
+<p>An application processes video transcoding jobs placed in an Amazon SQS Standard queue by a fleet of EC2 instances in an Auto Scaling Group (ASG). Each video takes between 3 and 8 minutes to transcode. Currently, users complain that some videos are transcoded twice, and when a corrupted video file arrives, workers crash repeatedly trying to process it forever. Which TWO actions will fix both issues? <strong>(Choose TWO)</strong></p>
+<ul>
+<li><strong>A)</strong> Increase the SQS queue <strong>Visibility Timeout</strong> to at least 10 minutes (or extend it dynamically during processing)</li>
+<li><strong>B)</strong> Configure a <strong>Dead-Letter Queue (DLQ)</strong> redrive policy on the SQS queue with a <code>maxReceiveCount</code> of 3</li>
+<li><strong>C)</strong> Switch from Long Polling to Short Polling</li>
+<li><strong>D)</strong> Increase the SQS message retention period to 14 days</li>
+<li><strong>E)</strong> Put an Application Load Balancer in front of the SQS queue</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answers: A and B</strong></p>
+<ul>
+<li><strong>Why A is correct:</strong> The default SQS visibility timeout is 30 seconds. Since jobs take 3–8 minutes, the message becomes visible again before the first worker finishes, causing duplicate processing. Increasing the visibility timeout (A) prevents this.</li>
+<li><strong>Why B is correct:</strong> A <strong>DLQ</strong> with <code>maxReceiveCount</code> isolates poison-pill/corrupted messages after N failed attempts so workers don&rsquo;t loop infinitely.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-7-domain-4---cost-optimized-networking">Question 7 (Domain 4 - Cost-Optimized Networking)<a class="anchor" href="#question-7-domain-4---cost-optimized-networking">#</a></h3>
+<p>A company runs a data-processing fleet on EC2 instances in private subnets across three Availability Zones. The instances download and upload 80 TB of data per month to Amazon S3 and Amazon DynamoDB in the same region. A monthly billing review shows very high <strong>NAT Gateway data processing charges</strong>. How can the solutions architect eliminate these data processing costs for S3 and DynamoDB traffic?</p>
+<ul>
+<li><strong>A)</strong> Replace the NAT Gateways with an AWS Transit Gateway</li>
+<li><strong>B)</strong> Create <strong>VPC Gateway Endpoints</strong> for S3 and DynamoDB and add them to the private subnets&rsquo; route tables</li>
+<li><strong>C)</strong> Create VPC Interface Endpoints (PrivateLink) for S3 and DynamoDB</li>
+<li><strong>D)</strong> Move the EC2 instances into public subnets and use VPN connections</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: B</strong></p>
+<ul>
+<li><strong>Why B is correct:</strong> <strong>Gateway VPC Endpoints</strong> for S3 and DynamoDB are completely <strong>free</strong> (no hourly fee, no per-GB data processing fee) and route traffic privately within the AWS network via the route table, bypassing the NAT Gateway.</li>
+<li><strong>Why C is wrong:</strong> Interface Endpoints cost per hour and per GB processed.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-8-domain-1---security--operations">Question 8 (Domain 1 - Security &amp; Operations)<a class="anchor" href="#question-8-domain-1---security--operations">#</a></h3>
+<p>A company runs 150 EC2 instances in private subnets across multiple AWS accounts. Security compliance strictly prohibits opening inbound SSH (port 22) or RDP (port 3389) in any Security Group, forbids deploying bastion hosts, and requires every command typed by an administrator during a troubleshooting session to be logged to an encrypted Amazon S3 bucket. What should the architect recommend?</p>
+<ul>
+<li><strong>A)</strong> Use EC2 Instance Connect over an Internet Gateway</li>
+<li><strong>B)</strong> Configure <strong>AWS Systems Manager Session Manager</strong> with an IAM instance profile and enable session logging to S3</li>
+<li><strong>C)</strong> Deploy a Network Load Balancer forwarding port 22 to the private instances</li>
+<li><strong>D)</strong> Use AWS Config to run shell commands on the instances</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: B</strong></p>
+<ul>
+<li><strong>Why B is correct:</strong> <strong>SSM Session Manager</strong> uses the outbound HTTPS connection from the SSM Agent (via NAT or SSM VPC Interface Endpoints) — requiring <strong>zero inbound ports, zero SSH keys, and zero bastion hosts</strong> — and natively logs session transcripts to S3 and CloudWatch Logs.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-9-domain-2---disaster-recovery--databases">Question 9 (Domain 2 - Disaster Recovery &amp; Databases)<a class="anchor" href="#question-9-domain-2---disaster-recovery--databases">#</a></h3>
+<p>A mission-critical financial application uses Amazon Aurora PostgreSQL in <code>us-east-1</code>. The business requires a cross-region disaster recovery solution in <code>us-west-2</code> with an <strong>RPO (Recovery Point Objective) of less than 1 second</strong> and an <strong>RTO (Recovery Time Objective) of less than 1 minute</strong>. Which architecture satisfies these requirements?</p>
+<ul>
+<li><strong>A)</strong> Enable RDS automated backups and use AWS Backup to copy daily snapshots to <code>us-west-2</code></li>
+<li><strong>B)</strong> Configure <strong>Amazon Aurora Global Database</strong> with a secondary cluster in <code>us-west-2</code> and Route 53 failover routing</li>
+<li><strong>C)</strong> Use Aurora Backtrack with a 24-hour window</li>
+<li><strong>D)</strong> Create a standard RDS MySQL Multi-AZ deployment in <code>us-east-1</code></li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: B</strong></p>
+<ul>
+<li><strong>Why B is correct:</strong> <strong>Aurora Global Database</strong> uses dedicated storage-layer replication across regions with typical lag <strong>under 1 second (RPO &lt; 1s)</strong> and can promote a secondary region to full read/write in <strong>under 1 minute (RTO &lt; 1m)</strong>.</li>
+<li><strong>Why A is wrong:</strong> Daily snapshots have an RPO of up to 24 hours and take hours to restore.</li>
+<li><strong>Why C &amp; D are wrong:</strong> Backtrack and Multi-AZ are single-region features and do not survive a full regional outage.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-10-domain-3---networking--load-balancing">Question 10 (Domain 3 - Networking &amp; Load Balancing)<a class="anchor" href="#question-10-domain-3---networking--load-balancing">#</a></h3>
+<p>A gaming company hosts a multiplayer backend on EC2 instances behind a load balancer. The application uses <strong>UDP and TCP</strong> protocols, requires <strong>ultra-low latency</strong> for millions of packets per second, and partners require <strong>one static IP address per Availability Zone</strong> so they can whitelist the service in their corporate firewalls. Which solution meets these requirements?</p>
+<ul>
+<li><strong>A)</strong> Application Load Balancer (ALB) with Elastic IPs attached</li>
+<li><strong>B)</strong> <strong>Network Load Balancer (NLB)</strong> with Elastic IPs assigned per Availability Zone</li>
+<li><strong>C)</strong> Gateway Load Balancer (GWLB)</li>
+<li><strong>D)</strong> Amazon CloudFront with an S3 origin</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: B</strong></p>
+<ul>
+<li><strong>Why B is correct:</strong> <strong>NLB</strong> operates at Layer 4 (TCP/UDP/TLS), handles millions of requests per second with ultra-low latency, and natively supports <strong>static / Elastic IPs per AZ</strong>.</li>
+<li><strong>Why A is wrong:</strong> ALB only supports Layer 7 (HTTP/HTTPS/gRPC) and cannot have static/Elastic IPs attached directly (without placing an NLB or Global Accelerator in front).</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-11-domain-3---s3-replication--compliance">Question 11 (Domain 3 - S3 Replication &amp; Compliance)<a class="anchor" href="#question-11-domain-3---s3-replication--compliance">#</a></h3>
+<p>A company has an existing S3 bucket containing 50 million objects (40 TB) in <code>eu-central-1</code>. Due to a new disaster recovery policy, the architect enables S3 Versioning and configures <strong>S3 Cross-Region Replication (CRR)</strong> to a new bucket in <code>eu-west-1</code>. The next day, the team notices that newly uploaded objects appear in <code>eu-west-1</code>, but none of the original 50 million objects are in the destination bucket. Why did this happen, and how should it be resolved?</p>
+<ul>
+<li><strong>A)</strong> CRR only replicates new objects after the rule is created; run an <strong>S3 Batch Replication</strong> job to replicate the existing objects</li>
+<li><strong>B)</strong> CRR requires S3 Transfer Acceleration to replicate existing objects</li>
+<li><strong>C)</strong> Versioning must be disabled on the destination bucket for historical objects to copy</li>
+<li><strong>D)</strong> Existing objects take 30 days to transition via S3 Lifecycle rules before CRR starts</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: A</strong></p>
+<ul>
+<li><strong>Why A is correct (Classic Exam Trap):</strong> By design, S3 CRR and SRR (Same-Region Replication) <strong>only replicate new or updated objects</strong> written <em>after</em> replication is enabled. To replicate objects that already existed before the rule, you must run <strong>S3 Batch Replication</strong>.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-12-domain-1---encryption--kms-cross-account">Question 12 (Domain 1 - Encryption &amp; KMS Cross-Account)<a class="anchor" href="#question-12-domain-1---encryption--kms-cross-account">#</a></h3>
+<p>Account A has an Amazon S3 bucket encrypted with a <strong>Customer Managed Key (CMK)</strong> in AWS KMS (Key Management Service). An IAM role in Account B needs to download and decrypt objects from this bucket. The architect has already updated the S3 Bucket Policy in Account A to allow the IAM role in Account B. What ELSE must be configured for the download to succeed?</p>
+<ul>
+<li><strong>A)</strong> Nothing else; the S3 Bucket Policy automatically delegates KMS decryption permissions</li>
+<li><strong>B)</strong> Update the <strong>KMS Key Policy</strong> in Account A to allow Account B, AND ensure the <strong>IAM Role Policy</strong> in Account B allows <code>kms:Decrypt</code> on Account A&rsquo;s CMK</li>
+<li><strong>C)</strong> Switch the bucket encryption to SSE-S3 because SSE-KMS does not support cross-account access</li>
+<li><strong>D)</strong> Export the KMS key material from Account A and import it into Account B</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: B</strong></p>
+<ul>
+<li><strong>Why B is correct:</strong> Cross-account access to SSE-KMS objects requires <strong>four</strong> permissions: (1) S3 Bucket Policy in Account A, (2) KMS Key Policy in Account A allowing Account B, and (3 &amp; 4) IAM Role Policy in Account B allowing both <code>s3:GetObject</code> AND <code>kms:Decrypt</code> on the CMK ARN.</li>
+<li><strong>Why C is wrong:</strong> Default AWS-managed keys (<code>aws/s3</code>) cannot have their key policy edited for cross-account sharing, which is why a <strong>Customer Managed Key (CMK)</strong> is required!</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-13-domain-4---compute-pricing--cost-optimization">Question 13 (Domain 4 - Compute Pricing &amp; Cost Optimization)<a class="anchor" href="#question-13-domain-4---compute-pricing--cost-optimization">#</a></h3>
+<p>A company runs a steady baseline of containerized web services on <strong>AWS Fargate</strong> in <code>us-east-1</code>, several <strong>AWS Lambda</strong> functions, and a fleet of <code>m6i.large</code> <strong>EC2</strong> instances that the team plans to migrate to Graviton (<code>m7g.large</code>) in <code>us-west-2</code> in six months. They want to commit to a 3-year spend to maximize discounts while keeping the flexibility to change instance families, regions, and compute services automatically. Which purchasing option should they choose?</p>
+<ul>
+<li><strong>A)</strong> EC2 Instance Savings Plans</li>
+<li><strong>B)</strong> <strong>Compute Savings Plans</strong></li>
+<li><strong>C)</strong> Standard Reserved Instances</li>
+<li><strong>D)</strong> Convertible Reserved Instances</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: B</strong></p>
+<ul>
+<li><strong>Why B is correct:</strong> <strong>Compute Savings Plans</strong> provide up to 66% discount and automatically apply across <strong>EC2 (any instance family, size, OS, tenancy, or Region), AWS Fargate, and AWS Lambda</strong>.</li>
+<li><strong>Why A &amp; C &amp; D are wrong:</strong> EC2 Instance Savings Plans and Reserved Instances are locked to a specific Region and do <strong>not</strong> cover AWS Fargate or AWS Lambda usage.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-14-domain-2---hybrid-dns">Question 14 (Domain 2 - Hybrid DNS)<a class="anchor" href="#question-14-domain-2---hybrid-dns">#</a></h3>
+<p>A company has connected its on-premises network to an AWS VPC via AWS Direct Connect. They use an Amazon Route 53 Private Hosted Zone (<code>aws.internal.example.com</code>) for resources inside the VPC, and an on-premises DNS server for <code>onprem.example.com</code>. Servers on-premises need to resolve <code>aws.internal.example.com</code>, and EC2 instances in the VPC need to resolve <code>onprem.example.com</code>. What should the solutions architect configure?</p>
+<ul>
+<li><strong>A)</strong> Make the Route 53 Hosted Zone public</li>
+<li><strong>B)</strong> Create a <strong>Route 53 Resolver Inbound Endpoint</strong> (for on-premises → AWS queries) and a <strong>Route 53 Resolver Outbound Endpoint</strong> with forwarding rules (for AWS → on-premises queries)</li>
+<li><strong>C)</strong> Enable <code>enableDnsHostnames</code> only and create CNAME records in S3</li>
+<li><strong>D)</strong> Deploy an Application Load Balancer in front of Route 53</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: B</strong></p>
+<ul>
+<li><strong>Why B is correct:</strong>
+<ul>
+<li><strong>Inbound Endpoint</strong>: gives on-premises DNS servers private IP addresses inside the VPC to forward queries <em>into</em> Route 53 Resolver.</li>
+<li><strong>Outbound Endpoint + Forwarding Rule</strong>: allows Route 53 Resolver inside the VPC to forward specific domain queries (<code>onprem.example.com</code>) <em>out</em> to on-premises DNS servers.</li>
+</ul>
+</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-15-domain-3---caching--cloudfront-security">Question 15 (Domain 3 - Caching &amp; CloudFront Security)<a class="anchor" href="#question-15-domain-3---caching--cloudfront-security">#</a></h3>
+<p>A media company distributes paid training videos stored in an Amazon S3 bucket through Amazon CloudFront. Only paying subscribers who log into the web application should be able to stream a set of 15 video files (HLS segments) for a course during their 2-hour session, without modifying the individual video URLs in the video player playlist. How should this be implemented?</p>
+<ul>
+<li><strong>A)</strong> Configure <strong>CloudFront Origin Access Control (OAC)</strong> on the S3 bucket and issue <strong>CloudFront Signed Cookies</strong> to authenticated subscribers</li>
+<li><strong>B)</strong> Issue S3 Pre-Signed URLs for every individual video segment</li>
+<li><strong>C)</strong> Make the S3 bucket public and restrict access using a NACL (Network Access Control List)</li>
+<li><strong>D)</strong> Use Cognito User Pools attached directly to the S3 bucket</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: A</strong></p>
+<ul>
+<li><strong>Why A is correct:</strong>
+<ul>
+<li><strong>OAC</strong> keeps the S3 bucket completely private so users must go through CloudFront.</li>
+<li><strong>CloudFront Signed Cookies</strong> grant time-limited access to <strong>multiple files</strong> (e.g., all <code>.ts</code> HLS video segments under <code>/courses/101/*</code>) without changing the URLs inside the playlist! (Use <strong>Signed URLs</strong> for a <em>single</em> file; use <strong>Signed Cookies</strong> for <em>many</em> files).</li>
+</ul>
+</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-16-domain-1---web-security--ddos">Question 16 (Domain 1 - Web Security &amp; DDoS)<a class="anchor" href="#question-16-domain-1---web-security--ddos">#</a></h3>
+<p>A public API hosted behind an Application Load Balancer (ALB) is suffering from credential-stuffing attacks where single IP addresses send 5,000 login requests per minute, as well as occasional SQL injection payloads. The company wants to automatically block any IP address that exceeds 500 requests in a 5-minute window and block SQL injection patterns. Which solution meets these requirements with the LEAST effort?</p>
+<ul>
+<li><strong>A)</strong> Add deny rules to the subnet Network ACL manually whenever an attack occurs</li>
+<li><strong>B)</strong> Attach an <strong>AWS WAF (Web Application Firewall)</strong> Web ACL to the ALB with an AWS Managed Rule group for SQL injection and a <strong>rate-based rule</strong> set to 500</li>
+<li><strong>C)</strong> Enable Amazon Inspector on the ALB</li>
+<li><strong>D)</strong> Subscribe to AWS Shield Standard</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: B</strong></p>
+<ul>
+<li><strong>Why B is correct:</strong> <strong>AWS WAF</strong> operates at Layer 7 on the ALB, provides managed rule sets for SQLi/XSS, and supports <strong>rate-based rules</strong> that automatically block offending IPs when they exceed N requests per 5-minute rolling window.</li>
+<li><strong>Why A is wrong:</strong> Manual NACL updates do not scale, have rule limits (default 20, max 40), and cannot inspect HTTP SQLi payloads.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-17-domain-2---global-traffic--non-http-failover">Question 17 (Domain 2 - Global Traffic &amp; Non-HTTP Failover)<a class="anchor" href="#question-17-domain-2---global-traffic--non-http-failover">#</a></h3>
+<p>A financial trading application runs on Network Load Balancers (NLBs) in <code>us-east-1</code> and <code>eu-west-1</code> over custom TCP ports. Clients around the world require <strong>two static Anycast IP addresses</strong> that never change, traffic routed over the <strong>AWS global network backbone</strong> from the nearest edge, and <strong>sub-30-second health-checked failover</strong> between regions without waiting for client DNS cache TTLs to expire. Which service should be placed in front of the NLBs?</p>
+<ul>
+<li><strong>A)</strong> Amazon CloudFront</li>
+<li><strong>B)</strong> <strong>AWS Global Accelerator</strong></li>
+<li><strong>C)</strong> Amazon Route 53 Geolocation Routing</li>
+<li><strong>D)</strong> AWS Transit Gateway</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: B</strong></p>
+<ul>
+<li><strong>Why B is correct:</strong> <strong>AWS Global Accelerator</strong> provides <strong>2 static Anycast IPs</strong>, ingests TCP/UDP traffic at the nearest edge location onto the AWS global backbone, and performs instant health-checked regional failover without relying on client DNS TTL caching.</li>
+<li><strong>Why A is wrong:</strong> CloudFront caches HTTP/HTTPS content and does not provide static Anycast IPs for arbitrary TCP/UDP protocols.</li>
+<li><strong>Why C is wrong:</strong> Route 53 failover is subject to client DNS TTL caching delays.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-18-domain-4---observability--right-sizing">Question 18 (Domain 4 - Observability &amp; Right-Sizing)<a class="anchor" href="#question-18-domain-4---observability--right-sizing">#</a></h3>
+<p>An operations team wants to configure a CloudWatch alarm that triggers whenever an EC2 instance&rsquo;s <strong>memory (RAM) utilization</strong> exceeds 85% OR its <strong>root EBS disk space</strong> exceeds 90% full. However, they cannot find these metrics in the Amazon CloudWatch console under the <code>AWS/EC2</code> namespace. Why are these metrics missing, and how can they be collected?</p>
+<ul>
+<li><strong>A)</strong> Memory and disk space are OS-level metrics not visible to the hypervisor; install the <strong>CloudWatch Unified Agent</strong> on the EC2 instance to push them as custom metrics</li>
+<li><strong>B)</strong> Enable Detailed Monitoring (1-minute intervals) on the EC2 instance</li>
+<li><strong>C)</strong> Enable VPC Flow Logs on the subnet</li>
+<li><strong>D)</strong> Upgrade the EBS volume from <code>gp2</code> to <code>gp3</code></li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: A</strong></p>
+<ul>
+<li><strong>Why A is correct:</strong> By default, EC2 sends hypervisor-visible metrics (CPU, Network I/O, Status Checks) to CloudWatch, <strong>never OS-level RAM or Disk space utilization</strong>. You must install the <strong>CloudWatch Agent</strong> on the instance (with an IAM role allowing <code>cloudwatch:PutMetricData</code>) to collect memory and disk space metrics.</li>
+<li><strong>Why B is wrong:</strong> Detailed Monitoring only changes the frequency of default metrics from 5 minutes to 1 minute; it does not add memory or disk space metrics.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-19-domain-3---analytics--data-lake-cost">Question 19 (Domain 3 - Analytics &amp; Data Lake Cost)<a class="anchor" href="#question-19-domain-3---analytics--data-lake-cost">#</a></h3>
+<p>A company stores 50 TB of application logs in Amazon S3 as uncompressed JSON files. Analysts run ad-hoc SQL queries using <strong>Amazon Athena</strong> a few times a week, and complain that queries are slow and Athena bills are high (since Athena charges $5 per TB scanned). Which TWO changes will dramatically improve query speed AND reduce Athena costs? <strong>(Choose TWO)</strong></p>
+<ul>
+<li><strong>A)</strong> Use AWS Glue or Amazon Data Firehose to convert the JSON files into compressed <strong>Apache Parquet</strong> (columnar format)</li>
+<li><strong>B)</strong> <strong>Partition</strong> the data in S3 by date (e.g., <code>s3://bucket/year=2026/month=10/day=30/</code>) and filter on partition columns in <code>WHERE</code> clauses</li>
+<li><strong>C)</strong> Move the S3 bucket to S3 Glacier Deep Archive</li>
+<li><strong>D)</strong> Provision an S3 Transfer Acceleration endpoint</li>
+<li><strong>E)</strong> Increase the number of EC2 instances running Athena</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answers: A and B</strong></p>
+<ul>
+<li><strong>Why A &amp; B are correct:</strong> Athena charges by the <strong>amount of data scanned</strong>. Converting row-based JSON to compressed <strong>columnar Parquet/ORC</strong> (A) lets Athena read only the requested columns and shrinks file size by up to 80–90%. <strong>Partitioning</strong> by date (B) lets Athena skip scanning irrelevant folders entirely.</li>
+<li><strong>Why C is wrong:</strong> Athena cannot directly query objects archived in Glacier Deep Archive without restoring them first.</li>
+<li><strong>Why E is wrong:</strong> Athena is completely serverless — there are no EC2 instances to manage.</li>
+</ul>
+</div></details>
+<hr>
+<h3 id="question-20-domain-1---multi-account-security--guardrails">Question 20 (Domain 1 - Multi-Account Security &amp; Guardrails)<a class="anchor" href="#question-20-domain-1---multi-account-security--guardrails">#</a></h3>
+<p>An enterprise uses AWS Organizations with 40 member accounts organized into Organizational Units (OUs). A security mandate requires that <strong>no user or role — including the account root user — in any member account</strong> is allowed to launch resources outside <code>eu-central-1</code> and <code>eu-west-1</code>, or disable AWS CloudTrail. What is the MOST effective way to enforce this centrally?</p>
+<ul>
+<li><strong>A)</strong> Create an IAM Permission Boundary in each of the 40 accounts</li>
+<li><strong>B)</strong> Attach a <strong>Service Control Policy (SCP)</strong> to the root or top-level OUs in AWS Organizations that explicitly denies actions in other regions (<code>aws:RequestedRegion</code>) and denies <code>cloudtrail:StopLogging</code></li>
+<li><strong>C)</strong> Configure an AWS Budgets alert in each account</li>
+<li><strong>D)</strong> Create a Network ACL in each account blocking traffic from other regions</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Correct Answer: B</strong></p>
+<ul>
+<li><strong>Why B is correct:</strong> <strong>Service Control Policies (SCPs)</strong> in AWS Organizations centrally enforce maximum permission guardrails across all member accounts — <strong>including each member account&rsquo;s root user</strong> — and cannot be overridden by local IAM administrators.</li>
+<li><strong>Why A is wrong:</strong> IAM Permission Boundaries do not restrict the account root user and would have to be attached to every single IAM entity individually.</li>
+</ul>
+</div></details>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+<div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/docs/aws-saa/general-knowledge/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>general-knowledge</span>
+      </a>
+    
+    </span>
+    <span>
+    
+    </span>
+  </div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#question-1-domain-1---security--networking">Question 1 (Domain 1 - Security &amp; Networking)</a></li>
+        <li><a href="#question-2-domain-2---resilience--serverless">Question 2 (Domain 2 - Resilience &amp; Serverless)</a></li>
+        <li><a href="#question-3-domain-1---storage-governance">Question 3 (Domain 1 - Storage Governance)</a></li>
+        <li><a href="#question-4-domain-3---high-performing-storage">Question 4 (Domain 3 - High-Performing Storage)</a></li>
+        <li><a href="#question-5-domain-2---event-driven--streaming--choose-two">Question 5 (Domain 2 - Event-Driven &amp; Streaming) — <em>Choose TWO</em></a></li>
+        <li><a href="#question-6-domain-2---decoupling--auto-scaling">Question 6 (Domain 2 - Decoupling &amp; Auto Scaling)</a></li>
+        <li><a href="#question-7-domain-4---cost-optimized-networking">Question 7 (Domain 4 - Cost-Optimized Networking)</a></li>
+        <li><a href="#question-8-domain-1---security--operations">Question 8 (Domain 1 - Security &amp; Operations)</a></li>
+        <li><a href="#question-9-domain-2---disaster-recovery--databases">Question 9 (Domain 2 - Disaster Recovery &amp; Databases)</a></li>
+        <li><a href="#question-10-domain-3---networking--load-balancing">Question 10 (Domain 3 - Networking &amp; Load Balancing)</a></li>
+        <li><a href="#question-11-domain-3---s3-replication--compliance">Question 11 (Domain 3 - S3 Replication &amp; Compliance)</a></li>
+        <li><a href="#question-12-domain-1---encryption--kms-cross-account">Question 12 (Domain 1 - Encryption &amp; KMS Cross-Account)</a></li>
+        <li><a href="#question-13-domain-4---compute-pricing--cost-optimization">Question 13 (Domain 4 - Compute Pricing &amp; Cost Optimization)</a></li>
+        <li><a href="#question-14-domain-2---hybrid-dns">Question 14 (Domain 2 - Hybrid DNS)</a></li>
+        <li><a href="#question-15-domain-3---caching--cloudfront-security">Question 15 (Domain 3 - Caching &amp; CloudFront Security)</a></li>
+        <li><a href="#question-16-domain-1---web-security--ddos">Question 16 (Domain 1 - Web Security &amp; DDoS)</a></li>
+        <li><a href="#question-17-domain-2---global-traffic--non-http-failover">Question 17 (Domain 2 - Global Traffic &amp; Non-HTTP Failover)</a></li>
+        <li><a href="#question-18-domain-4---observability--right-sizing">Question 18 (Domain 4 - Observability &amp; Right-Sizing)</a></li>
+        <li><a href="#question-19-domain-3---analytics--data-lake-cost">Question 19 (Domain 3 - Analytics &amp; Data Lake Cost)</a></li>
+        <li><a href="#question-20-domain-1---multi-account-security--guardrails">Question 20 (Domain 1 - Multi-Account Security &amp; Guardrails)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

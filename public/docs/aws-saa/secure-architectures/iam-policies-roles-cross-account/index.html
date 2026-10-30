@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,37 +8,37 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="IAM Policies, Roles and Cross-Account Access# IAM is the backbone of every security question on the exam. If a scenario says “grant access”, the answer almost always involves IAM roles - never sharing credentials, never embedding keys.
+<meta name="description" content="IAM (Identity and Access Management) Policies, Roles and Cross-Account Access# IAM is the backbone of every security question on the exam. If a scenario says “grant access”, the answer almost always involves IAM roles - never sharing credentials, never embedding keys.
 Policy structure# Every policy is a JSON document:
-{ &#34;Version&#34;: &#34;2012-10-17&#34;, &#34;Statement&#34;: [ { &#34;Effect&#34;: &#34;Allow&#34;, &#34;Action&#34;: &#34;s3:GetObject&#34;, &#34;Resource&#34;: &#34;arn:aws:s3:::my-bucket/*&#34;, &#34;Condition&#34;: { &#34;StringEquals&#34;: {&#34;aws:RequestedRegion&#34;: &#34;eu-central-1&#34;} } } ] }The four levers you can pull: Effect (Allow/Deny), Action (what API call), Resource (which ARN), Condition (when/where/from which IP).
+{ &#34;Version&#34;: &#34;2012-10-17&#34;, &#34;Statement&#34;: [ { &#34;Effect&#34;: &#34;Allow&#34;, &#34;Action&#34;: &#34;s3:GetObject&#34;, &#34;Resource&#34;: &#34;arn:aws:s3:::my-bucket/*&#34;, &#34;Condition&#34;: { &#34;StringEquals&#34;: {&#34;aws:RequestedRegion&#34;: &#34;eu-central-1&#34;} } } ] }The four levers you can pull: Effect (Allow/Deny), Action (what API call), Resource (which ARN (Amazon Resource Name)), Condition (when/where/from which IP).
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/iam-policies-roles-cross-account/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/secure-architectures/iam-policies-roles-cross-account/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="iam-policies-roles-cross-account">
-	<meta property="og:description" content="IAM Policies, Roles and Cross-Account Access# IAM is the backbone of every security question on the exam. If a scenario says “grant access”, the answer almost always involves IAM roles - never sharing credentials, never embedding keys.
+	<meta property="og:description" content="IAM (Identity and Access Management) Policies, Roles and Cross-Account Access# IAM is the backbone of every security question on the exam. If a scenario says “grant access”, the answer almost always involves IAM roles - never sharing credentials, never embedding keys.
 Policy structure# Every policy is a JSON document:
-{ &#34;Version&#34;: &#34;2012-10-17&#34;, &#34;Statement&#34;: [ { &#34;Effect&#34;: &#34;Allow&#34;, &#34;Action&#34;: &#34;s3:GetObject&#34;, &#34;Resource&#34;: &#34;arn:aws:s3:::my-bucket/*&#34;, &#34;Condition&#34;: { &#34;StringEquals&#34;: {&#34;aws:RequestedRegion&#34;: &#34;eu-central-1&#34;} } } ] }The four levers you can pull: Effect (Allow/Deny), Action (what API call), Resource (which ARN), Condition (when/where/from which IP).">
+{ &#34;Version&#34;: &#34;2012-10-17&#34;, &#34;Statement&#34;: [ { &#34;Effect&#34;: &#34;Allow&#34;, &#34;Action&#34;: &#34;s3:GetObject&#34;, &#34;Resource&#34;: &#34;arn:aws:s3:::my-bucket/*&#34;, &#34;Condition&#34;: { &#34;StringEquals&#34;: {&#34;aws:RequestedRegion&#34;: &#34;eu-central-1&#34;} } } ] }The four levers you can pull: Effect (Allow/Deny), Action (what API call), Resource (which ARN (Amazon Resource Name)), Condition (when/where/from which IP).">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="iam-policies-roles-cross-account">
-	<meta itemprop="description" content="IAM Policies, Roles and Cross-Account Access# IAM is the backbone of every security question on the exam. If a scenario says “grant access”, the answer almost always involves IAM roles - never sharing credentials, never embedding keys.
+	<meta itemprop="description" content="IAM (Identity and Access Management) Policies, Roles and Cross-Account Access# IAM is the backbone of every security question on the exam. If a scenario says “grant access”, the answer almost always involves IAM roles - never sharing credentials, never embedding keys.
 Policy structure# Every policy is a JSON document:
-{ &#34;Version&#34;: &#34;2012-10-17&#34;, &#34;Statement&#34;: [ { &#34;Effect&#34;: &#34;Allow&#34;, &#34;Action&#34;: &#34;s3:GetObject&#34;, &#34;Resource&#34;: &#34;arn:aws:s3:::my-bucket/*&#34;, &#34;Condition&#34;: { &#34;StringEquals&#34;: {&#34;aws:RequestedRegion&#34;: &#34;eu-central-1&#34;} } } ] }The four levers you can pull: Effect (Allow/Deny), Action (what API call), Resource (which ARN), Condition (when/where/from which IP).">
-	<meta itemprop="wordCount" content="732">
+{ &#34;Version&#34;: &#34;2012-10-17&#34;, &#34;Statement&#34;: [ { &#34;Effect&#34;: &#34;Allow&#34;, &#34;Action&#34;: &#34;s3:GetObject&#34;, &#34;Resource&#34;: &#34;arn:aws:s3:::my-bucket/*&#34;, &#34;Condition&#34;: { &#34;StringEquals&#34;: {&#34;aws:RequestedRegion&#34;: &#34;eu-central-1&#34;} } } ] }The four levers you can pull: Effect (Allow/Deny), Action (what API call), Resource (which ARN (Amazon Resource Name)), Condition (when/where/from which IP).">
+	<meta itemprop="wordCount" content="762">
 
 <title>iam-policies-roles-cross-account • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/iam-policies-roles-cross-account/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/secure-architectures/iam-policies-roles-cross-account/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3217,6 +3217,20 @@ Policy structure# Every policy is a JSON document:
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3317,6 +3331,20 @@ Policy structure# Every policy is a JSON document:
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3396,6 +3424,20 @@ Policy structure# Every policy is a JSON document:
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3440,6 +3482,20 @@ Policy structure# Every policy is a JSON document:
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3550,8 +3606,36 @@ Policy structure# Every policy is a JSON document:
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3632,7 +3716,7 @@ Policy structure# Every policy is a JSON document:
 
       
       
-  <article class="markdown book-article"><h1 id="iam-policies-roles-and-cross-account-access">IAM Policies, Roles and Cross-Account Access<a class="anchor" href="#iam-policies-roles-and-cross-account-access">#</a></h1>
+  <article class="markdown book-article"><h1 id="iam-identity-and-access-management-policies-roles-and-cross-account-access">IAM (Identity and Access Management) Policies, Roles and Cross-Account Access<a class="anchor" href="#iam-identity-and-access-management-policies-roles-and-cross-account-access">#</a></h1>
 <p>IAM is the backbone of every security question on the exam. If a scenario says &ldquo;grant access&rdquo;, the answer almost always involves <strong>IAM roles</strong> - never sharing credentials, never embedding keys.</p>
 <h2 id="policy-structure">Policy structure<a class="anchor" href="#policy-structure">#</a></h2>
 <p>Every policy is a JSON document:</p>
@@ -3648,7 +3732,7 @@ Policy structure# Every policy is a JSON document:
 </span></span><span style="display:flex;"><span>      }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>  ]
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The four levers you can pull: <strong>Effect</strong> (Allow/Deny), <strong>Action</strong> (what API call), <strong>Resource</strong> (which ARN), <strong>Condition</strong> (when/where/from which IP).</p>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>The four levers you can pull: <strong>Effect</strong> (Allow/Deny), <strong>Action</strong> (what API call), <strong>Resource</strong> (which ARN (Amazon Resource Name)), <strong>Condition</strong> (when/where/from which IP).</p>
 <h2 id="policy-types">Policy types<a class="anchor" href="#policy-types">#</a></h2>
 <table>
 	<thead>
@@ -3666,7 +3750,7 @@ Policy structure# Every policy is a JSON document:
 			</tr>
 			<tr>
 					<td>Resource-based</td>
-					<td>S3 buckets, SQS, KMS keys, Secrets Manager</td>
+					<td>S3 (Simple Storage Service) buckets, SQS (Simple Queue Service), KMS (Key Management Service) keys, Secrets Manager</td>
 					<td>Can grant access to <strong>other accounts</strong></td>
 			</tr>
 			<tr>
@@ -3675,7 +3759,7 @@ Policy structure# Every policy is a JSON document:
 					<td>Caps the maximum permissions</td>
 			</tr>
 			<tr>
-					<td>SCP (Organizations)</td>
+					<td>SCP (service control policy, Organizations)</td>
 					<td>Accounts/OUs</td>
 					<td>Caps everything in the account - <strong>does not grant</strong></td>
 			</tr>
@@ -3701,7 +3785,7 @@ Policy structure# Every policy is a JSON document:
 <h2 id="roles-vs-users">Roles vs users<a class="anchor" href="#roles-vs-users">#</a></h2>
 <ul>
 <li><strong>Users</strong> have long-lived credentials (access keys, passwords) - humans only, and only if federation is not possible</li>
-<li><strong>Roles</strong> issue <strong>temporary credentials</strong> via STS (default 1 hour, up to 12h for EC2) - everything else uses roles</li>
+<li><strong>Roles</strong> issue <strong>temporary credentials</strong> via STS (Security Token Service) - default 1 hour, up to 12h for EC2 (Elastic Compute Cloud) - everything else uses roles</li>
 </ul>
 <p>Every &ldquo;grant a service access to another service&rdquo; question is answered with a role:</p>
 <ul>
@@ -3725,17 +3809,25 @@ Policy structure# Every policy is a JSON document:
 <p>Not: &ldquo;sifre/paylasilan key ver&rdquo; hicbir zaman dogru cevap degildir. Scenario&rsquo;da access key geciyorsa o secenek neredeyse kesin yanlis.</p>
 </blockquote><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: An application running on EC2 must read objects from an S3 bucket in another AWS account. What is the MOST secure way to grant this access?</strong></p>
-<p>A) Create an IAM user in the other account and store its access keys on the EC2 instance
-B) Create an IAM role in the S3 account that trusts the EC2 instance&rsquo;s role, and assume it
-C) Make the S3 bucket public
-D) Copy the objects to the local instance store</p>
+<ul>
+<li><strong>A)</strong> Create an IAM user in the other account and store its access keys on the EC2 instance</li>
+<li><strong>B)</strong> Create an IAM role in the S3 account that trusts the EC2 instance&rsquo;s role, and assume it</li>
+<li><strong>C)</strong> Make the S3 bucket public</li>
+<li><strong>D)</strong> Copy the objects to the local instance store</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Cross-account role assumption with temporary credentials. A leaks long-lived keys to a server, C is a security hole, D doesn&rsquo;t solve ongoing access.</p>
+</div></details>
 <p><strong>Q2: An IAM policy allows <code>s3:*</code> and a bucket policy explicitly denies <code>s3:DeleteObject</code>. Can the user delete an object?</strong></p>
-<p>A) Yes, the identity policy allows all S3 actions
-B) No, an explicit deny always overrides any allow
-C) Yes, because resource-based policies are evaluated first
-D) Only if the user is in the Administrators group</p>
+<ul>
+<li><strong>A)</strong> Yes, the identity policy allows all S3 actions</li>
+<li><strong>B)</strong> No, an explicit deny always overrides any allow</li>
+<li><strong>C)</strong> Yes, because resource-based policies are evaluated first</li>
+<li><strong>D)</strong> Only if the user is in the Administrators group</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Explicit deny wins over every allow in the evaluation logic.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>IAM policy = JSON &ldquo;kim, ne, hangi kaynak, hangi sartta&rdquo;</li>

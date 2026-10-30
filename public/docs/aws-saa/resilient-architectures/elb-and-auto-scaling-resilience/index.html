@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,34 +8,34 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="ELB and Auto Scaling Resilience# The load balancer is the front door and the Auto Scaling Group is the immune system. Together they answer most “traffic doubles at noon” and “an instance died” questions.
-Choosing the load balancer# ALB NLB GWLB CLB (legacy) Layer 7 (HTTP/HTTPS) 4 (TCP/UDP/TLS) 3 (IP) 4/7 Routing Path, host, headers, query Port/IP, ultra low latency 3rd party appliances Simple Static IP No (use DNS) Yes (and Elastic IPs) Yes No Use case Web apps, containers, Lambda targets Gaming, IoT, extreme perf, private link entry Firewalls, IDS/IPS Don’t pick this Exam shortcuts:
+<meta name="description" content="ELB (Elastic Load Balancing) and Auto Scaling Resilience# The load balancer is the front door and the Auto Scaling Group is the immune system. Together they answer most “traffic doubles at noon” and “an instance died” questions.
+Choosing the load balancer# ALB (Application Load Balancer) NLB (Network Load Balancer) GWLB (Gateway Load Balancer) CLB (Classic Load Balancer) - legacy Layer 7 (HTTP/HTTPS) 4 (TCP/UDP/TLS) 3 (IP) 4/7 Routing Path, host, headers, query Port/IP, ultra low latency 3rd party appliances Simple Static IP No (use DNS) Yes (and Elastic IPs) Yes No Use case Web apps, containers, Lambda targets Gaming, IoT, extreme perf, private link entry Firewalls, IDS/IPS Don’t pick this Exam shortcuts:
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/elb-and-auto-scaling-resilience/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/resilient-architectures/elb-and-auto-scaling-resilience/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="elb-and-auto-scaling-resilience">
-	<meta property="og:description" content="ELB and Auto Scaling Resilience# The load balancer is the front door and the Auto Scaling Group is the immune system. Together they answer most “traffic doubles at noon” and “an instance died” questions.
-Choosing the load balancer# ALB NLB GWLB CLB (legacy) Layer 7 (HTTP/HTTPS) 4 (TCP/UDP/TLS) 3 (IP) 4/7 Routing Path, host, headers, query Port/IP, ultra low latency 3rd party appliances Simple Static IP No (use DNS) Yes (and Elastic IPs) Yes No Use case Web apps, containers, Lambda targets Gaming, IoT, extreme perf, private link entry Firewalls, IDS/IPS Don’t pick this Exam shortcuts:">
+	<meta property="og:description" content="ELB (Elastic Load Balancing) and Auto Scaling Resilience# The load balancer is the front door and the Auto Scaling Group is the immune system. Together they answer most “traffic doubles at noon” and “an instance died” questions.
+Choosing the load balancer# ALB (Application Load Balancer) NLB (Network Load Balancer) GWLB (Gateway Load Balancer) CLB (Classic Load Balancer) - legacy Layer 7 (HTTP/HTTPS) 4 (TCP/UDP/TLS) 3 (IP) 4/7 Routing Path, host, headers, query Port/IP, ultra low latency 3rd party appliances Simple Static IP No (use DNS) Yes (and Elastic IPs) Yes No Use case Web apps, containers, Lambda targets Gaming, IoT, extreme perf, private link entry Firewalls, IDS/IPS Don’t pick this Exam shortcuts:">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="elb-and-auto-scaling-resilience">
-	<meta itemprop="description" content="ELB and Auto Scaling Resilience# The load balancer is the front door and the Auto Scaling Group is the immune system. Together they answer most “traffic doubles at noon” and “an instance died” questions.
-Choosing the load balancer# ALB NLB GWLB CLB (legacy) Layer 7 (HTTP/HTTPS) 4 (TCP/UDP/TLS) 3 (IP) 4/7 Routing Path, host, headers, query Port/IP, ultra low latency 3rd party appliances Simple Static IP No (use DNS) Yes (and Elastic IPs) Yes No Use case Web apps, containers, Lambda targets Gaming, IoT, extreme perf, private link entry Firewalls, IDS/IPS Don’t pick this Exam shortcuts:">
-	<meta itemprop="wordCount" content="503">
+	<meta itemprop="description" content="ELB (Elastic Load Balancing) and Auto Scaling Resilience# The load balancer is the front door and the Auto Scaling Group is the immune system. Together they answer most “traffic doubles at noon” and “an instance died” questions.
+Choosing the load balancer# ALB (Application Load Balancer) NLB (Network Load Balancer) GWLB (Gateway Load Balancer) CLB (Classic Load Balancer) - legacy Layer 7 (HTTP/HTTPS) 4 (TCP/UDP/TLS) 3 (IP) 4/7 Routing Path, host, headers, query Port/IP, ultra low latency 3rd party appliances Simple Static IP No (use DNS) Yes (and Elastic IPs) Yes No Use case Web apps, containers, Lambda targets Gaming, IoT, extreme perf, private link entry Firewalls, IDS/IPS Don’t pick this Exam shortcuts:">
+	<meta itemprop="wordCount" content="633">
 
 <title>elb-and-auto-scaling-resilience • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/elb-and-auto-scaling-resilience/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/resilient-architectures/elb-and-auto-scaling-resilience/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ Choosing the load balancer# ALB NLB GWLB CLB (legacy) Layer 7 (HTTP/HTTPS) 4 (TC
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ Choosing the load balancer# ALB NLB GWLB CLB (legacy) Layer 7 (HTTP/HTTPS) 4 (TC
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ Choosing the load balancer# ALB NLB GWLB CLB (legacy) Layer 7 (HTTP/HTTPS) 4 (TC
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ Choosing the load balancer# ALB NLB GWLB CLB (legacy) Layer 7 (HTTP/HTTPS) 4 (TC
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ Choosing the load balancer# ALB NLB GWLB CLB (legacy) Layer 7 (HTTP/HTTPS) 4 (TC
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3630,17 +3714,17 @@ Choosing the load balancer# ALB NLB GWLB CLB (legacy) Layer 7 (HTTP/HTTPS) 4 (TC
 
       
       
-  <article class="markdown book-article"><h1 id="elb-and-auto-scaling-resilience">ELB and Auto Scaling Resilience<a class="anchor" href="#elb-and-auto-scaling-resilience">#</a></h1>
+  <article class="markdown book-article"><h1 id="elb-elastic-load-balancing-and-auto-scaling-resilience">ELB (Elastic Load Balancing) and Auto Scaling Resilience<a class="anchor" href="#elb-elastic-load-balancing-and-auto-scaling-resilience">#</a></h1>
 <p>The load balancer is the front door and the Auto Scaling Group is the immune system. Together they answer most &ldquo;traffic doubles at noon&rdquo; and &ldquo;an instance died&rdquo; questions.</p>
 <h2 id="choosing-the-load-balancer">Choosing the load balancer<a class="anchor" href="#choosing-the-load-balancer">#</a></h2>
 <table>
 	<thead>
 			<tr>
 					<th></th>
-					<th><strong>ALB</strong></th>
-					<th><strong>NLB</strong></th>
-					<th><strong>GWLB</strong></th>
-					<th>CLB (legacy)</th>
+					<th><strong>ALB (Application Load Balancer)</strong></th>
+					<th><strong>NLB (Network Load Balancer)</strong></th>
+					<th><strong>GWLB (Gateway Load Balancer)</strong></th>
+					<th>CLB (Classic Load Balancer) - legacy</th>
 			</tr>
 	</thead>
 	<tbody>
@@ -3681,13 +3765,18 @@ Choosing the load balancer# ALB NLB GWLB CLB (legacy) Layer 7 (HTTP/HTTPS) 4 (TC
 <li>&ldquo;Send traffic through a virtual firewall appliance&rdquo; → <strong>GWLB</strong></li>
 <li>&ldquo;Serverless API behind a load balancer&rdquo; → <strong>ALB → Lambda target group</strong></li>
 </ul>
-<p>ALB extras worth knowing: <strong>path-based routing</strong>, <strong>host-based routing</strong>, <strong>redirects (HTTP→HTTPS)</strong>, <strong>authentication (Cognito/OIDC)</strong> at the ALB, <strong>deregistration delay</strong> (connection draining), <strong>deletion protection</strong>, <strong>cross-zone load balancing</strong> (always on for ALB, optional for NLB).</p>
-<h2 id="auto-scaling-groups">Auto Scaling Groups<a class="anchor" href="#auto-scaling-groups">#</a></h2>
-<p>An ASG takes a <strong>launch template</strong> and maintains capacity:</p>
+<p>ALB extras worth knowing: <strong>path-based routing</strong>, <strong>host-based routing</strong>, <strong>redirects (HTTP→HTTPS)</strong>, <strong>authentication (Cognito/OIDC)</strong> at the ALB, <strong>deregistration delay</strong> (connection draining), <strong>deletion protection</strong>, <strong>SNI (Server Name Indication)</strong> (host multiple TLS certificates for multiple domains on a single ALB/NLB listener), and <strong>client IP preservation</strong> (ALB puts client IP in <code>X-Forwarded-For</code> header; NLB preserves the source IP natively at Layer 4).</p>
+<blockquote class='book-hint warning'>
+<p><strong>Sınav Tuzağı (Exam Trap) - Cross-Zone Load Balancing &amp; Sticky Sessions:</strong></p>
+<ol>
+<li><strong>Cross-Zone Load Balancing:</strong> ALB&rsquo;de her zaman açıktır ve <strong>AZ&rsquo;ler arası veri transfer ücreti yoktur</strong>. NLB ve GWLB&rsquo;de varsayılan kapalıdır; açarsan <strong>AZ&rsquo;ler arası veri transfer ücreti ödersin</strong>!</li>
+<li><strong>Sticky Sessions (Session Affinity):</strong> ALB ve CLB çerez (cookie) tabanlı sticky session destekler (Application-based vs Duration-based). Ancak sınavda <em>&ldquo;kullanıcı oturumu EC2 kapansa da kaybolmasın ve yük dengesizliği olmasın&rdquo;</em> denirse cevap Sticky Session değil, oturumları <strong>ElastiCache (Redis)</strong> veya <strong>DynamoDB</strong>&lsquo;ye taşımaktır.</li>
+</ol></blockquote><h2 id="auto-scaling-groups">Auto Scaling Groups<a class="anchor" href="#auto-scaling-groups">#</a></h2>
+<p>An ASG (Auto Scaling Group) takes a <strong>launch template</strong> and maintains capacity:</p>
 <ul>
 <li><code>min / desired / max</code> size</li>
-<li><strong>Health checks</strong>: EC2 status checks (default) or <strong>ELB health checks</strong> (unhealthy → replace, this is the resilient option)</li>
-<li><strong>Rebalancing</strong> across AZs after an AZ recovers</li>
+<li><strong>Health checks</strong>: EC2 (Elastic Compute Cloud) status checks (default) or <strong>ELB health checks</strong> (unhealthy → replace, this is the resilient option)</li>
+<li><strong>Rebalancing</strong> across AZs (Availability Zone) after an AZ recovers</li>
 <li><strong>Lifecycle hooks</strong> (pause instances for custom setup before <code>InService</code>)</li>
 </ul>
 <h3 id="scaling-policies---pick-by-scenario-keyword">Scaling policies - pick by scenario keyword<a class="anchor" href="#scaling-policies---pick-by-scenario-keyword">#</a></h3>
@@ -3735,17 +3824,25 @@ Choosing the load balancer# ALB NLB GWLB CLB (legacy) Layer 7 (HTTP/HTTPS) 4 (TC
 <p>Not: &ldquo;sunucu olurse kendini yenilesin&rdquo; = ASG(1) + ELB health check. &ldquo;Trafik arttikca olceklensin&rdquo; = target tracking. Sinavda en sik dogru cevap target tracking&rsquo;tir cunku en az yonetim yukudur.</p>
 </blockquote><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: A web application must route <code>/api</code> to one set of instances and <code>/images</code> to another, and terminate HTTPS centrally. Which load balancer?</strong></p>
-<p>A) NLB
-B) ALB
-C) GWLB
-D) Route 53 weighted routing</p>
+<ul>
+<li><strong>A)</strong> NLB</li>
+<li><strong>B)</strong> ALB</li>
+<li><strong>C)</strong> GWLB</li>
+<li><strong>D)</strong> Route 53 weighted routing</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Path-based Layer 7 routing = ALB.</p>
+</div></details>
 <p><strong>Q2: An ASG should keep average CPU utilization near 40% with the least operational effort. Which policy?</strong></p>
-<p>A) Scheduled scaling
-B) Simple scaling with manual alarms
-C) Target tracking scaling
-D) Manual instance provisioning</p>
+<ul>
+<li><strong>A)</strong> Scheduled scaling</li>
+<li><strong>B)</strong> Simple scaling with manual alarms</li>
+<li><strong>C)</strong> Target tracking scaling</li>
+<li><strong>D)</strong> Manual instance provisioning</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: C.</strong> Target tracking is the &ldquo;thermostat&rdquo; policy - set a target, done.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>ALB = HTTP katmani, path/host routing, web uygulamalari</li>

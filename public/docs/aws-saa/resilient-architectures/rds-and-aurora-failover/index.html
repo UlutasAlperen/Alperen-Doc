@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,34 +8,34 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="RDS and Aurora Resilience: Multi-AZ vs Read Replicas# The single most confused pair in the whole exam. One is for high availability, the other for performance - and mixing them up is exactly what the question writers count on.
-Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA Read scaling Replication Synchronous standby Asynchronous Reads from standby No (standby is invisible) Yes (you connect to its endpoint) Failover Automatic (~60s, DNS change) Manual promotion Regions Same region (different AZs) Cross-region possible Combining both is the standard “production” answer: Multi-AZ for safety, replicas for scale.
+<meta name="description" content="RDS (Relational Database Service) and Aurora Resilience: Multi-AZ vs Read Replicas# The single most confused pair in the whole exam. One is for high availability, the other for performance - and mixing them up is exactly what the question writers count on.
+Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA (high availability) Read scaling Replication Synchronous standby Asynchronous Reads from standby No (standby is invisible) Yes (you connect to its endpoint) Failover Automatic (~60s, DNS change) Manual promotion Regions Same region (different AZs (Availability Zone)) Cross-region possible Combining both is the standard “production” answer: Multi-AZ for safety, replicas for scale.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="rds-and-aurora-failover">
-	<meta property="og:description" content="RDS and Aurora Resilience: Multi-AZ vs Read Replicas# The single most confused pair in the whole exam. One is for high availability, the other for performance - and mixing them up is exactly what the question writers count on.
-Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA Read scaling Replication Synchronous standby Asynchronous Reads from standby No (standby is invisible) Yes (you connect to its endpoint) Failover Automatic (~60s, DNS change) Manual promotion Regions Same region (different AZs) Cross-region possible Combining both is the standard “production” answer: Multi-AZ for safety, replicas for scale.">
+	<meta property="og:description" content="RDS (Relational Database Service) and Aurora Resilience: Multi-AZ vs Read Replicas# The single most confused pair in the whole exam. One is for high availability, the other for performance - and mixing them up is exactly what the question writers count on.
+Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA (high availability) Read scaling Replication Synchronous standby Asynchronous Reads from standby No (standby is invisible) Yes (you connect to its endpoint) Failover Automatic (~60s, DNS change) Manual promotion Regions Same region (different AZs (Availability Zone)) Cross-region possible Combining both is the standard “production” answer: Multi-AZ for safety, replicas for scale.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="rds-and-aurora-failover">
-	<meta itemprop="description" content="RDS and Aurora Resilience: Multi-AZ vs Read Replicas# The single most confused pair in the whole exam. One is for high availability, the other for performance - and mixing them up is exactly what the question writers count on.
-Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA Read scaling Replication Synchronous standby Asynchronous Reads from standby No (standby is invisible) Yes (you connect to its endpoint) Failover Automatic (~60s, DNS change) Manual promotion Regions Same region (different AZs) Cross-region possible Combining both is the standard “production” answer: Multi-AZ for safety, replicas for scale.">
-	<meta itemprop="wordCount" content="516">
+	<meta itemprop="description" content="RDS (Relational Database Service) and Aurora Resilience: Multi-AZ vs Read Replicas# The single most confused pair in the whole exam. One is for high availability, the other for performance - and mixing them up is exactly what the question writers count on.
+Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA (high availability) Read scaling Replication Synchronous standby Asynchronous Reads from standby No (standby is invisible) Yes (you connect to its endpoint) Failover Automatic (~60s, DNS change) Manual promotion Regions Same region (different AZs (Availability Zone)) Cross-region possible Combining both is the standard “production” answer: Multi-AZ for safety, replicas for scale.">
+	<meta itemprop="wordCount" content="545">
 
 <title>rds-and-aurora-failover • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA Read scal
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA Read scal
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="active">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA Read scal
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA Read scal
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA Read scal
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3631,7 +3715,7 @@ Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA Read scal
 
       
       
-  <article class="markdown book-article"><h1 id="rds-and-aurora-resilience-multi-az-vs-read-replicas">RDS and Aurora Resilience: Multi-AZ vs Read Replicas<a class="anchor" href="#rds-and-aurora-resilience-multi-az-vs-read-replicas">#</a></h1>
+  <article class="markdown book-article"><h1 id="rds-relational-database-service-and-aurora-resilience-multi-az-vs-read-replicas">RDS (Relational Database Service) and Aurora Resilience: Multi-AZ vs Read Replicas<a class="anchor" href="#rds-relational-database-service-and-aurora-resilience-multi-az-vs-read-replicas">#</a></h1>
 <p>The single most confused pair in the whole exam. One is for <strong>high availability</strong>, the other for <strong>performance</strong> - and mixing them up is exactly what the question writers count on.</p>
 <h2 id="multi-az-vs-read-replicas">Multi-AZ vs Read Replicas<a class="anchor" href="#multi-az-vs-read-replicas">#</a></h2>
 <table>
@@ -3645,7 +3729,7 @@ Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA Read scal
 	<tbody>
 			<tr>
 					<td>Purpose</td>
-					<td><strong>Failover / HA</strong></td>
+					<td><strong>Failover / HA (high availability)</strong></td>
 					<td><strong>Read scaling</strong></td>
 			</tr>
 			<tr>
@@ -3665,7 +3749,7 @@ Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA Read scal
 			</tr>
 			<tr>
 					<td>Regions</td>
-					<td>Same region (different AZs)</td>
+					<td>Same region (different AZs (Availability Zone))</td>
 					<td><strong>Cross-region</strong> possible</td>
 			</tr>
 	</tbody>
@@ -3684,7 +3768,7 @@ Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA Read scal
 <li>Up to <strong>15 read replicas</strong> with sub-10ms replica lag; the reader endpoint load-balances them</li>
 <li><strong>Failover: &lt; 30 seconds</strong>, no data loss (replicas are failover targets)</li>
 <li><strong>Backtrack</strong> (MySQL): rewind the whole DB to a point in time in seconds (no restore!)</li>
-<li><strong>Aurora Global Database</strong>: primary region + up to 5 secondary regions → RPO &lt; 1s, RTO &lt; 1min</li>
+<li><strong>Aurora Global Database</strong>: primary region + up to 5 secondary regions → RPO (Recovery Point Objective) &lt; 1s, RTO (Recovery Time Objective) &lt; 1min</li>
 <li><strong>Aurora Serverless v2</strong>: scales capacity per second, good for spiky/infrequent workloads</li>
 <li>Multi-master exists for write availability in one region (rarely the answer)</li>
 </ul>
@@ -3695,28 +3779,36 @@ Multi-AZ vs Read Replicas# Multi-AZ Read Replica Purpose Failover / HA Read scal
     app --&gt;|reader endpoint| r1 &amp; r2
     writer -.async.-&gt; r1 &amp; r2</pre><script src="/mermaid.min.js"></script><script>mermaid.initialize({"flowchart":{"useMaxWidth":true},"theme":"default"})</script><h2 id="rds-backups-know-the-rpo-angle">RDS backups (know the RPO angle)<a class="anchor" href="#rds-backups-know-the-rpo-angle">#</a></h2>
 <ul>
-<li><strong>Automated backups</strong>: daily snapshot + transaction logs → <strong>PITR</strong> to any second in the retention window (0-35 days)</li>
+<li><strong>Automated backups</strong>: daily snapshot + transaction logs → <strong>PITR (point-in-time recovery)</strong> to any second in the retention window (0-35 days)</li>
 <li><strong>Manual snapshots</strong>: kept until deleted, copy across regions/accounts</li>
 <li>After a restore, you get a <strong>new instance with a new DNS endpoint</strong> - update the app</li>
 </ul>
 <p>Hands-on: <a href="../../../aws/rds/rds-backups/">rds-backups</a>, <a href="../../../aws/rds/create-read-replicas-for-scalability/">create-read-replicas-for-scalability</a>, <a href="../../../aws/eks/eks-use-rds/">eks-use-rds</a>.</p>
 <h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: A reporting application floods the primary database with heavy read queries, causing latency for writes. What is the MOST appropriate fix without changing the application architecture?</strong></p>
-<p>A) Switch to Multi-AZ
-B) Create read replicas and point reporting at them
-C) Enable deletion protection
-D) Increase the backup retention</p>
+<ul>
+<li><strong>A)</strong> Switch to Multi-AZ</li>
+<li><strong>B)</strong> Create read replicas and point reporting at them</li>
+<li><strong>C)</strong> Enable deletion protection</li>
+<li><strong>D)</strong> Increase the backup retention</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Read load → read replicas. Multi-AZ adds zero read capacity (the standby can&rsquo;t be read).</p>
+</div></details>
 <p><strong>Q2: An Aurora deployment must survive a regional outage with an RPO of under 1 second. What should be used?</strong></p>
-<p>A) Automated backups with PITR
-B) Aurora Global Database with a secondary region
-C) Read replicas in the same region
-D) Snapshots copied weekly</p>
+<ul>
+<li><strong>A)</strong> Automated backups with PITR</li>
+<li><strong>B)</strong> Aurora Global Database with a secondary region</li>
+<li><strong>C)</strong> Read replicas in the same region</li>
+<li><strong>D)</strong> Snapshots copied weekly</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Global Database = RPO &lt; 1s across regions. Snapshots are hours-scale RPO.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>Multi-AZ = saglamlik (sync, otomatik failover), read replica = performans (async, okuma)</li>
-<li>Multi-AZ standby&rsquo;den okuma YAPILMAZ</li>
+<li>Multi-AZ DB Instance standby&rsquo;dan okuma YAPILMAZ (ancak Multi-AZ DB Cluster 2 okunabilir standby sunar)</li>
 <li>Aurora = 6 kopya / 3 AZ, 15 replica, &lt;30s failover, otomatik olceklenen depolama</li>
 <li>Aurora Global Database = bolgeler arasi RPO&lt;1s, RTO&lt;1dk</li>
 <li>Backtrack = anlik geri sarma (restore yok)</li>
@@ -3744,9 +3836,9 @@ D) Snapshots copied weekly</p>
 <div class="flex flex-wrap justify-between">
     <span>
     
-      <a href="/docs/aws-saa/resilient-architectures/event-driven-eventbridge-step-functions/" class="flex align-center">
+      <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="flex align-center">
         <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
-        <span>event-driven-eventbridge-step-functions</span>
+        <span>streaming-kinesis-data-streams-firehose</span>
       </a>
     
     </span>

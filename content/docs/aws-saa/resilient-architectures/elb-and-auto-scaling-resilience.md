@@ -23,7 +23,12 @@ Exam shortcuts:
 - "Send traffic through a virtual firewall appliance" → **GWLB**
 - "Serverless API behind a load balancer" → **ALB → Lambda target group**
 
-ALB extras worth knowing: **path-based routing**, **host-based routing**, **redirects (HTTP→HTTPS)**, **authentication (Cognito/OIDC)** at the ALB, **deregistration delay** (connection draining), **deletion protection**, **cross-zone load balancing** (always on for ALB, optional for NLB).
+ALB extras worth knowing: **path-based routing**, **host-based routing**, **redirects (HTTP→HTTPS)**, **authentication (Cognito/OIDC)** at the ALB, **deregistration delay** (connection draining), **deletion protection**, **SNI (Server Name Indication)** (host multiple TLS certificates for multiple domains on a single ALB/NLB listener), and **client IP preservation** (ALB puts client IP in `X-Forwarded-For` header; NLB preserves the source IP natively at Layer 4).
+
+> [!WARNING]
+> **Sınav Tuzağı (Exam Trap) - Cross-Zone Load Balancing & Sticky Sessions:**
+> 1. **Cross-Zone Load Balancing:** ALB'de her zaman açıktır ve **AZ'ler arası veri transfer ücreti yoktur**. NLB ve GWLB'de varsayılan kapalıdır; açarsan **AZ'ler arası veri transfer ücreti ödersin**!
+> 2. **Sticky Sessions (Session Affinity):** ALB ve CLB çerez (cookie) tabanlı sticky session destekler (Application-based vs Duration-based). Ancak sınavda *"kullanıcı oturumu EC2 kapansa da kaybolmasın ve yük dengesizliği olmasın"* denirse cevap Sticky Session değil, oturumları **ElastiCache (Redis)** veya **DynamoDB**'ye taşımaktır.
 
 ## Auto Scaling Groups
 

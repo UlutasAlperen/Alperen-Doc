@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,31 +8,31 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Domain 3 - Design High-Performing Architectures (24%)# 001 - s3-storage-and-performance = storage class’lar, multipart, Transfer Acceleration 002 - caching-elasticache-cloudfront = Redis vs Memcached, DAX, cache stratejileri 003 - database-selection-matrix = is yukunden veritabani secimi - RDS mi DynamoDB mi Redshift mi 004 - dynamodb-deep-dive = partition, WCU/RCU, GSI/LSI, DAX, Global Tables 005 - compute-performance-ec2-options = instance aileleri, placement groups, enhanced networking 006 - data-transfer-and-hybrid-services = DataSync, Transfer Family, Storage Gateway, Snow, DMS Bu domain “performans” sorulari: en hizli/en olceklenebilir secenek hangisi. Yaygin tuzak: dogru calisan ama performansi olcilmemis secenekler. Ipucu: sinav yonetilmis (managed) servisleri ve dogru veritabani tipini sever.
+<meta name="description" content="Domain 3 - Design High-Performing Architectures (24%)# 001 - s3-storage-and-performance = storage class’lar, multipart, Transfer Acceleration, CRR/SRR kurallari 002 - block-and-file-storage-ebs-efs-fsx = EBS (gp3, io2, Multi-Attach), EFS, FSx (Windows, Lustre, ONTAP, OpenZFS) 003 - caching-elasticache-cloudfront = Redis vs Memcached, DAX (DynamoDB Accelerator), cache stratejileri 004 - database-selection-matrix = is yukunden veritabani secimi - RDS (Relational Database Service) mi DynamoDB mi Redshift mi 005 - dynamodb-deep-dive = partition, WCU (write capacity unit)/RCU (read capacity unit), GSI (global secondary index)/LSI (local secondary index), DAX, Global Tables 006 - compute-performance-ec2-options = instance aileleri, placement groups, enhanced networking 007 - serverless-and-containers-lambda-ecs-eks = Lambda limitleri, RDS Proxy, API Gateway, ECS/EKS ve Fargate 008 - data-transfer-and-hybrid-services = DataSync, Transfer Family, Storage Gateway, Snow, DMS (Database Migration Service) Bu domain “performans” sorulari: en hizli/en olceklenebilir secenek hangisi. Yaygin tuzak: dogru calisan ama performansi olcilmemis secenekler. Ipucu: sinav yonetilmis (managed) servisleri ve dogru veritabani tipini sever.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/high-performing-architectures/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="high-performing-architectures">
-	<meta property="og:description" content="Domain 3 - Design High-Performing Architectures (24%)# 001 - s3-storage-and-performance = storage class’lar, multipart, Transfer Acceleration 002 - caching-elasticache-cloudfront = Redis vs Memcached, DAX, cache stratejileri 003 - database-selection-matrix = is yukunden veritabani secimi - RDS mi DynamoDB mi Redshift mi 004 - dynamodb-deep-dive = partition, WCU/RCU, GSI/LSI, DAX, Global Tables 005 - compute-performance-ec2-options = instance aileleri, placement groups, enhanced networking 006 - data-transfer-and-hybrid-services = DataSync, Transfer Family, Storage Gateway, Snow, DMS Bu domain “performans” sorulari: en hizli/en olceklenebilir secenek hangisi. Yaygin tuzak: dogru calisan ama performansi olcilmemis secenekler. Ipucu: sinav yonetilmis (managed) servisleri ve dogru veritabani tipini sever.">
+	<meta property="og:description" content="Domain 3 - Design High-Performing Architectures (24%)# 001 - s3-storage-and-performance = storage class’lar, multipart, Transfer Acceleration, CRR/SRR kurallari 002 - block-and-file-storage-ebs-efs-fsx = EBS (gp3, io2, Multi-Attach), EFS, FSx (Windows, Lustre, ONTAP, OpenZFS) 003 - caching-elasticache-cloudfront = Redis vs Memcached, DAX (DynamoDB Accelerator), cache stratejileri 004 - database-selection-matrix = is yukunden veritabani secimi - RDS (Relational Database Service) mi DynamoDB mi Redshift mi 005 - dynamodb-deep-dive = partition, WCU (write capacity unit)/RCU (read capacity unit), GSI (global secondary index)/LSI (local secondary index), DAX, Global Tables 006 - compute-performance-ec2-options = instance aileleri, placement groups, enhanced networking 007 - serverless-and-containers-lambda-ecs-eks = Lambda limitleri, RDS Proxy, API Gateway, ECS/EKS ve Fargate 008 - data-transfer-and-hybrid-services = DataSync, Transfer Family, Storage Gateway, Snow, DMS (Database Migration Service) Bu domain “performans” sorulari: en hizli/en olceklenebilir secenek hangisi. Yaygin tuzak: dogru calisan ama performansi olcilmemis secenekler. Ipucu: sinav yonetilmis (managed) servisleri ve dogru veritabani tipini sever.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="website">
 
 
 	<meta itemprop="name" content="high-performing-architectures">
-	<meta itemprop="description" content="Domain 3 - Design High-Performing Architectures (24%)# 001 - s3-storage-and-performance = storage class’lar, multipart, Transfer Acceleration 002 - caching-elasticache-cloudfront = Redis vs Memcached, DAX, cache stratejileri 003 - database-selection-matrix = is yukunden veritabani secimi - RDS mi DynamoDB mi Redshift mi 004 - dynamodb-deep-dive = partition, WCU/RCU, GSI/LSI, DAX, Global Tables 005 - compute-performance-ec2-options = instance aileleri, placement groups, enhanced networking 006 - data-transfer-and-hybrid-services = DataSync, Transfer Family, Storage Gateway, Snow, DMS Bu domain “performans” sorulari: en hizli/en olceklenebilir secenek hangisi. Yaygin tuzak: dogru calisan ama performansi olcilmemis secenekler. Ipucu: sinav yonetilmis (managed) servisleri ve dogru veritabani tipini sever.">
-	<meta itemprop="wordCount" content="113">
+	<meta itemprop="description" content="Domain 3 - Design High-Performing Architectures (24%)# 001 - s3-storage-and-performance = storage class’lar, multipart, Transfer Acceleration, CRR/SRR kurallari 002 - block-and-file-storage-ebs-efs-fsx = EBS (gp3, io2, Multi-Attach), EFS, FSx (Windows, Lustre, ONTAP, OpenZFS) 003 - caching-elasticache-cloudfront = Redis vs Memcached, DAX (DynamoDB Accelerator), cache stratejileri 004 - database-selection-matrix = is yukunden veritabani secimi - RDS (Relational Database Service) mi DynamoDB mi Redshift mi 005 - dynamodb-deep-dive = partition, WCU (write capacity unit)/RCU (read capacity unit), GSI (global secondary index)/LSI (local secondary index), DAX, Global Tables 006 - compute-performance-ec2-options = instance aileleri, placement groups, enhanced networking 007 - serverless-and-containers-lambda-ecs-eks = Lambda limitleri, RDS Proxy, API Gateway, ECS/EKS ve Fargate 008 - data-transfer-and-hybrid-services = DataSync, Transfer Family, Storage Gateway, Snow, DMS (Database Migration Service) Bu domain “performans” sorulari: en hizli/en olceklenebilir secenek hangisi. Yaygin tuzak: dogru calisan ama performansi olcilmemis secenekler. Ipucu: sinav yonetilmis (managed) servisleri ve dogru veritabani tipini sever.">
+	<meta itemprop="wordCount" content="165">
 
 <title>high-performing-architectures • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/high-performing-architectures/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
-<link rel="alternate" type="application/rss+xml" href="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/index.xml" title="high-performing-architectures" />
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/docs/aws-saa/high-performing-architectures/index.xml" title="high-performing-architectures" />
 
   
 </head>
@@ -3211,6 +3211,20 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3311,6 +3325,20 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3390,6 +3418,20 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3434,6 +3476,20 @@ https://github.com/alex-shpak/hugo-book
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3544,8 +3600,36 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3618,16 +3702,18 @@ https://github.com/alex-shpak/hugo-book
       
   <article class="markdown book-article"><h1 id="domain-3---design-high-performing-architectures-24">Domain 3 - Design High-Performing Architectures (24%)<a class="anchor" href="#domain-3---design-high-performing-architectures-24">#</a></h1>
 <ul>
-<li>001 - <a href="s3-storage-and-performance/">s3-storage-and-performance</a> = storage class&rsquo;lar, multipart, Transfer Acceleration</li>
-<li>002 - <a href="caching-elasticache-cloudfront/">caching-elasticache-cloudfront</a> = Redis vs Memcached, DAX, cache stratejileri</li>
-<li>003 - <a href="database-selection-matrix/">database-selection-matrix</a> = is yukunden veritabani secimi - RDS mi DynamoDB mi Redshift mi</li>
-<li>004 - <a href="dynamodb-deep-dive/">dynamodb-deep-dive</a> = partition, WCU/RCU, GSI/LSI, DAX, Global Tables</li>
-<li>005 - <a href="compute-performance-ec2-options/">compute-performance-ec2-options</a> = instance aileleri, placement groups, enhanced networking</li>
-<li>006 - <a href="data-transfer-and-hybrid-services/">data-transfer-and-hybrid-services</a> = DataSync, Transfer Family, Storage Gateway, Snow, DMS</li>
+<li>001 - <a href="s3-storage-and-performance/">s3-storage-and-performance</a> = storage class&rsquo;lar, multipart, Transfer Acceleration, CRR/SRR kurallari</li>
+<li>002 - <a href="block-and-file-storage-ebs-efs-fsx/">block-and-file-storage-ebs-efs-fsx</a> = EBS (<code>gp3</code>, <code>io2</code>, Multi-Attach), EFS, FSx (Windows, Lustre, ONTAP, OpenZFS)</li>
+<li>003 - <a href="caching-elasticache-cloudfront/">caching-elasticache-cloudfront</a> = Redis vs Memcached, DAX (DynamoDB Accelerator), cache stratejileri</li>
+<li>004 - <a href="database-selection-matrix/">database-selection-matrix</a> = is yukunden veritabani secimi - RDS (Relational Database Service) mi DynamoDB mi Redshift mi</li>
+<li>005 - <a href="dynamodb-deep-dive/">dynamodb-deep-dive</a> = partition, WCU (write capacity unit)/RCU (read capacity unit), GSI (global secondary index)/LSI (local secondary index), DAX, Global Tables</li>
+<li>006 - <a href="compute-performance-ec2-options/">compute-performance-ec2-options</a> = instance aileleri, placement groups, enhanced networking</li>
+<li>007 - <a href="serverless-and-containers-lambda-ecs-eks/">serverless-and-containers-lambda-ecs-eks</a> = Lambda limitleri, RDS Proxy, API Gateway, ECS/EKS ve Fargate</li>
+<li>008 - <a href="data-transfer-and-hybrid-services/">data-transfer-and-hybrid-services</a> = DataSync, Transfer Family, Storage Gateway, Snow, DMS (Database Migration Service)</li>
 </ul>
 <p>Bu domain &ldquo;performans&rdquo; sorulari: <strong>en hizli/en olceklenebilir secenek hangisi</strong>. Yaygin tuzak: dogru calisan ama performansi olcilmemis secenekler. Ipucu: sinav <strong>yonetilmis (managed) servisleri</strong> ve <strong>dogru veritabani tipini</strong> sever.</p>
 <blockquote class='book-hint '>
-<p>Not: S3 ve CloudFront&rsquo;un pratik tarafi <a href="../../aws/s3/">AWS - S3</a> ve <a href="../../aws/cdn/">AWS - CDN</a> notlarinda.</p>
+<p>Not: S3 (Simple Storage Service) ve CloudFront&rsquo;un pratik tarafi <a href="../../aws/s3/">AWS - S3</a> ve <a href="../../aws/cdn/">AWS - CDN</a> notlarinda.</p>
 </blockquote></article>
  
       

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,15 +8,15 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="S3 Security and Access Points# S3 security questions usually start with “an object was accidentally made public” or “only this VPC may access the bucket”. The answer set is small: Block Public Access, bucket policies, IAM, and Access Points.
+<meta name="description" content="S3 (Simple Storage Service) Security and Access Points# S3 security questions usually start with “an object was accidentally made public” or “only this VPC (Virtual Private Cloud) may access the bucket”. The answer set is small: Block Public Access, bucket policies, IAM (Identity and Access Management), and Access Points.
 The access control toolkit# Mechanism What it does Exam note Block Public Access Master switch; overrides everything Turn on account-wide, “prevent any public access” Bucket policy Resource-based JSON on the bucket Cross-account access, VPC-only access IAM policies Identity-based permissions Same-account access for users/roles ACLs Legacy per-object permissions “ACL disabled / Object Ownership: Bucket owner enforced” is the modern answer Access Points Per-workload entry point with its own policy Huge buckets, many teams/VPCs Pre-signed URLs Time-limited URL signed with credentials “Share a private object for 1 hour” Handy labs: aws-s3-bucket, presigned-urls.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/s3-security-and-access-points/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/secure-architectures/s3-security-and-access-points/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="s3-security-and-access-points">
-	<meta property="og:description" content="S3 Security and Access Points# S3 security questions usually start with “an object was accidentally made public” or “only this VPC may access the bucket”. The answer set is small: Block Public Access, bucket policies, IAM, and Access Points.
+	<meta property="og:description" content="S3 (Simple Storage Service) Security and Access Points# S3 security questions usually start with “an object was accidentally made public” or “only this VPC (Virtual Private Cloud) may access the bucket”. The answer set is small: Block Public Access, bucket policies, IAM (Identity and Access Management), and Access Points.
 The access control toolkit# Mechanism What it does Exam note Block Public Access Master switch; overrides everything Turn on account-wide, “prevent any public access” Bucket policy Resource-based JSON on the bucket Cross-account access, VPC-only access IAM policies Identity-based permissions Same-account access for users/roles ACLs Legacy per-object permissions “ACL disabled / Object Ownership: Bucket owner enforced” is the modern answer Access Points Per-workload entry point with its own policy Huge buckets, many teams/VPCs Pre-signed URLs Time-limited URL signed with credentials “Share a private object for 1 hour” Handy labs: aws-s3-bucket, presigned-urls.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
@@ -24,18 +24,18 @@ The access control toolkit# Mechanism What it does Exam note Block Public Access
 
 
 	<meta itemprop="name" content="s3-security-and-access-points">
-	<meta itemprop="description" content="S3 Security and Access Points# S3 security questions usually start with “an object was accidentally made public” or “only this VPC may access the bucket”. The answer set is small: Block Public Access, bucket policies, IAM, and Access Points.
+	<meta itemprop="description" content="S3 (Simple Storage Service) Security and Access Points# S3 security questions usually start with “an object was accidentally made public” or “only this VPC (Virtual Private Cloud) may access the bucket”. The answer set is small: Block Public Access, bucket policies, IAM (Identity and Access Management), and Access Points.
 The access control toolkit# Mechanism What it does Exam note Block Public Access Master switch; overrides everything Turn on account-wide, “prevent any public access” Bucket policy Resource-based JSON on the bucket Cross-account access, VPC-only access IAM policies Identity-based permissions Same-account access for users/roles ACLs Legacy per-object permissions “ACL disabled / Object Ownership: Bucket owner enforced” is the modern answer Access Points Per-workload entry point with its own policy Huge buckets, many teams/VPCs Pre-signed URLs Time-limited URL signed with credentials “Share a private object for 1 hour” Handy labs: aws-s3-bucket, presigned-urls.">
-	<meta itemprop="wordCount" content="547">
+	<meta itemprop="wordCount" content="814">
 
 <title>s3-security-and-access-points • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/s3-security-and-access-points/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/secure-architectures/s3-security-and-access-points/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ The access control toolkit# Mechanism What it does Exam note Block Public Access
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ The access control toolkit# Mechanism What it does Exam note Block Public Access
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ The access control toolkit# Mechanism What it does Exam note Block Public Access
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ The access control toolkit# Mechanism What it does Exam note Block Public Access
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ The access control toolkit# Mechanism What it does Exam note Block Public Access
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3612,6 +3696,8 @@ The access control toolkit# Mechanism What it does Exam note Block Public Access
   <ul>
     <li><a href="#the-access-control-toolkit">The access control toolkit</a></li>
     <li><a href="#the-classic-public-website-question">The classic &ldquo;public website&rdquo; question</a></li>
+    <li><a href="#s3-object-lock-worm-glacier-vault-lock--mfa-delete">S3 Object Lock (WORM), Glacier Vault Lock &amp; MFA Delete</a></li>
+    <li><a href="#cors-cross-origin-resource-sharing">CORS (Cross-Origin Resource Sharing)</a></li>
     <li><a href="#restricting-access-to-a-vpc">Restricting access to a VPC</a></li>
     <li><a href="#access-points">Access Points</a></li>
     <li><a href="#exam-check">Exam check</a></li>
@@ -3628,8 +3714,8 @@ The access control toolkit# Mechanism What it does Exam note Block Public Access
 
       
       
-  <article class="markdown book-article"><h1 id="s3-security-and-access-points">S3 Security and Access Points<a class="anchor" href="#s3-security-and-access-points">#</a></h1>
-<p>S3 security questions usually start with &ldquo;an object was accidentally made public&rdquo; or &ldquo;only this VPC may access the bucket&rdquo;. The answer set is small: <strong>Block Public Access</strong>, bucket policies, IAM, and <strong>Access Points</strong>.</p>
+  <article class="markdown book-article"><h1 id="s3-simple-storage-service-security-and-access-points">S3 (Simple Storage Service) Security and Access Points<a class="anchor" href="#s3-simple-storage-service-security-and-access-points">#</a></h1>
+<p>S3 security questions usually start with &ldquo;an object was accidentally made public&rdquo; or &ldquo;only this VPC (Virtual Private Cloud) may access the bucket&rdquo;. The answer set is small: <strong>Block Public Access</strong>, bucket policies, IAM (Identity and Access Management), and <strong>Access Points</strong>.</p>
 <h2 id="the-access-control-toolkit">The access control toolkit<a class="anchor" href="#the-access-control-toolkit">#</a></h2>
 <table>
 	<thead>
@@ -3679,9 +3765,49 @@ The access control toolkit# Mechanism What it does Exam note Block Public Access
 <li><strong>Static website hosting</strong> - bucket policy allows <code>s3:GetObject</code> for <code>*</code>, Block Public Access off, website endpoint</li>
 <li><strong>Private content via CloudFront</strong> - bucket stays private; CloudFront accesses it with <strong>OAC (Origin Access Control)</strong> so users can never hit S3 directly</li>
 </ol>
-<blockquote class='book-hint '>
-<p>Not: sinavda 2023&rsquo;ten beri &ldquo;en guvenli&rdquo; statik site cevabi CloudFront + OAC. Bucket&rsquo;i public yapmak hala calisir ama &ldquo;MOST secure&rdquo; sorularinda kaybeder.</p>
-</blockquote><h2 id="restricting-access-to-a-vpc">Restricting access to a VPC<a class="anchor" href="#restricting-access-to-a-vpc">#</a></h2>
+<blockquote class='book-hint note'>
+<p><strong>Not:</strong> Sınavda 2023&rsquo;ten beri &ldquo;en güvenli&rdquo; statik site cevabı <strong>CloudFront + OAC (Origin Access Control)</strong> (eski adıyla OAI)&lsquo;dir. Bucket&rsquo;ı public yapmak hâlâ çalışır ama &ldquo;MOST secure&rdquo; sorularında kaybeder. Birden fazla özel dosyaya (örn. HLS video parçaları) URL değiştirmeden süreli erişim verilecekse <strong>CloudFront Signed Cookies</strong>, tek bir dosyaya verilecekse <strong>CloudFront Signed URL / S3 Pre-Signed URL</strong> seçilir.</p></blockquote><h2 id="s3-object-lock-worm-glacier-vault-lock--mfa-delete">S3 Object Lock (WORM), Glacier Vault Lock &amp; MFA Delete<a class="anchor" href="#s3-object-lock-worm-glacier-vault-lock--mfa-delete">#</a></h2>
+<p>Compliance questions (&ldquo;files must never be deleted or modified for 7 years&rdquo;) test these mechanisms:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Feature</th>
+					<th>How it works</th>
+					<th>Exam keyword</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Object Lock - Compliance mode</strong></td>
+					<td>Object version cannot be overwritten or deleted by <strong>anyone — including the root user</strong> — until retention expires</td>
+					<td>&ldquo;Strict regulatory compliance, even root cannot delete&rdquo;</td>
+			</tr>
+			<tr>
+					<td><strong>Object Lock - Governance mode</strong></td>
+					<td>Protected by default, but users with <code>s3:BypassGovernanceRetention</code> IAM permission can override</td>
+					<td>&ldquo;Prevent accidental deletion, allow admin override&rdquo;</td>
+			</tr>
+			<tr>
+					<td><strong>Object Lock - Legal Hold</strong></td>
+					<td>On/off switch with <strong>no expiration date</strong>; stays locked until explicitly removed (<code>s3:PutObjectLegalHold</code>)</td>
+					<td>&ldquo;Indefinite hold during a legal investigation&rdquo;</td>
+			</tr>
+			<tr>
+					<td><strong>Glacier Vault Lock</strong></td>
+					<td>Lock a Glacier vault policy with a 24-hour confirmation code; <strong>immutable forever</strong> once locked</td>
+					<td>&ldquo;Archive vault compliance policy that can never be changed&rdquo;</td>
+			</tr>
+			<tr>
+					<td><strong>MFA Delete</strong></td>
+					<td>Requires MFA code to permanently delete an object version or suspend Versioning (<strong>only the Root user</strong> can enable/disable via CLI/API)</td>
+					<td>&ldquo;Extra authentication before deleting versioned objects&rdquo;</td>
+			</tr>
+	</tbody>
+</table>
+<p><em>Prerequisite:</em> <strong>S3 Versioning must be enabled</strong> before you can use S3 Object Lock or MFA Delete.</p>
+<h2 id="cors-cross-origin-resource-sharing">CORS (Cross-Origin Resource Sharing)<a class="anchor" href="#cors-cross-origin-resource-sharing">#</a></h2>
+<p>If a web page hosted at <code>https://app.example.com</code> makes browser <code>fetch</code>/<code>XHR</code> requests (or loads fonts/images via JS) from <code>https://assets.otherdomain.com</code> (another S3 bucket), you must configure a <strong>CORS rule on the target (assets) S3 bucket</strong> allowing the <code>Origin: https://app.example.com</code>.</p>
+<h2 id="restricting-access-to-a-vpc">Restricting access to a VPC<a class="anchor" href="#restricting-access-to-a-vpc">#</a></h2>
 <p>A bucket policy can say &ldquo;only requests coming through my VPC endpoint&rdquo;:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Effect&#34;</span>: <span style="color:#e6db74">&#34;Deny&#34;</span>,
@@ -3711,17 +3837,25 @@ The access control toolkit# Mechanism What it does Exam note Block Public Access
 </ul>
 <h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: A security audit found that an S3 bucket allows public ACLs. The requirement is that no object in any bucket of the account can ever be made public. What is the fastest fix?</strong></p>
-<p>A) Delete the bucket policy
-B) Enable S3 Block Public Access at the <strong>account</strong> level
-C) Enable versioning on the bucket
-D) Move objects to Glacier</p>
+<ul>
+<li><strong>A)</strong> Delete the bucket policy</li>
+<li><strong>B)</strong> Enable S3 Block Public Access at the <strong>account</strong> level</li>
+<li><strong>C)</strong> Enable versioning on the bucket</li>
+<li><strong>D)</strong> Move objects to Glacier</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Account-level Block Public Access overrides every bucket policy and ACL.</p>
+</div></details>
 <p><strong>Q2: Only instances inside a specific VPC should be able to read a bucket. What should the architect configure?</strong></p>
-<p>A) An IAM role with <code>s3:GetObject</code>
-B) A bucket policy denying requests where <code>aws:sourceVpce</code> is not the VPC endpoint
-C) A security group attached to the bucket
-D) A pre-signed URL on each object</p>
-<p><strong>Answer: B.</strong> The Deny + <code>aws:sourceVpce</code> condition pattern. A doesn&rsquo;t restrict network origin, C is nonsense (SGs don&rsquo;t attach to buckets), D is per-object and temporary.</p>
+<ul>
+<li><strong>A)</strong> An IAM role with <code>s3:GetObject</code></li>
+<li><strong>B)</strong> A bucket policy denying requests where <code>aws:sourceVpce</code> is not the VPC endpoint</li>
+<li><strong>C)</strong> A security group attached to the bucket</li>
+<li><strong>D)</strong> A pre-signed URL on each object</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Answer: B.</strong> The Deny + <code>aws:sourceVpce</code> condition pattern. A doesn&rsquo;t restrict network origin, C is nonsense (SGs (Security Group) don&rsquo;t attach to buckets), D is per-object and temporary.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>Block Public Access = her seyi bastiran ana anahtar, hesap seviyesinde ac</li>
@@ -3801,6 +3935,8 @@ D) A pre-signed URL on each object</p>
   <ul>
     <li><a href="#the-access-control-toolkit">The access control toolkit</a></li>
     <li><a href="#the-classic-public-website-question">The classic &ldquo;public website&rdquo; question</a></li>
+    <li><a href="#s3-object-lock-worm-glacier-vault-lock--mfa-delete">S3 Object Lock (WORM), Glacier Vault Lock &amp; MFA Delete</a></li>
+    <li><a href="#cors-cross-origin-resource-sharing">CORS (Cross-Origin Resource Sharing)</a></li>
     <li><a href="#restricting-access-to-a-vpc">Restricting access to a VPC</a></li>
     <li><a href="#access-points">Access Points</a></li>
     <li><a href="#exam-check">Exam check</a></li>

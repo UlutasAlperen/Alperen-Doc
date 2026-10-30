@@ -80,7 +80,7 @@ Hands-on: [rds-backups](../../../aws/rds/rds-backups/), [create-read-replicas-fo
 ## Ozet
 
 - Multi-AZ = saglamlik (sync, otomatik failover), read replica = performans (async, okuma)
-- Multi-AZ standby'den okuma YAPILMAZ
+- Multi-AZ DB Instance standby'dan okuma YAPILMAZ (ancak Multi-AZ DB Cluster 2 okunabilir standby sunar)
 - Aurora = 6 kopya / 3 AZ, 15 replica, <30s failover, otomatik olceklenen depolama
 - Aurora Global Database = bolgeler arasi RPO<1s, RTO<1dk
 - Backtrack = anlik geri sarma (restore yok)

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -9,15 +9,21 @@ https://github.com/alex-shpak/hugo-book
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="AWS SAA-C03 - General Knowledge: Tek Satırlık Özet ve Sınav Rehberi# Amaç: Sınav öncesi hızlı tekrar. Her servisin ne yaptığını, hangi senaryoda seçileceğini ve benzer servislerden nasıl ayrıldığını hatırlatır. Ayrıntılı açıklamalar için ilgili konu dokümanlarına bak.
-1. Compute - İşlem ve Uygulama Çalıştırma# EC2: AWS üzerinde sanal sunucu; işletim sistemi, instance tipi, disk ve ağ yapılandırması üzerinde kontrol sağlar. Sınavda: Özel işletim sistemi yapılandırması, uzun süre çalışan uygulama veya tam sunucu kontrolü isteniyorsa EC2. Lambda: Sunucu yönetmeden olay tetiklemeli kod çalıştırır; kullanım ve çalışma süresine göre ücretlendirilir. Sınavda: S3’e dosya yüklenince işlem başlatma, SQS mesajı işleme veya kısa süreli API backend’i oluşturma. ECS: AWS’nin container orkestrasyon servisidir; Docker container’larını görev ve servis olarak çalıştırır. Sınavda: Kubernetes karmaşıklığı olmadan AWS üzerinde container yönetmek. EKS: AWS tarafından yönetilen Kubernetes control plane sunar; worker node’lar EC2 veya desteklenen iş yüklerinde Fargate üzerinde çalışabilir. Sınavda: Kubernetes API’si, mevcut Kubernetes araçları ve ekosistemi gerekiyorsa EKS. Fargate: ECS veya EKS container’ları için sunucu/worker node yönetme ihtiyacını azaltan serverless compute altyapısıdır. Sınavda: Container çalıştırılacak ancak EC2 instance’ları ve node kapasitesi yönetilmek istenmiyorsa Fargate. Lightsail: Basitleştirilmiş sanal sunucu, disk, ağ ve uygulama altyapısı sunar. Sınavda: Küçük web sitesi, blog veya kolay kurulabilen VPS benzeri ortam. AWS Batch: Batch işlerini kuyruklar, zamanlar ve uygun işlem kapasitesinde çalıştırır. Sınavda: Büyük veri setleri üzerinde toplu hesaplama, simülasyon veya çok sayıda bağımsız iş. Elastic Beanstalk: Uygulama dağıtımı, kapasite, yük dengeleme ve izleme gibi altyapı işlerini yönetir; EC2 tabanlı kaynaklara erişim imkânı da vardır. Sınavda: Uygulama kodunu dağıtmak, altyapı ayrıntılarını daha az yönetmek. Auto Scaling: EC2 instance sayısını talebe veya politikalara göre artırır ve azaltır. Sınavda: Trafik değişimlerine otomatik uyum ve kapasite maliyetini kontrol etme. EC2 Placement Groups: Instance’ların fiziksel yerleşimini kontrol ederek düşük gecikme, yüksek ağ performansı veya donanım arızalarına karşı ayrışma sağlar. Sınavda: Cluster = düşük gecikme; Spread = instance’ları ayrı donanımlara yayma; Partition = büyük dağıtık sistemlerde bölüm bazlı ayrışma. Karıştırma:
+1. Compute - İşlem ve Uygulama Çalıştırma# EC2 (Elastic Compute Cloud): AWS üzerinde sanal sunucu; işletim sistemi, instance tipi, disk ve ağ yapılandırması üzerinde kontrol sağlar.
+Kullanım alanları: Web uygulamaları ve API sunucuları; özel işletim sistemi veya yapılandırma gerektiren iş yükleri; veritabanı ve orta katman sunucuları.
+Avantajlar: Instance tipi, işletim sistemi, disk ve ağ üzerinde tam kontrol; yüzlerce instance tipi ve satın alma seçeneği.
+Sınavda: Özel işletim sistemi yapılandırması, uzun süre çalışan uygulama veya tam sunucu kontrolü isteniyorsa EC2.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/general-knowledge/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/general-knowledge/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="general-knowledge">
 	<meta property="og:description" content="AWS SAA-C03 - General Knowledge: Tek Satırlık Özet ve Sınav Rehberi# Amaç: Sınav öncesi hızlı tekrar. Her servisin ne yaptığını, hangi senaryoda seçileceğini ve benzer servislerden nasıl ayrıldığını hatırlatır. Ayrıntılı açıklamalar için ilgili konu dokümanlarına bak.
-1. Compute - İşlem ve Uygulama Çalıştırma# EC2: AWS üzerinde sanal sunucu; işletim sistemi, instance tipi, disk ve ağ yapılandırması üzerinde kontrol sağlar. Sınavda: Özel işletim sistemi yapılandırması, uzun süre çalışan uygulama veya tam sunucu kontrolü isteniyorsa EC2. Lambda: Sunucu yönetmeden olay tetiklemeli kod çalıştırır; kullanım ve çalışma süresine göre ücretlendirilir. Sınavda: S3’e dosya yüklenince işlem başlatma, SQS mesajı işleme veya kısa süreli API backend’i oluşturma. ECS: AWS’nin container orkestrasyon servisidir; Docker container’larını görev ve servis olarak çalıştırır. Sınavda: Kubernetes karmaşıklığı olmadan AWS üzerinde container yönetmek. EKS: AWS tarafından yönetilen Kubernetes control plane sunar; worker node’lar EC2 veya desteklenen iş yüklerinde Fargate üzerinde çalışabilir. Sınavda: Kubernetes API’si, mevcut Kubernetes araçları ve ekosistemi gerekiyorsa EKS. Fargate: ECS veya EKS container’ları için sunucu/worker node yönetme ihtiyacını azaltan serverless compute altyapısıdır. Sınavda: Container çalıştırılacak ancak EC2 instance’ları ve node kapasitesi yönetilmek istenmiyorsa Fargate. Lightsail: Basitleştirilmiş sanal sunucu, disk, ağ ve uygulama altyapısı sunar. Sınavda: Küçük web sitesi, blog veya kolay kurulabilen VPS benzeri ortam. AWS Batch: Batch işlerini kuyruklar, zamanlar ve uygun işlem kapasitesinde çalıştırır. Sınavda: Büyük veri setleri üzerinde toplu hesaplama, simülasyon veya çok sayıda bağımsız iş. Elastic Beanstalk: Uygulama dağıtımı, kapasite, yük dengeleme ve izleme gibi altyapı işlerini yönetir; EC2 tabanlı kaynaklara erişim imkânı da vardır. Sınavda: Uygulama kodunu dağıtmak, altyapı ayrıntılarını daha az yönetmek. Auto Scaling: EC2 instance sayısını talebe veya politikalara göre artırır ve azaltır. Sınavda: Trafik değişimlerine otomatik uyum ve kapasite maliyetini kontrol etme. EC2 Placement Groups: Instance’ların fiziksel yerleşimini kontrol ederek düşük gecikme, yüksek ağ performansı veya donanım arızalarına karşı ayrışma sağlar. Sınavda: Cluster = düşük gecikme; Spread = instance’ları ayrı donanımlara yayma; Partition = büyük dağıtık sistemlerde bölüm bazlı ayrışma. Karıştırma:">
+1. Compute - İşlem ve Uygulama Çalıştırma# EC2 (Elastic Compute Cloud): AWS üzerinde sanal sunucu; işletim sistemi, instance tipi, disk ve ağ yapılandırması üzerinde kontrol sağlar.
+Kullanım alanları: Web uygulamaları ve API sunucuları; özel işletim sistemi veya yapılandırma gerektiren iş yükleri; veritabanı ve orta katman sunucuları.
+Avantajlar: Instance tipi, işletim sistemi, disk ve ağ üzerinde tam kontrol; yüzlerce instance tipi ve satın alma seçeneği.
+Sınavda: Özel işletim sistemi yapılandırması, uzun süre çalışan uygulama veya tam sunucu kontrolü isteniyorsa EC2.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
@@ -25,17 +31,20 @@ https://github.com/alex-shpak/hugo-book
 
 	<meta itemprop="name" content="general-knowledge">
 	<meta itemprop="description" content="AWS SAA-C03 - General Knowledge: Tek Satırlık Özet ve Sınav Rehberi# Amaç: Sınav öncesi hızlı tekrar. Her servisin ne yaptığını, hangi senaryoda seçileceğini ve benzer servislerden nasıl ayrıldığını hatırlatır. Ayrıntılı açıklamalar için ilgili konu dokümanlarına bak.
-1. Compute - İşlem ve Uygulama Çalıştırma# EC2: AWS üzerinde sanal sunucu; işletim sistemi, instance tipi, disk ve ağ yapılandırması üzerinde kontrol sağlar. Sınavda: Özel işletim sistemi yapılandırması, uzun süre çalışan uygulama veya tam sunucu kontrolü isteniyorsa EC2. Lambda: Sunucu yönetmeden olay tetiklemeli kod çalıştırır; kullanım ve çalışma süresine göre ücretlendirilir. Sınavda: S3’e dosya yüklenince işlem başlatma, SQS mesajı işleme veya kısa süreli API backend’i oluşturma. ECS: AWS’nin container orkestrasyon servisidir; Docker container’larını görev ve servis olarak çalıştırır. Sınavda: Kubernetes karmaşıklığı olmadan AWS üzerinde container yönetmek. EKS: AWS tarafından yönetilen Kubernetes control plane sunar; worker node’lar EC2 veya desteklenen iş yüklerinde Fargate üzerinde çalışabilir. Sınavda: Kubernetes API’si, mevcut Kubernetes araçları ve ekosistemi gerekiyorsa EKS. Fargate: ECS veya EKS container’ları için sunucu/worker node yönetme ihtiyacını azaltan serverless compute altyapısıdır. Sınavda: Container çalıştırılacak ancak EC2 instance’ları ve node kapasitesi yönetilmek istenmiyorsa Fargate. Lightsail: Basitleştirilmiş sanal sunucu, disk, ağ ve uygulama altyapısı sunar. Sınavda: Küçük web sitesi, blog veya kolay kurulabilen VPS benzeri ortam. AWS Batch: Batch işlerini kuyruklar, zamanlar ve uygun işlem kapasitesinde çalıştırır. Sınavda: Büyük veri setleri üzerinde toplu hesaplama, simülasyon veya çok sayıda bağımsız iş. Elastic Beanstalk: Uygulama dağıtımı, kapasite, yük dengeleme ve izleme gibi altyapı işlerini yönetir; EC2 tabanlı kaynaklara erişim imkânı da vardır. Sınavda: Uygulama kodunu dağıtmak, altyapı ayrıntılarını daha az yönetmek. Auto Scaling: EC2 instance sayısını talebe veya politikalara göre artırır ve azaltır. Sınavda: Trafik değişimlerine otomatik uyum ve kapasite maliyetini kontrol etme. EC2 Placement Groups: Instance’ların fiziksel yerleşimini kontrol ederek düşük gecikme, yüksek ağ performansı veya donanım arızalarına karşı ayrışma sağlar. Sınavda: Cluster = düşük gecikme; Spread = instance’ları ayrı donanımlara yayma; Partition = büyük dağıtık sistemlerde bölüm bazlı ayrışma. Karıştırma:">
-	<meta itemprop="wordCount" content="3791">
+1. Compute - İşlem ve Uygulama Çalıştırma# EC2 (Elastic Compute Cloud): AWS üzerinde sanal sunucu; işletim sistemi, instance tipi, disk ve ağ yapılandırması üzerinde kontrol sağlar.
+Kullanım alanları: Web uygulamaları ve API sunucuları; özel işletim sistemi veya yapılandırma gerektiren iş yükleri; veritabanı ve orta katman sunucuları.
+Avantajlar: Instance tipi, işletim sistemi, disk ve ağ üzerinde tam kontrol; yüzlerce instance tipi ve satın alma seçeneği.
+Sınavda: Özel işletim sistemi yapılandırması, uzun süre çalışan uygulama veya tam sunucu kontrolü isteniyorsa EC2.">
+	<meta itemprop="wordCount" content="6625">
 
 <title>general-knowledge • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/general-knowledge/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/general-knowledge/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3223,20 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3337,20 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3430,20 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3488,20 @@ https://github.com/alex-shpak/hugo-book
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3612,36 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="active">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3638,37 +3731,142 @@ https://github.com/alex-shpak/hugo-book
 </blockquote><hr>
 <h2 id="1-compute---işlem-ve-uygulama-çalıştırma">1. Compute - İşlem ve Uygulama Çalıştırma<a class="anchor" href="#1-compute---i%c5%9flem-ve-uygulama-%c3%a7al%c4%b1%c5%9ft%c4%b1rma">#</a></h2>
 <ul>
-<li><strong>EC2:</strong> AWS üzerinde sanal sunucu; işletim sistemi, instance tipi, disk ve ağ yapılandırması üzerinde kontrol sağlar. <strong>Sınavda:</strong> Özel işletim sistemi yapılandırması, uzun süre çalışan uygulama veya tam sunucu kontrolü isteniyorsa EC2.</li>
-<li><strong>Lambda:</strong> Sunucu yönetmeden olay tetiklemeli kod çalıştırır; kullanım ve çalışma süresine göre ücretlendirilir. <strong>Sınavda:</strong> S3&rsquo;e dosya yüklenince işlem başlatma, SQS mesajı işleme veya kısa süreli API backend&rsquo;i oluşturma.</li>
-<li><strong>ECS:</strong> AWS&rsquo;nin container orkestrasyon servisidir; Docker container&rsquo;larını görev ve servis olarak çalıştırır. <strong>Sınavda:</strong> Kubernetes karmaşıklığı olmadan AWS üzerinde container yönetmek.</li>
-<li><strong>EKS:</strong> AWS tarafından yönetilen Kubernetes control plane sunar; worker node&rsquo;lar EC2 veya desteklenen iş yüklerinde Fargate üzerinde çalışabilir. <strong>Sınavda:</strong> Kubernetes API&rsquo;si, mevcut Kubernetes araçları ve ekosistemi gerekiyorsa EKS.</li>
-<li><strong>Fargate:</strong> ECS veya EKS container&rsquo;ları için sunucu/worker node yönetme ihtiyacını azaltan serverless compute altyapısıdır. <strong>Sınavda:</strong> Container çalıştırılacak ancak EC2 instance&rsquo;ları ve node kapasitesi yönetilmek istenmiyorsa Fargate.</li>
-<li><strong>Lightsail:</strong> Basitleştirilmiş sanal sunucu, disk, ağ ve uygulama altyapısı sunar. <strong>Sınavda:</strong> Küçük web sitesi, blog veya kolay kurulabilen VPS benzeri ortam.</li>
-<li><strong>AWS Batch:</strong> Batch işlerini kuyruklar, zamanlar ve uygun işlem kapasitesinde çalıştırır. <strong>Sınavda:</strong> Büyük veri setleri üzerinde toplu hesaplama, simülasyon veya çok sayıda bağımsız iş.</li>
-<li><strong>Elastic Beanstalk:</strong> Uygulama dağıtımı, kapasite, yük dengeleme ve izleme gibi altyapı işlerini yönetir; EC2 tabanlı kaynaklara erişim imkânı da vardır. <strong>Sınavda:</strong> Uygulama kodunu dağıtmak, altyapı ayrıntılarını daha az yönetmek.</li>
-<li><strong>Auto Scaling:</strong> EC2 instance sayısını talebe veya politikalara göre artırır ve azaltır. <strong>Sınavda:</strong> Trafik değişimlerine otomatik uyum ve kapasite maliyetini kontrol etme.</li>
-<li><strong>EC2 Placement Groups:</strong> Instance&rsquo;ların fiziksel yerleşimini kontrol ederek düşük gecikme, yüksek ağ performansı veya donanım arızalarına karşı ayrışma sağlar. <strong>Sınavda:</strong> Cluster = düşük gecikme; Spread = instance&rsquo;ları ayrı donanımlara yayma; Partition = büyük dağıtık sistemlerde bölüm bazlı ayrışma.</li>
+<li>
+<p><strong>EC2 (Elastic Compute Cloud):</strong> AWS üzerinde sanal sunucu; işletim sistemi, instance tipi, disk ve ağ yapılandırması üzerinde kontrol sağlar.<br>
+<strong>Kullanım alanları:</strong> Web uygulamaları ve API sunucuları; özel işletim sistemi veya yapılandırma gerektiren iş yükleri; veritabanı ve orta katman sunucuları.<br>
+<strong>Avantajlar:</strong> Instance tipi, işletim sistemi, disk ve ağ üzerinde tam kontrol; yüzlerce instance tipi ve satın alma seçeneği.<br>
+<strong>Sınavda:</strong> Özel işletim sistemi yapılandırması, uzun süre çalışan uygulama veya tam sunucu kontrolü isteniyorsa EC2.</p>
+</li>
+<li>
+<p><strong>Lambda:</strong> Sunucu yönetmeden olay tetiklemeli kod çalıştırır; kullanım ve çalışma süresine göre ücretlendirilir.<br>
+<strong>Kullanım alanları:</strong> Olay tetiklemeli işlemler (dosya yükleme, kuyruk mesajı); kısa süreli API backend&rsquo;leri; zamanlanmış bakım işleri.<br>
+<strong>Avantajlar:</strong> Sunucu yönetimi yok; istek başına ödeme; trafiğe göre otomatik ölçekleme.<br>
+<strong>Sınavda:</strong> S3 (Simple Storage Service)&rsquo;e dosya yüklenince işlem başlatma, SQS (Simple Queue Service) mesajı işleme veya kısa süreli API backend&rsquo;i oluşturma.</p>
+</li>
+<li>
+<p><strong>ECS (Elastic Container Service):</strong> AWS&rsquo;nin container orkestrasyon servisidir; Docker container&rsquo;larını görev ve servis olarak çalıştırır.<br>
+<strong>Kullanım alanları:</strong> Docker tabanlı mikroservisler; konteynerli batch işleri; mevcut konteyner iş yüklerini AWS&rsquo;te çalıştırma.<br>
+<strong>Avantajlar:</strong> IAM, ALB ve CloudWatch ile yerel entegrasyon; Kubernetes karmaşıklığı olmadan konteyner yönetimi.<br>
+<strong>Sınavda:</strong> Kubernetes karmaşıklığı olmadan AWS üzerinde container yönetmek.</p>
+</li>
+<li>
+<p><strong>EKS (Elastic Kubernetes Service):</strong> AWS tarafından yönetilen Kubernetes control plane sunar; worker node&rsquo;lar EC2 veya desteklenen iş yüklerinde Fargate üzerinde çalışabilir.<br>
+<strong>Kullanım alanları:</strong> Kubernetes tabalı uygulamalar; çoklu bulut Kubernetes stratejileri; mevcut Kubernetes araçlarıyla iş yükleri.<br>
+<strong>Avantajlar:</strong> Yönetilen Kubernetes control plane; AWS hizmetleriyle yerel entegrasyon; Fargate ile sunucusuz worker seçeneği.<br>
+<strong>Sınavda:</strong> Kubernetes API&rsquo;si, mevcut Kubernetes araçları ve ekosistemi gerekiyorsa EKS.</p>
+</li>
+<li>
+<p><strong>Fargate:</strong> ECS veya EKS container&rsquo;ları için sunucu/worker node yönetme ihtiyacını azaltan serverless compute altyapısıdır.<br>
+<strong>Kullanım alanları:</strong> Sunucusuz konteyner iş yükleri; düzensiz veya az sayıda çalışan servisler; node yönetmeden mikroservisler.<br>
+<strong>Avantajlar:</strong> Sunucu/altyapı yönetimi yok; konteyner başına ödeme; ECS ve EKS ile kullanım.<br>
+<strong>Sınavda:</strong> Container çalıştırılacak ancak EC2 instance&rsquo;ları ve node kapasitesi yönetilmek istenmiyorsa Fargate.</p>
+</li>
+<li>
+<p><strong>Lightsail:</strong> Basitleştirilmiş sanal sunucu, disk, ağ ve uygulama altyapısı sunar.<br>
+<strong>Kullanım alanları:</strong> Küçük web siteleri ve bloglar; basit uygulamalar; geliştirme ve test ortamları.<br>
+<strong>Avantajlar:</strong> Sabit ve düşük fiyatlı paketler; kurulumu kolay VPS benzeri deneyim.<br>
+<strong>Sınavda:</strong> Küçük web sitesi, blog veya kolay kurulabilen VPS benzeri ortam.</p>
+</li>
+<li>
+<p><strong>AWS Batch:</strong> Batch işlerini kuyruklar, zamanlar ve uygun işlem kapasitesinde çalıştırır.<br>
+<strong>Kullanım alanları:</strong> Bilimsel simülasyonlar; toplu veri işleme; model eğitimi gibi paralel işler.<br>
+<strong>Avantajlar:</strong> İşleri otomatik planlar ve uygun kapasitede çalıştırır; Spot kullanımıyla maliyet optimizasyonu.<br>
+<strong>Sınavda:</strong> Büyük veri setleri üzerinde toplu hesaplama, simülasyon veya çok sayıda bağımsız iş.</p>
+</li>
+<li>
+<p><strong>Elastic Beanstalk:</strong> Uygulama dağıtımı, kapasite, yük dengeleme ve izleme gibi altyapı işlerini yönetir; EC2 tabanlı kaynaklara erişim imkânı da vardır.<br>
+<strong>Kullanım alanları:</strong> Web uygulaması dağıtımı (Java, .NET, Python, Node.js vb.); hızlı geliştirme ortamları; altyapı ayrıntısıyla uğraşmadan yayınlama.<br>
+<strong>Avantajlar:</strong> Kod yükleyince altyapıyı otomatik kurar; kaynaklara erişim ve kontrol kullanıcıda kalır.<br>
+<strong>Sınavda:</strong> Uygulama kodunu dağıtmak, altyapı ayrıntılarını daha az yönetmek.</p>
+</li>
+<li>
+<p><strong>Auto Scaling:</strong> EC2 instance sayısını talebe veya politikalara göre artırır ve azaltır.<br>
+<strong>Kullanım alanları:</strong> Trafik dalgalanan web uygulamaları; maliyeti talebe göre optimize etme; hata toleranslı servisler.<br>
+<strong>Avantajlar:</strong> Otomatik kapasite ayarı; sağlık kontrolleriyle bozuk instance&rsquo;ları değiştirme; maliyet kontrolü.<br>
+<strong>Sınavda:</strong> Trafik değişimlerine otomatik uyum ve kapasite maliyetini kontrol etme.</p>
+</li>
+<li>
+<p><strong>EC2 Placement Groups:</strong> Instance&rsquo;ların fiziksel yerleşimini kontrol ederek düşük gecikme, yüksek ağ performansı veya donanım arızalarına karşı ayrışma sağlar.<br>
+<strong>Kullanım alanları:</strong> HPC ve düşük gecikmeli kümeler (cluster); tek donanım arızasından etkilenmemesi gereken kritik instance&rsquo;lar (spread); büyük dağıtık sistemler (partition).<br>
+<strong>Avantajlar:</strong> Fiziksel yerleşim üzerinde kontrol; performans veya dayanıklılık ihtiyacına göre ayrışma.<br>
+<strong>Sınavda:</strong> Cluster = düşük gecikme; Spread = instance&rsquo;ları ayrı donanımlara yayma; Partition = büyük dağıtık sistemlerde bölüm bazlı ayrışma.</p>
+</li>
 </ul>
 <p><strong>Karıştırma:</strong></p>
 <ul>
 <li>ECS = container orkestrasyonu; Fargate = container çalıştırma altyapısı.</li>
 <li>EKS = yönetilen Kubernetes; ECS = AWS&rsquo;nin kendi container orkestrasyonu.</li>
 <li>Lambda = fonksiyon çalıştırma; Fargate = container çalıştırma.</li>
-<li>Auto Scaling = kapasiteyi dinamik değiştirme; ELB = gelen trafiği hedeflere dağıtma.</li>
+<li>Auto Scaling = kapasiteyi dinamik değiştirme; ELB (Elastic Load Balancing) = gelen trafiği hedeflere dağıtma.</li>
 </ul>
 <h2 id="2-storage---depolama">2. Storage - Depolama<a class="anchor" href="#2-storage---depolama">#</a></h2>
 <ul>
-<li><strong>S3:</strong> Nesne depolama; dosyalar bucket içinde object olarak saklanır. Çok yüksek dayanıklılık, sürümleme, lifecycle ve farklı depolama sınıfları sunar. <strong>Sınavda:</strong> Yedekler, medya dosyaları, statik web içeriği, data lake ve arşiv.</li>
-<li><strong>S3 Storage Classes:</strong> Veriye erişim sıklığı ve erişim süresine göre maliyeti optimize eder. <strong>Sınavda:</strong> Sık erişim = S3 Standard; öngörülebilir seyrek erişim = Standard-IA; erişim deseni belirsiz = Intelligent-Tiering; arşiv = Glacier sınıfları.</li>
-<li><strong>EBS:</strong> EC2&rsquo;ye bağlanan block storage; işletim sistemi diski ve veritabanı diskleri için kullanılır. <strong>Sınavda:</strong> Kalıcı block disk, düşük gecikmeli disk I/O&rsquo;su ve belirli performans gereksinimleri.</li>
-<li><strong>EBS Snapshots:</strong> EBS volume verisinin point-in-time yedeğidir; artımlı snapshot mekanizması kullanır. <strong>Sınavda:</strong> Volume yedeği, başka bir AZ veya Region&rsquo;a kopyalama ve kurtarma.</li>
-<li><strong>Instance Store:</strong> Fiziksel sunucuya bağlı geçici block storage; kalıcı veri için uygun değildir. <strong>Sınavda:</strong> Geçici cache, buffer ve yeniden oluşturulabilir yüksek performanslı veriler.</li>
-<li><strong>EFS:</strong> Birden fazla Linux/Unix istemcisinin aynı dosya sistemine erişmesini sağlayan yönetilen NFS dosya depolamasıdır. <strong>Sınavda:</strong> Birden fazla EC2 instance&rsquo;ının aynı dosyaları eş zamanlı okuması ve yazması.</li>
-<li><strong>FSx:</strong> Windows File Server, Lustre, NetApp ONTAP ve OpenZFS gibi yönetilen dosya sistemleri sunar. <strong>Sınavda:</strong> Windows SMB/Active Directory, HPC için Lustre veya belirli kurumsal dosya sistemi özellikleri.</li>
-<li><strong>Storage Gateway:</strong> On-premises ortam ile AWS depolama servisleri arasında hibrit entegrasyon sağlar. <strong>Sınavda:</strong> Yerel uygulamaların bulut depolamasına geçişini kolaylaştırma.</li>
-<li><strong>AWS Snow Family:</strong> Büyük miktarda veriyi fiziksel cihazlarla taşıma ve uygun modellerde edge computing sağlama yaklaşımıdır. <strong>Sınavda:</strong> Sınırlı ağ bant genişliği, yüksek veri aktarım süresi veya bağlantı kısıtları.</li>
-<li><strong>AWS DataSync:</strong> NFS, SMB ve desteklenen depolama sistemleri arasında veriyi otomatik ve verimli biçimde taşır. <strong>Sınavda:</strong> On-premises dosyaları S3 veya EFS&rsquo;ye düzenli ya da toplu taşıma.</li>
-<li><strong>AWS Backup:</strong> Desteklenen AWS kaynakları için merkezi yedekleme planları, politikalar ve saklama yönetimi sunar. <strong>Sınavda:</strong> Birden fazla AWS servisinin yedeklerini merkezi yönetmek.</li>
+<li>
+<p><strong>S3:</strong> Nesne depolama; dosyalar bucket içinde object olarak saklanır. Çok yüksek dayanıklılık, sürümleme, lifecycle ve farklı depolama sınıfları sunar.<br>
+<strong>Kullanım alanları:</strong> Statik web içeriği ve medya; yedekleme ve arşiv; data lake; veri paylaşımı ve dağıtımı.<br>
+<strong>Avantajlar:</strong> Yüksek dayanıklılık; sınırsız ölçek; sürümleme, lifecycle ve geniş depolama sınıfı seçenekleri.<br>
+<strong>Sınavda:</strong> Yedekler, medya dosyaları, statik web içeriği, data lake ve arşiv.</p>
+</li>
+<li>
+<p><strong>S3 Storage Classes:</strong> Veriye erişim sıklığı ve erişim süresine göre maliyeti optimize eder.<br>
+<strong>Kullanım alanları:</strong> Sık erişilen veriler (Standard); seyrek erişilen veriler (Standard-IA); erişim deseni belirsiz veriler (Intelligent-Tiering); arşiv (Glacier sınıfları).<br>
+<strong>Avantajlar:</strong> Erişim sıklığına göre maliyet optimizasyonu; lifecycle ile otomatik geçiş.<br>
+<strong>Sınavda:</strong> Sık erişim = S3 Standard; öngörülebilir seyrek erişim = Standard-IA; erişim deseni belirsiz = Intelligent-Tiering; arşiv = Glacier sınıfları.</p>
+</li>
+<li>
+<p><strong>EBS (Elastic Block Store):</strong> EC2&rsquo;ye bağlanan block storage; işletim sistemi diski ve veritabanı diskleri için kullanılır.<br>
+<strong>Kullanım alanları:</strong> EC2 işletim sistemi diskleri; ilişkisel veritabanı depolaması; düşük gecikmeli kalıcı blok depolama.<br>
+<strong>Avantajlar:</strong> Anlık snapshot alma; gp3/io2 gibi türlerle performans-fiyat seçeneği; AZ içinde dayanıklı.<br>
+<strong>Sınavda:</strong> Kalıcı block disk, düşük gecikmeli disk I/O&rsquo;su ve belirli performans gereksinimleri.</p>
+</li>
+<li>
+<p><strong>EBS Snapshots:</strong> EBS volume verisinin point-in-time yedeğidir; artımlı snapshot mekanizması kullanır.<br>
+<strong>Kullanım alanları:</strong> Volume yedekleme ve felaket kurtarma; AMI oluşturma; veriyi bölge/region kopyalama.<br>
+<strong>Avantajlar:</strong> Artımlı ve maliyeti verimli yedekleme; S3 üzerinde depolama; anlık geri yükleme.<br>
+<strong>Sınavda:</strong> Volume yedeği, başka bir AZ (Availability Zone) veya Region&rsquo;a kopyalama ve kurtarma.</p>
+</li>
+<li>
+<p><strong>Instance Store:</strong> Fiziksel sunucuya bağlı geçici block storage; kalıcı veri için uygun değildir.<br>
+<strong>Kullanım alanları:</strong> Geçici cache ve buffer; yeniden oluşturulabilir veriler; yüksek IOPS gerektiren geçici iş yükleri.<br>
+<strong>Avantajlar:</strong> Çok yüksek yerel disk performansı; instance&rsquo;a dahil olduğu için ek disk maliyeti yok.<br>
+<strong>Sınavda:</strong> Geçici cache, buffer ve yeniden oluşturulabilir yüksek performanslı veriler.</p>
+</li>
+<li>
+<p><strong>EFS (Elastic File System):</strong> Birden fazla Linux/Unix istemcisinin aynı dosya sistemine erişmesini sağlayan yönetilen NFS dosya depolamasıdır.<br>
+<strong>Kullanım alanları:</strong> Birden fazla instance&rsquo;ın paylaştığı dosya sistemleri; içerik yönetimi; Linux uygulamaları için paylaşımlı depolama.<br>
+<strong>Avantajlar:</strong> Otomatik ölçeklenir; çoklu AZ&rsquo;den erişim; NFS uyumlu.<br>
+<strong>Sınavda:</strong> Birden fazla EC2 instance&rsquo;ının aynı dosyaları eş zamanlı okuması ve yazması.</p>
+</li>
+<li>
+<p><strong>FSx:</strong> Windows File Server, Lustre, NetApp ONTAP ve OpenZFS gibi yönetilen dosya sistemleri sunar.<br>
+<strong>Kullanım alanları:</strong> Windows uygulamaları ve SMB paylaşımları; HPC ve ML için Lustre; NetApp ONTAP gerektiren kurumsal iş yükleri.<br>
+<strong>Avantajlar:</strong> Yönetilen dosya sistemleri; yüksek performans; mevcut protokol ve araçlarla uyumluluk.<br>
+<strong>Sınavda:</strong> Windows SMB/Active Directory, HPC için Lustre veya belirli kurumsal dosya sistemi özellikleri.</p>
+</li>
+<li>
+<p><strong>Storage Gateway:</strong> On-premises ortam ile AWS depolama servisleri arasında hibrit entegrasyon sağlar.<br>
+<strong>Kullanım alanları:</strong> On-premises uygulamaların bulut yedeklemesi; hibrit depolama uzantısı; dosya/blok/tape iş yükleri.<br>
+<strong>Avantajlar:</strong> Yerel erişim hızı + bulut depolama maliyeti; VMware/Hyper-V uyumlu.<br>
+<strong>Sınavda:</strong> Yerel uygulamaların bulut depolamasına geçişini kolaylaştırma.</p>
+</li>
+<li>
+<p><strong>AWS Snow Family:</strong> Büyük miktarda veriyi fiziksel cihazlarla taşıma ve uygun modellerde edge computing sağlama yaklaşımıdır.<br>
+<strong>Kullanım alanları:</strong> TB-PB ölçeğinde veri taşıma; sınırlı bant genişliği olan lokasyonlar; uç (edge) işleme senaryoları.<br>
+<strong>Avantajlar:</strong> Fiziksel transferle ağ maliyeti ve süresi ortadan kalkar; şifreli ve dayanıklı cihazlar.<br>
+<strong>Sınavda:</strong> Sınırlı ağ bant genişliği, yüksek veri aktarım süresi veya bağlantı kısıtları.</p>
+</li>
+<li>
+<p><strong>AWS DataSync:</strong> NFS, SMB ve desteklenen depolama sistemleri arasında veriyi otomatik ve verimli biçimde taşır.<br>
+<strong>Kullanım alanları:</strong> On-premises veriyi S3/EFS/FSx&rsquo;e düzenli taşıma; bulutlar arası kopyalama; göç öncesi sürekli senkronizasyon.<br>
+<strong>Avantajlar:</strong> Otomatik şifreleme ve veri doğrulama; ağ optimizasyonu; zamanlanmış otomatik transfer.<br>
+<strong>Sınavda:</strong> On-premises dosyaları S3 veya EFS&rsquo;ye düzenli ya da toplu taşıma.</p>
+</li>
+<li>
+<p><strong>AWS Backup:</strong> Desteklenen AWS kaynakları için merkezi yedekleme planları, politikalar ve saklama yönetimi sunar.<br>
+<strong>Kullanım alanları:</strong> RDS, EBS, EFS, S3 ve DynamoDB için merkezi yedekleme; uyumluluk amaçlı saklama; çoklu hesap yedek yönetimi.<br>
+<strong>Avantajlar:</strong> Tek panelden politika yönetimi; otomatik saklama ve silmeye karşı koruma.<br>
+<strong>Sınavda:</strong> Birden fazla AWS servisinin yedeklerini merkezi yönetmek.</p>
+</li>
 </ul>
 <p><strong>Karıştırma:</strong></p>
 <ul>
@@ -3679,20 +3877,90 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 <h2 id="3-database---veritabanları">3. Database - Veritabanları<a class="anchor" href="#3-database---veritabanlar%c4%b1">#</a></h2>
 <ul>
-<li><strong>RDS:</strong> MySQL, PostgreSQL, MariaDB, Oracle ve SQL Server gibi ilişkisel veritabanlarını yönetilen hizmet olarak çalıştırır. <strong>Sınavda:</strong> SQL, ilişkisel veri, otomatik yedekleme ve yönetilen veritabanı.</li>
-<li><strong>RDS Multi-AZ:</strong> Veritabanı altyapısının farklı AZ&rsquo;lerde yüksek erişilebilirlik için yedeklenmesini sağlar. <strong>Sınavda:</strong> Veritabanı instance&rsquo;ı veya AZ arızasında otomatik failover.</li>
-<li><strong>RDS Read Replica:</strong> Okuma sorgularını ana veritabanından ayırmak için asenkron replika oluşturur. <strong>Sınavda:</strong> Okuma ağırlıklı iş yüklerinde performans artırma.</li>
-<li><strong>Amazon Aurora:</strong> AWS tarafından tasarlanmış, MySQL ve PostgreSQL uyumlu ilişkisel veritabanıdır. Ayrıştırılmış, dağıtık depolama mimarisi ve yönetilen failover özellikleri sunar. <strong>Sınavda:</strong> Yüksek performans, yüksek erişilebilirlik ve ilişkisel veri.</li>
-<li><strong>Aurora Serverless:</strong> Aurora kapasitesini desteklenen yapılandırmalarda talebe göre otomatik ölçekler. <strong>Sınavda:</strong> Değişken veya öngörülemeyen veritabanı yükü.</li>
-<li><strong>DynamoDB:</strong> Yönetilen, dağıtık NoSQL key-value ve document veritabanıdır. <strong>Sınavda:</strong> Çok yüksek ölçek, düşük gecikmeli anahtar erişimi ve sunucu yönetimi olmadan kapasite yönetimi.</li>
-<li><strong>DynamoDB DAX:</strong> DynamoDB okumaları için bellek içi cache katmanıdır. <strong>Sınavda:</strong> Sık okunan verilerde mikro saniye düzeyinde okuma gecikmesi hedefi.</li>
-<li><strong>ElastiCache:</strong> Redis OSS veya Memcached tabanlı yönetilen cache çözümleri sunar. <strong>Sınavda:</strong> Veritabanı üzerindeki okuma yükünü azaltma ve uygulama gecikmesini düşürme.</li>
-<li><strong>Redshift:</strong> Analitik sorgular ve büyük ölçekli veri ambarı iş yükleri için kullanılır. <strong>Sınavda:</strong> Büyük veri üzerinde SQL raporlama, BI ve analitik.</li>
-<li><strong>Neptune:</strong> İlişkileri ve bağlantıları grafik modeliyle tutar. <strong>Sınavda:</strong> Sosyal ağ ilişkileri, fraud bağlantıları ve graph traversal.</li>
-<li><strong>DocumentDB:</strong> MongoDB ile uyumlu API&rsquo;ler sunan yönetilen document database hizmetidir. <strong>Sınavda:</strong> Belge tabanlı veri modeli ve MongoDB uyumlu uygulama gereksinimleri.</li>
-<li><strong>OpenSearch Service:</strong> Tam metin arama, log analizi ve arama odaklı analiz sağlar. <strong>Sınavda:</strong> Uygulama arama kutusu, log arama ve indekslenmiş metin sorguları.</li>
-<li><strong>Timestream:</strong> Zaman damgalı veriler ve zaman serisi analizi için tasarlanmıştır. <strong>Sınavda:</strong> IoT telemetrisi, sensör verileri ve zaman serisi metrikleri.</li>
-<li><strong>QLDB:</strong> Değişiklik geçmişini kriptografik olarak doğrulanabilir bir ledger yapısında tutmak için tasarlanmıştı. <strong>Sınavda:</strong> Eski kaynaklarda karşılaşabilirsin; AWS, QLDB desteğini 31 Temmuz 2025&rsquo;te sona erdirdiğinden güncel mimariler için aktif bir seçenek olarak değerlendirme.</li>
+<li>
+<p><strong>RDS (Relational Database Service):</strong> MySQL, PostgreSQL, MariaDB, Oracle ve SQL Server gibi ilişkisel veritabanlarını yönetilen hizmet olarak çalıştırır.<br>
+<strong>Kullanım alanları:</strong> İlişkisel uygulamalar (MySQL, PostgreSQL, Oracle vb.); ACID gerektiren iş yükleri; yönetilen veritabanı ihtiyacı.<br>
+<strong>Avantajlar:</strong> Otomatik yedekleme, patch ve failover; Multi-AZ ve Read Replica seçenekleri.<br>
+<strong>Sınavda:</strong> SQL, ilişkisel veri, otomatik yedekleme ve yönetilen veritabanı.</p>
+</li>
+<li>
+<p><strong>RDS Multi-AZ:</strong> Veritabanı altyapısının farklı AZ&rsquo;lerde yüksek erişilebilirlik için yedeklenmesini sağlar.<br>
+<strong>Kullanım alanları:</strong> Yüksek erişilebilirlik gerektiren üretim veritabanları; planlanmamış arızalarda kesintisiz devam.<br>
+<strong>Avantajlar:</strong> Otomatik failover; senkron replikasyon; uygulama tarafında değişiklik gerekmez.<br>
+<strong>Sınavda:</strong> Veritabanı instance&rsquo;ı veya AZ arızasında otomatik failover.</p>
+</li>
+<li>
+<p><strong>RDS Read Replica:</strong> Okuma sorgularını ana veritabanından ayırmak için asenkron replika oluşturur.<br>
+<strong>Kullanım alanları:</strong> Raporlama ve analitik okumalar; okuma trafiğini ölçekleme; bölge dışı kopya.<br>
+<strong>Avantajlar:</strong> Okuma kapasitesini artırır; asenkron replikasyon; birden fazla kopya.<br>
+<strong>Sınavda:</strong> Okuma ağırlıklı iş yüklerinde performans artırma.</p>
+</li>
+<li>
+<p><strong>Amazon Aurora:</strong> AWS tarafından tasarlanmış, MySQL ve PostgreSQL uyumlu ilişkisel veritabanıdır. Ayrıştırılmış, dağıtık depolama mimarisi ve yönetilen failover özellikleri sunar.<br>
+<strong>Kullanım alanları:</strong> Yüksek performanslı ilişkisel uygulamalar; oyun, medya ve içerik yönetimi, gerçek zamanlı analitik; MySQL/PostgreSQL iş yükleri.<br>
+<strong>Avantajlar:</strong> Standart motorlara göre yüksek performans; otomatik ölçeklenen depolama; 15 Read Replica&rsquo;ya kadar.<br>
+<strong>Sınavda:</strong> Yüksek performans, yüksek erişilebilirlik ve ilişkisel veri.</p>
+</li>
+<li>
+<p><strong>Aurora Serverless:</strong> Aurora kapasitesini desteklenen yapılandırmalarda talebe göre otomatik ölçekler.<br>
+<strong>Kullanım alanları:</strong> Düzensiz veya tahmin edilemeyen trafikli uygulamalar; geliştirme/test ortamları; sezonluk iş yükleri.<br>
+<strong>Avantajlar:</strong> Kapasite otomatik ölçeklenir; kullanılmadığında durabilir; saniye bazlı faturalandırma.<br>
+<strong>Sınavda:</strong> Değişken veya öngörülemeyen veritabanı yükü.</p>
+</li>
+<li>
+<p><strong>DynamoDB:</strong> Yönetilen, dağıtık NoSQL key-value ve document veritabanıdır.<br>
+<strong>Kullanım alanları:</strong> Oyun skorları ve profilleri; sepet ve oturum verileri; IoT ve mobil uygulama verileri; anahtar-değer erişimi.<br>
+<strong>Avantajlar:</strong> Tek haneli milisaniye gecikme; sunucusuz ve sınırsız ölçek; TTL ve Global Tables.<br>
+<strong>Sınavda:</strong> Çok yüksek ölçek, düşük gecikmeli anahtar erişimi ve sunucu yönetimi olmadan kapasite yönetimi.</p>
+</li>
+<li>
+<p><strong>DynamoDB DAX (DynamoDB Accelerator):</strong> DynamoDB okumaları için bellek içi cache katmanıdır.<br>
+<strong>Kullanım alanları:</strong> Yoğun okunan DynamoDB tabloları; oyun panoları; flash-sale gibi ani yük senaryoları.<br>
+<strong>Avantajlar:</strong> Mikrosaniye seviyesinde okuma; write-through cache; uygulama kodunda değişiklik gerekmez.<br>
+<strong>Sınavda:</strong> Sık okunan verilerde mikro saniye düzeyinde okuma gecikmesi hedefi.</p>
+</li>
+<li>
+<p><strong>ElastiCache:</strong> Redis OSS veya Memcached tabanlı yönetilen cache çözümleri sunar.<br>
+<strong>Kullanım alanları:</strong> Veritabanı önü cache; oturum yönetimi; liderlik panoları (Redis); gerçek zamanlı analitik.<br>
+<strong>Avantajlar:</strong> Milisaniye altı gecikme; veritabanı yükünü azaltır; Redis ve Memcached seçenekleri.<br>
+<strong>Sınavda:</strong> Veritabanı üzerindeki okuma yükünü azaltma ve uygulama gecikmesini düşürme.</p>
+</li>
+<li>
+<p><strong>Redshift:</strong> Analitik sorgular ve büyük ölçekli veri ambarı iş yükleri için kullanılır.<br>
+<strong>Kullanım alanları:</strong> Büyük ölçekli veri ambarı; iş zekâsı raporları; yılların satış verisi üzerinde analitik sorgular.<br>
+<strong>Avantajlar:</strong> Kolonlu depolama ile hızlı sorgu; SQL uyumlu; petabayt ölçek.<br>
+<strong>Sınavda:</strong> Büyük veri üzerinde SQL raporlama, BI ve analitik.</p>
+</li>
+<li>
+<p><strong>Neptune:</strong> İlişkileri ve bağlantıları grafik modeliyle tutar.<br>
+<strong>Kullanım alanları:</strong> Sosyal ağlar; öneri motorları; dolandırıcılık tespiti; graf verisi gereken uygulamalar.<br>
+<strong>Avantajlar:</strong> Gremlin ve SPARQL desteği; yüksek dayanıklılık; hızlı graf sorguları.<br>
+<strong>Sınavda:</strong> Sosyal ağ ilişkileri, fraud bağlantıları ve graph traversal.</p>
+</li>
+<li>
+<p><strong>DocumentDB:</strong> MongoDB ile uyumlu API&rsquo;ler sunan yönetilen document database hizmetidir.<br>
+<strong>Kullanım alanları:</strong> MongoDB uyumlu uygulamalar; içerik katalogları; kullanıcı profilleri.<br>
+<strong>Avantajlar:</strong> MongoDB uyumluluğu; yönetilen yedekleme ve failover; otomatik ölçeklenen depolama.<br>
+<strong>Sınavda:</strong> Belge tabanlı veri modeli ve MongoDB uyumlu uygulama gereksinimleri.</p>
+</li>
+<li>
+<p><strong>OpenSearch Service:</strong> Tam metin arama, log analizi ve arama odaklı analiz sağlar.<br>
+<strong>Kullanım alanları:</strong> Uygulama içi arama; log analizi; güvenlik olayı izleme.<br>
+<strong>Avantajlar:</strong> Tam metin arama ve analitik; Kibana görselleştirme; gerçek zamanlı sorgular.<br>
+<strong>Sınavda:</strong> Uygulama arama kutusu, log arama ve indekslenmiş metin sorguları.</p>
+</li>
+<li>
+<p><strong>Timestream:</strong> Zaman damgalı veriler ve zaman serisi analizi için tasarlanmıştır.<br>
+<strong>Kullanım alanları:</strong> IoT sensör verileri; DevOps metrikleri; zaman serisi analitiği.<br>
+<strong>Avantajlar:</strong> Zaman serisine özel depolama; otomatik katmanlandırma; SQL sorgu desteği.<br>
+<strong>Sınavda:</strong> IoT telemetrisi, sensör verileri ve zaman serisi metrikleri.</p>
+</li>
+<li>
+<p><strong>QLDB (Quantum Ledger Database):</strong> Değişiklik geçmişini kriptografik olarak doğrulanabilir bir ledger yapısında tutmak için tasarlanmıştı.<br>
+<strong>Kullanım alanları:</strong> Denetlenebilir işlem geçmişi; tedarik zinciri kayıtları; sistem-of-record doğrulama.<br>
+<strong>Avantajlar:</strong> Değiştirilemez ledger; kriptografik doğrulama; merkezi ve yönetilen altyapı.<br>
+<strong>Sınavda:</strong> Eski kaynaklarda karşılaşabilirsin; AWS, QLDB desteğini 31 Temmuz 2025&rsquo;te sona erdirdiğinden güncel mimariler için aktif bir seçenek olarak değerlendirme.</p>
+</li>
 </ul>
 <p><strong>Karıştırma:</strong></p>
 <ul>
@@ -3703,23 +3971,108 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 <h2 id="4-networking--cdn---ağ-ve-trafik-yönetimi">4. Networking &amp; CDN - Ağ ve Trafik Yönetimi<a class="anchor" href="#4-networking--cdn---a%c4%9f-ve-trafik-y%c3%b6netimi">#</a></h2>
 <ul>
-<li><strong>VPC:</strong> AWS kaynaklarının IP aralıklarını, subnet&rsquo;lerini, route table&rsquo;larını ve ağ güvenliğini tanımlayan izole sanal ağdır. <strong>Sınavda:</strong> Kaynakları özel ağda çalıştırma ve ağ erişimini kontrol etme.</li>
-<li><strong>Subnet:</strong> VPC içindeki belirli bir Availability Zone&rsquo;a ait IP aralığıdır. <strong>Sınavda:</strong> Kaynakları AZ&rsquo;lere ve public/private ağ katmanlarına ayırma.</li>
-<li><strong>Internet Gateway (IGW):</strong> VPC ile internet arasında internet yönlendirmesini sağlar. <strong>Sınavda:</strong> Public subnet&rsquo;teki kaynağın internete erişmesi; bunun için route, public IP ve güvenlik kuralları da gerekir.</li>
-<li><strong>NAT Gateway:</strong> Private subnet&rsquo;teki IPv4 kaynaklarının internete veya dış ağlara bağlantı başlatmasını sağlar; internetten doğrudan başlatılan bağlantıları kabul etmez. <strong>Sınavda:</strong> Private EC2&rsquo;nin yazılım güncellemesi indirmesi.</li>
-<li><strong>Security Group:</strong> ENI/instance düzeyinde stateful sanal güvenlik duvarıdır. <strong>Sınavda:</strong> Yalnızca belirli kaynaklardan belirli portlara izin verme.</li>
-<li><strong>Network ACL (NACL):</strong> Subnet düzeyinde stateless filtreleme yapar; inbound ve outbound kuralları ayrı değerlendirilir. <strong>Sınavda:</strong> Subnet düzeyinde ek filtreleme veya belirli IP aralıklarını engelleme.</li>
-<li><strong>Route Table:</strong> Hedef IP aralığına göre trafiğin IGW, NAT, peering veya başka bir hedefe yönlendirilmesini belirler. <strong>Sınavda:</strong> Public/private subnet erişim sorunları ve ağ yolları.</li>
-<li><strong>Route 53:</strong> DNS, health check ve routing policy hizmetidir. <strong>Sınavda:</strong> DNS yönlendirme, failover, latency-based veya geolocation routing.</li>
-<li><strong>CloudFront:</strong> İçeriği edge location&rsquo;larda cache ederek kullanıcılara daha düşük gecikmeyle ulaştıran CDN&rsquo;dir. <strong>Sınavda:</strong> Global kullanıcılar, statik içerik hızlandırma ve origin yükünü azaltma.</li>
-<li><strong>Elastic Load Balancing (ELB):</strong> Trafiği sağlıklı hedeflere dağıtır. <strong>Sınavda:</strong> ALB = HTTP/HTTPS ve katman 7 yönlendirme; NLB = katman 4, TCP/UDP ve yüksek performans; Gateway Load Balancer = sanal ağ güvenlik cihazları.</li>
-<li><strong>AWS Global Accelerator:</strong> Anycast statik IP&rsquo;ler ve AWS global ağı üzerinden trafiği uygun bölgesel endpoint&rsquo;lere yönlendirir. <strong>Sınavda:</strong> Global uygulamalar, hızlı failover ve TCP/UDP trafiğinin AWS ağı üzerinden yönlendirilmesi.</li>
-<li><strong>AWS Direct Connect:</strong> On-premises veri merkezi ile AWS arasında özel ağ bağlantısı sağlar. <strong>Sınavda:</strong> Daha tutarlı ağ performansı, yüksek bant genişliği ve özel bağlantı ihtiyacı.</li>
-<li><strong>Site-to-Site VPN:</strong> On-premises ağ ile AWS arasında internet üzerinden IPsec tünelleri oluşturur. <strong>Sınavda:</strong> Hızlı hibrit bağlantı veya Direct Connect&rsquo;e yedek bağlantı.</li>
-<li><strong>VPC Peering:</strong> İki VPC arasında doğrudan özel IP yönlendirmesi sağlar; transit yönlendirme desteklemez. <strong>Sınavda:</strong> Az sayıda VPC&rsquo;yi birbirine bağlama.</li>
-<li><strong>Transit Gateway:</strong> Çok sayıda VPC ve on-premises ağı merkezi hub üzerinden bağlar. <strong>Sınavda:</strong> Çoklu hesap ve VPC&rsquo;lerde merkezi ağ topolojisi.</li>
-<li><strong>VPC Endpoints:</strong> AWS servislerine özel ağ üzerinden erişim sağlar. <strong>Sınavda:</strong> Private subnet&rsquo;teki EC2&rsquo;nin internet/NAT kullanmadan S3 veya DynamoDB&rsquo;ye erişmesi için Gateway Endpoint; birçok diğer servis için uygun Interface Endpoint.</li>
-<li><strong>AWS PrivateLink:</strong> Bir servise VPC endpoint üzerinden özel erişim sağlar; servis sağlayıcı ve tüketici ağlarını doğrudan birbirine açmadan bağlantı kurabilir. <strong>Sınavda:</strong> Başka bir VPC&rsquo;deki veya üçüncü taraf sağlayıcıdaki servise özel erişim.</li>
+<li>
+<p><strong>VPC (Virtual Private Cloud):</strong> AWS kaynaklarının IP aralıklarını, subnet&rsquo;lerini, route table&rsquo;larını ve ağ güvenliğini tanımlayan izole sanal ağdır.<br>
+<strong>Kullanım alanları:</strong> İzole bulut ağı; çok katmanlı uygulama mimarileri; özel subnet&rsquo;li iş yükleri.<br>
+<strong>Avantajlar:</strong> Subnet, route ve gateway üzerinde tam kontrol; katmanlı güvenlik yapılandırması.<br>
+<strong>Sınavda:</strong> Kaynakları özel ağda çalıştırma ve ağ erişimini kontrol etme.</p>
+</li>
+<li>
+<p><strong>Subnet:</strong> VPC içindeki belirli bir Availability Zone&rsquo;a ait IP aralığıdır.<br>
+<strong>Kullanım alanları:</strong> Genel/özel katman ayrımı; erişim kontrolü; AZ bazlı kaynak yerleşimi.<br>
+<strong>Avantajlar:</strong> Kaynakları mantıksal olarak gruplama; NACL ile katman güvenliği.<br>
+<strong>Sınavda:</strong> Kaynakları AZ&rsquo;lere ve public/private ağ katmanlarına ayırma.</p>
+</li>
+<li>
+<p><strong>Internet Gateway (IGW):</strong> VPC ile internet arasında internet yönlendirmesini sağlar.<br>
+<strong>Kullanım alanları:</strong> VPC&rsquo;nin internete çıkması; genel IP&rsquo;li kaynakların internet erişimi.<br>
+<strong>Avantajlar:</strong> Çift yönlü internet erişimi; yüksek bant genişliği; ek ücret yok.<br>
+<strong>Sınavda:</strong> Public subnet&rsquo;teki kaynağın internete erişmesi; bunun için route, public IP ve güvenlik kuralları da gerekir.</p>
+</li>
+<li>
+<p><strong>NAT Gateway:</strong> Private subnet&rsquo;teki IPv4 kaynaklarının internete veya dış ağlara bağlantı başlatmasını sağlar; internetten doğrudan başlatılan bağlantıları kabul etmez.<br>
+<strong>Kullanım alanları:</strong> Özel subnet&rsquo;lerden internete çıkış; özel instance&rsquo;ların güncelleme ve paket erişimi.<br>
+<strong>Avantajlar:</strong> Gelen trafiğe kapalı güvenlik; yönetilen ve otomatik ölçeklenen servis.<br>
+<strong>Sınavda:</strong> Private EC2&rsquo;nin yazılım güncellemesi indirmesi.</p>
+</li>
+<li>
+<p><strong>Security Group:</strong> ENI (Elastic Network Interface)/instance düzeyinde stateful sanal güvenlik duvarıdır.<br>
+<strong>Kullanım alanları:</strong> Instance seviyesinde trafik filtreleme; port bazlı erişim izinleri.<br>
+<strong>Avantajlar:</strong> Stateful yapı (izin verilen dönüş trafiği otomatik); kural yönetimi kolay.<br>
+<strong>Sınavda:</strong> Yalnızca belirli kaynaklardan belirli portlara izin verme.</p>
+</li>
+<li>
+<p><strong>Network ACL (NACL):</strong> Subnet düzeyinde stateless filtreleme yapar; inbound ve outbound kuralları ayrı değerlendirilir.<br>
+<strong>Kullanım alanları:</strong> Subnet seviyesinde trafik kontrolü; belirli IP adreslerini engelleme.<br>
+<strong>Avantajlar:</strong> Explicit deny desteği; stateless yapı; subnet genelinde koruma.<br>
+<strong>Sınavda:</strong> Subnet düzeyinde ek filtreleme veya belirli IP aralıklarını engelleme.</p>
+</li>
+<li>
+<p><strong>Route Table:</strong> Hedef IP aralığına göre trafiğin IGW, NAT, peering veya başka bir hedefe yönlendirilmesini belirler.<br>
+<strong>Kullanım alanları:</strong> Trafik yönlendirme kuralları; internet veya VPC endpoint yönlendirmesi; VPN/Direct Connect trafiği.<br>
+<strong>Avantajlar:</strong> Subnet bazlı hedef kontrolü; basit ve esnek yönlendirme.<br>
+<strong>Sınavda:</strong> Public/private subnet erişim sorunları ve ağ yolları.</p>
+</li>
+<li>
+<p><strong>Route 53:</strong> DNS, health check ve routing policy hizmetidir.<br>
+<strong>Kullanım alanları:</strong> DNS yönetimi; bölge bazlı yönlendirme; sağlık kontrollü failover; domain kayıt.<br>
+<strong>Avantajlar:</strong> Yüksek erişilebilirlik; latency/weighted/geolocation politikaları; alias ile ücretsiz sorgular.<br>
+<strong>Sınavda:</strong> DNS yönlendirme, failover, latency-based veya geolocation routing.</p>
+</li>
+<li>
+<p><strong>CloudFront:</strong> İçeriği edge location&rsquo;larda cache ederek kullanıcılara daha düşük gecikmeyle ulaştıran CDN&rsquo;dir.<br>
+<strong>Kullanım alanları:</strong> Statik içerik ve medya dağıtımı; API hızlandırma; DDoS/bot koruması katmanı.<br>
+<strong>Avantajlar:</strong> Kenar (edge) önbellekleme ile düşük gecikme; S3 internet çıkış ücretlerini düşürür.<br>
+<strong>Sınavda:</strong> Global kullanıcılar, statik içerik hızlandırma ve origin yükünü azaltma.</p>
+</li>
+<li>
+<p><strong>Elastic Load Balancing (ELB):</strong> Trafiği sağlıklı hedeflere dağıtır.<br>
+<strong>Kullanım alanları:</strong> Gelen trafiği birden fazla hedefe dağıtma; HTTPS sonlandırma; sağlık kontrollü yönlendirme.<br>
+<strong>Avantajlar:</strong> Otomatik ölçeklenen yönetilen servis; ALB/NLB/GWLB seçenekleri; AZ&rsquo;ler arası dağıtım.<br>
+<strong>Sınavda:</strong> ALB (Application Load Balancer) = HTTP/HTTPS ve katman 7 yönlendirme; NLB (Network Load Balancer) = katman 4, TCP/UDP ve yüksek performans; Gateway Load Balancer = sanal ağ güvenlik cihazları.</p>
+</li>
+<li>
+<p><strong>AWS Global Accelerator:</strong> Anycast statik IP&rsquo;ler ve AWS global ağı üzerinden trafiği uygun bölgesel endpoint&rsquo;lere yönlendirir.<br>
+<strong>Kullanım alanları:</strong> Global kullanıcılar için düşük gecikmeli uygulamalar; tek IP ile çoklu bölge failover.<br>
+<strong>Avantajlar:</strong> AWS omurgası üzerinden yönlendirme; sabit giriş IP&rsquo;leri; hızlı bölgesel geçiş.<br>
+<strong>Sınavda:</strong> Global uygulamalar, hızlı failover ve TCP/UDP trafiğinin AWS ağı üzerinden yönlendirilmesi.</p>
+</li>
+<li>
+<p><strong>AWS Direct Connect:</strong> On-premises veri merkezi ile AWS arasında özel ağ bağlantısı sağlar.<br>
+<strong>Kullanım alanları:</strong> On-premises&rsquo;ten AWS&rsquo;e özel bağlantı; yüksek hacimli veri aktarımı; gecikme duyarlı hibrit mimariler.<br>
+<strong>Avantajlar:</strong> İnternet dışı özel hat; tutarlı bant genişliği ve gecikme; ağ maliyetinde tasarruf.<br>
+<strong>Sınavda:</strong> Daha tutarlı ağ performansı, yüksek bant genişliği ve özel bağlantı ihtiyacı.</p>
+</li>
+<li>
+<p><strong>Site-to-Site VPN:</strong> On-premises ağ ile AWS arasında internet üzerinden IPsec tünelleri oluşturur.<br>
+<strong>Kullanım alanları:</strong> On-premises ağdan VPC&rsquo;ye güvenli tünel; geçici veya yedek bağlantı; küçük ofis bağlantıları.<br>
+<strong>Avantajlar:</strong> Hızlı kurulum; IPSec şifreleme; Direct Connect&rsquo;e ucuz yedek.<br>
+<strong>Sınavda:</strong> Hızlı hibrit bağlantı veya Direct Connect&rsquo;e yedek bağlantı.</p>
+</li>
+<li>
+<p><strong>VPC Peering:</strong> İki VPC arasında doğrudan özel IP yönlendirmesi sağlar; transit yönlendirme desteklemez.<br>
+<strong>Kullanım alanları:</strong> İki VPC arasında özel iletişim; farklı hesap veya bölgeler arası erişim.<br>
+<strong>Avantajlar:</strong> Ağ geçidi gerektirmez; düşük gecikme; basit yapılandırma.<br>
+<strong>Sınavda:</strong> Az sayıda VPC&rsquo;yi birbirine bağlama.</p>
+</li>
+<li>
+<p><strong>Transit Gateway:</strong> Çok sayıda VPC ve on-premises ağı merkezi hub üzerinden bağlar.<br>
+<strong>Kullanım alanları:</strong> Çok sayıda VPC&rsquo;yi merkezi bağlama; hub-and-spoke ağ; VPN/Direct Connect&rsquo;i merkezileştirme.<br>
+<strong>Avantajlar:</strong> Transitif yönlendirme; merkezi kontrol; peering mesh karmaşıklığını ortadan kaldırır.<br>
+<strong>Sınavda:</strong> Çoklu hesap ve VPC&rsquo;lerde merkezi ağ topolojisi.</p>
+</li>
+<li>
+<p><strong>VPC Endpoints:</strong> AWS servislerine özel ağ üzerinden erişim sağlar.<br>
+<strong>Kullanım alanları:</strong> Özel subnet&rsquo;ten AWS servislerine internetsiz erişim; S3/DynamoDB erişiminde NAT maliyetini kesme.<br>
+<strong>Avantajlar:</strong> Trafik AWS ağında kalır; gateway endpoint ücretsiz; politika ile erişim kontrolü.<br>
+<strong>Sınavda:</strong> Private subnet&rsquo;teki EC2&rsquo;nin internet/NAT kullanmadan S3 veya DynamoDB&rsquo;ye erişmesi için Gateway Endpoint; birçok diğer servis için uygun Interface Endpoint.</p>
+</li>
+<li>
+<p><strong>AWS PrivateLink:</strong> Bir servise VPC endpoint üzerinden özel erişim sağlar; servis sağlayıcı ve tüketici ağlarını doğrudan birbirine açmadan bağlantı kurabilir.<br>
+<strong>Kullanım alanları:</strong> Üçüncü parti SaaS&rsquo;a özel erişim; VPC&rsquo;ler arası servis paylaşımı; özel servis yayınlama.<br>
+<strong>Avantajlar:</strong> Public IP&rsquo;siz ve internetsiz bağlantı; tek yönlü güvenli erişim; VPC dışına sızıntı yok.<br>
+<strong>Sınavda:</strong> Başka bir VPC&rsquo;deki veya üçüncü taraf sağlayıcıdaki servise özel erişim.</p>
+</li>
 </ul>
 <p><strong>Karıştırma:</strong></p>
 <ul>
@@ -3732,17 +4085,72 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 <h2 id="5-integration--messaging---mesajlaşma-ve-iş-akışları">5. Integration &amp; Messaging - Mesajlaşma ve İş Akışları<a class="anchor" href="#5-integration--messaging---mesajla%c5%9fma-ve-i%c5%9f-ak%c4%b1%c5%9flar%c4%b1">#</a></h2>
 <ul>
-<li><strong>SQS:</strong> Dağıtık uygulamalar arasında mesajları kuyrukta tutarak üretici ve tüketiciyi birbirinden ayırır. <strong>Sınavda:</strong> Asenkron işleme, yük patlamalarını tamponlama ve başarısız mesajları DLQ&rsquo;ya yönlendirme.</li>
-<li><strong>SQS FIFO:</strong> Mesaj sıralamasını ve uygun kullanımda deduplication desteğini sağlar. <strong>Sınavda:</strong> Sıralama veya mesajların tekilleştirilmesi gerektiğinde FIFO; aksi durumda Standard daha yüksek esneklik ve ölçek sunar.</li>
-<li><strong>SNS:</strong> Bir mesajı birden fazla aboneye yayınlayan pub/sub hizmetidir. <strong>Sınavda:</strong> Tek olayın birden fazla SQS kuyruğuna, Lambda fonksiyonuna veya başka desteklenen abonelere iletilmesi.</li>
-<li><strong>EventBridge:</strong> Servislerden gelen olayları kurallara göre hedeflere yönlendirir. <strong>Sınavda:</strong> Bir AWS kaynağındaki olay gerçekleşince Lambda, Step Functions veya başka bir hedefi tetikleme.</li>
-<li><strong>Step Functions:</strong> Birden fazla adımı, dallanmayı, tekrar denemeyi ve hata yönetimini state machine ile orkestre eder. <strong>Sınavda:</strong> Birden fazla servisten oluşan iş akışı ve kontrollü hata yönetimi.</li>
-<li><strong>Kinesis Data Streams:</strong> Gerçek zamanlı veri akışlarını toplar ve tüketicilere sunar. <strong>Sınavda:</strong> Clickstream, IoT veya sürekli gelen logların düşük gecikmeyle işlenmesi.</li>
-<li><strong>Amazon Data Firehose:</strong> Akış verisini desteklenen hedeflere teslim eder; tamponlama ve dönüşüm seçenekleri sunar. <strong>Sınavda:</strong> Streaming verisini S3, Redshift veya desteklenen hedeflere yönetilen biçimde aktarma.</li>
-<li><strong>Managed Service for Apache Flink:</strong> Akış verisi üzerinde durum bilgili gerçek zamanlı analiz çalıştırır. <strong>Sınavda:</strong> Gelen olaylar üzerinde sürekli hesaplama ve pencere bazlı analiz. Eski kaynaklarda Kinesis Data Analytics adıyla geçebilir.</li>
-<li><strong>API Gateway:</strong> Yönetilen API endpoint&rsquo;leri oluşturur; kimlik doğrulama, throttling ve entegrasyon özellikleri sunar. <strong>Sınavda:</strong> Lambda veya backend servisleri için yönetilen HTTP API katmanı.</li>
-<li><strong>AWS AppSync:</strong> GraphQL API&rsquo;leri ve desteklenen veri kaynaklarıyla entegrasyon sağlar. <strong>Sınavda:</strong> İstemcinin ihtiyacı olan alanları tek GraphQL API üzerinden sorgulaması.</li>
-<li><strong>Amazon MQ:</strong> ActiveMQ veya RabbitMQ gibi mesajlaşma sistemleriyle uyumluluk sağlar. <strong>Sınavda:</strong> Mevcut uygulamanın geleneksel broker protokollerini ve özelliklerini koruması gerekiyorsa.</li>
+<li>
+<p><strong>SQS:</strong> Dağıtık uygulamalar arasında mesajları kuyrukta tutarak üretici ve tüketiciyi birbirinden ayırır.<br>
+<strong>Kullanım alanları:</strong> Servisleri birbirinden ayırma (decoupling); yük patlaması tamponlama; iş kuyrukları.<br>
+<strong>Avantajlar:</strong> Sunucusuz ve sınırsız ölçek; DLQ ile başarısız mesaj yönetimi; at-least-once teslimat.<br>
+<strong>Sınavda:</strong> Asenkron işleme, yük patlamalarını tamponlama ve başarısız mesajları DLQ (dead-letter queue)&lsquo;ya yönlendirme.</p>
+</li>
+<li>
+<p><strong>SQS FIFO:</strong> Mesaj sıralamasını ve uygun kullanımda deduplication desteğini sağlar.<br>
+<strong>Kullanım alanları:</strong> Sipariş işleme; bankacılık işlemleri; tekilleştirme gerektiren iş akışları.<br>
+<strong>Avantajlar:</strong> Sıralı teslimat; exactly-once processing; grup bazlı paralellik.<br>
+<strong>Sınavda:</strong> Sıralama veya mesajların tekilleştirilmesi gerektiğinde FIFO; aksi durumda Standard daha yüksek esneklik ve ölçek sunar.</p>
+</li>
+<li>
+<p><strong>SNS (Simple Notification Service):</strong> Bir mesajı birden fazla aboneye yayınlayan pub/sub hizmetidir.<br>
+<strong>Kullanım alanları:</strong> Olay bildirimleri; e-posta/SMS/Lambda bildirimi; fan-out ile çok tüketiciye yayın.<br>
+<strong>Avantajlar:</strong> Push tabanlı; çoklu abonelik protokolü; SQS ile fan-out deseni.<br>
+<strong>Sınavda:</strong> Tek olayın birden fazla SQS kuyruğuna, Lambda fonksiyonuna veya başka desteklenen abonelere iletilmesi.</p>
+</li>
+<li>
+<p><strong>EventBridge:</strong> Servislerden gelen olayları kurallara göre hedeflere yönlendirir.<br>
+<strong>Kullanım alanları:</strong> Uygulama ve SaaS olaylarını filtreleyip yönlendirme; zamanlanmış kurallar; olay tabanlı mimari.<br>
+<strong>Avantajlar:</strong> İçerik bazlı filtreleme; olay arşivi ve replay; çoklu hedef desteği.<br>
+<strong>Sınavda:</strong> Bir AWS kaynağındaki olay gerçekleşince Lambda, Step Functions veya başka bir hedefi tetikleme.</p>
+</li>
+<li>
+<p><strong>Step Functions:</strong> Birden fazla adımı, dallanmayı, tekrar denemeyi ve hata yönetimini state machine ile orkestre eder.<br>
+<strong>Kullanım alanları:</strong> Çok adımlı iş akışları; onay süreçleri; hata kurtarmalı orkestrasyon.<br>
+<strong>Avantajlar:</strong> Görsel akış yönetimi; otomatik retry; insan onayı (wait) adımları; sunucusuz.<br>
+<strong>Sınavda:</strong> Birden fazla servisten oluşan iş akışı ve kontrollü hata yönetimi.</p>
+</li>
+<li>
+<p><strong>Kinesis Data Streams:</strong> Gerçek zamanlı veri akışlarını toplar ve tüketicilere sunar.<br>
+<strong>Kullanım alanları:</strong> Gerçek zamanlı veri akışı (log, clickstream, IoT); veriyi birden fazla tüketiciye dağıtmak.<br>
+<strong>Avantajlar:</strong> Saniyede binlerce olay; olayları yeniden oynatma; shard ile ölçekleme.<br>
+<strong>Sınavda:</strong> Clickstream, IoT veya sürekli gelen logların düşük gecikmeyle işlenmesi.</p>
+</li>
+<li>
+<p><strong>Amazon Data Firehose:</strong> Akış verisini desteklenen hedeflere teslim eder; tamponlama ve dönüşüm seçenekleri sunar.<br>
+<strong>Kullanım alanları:</strong> Veriyi S3/Redshift/OpenSearch&rsquo;e otomatik yükleme; near real-time veri ambarı besleme.<br>
+<strong>Avantajlar:</strong> Tam yönetilen; otomatik ölçekleme; dönüşüm ve sıkıştırma seçenekleri.<br>
+<strong>Sınavda:</strong> Streaming verisini S3, Redshift veya desteklenen hedeflere yönetilen biçimde aktarma.</p>
+</li>
+<li>
+<p><strong>Managed Service for Apache Flink:</strong> Akış verisi üzerinde durum bilgili gerçek zamanlı analiz çalıştırır.<br>
+<strong>Kullanım alanları:</strong> Akış verisi üzerinde gerçek zamanlı analitik; pencereleme ve agregasyon işlemleri.<br>
+<strong>Avantajlar:</strong> Yönetilen Flink; SQL ve Java desteği; otomatik ölçekleme.<br>
+<strong>Sınavda:</strong> Gelen olaylar üzerinde sürekli hesaplama ve pencere bazlı analiz. Eski kaynaklarda Kinesis Data Analytics adıyla geçebilir.</p>
+</li>
+<li>
+<p><strong>API Gateway:</strong> Yönetilen API endpoint&rsquo;leri oluşturur; kimlik doğrulama, throttling ve entegrasyon özellikleri sunar.<br>
+<strong>Kullanım alanları:</strong> REST/WebSocket API yayınlama; Lambda backend&rsquo;leri; API anahtarı ve throttling.<br>
+<strong>Avantajlar:</strong> Yönetilen API katmanı; istek başı ödeme; cache ve sürümleme.<br>
+<strong>Sınavda:</strong> Lambda veya backend servisleri için yönetilen HTTP API katmanı.</p>
+</li>
+<li>
+<p><strong>AWS AppSync:</strong> GraphQL API&rsquo;leri ve desteklenen veri kaynaklarıyla entegrasyon sağlar.<br>
+<strong>Kullanım alanları:</strong> GraphQL API&rsquo;ler; mobil/web için senkron veri; gerçek zamanlı uygulamalar.<br>
+<strong>Avantajlar:</strong> Otomatik veri senkronizasyonu; offline destek; çoklu veri kaynağı.<br>
+<strong>Sınavda:</strong> İstemcinin ihtiyacı olan alanları tek GraphQL API üzerinden sorgulaması.</p>
+</li>
+<li>
+<p><strong>Amazon MQ:</strong> ActiveMQ veya RabbitMQ gibi mesajlaşma sistemleriyle uyumluluk sağlar.<br>
+<strong>Kullanım alanları:</strong> ActiveMQ/RabbitMQ tabanlı mevcut uygulamalar; kurumsal mesajlaşma geçişleri.<br>
+<strong>Avantajlar:</strong> Standart protokoller (JMS, AMQP); yönetilen broker; on-premises uyumluluk.<br>
+<strong>Sınavda:</strong> Mevcut uygulamanın geleneksel broker protokollerini ve özelliklerini koruması gerekiyorsa.</p>
+</li>
 </ul>
 <p><strong>Karıştırma:</strong></p>
 <ul>
@@ -3754,22 +4162,102 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 <h2 id="6-security--identity---güvenlik-ve-kimlik">6. Security &amp; Identity - Güvenlik ve Kimlik<a class="anchor" href="#6-security--identity---g%c3%bcvenlik-ve-kimlik">#</a></h2>
 <ul>
-<li><strong>IAM:</strong> AWS kullanıcılarının, rollerinin ve servislerin hangi işlemleri yapabileceğini policy&rsquo;lerle belirler. <strong>Sınavda:</strong> Least privilege, IAM role, cross-account access ve servisler arası yetkilendirme.</li>
-<li><strong>IAM Role:</strong> Uzun ömürlü erişim anahtarları yerine geçici kimlik bilgileriyle AWS kaynaklarına erişim sağlar. <strong>Sınavda:</strong> EC2&rsquo;nin S3&rsquo;e veya Lambda&rsquo;nın DynamoDB&rsquo;ye güvenli erişmesi.</li>
-<li><strong>AWS KMS:</strong> Şifreleme anahtarlarını ve bunların kullanım izinlerini yönetir. <strong>Sınavda:</strong> S3, EBS, RDS veya uygulama verisini şifreleme ve anahtar erişimini kontrol etme.</li>
-<li><strong>AWS Secrets Manager:</strong> Veritabanı parolaları, API anahtarları ve diğer gizli bilgileri saklar; desteklenen entegrasyonlarda rotasyonu yönetebilir. <strong>Sınavda:</strong> Veritabanı parolasını güvenli saklama ve otomatik döndürme.</li>
-<li><strong>SSM Parameter Store:</strong> Konfigürasyon ve parametreleri merkezi saklar; SecureString ile KMS destekli şifreleme yapabilir. <strong>Sınavda:</strong> Uygulama ayarları ve basit parametre yönetimi.</li>
-<li><strong>Amazon Cognito:</strong> Uygulama kullanıcılarının kayıt, giriş ve token tabanlı kimlik doğrulama ihtiyaçlarını karşılar. <strong>Sınavda:</strong> Web veya mobil uygulama kullanıcılarını AWS IAM kullanıcılarından ayrı yönetme.</li>
-<li><strong>AWS WAF:</strong> HTTP/HTTPS isteklerini web ACL ve kurallarla filtreler. <strong>Sınavda:</strong> SQL injection, XSS, IP tabanlı filtreleme ve istek hız sınırlandırma.</li>
-<li><strong>AWS Shield:</strong> DDoS saldırılarına karşı koruma sağlar; Standard temel korumayı otomatik sunar, Advanced ek özellikler sağlar. <strong>Sınavda:</strong> DDoS riskini azaltma.</li>
-<li><strong>Amazon GuardDuty:</strong> CloudTrail, VPC Flow Logs ve diğer desteklenen veri kaynaklarından tehdit göstergeleri çıkarır. <strong>Sınavda:</strong> Şüpheli API çağrıları, olası hesap ihlali ve kötü amaçlı ağ etkinliği.</li>
-<li><strong>Amazon Inspector:</strong> Desteklenen kaynaklarda yazılım zafiyetlerini ve belirli güvenlik risklerini değerlendirir. <strong>Sınavda:</strong> EC2, container image ve desteklenen compute kaynaklarında vulnerability management.</li>
-<li><strong>Amazon Macie:</strong> S3&rsquo;teki hassas verileri, makine öğrenmesi ve eşleştirme yöntemleriyle keşfetmeye yardımcı olur. <strong>Sınavda:</strong> S3 içindeki PII ve benzeri hassas bilgileri tespit etme.</li>
-<li><strong>AWS Security Hub:</strong> Birden fazla güvenlik kaynağından gelen bulguları merkezileştirir ve güvenlik duruşunu değerlendirmeye yardımcı olur. <strong>Sınavda:</strong> Birden fazla güvenlik hizmetinin bulgularını tek yerde toplama.</li>
-<li><strong>AWS CloudTrail:</strong> AWS hesap etkinliğini ve API çağrılarını kaydeder. <strong>Sınavda:</strong> Kim, ne zaman, hangi API işlemini yaptı sorusunun cevabı.</li>
-<li><strong>AWS Artifact:</strong> AWS uyumluluk raporlarına ve ilgili anlaşma belgelerine erişim sağlar. <strong>Sınavda:</strong> AWS&rsquo;nin SOC, ISO ve PCI gibi uyumluluk belgelerini edinme.</li>
-<li><strong>AWS Certificate Manager (ACM):</strong> Desteklenen AWS servislerinde TLS sertifikalarının sağlanması ve yenilenmesini yönetir. <strong>Sınavda:</strong> ALB veya CloudFront üzerinde HTTPS sertifikası kullanma.</li>
-<li><strong>AWS Directory Service:</strong> Microsoft Active Directory ile ilgili yönetilen dizin ihtiyaçlarını karşılar. <strong>Sınavda:</strong> Windows iş yükleri, domain join ve Active Directory entegrasyonu.</li>
+<li>
+<p><strong>IAM (Identity and Access Management):</strong> AWS kullanıcılarının, rollerinin ve servislerin hangi işlemleri yapabileceğini policy&rsquo;lerle belirler.<br>
+<strong>Kullanım alanları:</strong> Kullanıcı ve servis yetkilendirmesi; politika tabanlı erişim kontrolü; çoklu hesap yönetimi.<br>
+<strong>Avantajlar:</strong> Merkezi erişim kontrolü; least privilege; ayrıntılı politika dili.<br>
+<strong>Sınavda:</strong> Least privilege, IAM role, cross-account access ve servisler arası yetkilendirme.</p>
+</li>
+<li>
+<p><strong>IAM Role:</strong> Uzun ömürlü erişim anahtarları yerine geçici kimlik bilgileriyle AWS kaynaklarına erişim sağlar.<br>
+<strong>Kullanım alanları:</strong> EC2/Lambda&rsquo;ya geçici kimlik verme; çapraz hesap erişimi; servisler arası yetkilendirme.<br>
+<strong>Avantajlar:</strong> Uzun ömürlü anahtar yok; geçici kimlik bilgileri; güvenli çapraz hesap erişimi.<br>
+<strong>Sınavda:</strong> EC2&rsquo;nin S3&rsquo;e veya Lambda&rsquo;nın DynamoDB&rsquo;ye güvenli erişmesi.</p>
+</li>
+<li>
+<p><strong>AWS KMS (Key Management Service):</strong> Şifreleme anahtarlarını ve bunların kullanım izinlerini yönetir.<br>
+<strong>Kullanım alanları:</strong> Şifreleme anahtarı yönetimi; S3/EBS/RDS şifreleme; anahtar rotasyonu.<br>
+<strong>Avantajlar:</strong> Denetlenebilir anahtar kullanımı (CloudTrail); servislerle entegre şifreleme; FIPS uyumlu.<br>
+<strong>Sınavda:</strong> S3, EBS, RDS veya uygulama verisini şifreleme ve anahtar erişimini kontrol etme.</p>
+</li>
+<li>
+<p><strong>AWS Secrets Manager:</strong> Veritabanı parolaları, API anahtarları ve diğer gizli bilgileri saklar; desteklenen entegrasyonlarda rotasyonu yönetebilir.<br>
+<strong>Kullanım alanları:</strong> Veritabanı kimlik bilgileri saklama; otomatik rotasyon; API anahtarları.<br>
+<strong>Avantajlar:</strong> Otomatik sır rotasyonu; çapraz hesap erişimi; KMS ile şifreleme.<br>
+<strong>Sınavda:</strong> Veritabanı parolasını güvenli saklama ve otomatik döndürme.</p>
+</li>
+<li>
+<p><strong>SSM (Systems Manager) Parameter Store:</strong> Konfigürasyon ve parametreleri merkezi saklar; SecureString ile KMS destekli şifreleme yapabilir.<br>
+<strong>Kullanım alanları:</strong> Uygulama konfigürasyonları; ortam değişkenleri; basit parametre yönetimi.<br>
+<strong>Avantajlar:</strong> Standart katman ücretsiz; hierarşik yapı; sürüm geçmişi.<br>
+<strong>Sınavda:</strong> Uygulama ayarları ve basit parametre yönetimi.</p>
+</li>
+<li>
+<p><strong>Amazon Cognito:</strong> Uygulama kullanıcılarının kayıt, giriş ve token tabanlı kimlik doğrulama ihtiyaçlarını karşılar.<br>
+<strong>Kullanım alanları:</strong> Mobil/web uygulamalarında kullanıcı girişi; sosyal login (Facebook/Google); misafir erişimi.<br>
+<strong>Avantajlar:</strong> Hazır UI ve SDK&rsquo;lar; kimlik havuzu ile AWS erişimi; otomatik ölçekleme.<br>
+<strong>Sınavda:</strong> Web veya mobil uygulama kullanıcılarını AWS IAM kullanıcılarından ayrı yönetme.</p>
+</li>
+<li>
+<p><strong>AWS WAF (Web Application Firewall):</strong> HTTP/HTTPS isteklerini web ACL ve kurallarla filtreler.<br>
+<strong>Kullanım alanları:</strong> SQL injection ve XSS koruması; bot trafiğini filtreleme; oran bazlı istek sınırlama.<br>
+<strong>Avantajlar:</strong> Katman 7 filtreleme; yönetilen kural kümeleri; CloudFront/ALB ile entegrasyon.<br>
+<strong>Sınavda:</strong> SQL injection, XSS, IP tabanlı filtreleme ve istek hız sınırlandırma.</p>
+</li>
+<li>
+<p><strong>AWS Shield:</strong> DDoS saldırılarına karşı koruma sağlar; Standard temel korumayı otomatik sunar, Advanced ek özellikler sağlar.<br>
+<strong>Kullanım alanları:</strong> DDoS koruması; yüksek trafikli web servisleri; saldırı maliyeti koruması (Advanced).<br>
+<strong>Avantajlar:</strong> Standart ücretsiz; Advanced&rsquo;te 7/24 DDoS Response Team ve maliyet tazminatı.<br>
+<strong>Sınavda:</strong> DDoS riskini azaltma.</p>
+</li>
+<li>
+<p><strong>Amazon GuardDuty:</strong> CloudTrail, VPC Flow Logs ve diğer desteklenen veri kaynaklarından tehdit göstergeleri çıkarır.<br>
+<strong>Kullanım alanları:</strong> Hesap güvenliği izleme; tehdit tespiti (kompromize kimlik, kötü amaçlı trafik); CloudTrail/VPC log analizi.<br>
+<strong>Avantajlar:</strong> Kurulum gerektirmez; makine öğrenmesi tabanlı bulgular; risk önceliklendirmesi.<br>
+<strong>Sınavda:</strong> Şüpheli API çağrıları, olası hesap ihlali ve kötü amaçlı ağ etkinliği.</p>
+</li>
+<li>
+<p><strong>Amazon Inspector:</strong> Desteklenen kaynaklarda yazılım zafiyetlerini ve belirli güvenlik risklerini değerlendirir.<br>
+<strong>Kullanım alanları:</strong> EC2/EKS/ECR&rsquo;de yazılım açıklığı taraması; benchmark uyumluluğu; sürekli güvenlik değerlendirmesi.<br>
+<strong>Avantajlar:</strong> Otomatik bulgu yönetimi; risk önceliklendirmesi; CI/CD entegrasyonu.<br>
+<strong>Sınavda:</strong> EC2, container image ve desteklenen compute kaynaklarında vulnerability management.</p>
+</li>
+<li>
+<p><strong>Amazon Macie:</strong> S3&rsquo;teki hassas verileri, makine öğrenmesi ve eşleştirme yöntemleriyle keşfetmeye yardımcı olur.<br>
+<strong>Kullanım alanları:</strong> S3&rsquo;de hassas veri (PII, kredi kartı) keşfi; veri sınıflandırma; uyumluluk raporları.<br>
+<strong>Avantajlar:</strong> Makine öğrenmesi ile otomatik tespit; ayrıntılı bulgular; S3 genelinde görünürlük.<br>
+<strong>Sınavda:</strong> S3 içindeki PII ve benzeri hassas bilgileri tespit etme.</p>
+</li>
+<li>
+<p><strong>AWS Security Hub:</strong> Birden fazla güvenlik kaynağından gelen bulguları merkezileştirir ve güvenlik duruşunu değerlendirmeye yardımcı olur.<br>
+<strong>Kullanım alanları:</strong> Çoklu hesap güvenlik duruşu; bulguları merkezileştirme; uyumluluk kontrolleri.<br>
+<strong>Avantajlar:</strong> Tek panelden görünürlük; standart bazlı otomatik kontroller; entegre bulgu formatı.<br>
+<strong>Sınavda:</strong> Birden fazla güvenlik hizmetinin bulgularını tek yerde toplama.</p>
+</li>
+<li>
+<p><strong>AWS CloudTrail:</strong> AWS hesap etkinliğini ve API çağrılarını kaydeder.<br>
+<strong>Kullanım alanları:</strong> API çağrı denetimi; &lsquo;kim ne yaptı&rsquo; sorusu; uyumluluk kayıtları.<br>
+<strong>Avantajlar:</strong> Hesaplar arası aktivite kaydı; S3&rsquo;e log aktarımı; CloudTrail Lake ile sorgulama.<br>
+<strong>Sınavda:</strong> Kim, ne zaman, hangi API işlemini yaptı sorusunun cevabı.</p>
+</li>
+<li>
+<p><strong>AWS Artifact:</strong> AWS uyumluluk raporlarına ve ilgili anlaşma belgelerine erişim sağlar.<br>
+<strong>Kullanım alanları:</strong> SOC/PCI gibi uyumluluk raporlarına erişme; denetim kanıtları; iş ortağı soru formları.<br>
+<strong>Avantajlar:</strong> Tek noktadan rapor indirme; NDA otomasyonu; güncel belgeler.<br>
+<strong>Sınavda:</strong> AWS&rsquo;nin SOC, ISO ve PCI gibi uyumluluk belgelerini edinme.</p>
+</li>
+<li>
+<p><strong>AWS Certificate Manager (ACM):</strong> Desteklenen AWS servislerinde TLS sertifikalarının sağlanması ve yenilenmesini yönetir.<br>
+<strong>Kullanım alanları:</strong> Ücretsiz SSL/TLS sertifikaları; CloudFront/ALB&rsquo;de HTTPS; otomatik sertifika yenileme.<br>
+<strong>Avantajlar:</strong> Ücretsiz sertifika; otomatik yenileme ve dağıtım; yönetilen doğrulama.<br>
+<strong>Sınavda:</strong> ALB veya CloudFront üzerinde HTTPS sertifikası kullanma.</p>
+</li>
+<li>
+<p><strong>AWS Directory Service:</strong> Microsoft Active Directory ile ilgili yönetilen dizin ihtiyaçlarını karşılar.<br>
+<strong>Kullanım alanları:</strong> AWS&rsquo;de Active Directory; Microsoft uygulamaları; Windows tabanlı iş yükleri.<br>
+<strong>Avantajlar:</strong> Yönetilen AD; on-premises AD ile güven ilişkisi; Kerberos/LDAP desteği.<br>
+<strong>Sınavda:</strong> Windows iş yükleri, domain join ve Active Directory entegrasyonu.</p>
+</li>
 </ul>
 <p><strong>Karıştırma:</strong></p>
 <ul>
@@ -3781,18 +4269,78 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 <h2 id="7-management--monitoring---yönetim-ve-izleme">7. Management &amp; Monitoring - Yönetim ve İzleme<a class="anchor" href="#7-management--monitoring---y%c3%b6netim-ve-izleme">#</a></h2>
 <ul>
-<li><strong>Amazon CloudWatch:</strong> Metrik, log, alarm ve gözlemlenebilirlik özellikleri sağlar. <strong>Sınavda:</strong> CPU kullanımı yükselince alarm oluşturma veya belirli bir metriğe göre aksiyon başlatma.</li>
-<li><strong>CloudWatch Logs:</strong> Uygulama ve servis loglarını toplar, saklar ve sorgulamaya yardımcı olur. <strong>Sınavda:</strong> Hata kayıtlarını inceleme, log grupları ve log tabanlı metrikler.</li>
-<li><strong>AWS X-Ray:</strong> Dağıtık uygulamalarda isteklerin servisler arasındaki izini sürer. <strong>Sınavda:</strong> Mikroservislerde gecikmenin hangi servisten kaynaklandığını bulma.</li>
-<li><strong>AWS Config:</strong> Kaynak konfigürasyonlarını kaydeder ve kurallarla uyumluluk değerlendirmesi yapar. <strong>Sınavda:</strong> Security Group&rsquo;un zaman içinde değişimini bulma veya kurallara aykırı kaynakları tespit etme.</li>
-<li><strong>AWS Systems Manager (SSM):</strong> Desteklenen sunuculara uzaktan erişim, patch yönetimi, envanter ve otomasyon sağlar. <strong>Sınavda:</strong> SSH/RDP açmadan yönetim için Session Manager veya merkezi patch operasyonları.</li>
-<li><strong>AWS CloudFormation:</strong> AWS kaynaklarını şablonlarla tanımlayıp yönetir. <strong>Sınavda:</strong> Tekrarlanabilir altyapı dağıtımı ve Infrastructure as Code.</li>
-<li><strong>AWS Service Catalog:</strong> Kuruluşların onaylanmış altyapı ürünlerini kullanıcılarına sunmasını sağlar. <strong>Sınavda:</strong> Kullanıcıların yalnızca kurumsal olarak onaylanan yapılandırmaları dağıtması.</li>
-<li><strong>AWS Organizations:</strong> Birden fazla AWS hesabını merkezi yönetir; SCP ve konsolide faturalandırma gibi özellikler sunar. <strong>Sınavda:</strong> Çoklu hesap yönetimi ve hesap seviyesinde izin sınırları.</li>
-<li><strong>AWS Control Tower:</strong> Landing zone ve çoklu hesap ortamının kurulumunu ve yönetişimini kolaylaştırır. <strong>Sınavda:</strong> Yeni kurumsal AWS ortamı, merkezi guardrail ve hesap yaşam döngüsü.</li>
-<li><strong>AWS Trusted Advisor:</strong> Desteklenen kontrol kategorilerinde maliyet, güvenlik, performans ve hata toleransı önerileri sunar. <strong>Sınavda:</strong> Kullanılmayan kaynakları veya önerilen iyileştirmeleri tespit etme.</li>
-<li><strong>AWS Compute Optimizer:</strong> Desteklenen compute kaynakları için kullanım verisine dayalı boyutlandırma önerileri üretir. <strong>Sınavda:</strong> Fazla büyük veya yetersiz boyutlandırılmış EC2 ve diğer desteklenen kaynakları belirleme.</li>
-<li><strong>AWS Backup:</strong> Desteklenen kaynaklar için merkezi yedekleme politikaları, saklama ve kurtarma yönetimi sunar. <strong>Sınavda:</strong> Birden fazla hesap veya serviste standart yedekleme stratejisi.</li>
+<li>
+<p><strong>Amazon CloudWatch:</strong> Metrik, log, alarm ve gözlemlenebilirlik özellikleri sağlar.<br>
+<strong>Kullanım alanları:</strong> Metrik izleme ve alarmlar; otomatik ölçekleme tetikleme; operasyon panoları.<br>
+<strong>Avantajlar:</strong> Servis metrikleri hazır gelir; alarmlarla otomasyon; metrik ve log birleştirme.<br>
+<strong>Sınavda:</strong> CPU kullanımı yükselince alarm oluşturma veya belirli bir metriğe göre aksiyon başlatma.</p>
+</li>
+<li>
+<p><strong>CloudWatch Logs:</strong> Uygulama ve servis loglarını toplar, saklar ve sorgulamaya yardımcı olur.<br>
+<strong>Kullanım alanları:</strong> Uygulama ve sistem logları; log sorgulama (Logs Insights); hata ayıklama.<br>
+<strong>Avantajlar:</strong> Merkezi log toplama; metrik filtreleme; uzun süreli saklama.<br>
+<strong>Sınavda:</strong> Hata kayıtlarını inceleme, log grupları ve log tabanlı metrikler.</p>
+</li>
+<li>
+<p><strong>AWS X-Ray:</strong> Dağıtık uygulamalarda isteklerin servisler arasındaki izini sürer.<br>
+<strong>Kullanım alanları:</strong> Dağıtık uygulamalarda istek takibi; darboğaz tespiti; mikroservis hata ayıklama.<br>
+<strong>Avantajlar:</strong> Servis haritası; gecikme analizi; SDK entegrasyonu.<br>
+<strong>Sınavda:</strong> Mikroservislerde gecikmenin hangi servisten kaynaklandığını bulma.</p>
+</li>
+<li>
+<p><strong>AWS Config:</strong> Kaynak konfigürasyonlarını kaydeder ve kurallarla uyumluluk değerlendirmesi yapar.<br>
+<strong>Kullanım alanları:</strong> Kaynak değişiklik geçmişi; uyumluluk kontrolleri; yanlış yapılandırma tespiti.<br>
+<strong>Avantajlar:</strong> Zamanda geriye bakış; otomatik uyumluluk kuralları; kaynak ilişkileri görünümü.<br>
+<strong>Sınavda:</strong> Security Group&rsquo;un zaman içinde değişimini bulma veya kurallara aykırı kaynakları tespit etme.</p>
+</li>
+<li>
+<p><strong>AWS Systems Manager (SSM):</strong> Desteklenen sunuculara uzaktan erişim, patch yönetimi, envanter ve otomasyon sağlar.<br>
+<strong>Kullanım alanları:</strong> Sunucu yönetimi ve patch; otomasyon (runbook&rsquo;lar); oturum yönetimi (Session Manager).<br>
+<strong>Avantajlar:</strong> Ajan tabanlı merkezi yönetim; SSH anahtarı gerektirmez; envanter ve patch yönetimi.<br>
+<strong>Sınavda:</strong> SSH/RDP açmadan yönetim için Session Manager veya merkezi patch operasyonları.</p>
+</li>
+<li>
+<p><strong>AWS CloudFormation:</strong> AWS kaynaklarını şablonlarla tanımlayıp yönetir.<br>
+<strong>Kullanım alanları:</strong> Altyapıyı kod olarak (IaC) yönetme; tekrarlanabilir ortamlar; yığın (stack) dağıtımı.<br>
+<strong>Avantajlar:</strong> Şablon tabanlı dağıtım; değişiklik önizleme; otomatik rollback.<br>
+<strong>Sınavda:</strong> Tekrarlanabilir altyapı dağıtımı ve Infrastructure as Code.</p>
+</li>
+<li>
+<p><strong>AWS Service Catalog:</strong> Kuruluşların onaylanmış altyapı ürünlerini kullanıcılarına sunmasını sağlar.<br>
+<strong>Kullanım alanları:</strong> Onaylı hizmet portföyü sunma; kurumsal self-servis altyapı; standartlaştırılmış dağıtımlar.<br>
+<strong>Avantajlar:</strong> Kullanıcıya güvenli self-servis; merkezi politika kontrolü.<br>
+<strong>Sınavda:</strong> Kullanıcıların yalnızca kurumsal olarak onaylanan yapılandırmaları dağıtması.</p>
+</li>
+<li>
+<p><strong>AWS Organizations:</strong> Birden fazla AWS hesabını merkezi yönetir; SCP (service control policy) ve konsolide faturalandırma gibi özellikler sunar.<br>
+<strong>Kullanım alanları:</strong> Çoklu hesap yönetimi; birleşik faturalandırma; servis kontrol politikaları (SCP).<br>
+<strong>Avantajlar:</strong> Merkezi hesap yönetimi; konsolide fatura ve indirim; otomatik hesap oluşturma.<br>
+<strong>Sınavda:</strong> Çoklu hesap yönetimi ve hesap seviyesinde izin sınırları.</p>
+</li>
+<li>
+<p><strong>AWS Control Tower:</strong> Landing zone ve çoklu hesap ortamının kurulumunu ve yönetişimini kolaylaştırır.<br>
+<strong>Kullanım alanları:</strong> Çoklu hesaplı landing zone kurulumu; güvenlik temel çizgisi (guardrail); yeni hesap otomasyonu.<br>
+<strong>Avantajlar:</strong> Hazır en iyi uygulamalar; otomatik guardrail&rsquo;ler; şablonlu hesap üretimi.<br>
+<strong>Sınavda:</strong> Yeni kurumsal AWS ortamı, merkezi guardrail ve hesap yaşam döngüsü.</p>
+</li>
+<li>
+<p><strong>AWS Trusted Advisor:</strong> Desteklenen kontrol kategorilerinde maliyet, güvenlik, performans ve hata toleransı önerileri sunar.<br>
+<strong>Kullanım alanları:</strong> Maliyet optimizasyon önerileri; güvenlik açıkları; hizmet limiti kontrolleri.<br>
+<strong>Avantajlar:</strong> Gerçek zamanlı kontroller; kategorilere ayrılmış öneriler; maliyet tasarrufu ipuçları.<br>
+<strong>Sınavda:</strong> Kullanılmayan kaynakları veya önerilen iyileştirmeleri tespit etme.</p>
+</li>
+<li>
+<p><strong>AWS Compute Optimizer:</strong> Desteklenen compute kaynakları için kullanım verisine dayalı boyutlandırma önerileri üretir.<br>
+<strong>Kullanım alanları:</strong> EC2/RDS/Lambda için doğru boyutlandırma; kullanılmayan kaynakları tespit; maliyet-performans dengesi.<br>
+<strong>Avantajlar:</strong> Makine öğrenmesi tabanlı öneriler; kullanım analiziyle instance seçimi; maliyet tasarrufu.<br>
+<strong>Sınavda:</strong> Fazla büyük veya yetersiz boyutlandırılmış EC2 ve diğer desteklenen kaynakları belirleme.</p>
+</li>
+<li>
+<p><strong>AWS Backup:</strong> Desteklenen kaynaklar için merkezi yedekleme politikaları, saklama ve kurtarma yönetimi sunar.<br>
+<strong>Kullanım alanları:</strong> RDS, EBS, EFS, S3 ve DynamoDB için merkezi yedekleme; uyumluluk amaçlı saklama; çoklu hesap yedek yönetimi.<br>
+<strong>Avantajlar:</strong> Tek panelden politika yönetimi; otomatik saklama ve silmeye karşı koruma.<br>
+<strong>Sınavda:</strong> Birden fazla hesap veya serviste standart yedekleme stratejisi.</p>
+</li>
 </ul>
 <p><strong>Karıştırma:</strong></p>
 <ul>
@@ -3803,18 +4351,78 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 <h2 id="8-analytics--machine-learning---analitik-ve-ml">8. Analytics &amp; Machine Learning - Analitik ve ML<a class="anchor" href="#8-analytics--machine-learning---analitik-ve-ml">#</a></h2>
 <ul>
-<li><strong>Amazon Athena:</strong> S3&rsquo;teki veriyi sunucu yönetmeden SQL ile sorgular. <strong>Sınavda:</strong> Data lake üzerinde seyrek veya ihtiyaca bağlı analitik sorgular.</li>
-<li><strong>AWS Glue:</strong> Veri keşfi, Data Catalog ve ETL işlerini destekler. <strong>Sınavda:</strong> S3 verisini dönüştürüp analize hazırlama veya şemasını kataloglama.</li>
-<li><strong>Amazon Managed Service for Apache Flink:</strong> Sürekli gelen akış verisini gerçek zamanlı işler ve analiz eder. <strong>Sınavda:</strong> Streaming verisi üzerinde sürekli hesaplama.</li>
-<li><strong>Amazon QuickSight:</strong> Yönetilen BI ve dashboard hizmetidir. <strong>Sınavda:</strong> İş zekâsı raporları, görselleştirme ve dashboard.</li>
-<li><strong>Amazon EMR:</strong> Hadoop, Spark ve desteklenen büyük veri çerçevelerini çalıştırır. <strong>Sınavda:</strong> Büyük ölçekli dağıtık veri işleme.</li>
-<li><strong>Amazon SageMaker AI:</strong> Makine öğrenmesi modellerinin geliştirilmesi, eğitilmesi ve dağıtılmasına yönelik araçlar sağlar. <strong>Sınavda:</strong> Özel ML modeli oluşturma ve üretime alma.</li>
-<li><strong>Amazon Rekognition:</strong> Görüntü ve videolardaki nesne, yüz ve diğer desteklenen özellikleri analiz eder. <strong>Sınavda:</strong> Görsel içerik analizi.</li>
-<li><strong>Amazon Comprehend:</strong> Metin üzerinde doğal dil işleme görevleri gerçekleştirir. <strong>Sınavda:</strong> Duygu analizi, varlık çıkarımı ve metin sınıflandırma.</li>
-<li><strong>Amazon Translate:</strong> Diller arasında metin çevirisi yapar. <strong>Sınavda:</strong> Uygulamalarda otomatik çok dilli içerik.</li>
-<li><strong>Amazon Polly:</strong> Metni konuşmaya dönüştürür (text-to-speech). <strong>Sınavda:</strong> Metinden ses üretimi.</li>
-<li><strong>Amazon Transcribe:</strong> Konuşmayı metne dönüştürür (speech-to-text). <strong>Sınavda:</strong> Ses kayıtlarının yazıya çevrilmesi.</li>
-<li><strong>Amazon Textract:</strong> Belge ve formlardan metin, tablo ve form alanlarını çıkarır. <strong>Sınavda:</strong> Tarama veya PDF belgelerinden yapılandırılmış veri elde etme.</li>
+<li>
+<p><strong>Amazon Athena:</strong> S3&rsquo;teki veriyi sunucu yönetmeden SQL ile sorgular.<br>
+<strong>Kullanım alanları:</strong> S3 üzerinde SQL sorguları; log analizi; veri keşfi (ad-hoc sorgular).<br>
+<strong>Avantajlar:</strong> Sunucusuz; sorgu başı ödeme; standart SQL; Glue katalog entegrasyonu.<br>
+<strong>Sınavda:</strong> Data lake üzerinde seyrek veya ihtiyaca bağlı analitik sorgular.</p>
+</li>
+<li>
+<p><strong>AWS Glue:</strong> Veri keşfi, Data Catalog ve ETL işlerini destekler.<br>
+<strong>Kullanım alanları:</strong> Veri keşfi ve kataloglama; ETL işleri; veri ambarı/gölü hazırlığı.<br>
+<strong>Avantajlar:</strong> Sunucusuz ETL; otomatik şema keşfi; Spark tabanlı dönüşüm.<br>
+<strong>Sınavda:</strong> S3 verisini dönüştürüp analize hazırlama veya şemasını kataloglama.</p>
+</li>
+<li>
+<p><strong>Amazon Managed Service for Apache Flink:</strong> Sürekli gelen akış verisini gerçek zamanlı işler ve analiz eder.<br>
+<strong>Kullanım alanları:</strong> Akış verileri üzerinde gerçek zamanlı analitik ve zenginleştirme; SQL ile akış sorguları.<br>
+<strong>Avantajlar:</strong> Yönetilen altyapı; otomatik ölçekleme; kalıcı durum yönetimi.<br>
+<strong>Sınavda:</strong> Streaming verisi üzerinde sürekli hesaplama.</p>
+</li>
+<li>
+<p><strong>Amazon QuickSight:</strong> Yönetilen BI ve dashboard hizmetidir.<br>
+<strong>Kullanım alanları:</strong> İş zekâsı panoları; görsel raporlama; uygulamalara gömülü analitik.<br>
+<strong>Avantajlar:</strong> Sunucusuz BI; SPICE motoru ile hızlı sorgu; çoklu veri kaynağı.<br>
+<strong>Sınavda:</strong> İş zekâsı raporları, görselleştirme ve dashboard.</p>
+</li>
+<li>
+<p><strong>Amazon EMR (Elastic MapReduce):</strong> Hadoop, Spark ve desteklenen büyük veri çerçevelerini çalıştırır.<br>
+<strong>Kullanım alanları:</strong> Büyük veri işleme (Hadoop/Spark); veri dönüşümleri; ML pipeline&rsquo;ları.<br>
+<strong>Avantajlar:</strong> Yönetilen big data kümeleri; Spot ile ucuz hesaplama; otomatik ölçekleme.<br>
+<strong>Sınavda:</strong> Büyük ölçekli dağıtık veri işleme.</p>
+</li>
+<li>
+<p><strong>Amazon SageMaker AI:</strong> Makine öğrenmesi modellerinin geliştirilmesi, eğitilmesi ve dağıtılmasına yönelik araçlar sağlar.<br>
+<strong>Kullanım alanları:</strong> ML model geliştirme ve dağıtımı; model eğitimi ve ayarlama; uç (edge) dağıtımı.<br>
+<strong>Avantajlar:</strong> Uçtan uca ML platformu; yönetilen altyapı; hazır algoritmalar.<br>
+<strong>Sınavda:</strong> Özel ML modeli oluşturma ve üretime alma.</p>
+</li>
+<li>
+<p><strong>Amazon Rekognition:</strong> Görüntü ve videolardaki nesne, yüz ve diğer desteklenen özellikleri analiz eder.<br>
+<strong>Kullanım alanları:</strong> Görüntü ve video analizi; nesne/yüz tespiti; içerik moderasyonu.<br>
+<strong>Avantajlar:</strong> Hazır bilgisayarlı görü modelleri; eğitim gerektirmez; video desteği.<br>
+<strong>Sınavda:</strong> Görsel içerik analizi.</p>
+</li>
+<li>
+<p><strong>Amazon Comprehend:</strong> Metin üzerinde doğal dil işleme görevleri gerçekleştirir.<br>
+<strong>Kullanım alanları:</strong> Metin analizi; duygu analizi; varlık tespiti (NER).<br>
+<strong>Avantajlar:</strong> Doğal dil işleme; özel sınıflandırıcılar; çoklu dil desteği.<br>
+<strong>Sınavda:</strong> Duygu analizi, varlık çıkarımı ve metin sınıflandırma.</p>
+</li>
+<li>
+<p><strong>Amazon Translate:</strong> Diller arasında metin çevirisi yapar.<br>
+<strong>Kullanım alanları:</strong> Uygulama içi çeviri; belge çevirisi; çok dilli içerik üretimi.<br>
+<strong>Avantajlar:</strong> Gerçek zamanlı çeviri; toplu çeviri; geniş dil desteği.<br>
+<strong>Sınavda:</strong> Uygulamalarda otomatik çok dilli içerik.</p>
+</li>
+<li>
+<p><strong>Amazon Polly:</strong> Metni konuşmaya dönüştürür (text-to-speech).<br>
+<strong>Kullanım alanları:</strong> Metni sese çevirme (TTS); sesli asistanlar; erişilebilirlik uygulamaları.<br>
+<strong>Avantajlar:</strong> Gerçekçi sesler; SSML desteği; çoklu dil ve ses seçenekleri.<br>
+<strong>Sınavda:</strong> Metinden ses üretimi.</p>
+</li>
+<li>
+<p><strong>Amazon Transcribe:</strong> Konuşmayı metne dönüştürür (speech-to-text).<br>
+<strong>Kullanım alanları:</strong> Konuşmayı metne çevirme; çağrı merkezi analizi; altyazı üretimi.<br>
+<strong>Avantajlar:</strong> Otomatik konuşma tanıma; özelleştirilebilir sözlük; çoklu dil.<br>
+<strong>Sınavda:</strong> Ses kayıtlarının yazıya çevrilmesi.</p>
+</li>
+<li>
+<p><strong>Amazon Textract:</strong> Belge ve formlardan metin, tablo ve form alanlarını çıkarır.<br>
+<strong>Kullanım alanları:</strong> Belge verisi çıkarma; form ve tablo okuma; fatura/fiş işleme.<br>
+<strong>Avantajlar:</strong> OCR&rsquo;dan öte yapılandırılmış veri; makine öğrenmesi tabanlı; hazır modeller.<br>
+<strong>Sınavda:</strong> Tarama veya PDF belgelerinden yapılandırılmış veri elde etme.</p>
+</li>
 </ul>
 <p><strong>Karıştırma:</strong></p>
 <ul>
@@ -3824,14 +4432,54 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 <h2 id="9-migration---taşıma-ve-geçiş">9. Migration - Taşıma ve Geçiş<a class="anchor" href="#9-migration---ta%c5%9f%c4%b1ma-ve-ge%c3%a7i%c5%9f">#</a></h2>
 <ul>
-<li><strong>AWS Database Migration Service (DMS):</strong> Veritabanları arasında veri taşımayı ve desteklenen senaryolarda değişiklikleri çoğaltmayı sağlar. <strong>Sınavda:</strong> Kaynak veritabanı çalışırken hedefe geçiş ve downtime&rsquo;ı azaltma.</li>
-<li><strong>AWS Schema Conversion Tool (SCT):</strong> Desteklenen heterojen veritabanı geçişlerinde şema ve kod dönüşümüne yardımcı olur. <strong>Sınavda:</strong> Oracle veya SQL Server&rsquo;dan PostgreSQL gibi farklı motorlara geçiş.</li>
-<li><strong>AWS Migration Hub:</strong> Birden fazla migrasyon projesinin ilerlemesini merkezi izlemeye yardımcı olur. <strong>Sınavda:</strong> Büyük ölçekli sunucu ve uygulama taşıma süreçlerini takip etme.</li>
-<li><strong>AWS Application Migration Service (MGN):</strong> Sunucuları AWS&rsquo;ye lift-and-shift yaklaşımıyla taşımak için replikasyon ve geçiş süreçlerini yönetir. <strong>Sınavda:</strong> Uygulamayı büyük ölçüde yeniden tasarlamadan EC2&rsquo;ye taşıma.</li>
-<li><strong>AWS DataSync:</strong> Dosya verisini desteklenen on-premises ve AWS depolama sistemleri arasında taşır. <strong>Sınavda:</strong> Büyük miktarda dosyayı verimli biçimde kopyalama.</li>
-<li><strong>AWS Transfer Family:</strong> SFTP, FTPS, FTP ve AS2 gibi desteklenen protokollerle yönetilen dosya transferi sunar. <strong>Sınavda:</strong> Müşterilerin veya iş ortaklarının mevcut dosya transfer protokolüyle S3/EFS&rsquo;ye veri göndermesi.</li>
-<li><strong>AWS Snow Family:</strong> Büyük veri setlerinin fiziksel cihazlarla taşınmasını destekler. <strong>Sınavda:</strong> Ağ üzerinden transferin çok uzun sürmesi veya bağlantı kısıtları.</li>
-<li><strong>AWS Storage Gateway:</strong> On-premises uygulamalarla AWS depolama hizmetleri arasında hibrit bağlantı sağlar. <strong>Sınavda:</strong> Yerel sistemlerin bulut depolamasını entegre biçimde kullanması.</li>
+<li>
+<p><strong>AWS Database Migration Service (DMS):</strong> Veritabanları arasında veri taşımayı ve desteklenen senaryolarda değişiklikleri çoğaltmayı sağlar.<br>
+<strong>Kullanım alanları:</strong> Veritabanı göçü (homojen/heterojen); sürekli replikasyon; buluta geçiş.<br>
+<strong>Avantajlar:</strong> Minimum kesinti; kaynak çalışırken kopyalama; değişiklik veri yakalama (CDC).<br>
+<strong>Sınavda:</strong> Kaynak veritabanı çalışırken hedefe geçiş ve downtime&rsquo;ı azaltma.</p>
+</li>
+<li>
+<p><strong>AWS Schema Conversion Tool (SCT):</strong> Desteklenen heterojen veritabanı geçişlerinde şema ve kod dönüşümüne yardımcı olur.<br>
+<strong>Kullanım alanları:</strong> Motor değiştirmede şema dönüşümü (ör. Oracle→Aurora); uyumluluk raporu; kod dönüşümü.<br>
+<strong>Avantajlar:</strong> Otomatik şema dönüşümü; göç öncesi analiz; dönüşüm önerileri.<br>
+<strong>Sınavda:</strong> Oracle veya SQL Server&rsquo;dan PostgreSQL gibi farklı motorlara geçiş.</p>
+</li>
+<li>
+<p><strong>AWS Migration Hub:</strong> Birden fazla migrasyon projesinin ilerlemesini merkezi izlemeye yardımcı olur.<br>
+<strong>Kullanım alanları:</strong> Göç projelerini tek panelden izleme; envanter ve bağımlılık keşfi; ilerleme takibi.<br>
+<strong>Avantajlar:</strong> Merkezi görünürlük; çoklu araç entegrasyonu; strateji önerileri.<br>
+<strong>Sınavda:</strong> Büyük ölçekli sunucu ve uygulama taşıma süreçlerini takip etme.</p>
+</li>
+<li>
+<p><strong>AWS Application Migration Service (MGN):</strong> Sunucuları AWS&rsquo;ye lift-and-shift yaklaşımıyla taşımak için replikasyon ve geçiş süreçlerini yönetir.<br>
+<strong>Kullanım alanları:</strong> Sunucuları buluta taşıma (lift-and-shift); otomatik replikasyon; kesintisiz geçiş.<br>
+<strong>Avantajlar:</strong> Sürekli blok replikasyonu; test geçişleri; otomatik dönüştürme.<br>
+<strong>Sınavda:</strong> Uygulamayı büyük ölçüde yeniden tasarlamadan EC2&rsquo;ye taşıma.</p>
+</li>
+<li>
+<p><strong>AWS DataSync:</strong> Dosya verisini desteklenen on-premises ve AWS depolama sistemleri arasında taşır.<br>
+<strong>Kullanım alanları:</strong> On-premises veriyi S3/EFS/FSx&rsquo;e düzenli taşıma; bulutlar arası kopyalama; göç öncesi sürekli senkronizasyon.<br>
+<strong>Avantajlar:</strong> Otomatik şifreleme ve veri doğrulama; ağ optimizasyonu; zamanlanmış otomatik transfer.<br>
+<strong>Sınavda:</strong> Büyük miktarda dosyayı verimli biçimde kopyalama.</p>
+</li>
+<li>
+<p><strong>AWS Transfer Family:</strong> SFTP, FTPS, FTP ve AS2 gibi desteklenen protokollerle yönetilen dosya transferi sunar.<br>
+<strong>Kullanım alanları:</strong> SFTP/FTPS/FTP ile iş ortağı dosya transferi; mevcut transfer iş akışlarını S3/EFS&rsquo;e bağlama.<br>
+<strong>Avantajlar:</strong> Yönetilen transfer uçları; kimlik entegrasyonu; sunucu yönetimi yok.<br>
+<strong>Sınavda:</strong> Müşterilerin veya iş ortaklarının mevcut dosya transfer protokolüyle S3/EFS&rsquo;ye veri göndermesi.</p>
+</li>
+<li>
+<p><strong>AWS Snow Family:</strong> Büyük veri setlerinin fiziksel cihazlarla taşınmasını destekler.<br>
+<strong>Kullanım alanları:</strong> TB-PB ölçeğinde veri taşıma; sınırlı bant genişliği olan lokasyonlar; uç (edge) işleme senaryoları.<br>
+<strong>Avantajlar:</strong> Fiziksel transferle ağ maliyeti ve süresi ortadan kalkar; şifreli ve dayanıklı cihazlar.<br>
+<strong>Sınavda:</strong> Ağ üzerinden transferin çok uzun sürmesi veya bağlantı kısıtları.</p>
+</li>
+<li>
+<p><strong>AWS Storage Gateway:</strong> On-premises uygulamalarla AWS depolama hizmetleri arasında hibrit bağlantı sağlar.<br>
+<strong>Kullanım alanları:</strong> On-premises ortamla AWS depolama arasında hibrit köprü; bulut yedekleme; dosya/blok/tape uzantısı.<br>
+<strong>Avantajlar:</strong> Yerel erişim + bulut ekonomisi; standart protokoller (NFS/SMB/iSCSI); yönetilen servis.<br>
+<strong>Sınavda:</strong> Yerel sistemlerin bulut depolamasını entegre biçimde kullanması.</p>
+</li>
 </ul>
 <p><strong>Karıştırma:</strong></p>
 <ul>
@@ -3841,16 +4489,66 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 <h2 id="10-cost-optimization---maliyet-optimizasyonu">10. Cost Optimization - Maliyet Optimizasyonu<a class="anchor" href="#10-cost-optimization---maliyet-optimizasyonu">#</a></h2>
 <ul>
-<li><strong>AWS Cost Explorer:</strong> Geçmiş harcamaları, maliyet eğilimlerini ve tahminleri analiz eder. <strong>Sınavda:</strong> Maliyet artışının kaynağını inceleme.</li>
-<li><strong>AWS Budgets:</strong> Belirlenen bütçe veya kullanım eşikleri için uyarılar oluşturur; desteklenen senaryolarda aksiyonlarla entegre edilebilir. <strong>Sınavda:</strong> Harcama hedefini aşmadan önce bildirim alma.</li>
-<li><strong>Cost and Usage Report (CUR):</strong> AWS kullanım ve maliyet verilerini ayrıntılı biçimde sunar. <strong>Sınavda:</strong> Ayrıntılı fatura analizi ve Athena ile sorgulama.</li>
-<li><strong>AWS Pricing Calculator:</strong> Mimari dağıtımdan önce tahmini maliyet hesaplamaya yardımcı olur. <strong>Sınavda:</strong> Planlanan altyapının maliyetini önceden tahmin etme.</li>
-<li><strong>Savings Plans:</strong> Belirli kullanım türleri için saatlik harcama taahhüdü karşılığında indirim sağlar. <strong>Sınavda:</strong> Uzun vadeli ve öngörülebilir compute kullanımını daha düşük maliyetle çalıştırma.</li>
-<li><strong>Reserved Instances (RI):</strong> Uygun servislerde kullanım taahhüdü karşılığında indirim sağlar; bazı türlerde kapasite rezervasyonu da söz konusudur. <strong>Sınavda:</strong> Özellikle RDS veya belirli EC2 kullanım senaryolarında uzun vadeli maliyet optimizasyonu.</li>
-<li><strong>On-Demand Instances:</strong> Uzun vadeli taahhüt olmadan kullandıkça ödeme modelidir. <strong>Sınavda:</strong> Kısa süreli veya belirsiz iş yükleri.</li>
-<li><strong>Spot Instances:</strong> AWS&rsquo;nin kullanılmayan EC2 kapasitesini indirimli sunar; kapasite geri alınabilir. <strong>Sınavda:</strong> Kesintiye dayanıklı batch, dağıtık işlem ve esnek iş yükleri.</li>
-<li><strong>S3 Lifecycle Policies:</strong> Nesneleri zaman veya kurallara göre farklı depolama sınıflarına taşır ya da siler. <strong>Sınavda:</strong> Eski logları daha ucuz arşiv sınıfına taşıma.</li>
-<li><strong>S3 Intelligent-Tiering:</strong> Erişim desenine göre nesneleri uygun erişim katmanlarında tutarak maliyet optimizasyonu sağlar. <strong>Sınavda:</strong> Erişim sıklığı önceden tahmin edilemiyorsa.</li>
+<li>
+<p><strong>AWS Cost Explorer:</strong> Geçmiş harcamaları, maliyet eğilimlerini ve tahminleri analiz eder.<br>
+<strong>Kullanım alanları:</strong> Maliyet ve kullanım analizi; gelecek dönem tahminleri; RI/SP kullanım ve kapsama raporları.<br>
+<strong>Avantajlar:</strong> Görsel raporlar; 12 aylık tahmin; özel görünümler ve filtreler.<br>
+<strong>Sınavda:</strong> Maliyet artışının kaynağını inceleme.</p>
+</li>
+<li>
+<p><strong>AWS Budgets:</strong> Belirlenen bütçe veya kullanım eşikleri için uyarılar oluşturur; desteklenen senaryolarda aksiyonlarla entegre edilebilir.<br>
+<strong>Kullanım alanları:</strong> Bütçe eşikleri ve alarmlar; otomatik düzeltici eylemler (budget actions); planlanan maliyet takibi.<br>
+<strong>Avantajlar:</strong> Tahmin bazlı uyarılar; otomasyon eylemleri; ayrıntılı raporlama.<br>
+<strong>Sınavda:</strong> Harcama hedefini aşmadan önce bildirim alma.</p>
+</li>
+<li>
+<p><strong>Cost and Usage Report (CUR):</strong> AWS kullanım ve maliyet verilerini ayrıntılı biçimde sunar.<br>
+<strong>Kullanım alanları:</strong> Kaynak seviyesinde fatura analizi; chargeback/showback; Athena ile sorgulama.<br>
+<strong>Avantajlar:</strong> En ayrıntılı fatura verisi; saatlik granülarite; QuickSight entegrasyonu.<br>
+<strong>Sınavda:</strong> Ayrıntılı fatura analizi ve Athena ile sorgulama.</p>
+</li>
+<li>
+<p><strong>AWS Pricing Calculator:</strong> Mimari dağıtımdan önce tahmini maliyet hesaplamaya yardımcı olur.<br>
+<strong>Kullanım alanları:</strong> Mimari maliyet tahmini; satın alma öncesi hesaplama; senaryo karşılaştırma.<br>
+<strong>Avantajlar:</strong> Ücretsiz ve ayrıntılı tahmin; fiyat varyasyonlarını modelleme; paylaşılabilir raporlar.<br>
+<strong>Sınavda:</strong> Planlanan altyapının maliyetini önceden tahmin etme.</p>
+</li>
+<li>
+<p><strong>Savings Plans:</strong> Belirli kullanım türleri için saatlik harcama taahhüdü karşılığında indirim sağlar.<br>
+<strong>Kullanım alanları:</strong> Sürekli iş yükleri için taahhütlü indirim; kullanım esnekliği gerektiren commit&rsquo;ler.<br>
+<strong>Avantajlar:</strong> Yüksek indirim oranı; kullanımı kolay; Compute SP ile instance ailesi değişikliği serbest.<br>
+<strong>Sınavda:</strong> Uzun vadeli ve öngörülebilir compute kullanımını daha düşük maliyetle çalıştırma.</p>
+</li>
+<li>
+<p><strong>Reserved Instances (RI):</strong> Uygun servislerde kullanım taahhüdü karşılığında indirim sağlar; bazı türlerde kapasite rezervasyonu da söz konusudur.<br>
+<strong>Kullanım alanları:</strong> Sabit iş yükleri için 1-3 yıllık taahhüt; kapasite rezervasyonu gereken durumlar.<br>
+<strong>Avantajlar:</strong> On-Demand&rsquo;e göre büyük indirim; Standard/Convertible ve Scheduled seçenekleri.<br>
+<strong>Sınavda:</strong> Özellikle RDS veya belirli EC2 kullanım senaryolarında uzun vadeli maliyet optimizasyonu.</p>
+</li>
+<li>
+<p><strong>On-Demand Instances:</strong> Uzun vadeli taahhüt olmadan kullandıkça ödeme modelidir.<br>
+<strong>Kullanım alanları:</strong> Kısa süreli veya tahmin edilemeyen iş yükleri; geliştirme/test; taahhütsüz kullanım.<br>
+<strong>Avantajlar:</strong> Taahhüt yok; anında kapasite; saatlik faturalandırma.<br>
+<strong>Sınavda:</strong> Kısa süreli veya belirsiz iş yükleri.</p>
+</li>
+<li>
+<p><strong>Spot Instances:</strong> AWS&rsquo;nin kullanılmayan EC2 kapasitesini indirimli sunar; kapasite geri alınabilir.<br>
+<strong>Kullanım alanları:</strong> Kesinti toleranslı işler (batch, CI/CD); büyük ölçekli hesaplama; maliyeti kritik iş yükleri.<br>
+<strong>Avantajlar:</strong> On-Demand&rsquo;e göre çok yüksek indirim; ASG/Batch ile otomasyon; kesintiye dayanıklı işler için ideal.<br>
+<strong>Sınavda:</strong> Kesintiye dayanıklı batch, dağıtık işlem ve esnek iş yükleri.</p>
+</li>
+<li>
+<p><strong>S3 Lifecycle Policies:</strong> Nesneleri zaman veya kurallara göre farklı depolama sınıflarına taşır ya da siler.<br>
+<strong>Kullanım alanları:</strong> Eski verileri ucuz depolama sınıflarına taşıma; süre sonunda silme; log/backup yönetimi.<br>
+<strong>Avantajlar:</strong> Otomatik sınıf geçişleri; maliyet optimizasyonu; kurallarla otomasyon.<br>
+<strong>Sınavda:</strong> Eski logları daha ucuz arşiv sınıfına taşıma.</p>
+</li>
+<li>
+<p><strong>S3 Intelligent-Tiering:</strong> Erişim desenine göre nesneleri uygun erişim katmanlarında tutarak maliyet optimizasyonu sağlar.<br>
+<strong>Kullanım alanları:</strong> Erişim deseni belirsiz veriler; otomatik maliyet optimizasyonu; değişken iş yükleri.<br>
+<strong>Avantajlar:</strong> Otomatik sınıf geçişi; erişim ücreti yok; tahmin gerektirmez.<br>
+<strong>Sınavda:</strong> Erişim sıklığı önceden tahmin edilemiyorsa.</p>
+</li>
 </ul>
 <p><strong>Karıştırma:</strong></p>
 <ul>
@@ -4000,7 +4698,7 @@ https://github.com/alex-shpak/hugo-book
 <li><strong>Block, file, object mı?</strong> EBS, EFS/FSx ve S3 birbirinin yerine geçen depolama türleri değildir.</li>
 <li><strong>Senkron mu, asenkron mu?</strong> Üretici ve tüketiciyi ayırmak gerekiyorsa SQS; olay yayınlamak gerekiyorsa SNS veya EventBridge.</li>
 <li><strong>Private erişim mi, internet erişimi mi?</strong> VPC Endpoint, NAT Gateway ve IGW farklı ihtiyaçları karşılar.</li>
-<li><strong>Veritabanı HA mı, okuma ölçeklendirmesi mi?</strong> Multi-AZ ve Read Replica aynı problem için tasarlanmamıştır.</li>
+<li><strong>Veritabanı HA (high availability) mı, okuma ölçeklendirmesi mi?</strong> Multi-AZ ve Read Replica aynı problem için tasarlanmamıştır.</li>
 <li><strong>Güvenlikte hangi katman?</strong> IAM yetkilendirme, KMS şifreleme anahtarı, Secrets Manager gizli bilgi, GuardDuty tehdit tespiti ve Inspector zafiyet değerlendirmesidir.</li>
 <li><strong>En az operasyonel yük mü, en düşük maliyet mi?</strong> Bunlar her zaman aynı çözüm değildir. Gereksinimlerin tamamını karşılayan seçeneği tercih et.</li>
 <li><strong>Kesinti kabul ediliyor mu?</strong> Spot Instances gibi kesintiye açık seçenekleri, kesintisiz çalışması gereken kritik işler için otomatik olarak seçme.</li>
@@ -4029,13 +4727,18 @@ https://github.com/alex-shpak/hugo-book
 <div class="flex flex-wrap justify-between">
     <span>
     
-      <a href="/docs/aws-saa/cost-optimized-architectures/cost-optimized-architecture-patterns/" class="flex align-center">
+      <a href="/docs/aws-saa/architecture-playbook/" class="flex align-center">
         <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
-        <span>cost-optimized-architecture-patterns</span>
+        <span>architecture-playbook</span>
       </a>
     
     </span>
     <span>
+    
+      <a href="/docs/aws-saa/practice-exam/" class="flex align-center">
+        <span>practice-exam</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
     
     </span>
   </div>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -9,15 +9,15 @@ https://github.com/alex-shpak/hugo-book
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Cost Management Tools# “Which tool should the company use to see/track/limit spending?” - the answer is one of a small set of billing tools. Learn what each one uniquely does.
-The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; forecast costs, RI/SP utilization &amp; coverage “why did costs rise”, “should we buy RIs” Cost &amp; Usage Report (CUR) Most granular billing data (hourly, resource-level) “detailed analysis in Athena/QuickSight” Budgets Alert and act at thresholds “notify me at 80% of budget”, “stop resources” Cost Anomaly Detection ML-based unusual-spend alerts “sudden unexpected spike” Pricing Calculator Estimate costs before building “what will this architecture cost” Trusted Advisor Best-practice checks: cost, security, performance, fault tolerance, service limits “find idle resources, unattached EBS” Compute Optimizer Right-size recommendations “is this instance too big” AWS Budgets &#43; Billing Alarms Classic proactive control CloudWatch alarm on estimated charges Details worth knowing# Cost Explorer: 12 months history default, forecasting up to 12 months, save custom views; RI/SP utilization reports answer “are we wasting our commitment” CUR is the only source with full resource-level detail → analyze with Athena, visualize with QuickSight Budgets can trigger actions (e.g. apply an IAM policy via Service Catalog to stop non-prod); alert types: actual, forecasted, and planned (RI/SP) Trusted Advisor full checks require Business/Enterprise support; the “cost” category finds idle ELBs, unassociated Elastic IPs, low-utilization instances Compute Optimizer analyzes CloudWatch metrics and recommends right-sized instances (needs opt-in) flowchart LR usage[AWS usage] --&gt; ce[Cost Explorer: what happened?] usage --&gt; cur[CUR: raw detail] usage --&gt; budget[Budgets: alert/act] usage --&gt; ta[Trusted Advisor: fix waste] usage --&gt; co[Compute Optimizer: right-size] Not: sinav eslesmeleri: “harcama gecmisi ve RI karari” = Cost Explorer, “en detayli veri” = CUR, “butce asiminda uyari/aksiyon” = Budgets, “bos kaynak / limit uyari” = Trusted Advisor, “instance fazla buyuk mu” = Compute Optimizer.
+The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; forecast costs, RI (Reserved Instance)/SP (Savings Plan) utilization &amp; coverage “why did costs rise”, “should we buy RIs” Cost &amp; Usage Report (CUR) Most granular billing data (hourly, resource-level) “detailed analysis in Athena/QuickSight” Budgets Alert and act at thresholds “notify me at 80% of budget”, “stop resources” Cost Anomaly Detection ML-based unusual-spend alerts “sudden unexpected spike” Pricing Calculator Estimate costs before building “what will this architecture cost” Trusted Advisor Best-practice checks: cost, security, performance, fault tolerance, service limits “find idle resources, unattached EBS (Elastic Block Store)” Compute Optimizer Right-size recommendations “is this instance too big” AWS Budgets &#43; Billing Alarms Classic proactive control CloudWatch alarm on estimated charges Details worth knowing# Cost Explorer: 12 months history default, forecasting up to 12 months, save custom views; RI/SP utilization reports answer “are we wasting our commitment” CUR is the only source with full resource-level detail → analyze with Athena, visualize with QuickSight Budgets can trigger actions (e.g. apply an IAM (Identity and Access Management) policy via Service Catalog to stop non-prod); alert types: actual, forecasted, and planned (RI/SP) Trusted Advisor full checks require Business/Enterprise support; the “cost” category finds idle ELBs (Elastic Load Balancing), unassociated Elastic IPs, low-utilization instances Compute Optimizer analyzes CloudWatch metrics and recommends right-sized instances (needs opt-in) flowchart LR usage[AWS usage] --&gt; ce[Cost Explorer: what happened?] usage --&gt; cur[CUR: raw detail] usage --&gt; budget[Budgets: alert/act] usage --&gt; ta[Trusted Advisor: fix waste] usage --&gt; co[Compute Optimizer: right-size] Not: sinav eslesmeleri: “harcama gecmisi ve RI karari” = Cost Explorer, “en detayli veri” = CUR, “butce asiminda uyari/aksiyon” = Budgets, “bos kaynak / limit uyari” = Trusted Advisor, “instance fazla buyuk mu” = Compute Optimizer.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/cost-optimized-architectures/cost-management-tools/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/cost-optimized-architectures/cost-management-tools/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="cost-management-tools">
 	<meta property="og:description" content="Cost Management Tools# “Which tool should the company use to see/track/limit spending?” - the answer is one of a small set of billing tools. Learn what each one uniquely does.
-The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; forecast costs, RI/SP utilization &amp; coverage “why did costs rise”, “should we buy RIs” Cost &amp; Usage Report (CUR) Most granular billing data (hourly, resource-level) “detailed analysis in Athena/QuickSight” Budgets Alert and act at thresholds “notify me at 80% of budget”, “stop resources” Cost Anomaly Detection ML-based unusual-spend alerts “sudden unexpected spike” Pricing Calculator Estimate costs before building “what will this architecture cost” Trusted Advisor Best-practice checks: cost, security, performance, fault tolerance, service limits “find idle resources, unattached EBS” Compute Optimizer Right-size recommendations “is this instance too big” AWS Budgets &#43; Billing Alarms Classic proactive control CloudWatch alarm on estimated charges Details worth knowing# Cost Explorer: 12 months history default, forecasting up to 12 months, save custom views; RI/SP utilization reports answer “are we wasting our commitment” CUR is the only source with full resource-level detail → analyze with Athena, visualize with QuickSight Budgets can trigger actions (e.g. apply an IAM policy via Service Catalog to stop non-prod); alert types: actual, forecasted, and planned (RI/SP) Trusted Advisor full checks require Business/Enterprise support; the “cost” category finds idle ELBs, unassociated Elastic IPs, low-utilization instances Compute Optimizer analyzes CloudWatch metrics and recommends right-sized instances (needs opt-in) flowchart LR usage[AWS usage] --&gt; ce[Cost Explorer: what happened?] usage --&gt; cur[CUR: raw detail] usage --&gt; budget[Budgets: alert/act] usage --&gt; ta[Trusted Advisor: fix waste] usage --&gt; co[Compute Optimizer: right-size] Not: sinav eslesmeleri: “harcama gecmisi ve RI karari” = Cost Explorer, “en detayli veri” = CUR, “butce asiminda uyari/aksiyon” = Budgets, “bos kaynak / limit uyari” = Trusted Advisor, “instance fazla buyuk mu” = Compute Optimizer.">
+The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; forecast costs, RI (Reserved Instance)/SP (Savings Plan) utilization &amp; coverage “why did costs rise”, “should we buy RIs” Cost &amp; Usage Report (CUR) Most granular billing data (hourly, resource-level) “detailed analysis in Athena/QuickSight” Budgets Alert and act at thresholds “notify me at 80% of budget”, “stop resources” Cost Anomaly Detection ML-based unusual-spend alerts “sudden unexpected spike” Pricing Calculator Estimate costs before building “what will this architecture cost” Trusted Advisor Best-practice checks: cost, security, performance, fault tolerance, service limits “find idle resources, unattached EBS (Elastic Block Store)” Compute Optimizer Right-size recommendations “is this instance too big” AWS Budgets &#43; Billing Alarms Classic proactive control CloudWatch alarm on estimated charges Details worth knowing# Cost Explorer: 12 months history default, forecasting up to 12 months, save custom views; RI/SP utilization reports answer “are we wasting our commitment” CUR is the only source with full resource-level detail → analyze with Athena, visualize with QuickSight Budgets can trigger actions (e.g. apply an IAM (Identity and Access Management) policy via Service Catalog to stop non-prod); alert types: actual, forecasted, and planned (RI/SP) Trusted Advisor full checks require Business/Enterprise support; the “cost” category finds idle ELBs (Elastic Load Balancing), unassociated Elastic IPs, low-utilization instances Compute Optimizer analyzes CloudWatch metrics and recommends right-sized instances (needs opt-in) flowchart LR usage[AWS usage] --&gt; ce[Cost Explorer: what happened?] usage --&gt; cur[CUR: raw detail] usage --&gt; budget[Budgets: alert/act] usage --&gt; ta[Trusted Advisor: fix waste] usage --&gt; co[Compute Optimizer: right-size] Not: sinav eslesmeleri: “harcama gecmisi ve RI karari” = Cost Explorer, “en detayli veri” = CUR, “butce asiminda uyari/aksiyon” = Budgets, “bos kaynak / limit uyari” = Trusted Advisor, “instance fazla buyuk mu” = Compute Optimizer.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
@@ -25,17 +25,17 @@ The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; 
 
 	<meta itemprop="name" content="cost-management-tools">
 	<meta itemprop="description" content="Cost Management Tools# “Which tool should the company use to see/track/limit spending?” - the answer is one of a small set of billing tools. Learn what each one uniquely does.
-The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; forecast costs, RI/SP utilization &amp; coverage “why did costs rise”, “should we buy RIs” Cost &amp; Usage Report (CUR) Most granular billing data (hourly, resource-level) “detailed analysis in Athena/QuickSight” Budgets Alert and act at thresholds “notify me at 80% of budget”, “stop resources” Cost Anomaly Detection ML-based unusual-spend alerts “sudden unexpected spike” Pricing Calculator Estimate costs before building “what will this architecture cost” Trusted Advisor Best-practice checks: cost, security, performance, fault tolerance, service limits “find idle resources, unattached EBS” Compute Optimizer Right-size recommendations “is this instance too big” AWS Budgets &#43; Billing Alarms Classic proactive control CloudWatch alarm on estimated charges Details worth knowing# Cost Explorer: 12 months history default, forecasting up to 12 months, save custom views; RI/SP utilization reports answer “are we wasting our commitment” CUR is the only source with full resource-level detail → analyze with Athena, visualize with QuickSight Budgets can trigger actions (e.g. apply an IAM policy via Service Catalog to stop non-prod); alert types: actual, forecasted, and planned (RI/SP) Trusted Advisor full checks require Business/Enterprise support; the “cost” category finds idle ELBs, unassociated Elastic IPs, low-utilization instances Compute Optimizer analyzes CloudWatch metrics and recommends right-sized instances (needs opt-in) flowchart LR usage[AWS usage] --&gt; ce[Cost Explorer: what happened?] usage --&gt; cur[CUR: raw detail] usage --&gt; budget[Budgets: alert/act] usage --&gt; ta[Trusted Advisor: fix waste] usage --&gt; co[Compute Optimizer: right-size] Not: sinav eslesmeleri: “harcama gecmisi ve RI karari” = Cost Explorer, “en detayli veri” = CUR, “butce asiminda uyari/aksiyon” = Budgets, “bos kaynak / limit uyari” = Trusted Advisor, “instance fazla buyuk mu” = Compute Optimizer.">
-	<meta itemprop="wordCount" content="456">
+The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; forecast costs, RI (Reserved Instance)/SP (Savings Plan) utilization &amp; coverage “why did costs rise”, “should we buy RIs” Cost &amp; Usage Report (CUR) Most granular billing data (hourly, resource-level) “detailed analysis in Athena/QuickSight” Budgets Alert and act at thresholds “notify me at 80% of budget”, “stop resources” Cost Anomaly Detection ML-based unusual-spend alerts “sudden unexpected spike” Pricing Calculator Estimate costs before building “what will this architecture cost” Trusted Advisor Best-practice checks: cost, security, performance, fault tolerance, service limits “find idle resources, unattached EBS (Elastic Block Store)” Compute Optimizer Right-size recommendations “is this instance too big” AWS Budgets &#43; Billing Alarms Classic proactive control CloudWatch alarm on estimated charges Details worth knowing# Cost Explorer: 12 months history default, forecasting up to 12 months, save custom views; RI/SP utilization reports answer “are we wasting our commitment” CUR is the only source with full resource-level detail → analyze with Athena, visualize with QuickSight Budgets can trigger actions (e.g. apply an IAM (Identity and Access Management) policy via Service Catalog to stop non-prod); alert types: actual, forecasted, and planned (RI/SP) Trusted Advisor full checks require Business/Enterprise support; the “cost” category finds idle ELBs (Elastic Load Balancing), unassociated Elastic IPs, low-utilization instances Compute Optimizer analyzes CloudWatch metrics and recommends right-sized instances (needs opt-in) flowchart LR usage[AWS usage] --&gt; ce[Cost Explorer: what happened?] usage --&gt; cur[CUR: raw detail] usage --&gt; budget[Budgets: alert/act] usage --&gt; ta[Trusted Advisor: fix waste] usage --&gt; co[Compute Optimizer: right-size] Not: sinav eslesmeleri: “harcama gecmisi ve RI karari” = Cost Explorer, “en detayli veri” = CUR, “butce asiminda uyari/aksiyon” = Budgets, “bos kaynak / limit uyari” = Trusted Advisor, “instance fazla buyuk mu” = Compute Optimizer.">
+	<meta itemprop="wordCount" content="474">
 
 <title>cost-management-tools • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/cost-optimized-architectures/cost-management-tools/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/cost-optimized-architectures/cost-management-tools/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; 
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; 
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; 
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; 
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; 
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3640,7 +3724,7 @@ The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; 
 	<tbody>
 			<tr>
 					<td><strong>Cost Explorer</strong></td>
-					<td>Visualize &amp; forecast costs, RI/SP utilization &amp; coverage</td>
+					<td>Visualize &amp; forecast costs, RI (Reserved Instance)/SP (Savings Plan) utilization &amp; coverage</td>
 					<td>&ldquo;why did costs rise&rdquo;, &ldquo;should we buy RIs&rdquo;</td>
 			</tr>
 			<tr>
@@ -3666,7 +3750,7 @@ The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; 
 			<tr>
 					<td><strong>Trusted Advisor</strong></td>
 					<td>Best-practice checks: cost, security, performance, fault tolerance, <strong>service limits</strong></td>
-					<td>&ldquo;find idle resources, unattached EBS&rdquo;</td>
+					<td>&ldquo;find idle resources, unattached EBS (Elastic Block Store)&rdquo;</td>
 			</tr>
 			<tr>
 					<td><strong>Compute Optimizer</strong></td>
@@ -3684,8 +3768,8 @@ The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; 
 <ul>
 <li><strong>Cost Explorer</strong>: 12 months history default, forecasting up to 12 months, save custom views; <strong>RI/SP utilization reports</strong> answer &ldquo;are we wasting our commitment&rdquo;</li>
 <li><strong>CUR</strong> is the only source with full resource-level detail → analyze with <strong>Athena</strong>, visualize with <strong>QuickSight</strong></li>
-<li><strong>Budgets</strong> can trigger actions (e.g. apply an IAM policy via Service Catalog to stop non-prod); alert types: actual, forecasted, and planned (RI/SP)</li>
-<li><strong>Trusted Advisor</strong> full checks require Business/Enterprise support; the &ldquo;cost&rdquo; category finds idle ELBs, unassociated Elastic IPs, low-utilization instances</li>
+<li><strong>Budgets</strong> can trigger actions (e.g. apply an IAM (Identity and Access Management) policy via Service Catalog to stop non-prod); alert types: actual, forecasted, and planned (RI/SP)</li>
+<li><strong>Trusted Advisor</strong> full checks require Business/Enterprise support; the &ldquo;cost&rdquo; category finds idle ELBs (Elastic Load Balancing), unassociated Elastic IPs, low-utilization instances</li>
 <li><strong>Compute Optimizer</strong> analyzes CloudWatch metrics and recommends right-sized instances (needs opt-in)</li>
 </ul>
 <pre class="mermaid">flowchart LR
@@ -3697,17 +3781,25 @@ The lineup# Tool What it’s for Scenario keyword Cost Explorer Visualize &amp; 
 <p>Not: sinav eslesmeleri: &ldquo;harcama gecmisi ve RI karari&rdquo; = Cost Explorer, &ldquo;en detayli veri&rdquo; = CUR, &ldquo;butce asiminda uyari/aksiyon&rdquo; = Budgets, &ldquo;bos kaynak / limit uyari&rdquo; = Trusted Advisor, &ldquo;instance fazla buyuk mu&rdquo; = Compute Optimizer.</p>
 </blockquote><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: Management wants an alert when monthly spend is forecast to exceed $10,000, and wants non-production resources stopped automatically at 100% of budget. Which service?</strong></p>
-<p>A) Cost Explorer
-B) AWS Budgets
-C) Trusted Advisor
-D) Cost &amp; Usage Report</p>
+<ul>
+<li><strong>A)</strong> Cost Explorer</li>
+<li><strong>B)</strong> AWS Budgets</li>
+<li><strong>C)</strong> Trusted Advisor</li>
+<li><strong>D)</strong> Cost &amp; Usage Report</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Forecasted-threshold alerts + budget actions = Budgets.</p>
+</div></details>
 <p><strong>Q2: A finance team needs resource-level, hourly billing data to build a custom chargeback dashboard in QuickSight. What should they use?</strong></p>
-<p>A) Cost Explorer
-B) AWS Budgets
-C) Cost &amp; Usage Report analyzed with Athena
-D) CloudWatch Metrics</p>
+<ul>
+<li><strong>A)</strong> Cost Explorer</li>
+<li><strong>B)</strong> AWS Budgets</li>
+<li><strong>C)</strong> Cost &amp; Usage Report analyzed with Athena</li>
+<li><strong>D)</strong> CloudWatch Metrics</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: C.</strong> Only CUR has resource-level granularity; QuickSight visualizes it.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>Cost Explorer = grafik + tahmin + RI/SP kullanim raporlari</li>

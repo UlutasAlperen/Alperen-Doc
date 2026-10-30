@@ -2,480 +2,492 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/basic_git_conf/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/basic_git_conf/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/docker-kurulum-hardening-debian/</loc>
+    <loc>http://localhost:1313/docs/docker/docker-kurulum-hardening-debian/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/helm/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/helm/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-minikube/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-minikube/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/basic_git_knowledge/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/basic_git_knowledge/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-pods-minikube/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-pods-minikube/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/kustomize/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/kustomize/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/</loc>
+    <loc>http://localhost:1313/docs/linux/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/manage-docker-as-non-root-user/</loc>
+    <loc>http://localhost:1313/docs/docker/manage-docker-as-non-root-user/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/cluster-extensions/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/cluster-extensions/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/</loc>
+    <loc>http://localhost:1313/docs/docker/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/docker-containers-images/</loc>
+    <loc>http://localhost:1313/docs/docker/docker-containers-images/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/github_workflow/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/github_workflow/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-deployments-minikube/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-deployments-minikube/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/continuous_integration/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/continuous_integration/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/docker-volumes/</loc>
+    <loc>http://localhost:1313/docs/docker/docker-volumes/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-probes/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-probes/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/network-policy/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/network-policy/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/continuous_deployment/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/continuous_deployment/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/docker-build/</loc>
+    <loc>http://localhost:1313/docs/docker/docker-build/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-deployment-rollouts/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-deployment-rollouts/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/security-context/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/security-context/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/</loc>
+    <loc>http://localhost:1313/docs/aws/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/kubernetes-troubleshooting/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/kubernetes-troubleshooting/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-yaml-configurations/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-yaml-configurations/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/optimize-container-images-with-multi-stage-builds/</loc>
+    <loc>http://localhost:1313/docs/docker/optimize-container-images-with-multi-stage-builds/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/control-plane-troubleshooting/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/control-plane-troubleshooting/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/docker-network/</loc>
+    <loc>http://localhost:1313/docs/docker/docker-network/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-secrets/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-secrets/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/docker-exec-shell/</loc>
+    <loc>http://localhost:1313/docs/docker/docker-exec-shell/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/gitops-argocd/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/gitops-argocd/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-rbac/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-rbac/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/docker-logs/</loc>
+    <loc>http://localhost:1313/docs/docker/docker-logs/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-jobs-cronjobs/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-jobs-cronjobs/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/vpa-cluster-autoscaler/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/vpa-cluster-autoscaler/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/monitoring/aws-external-monitoring/</loc>
+    <loc>http://localhost:1313/docs/aws/monitoring/aws-external-monitoring/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/lambda/aws-lambda/</loc>
+    <loc>http://localhost:1313/docs/aws/lambda/aws-lambda/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/s3/aws-s3/</loc>
+    <loc>http://localhost:1313/docs/aws/s3/aws-s3/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/cdn/cloudfront-cdn/</loc>
+    <loc>http://localhost:1313/docs/aws/cdn/cloudfront-cdn/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/iam/create-iam-user-and-group/</loc>
+    <loc>http://localhost:1313/docs/aws/iam/create-iam-user-and-group/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/docker-compose-basic/</loc>
+    <loc>http://localhost:1313/docs/docker/docker-compose-basic/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ec2/ec2-instance-configuration-keys/</loc>
+    <loc>http://localhost:1313/docs/aws/ec2/ec2-instance-configuration-keys/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/eks/eks-cluster/</loc>
+    <loc>http://localhost:1313/docs/aws/eks/eks-cluster/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-status/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/git-status/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/ha-vs-fault-tolerance/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/resilient-architectures/ha-vs-fault-tolerance/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/iam-policies-roles-cross-account/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/secure-architectures/iam-policies-roles-cross-account/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-services/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-services/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/linux-user-management/</loc>
+    <loc>http://localhost:1313/docs/linux/linux-user-management/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/networking/</loc>
+    <loc>http://localhost:1313/docs/aws/networking/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/cost-optimized-architectures/pricing-models-ri-savings-plans-spot/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/cost-optimized-architectures/pricing-models-ri-savings-plans-spot/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/networking/regions-and-availability-zones/</loc>
+    <loc>http://localhost:1313/docs/aws/networking/regions-and-availability-zones/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/rds/relational-database-service/</loc>
+    <loc>http://localhost:1313/docs/aws/rds/relational-database-service/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/general-knowledge/reserved-instances-savings-plans/</loc>
+    <loc>http://localhost:1313/docs/aws/general-knowledge/reserved-instances-savings-plans/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/dns/route-53-hosted-zones/</loc>
+    <loc>http://localhost:1313/docs/aws/dns/route-53-hosted-zones/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/s3-storage-and-performance/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/high-performing-architectures/s3-storage-and-performance/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/secure-architectures/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/taints-affinity-quotas/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/taints-affinity-quotas/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ecs/vpc-and-networking-setup-for-ecs/</loc>
+    <loc>http://localhost:1313/docs/aws/ecs/vpc-and-networking-setup-for-ecs/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-add/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/git-add/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-ingress/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-ingress/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/pod-priority-disruption/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/pod-priority-disruption/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/var-olan-volume-uzerine-docker-compose/</loc>
+    <loc>http://localhost:1313/docs/docker/var-olan-volume-uzerine-docker-compose/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/docker-publish/</loc>
+    <loc>http://localhost:1313/docs/docker/docker-publish/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-commit/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/git-commit/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-gateway-minikube/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-gateway-minikube/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/multi-node-kubeadm/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/multi-node-kubeadm/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/docker-kurulum-hardening-rocky/</loc>
+    <loc>http://localhost:1313/docs/docker/docker-kurulum-hardening-rocky/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-push/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/git-push/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/kubeadm-upgrade-etcd/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/kubeadm-upgrade-etcd/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-namespaces/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-namespaces/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/docker/docker-distroless-container-images/</loc>
+    <loc>http://localhost:1313/docs/docker/docker-distroless-container-images/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-branch/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/git-branch/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/ha-control-plane/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/ha-control-plane/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-dns-coredns/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-dns-coredns/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/devops-control-plane/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-pull/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/devops-control-plane/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-scaling-vertical/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/git-pull/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/cert-manager/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-scaling-vertical/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-log/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/cert-manager/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-scaling-horizontal/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/git-log/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/cert-manager-production/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-scaling-horizontal/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-merge/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/cert-manager-production/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-storage/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/git-merge/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-rebase/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-storage/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-persistent-volumes/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/git-rebase/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/prometheus-stack/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-persistent-volumes/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-reset/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/prometheus-stack/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-storage-classes/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/git-reset/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/victoriametrics/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-storage-classes/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/dns/aws-a-records/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/victoriametrics/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/monitoring/aws-internal-monitoring/</loc>
+    <loc>http://localhost:1313/docs/aws/dns/aws-a-records/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/s3/aws-s3-bucket/</loc>
+    <loc>http://localhost:1313/docs/aws/monitoring/aws-internal-monitoring/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/</loc>
+    <loc>http://localhost:1313/docs/aws/s3/aws-s3-bucket/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/cdn/cloudfront-distributions/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/rds/create-a-postgresql-database-in-aws/</loc>
+    <loc>http://localhost:1313/docs/aws/cdn/cloudfront-distributions/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/lambda/deploy-lambda/</loc>
+    <loc>http://localhost:1313/docs/aws/rds/create-a-postgresql-database-in-aws/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/disaster-recovery-strategies/</loc>
+    <loc>http://localhost:1313/docs/aws/lambda/deploy-lambda/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ec2/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/resilient-architectures/disaster-recovery-strategies/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ec2/ec2-instances/</loc>
+    <loc>http://localhost:1313/docs/aws/ec2/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/eks/eks-vs-kubeadm/</loc>
+    <loc>http://localhost:1313/docs/aws/ec2/ec2-instances/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-remote/</loc>
+    <loc>http://localhost:1313/docs/aws/eks/eks-vs-kubeadm/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/group-management/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/git-remote/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/iam/identity-and-access-management/</loc>
+    <loc>http://localhost:1313/docs/linux/group-management/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/identity-federation-and-cognito/</loc>
+    <loc>http://localhost:1313/docs/aws/iam/identity-and-access-management/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-statefulsets/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/secure-architectures/identity-federation-and-cognito/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/longhorn/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-statefulsets/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/longhorn/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/cost-optimized-architectures/s3-cost-and-lifecycle-policies/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/resilient-architectures/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/general-knowledge/spot-instances/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/cost-optimized-architectures/s3-cost-and-lifecycle-policies/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/networking/virtual-private-cloud-vpc/</loc>
+    <loc>http://localhost:1313/docs/aws/general-knowledge/spot-instances/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ecs/why-ecs/</loc>
+    <loc>http://localhost:1313/docs/aws/networking/virtual-private-cloud-vpc/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-fetch/</loc>
+    <loc>http://localhost:1313/docs/aws/ecs/why-ecs/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes/kubernetes-nodes-basic/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/git-fetch/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-statefulset-replication/</loc>
+    <loc>http://localhost:1313/docs/kubernetes/kubernetes-nodes-basic/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-switch/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/postgresql-statefulset-replication/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/kubernetes_v2/postgresql-longhorn-read-replicas/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/git-switch/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/git-config/</loc>
+    <loc>http://localhost:1313/docs/kubernetes_v2/postgresql-longhorn-read-replicas/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/gitignore/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/git-config/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/version_control_systems/plumbing/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/gitignore/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/general-knowledge/auto-scaling-groups/</loc>
+    <loc>http://localhost:1313/docs/version_control_systems/plumbing/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/rds/aws-connect-to-your-database/</loc>
+    <loc>http://localhost:1313/docs/aws/general-knowledge/auto-scaling-groups/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/s3/aws-s3-objects/</loc>
+    <loc>http://localhost:1313/docs/aws/rds/aws-connect-to-your-database/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/networking/aws-subnetting/</loc>
+    <loc>http://localhost:1313/docs/aws/s3/aws-s3-objects/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/monitoring/cloud-watch-alarms/</loc>
+    <loc>http://localhost:1313/docs/aws/networking/aws-subnetting/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/cdn/cloudfront-invalidation/</loc>
+    <loc>http://localhost:1313/docs/aws/monitoring/cloud-watch-alarms/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/cost-optimized-architectures/cost-management-tools/</loc>
+    <loc>http://localhost:1313/docs/aws/cdn/cloudfront-invalidation/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/iam/create-iam-user/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/cost-optimized-architectures/cost-management-tools/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/database-selection-matrix/</loc>
+    <loc>http://localhost:1313/docs/aws/iam/create-iam-user/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/dns/dns-ttl-and-caching/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/high-performing-architectures/database-selection-matrix/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/eks/eks-deploy-app/</loc>
+    <loc>http://localhost:1313/docs/aws/dns/dns-ttl-and-caching/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ecs/elastic-container-registry/</loc>
+    <loc>http://localhost:1313/docs/aws/eks/eks-deploy-app/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ec2/elastic-ips/</loc>
+    <loc>http://localhost:1313/docs/aws/ecs/elastic-container-registry/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/elb-and-auto-scaling-resilience/</loc>
+    <loc>http://localhost:1313/docs/aws/ec2/elastic-ips/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/file-permissions/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/resilient-architectures/elb-and-auto-scaling-resilience/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/</loc>
+    <loc>http://localhost:1313/docs/linux/file-permissions/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/kms-encryption-deep-dive/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/high-performing-architectures/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/rds/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/secure-architectures/kms-encryption-deep-dive/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/lambda/testing-lambda-function/</loc>
+    <loc>http://localhost:1313/docs/aws/rds/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/system-information/</loc>
+    <loc>http://localhost:1313/docs/aws/lambda/testing-lambda-function/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/general-knowledge/aws-compute-service/</loc>
+    <loc>http://localhost:1313/docs/linux/system-information/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/rds/aws-connect-app-to-database/</loc>
+    <loc>http://localhost:1313/docs/aws/general-knowledge/aws-compute-service/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ec2/aws-security-groups/</loc>
+    <loc>http://localhost:1313/docs/aws/rds/aws-connect-app-to-database/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/dns/aws-verifying-dns/</loc>
+    <loc>http://localhost:1313/docs/aws/ec2/aws-security-groups/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/monitoring/cloudtrail/</loc>
+    <loc>http://localhost:1313/docs/aws/dns/aws-verifying-dns/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/cost-optimized-architectures/cost-optimized-architecture-patterns/</loc>
+    <loc>http://localhost:1313/docs/aws/monitoring/cloudtrail/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/cost-optimized-architectures/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/cost-optimized-architectures/cost-optimized-architecture-patterns/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/decoupling-with-sqs-sns/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/cost-optimized-architectures/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/dynamodb-deep-dive/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/resilient-architectures/decoupling-with-sqs-sns/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ecs/ecr-repo/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/high-performing-architectures/dynamodb-deep-dive/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/eks/eks-connect-s3/</loc>
+    <loc>http://localhost:1313/docs/aws/ecs/ecr-repo/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/iam/</loc>
+    <loc>http://localhost:1313/docs/aws/eks/eks-connect-s3/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/iam/inline-policies-iam-user/</loc>
+    <loc>http://localhost:1313/docs/aws/iam/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/networking/internet-gateways-igw/</loc>
+    <loc>http://localhost:1313/docs/aws/iam/inline-policies-iam-user/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/lambda/lambda-api-gateway/</loc>
+    <loc>http://localhost:1313/docs/aws/networking/internet-gateways-igw/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/cdn/presigned-urls/</loc>
+    <loc>http://localhost:1313/docs/aws/lambda/lambda-api-gateway/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/secrets-manager-vs-parameter-store/</loc>
+    <loc>http://localhost:1313/docs/aws/cdn/presigned-urls/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/sudo/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/secure-architectures/secrets-manager-vs-parameter-store/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/dns/aws-cname-records/</loc>
+    <loc>http://localhost:1313/docs/linux/sudo/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/general-knowledge/aws-storage/</loc>
+    <loc>http://localhost:1313/docs/aws/dns/aws-cname-records/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/lambda/cloudwatch-log-groups-and-viewing-lambda-logs/</loc>
+    <loc>http://localhost:1313/docs/aws/general-knowledge/aws-storage/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/</loc>
+    <loc>http://localhost:1313/docs/aws/lambda/cloudwatch-log-groups-and-viewing-lambda-logs/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ecs/ecs-clusters/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/eks/eks-use-rds/</loc>
+    <loc>http://localhost:1313/docs/aws/ecs/ecs-clusters/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/event-driven-eventbridge-step-functions/</loc>
+    <loc>http://localhost:1313/docs/aws/eks/eks-use-rds/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/iam/iam-groups/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/resilient-architectures/event-driven-eventbridge-step-functions/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/monitoring/</loc>
+    <loc>http://localhost:1313/docs/aws/iam/iam-groups/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/rds/rds-backups/</loc>
+    <loc>http://localhost:1313/docs/aws/monitoring/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/networking/route-tables/</loc>
+    <loc>http://localhost:1313/docs/aws/rds/rds-backups/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/s3-security-and-access-points/</loc>
+    <loc>http://localhost:1313/docs/aws/networking/route-tables/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/ssh/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/secure-architectures/s3-security-and-access-points/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ec2/ssh-to-aws-server/</loc>
+    <loc>http://localhost:1313/docs/linux/ssh/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/cdn/why-use-presigned-urls/</loc>
+    <loc>http://localhost:1313/docs/aws/ec2/ssh-to-aws-server/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/cdn/cloudfront-with-dns/</loc>
+    <loc>http://localhost:1313/docs/aws/cdn/why-use-presigned-urls/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/rds/create-read-replicas-for-scalability/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/data-transfer-and-hybrid-services/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ec2/deploy-site-to-aws-server/</loc>
+    <loc>http://localhost:1313/docs/aws/cdn/cloudfront-with-dns/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ecs/ecs-permissions/</loc>
+    <loc>http://localhost:1313/docs/aws/rds/create-read-replicas-for-scalability/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/eks/eks-node-affinity-taints/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/high-performing-architectures/data-transfer-and-hybrid-services/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/iam/iam-roles/</loc>
+    <loc>http://localhost:1313/docs/aws/ec2/deploy-site-to-aws-server/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/network-security-sg-nacl-vpc-endpoints/</loc>
+    <loc>http://localhost:1313/docs/aws/ecs/ecs-permissions/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/lambda/other-lambda-use-cases/</loc>
+    <loc>http://localhost:1313/docs/aws/eks/eks-node-affinity-taints/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/networking/private-subnets/</loc>
+    <loc>http://localhost:1313/docs/aws/iam/iam-roles/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/secure-architectures/network-security-sg-nacl-vpc-endpoints/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/s3/</loc>
+    <loc>http://localhost:1313/docs/aws/lambda/other-lambda-use-cases/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/systemd/</loc>
+    <loc>http://localhost:1313/docs/aws/networking/private-subnets/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/iam/aws-iam-deny-policies/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/networking/connecting-to-the-aws-cloud/</loc>
+    <loc>http://localhost:1313/docs/aws/s3/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/dns/</loc>
+    <loc>http://localhost:1313/docs/linux/systemd/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ecs/ecs-task-definitions/</loc>
+    <loc>http://localhost:1313/docs/aws/iam/aws-iam-deny-policies/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/eks/eks-ha-cluster/</loc>
+    <loc>http://localhost:1313/docs/aws/networking/connecting-to-the-aws-cloud/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ec2/open-web-traffic/</loc>
+    <loc>http://localhost:1313/docs/aws/dns/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/process-management/</loc>
+    <loc>http://localhost:1313/docs/aws/ecs/ecs-task-definitions/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/rds/rds-general-knowledge/</loc>
+    <loc>http://localhost:1313/docs/aws/eks/eks-ha-cluster/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/route53-routing-policies-and-failover/</loc>
+    <loc>http://localhost:1313/docs/aws/ec2/open-web-traffic/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/security-services-waf-guardduty-inspector/</loc>
+    <loc>http://localhost:1313/docs/linux/process-management/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/process-internals/</loc>
+    <loc>http://localhost:1313/docs/aws/rds/rds-general-knowledge/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/iam/aws-ssm-parameter-store/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/resilient-architectures/route53-routing-policies-and-failover/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/cdn/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/secure-architectures/security-services-waf-guardduty-inspector/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ec2/creating-and-using-your-own-ami/</loc>
+    <loc>http://localhost:1313/docs/linux/process-internals/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/cron-timers/</loc>
+    <loc>http://localhost:1313/docs/aws/iam/aws-ssm-parameter-store/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ecs/ecs-security-groups/</loc>
+    <loc>http://localhost:1313/docs/aws/cdn/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/eks/eks-spot-instances/</loc>
+    <loc>http://localhost:1313/docs/aws/ec2/creating-and-using-your-own-ami/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/vpc-connectivity-peering-tgw-direct-connect/</loc>
+    <loc>http://localhost:1313/docs/linux/cron-timers/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/iam/accessing-ssm-parameters-from-ec2/</loc>
+    <loc>http://localhost:1313/docs/aws/ecs/ecs-security-groups/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ecs/application-load-balancer/</loc>
+    <loc>http://localhost:1313/docs/aws/eks/eks-spot-instances/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ec2/aws-launch-template/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ecs/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/resilient-architectures/vpc-connectivity-peering-tgw-direct-connect/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/networking-basics/</loc>
+    <loc>http://localhost:1313/docs/aws/iam/accessing-ssm-parameters-from-ec2/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/dns/</loc>
+    <loc>http://localhost:1313/docs/aws/ecs/application-load-balancer/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ecs/ecs-target-groups/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/architecture-playbook/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/eks/</loc>
+    <loc>http://localhost:1313/docs/aws/ec2/aws-launch-template/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws-saa/general-knowledge/</loc>
+    <loc>http://localhost:1313/docs/aws/ecs/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ec2/launch-from-template-aws/</loc>
+    <loc>http://localhost:1313/docs/linux/networking-basics/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/iam/use-ssm-from-ec2/</loc>
+    <loc>http://localhost:1313/docs/linux/dns/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ecs/cloudwatch-log-groups/</loc>
+    <loc>http://localhost:1313/docs/aws/ecs/ecs-target-groups/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/firewall/</loc>
+    <loc>http://localhost:1313/docs/aws/eks/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/lambda/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/general-knowledge/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/ecs/ecs-services/</loc>
+    <loc>http://localhost:1313/docs/aws/ec2/launch-from-template-aws/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/aws/general-knowledge/</loc>
+    <loc>http://localhost:1313/docs/aws/iam/use-ssm-from-ec2/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/network-troubleshooting/</loc>
+    <loc>http://localhost:1313/docs/aws/ecs/cloudwatch-log-groups/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/filesystem-hierarchy/</loc>
+    <loc>http://localhost:1313/docs/linux/firewall/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/disk-management/</loc>
+    <loc>http://localhost:1313/docs/aws/lambda/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/lvm/</loc>
+    <loc>http://localhost:1313/docs/aws-saa/practice-exam/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/disk-troubleshooting/</loc>
+    <loc>http://localhost:1313/docs/aws/ecs/ecs-services/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/log-management/</loc>
+    <loc>http://localhost:1313/docs/aws/general-knowledge/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/selinux-apparmor/</loc>
+    <loc>http://localhost:1313/docs/linux/network-troubleshooting/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/security-hardening/</loc>
+    <loc>http://localhost:1313/docs/linux/filesystem-hierarchy/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/package-management/</loc>
+    <loc>http://localhost:1313/docs/linux/disk-management/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/performance-triage/</loc>
+    <loc>http://localhost:1313/docs/linux/lvm/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/linux/boot-process/</loc>
+    <loc>http://localhost:1313/docs/linux/disk-troubleshooting/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/</loc>
+    <loc>http://localhost:1313/docs/linux/log-management/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/docs/</loc>
+    <loc>http://localhost:1313/docs/linux/selinux-apparmor/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/categories/</loc>
+    <loc>http://localhost:1313/docs/linux/security-hardening/</loc>
   </url><url>
-    <loc>https://blog.ulutasalperen.com/tags/</loc>
+    <loc>http://localhost:1313/docs/linux/package-management/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/linux/performance-triage/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/linux/boot-process/</loc>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/</loc>
+  </url><url>
+    <loc>http://localhost:1313/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
   </url>
 </urlset>

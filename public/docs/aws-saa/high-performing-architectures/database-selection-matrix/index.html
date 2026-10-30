@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -9,15 +9,15 @@ https://github.com/alex-shpak/hugo-book
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Database Selection Matrix# The most common question format in Domain 3: “the application needs X - which database?” There are ~10 AWS database services and exactly one right answer per workload. Learn the workload → service mapping.
-The decision table# Workload Service Why Relational OLTP, joins, transactions, known schema RDS (or Aurora for cloud-native scale) Managed SQL, Multi-AZ, replicas Massive-scale key-value, any traffic shape, single-digit ms DynamoDB Serverless NoSQL, unlimited scale Hot data, microsecond reads, session store ElastiCache (Redis/Memcached) In-memory Data warehouse, OLAP, columnar analytics Redshift Petabyte analytics Interactive SQL on S3 data lake Athena Serverless, pay per query Search, autocomplete, log analytics OpenSearch Full-text search Document workloads, MongoDB-compatible DocumentDB Mongo API without Mongo ops Graph relationships (social, fraud, routes) Neptune Graph DB Time series (IoT, metrics) Timestream Built for timestamps Immutable ledger / audit QLDB Cryptographic verifiability In-memory cache with SQL on RDS-adjacent Redis Microsecond latency RDS vs DynamoDB - the heavyweight bout# Pick RDS/Aurora when:
+The decision table# Workload Service Why Relational OLTP (online transaction processing), joins, transactions, known schema RDS (Relational Database Service) (or Aurora for cloud-native scale) Managed SQL, Multi-AZ, replicas Massive-scale key-value, any traffic shape, single-digit ms DynamoDB Serverless NoSQL, unlimited scale Hot data, microsecond reads, session store ElastiCache (Redis/Memcached) In-memory Data warehouse, OLAP (online analytical processing), columnar analytics Redshift Petabyte analytics Interactive SQL on S3 (Simple Storage Service) data lake Athena Serverless, pay per query Search, autocomplete, log analytics OpenSearch Full-text search Document workloads, MongoDB-compatible DocumentDB Mongo API without Mongo ops Graph relationships (social, fraud, routes) Neptune Graph DB Time series (IoT, metrics) Timestream Built for timestamps Immutable ledger / audit Aurora PostgreSQL / S3 Object Lock (Note: AWS deprecated QLDB on July 31, 2025) Cryptographic verifiability / WORM In-memory cache with SQL on RDS-adjacent Redis Microsecond latency Query exabytes in S3 directly from a data warehouse Redshift Spectrum Joins Redshift tables with S3 Parquet files without loading RDS vs DynamoDB - the heavyweight bout# Pick RDS/Aurora when:
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/database-selection-matrix/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/high-performing-architectures/database-selection-matrix/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="database-selection-matrix">
 	<meta property="og:description" content="Database Selection Matrix# The most common question format in Domain 3: “the application needs X - which database?” There are ~10 AWS database services and exactly one right answer per workload. Learn the workload → service mapping.
-The decision table# Workload Service Why Relational OLTP, joins, transactions, known schema RDS (or Aurora for cloud-native scale) Managed SQL, Multi-AZ, replicas Massive-scale key-value, any traffic shape, single-digit ms DynamoDB Serverless NoSQL, unlimited scale Hot data, microsecond reads, session store ElastiCache (Redis/Memcached) In-memory Data warehouse, OLAP, columnar analytics Redshift Petabyte analytics Interactive SQL on S3 data lake Athena Serverless, pay per query Search, autocomplete, log analytics OpenSearch Full-text search Document workloads, MongoDB-compatible DocumentDB Mongo API without Mongo ops Graph relationships (social, fraud, routes) Neptune Graph DB Time series (IoT, metrics) Timestream Built for timestamps Immutable ledger / audit QLDB Cryptographic verifiability In-memory cache with SQL on RDS-adjacent Redis Microsecond latency RDS vs DynamoDB - the heavyweight bout# Pick RDS/Aurora when:">
+The decision table# Workload Service Why Relational OLTP (online transaction processing), joins, transactions, known schema RDS (Relational Database Service) (or Aurora for cloud-native scale) Managed SQL, Multi-AZ, replicas Massive-scale key-value, any traffic shape, single-digit ms DynamoDB Serverless NoSQL, unlimited scale Hot data, microsecond reads, session store ElastiCache (Redis/Memcached) In-memory Data warehouse, OLAP (online analytical processing), columnar analytics Redshift Petabyte analytics Interactive SQL on S3 (Simple Storage Service) data lake Athena Serverless, pay per query Search, autocomplete, log analytics OpenSearch Full-text search Document workloads, MongoDB-compatible DocumentDB Mongo API without Mongo ops Graph relationships (social, fraud, routes) Neptune Graph DB Time series (IoT, metrics) Timestream Built for timestamps Immutable ledger / audit Aurora PostgreSQL / S3 Object Lock (Note: AWS deprecated QLDB on July 31, 2025) Cryptographic verifiability / WORM In-memory cache with SQL on RDS-adjacent Redis Microsecond latency Query exabytes in S3 directly from a data warehouse Redshift Spectrum Joins Redshift tables with S3 Parquet files without loading RDS vs DynamoDB - the heavyweight bout# Pick RDS/Aurora when:">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
@@ -25,17 +25,17 @@ The decision table# Workload Service Why Relational OLTP, joins, transactions, k
 
 	<meta itemprop="name" content="database-selection-matrix">
 	<meta itemprop="description" content="Database Selection Matrix# The most common question format in Domain 3: “the application needs X - which database?” There are ~10 AWS database services and exactly one right answer per workload. Learn the workload → service mapping.
-The decision table# Workload Service Why Relational OLTP, joins, transactions, known schema RDS (or Aurora for cloud-native scale) Managed SQL, Multi-AZ, replicas Massive-scale key-value, any traffic shape, single-digit ms DynamoDB Serverless NoSQL, unlimited scale Hot data, microsecond reads, session store ElastiCache (Redis/Memcached) In-memory Data warehouse, OLAP, columnar analytics Redshift Petabyte analytics Interactive SQL on S3 data lake Athena Serverless, pay per query Search, autocomplete, log analytics OpenSearch Full-text search Document workloads, MongoDB-compatible DocumentDB Mongo API without Mongo ops Graph relationships (social, fraud, routes) Neptune Graph DB Time series (IoT, metrics) Timestream Built for timestamps Immutable ledger / audit QLDB Cryptographic verifiability In-memory cache with SQL on RDS-adjacent Redis Microsecond latency RDS vs DynamoDB - the heavyweight bout# Pick RDS/Aurora when:">
-	<meta itemprop="wordCount" content="525">
+The decision table# Workload Service Why Relational OLTP (online transaction processing), joins, transactions, known schema RDS (Relational Database Service) (or Aurora for cloud-native scale) Managed SQL, Multi-AZ, replicas Massive-scale key-value, any traffic shape, single-digit ms DynamoDB Serverless NoSQL, unlimited scale Hot data, microsecond reads, session store ElastiCache (Redis/Memcached) In-memory Data warehouse, OLAP (online analytical processing), columnar analytics Redshift Petabyte analytics Interactive SQL on S3 (Simple Storage Service) data lake Athena Serverless, pay per query Search, autocomplete, log analytics OpenSearch Full-text search Document workloads, MongoDB-compatible DocumentDB Mongo API without Mongo ops Graph relationships (social, fraud, routes) Neptune Graph DB Time series (IoT, metrics) Timestream Built for timestamps Immutable ledger / audit Aurora PostgreSQL / S3 Object Lock (Note: AWS deprecated QLDB on July 31, 2025) Cryptographic verifiability / WORM In-memory cache with SQL on RDS-adjacent Redis Microsecond latency Query exabytes in S3 directly from a data warehouse Redshift Spectrum Joins Redshift tables with S3 Parquet files without loading RDS vs DynamoDB - the heavyweight bout# Pick RDS/Aurora when:">
+	<meta itemprop="wordCount" content="581">
 
 <title>database-selection-matrix • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/database-selection-matrix/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/high-performing-architectures/database-selection-matrix/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ The decision table# Workload Service Why Relational OLTP, joins, transactions, k
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ The decision table# Workload Service Why Relational OLTP, joins, transactions, k
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ The decision table# Workload Service Why Relational OLTP, joins, transactions, k
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ The decision table# Workload Service Why Relational OLTP, joins, transactions, k
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ The decision table# Workload Service Why Relational OLTP, joins, transactions, k
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3640,8 +3724,8 @@ The decision table# Workload Service Why Relational OLTP, joins, transactions, k
 	</thead>
 	<tbody>
 			<tr>
-					<td>Relational OLTP, joins, transactions, known schema</td>
-					<td><strong>RDS</strong> (or <strong>Aurora</strong> for cloud-native scale)</td>
+					<td>Relational OLTP (online transaction processing), joins, transactions, known schema</td>
+					<td><strong>RDS (Relational Database Service)</strong> (or <strong>Aurora</strong> for cloud-native scale)</td>
 					<td>Managed SQL, Multi-AZ, replicas</td>
 			</tr>
 			<tr>
@@ -3655,12 +3739,12 @@ The decision table# Workload Service Why Relational OLTP, joins, transactions, k
 					<td>In-memory</td>
 			</tr>
 			<tr>
-					<td>Data warehouse, OLAP, columnar analytics</td>
+					<td>Data warehouse, OLAP (online analytical processing), columnar analytics</td>
 					<td><strong>Redshift</strong></td>
 					<td>Petabyte analytics</td>
 			</tr>
 			<tr>
-					<td>Interactive SQL on S3 data lake</td>
+					<td>Interactive SQL on S3 (Simple Storage Service) data lake</td>
 					<td><strong>Athena</strong></td>
 					<td>Serverless, pay per query</td>
 			</tr>
@@ -3686,13 +3770,18 @@ The decision table# Workload Service Why Relational OLTP, joins, transactions, k
 			</tr>
 			<tr>
 					<td>Immutable ledger / audit</td>
-					<td><strong>QLDB</strong></td>
-					<td>Cryptographic verifiability</td>
+					<td><strong>Aurora PostgreSQL / S3 Object Lock</strong> <em>(Note: AWS deprecated <strong>QLDB</strong> on July 31, 2025)</em></td>
+					<td>Cryptographic verifiability / WORM</td>
 			</tr>
 			<tr>
 					<td>In-memory cache with SQL on RDS-adjacent</td>
 					<td><strong>Redis</strong></td>
 					<td>Microsecond latency</td>
+			</tr>
+			<tr>
+					<td>Query exabytes in S3 directly from a data warehouse</td>
+					<td><strong>Redshift Spectrum</strong></td>
+					<td>Joins Redshift tables with S3 Parquet files without loading</td>
 			</tr>
 	</tbody>
 </table>
@@ -3722,24 +3811,32 @@ The decision table# Workload Service Why Relational OLTP, joins, transactions, k
     q --&gt;|full-text search| os[OpenSearch]</pre><script src="/mermaid.min.js"></script><script>mermaid.initialize({"flowchart":{"useMaxWidth":true},"theme":"default"})</script><h2 id="oltp-vs-olap-favorite-definitions">OLTP vs OLAP (favorite definitions)<a class="anchor" href="#oltp-vs-olap-favorite-definitions">#</a></h2>
 <ul>
 <li><strong>OLTP</strong> (online transaction processing) - many small fast transactions: RDS, Aurora, DynamoDB</li>
-<li><strong>OLAP</strong> (online analytical processing) - big scans and aggregations: <strong>Redshift</strong> (warehouse), Athena (serverless on S3), EMR (Hadoop/Spark)</li>
+<li><strong>OLAP</strong> (online analytical processing) - big scans and aggregations: <strong>Redshift</strong> (warehouse), Athena (serverless on S3), EMR (Elastic MapReduce) - Hadoop/Spark</li>
 </ul>
 <p>&ldquo;Run complex analytical queries over years of data without affecting the transactional database&rdquo; → <strong>ETL into Redshift</strong> (Glue for the extract/transform part).</p>
 <blockquote class='book-hint '>
 <p>Not: sinavda &ldquo;is yukunu acikla, sen dogru veritabanini sec&rdquo; tipi soru gelir. Anahtar kelimeler: &ldquo;join/transaction&rdquo; = RDS, &ldquo;internet olcegi, anahtar-deger&rdquo; = DynamoDB, &ldquo;analiz/data warehouse&rdquo; = Redshift, &ldquo;arama&rdquo; = OpenSearch, &ldquo;graf&rdquo; = Neptune.</p>
 </blockquote><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: A startup expects unpredictable traffic from 0 to 10 million users and stores simple user profile records accessed by user ID. Which database?</strong></p>
-<p>A) RDS MySQL
-B) DynamoDB
-C) Redshift
-D) ElastiCache</p>
+<ul>
+<li><strong>A)</strong> RDS MySQL</li>
+<li><strong>B)</strong> DynamoDB</li>
+<li><strong>C)</strong> Redshift</li>
+<li><strong>D)</strong> ElastiCache</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Key-value access + internet scale + unpredictable = DynamoDB.</p>
+</div></details>
 <p><strong>Q2: A data team needs to run complex analytical joins over 3 years of sales data without slowing down the order-processing database. What should be used?</strong></p>
-<p>A) Add read replicas to RDS
-B) Move analytics to Redshift and load with Glue
-C) Run the queries on the RDS primary
-D) Enable DynamoDB DAX</p>
+<ul>
+<li><strong>A)</strong> Add read replicas to RDS</li>
+<li><strong>B)</strong> Move analytics to Redshift and load with Glue</li>
+<li><strong>C)</strong> Run the queries on the RDS primary</li>
+<li><strong>D)</strong> Enable DynamoDB DAX (DynamoDB Accelerator)</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> OLAP workload = warehouse (Redshift), ETL via Glue.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>RDS/Aurora = iliskisel, join, transaction, SQL</li>

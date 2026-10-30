@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,34 +8,34 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="KMS and Encryption Deep Dive# Encryption questions on the exam come down to one choice: which encryption option and where do the keys live. AWS KMS is the default answer for almost all of them.
-KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Zero setup, no key policy to manage AWS managed key (aws/s3 etc.) AWS Automatic for most services, cannot rotate on demand Customer managed key (CMK) You Full control: key policy, rotation, disable, grants Asymmetric keys You Sign/verify or public-key encryption outside KMS Multi-region keys You Global tables, cross-region DR with one key Automatic rotation: customer managed keys rotate once a year (you can trigger early rotation). You cannot export the key material - KMS is the boundary.
+<meta name="description" content="KMS (Key Management Service) and Encryption Deep Dive# Encryption questions on the exam come down to one choice: which encryption option and where do the keys live. AWS KMS is the default answer for almost all of them.
+KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Zero setup, no key policy to manage AWS managed key (aws/s3 etc.) AWS Automatic for most services, cannot rotate on demand Customer managed key (CMK) You Full control: key policy, rotation, disable, grants Asymmetric keys You Sign/verify or public-key encryption outside KMS Multi-region keys You Global tables, cross-region DR (disaster recovery) with one key Automatic rotation: customer managed keys rotate once a year (you can trigger early rotation). You cannot export the key material - KMS is the boundary.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/kms-encryption-deep-dive/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/secure-architectures/kms-encryption-deep-dive/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="kms-encryption-deep-dive">
-	<meta property="og:description" content="KMS and Encryption Deep Dive# Encryption questions on the exam come down to one choice: which encryption option and where do the keys live. AWS KMS is the default answer for almost all of them.
-KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Zero setup, no key policy to manage AWS managed key (aws/s3 etc.) AWS Automatic for most services, cannot rotate on demand Customer managed key (CMK) You Full control: key policy, rotation, disable, grants Asymmetric keys You Sign/verify or public-key encryption outside KMS Multi-region keys You Global tables, cross-region DR with one key Automatic rotation: customer managed keys rotate once a year (you can trigger early rotation). You cannot export the key material - KMS is the boundary.">
+	<meta property="og:description" content="KMS (Key Management Service) and Encryption Deep Dive# Encryption questions on the exam come down to one choice: which encryption option and where do the keys live. AWS KMS is the default answer for almost all of them.
+KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Zero setup, no key policy to manage AWS managed key (aws/s3 etc.) AWS Automatic for most services, cannot rotate on demand Customer managed key (CMK) You Full control: key policy, rotation, disable, grants Asymmetric keys You Sign/verify or public-key encryption outside KMS Multi-region keys You Global tables, cross-region DR (disaster recovery) with one key Automatic rotation: customer managed keys rotate once a year (you can trigger early rotation). You cannot export the key material - KMS is the boundary.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="kms-encryption-deep-dive">
-	<meta itemprop="description" content="KMS and Encryption Deep Dive# Encryption questions on the exam come down to one choice: which encryption option and where do the keys live. AWS KMS is the default answer for almost all of them.
-KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Zero setup, no key policy to manage AWS managed key (aws/s3 etc.) AWS Automatic for most services, cannot rotate on demand Customer managed key (CMK) You Full control: key policy, rotation, disable, grants Asymmetric keys You Sign/verify or public-key encryption outside KMS Multi-region keys You Global tables, cross-region DR with one key Automatic rotation: customer managed keys rotate once a year (you can trigger early rotation). You cannot export the key material - KMS is the boundary.">
-	<meta itemprop="wordCount" content="644">
+	<meta itemprop="description" content="KMS (Key Management Service) and Encryption Deep Dive# Encryption questions on the exam come down to one choice: which encryption option and where do the keys live. AWS KMS is the default answer for almost all of them.
+KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Zero setup, no key policy to manage AWS managed key (aws/s3 etc.) AWS Automatic for most services, cannot rotate on demand Customer managed key (CMK) You Full control: key policy, rotation, disable, grants Asymmetric keys You Sign/verify or public-key encryption outside KMS Multi-region keys You Global tables, cross-region DR (disaster recovery) with one key Automatic rotation: customer managed keys rotate once a year (you can trigger early rotation). You cannot export the key material - KMS is the boundary.">
+	<meta itemprop="wordCount" content="669">
 
 <title>kms-encryption-deep-dive • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/secure-architectures/kms-encryption-deep-dive/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/secure-architectures/kms-encryption-deep-dive/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Z
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Z
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Z
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Z
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Z
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3612,7 +3696,7 @@ KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Z
   <ul>
     <li><a href="#kms-key-types">KMS key types</a></li>
     <li><a href="#envelope-encryption">Envelope encryption</a></li>
-    <li><a href="#s3-encryption-options---the-classic-exam-table">S3 encryption options - the classic exam table</a></li>
+    <li><a href="#s3-simple-storage-service-encryption-options---the-classic-exam-table">S3 (Simple Storage Service) encryption options - the classic exam table</a></li>
     <li><a href="#key-policies-and-access">Key policies and access</a></li>
     <li><a href="#kms-vs-cloudhsm">KMS vs CloudHSM</a></li>
     <li><a href="#exam-check">Exam check</a></li>
@@ -3629,7 +3713,7 @@ KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Z
 
       
       
-  <article class="markdown book-article"><h1 id="kms-and-encryption-deep-dive">KMS and Encryption Deep Dive<a class="anchor" href="#kms-and-encryption-deep-dive">#</a></h1>
+  <article class="markdown book-article"><h1 id="kms-key-management-service-and-encryption-deep-dive">KMS (Key Management Service) and Encryption Deep Dive<a class="anchor" href="#kms-key-management-service-and-encryption-deep-dive">#</a></h1>
 <p>Encryption questions on the exam come down to one choice: <strong>which encryption option and where do the keys live</strong>. AWS KMS is the default answer for almost all of them.</p>
 <h2 id="kms-key-types">KMS key types<a class="anchor" href="#kms-key-types">#</a></h2>
 <table>
@@ -3664,7 +3748,7 @@ KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Z
 			<tr>
 					<td>Multi-region keys</td>
 					<td>You</td>
-					<td>Global tables, cross-region DR with one key</td>
+					<td>Global tables, cross-region DR (disaster recovery) with one key</td>
 			</tr>
 	</tbody>
 </table>
@@ -3678,7 +3762,7 @@ KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Z
 <li>This is why encrypting 5 GB with KMS &ldquo;directly&rdquo; isn&rsquo;t a thing - and why KMS API calls are cheap but not free</li>
 <li><strong>Encryption context</strong> = additional key/value pairs in the request; change it and decryption fails (tamper detection)</li>
 </ul>
-<h2 id="s3-encryption-options---the-classic-exam-table">S3 encryption options - the classic exam table<a class="anchor" href="#s3-encryption-options---the-classic-exam-table">#</a></h2>
+<h2 id="s3-simple-storage-service-encryption-options---the-classic-exam-table">S3 (Simple Storage Service) encryption options - the classic exam table<a class="anchor" href="#s3-simple-storage-service-encryption-options---the-classic-exam-table">#</a></h2>
 <table>
 	<thead>
 			<tr>
@@ -3710,14 +3794,14 @@ KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Z
 			</tr>
 	</tbody>
 </table>
-<p>EBS encryption follows the same pattern (SSE-KMS style, transparent to the OS, cannot &ldquo;convert&rdquo; - you must snapshot &amp; copy). RDS encryption is enabled <strong>at creation time</strong> (snapshot-copy-and-restore to encrypt an existing DB).</p>
+<p>EBS (Elastic Block Store) encryption follows the same pattern (SSE-KMS style, transparent to the OS, cannot &ldquo;convert&rdquo; - you must snapshot &amp; copy). RDS (Relational Database Service) encryption is enabled <strong>at creation time</strong> (snapshot-copy-and-restore to encrypt an existing DB).</p>
 <blockquote class='book-hint '>
 <p>Not: &ldquo;mevcut RDS&rsquo;i sifrele&rdquo; sorusu gelirse cevap: snapshot al → sifreli kopyala → yeni instance olustur. Canli instance&rsquo;i sonradan sifreleme yok.</p>
 </blockquote><h2 id="key-policies-and-access">Key policies and access<a class="anchor" href="#key-policies-and-access">#</a></h2>
 <ul>
 <li>The <strong>key policy</strong> is the root of trust for a KMS key - it says who can administer and use the key</li>
 <li><strong>Grants</strong> = programmatic, delegatable permissions (used heavily by other AWS services)</li>
-<li>IAM policies alone cannot grant access to a key unless the key policy allows it</li>
+<li>IAM (Identity and Access Management) policies alone cannot grant access to a key unless the key policy allows it</li>
 <li>Cross-account use: the key policy must allow the other account, <strong>and</strong> that account&rsquo;s IAM policies must allow it too (both are required)</li>
 </ul>
 <h2 id="kms-vs-cloudhsm">KMS vs CloudHSM<a class="anchor" href="#kms-vs-cloudhsm">#</a></h2>
@@ -3737,7 +3821,7 @@ KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Z
 			</tr>
 			<tr>
 					<td>Ops</td>
-					<td>AWS manages the HSM</td>
+					<td>AWS manages the HSM (Hardware Security Module)</td>
 					<td>You manage the cluster (and the availability)</td>
 			</tr>
 			<tr>
@@ -3754,17 +3838,25 @@ KMS key types# Key Managed by Use case AWS owned keys (aws/s3, aws/ebs…) AWS Z
 </table>
 <h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: A compliance requirement states that all data at rest must be encrypted with keys the customer controls, and every decryption attempt must be logged. Which S3 option?</strong></p>
-<p>A) SSE-S3
-B) SSE-KMS with a customer managed key
-C) SSE-C
-D) Client-side encryption with a key stored in the bucket</p>
+<ul>
+<li><strong>A)</strong> SSE-S3</li>
+<li><strong>B)</strong> SSE-KMS with a customer managed key</li>
+<li><strong>C)</strong> SSE-C</li>
+<li><strong>D)</strong> Client-side encryption with a key stored in the bucket</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Customer-controlled key + CloudTrail audit of key usage = SSE-KMS with a CMK. D stores the key next to the data.</p>
+</div></details>
 <p><strong>Q2: An on-premises application must encrypt data with a dedicated, single-tenant hardware security module that meets FIPS 140-2 Level 3. What should be used?</strong></p>
-<p>A) AWS KMS with an AWS managed key
-B) AWS CloudHSM
-C) Secrets Manager
-D) S3 SSE-C</p>
+<ul>
+<li><strong>A)</strong> AWS KMS with an AWS managed key</li>
+<li><strong>B)</strong> AWS CloudHSM</li>
+<li><strong>C)</strong> Secrets Manager</li>
+<li><strong>D)</strong> S3 SSE-C</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> &ldquo;Dedicated/single-tenant HSM&rdquo; = CloudHSM.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>KMS = anahtar yonetimi + sifreleme servisi, varsayilan cevap</li>
@@ -3844,7 +3936,7 @@ D) S3 SSE-C</p>
   <ul>
     <li><a href="#kms-key-types">KMS key types</a></li>
     <li><a href="#envelope-encryption">Envelope encryption</a></li>
-    <li><a href="#s3-encryption-options---the-classic-exam-table">S3 encryption options - the classic exam table</a></li>
+    <li><a href="#s3-simple-storage-service-encryption-options---the-classic-exam-table">S3 (Simple Storage Service) encryption options - the classic exam table</a></li>
     <li><a href="#key-policies-and-access">Key policies and access</a></li>
     <li><a href="#kms-vs-cloudhsm">KMS vs CloudHSM</a></li>
     <li><a href="#exam-check">Exam check</a></li>

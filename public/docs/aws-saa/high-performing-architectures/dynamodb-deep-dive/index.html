@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,34 +8,34 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="DynamoDB Deep Dive# DynamoDB shows up in ~a third of all “which database” and “how do I scale reads” questions. The exam-level knowledge is: partitioning, capacity modes, indexes, DAX and Global Tables.
-Data model basics# Table → items (rows) → attributes (columns) - schemaless except the key Partition key (required) - hashed to decide storage partition; good partition keys spread load evenly Composite key = partition key &#43; sort key - enables range queries (WHERE orderId = X AND date BETWEEN...) Item max size 400 KB Access is via Query (key condition) or Scan (everything - avoid it) Capacity modes# On-demand Provisioned Pricing Per request (pay per use) Per hour on WCU/RCU &#43; autoscaling Best for Unknown, spiky traffic Steady, predictable traffic Scaling Instant, no planning Auto scaling policy on utilization 1 WCU = 1 KB write per second; 1 RCU = 4 KB strongly consistent read per second (2x for eventually consistent) Reads: eventually consistent by default (duplicates at read time possible), strongly consistent = 2x RCU Indexes# LSI (Local) GSI (Global) Key Same partition key, new sort key Any key (new partition &#43; sort) Consistency Can be strongly consistent Always eventually consistent Limits 5 per table 20 per table Availability Same partition as item “Global” = separate index Sparse index trick: items missing the indexed attribute are simply not in the index - filter by putting an attribute only on some items.
+<meta name="description" content="DynamoDB Deep Dive# DynamoDB shows up in ~a third of all “which database” and “how do I scale reads” questions. The exam-level knowledge is: partitioning, capacity modes, indexes, DAX (DynamoDB Accelerator) and Global Tables.
+Data model basics# Table → items (rows) → attributes (columns) - schemaless except the key Partition key (required) - hashed to decide storage partition; good partition keys spread load evenly Composite key = partition key &#43; sort key - enables range queries (WHERE orderId = X AND date BETWEEN...) Item max size 400 KB Access is via Query (key condition) or Scan (everything - avoid it) Capacity modes# On-demand Provisioned Pricing Per request (pay per use) Per hour on WCU (write capacity unit)/RCU (read capacity unit) &#43; autoscaling Best for Unknown, spiky traffic Steady, predictable traffic Scaling Instant, no planning Auto scaling policy on utilization 1 WCU = 1 KB write per second; 1 RCU = 4 KB strongly consistent read per second (2x for eventually consistent) Reads: eventually consistent by default (duplicates at read time possible), strongly consistent = 2x RCU Indexes# LSI (local secondary index) GSI (global secondary index) Key Same partition key, new sort key Any key (new partition &#43; sort) Consistency Can be strongly consistent Always eventually consistent Limits 5 per table 20 per table Availability Same partition as item “Global” = separate index Sparse index trick: items missing the indexed attribute are simply not in the index - filter by putting an attribute only on some items.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/dynamodb-deep-dive/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/high-performing-architectures/dynamodb-deep-dive/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="dynamodb-deep-dive">
-	<meta property="og:description" content="DynamoDB Deep Dive# DynamoDB shows up in ~a third of all “which database” and “how do I scale reads” questions. The exam-level knowledge is: partitioning, capacity modes, indexes, DAX and Global Tables.
-Data model basics# Table → items (rows) → attributes (columns) - schemaless except the key Partition key (required) - hashed to decide storage partition; good partition keys spread load evenly Composite key = partition key &#43; sort key - enables range queries (WHERE orderId = X AND date BETWEEN...) Item max size 400 KB Access is via Query (key condition) or Scan (everything - avoid it) Capacity modes# On-demand Provisioned Pricing Per request (pay per use) Per hour on WCU/RCU &#43; autoscaling Best for Unknown, spiky traffic Steady, predictable traffic Scaling Instant, no planning Auto scaling policy on utilization 1 WCU = 1 KB write per second; 1 RCU = 4 KB strongly consistent read per second (2x for eventually consistent) Reads: eventually consistent by default (duplicates at read time possible), strongly consistent = 2x RCU Indexes# LSI (Local) GSI (Global) Key Same partition key, new sort key Any key (new partition &#43; sort) Consistency Can be strongly consistent Always eventually consistent Limits 5 per table 20 per table Availability Same partition as item “Global” = separate index Sparse index trick: items missing the indexed attribute are simply not in the index - filter by putting an attribute only on some items.">
+	<meta property="og:description" content="DynamoDB Deep Dive# DynamoDB shows up in ~a third of all “which database” and “how do I scale reads” questions. The exam-level knowledge is: partitioning, capacity modes, indexes, DAX (DynamoDB Accelerator) and Global Tables.
+Data model basics# Table → items (rows) → attributes (columns) - schemaless except the key Partition key (required) - hashed to decide storage partition; good partition keys spread load evenly Composite key = partition key &#43; sort key - enables range queries (WHERE orderId = X AND date BETWEEN...) Item max size 400 KB Access is via Query (key condition) or Scan (everything - avoid it) Capacity modes# On-demand Provisioned Pricing Per request (pay per use) Per hour on WCU (write capacity unit)/RCU (read capacity unit) &#43; autoscaling Best for Unknown, spiky traffic Steady, predictable traffic Scaling Instant, no planning Auto scaling policy on utilization 1 WCU = 1 KB write per second; 1 RCU = 4 KB strongly consistent read per second (2x for eventually consistent) Reads: eventually consistent by default (duplicates at read time possible), strongly consistent = 2x RCU Indexes# LSI (local secondary index) GSI (global secondary index) Key Same partition key, new sort key Any key (new partition &#43; sort) Consistency Can be strongly consistent Always eventually consistent Limits 5 per table 20 per table Availability Same partition as item “Global” = separate index Sparse index trick: items missing the indexed attribute are simply not in the index - filter by putting an attribute only on some items.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="docs">
 
 
 	<meta itemprop="name" content="dynamodb-deep-dive">
-	<meta itemprop="description" content="DynamoDB Deep Dive# DynamoDB shows up in ~a third of all “which database” and “how do I scale reads” questions. The exam-level knowledge is: partitioning, capacity modes, indexes, DAX and Global Tables.
-Data model basics# Table → items (rows) → attributes (columns) - schemaless except the key Partition key (required) - hashed to decide storage partition; good partition keys spread load evenly Composite key = partition key &#43; sort key - enables range queries (WHERE orderId = X AND date BETWEEN...) Item max size 400 KB Access is via Query (key condition) or Scan (everything - avoid it) Capacity modes# On-demand Provisioned Pricing Per request (pay per use) Per hour on WCU/RCU &#43; autoscaling Best for Unknown, spiky traffic Steady, predictable traffic Scaling Instant, no planning Auto scaling policy on utilization 1 WCU = 1 KB write per second; 1 RCU = 4 KB strongly consistent read per second (2x for eventually consistent) Reads: eventually consistent by default (duplicates at read time possible), strongly consistent = 2x RCU Indexes# LSI (Local) GSI (Global) Key Same partition key, new sort key Any key (new partition &#43; sort) Consistency Can be strongly consistent Always eventually consistent Limits 5 per table 20 per table Availability Same partition as item “Global” = separate index Sparse index trick: items missing the indexed attribute are simply not in the index - filter by putting an attribute only on some items.">
-	<meta itemprop="wordCount" content="526">
+	<meta itemprop="description" content="DynamoDB Deep Dive# DynamoDB shows up in ~a third of all “which database” and “how do I scale reads” questions. The exam-level knowledge is: partitioning, capacity modes, indexes, DAX (DynamoDB Accelerator) and Global Tables.
+Data model basics# Table → items (rows) → attributes (columns) - schemaless except the key Partition key (required) - hashed to decide storage partition; good partition keys spread load evenly Composite key = partition key &#43; sort key - enables range queries (WHERE orderId = X AND date BETWEEN...) Item max size 400 KB Access is via Query (key condition) or Scan (everything - avoid it) Capacity modes# On-demand Provisioned Pricing Per request (pay per use) Per hour on WCU (write capacity unit)/RCU (read capacity unit) &#43; autoscaling Best for Unknown, spiky traffic Steady, predictable traffic Scaling Instant, no planning Auto scaling policy on utilization 1 WCU = 1 KB write per second; 1 RCU = 4 KB strongly consistent read per second (2x for eventually consistent) Reads: eventually consistent by default (duplicates at read time possible), strongly consistent = 2x RCU Indexes# LSI (local secondary index) GSI (global secondary index) Key Same partition key, new sort key Any key (new partition &#43; sort) Consistency Can be strongly consistent Always eventually consistent Limits 5 per table 20 per table Availability Same partition as item “Global” = separate index Sparse index trick: items missing the indexed attribute are simply not in the index - filter by putting an attribute only on some items.">
+	<meta itemprop="wordCount" content="547">
 
 <title>dynamodb-deep-dive • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/dynamodb-deep-dive/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/high-performing-architectures/dynamodb-deep-dive/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ Data model basics# Table → items (rows) → attributes (columns) - schemaless 
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ Data model basics# Table → items (rows) → attributes (columns) - schemaless 
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ Data model basics# Table → items (rows) → attributes (columns) - schemaless 
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ Data model basics# Table → items (rows) → attributes (columns) - schemaless 
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ Data model basics# Table → items (rows) → attributes (columns) - schemaless 
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3629,7 +3713,7 @@ Data model basics# Table → items (rows) → attributes (columns) - schemaless 
       
       
   <article class="markdown book-article"><h1 id="dynamodb-deep-dive">DynamoDB Deep Dive<a class="anchor" href="#dynamodb-deep-dive">#</a></h1>
-<p>DynamoDB shows up in ~a third of all &ldquo;which database&rdquo; and &ldquo;how do I scale reads&rdquo; questions. The exam-level knowledge is: <strong>partitioning, capacity modes, indexes, DAX and Global Tables</strong>.</p>
+<p>DynamoDB shows up in ~a third of all &ldquo;which database&rdquo; and &ldquo;how do I scale reads&rdquo; questions. The exam-level knowledge is: <strong>partitioning, capacity modes, indexes, DAX (DynamoDB Accelerator) and Global Tables</strong>.</p>
 <h2 id="data-model-basics">Data model basics<a class="anchor" href="#data-model-basics">#</a></h2>
 <ul>
 <li><strong>Table → items (rows) → attributes (columns)</strong> - schemaless except the key</li>
@@ -3651,7 +3735,7 @@ Data model basics# Table → items (rows) → attributes (columns) - schemaless 
 			<tr>
 					<td>Pricing</td>
 					<td>Per request (pay per use)</td>
-					<td>Per hour on WCU/RCU + autoscaling</td>
+					<td>Per hour on WCU (write capacity unit)/RCU (read capacity unit) + autoscaling</td>
 			</tr>
 			<tr>
 					<td>Best for</td>
@@ -3674,8 +3758,8 @@ Data model basics# Table → items (rows) → attributes (columns) - schemaless 
 	<thead>
 			<tr>
 					<th></th>
-					<th><strong>LSI (Local)</strong></th>
-					<th><strong>GSI (Global)</strong></th>
+					<th><strong>LSI (local secondary index)</strong></th>
+					<th><strong>GSI (global secondary index)</strong></th>
 			</tr>
 	</thead>
 	<tbody>
@@ -3705,9 +3789,9 @@ Data model basics# Table → items (rows) → attributes (columns) - schemaless 
 <h2 id="scaling-and-acceleration-features">Scaling and acceleration features<a class="anchor" href="#scaling-and-acceleration-features">#</a></h2>
 <ul>
 <li><strong>DAX</strong> - write-through in-memory cache, microsecond reads, API-compatible (see <a href="../caching-elasticache-cloudfront/">caching</a>)</li>
-<li><strong>Global Tables</strong> - multi-region, <strong>multi-active</strong> replication (conflict resolution last-writer-wins), &lt;1s replication → DR + local latency</li>
+<li><strong>Global Tables</strong> - multi-region, <strong>multi-active</strong> replication (conflict resolution last-writer-wins), &lt;1s replication → DR (disaster recovery) + local latency</li>
 <li><strong>DynamoDB Streams</strong> + Lambda - react to item changes (event-driven)</li>
-<li><strong>TTL</strong> - auto-delete expired items (sessions, temp data)</li>
+<li><strong>TTL (time to live)</strong> - auto-delete expired items (sessions, temp data)</li>
 <li><strong>Transactions</strong> - ACID across multiple items/tables (up to 100 items per transaction)</li>
 <li><strong>PartiQL</strong> - SQL-like syntax for DynamoDB</li>
 <li>Adaptive capacity handles &ldquo;hot partitions&rdquo; automatically</li>
@@ -3720,17 +3804,25 @@ Data model basics# Table → items (rows) → attributes (columns) - schemaless 
 <p>Not: sinav sik tuzaklari: GSI&rsquo;lar her zaman eventually consistent&rsquo;tir; Scan pahalidir - soruda &ldquo;performansi arttir&rdquo; varsa cevap genelde index ya da DAX&rsquo;tir; &ldquo;cok bolgede aktif yazma&rdquo; = Global Tables.</p>
 </blockquote><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: A table stores orders keyed by <code>customerId</code>, and the app frequently queries &ldquo;all orders for customer X between two dates&rdquo;. Which key design?</strong></p>
-<p>A) Partition key: <code>orderId</code>
-B) Partition key: <code>customerId</code>, sort key: <code>orderDate</code>
-C) Partition key: <code>orderDate</code>
-D) No sort key, use Scan</p>
+<ul>
+<li><strong>A)</strong> Partition key: <code>orderId</code></li>
+<li><strong>B)</strong> Partition key: <code>customerId</code>, sort key: <code>orderDate</code></li>
+<li><strong>C)</strong> Partition key: <code>orderDate</code></li>
+<li><strong>D)</strong> No sort key, use Scan</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Composite key enables the range query without a Scan.</p>
+</div></details>
 <p><strong>Q2: A global application needs users in Asia and Europe to write locally with the same table, and tolerate a regional outage. Which feature?</strong></p>
-<p>A) DynamoDB DAX
-B) DynamoDB Global Tables
-C) Read replicas
-D) ElastiCache Redis</p>
+<ul>
+<li><strong>A)</strong> DynamoDB DAX</li>
+<li><strong>B)</strong> DynamoDB Global Tables</li>
+<li><strong>C)</strong> Read replicas</li>
+<li><strong>D)</strong> ElastiCache Redis</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Multi-region multi-active replication = Global Tables.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>Partition key = dagilimi belirler, sort key = aralik sorgusu</li>

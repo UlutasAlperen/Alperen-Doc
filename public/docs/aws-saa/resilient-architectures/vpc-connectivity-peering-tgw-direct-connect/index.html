@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,16 +8,16 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="VPC Connectivity: Peering, Transit Gateway, VPN and Direct Connect# “Connect these networks” questions come in three flavors: VPC-to-VPC, VPC-to-on-prem, and hybrid at scale. The exam wants the right topology for the scale - not just “what works”.
+<meta name="description" content="VPC (Virtual Private Cloud) Connectivity: Peering, Transit Gateway, VPN and Direct Connect# “Connect these networks” questions come in three flavors: VPC-to-VPC, VPC-to-on-prem, and hybrid at scale. The exam wants the right topology for the scale - not just “what works”.
 VPC Peering# Direct network connection between two VPCs using private IPs.
 No transitive routing: A↔B and B↔C does not give A↔C (mesh explodes with VPC count) CIDR blocks must not overlap Works cross-region and cross-account No bandwidth bottleneck (uses AWS backbone), no single point of failure When: 2-3 VPCs that all need to talk to each other Transit Gateway# The hub-and-spoke answer for scale:
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/vpc-connectivity-peering-tgw-direct-connect/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/resilient-architectures/vpc-connectivity-peering-tgw-direct-connect/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="vpc-connectivity-peering-tgw-direct-connect">
-	<meta property="og:description" content="VPC Connectivity: Peering, Transit Gateway, VPN and Direct Connect# “Connect these networks” questions come in three flavors: VPC-to-VPC, VPC-to-on-prem, and hybrid at scale. The exam wants the right topology for the scale - not just “what works”.
+	<meta property="og:description" content="VPC (Virtual Private Cloud) Connectivity: Peering, Transit Gateway, VPN and Direct Connect# “Connect these networks” questions come in three flavors: VPC-to-VPC, VPC-to-on-prem, and hybrid at scale. The exam wants the right topology for the scale - not just “what works”.
 VPC Peering# Direct network connection between two VPCs using private IPs.
 No transitive routing: A↔B and B↔C does not give A↔C (mesh explodes with VPC count) CIDR blocks must not overlap Works cross-region and cross-account No bandwidth bottleneck (uses AWS backbone), no single point of failure When: 2-3 VPCs that all need to talk to each other Transit Gateway# The hub-and-spoke answer for scale:">
 	<meta property="og:locale" content="en">
@@ -26,19 +26,19 @@ No transitive routing: A↔B and B↔C does not give A↔C (mesh explodes with V
 
 
 	<meta itemprop="name" content="vpc-connectivity-peering-tgw-direct-connect">
-	<meta itemprop="description" content="VPC Connectivity: Peering, Transit Gateway, VPN and Direct Connect# “Connect these networks” questions come in three flavors: VPC-to-VPC, VPC-to-on-prem, and hybrid at scale. The exam wants the right topology for the scale - not just “what works”.
+	<meta itemprop="description" content="VPC (Virtual Private Cloud) Connectivity: Peering, Transit Gateway, VPN and Direct Connect# “Connect these networks” questions come in three flavors: VPC-to-VPC, VPC-to-on-prem, and hybrid at scale. The exam wants the right topology for the scale - not just “what works”.
 VPC Peering# Direct network connection between two VPCs using private IPs.
 No transitive routing: A↔B and B↔C does not give A↔C (mesh explodes with VPC count) CIDR blocks must not overlap Works cross-region and cross-account No bandwidth bottleneck (uses AWS backbone), no single point of failure When: 2-3 VPCs that all need to talk to each other Transit Gateway# The hub-and-spoke answer for scale:">
-	<meta itemprop="wordCount" content="565">
+	<meta itemprop="wordCount" content="720">
 
 <title>vpc-connectivity-peering-tgw-direct-connect • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/resilient-architectures/vpc-connectivity-peering-tgw-direct-connect/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/resilient-architectures/vpc-connectivity-peering-tgw-direct-connect/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3217,6 +3217,20 @@ No transitive routing: A↔B and B↔C does not give A↔C (mesh explodes with V
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3317,6 +3331,20 @@ No transitive routing: A↔B and B↔C does not give A↔C (mesh explodes with V
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3396,6 +3424,20 @@ No transitive routing: A↔B and B↔C does not give A↔C (mesh explodes with V
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="">
       caching-elasticache-cloudfront</a>
   
@@ -3440,6 +3482,20 @@ No transitive routing: A↔B and B↔C does not give A↔C (mesh explodes with V
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3550,8 +3606,36 @@ No transitive routing: A↔B and B↔C does not give A↔C (mesh explodes with V
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3616,6 +3700,7 @@ No transitive routing: A↔B and B↔C does not give A↔C (mesh explodes with V
     <li><a href="#vpc-peering">VPC Peering</a></li>
     <li><a href="#transit-gateway">Transit Gateway</a></li>
     <li><a href="#vpn-vs-direct-connect">VPN vs Direct Connect</a></li>
+    <li><a href="#hybrid-dns-route-53-resolver-inbound-vs-outbound-endpoints">Hybrid DNS: Route 53 Resolver Inbound vs Outbound Endpoints</a></li>
     <li><a href="#vpc-endpoints-and-privatelink-recap">VPC Endpoints and PrivateLink (recap)</a></li>
     <li><a href="#choosing-quickly---the-exam-cheat-sheet">Choosing quickly - the exam cheat sheet</a></li>
     <li><a href="#exam-check">Exam check</a></li>
@@ -3632,7 +3717,7 @@ No transitive routing: A↔B and B↔C does not give A↔C (mesh explodes with V
 
       
       
-  <article class="markdown book-article"><h1 id="vpc-connectivity-peering-transit-gateway-vpn-and-direct-connect">VPC Connectivity: Peering, Transit Gateway, VPN and Direct Connect<a class="anchor" href="#vpc-connectivity-peering-transit-gateway-vpn-and-direct-connect">#</a></h1>
+  <article class="markdown book-article"><h1 id="vpc-virtual-private-cloud-connectivity-peering-transit-gateway-vpn-and-direct-connect">VPC (Virtual Private Cloud) Connectivity: Peering, Transit Gateway, VPN and Direct Connect<a class="anchor" href="#vpc-virtual-private-cloud-connectivity-peering-transit-gateway-vpn-and-direct-connect">#</a></h1>
 <p>&ldquo;Connect these networks&rdquo; questions come in three flavors: VPC-to-VPC, VPC-to-on-prem, and hybrid at scale. The exam wants the <strong>right topology for the scale</strong> - not just &ldquo;what works&rdquo;.</p>
 <h2 id="vpc-peering">VPC Peering<a class="anchor" href="#vpc-peering">#</a></h2>
 <p>Direct network connection between two VPCs using private IPs.</p>
@@ -3702,12 +3787,19 @@ No transitive routing: A↔B and B↔C does not give A↔C (mesh explodes with V
 </table>
 <ul>
 <li><strong>BGP</strong> propagates routes in both cases</li>
-<li><strong>Direct Connect Gateway</strong> = one DX connection to access many VPCs in different regions</li>
+<li><strong>Direct Connect Gateway</strong> = one DX connection to access many VPCs in different regions (via Public VIF for AWS public services like S3, Private VIF for VPCs, or <strong>Transit VIF</strong> for Transit Gateway)</li>
+<li><strong>Encryption on Direct Connect</strong>: DX is a private dedicated line, <strong>not encrypted by default</strong>! If compliance requires encryption in transit over DX, either enable <strong>MACsec</strong> (on supported 10G/100G connections) or run a <strong>Site-to-Site VPN over Direct Connect</strong> (IPsec tunnel inside the DX link).</li>
 <li>&ldquo;Must not traverse the public internet + consistent latency&rdquo; → DX. &ldquo;Quick, cheap, temporary or backup link&rdquo; → VPN</li>
 <li><strong>AWS Client VPN</strong> = managed OpenVPN for individual employees (not site-to-site)</li>
 </ul>
+<h2 id="hybrid-dns-route-53-resolver-inbound-vs-outbound-endpoints">Hybrid DNS: Route 53 Resolver Inbound vs Outbound Endpoints<a class="anchor" href="#hybrid-dns-route-53-resolver-inbound-vs-outbound-endpoints">#</a></h2>
+<p>When you connect on-premises to AWS via VPN or Direct Connect, DNS queries need to cross the bridge too:</p>
+<ul>
+<li><strong>Route 53 Resolver Inbound Endpoint</strong>: allows <strong>on-premises DNS servers to resolve AWS Private Hosted Zones</strong> (gives on-prem forwarders private IPs inside your VPC).</li>
+<li><strong>Route 53 Resolver Outbound Endpoint + Forwarding Rules</strong>: allows <strong>EC2 (Elastic Compute Cloud) instances in the VPC to resolve on-premises domain names</strong> (<code>corp.local</code>) by forwarding queries to on-premises DNS servers.</li>
+</ul>
 <h2 id="vpc-endpoints-and-privatelink-recap">VPC Endpoints and PrivateLink (recap)<a class="anchor" href="#vpc-endpoints-and-privatelink-recap">#</a></h2>
-<p>For <em>AWS service</em> access without any of the above: <a href="../../secure-architectures/network-security-sg-nacl-vpc-endpoints/">network-security-sg-nacl-vpc-endpoints</a>. Gateway endpoints (S3/DynamoDB) are free; interface endpoints use PrivateLink and can expose <strong>your service</strong> to other accounts privately.</p>
+<p>For <em>AWS service</em> access without any of the above: <a href="../../secure-architectures/network-security-sg-nacl-vpc-endpoints/">network-security-sg-nacl-vpc-endpoints</a>. Gateway endpoints (S3 (Simple Storage Service)/DynamoDB) are free; interface endpoints use PrivateLink and can expose <strong>your service</strong> to other accounts privately.</p>
 <h2 id="choosing-quickly---the-exam-cheat-sheet">Choosing quickly - the exam cheat sheet<a class="anchor" href="#choosing-quickly---the-exam-cheat-sheet">#</a></h2>
 <table>
 	<thead>
@@ -3747,17 +3839,25 @@ No transitive routing: A↔B and B↔C does not give A↔C (mesh explodes with V
 <p>Not: peering&rsquo;de transitive routing YOK - &ldquo;A-B ve B-C varsa A-C de olsun&rdquo; diyorsan cevap Transit Gateway. &ldquo;Haftalar surmesin&rdquo; = VPN, &ldquo;internet uzerinden gecmesin&rdquo; = Direct Connect.</p>
 </blockquote><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
 <p><strong>Q1: A company has 30 VPCs across several accounts and wants any VPC to reach any other with centralized control and transitive routing. What should be used?</strong></p>
-<p>A) Full mesh of VPC peering connections
-B) Transit Gateway
-C) One large VPC
-D) Site-to-site VPN</p>
-<p><strong>Answer: B.</strong> Peering at 30 VPCs is a 435-connection mesh; TGW is the designed answer.</p>
+<ul>
+<li><strong>A)</strong> Full mesh of VPC peering connections</li>
+<li><strong>B)</strong> Transit Gateway</li>
+<li><strong>C)</strong> One large VPC</li>
+<li><strong>D)</strong> Site-to-site VPN</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
+<p><strong>Answer: B.</strong> Peering at 30 VPCs is a 435-connection mesh; TGW (Transit Gateway) is the designed answer.</p>
+</div></details>
 <p><strong>Q2: An on-premises datacenter must connect to AWS with consistent low latency and no traffic over the public internet. Which service?</strong></p>
-<p>A) Site-to-site VPN
-B) AWS Direct Connect
-C) VPC peering
-D) Internet Gateway</p>
+<ul>
+<li><strong>A)</strong> Site-to-site VPN</li>
+<li><strong>B)</strong> AWS Direct Connect</li>
+<li><strong>C)</strong> VPC peering</li>
+<li><strong>D)</strong> Internet Gateway</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Dedicated private line = Direct Connect.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>Peering = 2-3 VPC, dogrudan, transitive YOK, CIDR cakismamali</li>
@@ -3838,6 +3938,7 @@ D) Internet Gateway</p>
     <li><a href="#vpc-peering">VPC Peering</a></li>
     <li><a href="#transit-gateway">Transit Gateway</a></li>
     <li><a href="#vpn-vs-direct-connect">VPN vs Direct Connect</a></li>
+    <li><a href="#hybrid-dns-route-53-resolver-inbound-vs-outbound-endpoints">Hybrid DNS: Route 53 Resolver Inbound vs Outbound Endpoints</a></li>
     <li><a href="#vpc-endpoints-and-privatelink-recap">VPC Endpoints and PrivateLink (recap)</a></li>
     <li><a href="#choosing-quickly---the-exam-cheat-sheet">Choosing quickly - the exam cheat sheet</a></li>
     <li><a href="#exam-check">Exam check</a></li>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -8,15 +8,15 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Caching: ElastiCache, CloudFront and DAX# The fastest query is the one you never make. Caching questions on the exam come down to: what layer (CDN, application, database) and which engine (Redis vs Memcached vs DAX).
+<meta name="description" content="Caching: ElastiCache, CloudFront and DAX (DynamoDB Accelerator)# The fastest query is the one you never make. Caching questions on the exam come down to: what layer (CDN, application, database) and which engine (Redis vs Memcached vs DAX).
 Cache placement - pick the layer# Latency source Fix Static content far from users CloudFront (edge caching) Repeated DB queries / session data ElastiCache in front of the DB DynamoDB reads need microseconds DAX API responses repeat API Gateway caching ElastiCache: Redis vs Memcached# Redis Memcached Data structures Rich (lists, sets, sorted sets, streams) Simple key-value strings Replication / failover Yes (Multi-AZ with auto failover) No Persistence Yes (snapshots, AOF) No Clustering Yes (cluster mode, sharding) Multi-threaded scaling Pub/Sub, Lua, transactions Yes No Typical use Session store, leaderboards, chat, queues Simple object caching Exam shortcut: “failover / durability / data structures / sorted leaderboard” → Redis. “Pure cache, simplest and fastest horizontal scaling” → Memcached.
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2e3440">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/">
 	<meta property="og:site_name" content="Alperen Doc">
 	<meta property="og:title" content="caching-elasticache-cloudfront">
-	<meta property="og:description" content="Caching: ElastiCache, CloudFront and DAX# The fastest query is the one you never make. Caching questions on the exam come down to: what layer (CDN, application, database) and which engine (Redis vs Memcached vs DAX).
+	<meta property="og:description" content="Caching: ElastiCache, CloudFront and DAX (DynamoDB Accelerator)# The fastest query is the one you never make. Caching questions on the exam come down to: what layer (CDN, application, database) and which engine (Redis vs Memcached vs DAX).
 Cache placement - pick the layer# Latency source Fix Static content far from users CloudFront (edge caching) Repeated DB queries / session data ElastiCache in front of the DB DynamoDB reads need microseconds DAX API responses repeat API Gateway caching ElastiCache: Redis vs Memcached# Redis Memcached Data structures Rich (lists, sets, sorted sets, streams) Simple key-value strings Replication / failover Yes (Multi-AZ with auto failover) No Persistence Yes (snapshots, AOF) No Clustering Yes (cluster mode, sharding) Multi-threaded scaling Pub/Sub, Lua, transactions Yes No Typical use Session store, leaderboards, chat, queues Simple object caching Exam shortcut: “failover / durability / data structures / sorted leaderboard” → Redis. “Pure cache, simplest and fastest horizontal scaling” → Memcached.">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
@@ -24,18 +24,18 @@ Cache placement - pick the layer# Latency source Fix Static content far from use
 
 
 	<meta itemprop="name" content="caching-elasticache-cloudfront">
-	<meta itemprop="description" content="Caching: ElastiCache, CloudFront and DAX# The fastest query is the one you never make. Caching questions on the exam come down to: what layer (CDN, application, database) and which engine (Redis vs Memcached vs DAX).
+	<meta itemprop="description" content="Caching: ElastiCache, CloudFront and DAX (DynamoDB Accelerator)# The fastest query is the one you never make. Caching questions on the exam come down to: what layer (CDN, application, database) and which engine (Redis vs Memcached vs DAX).
 Cache placement - pick the layer# Latency source Fix Static content far from users CloudFront (edge caching) Repeated DB queries / session data ElastiCache in front of the DB DynamoDB reads need microseconds DAX API responses repeat API Gateway caching ElastiCache: Redis vs Memcached# Redis Memcached Data structures Rich (lists, sets, sorted sets, streams) Simple key-value strings Replication / failover Yes (Multi-AZ with auto failover) No Persistence Yes (snapshots, AOF) No Clustering Yes (cluster mode, sharding) Multi-threaded scaling Pub/Sub, Lua, transactions Yes No Typical use Session store, leaderboards, chat, queues Simple object caching Exam shortcut: “failover / durability / data structures / sorted leaderboard” → Redis. “Pure cache, simplest and fastest horizontal scaling” → Memcached.">
-	<meta itemprop="wordCount" content="505">
+	<meta itemprop="wordCount" content="520">
 
 <title>caching-elasticache-cloudfront • Alperen Doc</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://blog.ulutasalperen.com/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/">
+<link rel="canonical" href="http://localhost:1313/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/">
 <link rel="stylesheet" href="/book.min.b7de58a69aca8cdbdaeb0291db09cba88cb71dfa0ecefa227772523b5a307f4c.css" integrity="sha256-t95YpprKjNva6wKR2wnLqIy3HfoOzvoid3JSO1owf0w=" crossorigin="anonymous">
 
 
-  <script defer type="module" src="/en.search.min.632790f6f4a5c530c64266a0c0d22f092609964a0d547eeeb71424f7e485f0b3.js" integrity="sha256-YyeQ9vSlxTDGQmagwNIvCSYJlkoNVH7utxQk9&#43;SF8LM=" crossorigin="anonymous"></script>
+  <script defer type="module" src="/en.search.min.a90852543405aaa5f50456166cd4582d3f245d5152bd6093f36d821260985758.js" integrity="sha256-qQhSVDQFqqX1BFYWbNRYLT8kXVFSvWCT822CEmCYV1g=" crossorigin="anonymous"></script>
 
   
 </head>
@@ -3214,6 +3214,20 @@ Cache placement - pick the layer# Latency source Fix Static content far from use
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/secure-architectures/governance-monitoring-organizations-config-ssm/" class="">
+      governance-monitoring-organizations-config-ssm</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -3314,6 +3328,20 @@ Cache placement - pick the layer# Latency source Fix Static content far from use
   
 
   
+    <a href="/docs/aws-saa/resilient-architectures/streaming-kinesis-data-streams-firehose/" class="">
+      streaming-kinesis-data-streams-firehose</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/resilient-architectures/rds-and-aurora-failover/" class="">
       rds-and-aurora-failover</a>
   
@@ -3393,6 +3421,20 @@ Cache placement - pick the layer# Latency source Fix Static content far from use
   
 
   
+    <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="">
+      block-and-file-storage-ebs-efs-fsx</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/high-performing-architectures/caching-elasticache-cloudfront/" class="active">
       caching-elasticache-cloudfront</a>
   
@@ -3437,6 +3479,20 @@ Cache placement - pick the layer# Latency source Fix Static content far from use
   
     <a href="/docs/aws-saa/high-performing-architectures/compute-performance-ec2-options/" class="">
       compute-performance-ec2-options</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/high-performing-architectures/serverless-and-containers-lambda-ecs-eks/" class="">
+      serverless-and-containers-lambda-ecs-eks</a>
   
 
         </li>
@@ -3547,8 +3603,36 @@ Cache placement - pick the layer# Latency source Fix Static content far from use
   
 
   
+    <a href="/docs/aws-saa/architecture-playbook/" class="">
+      architecture-playbook</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/aws-saa/general-knowledge/" class="">
       general-knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/aws-saa/practice-exam/" class="">
+      practice-exam</a>
   
 
         </li>
@@ -3629,7 +3713,7 @@ Cache placement - pick the layer# Latency source Fix Static content far from use
 
       
       
-  <article class="markdown book-article"><h1 id="caching-elasticache-cloudfront-and-dax">Caching: ElastiCache, CloudFront and DAX<a class="anchor" href="#caching-elasticache-cloudfront-and-dax">#</a></h1>
+  <article class="markdown book-article"><h1 id="caching-elasticache-cloudfront-and-dax-dynamodb-accelerator">Caching: ElastiCache, CloudFront and DAX (DynamoDB Accelerator)<a class="anchor" href="#caching-elasticache-cloudfront-and-dax-dynamodb-accelerator">#</a></h1>
 <p>The fastest query is the one you never make. Caching questions on the exam come down to: <strong>what layer</strong> (CDN, application, database) and <strong>which engine</strong> (Redis vs Memcached vs DAX).</p>
 <h2 id="cache-placement---pick-the-layer">Cache placement - pick the layer<a class="anchor" href="#cache-placement---pick-the-layer">#</a></h2>
 <table>
@@ -3705,7 +3789,7 @@ Cache placement - pick the layer# Latency source Fix Static content far from use
 <ul>
 <li><strong>Lazy loading</strong> (cache-aside): cache only what&rsquo;s requested; cheap on cache size, but first request after expiry = cache miss → DB hit</li>
 <li><strong>Write-through</strong>: write to cache and DB together; consistent, but writes are slower and everything gets cached</li>
-<li><strong>TTL management</strong>: expired = stale data gone; &ldquo;the product name is wrong after update&rdquo; → missing invalidation / TTL question</li>
+<li><strong>TTL (time to live) management</strong>: expired = stale data gone; &ldquo;the product name is wrong after update&rdquo; → missing invalidation / TTL question</li>
 <li>Session state in Redis = the standard &ldquo;sticky sessions are bad, where do sessions go&rdquo; answer</li>
 </ul>
 <h2 id="dynamodb-dax">DynamoDB DAX<a class="anchor" href="#dynamodb-dax">#</a></h2>
@@ -3729,18 +3813,26 @@ Cache placement - pick the layer# Latency source Fix Static content far from use
     app --&gt;|miss| rds[(RDS)]</pre><script src="/mermaid.min.js"></script><script>mermaid.initialize({"flowchart":{"useMaxWidth":true},"theme":"default"})</script><blockquote class='book-hint '>
 <p>Not: &ldquo;kullaniciya hizli goster&rdquo; katmani CloudFront, &ldquo;veritabanina gitmesin&rdquo; katmani ElastiCache, &ldquo;DynamoDB sorgusu mikrosaniyeye insin&rdquo; = DAX. Ucunu ayni mimaride birlikte gormek normal.</p>
 </blockquote><h2 id="exam-check">Exam check<a class="anchor" href="#exam-check">#</a></h2>
-<p><strong>Q1: A product catalog API runs the same SQL queries thousands of times per minute against RDS. What gives the biggest performance gain?</strong></p>
-<p>A) Switch RDS to Multi-AZ
-B) Add ElastiCache in front of the database
-C) Add read replicas
-D) Enable RDS Performance Insights</p>
+<p><strong>Q1: A product catalog API runs the same SQL queries thousands of times per minute against RDS (Relational Database Service). What gives the biggest performance gain?</strong></p>
+<ul>
+<li><strong>A)</strong> Switch RDS to Multi-AZ</li>
+<li><strong>B)</strong> Add ElastiCache in front of the database</li>
+<li><strong>C)</strong> Add read replicas</li>
+<li><strong>D)</strong> Enable RDS Performance Insights</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Repeated identical queries = cache. Read replicas help too, but caching removes most DB hits entirely.</p>
+</div></details>
 <p><strong>Q2: Session data must survive the failure of a node and support sorted-set leaderboards. Which engine?</strong></p>
-<p>A) Memcached
-B) Redis
-C) DynamoDB
-D) S3</p>
+<ul>
+<li><strong>A)</strong> Memcached</li>
+<li><strong>B)</strong> Redis</li>
+<li><strong>C)</strong> DynamoDB</li>
+<li><strong>D)</strong> S3 (Simple Storage Service)</li>
+</ul>
+<details ><summary>Cevabı göster</summary><div class="markdown-inner">
 <p><strong>Answer: B.</strong> Replication + data structures = Redis.</p>
+</div></details>
 <h2 id="ozet">Ozet<a class="anchor" href="#ozet">#</a></h2>
 <ul>
 <li>CloudFront = istemciye en yakin statik katman (maliyet de dusurur)</li>
@@ -3772,9 +3864,9 @@ D) S3</p>
 <div class="flex flex-wrap justify-between">
     <span>
     
-      <a href="/docs/aws-saa/high-performing-architectures/s3-storage-and-performance/" class="flex align-center">
+      <a href="/docs/aws-saa/high-performing-architectures/block-and-file-storage-ebs-efs-fsx/" class="flex align-center">
         <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
-        <span>s3-storage-and-performance</span>
+        <span>block-and-file-storage-ebs-efs-fsx</span>
       </a>
     
     </span>
